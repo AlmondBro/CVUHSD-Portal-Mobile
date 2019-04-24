@@ -65,7 +65,7 @@ class App extends Component {
         
         <View style={styles.blueSection}>
           <View style={styles.blueSection_Header}>
-            <Text style={styles.blueSection_HeaderText}>System</Text>
+            <Text style={styles.blueSection_HeaderText}>Systems</Text>
             <Button style={styles.blueSection_ExpandButton}
                     onPress={() => { console.log("Test")} }
                     title="+"
@@ -94,7 +94,7 @@ class App extends Component {
                                         appName: "titan-hst",
                                         appStoreId: "855732889",
                                         appStoreLocale: "us",
-                                        playStoreId: "swipe.android.swipe.android.titanHst"
+                                        playStoreId: "swipe.android.titanHst"
                               
                                       };
 
