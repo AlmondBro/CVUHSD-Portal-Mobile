@@ -1,5 +1,5 @@
 import { KeepAwake, registerRootComponent } from 'expo';
-import App from "./App.js";
+import App from "./components/App.js";
 
 //import App from '../../App';
 

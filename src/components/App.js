@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, Button, WebView, Linking } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Image, Button, WebView, Linking } from 'react-native';
 
 import AppLink from 'react-native-app-link';
 
@@ -49,8 +49,7 @@ const styles = StyleSheet.create({
   },
   
   webView: {
-    height: 100,
-    width: 100
+  
   }
 });
 
@@ -91,14 +90,23 @@ class App extends Component {
             />
               <Button 
                     onPress={ () => { 
-                                      Linking.openURL("titan-hst://")
+                                      let titanHST_config = {
+                                        appName: "titan-hst",
+                                        appStoreId: "855732889",
+                                        appStoreLocale: "us",
+                                        playStoreId: "swipe.android.swipe.android.titanHst"
+                              
+                                      };
+
+                                      //Linking.openURL("855732889://");
+                                      //Open in App Store:
+                                      AppLink.openInStore(titanHST_config);
                                     } 
                             }
                     title="Titan"
                     accessibilityLabel="Press this button to open Lyft"
             />
           </View>
-
           
         </View>
       </View>
