@@ -19,16 +19,24 @@ const styles = StyleSheet.create({
 class BlueSection extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+          pressed: false
+        }
     }
 
     render() {
         return (
             <View style={styles.blueSection}>
-                <BlueSectionHeader title={this.props.title}/>
-                <BlueSectionContent />
+                <BlueSectionHeader 
+                    title={this.props.title} 
+                    pressed={this.state.pressed} 
+                /> 
+                <BlueSectionContent  
+                  pressed={this.state.pressed}
+                />
             </View>
         );
     } //end render() method
 } //BlueSection class
 
-export default BlueSection
+export default BlueSection;
