@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, ScrollView, Image, Button, WebView, Linking } f
 
 import AppLink from 'react-native-app-link';
 
+import ToggleButton from "./ToggleButton.js";
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -66,11 +68,7 @@ class App extends Component {
         <View style={styles.blueSection}>
           <View style={styles.blueSection_Header}>
             <Text style={styles.blueSection_HeaderText}>Systems</Text>
-            <Button style={styles.blueSection_ExpandButton}
-                    onPress={() => { console.log("Test")} }
-                    title="+"
-                    accessibilityLabel="Press this button to expand"
-            />
+            <ToggleButton />
           </View>
 
           <View style={styles.blueSection_Content}>
