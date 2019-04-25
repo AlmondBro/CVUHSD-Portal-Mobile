@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { View, StyleSheet, TouchableHighlight, Text } from "react-native";
+import { StyleSheet, TouchableHighlight, Text } from "react-native";
 
 const styles = StyleSheet.create({
     touchableHighlight: {
