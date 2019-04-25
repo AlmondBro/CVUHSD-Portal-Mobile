@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 18,
-        
         textAlign: 'center',
         color: 'rgb(30, 108, 147)'
     }
@@ -40,9 +39,9 @@ class ToggleButton extends Component {
     render() {
         return (
             <TouchableHighlight 
-                    style={styles.touchableHighlight}
-                    onPress={this.onPress}
-                >
+                style={styles.touchableHighlight}
+                onPress={this.onPress}
+            >
                 <Text style={styles.text}>{this.state.pressed ? "- " : "+"}</Text>
             </TouchableHighlight>
         );

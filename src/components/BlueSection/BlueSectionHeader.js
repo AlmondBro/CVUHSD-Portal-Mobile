@@ -24,7 +24,7 @@ const blueSection_Header_Styles = StyleSheet.create({
 const BlueSectionHeader = (props) => {
     return (
         <View style={blueSection_Header_Styles.blueSection_Header}>
-            <Text style={blueSection_Header_Styles.blueSection_HeaderText}>{props.title || "Quick Links"}</Text>
+            <Text style={blueSection_Header_Styles.blueSection_HeaderText}>{props.title}</Text>
             <ToggleButton />
         </View>
     );

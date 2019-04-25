@@ -1,6 +1,9 @@
 import React from "react";
 import { StyleSheet, View, Button, Linking } from "react-native";
+
 import AppLink from 'react-native-app-link';
+
+import LinkButton from "./../linkButton.js";
 
 const blueSectionContent_styles = StyleSheet.create({
     blueSectionContent_styles: {
@@ -17,6 +20,11 @@ const BlueSectionContent = (props) => {
                     source={{html: "<iframe src='https://www.site24x7.com/sv.do?id=-lTskTIBFC99AjBdJTzdd22ylcZvGBYnfGhcgwvt1-27W89lFFvf7WICSx8TdzUT6kB92hYLWdGYIInKaxcmHcJTzDPBf7IFLjpWmnUEJ18%3D&st=false' scrolling='yes'></iframe>"}}
                     
                 /> */}
+                    <LinkButton 
+                        name="Spiceworks"
+                        imagePath="CVUHSD-Course-Resources.png"
+                        deepLink="spiceworks://"
+                    />
                     <Button 
                             onPress={ () => { 
                                                 Linking.openURL("spiceworks://")
