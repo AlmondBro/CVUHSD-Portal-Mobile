@@ -37,12 +37,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: "center",
     alignSelf: "stretch",
-    backgroundColor: 'rgb(30, 108, 147)'
+    backgroundColor: 'rgb(30, 108, 147)',
+    paddingTop: 8,
+    paddingBottom: 8
   },
 
   blueSection_HeaderText: {
     color: "white",
-    fontSize: 20
+    fontSize: 20,
+    marginRight: 12
   },
 
   blueSection_ExpandButton: {
@@ -67,7 +70,7 @@ class App extends Component {
         
         <View style={styles.blueSection}>
           <View style={styles.blueSection_Header}>
-            <Text style={styles.blueSection_HeaderText}>Systems</Text>
+            <Text style={styles.blueSection_HeaderText}>Quick Links</Text>
             <ToggleButton />
           </View>
 
