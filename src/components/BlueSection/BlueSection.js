@@ -8,7 +8,6 @@ import BlueSectionContent from "./BlueSectionContent.js";
 
 const styles = StyleSheet.create({
     blueSection: {
-      alignItems: "center",
       alignSelf: 'stretch',
       justifyContent: "center",
       paddingTop: 15,

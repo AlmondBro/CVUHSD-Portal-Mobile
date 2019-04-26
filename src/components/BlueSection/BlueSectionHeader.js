@@ -5,9 +5,10 @@ import ToggleButton from "./ToggleButton.js";
 
 const blueSection_Header_Styles = StyleSheet.create({
     blueSection_Header: {
+      flex: 1, 
       flexDirection: 'row',
-      justifyContent: 'center',
       alignSelf: 'stretch',
+      justifyContent: 'center',
       backgroundColor: 'rgb(30, 108, 147)',
       paddingTop: 8,
       paddingBottom: 8
