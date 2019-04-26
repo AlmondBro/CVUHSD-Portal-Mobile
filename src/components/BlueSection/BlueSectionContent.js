@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Button, Linking, Animated } from "react-native";
 
-import AppLink from 'react-native-app-link';
+import AppLink from "react-native-app-link";
 
 import LinkButton from "./../linkButton.js";
 
@@ -42,7 +42,8 @@ class BlueSectionContent extends Component {
         return (
             <View style={[
                 blueSectionContent_styles.blueSection_Content,
-                    { height: this.state.expanded ? 300 : 0}
+                    { height: this.state.expanded ? 300 : 0,
+                        opacity: this.state.expanded ? 1.0 : 0}
                 ]}
 
                 onLayout={this._setMinHeight.bind(this)}
@@ -53,11 +54,11 @@ class BlueSectionContent extends Component {
                         source={{html: "<iframe src='https://www.site24x7.com/sv.do?id=-lTskTIBFC99AjBdJTzdd22ylcZvGBYnfGhcgwvt1-27W89lFFvf7WICSx8TdzUT6kB92hYLWdGYIInKaxcmHcJTzDPBf7IFLjpWmnUEJ18%3D&st=false' scrolling='yes'></iframe>"}}
                         
                     /> */}
-                        {/* <LinkButton 
+                        <LinkButton 
                             name="Spiceworks"
                             imagePath="CVUHSD-Course-Resources.png"
                             deepLink="spiceworks://"
-                        /> */}
+                        />
                         <Button 
                                 onPress={ () => { 
                                                     Linking.openURL("spiceworks://")

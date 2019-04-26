@@ -5,7 +5,8 @@ import AppLink from 'react-native-app-link';
 
 const serviceButton_styles = StyleSheet.create({
     touchableHighlight: {
-       
+       marginTop: 13,
+       marginBottom: 13
     },
 
     image: {
