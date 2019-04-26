@@ -5,9 +5,10 @@ import ToggleButton from "./ToggleButton.js";
 
 const blueSection_Header_Styles = StyleSheet.create({
     blueSection_Header: {
+      flex: 1, 
       flexDirection: 'row',
-      justifyContent: "center",
-      alignSelf: "stretch",
+      alignSelf: 'stretch',
+      justifyContent: 'center',
       backgroundColor: 'rgb(30, 108, 147)',
       paddingTop: 8,
       paddingBottom: 8
@@ -25,7 +26,7 @@ const BlueSectionHeader = (props) => {
     return (
         <View style={blueSection_Header_Styles.blueSection_Header}>
             <Text style={blueSection_Header_Styles.blueSection_HeaderText}>{props.title}</Text>
-            <ToggleButton />
+            <ToggleButton expanded={props.expanded} expandToggle={props.expandToggle} />
         </View>
     );
 }; //end BlueSectionHeader

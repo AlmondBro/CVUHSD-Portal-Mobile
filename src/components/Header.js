@@ -4,8 +4,9 @@ import {View, StyleSheet, Image} from "react-native";
 const headerStyles = StyleSheet.create({
     portalLogoContainer: {
       flexDirection: 'column',
-      alignItems: 'flex-start',
-      margin: 40
+      alignItems: 'center',
+      marginTop: 34,
+      marginBottom: 20
     },
   
     portalLogo: {

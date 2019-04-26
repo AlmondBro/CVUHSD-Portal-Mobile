@@ -8,11 +8,9 @@ import BlueSectionContent from "./BlueSectionContent.js";
 
 const styles = StyleSheet.create({
     blueSection: {
-      alignItems: "center",
-      alignSelf: 'stretch',
-      justifyContent: "center",
-      paddingTop: 15,
-      paddingBottom: 15
+        flexDirection: 'column',
+        alignSelf: 'stretch',
+        justifyContent: 'center'
     }
 });
 
@@ -20,19 +18,27 @@ class BlueSection extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          pressed: false
+          expanded: this.props.expanded
         }
     }
 
-    render() {
+    expandToggle = () => {
+        this.setState({expanded: !this.state.expanded});
+        console.log("expandToggle");
+        console.log("Expand state:\t" + this.state.expanded);
+    }
+
+    render = () => {
         return (
             <View style={styles.blueSection}>
                 <BlueSectionHeader 
                     title={this.props.title} 
-                    pressed={this.state.pressed} 
+                    expanded={this.state.expanded} 
+                    expandToggle={this.expandToggle}
                 /> 
                 <BlueSectionContent  
-                  pressed={this.state.pressed}
+                  expanded={this.state.expanded}
+                  expandToggle={this.expandToggle}
                 />
             </View>
         );

@@ -1,25 +1,54 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Button, Linking } from "react-native";
+import { StyleSheet, View, Button, Linking, Animated } from "react-native";
 
-import AppLink from 'react-native-app-link';
+import AppLink from "react-native-app-link";
 
 import LinkButton from "./../linkButton.js";
 
 const blueSectionContent_styles = StyleSheet.create({
-    blueSectionContent: {
-        
+    blueSection_Content: {
+       flexDirection: 'column',
+       justifyContent: 'center'
     }
 });
 
 class BlueSectionContent extends Component {
     constructor(props) {
         super(props);
-        this.state = { pressed: this.props.pressed}
+        this.state = { 
+            expanded: this.props.expanded,
+            animation: new Animated.Value()
+        }
     }
+
+    _setMaxHeight(event){
+        this.setState({
+            maxHeight   : event.nativeEvent.layout.height
+        });
+    }
+
+    _setMinHeight(event){
+        this.setState({
+            minHeight   : event.nativeEvent.layout.height
+        });
+    }
+
+    componentWillReceiveProps(newProps) {
+        if (this.state.expanded !== newProps.expanded) {
+          this.setState({expanded: newProps.expanded});
+        }
+      }
 
     render() {
         return (
-            <View style={blueSectionContent_styles.blueSection_Content}>
+            <View style={[
+                blueSectionContent_styles.blueSection_Content,
+                    { height: this.state.expanded ? 300 : 0,
+                        opacity: this.state.expanded ? 1.0 : 0}
+                ]}
+
+                onLayout={this._setMinHeight.bind(this)}
+            >
                     {/* <WebView 
                         style={styles.webView}
                         originWhitelist={['*']}
@@ -56,7 +85,7 @@ class BlueSectionContent extends Component {
                                     }
                             title="Titan"
                             accessibilityLabel="Press this button to open Lyft"
-                    />
+                        /> 
                     </View>
         );
     } //end render()
