@@ -54,17 +54,16 @@ class App extends Component {
                 using the Dimensions module 
             */}
           <View style={[appStyles.blueSectionContainer, this.getWidth()]}>
-            <Text style={{backgroundColor: 'red', alignSelf: 'stretch'}}>Test</Text>
             <BlueSection 
-              title="Quick Links" 
+              title="Bon Giorno" 
               expanded={false}
             />
             <BlueSection 
-              title="Hi" 
+              title="Buenos Dias" 
               expanded={true}
             />
               <BlueSection 
-              title="Hello" 
+              title="Good Morning" 
               expanded={false}
             />
               <BlueSection 

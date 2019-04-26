@@ -5,6 +5,7 @@ import AppLink from 'react-native-app-link';
 
 const serviceButton_styles = StyleSheet.create({
     touchableHighlight: {
+       alignSelf: 'center',
        marginTop: 13,
        marginBottom: 13
     },

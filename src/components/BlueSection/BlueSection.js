@@ -8,10 +8,9 @@ import BlueSectionContent from "./BlueSectionContent.js";
 
 const styles = StyleSheet.create({
     blueSection: {
-      alignSelf: 'stretch',
-      justifyContent: "center",
-      paddingTop: 15,
-      paddingBottom: 15
+        flexDirection: 'column',
+        alignSelf: 'stretch',
+        justifyContent: 'center'
     }
 });
 
