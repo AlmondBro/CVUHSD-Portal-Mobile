@@ -24,15 +24,17 @@ class ToggleButton extends Component {
         super(props);
         this.state = { 
             icon: "+",
-            pressed: false
+            expanded: this.props.expanded
         };
     } //end constructor()
 
     onPress = () => {
         console.log("ToggleButton pressed");
         this.setState({
-            pressed: !this.state.pressed
+            expanded: !this.state.expanded
         });
+
+        this.props.expandToggle();
     }; //onPress()
 
     
@@ -42,7 +44,7 @@ class ToggleButton extends Component {
                 style={styles.touchableHighlight}
                 onPress={this.onPress}
             >
-                <Text style={styles.text}>{this.state.pressed ? "- " : "+"}</Text>
+                <Text style={styles.text}>{this.state.expanded ? "- " : "+"}</Text>
             </TouchableHighlight>
         );
     }

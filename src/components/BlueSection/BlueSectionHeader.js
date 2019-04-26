@@ -25,7 +25,7 @@ const BlueSectionHeader = (props) => {
     return (
         <View style={blueSection_Header_Styles.blueSection_Header}>
             <Text style={blueSection_Header_Styles.blueSection_HeaderText}>{props.title}</Text>
-            <ToggleButton />
+            <ToggleButton expanded={props.expanded} expandToggle={props.expandToggle} />
         </View>
     );
 }; //end BlueSectionHeader

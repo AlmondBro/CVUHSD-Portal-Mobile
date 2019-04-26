@@ -20,7 +20,10 @@ class App extends Component {
     return (
       <View style={app_styles.container}>
         <Header />
-        <BlueSection title="Quick Links" />
+        <BlueSection 
+          title="Quick Links" 
+          expanded={false}
+        />
       </View>
     );
   }

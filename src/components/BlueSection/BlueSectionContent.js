@@ -14,12 +14,17 @@ const blueSectionContent_styles = StyleSheet.create({
 class BlueSectionContent extends Component {
     constructor(props) {
         super(props);
-        this.state = { pressed: this.props.pressed}
+        this.state = { 
+            expanded: this.props.expanded
+        }
     }
 
     render() {
         return (
-            <View style={blueSectionContent_styles.blueSection_Content}>
+            <View style={[
+                    blueSectionContent_styles.blueSection_Content,
+                    { height: this.state.expanded ? 500 : 0}
+                ]}>
                     {/* <WebView 
                         style={styles.webView}
                         originWhitelist={['*']}
