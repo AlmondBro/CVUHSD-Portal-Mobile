@@ -55,24 +55,44 @@ class App extends Component {
             */}
           <View style={[appStyles.blueSectionContainer, this.getWidth()]}>
             <BlueSection 
-              title="Bon Giorno" 
+              title="System Statuses" 
               expanded={false}
             />
             <BlueSection 
-              title="Buenos Dias" 
+              title="Quick Links" 
               expanded={true}
             />
               <BlueSection 
-              title="Good Morning" 
+              title="Standard Staff Tools " 
               expanded={false}
             />
               <BlueSection 
-              title="Bonjour" 
+              title="Administrative Tools" 
               expanded={true}
             />
             <BlueSection 
-              title="Bom dia" 
+              title="Teacher Tools" 
               expanded={false}
+            />
+            <BlueSection 
+              title="Classroom Tools" 
+              expanded={false}
+            />
+            <BlueSection 
+              title="Learning Tools" 
+              expanded={false}
+            />
+            <BlueSection 
+              title="Digital Textbooks" 
+              expanded={false}
+            />
+             <BlueSection 
+              title="Digital Library Resources" 
+              expanded={false}
+            />
+             <BlueSection 
+              title="School Websites" 
+              expanded={true}
             />
           </View>
           

@@ -5,7 +5,7 @@ const headerStyles = StyleSheet.create({
     portalLogoContainer: {
       flexDirection: 'column',
       alignItems: 'center',
-      marginTop: 30,
+      marginTop: 34,
       marginBottom: 20
     },
   
