@@ -17,34 +17,56 @@ class BlueSectionContent extends Component {
         super(props);
         this.state = { 
             expanded: this.props.expanded,
-            animation: new Animated.Value()
+            animation: new Animated.Value(0)
         }
     }
 
     _setMaxHeight(event){
         this.setState({
-            maxHeight   : event.nativeEvent.layout.height
+            maxHeight   : 300
         });
     }
 
     _setMinHeight(event){
+        // event.nativeEvent.layout.height
         this.setState({
-            minHeight   : event.nativeEvent.layout.height
+            minHeight   : 0
         });
+    }
+
+    animationToggle(){
+        console.log("animationToggle");
+        let initialValue    = this.state.expanded? this.state.maxHeight + this.state.minHeight : this.state.minHeight,
+            finalValue      = this.state.expanded? this.state.minHeight : this.state.maxHeight + this.state.minHeight;
+
+        // this.setState({
+        //     expanded : !this.state.expanded
+        // });
+
+        this.state.animation.setValue(0);
+        Animated.spring(
+            this.state.animation,
+            {
+                toValue: 50
+            }
+        ).start();
     }
 
     componentWillReceiveProps(newProps) {
         if (this.state.expanded !== newProps.expanded) {
-          this.setState({expanded: newProps.expanded});
+            this.setState({expanded: newProps.expanded});
+            this.animationToggle()
         }
       }
-
+/* 
+    { maxHeight: this.state.expanded ? "100%" : "0%",
+    opacity: this.state.expanded ? 1.0 : 0}
+*/
     render() {
         return (
-            <View style={[
+            <Animated.View style={[
                 blueSectionContent_styles.blueSection_Content,
-                    { height: this.state.expanded ? 300 : 0,
-                        opacity: this.state.expanded ? 1.0 : 0}
+                    { maxHeight: this.state.animation, opacity: this.state.animation }
                 ]}
 
                 onLayout={this._setMinHeight.bind(this)}
@@ -86,7 +108,7 @@ class BlueSectionContent extends Component {
                             title="Titan"
                             accessibilityLabel="Press this button to open Lyft"
                         /> 
-                    </View>
+                    </Animated.View>
         );
     } //end render()
   
