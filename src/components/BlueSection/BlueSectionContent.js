@@ -17,7 +17,8 @@ class BlueSectionContent extends Component {
         super(props);
         this.state = { 
             expanded: this.props.expanded,
-            animation: new Animated.Value(0)
+            heightAnimation: this.props.expanded ? new Animated.Value(300) : new Animated.Value(0) ,
+            opacityAnimation: this.props.expanded ? new Animated.Value(1.0) : new Animated.Value(0) 
         }
     }
 
@@ -34,7 +35,7 @@ class BlueSectionContent extends Component {
         });
     }
 
-    animationToggle(){
+    heightAnimationToggle(){
         console.log("animationToggle");
         let initialValue    = this.state.expanded? this.state.maxHeight + this.state.minHeight : this.state.minHeight,
             finalValue      = this.state.expanded? this.state.minHeight : this.state.maxHeight + this.state.minHeight;
@@ -43,11 +44,30 @@ class BlueSectionContent extends Component {
         //     expanded : !this.state.expanded
         // });
 
-        this.state.animation.setValue(0);
+        this.state.heightAnimation.setValue(0);
         Animated.spring(
-            this.state.animation,
+            this.state.heightAnimation,
             {
-                toValue: 50
+                toValue: 300
+            }
+        ).start();
+    }
+
+    opacityAnimationToggle(){
+        console.log("animationToggle");
+        let initialValue    = this.state.expanded? this.state.maxHeight + this.state.minHeight : this.state.minHeight,
+            finalValue      = this.state.expanded? this.state.minHeight : this.state.maxHeight + this.state.minHeight;
+
+        // this.setState({
+        //     expanded : !this.state.expanded
+        // });
+
+        this.state.opacityAnimation.setValue(0);
+        Animated.timing(
+            this.state.opacityAnimation,
+            {
+                toValue: 1.0,
+                duration: 1000
             }
         ).start();
     }
@@ -55,7 +75,8 @@ class BlueSectionContent extends Component {
     componentWillReceiveProps(newProps) {
         if (this.state.expanded !== newProps.expanded) {
             this.setState({expanded: newProps.expanded});
-            this.animationToggle()
+            this.heightAnimationToggle();
+            this.opacityAnimationToggle();
         }
       }
 /* 
@@ -66,7 +87,8 @@ class BlueSectionContent extends Component {
         return (
             <Animated.View style={[
                 blueSectionContent_styles.blueSection_Content,
-                    { maxHeight: this.state.animation, opacity: this.state.animation }
+                    { maxHeight: this.state.heightAnimation,
+                    opacity: this.state.opacityAnimation}
                 ]}
 
                 onLayout={this._setMinHeight.bind(this)}
