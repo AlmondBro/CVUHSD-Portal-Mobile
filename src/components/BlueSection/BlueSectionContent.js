@@ -10,6 +10,10 @@ const blueSectionContent_styles = StyleSheet.create({
     blueSection_Content: {
        flexDirection: 'column',
        justifyContent: 'center'
+    },
+    webView: {
+       flex: 1,
+       alignSelf: 'center'
     }
 });
 
@@ -18,8 +22,6 @@ class BlueSectionContent extends Component {
         super(props);
         this.state = { 
             expanded: this.props.expanded,
-            heightAnimation: this.props.expanded ? new Animated.Value(300) : new Animated.Value(0) ,
-            opacityAnimation: this.props.expanded ? new Animated.Value(1.0) : new Animated.Value(0) 
         }
     }
 
@@ -45,7 +47,8 @@ class BlueSectionContent extends Component {
                             originWhitelist={['*']}
                             source=
                             {{html: "<iframe src='https://www.site24x7.com/sv.do?id=-lTskTIBFC99AjBdJTzdd22ylcZvGBYnfGhcgwvt1-27W89lFFvf7WICSx8TdzUT6kB92hYLWdGYIInKaxcmHcJTzDPBf7IFLjpWmnUEJ18%3D&st=false' scrolling='yes'></iframe>"}}
-                            scalesPageToFit={true}
+                            scalesPageToFit={false}
+                            javaScriptEnabled={true}
                         />  
                 </View>
                 
