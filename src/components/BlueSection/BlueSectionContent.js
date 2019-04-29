@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, View, Button, Linking, Animated } from "react-native";
 
 import AppLink from "react-native-app-link";
+import Collapsible from 'react-native-collapsible';
 
 import LinkButton from "./../linkButton.js";
 
@@ -85,13 +86,10 @@ class BlueSectionContent extends Component {
 */
     render() {
         return (
-            <Animated.View style={[
-                blueSectionContent_styles.blueSection_Content,
-                    { maxHeight: this.state.heightAnimation,
-                    opacity: this.state.opacityAnimation}
-                ]}
-
+            <Collapsible 
+                style={blueSectionContent_styles.blueSection_Content}
                 onLayout={this._setMinHeight.bind(this)}
+                collapsed={this.state.expanded}
             >
                     {/* <WebView 
                         style={styles.webView}
@@ -130,7 +128,7 @@ class BlueSectionContent extends Component {
                             title="Titan"
                             accessibilityLabel="Press this button to open Lyft"
                         /> 
-                    </Animated.View>
+                    </Collapsible>
         );
     } //end render()
   
