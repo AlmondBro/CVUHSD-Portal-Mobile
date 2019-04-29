@@ -24,12 +24,12 @@ class ToggleButton extends Component {
         super(props);
         this.state = { 
             icon: "+",
-            expanded: this.props.expanded
+            expanded: !this.props.expanded
         };
     } //end constructor()
 
     onPress = () => {
-        console.log("ToggleButton pressed");
+        console.log("ToggleButton pressed:\t" + this.state.expanded);
         this.setState({
             expanded: !this.state.expanded
         });

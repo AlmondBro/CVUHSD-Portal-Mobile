@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, View, Button, Linking, Animated } from "react-native";
 
 import AppLink from "react-native-app-link";
+import Collapsible from 'react-native-collapsible';
 
 import LinkButton from "./../linkButton.js";
 
@@ -17,37 +18,78 @@ class BlueSectionContent extends Component {
         super(props);
         this.state = { 
             expanded: this.props.expanded,
-            animation: new Animated.Value()
+            heightAnimation: this.props.expanded ? new Animated.Value(300) : new Animated.Value(0) ,
+            opacityAnimation: this.props.expanded ? new Animated.Value(1.0) : new Animated.Value(0) 
         }
     }
 
     _setMaxHeight(event){
         this.setState({
-            maxHeight   : event.nativeEvent.layout.height
+            maxHeight   : 300
         });
     }
 
     _setMinHeight(event){
+        // event.nativeEvent.layout.height
         this.setState({
-            minHeight   : event.nativeEvent.layout.height
+            minHeight   : 0
         });
+    }
+
+    heightAnimationToggle(){
+        console.log("animationToggle");
+        let initialValue    = this.state.expanded? this.state.maxHeight + this.state.minHeight : this.state.minHeight,
+            finalValue      = this.state.expanded? this.state.minHeight : this.state.maxHeight + this.state.minHeight;
+
+        // this.setState({
+        //     expanded : !this.state.expanded
+        // });
+
+        this.state.heightAnimation.setValue(0);
+        Animated.spring(
+            this.state.heightAnimation,
+            {
+                toValue: 300
+            }
+        ).start();
+    }
+
+    opacityAnimationToggle(){
+        console.log("animationToggle");
+        let initialValue    = this.state.expanded? this.state.maxHeight + this.state.minHeight : this.state.minHeight,
+            finalValue      = this.state.expanded? this.state.minHeight : this.state.maxHeight + this.state.minHeight;
+
+        // this.setState({
+        //     expanded : !this.state.expanded
+        // });
+
+        this.state.opacityAnimation.setValue(0);
+        Animated.timing(
+            this.state.opacityAnimation,
+            {
+                toValue: 1.0,
+                duration: 1000
+            }
+        ).start();
     }
 
     componentWillReceiveProps(newProps) {
         if (this.state.expanded !== newProps.expanded) {
-          this.setState({expanded: newProps.expanded});
+            this.setState({expanded: newProps.expanded});
+            this.heightAnimationToggle();
+            this.opacityAnimationToggle();
         }
       }
-
+/* 
+    { maxHeight: this.state.expanded ? "100%" : "0%",
+    opacity: this.state.expanded ? 1.0 : 0}
+*/
     render() {
         return (
-            <View style={[
-                blueSectionContent_styles.blueSection_Content,
-                    { height: this.state.expanded ? 300 : 0,
-                        opacity: this.state.expanded ? 1.0 : 0}
-                ]}
-
+            <Collapsible 
+                style={blueSectionContent_styles.blueSection_Content}
                 onLayout={this._setMinHeight.bind(this)}
+                collapsed={this.state.expanded}
             >
                     {/* <WebView 
                         style={styles.webView}
@@ -86,7 +128,7 @@ class BlueSectionContent extends Component {
                             title="Titan"
                             accessibilityLabel="Press this button to open Lyft"
                         /> 
-                    </View>
+                    </Collapsible>
         );
     } //end render()
   
