@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Button, Linking, Animated } from "react-native";
+import { StyleSheet, View, WebView, Button, Linking, Animated } from "react-native";
 
 import AppLink from "react-native-app-link";
 import Collapsible from 'react-native-collapsible';
@@ -23,79 +23,28 @@ class BlueSectionContent extends Component {
         }
     }
 
-    _setMaxHeight(event){
-        this.setState({
-            maxHeight   : 300
-        });
-    }
-
-    _setMinHeight(event){
-        // event.nativeEvent.layout.height
-        this.setState({
-            minHeight   : 0
-        });
-    }
-
-    heightAnimationToggle(){
-        console.log("animationToggle");
-        let initialValue    = this.state.expanded? this.state.maxHeight + this.state.minHeight : this.state.minHeight,
-            finalValue      = this.state.expanded? this.state.minHeight : this.state.maxHeight + this.state.minHeight;
-
-        // this.setState({
-        //     expanded : !this.state.expanded
-        // });
-
-        this.state.heightAnimation.setValue(0);
-        Animated.spring(
-            this.state.heightAnimation,
-            {
-                toValue: 300
-            }
-        ).start();
-    }
-
-    opacityAnimationToggle(){
-        console.log("animationToggle");
-        let initialValue    = this.state.expanded? this.state.maxHeight + this.state.minHeight : this.state.minHeight,
-            finalValue      = this.state.expanded? this.state.minHeight : this.state.maxHeight + this.state.minHeight;
-
-        // this.setState({
-        //     expanded : !this.state.expanded
-        // });
-
-        this.state.opacityAnimation.setValue(0);
-        Animated.timing(
-            this.state.opacityAnimation,
-            {
-                toValue: 1.0,
-                duration: 1000
-            }
-        ).start();
-    }
-
     componentWillReceiveProps(newProps) {
         if (this.state.expanded !== newProps.expanded) {
             this.setState({expanded: newProps.expanded});
         }
       }
-/* 
-    { maxHeight: this.state.expanded ? "100%" : "0%",
-    opacity: this.state.expanded ? 1.0 : 0}
-*/
+        /* 
+        { maxHeight: this.state.expanded ? "100%" : "0%",
+        opacity: this.state.expanded ? 1.0 : 0}
+        */
     render() {
         return (
             <Collapsible 
                 style={blueSectionContent_styles.blueSection_Content}
-                onLayout={this._setMinHeight.bind(this)}
                 collapsed={this.state.expanded}
-                duration={850}
+                duration={750}
             >
-                    {/* <WebView 
-                        style={styles.webView}
+                    <WebView 
+                        style={blueSectionContent_styles.webView}
                         originWhitelist={['*']}
                         source={{html: "<iframe src='https://www.site24x7.com/sv.do?id=-lTskTIBFC99AjBdJTzdd22ylcZvGBYnfGhcgwvt1-27W89lFFvf7WICSx8TdzUT6kB92hYLWdGYIInKaxcmHcJTzDPBf7IFLjpWmnUEJ18%3D&st=false' scrolling='yes'></iframe>"}}
                         
-                    /> */}
+                    />
                         <LinkButton 
                             name="Spiceworks"
                             imagePath="CVUHSD-Course-Resources.png"
