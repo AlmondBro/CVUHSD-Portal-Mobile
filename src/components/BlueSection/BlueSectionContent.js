@@ -76,8 +76,6 @@ class BlueSectionContent extends Component {
     componentWillReceiveProps(newProps) {
         if (this.state.expanded !== newProps.expanded) {
             this.setState({expanded: newProps.expanded});
-            this.heightAnimationToggle();
-            this.opacityAnimationToggle();
         }
       }
 /* 
@@ -90,6 +88,7 @@ class BlueSectionContent extends Component {
                 style={blueSectionContent_styles.blueSection_Content}
                 onLayout={this._setMinHeight.bind(this)}
                 collapsed={this.state.expanded}
+                duration={850}
             >
                     {/* <WebView 
                         style={styles.webView}
