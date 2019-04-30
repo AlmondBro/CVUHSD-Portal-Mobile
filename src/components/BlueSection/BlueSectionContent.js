@@ -13,7 +13,10 @@ const blueSectionContent_styles = StyleSheet.create({
     },
     webView: {
        flex: 1,
-       alignSelf: 'center'
+       alignSelf: 'center',
+       height: 150,
+       width: 250,
+       backgroundColor: "#F4F7F9"
     }
 });
 
@@ -35,55 +38,61 @@ class BlueSectionContent extends Component {
         opacity: this.state.expanded ? 1.0 : 0}
         */
     render() {
-        return (
+        return this.props.serviceStatuses ? (
             <Collapsible 
                 style={blueSectionContent_styles.blueSection_Content}
                 collapsed={this.state.expanded}
                 duration={750}
             >
-                <View>
-                    <WebView 
-                            style={blueSectionContent_styles.webView}
-                            originWhitelist={['*']}
-                            source=
-                            {{html: "<iframe src='https://www.site24x7.com/sv.do?id=-lTskTIBFC99AjBdJTzdd22ylcZvGBYnfGhcgwvt1-27W89lFFvf7WICSx8TdzUT6kB92hYLWdGYIInKaxcmHcJTzDPBf7IFLjpWmnUEJ18%3D&st=false' scrolling='yes'></iframe>"}}
-                            scalesPageToFit={false}
-                            javaScriptEnabled={true}
-                        />  
-                </View>
-                
-                        <LinkButton 
-                            name="Spiceworks"
-                            imagePath="CVUHSD-Course-Resources.png"
-                            deepLink="spiceworks://"
-                        />
-                        <Button 
-                                onPress={ () => { 
-                                                    Linking.openURL("spiceworks://")
-                                                } 
-                                        }
-                                title="Spiceworks"
-                                accessibilityLabel="Press this button to open Lyft"
-                        />
-                        <Button 
+                <WebView 
+                        style={blueSectionContent_styles.webView}
+                        originWhitelist={['*']}
+                        source=
+                        {{html: "<iframe src='https://www.site24x7.com/sv.do?id=-lTskTIBFC99AjBdJTzdd22ylcZvGBYnfGhcgwvt1-27W89lFFvf7WICSx8TdzUT6kB92hYLWdGYIInKaxcmHcJTzDPBf7IFLjpWmnUEJ18%3D&st=false' scrolling='yes'></iframe>"}}
+                        scalesPageToFit={false}
+                        javaScriptEnabled={true}
+                        injectedJavaScript={`const meta = document.createElement('meta'); meta.setAttribute('content', 'width=width, initial-scale=0.5, maximum-scale=0.5, user-scalable=2.0'); meta.setAttribute('name', 'viewport'); document.getElementsByTagName('head')[0].appendChild(meta); `}
+                        useWebKit={false}
+                />  
+                </Collapsible>
+        ) : (
+                <Collapsible 
+                    style={blueSectionContent_styles.blueSection_Content}
+                    collapsed={this.state.expanded}
+                    duration={750}
+                >
+                    <LinkButton 
+                        name="Spiceworks"
+                        imagePath="CVUHSD-Course-Resources.png"
+                        deepLink="spiceworks://"
+                    />
+                    <Button 
                             onPress={ () => { 
-                                                let titanHST_config = {
-                                                appName: "titan-hst",
-                                                appStoreId: "855732889",
-                                                appStoreLocale: "us",
-                                                playStoreId: "swipe.android.titanHst"
-                                        
-                                                };
-        
-                                                //Linking.openURL("855732889://");
-                                                //Open in App Store:
-                                                AppLink.openInStore(titanHST_config);
+                                                Linking.openURL("spiceworks://")
                                             } 
                                     }
-                            title="Titan"
+                            title="Spiceworks"
                             accessibilityLabel="Press this button to open Lyft"
-                        /> 
-                    </Collapsible>
+                    />
+                    <Button 
+                        onPress={ () => { 
+                                            let titanHST_config = {
+                                            appName: "titan-hst",
+                                            appStoreId: "855732889",
+                                            appStoreLocale: "us",
+                                            playStoreId: "swipe.android.titanHst"
+                                    
+                                            };
+
+                                            //Linking.openURL("855732889://");
+                                            //Open in App Store:
+                                            AppLink.openInStore(titanHST_config);
+                                        } 
+                                }
+                        title="Titan"
+                        accessibilityLabel="Press this button to open Lyft"
+                    /> 
+                </Collapsible>
         );
     } //end render()
   

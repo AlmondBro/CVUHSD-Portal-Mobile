@@ -57,6 +57,7 @@ class App extends Component {
             <BlueSection 
               title="System Statuses" 
               expanded={false}
+              serviceStatuses={true}
             />
             <BlueSection 
               title="Quick Links" 
