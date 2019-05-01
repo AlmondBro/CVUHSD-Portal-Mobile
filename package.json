@@ -4,8 +4,11 @@
   "name": "src",
   "scripts": {
     "start": "expo start",
+    "publish": "expo publish",
     "android": "expo start --android",
+    "build-android": "expo build:android",
     "ios": "expo start --ios",
+    "build-ios": "expo build:ios",
     "eject": "expo eject"
   },
   "dependencies": {
