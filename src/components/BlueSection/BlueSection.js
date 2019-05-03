@@ -39,6 +39,7 @@ class BlueSection extends Component {
                 <BlueSectionContent  
                   expanded={this.state.expanded}
                   expandToggle={this.expandToggle}
+                  buttons={this.props.buttons}
                   serviceStatuses={this.props.serviceStatuses}
                 />
             </View>

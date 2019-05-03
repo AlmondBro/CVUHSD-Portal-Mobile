@@ -16,8 +16,8 @@ const serviceButton_styles = StyleSheet.create({
 });
 
 const LinkButton = (props) => {
-    let openLink = () => {
-        Linking.openURL(props.deepLink)
+    let openLink = (link) => {
+        Linking.openURL(link);
     };
 
     let getImage = (imagePath) => {
@@ -51,7 +51,7 @@ const LinkButton = (props) => {
                 return require("./../assets/images/Buttons/CVOD.png");
             
             case "CVUHSD-Course-Resources.png" : 
-                return require("./../assets/images/Buttons/CVUHSD-Course-Resource.png");
+                return require("./../assets/images/Buttons/CVUHSD-Course-Resources.png");
 
             case "CV-Website.png" : 
                 return require("./../assets/images/Buttons/CV-Website.png");
@@ -87,7 +87,7 @@ const LinkButton = (props) => {
                 return require("./../assets/images/Buttons/ed-tech-resources.png");
             
             case "everfi.png" : 
-                return require("./../assets/images/Buttons/everfi.png");
+                return require("./../assets/images/Buttons/everfi.jpg");
 
             case "FlipsterHW.png" : 
                 return require("./../assets/images/Buttons/FlipsterHW.png");
@@ -111,7 +111,7 @@ const LinkButton = (props) => {
                 return require("./../assets/images/Buttons/hawthorne-laptop-cart-system.png"); 
             
             case "Helpdesk.png" : 
-                return require("./../assets/images/Buttons/HelpDesk.png");
+                return require("./../assets/images/Buttons/Helpdesk.png");
 
             case "Hero.png" : 
                 return require("./../assets/images/Buttons/Hero.png");
@@ -135,7 +135,7 @@ const LinkButton = (props) => {
                 return require("./../assets/images/Buttons/infosnap.png");
 
             case "lacoe-media.png" : 
-                return require("./../assets/images/Buttons/lacoe-media.png");
+                return require("./../assets/images/Buttons/lacoe-media.jpg");
 
             case "lawndale-laptop-cart-system.png" : 
                 return require("./../assets/images/Buttons/lawndale-laptop-cart-system.png");
@@ -198,7 +198,7 @@ const LinkButton = (props) => {
                 return require("./../assets/images/Buttons/Read180LZ-Student.png"); 
 
             case "Read180LZ-Teacher.png" : 
-                return require("./../assets/images/Buttons/Read180LX-Teacher.png");
+                return require("./../assets/images/Buttons/Read180LZ-Teacher.png");
 
             case "schmoop.png" : 
                 return require("./../assets/images/Buttons/schmoop.png");
@@ -236,11 +236,11 @@ const LinkButton = (props) => {
             case "TimeClockPlusLogo.jpg" : 
                 return require("./../assets/images/Buttons/TimeClockPlusLogo.jpg");
 
-            case "turnitin.jpg" : 
-                return require("./../assets/images/Buttons/turnitin.jpg");
+            case "turnitin.png" : 
+                return require("./../assets/images/Buttons/turnitin.png");
 
             case "Wayside-publishing.jpg" : 
-                return require("./../assets/images/Buttons/Wayside-publishing.jpg");
+                return require("./../assets/images/Buttons/Wayside-publishing.png");
 
             default :  
                 return require("./../assets/images/Buttons/Outlook.png");
@@ -257,12 +257,12 @@ const LinkButton = (props) => {
     return (
         <TouchableHighlight 
             style={serviceButton_styles.touchableHighlight}
-            onPress={openLink}
+            onPress={ () => { openLink(props.buttonLink) } }
         >
             <Image  style={serviceButton_styles.image}
                     source={ getImage(props.imageSource) }  
-                    accessibilityLabel={props.name}
-                    accessible={props.name ? true : false}
+                    accessible={props.description ? true : false}
+                    accessibilityLabel={props.description}
             />
         </TouchableHighlight>
     );
