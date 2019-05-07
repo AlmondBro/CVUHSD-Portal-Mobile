@@ -260,7 +260,7 @@ const LinkButton = (props) => {
             onPress={ () => { openLink(props.buttonLink) } }
         >
             <Image  style={serviceButton_styles.image}
-                    source={ getImage(props.imageSource) }  
+                    source={ getImage(props.buttonImg) }  
                     accessible={props.description ? true : false}
                     accessibilityLabel={props.description}
             />
