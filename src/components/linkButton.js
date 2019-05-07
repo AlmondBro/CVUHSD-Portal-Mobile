@@ -22,65 +22,67 @@ const LinkButton = (props) => {
 
     let getImage = (imagePath) => {
         let baseImageFolder = `./../assets/images/Buttons/`;
-        switch (imagePath) {
-            case "Aesop.png" : 
+        let imagePath_LowerCase = imagePath.toString().toLowerCase();
+        
+        switch (imagePath_LowerCase) {
+            case "aesop.png": 
                 return require("./../assets/images/Buttons/Aesop.png");
 
-            case "BB-Admin.png" : 
+            case "bb-admin.png" : 
                 return require("./../assets/images/Buttons/BB-Admin.png");
 
-            case "BB-Teacher.png" : 
+            case "bb-teacher.png" : 
                 return require("./../assets/images/Buttons/BB-Teacher.png");
 
             case "behavior-alert.png" : 
                 return require("./../assets/images/Buttons/behavior-alert.png");
 
-            case "BrainPop.png" : 
+            case "brainpop.png" : 
                 return require("./../assets/images/Buttons/BrainPop.png");
         
-            case "Canvas.png" : 
+            case "canvas.png" : 
                 return require("./../assets/images/Buttons/Canvas.png");
             
             case "ccgi-logo.png" : 
                 return require("./../assets/images/Buttons/ccgi-logo.png");
 
-            case "CVISS-Website.png" : 
+            case "cviss-website.png" : 
                 return require("./../assets/images/Buttons/CVISS-Website.png");
 
-            case "CVOD.png" : 
+            case "cvod.png" : 
                 return require("./../assets/images/Buttons/CVOD.png");
             
-            case "CVUHSD-Course-Resources.png" : 
+            case "cvuhsd-course-resources.png" : 
                 return require("./../assets/images/Buttons/CVUHSD-Course-Resources.png");
 
-            case "CV-Website.png" : 
+            case "cv-website.png" : 
                 return require("./../assets/images/Buttons/CV-Website.png");
 
-            case "Destiny.png" : 
+            case "destiny.png" : 
                 return require("./../assets/images/Buttons/Destiny.png");
 
-            case "EBSCO.png" : 
+            case "ebsco.png" : 
                 return require("./../assets/images/Buttons/EBSCO.png");
             
-            case "Edgenuity.png" : 
+            case "edgenuity.png" : 
                 return require("./../assets/images/Buttons/Edgenuity.png");
 
-            case "Edlio-CVISS.png" : 
+            case "edlio-cviss.png" : 
                 return require("./../assets/images/Buttons/Edlio-CVISS.png");
             
-            case "Edlio-CVUHSD.png" : 
+            case "edlio-cvuhsd.png" : 
                 return require("./../assets/images/Buttons/Edlio-CVUHSD.png");
             
-            case "Edlio-HW.png" : 
+            case "edlio-hw.png" : 
                 return require("./../assets/images/Buttons/Edlio-HW.png");
 
-            case "Edlio-LL.png" : 
+            case "edlio-ll.png" : 
                 return require("./../assets/images/Buttons/Edlio-LL.png");
 
-            case "Edlio-LW.png" : 
+            case "edlio-lw.png" : 
                 return require("./../assets/images/Buttons/Edlio-LL.png");
 
-            case "Edlio-LZ.png" : 
+            case "edlio-lz.png" : 
                 return require("./../assets/images/Buttons/Edlio-LZ.png");
 
             case "ed-tech-resources.png" : 
@@ -89,19 +91,19 @@ const LinkButton = (props) => {
             case "everfi.png" : 
                 return require("./../assets/images/Buttons/everfi.jpg");
 
-            case "FlipsterHW.png" : 
+            case "flipsterhw.png" : 
                 return require("./../assets/images/Buttons/FlipsterHW.png");
 
-            case "FlipsterLW.png" : 
+            case "flipsterlw.png" : 
                 return require("./../assets/images/Buttons/FlipsterLW.png");
 
-            case "FlipsterLZ.png" : 
+            case "flipsterlz.png" : 
                 return require("./../assets/images/Buttons/FlipsterLZ.png");
 
             case "gmail.png" : 
                 return require("./../assets/images/Buttons/gmail.png"); 
                 
-            case "GoGuardian.png" : 
+            case "goguardian.png" : 
                 return require("./../assets/images/Buttons/GoGuardian.png");    
 
             case "google-drive.png" : 
@@ -110,25 +112,25 @@ const LinkButton = (props) => {
             case "hawthorne-laptop-cart-system.png" : 
                 return require("./../assets/images/Buttons/hawthorne-laptop-cart-system.png"); 
             
-            case "Helpdesk.png" : 
+            case "helpdesk.png" : 
                 return require("./../assets/images/Buttons/Helpdesk.png");
 
-            case "Hero.png" : 
+            case "hero.png" : 
                 return require("./../assets/images/Buttons/Hero.png");
 
-            case "HMH.png" : 
+            case "hmh.png" : 
                 return require("./../assets/images/Buttons/HMH.png");
 
-            case "HW-Website.png" : 
+            case "hw-website.png" : 
                 return require("./../assets/images/Buttons/HW-Website.png");
 
-            case "Illuminate.png" : 
+            case "illuminate.png" : 
                 return require("./../assets/images/Buttons/Illuminate.png");
 
-            case "Illuminate-Student.png" : 
+            case "illuminate-student.png" : 
                 return require("./../assets/images/Buttons/Illuminate-Student.png");
 
-            case "Illuminate-Teacher.png" : 
+            case "illuminate-teacher.png" : 
                 return require("./../assets/images/Buttons/Illuminate-Teacher.png");
             
             case "infosnap.png" : 
@@ -143,22 +145,22 @@ const LinkButton = (props) => {
             case "leuzinger-laptop-cart-system.png" : 
                 return require("./../assets/images/Buttons/lawndale-laptop-cart-system.png");
 
-            case "LL-Website.png" : 
+            case "ll-Website.png" : 
                 return require("./../assets/images/Buttons/LL-Website.png");
 
-            case "LW-Website.png" : 
+            case "lw-Website.png" : 
                 return require("./../assets/images/Buttons/LW-Website.png");
 
-            case "LZ-Website.png" : 
+            case "lz-Website.png" : 
                 return require("./../assets/images/Buttons/LZ-Website.png");
 
             case "office365.png" : 
                 return require("./../assets/images/Buttons/office365.png");
 
-            case "Outlook.png" : 
+            case "outlook.png" : 
                 return require("./../assets/images/Buttons/Outlook.png");
 
-            case "Overdrive.png" : 
+            case "overdrive.png" : 
                 return require("./../assets/images/Buttons/Overdrive.png");  
             
             case "password-portal.png" : 
@@ -167,37 +169,31 @@ const LinkButton = (props) => {
             case "print-center.png" : 
                 return require("./../assets/images/Buttons/print-center.png");   
 
-            case "PS.png" : 
+            case "ps.png" : 
                 return require("./../assets/images/Buttons/PS.png"); 
 
-            case "PS-student.png" : 
+            case "ps-student.png" : 
                 return require("./../assets/images/Buttons/PS-student.png");
-                
-            case "PT.png" : 
-                return require("./../assets/images/Buttons/PS.png");
-                            
+                           
             case "PT.png" : 
                 return require("./../assets/images/Buttons/PT.png"); 
 
-            case "Read180HW-Student.png" : 
+            case "read180hw-student.png" : 
                 return require("./../assets/images/Buttons/Read180HW-Student.png");
                 
-            case "Read180HW-Teacher.png" : 
+            case "read180hw-teacher.png" : 
                 return require("./../assets/images/Buttons/Read180HW-Teacher.png"); 
 
-            case "Read180LW-Student.png" : 
+            case "read180lw-student.png" : 
                 return require("./../assets/images/Buttons/Read180LW-Student.png");
 
-            case "Read180LW-Teacher.png" : 
+            case "read180lw-teacher.png" : 
                 return require("./../assets/images/Buttons/Read180LW-Teacher.png");
-            
-            case "Read180LW-Teacher.png" : 
-                return require("./../assets/images/Buttons/Read180LW-Teacher.png"); 
-
-            case "Read180LZ-Student.png" : 
+    
+            case "read180lz-student.png" : 
                 return require("./../assets/images/Buttons/Read180LZ-Student.png"); 
 
-            case "Read180LZ-Teacher.png" : 
+            case "read180lz-teacher.png" : 
                 return require("./../assets/images/Buttons/Read180LZ-Teacher.png");
 
             case "schmoop.png" : 
@@ -230,16 +226,16 @@ const LinkButton = (props) => {
             case "staff-only-mine.png" : 
                 return require("./../assets/images/Buttons/staff-only-mine.png");
 
-            case "TechItOut_Button.png" : 
+            case "techItOut_Button.png" : 
                 return require("./../assets/images/Buttons/TechItOut_Button.png");
 
-            case "TimeClockPlusLogo.jpg" : 
+            case "timeclockpluslogo.jpg" : 
                 return require("./../assets/images/Buttons/TimeClockPlusLogo.jpg");
 
             case "turnitin.png" : 
                 return require("./../assets/images/Buttons/turnitin.png");
 
-            case "Wayside-publishing.jpg" : 
+            case "wayside-publishing.jpg" : 
                 return require("./../assets/images/Buttons/Wayside-publishing.png");
 
             default :  

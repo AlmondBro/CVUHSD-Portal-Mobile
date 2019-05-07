@@ -82,7 +82,7 @@ let staffPortalButtons = {
 
         helpDesk_button : {
             buttonLink: "https://helpdesk.centinela.k12.ca.us",
-            buttonImg: "helpdesk.png",
+            buttonImg: "Helpdesk.png",
             description: "Helpdesk (CV It Department)"
         },
 
