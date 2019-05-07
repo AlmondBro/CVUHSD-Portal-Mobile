@@ -265,3 +265,37 @@ const LinkButton = (props) => {
 };
 
 export default LinkButton;
+
+{/* <LinkButton 
+                        name="Spiceworks"
+                        imagePath="CVUHSD-Course-Resources.png"
+                        deepLink="spiceworks://"
+                    /> */}
+                    {/* <Button 
+                            onPress={ () => { 
+                                                Linking.openURL("spiceworks://")
+                                            } 
+                                    }
+                            title="Spiceworks"
+                            accessibilityLabel="Press this button to open Lyft"
+                    />
+                    <Button 
+                        onPress={ () => { 
+                                            let titanHST_config = {
+                                            appName: "titan-hst",
+                                            appStoreId: "855732889",
+                                            appStoreLocale: "us",
+                                            playStoreId: "swipe.android.titanHst"
+                                    
+                                            };
+
+                                            //Linking.openURL("855732889://");
+                                            //Open in App Store:
+                                            AppLink.openInStore(titanHST_config);
+                                        } 
+                                }
+                        title="Titan"
+                        accessibilityLabel="Press this button to open Lyft"
+                    />  */}
+
+                    

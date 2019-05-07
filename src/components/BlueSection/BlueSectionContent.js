@@ -46,21 +46,15 @@ class BlueSectionContent extends Component {
                     let buttonsArray = Object.values(this.props.buttons);
 
                     return [...buttonsArray].map( (buttonObject, index) => {
-                            
-                            /* Group buttons in tabs of four */
-                            if (index %4 === 0 && index >= 4 ) {
-                                return (
-                                    <View key={index}></View>
-                                    ); 
-                            }  
-
-                    return (<LinkButton 
-                                key={index} 
-                                buttonLink={buttonObject.buttonLink} 
-                                buttonImg={buttonObject.buttonImg} 
-                                description={buttonObject.description}
-                            />); 
-                    }); 
+            
+                        return (<LinkButton 
+                                    key={index} 
+                                    buttonLink={buttonObject.buttonLink} 
+                                    buttonImg={buttonObject.buttonImg} 
+                                    description={buttonObject.description}
+                                />); 
+                            }
+                    ); 
 
             /* For loop can work here, but it does not return any new values whereas map does: 
                 Source: https://stackoverflow.com/questions/45576223/why-are-for-loops-not-allowed-in-react-jsx
@@ -104,39 +98,7 @@ class BlueSectionContent extends Component {
                     collapsed={this.state.expanded}
                     duration={750}
                 >
-
                     { this.generateBlueSectionButtons() }
-                    {/* <LinkButton 
-                        name="Spiceworks"
-                        imagePath="CVUHSD-Course-Resources.png"
-                        deepLink="spiceworks://"
-                    /> */}
-                    {/* <Button 
-                            onPress={ () => { 
-                                                Linking.openURL("spiceworks://")
-                                            } 
-                                    }
-                            title="Spiceworks"
-                            accessibilityLabel="Press this button to open Lyft"
-                    />
-                    <Button 
-                        onPress={ () => { 
-                                            let titanHST_config = {
-                                            appName: "titan-hst",
-                                            appStoreId: "855732889",
-                                            appStoreLocale: "us",
-                                            playStoreId: "swipe.android.titanHst"
-                                    
-                                            };
-
-                                            //Linking.openURL("855732889://");
-                                            //Open in App Store:
-                                            AppLink.openInStore(titanHST_config);
-                                        } 
-                                }
-                        title="Titan"
-                        accessibilityLabel="Press this button to open Lyft"
-                    />  */}
                 </Collapsible>
         );
     } //end render()
