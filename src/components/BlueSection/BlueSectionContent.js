@@ -39,8 +39,6 @@ class BlueSectionContent extends Component {
       } //end componentWillReceiveProps(newProps)
         
     generateBlueSectionButtons = () => {
-        console.log("generateBlueSectionButtons()");
-
         if ( ( typeof(this.props.buttons) !== "undefined" ) ) {
 
                     let buttonsArray = Object.values(this.props.buttons);
@@ -52,6 +50,8 @@ class BlueSectionContent extends Component {
                                     buttonLink={buttonObject.buttonLink} 
                                     buttonImg={buttonObject.buttonImg} 
                                     description={buttonObject.description}
+                                    deepLink={buttonObject.deepLink}
+                                    appLink_config={buttonObject.appLink_config}
                                 />); 
                             }
                     ); 

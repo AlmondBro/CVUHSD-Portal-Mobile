@@ -16,12 +16,6 @@
       "ios",
       "android"
     ],
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.cvuhsd.portalMobile"
@@ -29,6 +23,6 @@
     "android": {
       "package": "com.cvuhsd.portalMobile"
     },
-    "scheme": "portal"
+    "scheme": "cvuhsd-portal"
   }
 }

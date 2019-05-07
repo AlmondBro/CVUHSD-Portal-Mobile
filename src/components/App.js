@@ -72,7 +72,7 @@ class App extends Component {
             />
             <BlueSection 
               title="Administrative Tools" 
-              expanded={true}
+              expanded={false}
               buttons={staffPortalButtons.administrativeTools}
             />
             <BlueSection 

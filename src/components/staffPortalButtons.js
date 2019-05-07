@@ -3,13 +3,28 @@ let staffPortalButtons = {
         outlookEmail_button : {
             buttonLink: "https://sso.centinela.k12.ca.us/adfs/ls/?wa=wsignin1.0&wtrealm=https%3a%2f%2fmail.centinela.k12.ca.us%2fowa%2f&wctx=rm%3d0%26id%3dpassive%26ru%3d%252fowa%252f&wct=2017-08-21T18%3a05%3a05Z",
             buttonImg: "Outlook.png",
-            description: "Outlook E-mail"
+            description: "Outlook E-mail",
+            deepLink : "ms-outlook://",
+            appLink_config : {
+                appName: "microsoft-outlook",
+                appStoreId: "951937596",
+                appStoreLocale: "us",
+                playStoreId: "com.microsoft.office.outlook"
+            }
         },
     
         canvas_button : {
             buttonLink: "https://centinela.instructure.com/",
             buttonImg: "canvas.png",
-            description: "Canvas (Learning Management System)"
+            deepLink : "canvas://",
+            description: "Canvas (Learning Management System)",
+            appLink_config : {
+                appName: "canvas-teacher",
+                appStoreId: "1257834464",
+                appStoreLocale: "us",
+                playStoreId: "com.instructure.teacher"
+            }
+
         },
     
         illuminate_button : {

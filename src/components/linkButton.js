@@ -16,8 +16,19 @@ const serviceButton_styles = StyleSheet.create({
 });
 
 const LinkButton = (props) => {
-    let openLink = (link) => {
-        Linking.openURL(link);
+    let openLink = (props) => {
+        console.log("openLink Props:\t" + JSON.stringify(props));
+
+        AppLink.maybeOpenURL(props.deepLink, props.appLink_config)
+            .then(() => {
+                // do stuff
+            })
+            .catch((err) => {
+            // handle error
+                console.log("App Link Error:\t" + err);
+                Linking.openURL(props.buttonLink)
+            });
+        //Linking.openURL(link);
     };
 
     let getImage = (imagePath) => {
@@ -253,7 +264,7 @@ const LinkButton = (props) => {
     return (
         <TouchableHighlight 
             style={serviceButton_styles.touchableHighlight}
-            onPress={ () => { openLink(props.buttonLink) } }
+            onPress={ () => { openLink(props) } }
         >
             <Image  style={serviceButton_styles.image}
                     source={ getImage(props.buttonImg) }  
