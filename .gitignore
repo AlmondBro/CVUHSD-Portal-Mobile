@@ -5,3 +5,6 @@ node_modules/
 #Ignore automatically generated files
 package-lock.json
 
+#Add Android Studio .idea folder to ignore
+.idea/
+
