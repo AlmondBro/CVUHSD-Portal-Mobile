@@ -16,7 +16,7 @@ let staffPortalButtons = {
         canvas_button : {
             buttonLink: "https://centinela.instructure.com/",
             buttonImg: "canvas.png",
-            deepLink : "canvas://",
+            deepLink : "canvas-teacher://",
             description: "Canvas (Learning Management System)",
             appLink_config : {
                 appName: "canvas-teacher",
@@ -26,35 +26,73 @@ let staffPortalButtons = {
             }
 
         },
-    
+        //TODO : Need to get illuminate deep link working!
         illuminate_button : {
             buttonLink: "https://centinela.illuminateed.com/dna/?prev_page=Main_NotDashboardPage&amp;page=SisLogin",
             buttonImg: "illuminate.png",
-            description: "Illuminate (Assessments)"
+            deepLink: "illuminate://",
+            description: "Illuminate (Assessments)",
+            appLink_config : {
+                appName: "illuminate-hc",
+                appStoreId: "1082772020",
+                appStoreLocale: "us",
+                playStoreId: "com.illuminateed.gd.conferences"
+            }
         },
     
+        //TODO: Need to find hero deep link!!
         hero_button : {
             buttonLink: "https://access.heropowered.com/login/centinelavalley-usd",
             buttonImg: "hero.png",
-            description: "Hero (PBIS System)"
+            deepLink: "hero://",
+            description: "Hero (PBIS System)",
+            appLink_config : {
+                appName: "hero-k12",
+                appStoreId: "980722195",
+                appStoreLocale: "us",
+                playStoreId: "com.plascotrac.app.hero"
+            }
         },
         
+        //TODO: Need to find deep link for school messenger!
         schoolMessenger_button : {
             buttonLink: "https://asp.schoolmessenger.com/centinela",
             buttonImg: "schoolmessenger-button.png",
-            description: "School Messenger"
+            description: "School Messenger",
+            deepLink: "school-messenger://",
+            appLink_config : {
+                appName: "schoolmessenger",
+                appStoreId: "978894818",
+                appStoreLocale: "us",
+                playStoreId: "com.schoolmessenger.recipient"
+            }
         },
     
+        //TODO: Need to find deep link for power teacher!
         powerTeacher_button : {
             buttonLink: "https://powerschool.centinela.k12.ca.us/teachers/pw.html",
             buttonImg: "PT.png",
-            description: "PowerSchool Teacher"
+            description: "PowerSchool Teacher",
+            deepLink: "powerschool://",
+            appLink_config : {
+                appName: "powerteacher-mobile",
+                appStoreId: "390563073",
+                appStoreLocale: "us",
+                playStoreId: "com.powerschool.portal"
+            }
         },
     
         googleDrive_button : { 
             buttonLink: "https://accounts.google.com/signin/v2/sl/pwd?service=wise&amp;passive=1209600&amp;osid=1&amp;continue=https%3A%2F%2Fdrive.google.com%2F&amp;followup=https%3A%2F%2Fdrive.google.com%2F&amp;emr=1&amp;flowName=GlifWebSignIn&amp;flowEntry=ServiceLogin",
             buttonImg: "google-drive.png",
-            description: "Google Drive"
+            description: "Google Drive",
+            deepLink: "googledrive://",
+            appLink_config : {
+                appName: "google-drive",
+                appStoreId: "507874739",
+                appStoreLocale: "us",
+                playStoreId: "com.google.android.apps.docs"
+            }
         },
     
         printCenter_button : {

@@ -186,7 +186,7 @@ const LinkButton = (props) => {
             case "ps-student.png" : 
                 return require("./../assets/images/Buttons/PS-student.png");
                            
-            case "PT.png" : 
+            case "pt.png" : 
                 return require("./../assets/images/Buttons/PT.png"); 
 
             case "read180hw-student.png" : 
