@@ -73,7 +73,7 @@ let staffPortalButtons = {
             buttonLink: "https://powerschool.centinela.k12.ca.us/teachers/pw.html",
             buttonImg: "PT.png",
             description: "PowerSchool Teacher",
-            deepLink: "powerschool://",
+            deepLink: "pss-Teacher://",
             appLink_config : {
                 appName: "powerteacher-mobile",
                 appStoreId: "390563073",
@@ -107,6 +107,15 @@ let staffPortalButtons = {
             description: "Helpdesk (C.V. I.T. Department)"
         },
     
+        /* Possible deep link: 
+        
+            deepLink: "itms-apps://itunes.apple.com/us/app-bundle/microsoft-office-365/id1450038993?mt=12",
+            appLink_config : {
+                appName: "google-drive",
+                appStoreId: "507874739",
+                appStoreLocale: "us",
+                playStoreId: "com.google.android.apps.docs"
+            }*/
         office365_button : {
             buttonLink: "https://portal.office.com/",
             buttonImg: "office365.png",
@@ -124,13 +133,27 @@ let staffPortalButtons = {
         gmail_button : {
             buttonLink: "https://accounts.google.com/signin/v2/sl/pwd?service=mail&amp;passive=true&amp;rm=false&amp;continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&amp;ss=1&amp;scc=1&amp;ltmpl=default&amp;ltmplcache=2&amp;emr=1&amp;osid=1&amp;flowName=GlifWebSignIn&amp;flowEntry=ServiceLogin",
             buttonImg: "gmail.png",
-            description: "Gmail"
+            description: "Gmail",
+            deepLink: "googlegmail://",
+            appLink_config : {
+                appName: "gmail-email-by-google",
+                appStoreId: "422689480",
+                appStoreLocale: "us",
+                playStoreId: "com.google.android.gm"
+            }
         },
 
         googleDrive_button : {
             buttonLink: "https://accounts.google.com/signin/v2/sl/pwd?service=wise&amp;passive=1209600&amp;osid=1&amp;continue=https%3A%2F%2Fdrive.google.com%2F&amp;followup=https%3A%2F%2Fdrive.google.com%2F&amp;emr=1&amp;flowName=GlifWebSignIn&amp;flowEntry=ServiceLogin",
             buttonImg: "google-drive.png",
-            description: "Google Drive"
+            description: "Google Drive",
+            deepLink: "googledrive://",
+            appLink_config : {
+                appName: "google-drive",
+                appStoreId: "507874739",
+                appStoreLocale: "us",
+                playStoreId: "com.google.android.apps.docs"
+            }
         },
 
         helpDesk_button : {
@@ -142,13 +165,28 @@ let staffPortalButtons = {
         outlook_button : {
             buttonLink: "https://sso.centinela.k12.ca.us/adfs/ls/?wa=wsignin1.0&wtrealm=https%3a%2f%2fmail.centinela.k12.ca.us%2fowa%2f&wctx=rm%3d0%26id%3dpassive%26ru%3d%252fowa%252f&wct=2017-08-21T18%3a05%3a05Z",
             buttonImg: "outlook.png",
-            description: "Outlook E-mail"
+            description: "Outlook E-mail",
+            deepLink : "ms-outlook://",
+            appLink_config : {
+                appName: "microsoft-outlook",
+                appStoreId: "951937596",
+                appStoreLocale: "us",
+                playStoreId: "com.microsoft.office.outlook"
+            }
         },
 
+        //TO-DO: Find deep link!!
         schoolMessenger_button: {
             buttonLink: "https://asp.schoolmessenger.com/centinela",
             buttonImg: "schoolmessenger-button.png",
-            description: "School Messenger"
+            description: "School Messenger",
+            deepLink: "school-messenger://",
+            appLink_config : {
+                appName: "schoolmessenger",
+                appStoreId: "978894818",
+                appStoreLocale: "us",
+                playStoreId: "com.schoolmessenger.recipient"
+            }
         },
 
         passwordPortal_button: {
@@ -166,7 +204,14 @@ let staffPortalButtons = {
         schoolDude_button : {
             buttonLink: "https://login.schooldude.com/mlogin?productid=community",
             buttonImg: "school-dude.png",
-            description: "School Dude"
+            description: "School Dude",
+            deepLink: "dudesolutions://",
+            appLink_config : {
+                appName: "schooldude",
+                appStoreId: "787457415",
+                appStoreLocale: "us",
+                playStoreId: "com.smashingboxes.dudesolutions.schooldude"
+            }
         },
 
         behaviorAlert_button : {
@@ -177,10 +222,18 @@ let staffPortalButtons = {
     }, //end standardStaffTools
 
     administrativeTools : {
+        //TODO: Need to find deep link for powerTeacher mobile!!
        powerSchool_button : {
             buttonLink: "https://powerschool.centinela.k12.ca.us/admin",
             buttonImg: "PS.png",
-            description: "PowerSchool (Admin)"
+            description: "PowerSchool (Admin)",
+            deepLink: "pss-teacher://",
+            appLink_config : {
+                appName: "powerteacher-mobile",
+                appStoreId: "390563073",
+                appStoreLocale: "us",
+                playStoreId: "com.powerschool.portal"
+            }
         },
 
         smarteTools_button : {
@@ -197,10 +250,18 @@ let staffPortalButtons = {
     }, //end administrativeTools
 
     teacherTools : {
+        //TODO: Find Frontline Education Deep Link!!
         frontLine_button : {
             buttonLink: "https://login.frontlineeducation.com/login?signin=dc20373fccea7afc2e324f7ceec30775&productId=ABSMGMT&clientId=ABSMGMT#/login",
             buttonImg: "aesop.png",
-            description: "Frontline (Absence Management/Subfinder)"
+            description: "Frontline (Absence Management/Subfinder)",
+            deepLink: "frontline-technologies://",
+            appLink_config : {
+                appName: "frontline-education",
+                appStoreId: "1160398526",
+                appStoreLocale: "us",
+                playStoreId: "com.frontline.frontlinemobile"
+            }
         },
 
         cvuhsdCourseResources_button : {
