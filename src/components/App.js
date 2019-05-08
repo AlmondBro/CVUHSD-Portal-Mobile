@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, ScrollView, Text, Dimensions } from 'react-native';
+import { StyleSheet, View, SafeAreaView, ScrollView, Text, Dimensions } from 'react-native';
 
 import BlueSection from "./BlueSection/BlueSection.js"
 import Header from "./Header.js"
@@ -48,7 +48,7 @@ class App extends Component {
 
   render() {
     return (
-      <View style={appStyles.container}>
+      <SafeAreaView style={appStyles.container}>
         <ScrollView contentContainerStyle={appStyles.scrollView}>
           <Header />
           {/*  Had to hardcode the width of this view to get it to stretch horizontally
@@ -108,7 +108,7 @@ class App extends Component {
             />
           </View>
         </ScrollView>
-      </View>
+      </SafeAreaView>
     );
   }
 }
