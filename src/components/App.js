@@ -5,14 +5,15 @@ import BlueSection from "./BlueSection/BlueSection.js"
 import Header from "./Header.js"
 
 import { staffPortalButtons } from "./staffPortalButtons.js";
-
+//rgb(30, 108, 147)
+// #F4F7F9
 const appStyles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignSelf: 'stretch',
-    backgroundColor: '#F4F7F9',
+    backgroundColor: 'rgb(30, 108, 147)',
     padding: 0,
     margin: 0
   },
@@ -21,7 +22,8 @@ const appStyles = StyleSheet.create({
     flexDirection: 'column',
     alignSelf: 'center',
     justifyContent: 'flex-start',
-    padding: 0
+    padding: 0,
+    backgroundColor: '#F4F7F9'
   },
 
   blueSectionContainer: {
