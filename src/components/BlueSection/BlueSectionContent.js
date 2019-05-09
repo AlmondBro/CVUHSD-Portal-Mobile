@@ -9,14 +9,15 @@ import LinkButton from "../LinkButton.js";
 const blueSectionContent_styles = StyleSheet.create({
     blueSection_Content: {
        flexDirection: 'column',
-       justifyContent: 'center'
+       justifyContent: 'center',
+       backgroundColor: "#e1e5e8"
     },
     webView: {
        flex: 1,
        alignSelf: 'center',
        height: 150,
        width: 250,
-       backgroundColor: "#F4F7F9"
+       backgroundColor: "#e1e5e8"
     }
 });
 
