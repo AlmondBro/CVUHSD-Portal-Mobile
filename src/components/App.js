@@ -1,8 +1,11 @@
 import React, { Component, Fragment } from 'react';
-import { StyleSheet, View, SafeAreaView, ScrollView, Text, Dimensions } from 'react-native';
+import { StyleSheet, View, ScrollView, Dimensions, StatusBar } from 'react-native';
+//import { SafeAreaView } from 'react-native';
 
-import BlueSection from "./BlueSection/BlueSection.js"
-import Header from "./Header.js"
+import BlueSection from "./BlueSection/BlueSection.js";
+import Header from "./Header.js";
+
+import SafeAreaView from "react-native-safe-area-view";
 
 import { staffPortalButtons } from "./staffPortalButtons.js";
 //rgb(30, 108, 147)
@@ -51,13 +54,14 @@ class App extends Component {
   render() {
     return (
         <Fragment>
+            <StatusBar backgroundColor="#F4F7F9" barStyle="dark-content" translucent={true} />
             { /* The following is a technique using two SafeAreaViews to have the
                 statusbar/top padding be a different color than the bottom padding. 
                 SafeAreaViews are only applicable on iOs 11+ on >iPhone X 
 
                 Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
             */ }
-            <SafeAreaView style={{ flex:0, backgroundColor: '#F4F7F9' }} />
+            {/* <SafeAreaView style={{ flex:0, backgroundColor: '#F4F7F9' }} /> */}
             <SafeAreaView style={appStyles.container} forceInset={ {bottom: 'never'} }>
                 <ScrollView contentContainerStyle={appStyles.scrollView}>
                 <Header />

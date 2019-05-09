@@ -9,7 +9,7 @@ const blueSection_Header_Styles = StyleSheet.create({
       flexDirection: 'row',
       alignSelf: 'stretch',
       justifyContent: 'center',
-      backgroundColor: 'rgb(30, 108, 147)',
+      backgroundColor: '#1e6c93',
       paddingTop: 8,
       paddingBottom: 8
     },
@@ -24,7 +24,7 @@ const blueSection_Header_Styles = StyleSheet.create({
 
 const BlueSectionHeader = (props) => {
     return (
-        <View style={blueSection_Header_Styles.blueSection_Header}>
+        <View style={[blueSection_Header_Styles.blueSection_Header, {backgroundColor: !props.expanded ? "#15516b" : "#1e6c93"}]}>
             <Text style={blueSection_Header_Styles.blueSection_HeaderText}>{props.title}</Text>
             <ToggleButton expanded={props.expanded} expandToggle={props.expandToggle} />
         </View>
