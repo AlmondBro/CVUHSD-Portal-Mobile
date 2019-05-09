@@ -13,7 +13,7 @@ const appStyles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignSelf: 'stretch',
-    backgroundColor: 'rgb(30, 108, 147)',
+    backgroundColor: '#F4F7F9',
     padding: 0,
     margin: 0
   },
