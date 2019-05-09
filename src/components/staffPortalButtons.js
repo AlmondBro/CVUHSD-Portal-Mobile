@@ -16,8 +16,8 @@ let staffPortalButtons = {
         canvas_button : {
             buttonLink: "https://centinela.instructure.com/",
             buttonImg: "canvas.png",
-            deepLink : "canvas-teacher://",
             description: "Canvas (Learning Management System)",
+            deepLink : "canvas-teacher://",
             appLink_config : {
                 appName: "canvas-teacher",
                 appStoreId: "1257834464",
@@ -332,7 +332,14 @@ let staffPortalButtons = {
         canvas_button : {
             buttonLink: "https://centinela.instructure.com/",
             buttonImg: "canvas.png",
-            description: "Canvas (Learning Management System)"
+            description: "Canvas (Learning Management System)",
+            deepLink : "canvas-teacher://",
+            appLink_config : {
+                appName: "canvas-teacher",
+                appStoreId: "1257834464",
+                appStoreLocale: "us",
+                playStoreId: "com.instructure.teacher"
+            }
         },
 
         edgenuity_button : {
