@@ -31,7 +31,7 @@ const BlueSectionHeader = (props) => {
     return (
         <TouchableOpacity style={[ blueSection_Header_Styles.blueSection_Header, 
                                   {backgroundColor: !props.expanded ? "#15516b" : "#1e6c93",
-                                  borderBottomColor: '#15516b', borderBottomWidth: props.expanded ? 1 : 0}
+                                  borderBottomColor: '#F4F7F9', borderBottomWidth: props.expanded ? 1 : 0}
                                 ]}
               onPress={onPress}
               activeOpacity={0.5} //Defaults to 0.2

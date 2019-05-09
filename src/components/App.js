@@ -71,53 +71,53 @@ class App extends Component {
                 <View style={[appStyles.blueSectionContainer, this.getWidth()]}>
                     <BlueSection 
                         title="System Statuses" 
-                        expanded={false}
+                        expanded={!false}
                         serviceStatuses={true}
                     />
                     <BlueSection 
                         title="Quick Links" 
-                        expanded={true}
+                        expanded={!true}
                         buttons={staffPortalButtons.quickLinks}
                     />
                     <BlueSection 
                         title="Standard Staff Tools " 
-                        expanded={false}
+                        expanded={!false}
                         buttons={staffPortalButtons.standardStaffTools}
                     />
                     <BlueSection 
                         title="Administrative Tools" 
-                        expanded={false}
+                        expanded={!false}
                         buttons={staffPortalButtons.administrativeTools}
                     />
                     <BlueSection 
                         title="Teacher Tools" 
-                        expanded={false}
+                        expanded={!false}
                         buttons={staffPortalButtons.teacherTools}
                     />
                     <BlueSection 
                         title="Classroom Tools" 
-                        expanded={false}
+                        expanded={!false}
                         buttons={staffPortalButtons.classroomTools}
                     />
                     <BlueSection 
                         title="Learning Tools" 
-                        expanded={false}
+                        expanded={!false}
                         buttons={staffPortalButtons.learningTools}
                     />
                     <BlueSection 
                         title="Digital Textbooks" 
-                        expanded={false}
+                        expanded={!false}
                         buttons={staffPortalButtons.digitalTextbooks}
                     />
                     {/* needs right buttons! */}
                     <BlueSection 
                         title="Digital Library Resources" 
-                        expanded={false}
+                        expanded={!false}
                         buttons={staffPortalButtons.digitalTextbooks}
                     />
                     <BlueSection 
                         title="School Websites" 
-                        expanded={false}
+                        expanded={!false}
                         buttons={staffPortalButtons.schoolWebsites}
                     />
                 </View>
