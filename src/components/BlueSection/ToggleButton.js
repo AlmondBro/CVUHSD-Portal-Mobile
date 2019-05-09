@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { StyleSheet, TouchableHighlight, Text } from "react-native";
+import { StyleSheet, TouchableOpacity, Text } from "react-native";
 
 const styles = StyleSheet.create({
     touchableHighlight: {
@@ -46,12 +46,12 @@ class ToggleButton extends Component {
     
     render() {
         return (
-            <TouchableHighlight 
+            <TouchableOpacity 
                 style={styles.touchableHighlight}
                 onPress={this.onPress}
             >
                 <Text style={styles.text}>{!this.state.expanded ? "-" : "+"}</Text>
-            </TouchableHighlight>
+            </TouchableOpacity>
         );
     }
 } //ToggleButton class
