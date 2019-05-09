@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text} from "react-native";
+import { StyleSheet, TouchableOpacity, Text} from "react-native";
 
 import ToggleButton from "./ToggleButton.js";
 
@@ -23,14 +23,20 @@ const blueSection_Header_Styles = StyleSheet.create({
 
 
 const BlueSectionHeader = (props) => {
+    let onPress = () => {
+      props.expandToggle() 
+    }; //end onPress
+
+    //TODO: How would i trigger the TouchableOpacity's onPresss button in the toggleButton?
     return (
-        <View style={[ blueSection_Header_Styles.blueSection_Header, 
+        <TouchableOpacity style={[ blueSection_Header_Styles.blueSection_Header, 
                       {backgroundColor: !props.expanded ? "#15516b" : "#1e6c93"}
                     ]}
+              onPress={onPress}
         >
             <Text style={blueSection_Header_Styles.blueSection_HeaderText}>{props.title}</Text>
-            <ToggleButton expanded={props.expanded} expandToggle={props.expandToggle} />
-        </View>
+            <ToggleButton expanded={props.expanded} expandToggle={onPress} />
+        </TouchableOpacity>
     );
 }; //end BlueSectionHeader
 
