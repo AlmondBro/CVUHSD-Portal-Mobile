@@ -267,13 +267,27 @@ let staffPortalButtons = {
         cvuhsdCourseResources_button : {
             buttonLink: "https://drive.google.com/drive/folders/0B8DM6hczyKMbfkNvaU9LS3lLanpkS09GTExmTjR3TW0tZzBDYjlZd0ZRNkZKQUpHdERSZ28?usp=sharing",
             buttonImg: "CVUHSD-Course-Resources.png",
-            description: "CVUHSD Course Resources (Google Drive)"
+            description: "CVUHSD Course Resources (Google Drive)",
+            deepLink: "https://drive.google.com/drive/folders/0B8DM6hczyKMbfkNvaU9LS3lLanpkS09GTExmTjR3TW0tZzBDYjlZd0ZRNkZKQUpHdERSZ28?usp=sharing",
+            appLink_config : {
+                appName: "google-drive",
+                appStoreId: "507874739",
+                appStoreLocale: "us",
+                playStoreId: "com.google.android.apps.docs"
+            }  
         },
 
         powerTeacher_button : {
             buttonLink: "https://powerschool.centinela.k12.ca.us/teachers/pw.html",
             buttonImg: "PT.png",
-            description: "PowerTeacher (GradeBook &amp; Attendance)"
+            description: "PowerTeacher (GradeBook &amp; Attendance)",
+            deepLink: "pss-Teacher://",
+            appLink_config : {
+                appName: "powerteacher-mobile",
+                appStoreId: "390563073",
+                appStoreLocale: "us",
+                playStoreId: "com.powerschool.portal"
+            }
         },
 
         cvRestricted_button : {
@@ -285,7 +299,14 @@ let staffPortalButtons = {
         edTechResources_button : {
             buttonLink: "https://drive.google.com/drive/folders/0B_ico1iiP8Effkp5RkE2VnlmSzIybW5YbVRqQnVXb3NZSFIwQ1IwcUdYbEZtNWlvLTJGZHM",
             buttonImg: "ed-tech-resources.png",
-            description: "Ed Tech Resources"
+            description: "Ed Tech Resources",
+            deepLink: "https://drive.google.com/drive/folders/0B_ico1iiP8Effkp5RkE2VnlmSzIybW5YbVRqQnVXb3NZSFIwQ1IwcUdYbEZtNWlvLTJGZHM",
+            appLink_config : {
+                appName: "google-drive",
+                appStoreId: "507874739",
+                appStoreLocale: "us",
+                playStoreId: "com.google.android.apps.docs"
+            }  
         },
         
         lawndaleLaptopCartSystem_button : {
