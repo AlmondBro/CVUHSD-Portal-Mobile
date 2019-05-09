@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { StyleSheet, View, SafeAreaView, ScrollView, Text, Dimensions } from 'react-native';
 
 import BlueSection from "./BlueSection/BlueSection.js"
@@ -50,67 +50,76 @@ class App extends Component {
 
   render() {
     return (
-      <SafeAreaView style={appStyles.container}>
-        <ScrollView contentContainerStyle={appStyles.scrollView}>
-          <Header />
-          {/*  Had to hardcode the width of this view to get it to stretch horizontally
-                using the Dimensions module 
-            */}
-          <View style={[appStyles.blueSectionContainer, this.getWidth()]}>
-            <BlueSection 
-              title="System Statuses" 
-              expanded={false}
-              serviceStatuses={true}
-            />
-            <BlueSection 
-              title="Quick Links" 
-              expanded={true}
-              buttons={staffPortalButtons.quickLinks}
-            />
-              <BlueSection 
-              title="Standard Staff Tools " 
-              expanded={false}
-              buttons={staffPortalButtons.standardStaffTools}
-            />
-            <BlueSection 
-              title="Administrative Tools" 
-              expanded={false}
-              buttons={staffPortalButtons.administrativeTools}
-            />
-            <BlueSection 
-              title="Teacher Tools" 
-              expanded={false}
-              buttons={staffPortalButtons.teacherTools}
-            />
-            <BlueSection 
-              title="Classroom Tools" 
-              expanded={false}
-              buttons={staffPortalButtons.classroomTools}
-            />
-            <BlueSection 
-              title="Learning Tools" 
-              expanded={false}
-              buttons={staffPortalButtons.learningTools}
-            />
-            <BlueSection 
-              title="Digital Textbooks" 
-              expanded={false}
-              buttons={staffPortalButtons.digitalTextbooks}
-            />
-            {/* needs right buttons! */}
-             <BlueSection 
-              title="Digital Library Resources" 
-              expanded={false}
-              buttons={staffPortalButtons.digitalTextbooks}
-            />
-             <BlueSection 
-              title="School Websites" 
-              expanded={false}
-              buttons={staffPortalButtons.schoolWebsites}
-            />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+        <Fragment>
+            { /* The following is a technique using two SafeAreaViews to have the
+                statusbar/top padding be a different color than the bottom padding. 
+                SafeAreaViews are only applicable on iOs 11+ on >iPhone X 
+
+                Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
+            */ }
+            <SafeAreaView style={{ flex:0, backgroundColor: '#F4F7F9' }} />
+            <SafeAreaView style={appStyles.container} forceInset={ {bottom: 'never'} }>
+                <ScrollView contentContainerStyle={appStyles.scrollView}>
+                <Header />
+                {/*  Had to hardcode the width of this view to get it to stretch horizontally
+                        using the Dimensions module 
+                    */}
+                <View style={[appStyles.blueSectionContainer, this.getWidth()]}>
+                        <BlueSection 
+                        title="System Statuses" 
+                        expanded={false}
+                        serviceStatuses={true}
+                        />
+                        <BlueSection 
+                        title="Quick Links" 
+                        expanded={true}
+                        buttons={staffPortalButtons.quickLinks}
+                        />
+                        <BlueSection 
+                        title="Standard Staff Tools " 
+                        expanded={false}
+                        buttons={staffPortalButtons.standardStaffTools}
+                        />
+                        <BlueSection 
+                        title="Administrative Tools" 
+                        expanded={false}
+                        buttons={staffPortalButtons.administrativeTools}
+                        />
+                        <BlueSection 
+                        title="Teacher Tools" 
+                        expanded={false}
+                        buttons={staffPortalButtons.teacherTools}
+                        />
+                        <BlueSection 
+                        title="Classroom Tools" 
+                        expanded={false}
+                        buttons={staffPortalButtons.classroomTools}
+                        />
+                        <BlueSection 
+                        title="Learning Tools" 
+                        expanded={false}
+                        buttons={staffPortalButtons.learningTools}
+                        />
+                        <BlueSection 
+                        title="Digital Textbooks" 
+                        expanded={false}
+                        buttons={staffPortalButtons.digitalTextbooks}
+                        />
+                        {/* needs right buttons! */}
+                        <BlueSection 
+                        title="Digital Library Resources" 
+                        expanded={false}
+                        buttons={staffPortalButtons.digitalTextbooks}
+                        />
+                        <BlueSection 
+                        title="School Websites" 
+                        expanded={false}
+                        buttons={staffPortalButtons.schoolWebsites}
+                        />
+                    </View>
+                </ScrollView>
+            </SafeAreaView>
+        </Fragment>
     );
   }
 }
