@@ -1,3 +1,5 @@
+import {Platform, StyleSheet} from 'react-native';
+
 let staffPortalButtons = {
     quickLinks : {
         outlookEmail_button : {
@@ -30,8 +32,8 @@ let staffPortalButtons = {
         illuminate_button : {
             buttonLink: "https://centinela.illuminateed.com/dna/?prev_page=Main_NotDashboardPage&amp;page=SisLogin",
             buttonImg: "illuminate.png",
-            deepLink: "illuminate://",
             description: "Illuminate (Assessments)",
+            deepLink: "illuminate://",
             appLink_config : {
                 appName: "illuminate-hc",
                 appStoreId: "1082772020",
@@ -44,8 +46,8 @@ let staffPortalButtons = {
         hero_button : {
             buttonLink: "https://access.heropowered.com/login/centinelavalley-usd",
             buttonImg: "hero.png",
-            deepLink: "hero://",
             description: "Hero (PBIS System)",
+            deepLink: "hero://",
             appLink_config : {
                 appName: "hero-k12",
                 appStoreId: "980722195",
@@ -277,6 +279,7 @@ let staffPortalButtons = {
             }  
         },
 
+        //TODO: Find deep link for power teacher!!
         powerTeacher_button : {
             buttonLink: "https://powerschool.centinela.k12.ca.us/teachers/pw.html",
             buttonImg: "PT.png",
@@ -357,7 +360,14 @@ let staffPortalButtons = {
         illuminate_button : {
             buttonLink: "https://centinela.illuminateed.com/dna/?prev_page=Main_NotDashboardPage&amp;page=SisLogin",
             buttonImg: "illuminate.png",
-            description: "Illuminate (Assessments)"
+            description: "Illuminate (Assessments)",
+            deepLink: "illuminate://",
+            appLink_config : {
+                appName: "illuminate-hc",
+                appStoreId: "1082772020",
+                appStoreLocale: "us",
+                playStoreId: "com.illuminateed.gd.conferences"
+            }
         },
 
         goGuardian_button : {
@@ -369,7 +379,14 @@ let staffPortalButtons = {
         hero_button : {
             buttonLink: "https://access.heropowered.com/login/centinelavalley-usd",
             buttonImg: "hero.png",
-            description: "Hero (PBIS System)"
+            description: "Hero (PBIS System)",
+            deepLink: "hero://",
+            appLink_config : {
+                appName: "hero-k12",
+                appStoreId: "980722195",
+                appStoreLocale: "us",
+                playStoreId: "com.plascotrac.app.hero"
+            }
         }
     }, //end classroomTools
 
@@ -377,7 +394,14 @@ let staffPortalButtons = {
         brainPop_button : {
             buttonLink: "https://www.brainpop.com/",
             buttonImg: "BrainPop.png",
-            description: "BrainPop"
+            description: "BrainPop",
+            deepLink: "brainpop://",
+            appLink_config : {
+                appName: "brainpop-featured-movie",
+                appStoreId: "364894352",
+                appStoreLocale: "us",
+                playStoreId: "com.brainpop.brainpopfeaturedmovieandroid"
+            }
         },
 
         read180HW_button : {
@@ -404,11 +428,26 @@ let staffPortalButtons = {
             description: "Schmoop"
         },
 
-        schmoop_button : {
-            buttonLink: "https://clever.com/oauth/instant-login?client_id=2b024c690549687be970&district_id=5283beba2c067cd50b000031",
-            buttonImg: "everfi.png",
-            description: "Everfi"
-        }
+        //TODO: Need to find deep link for clever. NOTE: Appears to only be available on iOS!!
+        everfi_button : Platform.select({
+            ios: {
+                buttonLink: "https://clever.com/oauth/instant-login?client_id=2b024c690549687be970&district_id=5283beba2c067cd50b000031",
+                buttonImg: "everfi.png",
+                description: "Everfi",
+                deepLink: "clever://",
+                appLink_config : {
+                    appName: "clever",
+                    appStoreId: "1134186971",
+                    appStoreLocale: "us",
+                }
+            },
+            android: {
+                buttonLink: "https://clever.com/oauth/instant-login?client_id=2b024c690549687be970&district_id=5283beba2c067cd50b000031",
+                buttonImg: "everfi.png",
+                description: "Everfi",
+                deepLink: "clever://",
+            }
+        }) //end Platform.select()
     }, //end learningTools
 
     digitalTextbooks : {
