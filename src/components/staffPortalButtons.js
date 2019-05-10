@@ -480,16 +480,31 @@ let staffPortalButtons = {
     }, //end digitalTextbooks
 
     digitalLibraryResources : {
+        //TODO: Looks like there is a different app but try to find the deep link to that app
         classroomVideo_Button : {
             buttonLink: "http://cvod.infobase.com/p_Home.aspx",
             buttonImg: "CVOD.png",
-            description: "Classroom Video on Demand (Educational Video Streaming)"
+            description: "Classroom Video on Demand (Educational Video Streaming)",
+          /* deeplink: "cvod://",  
+            appLink_config : {
+                appName: "infobase-ebooks",
+                appStoreId: "1451620123",
+                appStoreLocale: "us",
+                playStoreId: "com.hurix.infobase.cloudreader"
+            } */
         },
 
         folletDestiny_Button : {
             buttonLink: "http://destiny.centinela.k12.ca.us/",
             buttonImg: "Destiny.png",
-            description: "Destiny"
+            description: "Destiny",
+            deepLink: "destiny://",
+            appLink_config : {
+                appName: "follett-destiny",
+                appStoreId: "521121808",
+                appStoreLocale: "us",
+                playStoreId: "com.follett.fsc.mobile.circdesk"
+            }
         },
 
         ebsco_Button : {
@@ -528,7 +543,7 @@ let staffPortalButtons = {
             description: "Flipster Hawthorne (E-Magazines)"
         }
     },
-    
+
     schoolWebsites : {
         cvuhsdWebsite_Button : {
             buttonLink: "https://www.centinela.k12.ca.us",

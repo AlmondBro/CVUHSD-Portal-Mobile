@@ -11,7 +11,7 @@ const serviceButton_styles = StyleSheet.create({
     },
 
     image: {
-
+        
     }
 });
 

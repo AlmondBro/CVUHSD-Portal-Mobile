@@ -113,7 +113,7 @@ class App extends Component {
                     <BlueSection 
                         title="Digital Library Resources" 
                         expanded={!false}
-                        buttons={staffPortalButtons.digitalTextbooks}
+                        buttons={staffPortalButtons.digitalLibraryResources}
                     />
                     <BlueSection 
                         title="School Websites" 
