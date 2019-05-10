@@ -11,7 +11,7 @@ const serviceButton_styles = StyleSheet.create({
     },
 
     image: {
-        
+
     }
 });
 
@@ -147,7 +147,7 @@ const LinkButton = (props) => {
             case "infosnap.png" : 
                 return require("./../assets/images/Buttons/infosnap.png");
 
-            case "lacoe-media.png" : 
+            case "lacoe-media.jpg" : 
                 return require("./../assets/images/Buttons/lacoe-media.jpg");
 
             case "lawndale-laptop-cart-system.png" : 
@@ -156,13 +156,13 @@ const LinkButton = (props) => {
             case "leuzinger-laptop-cart-system.png" : 
                 return require("./../assets/images/Buttons/lawndale-laptop-cart-system.png");
 
-            case "ll-Website.png" : 
+            case "ll-website.png" : 
                 return require("./../assets/images/Buttons/LL-Website.png");
 
-            case "lw-Website.png" : 
+            case "lw-website.png" : 
                 return require("./../assets/images/Buttons/LW-Website.png");
 
-            case "lz-Website.png" : 
+            case "lz-website.png" : 
                 return require("./../assets/images/Buttons/LZ-Website.png");
 
             case "office365.png" : 
