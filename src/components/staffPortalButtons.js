@@ -494,11 +494,12 @@ let staffPortalButtons = {
             } */
         },
 
+        //TODO: Need to find deeplink URL
         folletDestiny_Button : {
             buttonLink: "http://destiny.centinela.k12.ca.us/",
             buttonImg: "Destiny.png",
             description: "Destiny",
-            deepLink: "destiny://",
+            deepLink: "follettlearning://",
             appLink_config : {
                 appName: "follett-destiny",
                 appStoreId: "521121808",
@@ -510,13 +511,27 @@ let staffPortalButtons = {
         ebsco_Button : {
             buttonLink: "http://search.ebscohost.com/",
             buttonImg: "ebsco.png",
-            description: "EBSCO (Research Databases)"
+            description: "EBSCO (Research Databases)",
+            deepLink: "ebscoeh://",
+            appLink_config : {
+                appName: "ebscohost",
+                appStoreId: "433269587",
+                appStoreLocale: "us",
+                playStoreId: "com.ebsco.ehost"
+            }
         },
 
         overdrive_Button : {
             buttonLink: "http://centinela.lib.overdrive.com/",
             buttonImg: "overdrive.png",
-            description: "Overdrive (Ebooks)"
+            description: "Overdrive (Ebooks)",
+            deepLink: "overdrive://",
+            appLink_config : {
+                appName: "overdrive-ebooks-audiobooks",
+                appStoreId: "366869252",
+                appStoreLocale: "us",
+                playStoreId: "com.overdrive.mobile.android.mediaconsole"
+            }
         },
 
         calSnap_Button : {
