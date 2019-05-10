@@ -246,7 +246,7 @@ const LinkButton = (props) => {
             case "turnitin.png" : 
                 return require("./../assets/images/Buttons/turnitin.png");
 
-            case "wayside-publishing.jpg" : 
+            case "wayside-publishing.png" : 
                 return require("./../assets/images/Buttons/Wayside-publishing.png");
 
             default :  

@@ -451,8 +451,9 @@ let staffPortalButtons = {
     }, //end learningTools
 
     digitalTextbooks : {
+        //TODO: Holt web link is bad: https://my.hrw.com/sp/access?sp=hrw&connection=CA-CVUHSD-00067204
         holt_button : {
-            buttonLink: "https://my.hrw.com/sp/access?sp=hrw&connection=CA-CVUHSD-00067204",
+            buttonLink: "https://my.hrw.com/",
             buttonImg: "HMH.png",
             description: "Holt McDougal (Online Textbooks)"
         },
@@ -460,7 +461,13 @@ let staffPortalButtons = {
         wayside_Button : {
             buttonLink: "https://learningsite.waysidepublishing.com/",
             buttonImg: "Wayside-Publishing.png",
-            description: "Wayside Publishing"
+            description: "Wayside Publishing",
+            deepLink: "learning-site://",
+            appLink_config : {
+                appName: "learning-site",
+                appStoreId: "948682851",
+                appStoreLocale: "us",
+            }
         }
     }, //end digitalTextbooks
 
