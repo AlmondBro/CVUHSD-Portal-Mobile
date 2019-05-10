@@ -2,14 +2,15 @@
   "expo": {
     "name": "CVUHSD Portal Mobile",
     "slug": "CVUHSD-Portal-Mobile",
-    "version": "0.5.0",
+    "description": "The CVUHSD Mobile Portal allows for quick access in mobile apparati to 3rd-party CVUHSD staff services, such as school dude. Availale for iOS & Android ",
+    "version": "0.7.0",
     "privacy": "public",
     "orientation": "portrait",
-    "icon": "./src/assets/icon.png",
+    "icon": "./src/assets/app-icon.ios.png",
     "splash": {
       "image": "./src/assets/splash-screen.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundColor": "#F4F7F9"
     },
     "sdkVersion": "32.0.0",
     "platforms": [
@@ -21,8 +22,21 @@
       "bundleIdentifier": "com.cvuhsd.portalMobile"
     },
     "android": {
-      "package": "com.cvuhsd.portalMobile"
+      "package": "com.cvuhsd.portalMobile",
+      "versionCode": "0.7.0",
+      "permissions": []
     },
-    "scheme": "cvuhsd-portal"
+    "androidStatusBar": {
+      "barStyle": "dark-content",
+      "backgroundColor": "#F4F7F9"
+    },
+    "scheme": "cvuhsd-portal",
+    "primaryColor": "#1e6c93",
+    "githubUrl": "https://github.com/JuanDavidLopez95/CVUHSD-Portal-Mobile",
+    "updates": {
+      "enabled": true,
+      "checkAutomatically": "ON_LOAD",
+      "fallbackToCacheTimeout": 30000
+    }
   }
 }
