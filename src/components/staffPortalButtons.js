@@ -451,24 +451,32 @@ let staffPortalButtons = {
     }, //end learningTools
 
     digitalTextbooks : {
-        //TODO: Holt web link is bad: https://my.hrw.com/sp/access?sp=hrw&connection=CA-CVUHSD-00067204
+        //TODO: Former Holt web link is bad: https://my.hrw.com/sp/access?sp=hrw&connection=CA-CVUHSD-00067204
         holt_button : {
             buttonLink: "https://my.hrw.com/",
             buttonImg: "HMH.png",
             description: "Holt McDougal (Online Textbooks)"
         },
-
-        wayside_Button : {
-            buttonLink: "https://learningsite.waysidepublishing.com/",
-            buttonImg: "Wayside-Publishing.png",
-            description: "Wayside Publishing",
-            deepLink: "learning-site://",
-            appLink_config : {
-                appName: "learning-site",
-                appStoreId: "948682851",
-                appStoreLocale: "us",
+        //TODO: Find deep link for wayside publishing
+        wayside_Button : Platform.select({
+            ios :  {
+                buttonLink: "https://learningsite.waysidepublishing.com/",
+                buttonImg: "Wayside-Publishing.png",
+                description: "Wayside Publishing",
+                deepLink: "wayside-publishing://",
+                appLink_config : {
+                    appName: "learning-site",
+                    appStoreId: "948682851",
+                    appStoreLocale: "us",
+                }
+            },//No mobile app exists for android
+            android :  {
+                buttonLink: "https://learningsite.waysidepublishing.com/",
+                buttonImg: "Wayside-Publishing.png",
+                description: "Wayside Publishing",
+                deepLink: "wayside-publishing://",
             }
-        }
+        }) //end Platform.select()
     }, //end digitalTextbooks
 
     schoolWebsites : {
