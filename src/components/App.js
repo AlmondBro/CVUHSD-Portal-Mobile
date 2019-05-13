@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { StyleSheet, View, ScrollView, Dimensions, StatusBar, Text, Button } from 'react-native';
+import { StyleSheet, View, ScrollView, Dimensions, StatusBar, Text, Button, TouchableOpacity } from 'react-native';
 //import { SafeAreaView } from 'react-native';
 
 import { Updates } from 'expo';
@@ -64,7 +64,7 @@ class App extends Component {
         Updates.checkForUpdateAsync().then(update => {
             if (update.isAvailable) {
               this.setState({showUpdate: true});
-            }
+            } //end if-statement
           });
     };
 
@@ -88,19 +88,20 @@ class App extends Component {
                         }
                         
                         { this.state.showUpdate ?
-                            <Text>A new update is available. Press here to update! 
-                                <Button onPress={() => Updates.reload()} title="Update Me"/>
-                            </Text>
-                        :   <Fragment>
-                                <Text >A new update is available. Press here to update!</Text>
-                                <Button
-                                    onPress={ () => { console.log("button press"); } }
-                                    title="Update Mobile Portal"
-                                    color="#15516b"
-                                    accessibilityLabel="Update Mobile Portal"
-        
-                                />
-                            </Fragment>
+                             <Fragment>
+                             <View style={{backgroundColor: "#F4F7F9", marginBottom: 12}}>
+                                 <Text style={{fontSize: 13, alignSelf: "center", color: "#15516b"}} >A new update is available. Press here to update!</Text>
+                                 <Button
+                                     onPress={ () => { console.log("Update reload"); Updates.reload() } }
+                                     title="Update Mobile Portal"
+                                     color="#1E6C93"
+                                     accessibilityLabel="Update Mobile Portal"
+         
+                                 />
+                             </View>
+                             
+                         </Fragment>
+                        : null
                         }   
 
                         <View style={[appStyles.blueSectionContainer, this.getWidth()]}>

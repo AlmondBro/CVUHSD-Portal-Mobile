@@ -27,7 +27,7 @@
     },
     "android": {
       "package": "com.cvuhsd.portalMobile",
-      "versionCode": "0.7.0",
+      "versionCode": 0.7,
       "permissions": []
     },
     "androidStatusBar": {
