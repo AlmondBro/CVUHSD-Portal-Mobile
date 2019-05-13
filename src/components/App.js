@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { StyleSheet, View, ScrollView, Dimensions, StatusBar } from 'react-native';
 //import { SafeAreaView } from 'react-native';
 
+import { Updates } from 'expo';
+
 import BlueSection from "./BlueSection/BlueSection.js";
 import Header from "./Header.js";
 
@@ -43,13 +45,31 @@ class App extends Component {
     return {
         width: Dimensions.get('window').width
     }
-  }
+  };
 
   getHeight= () => {
     return {
         height: Dimensions.get('window').height
     }
-  }
+  };
+
+  checkForUpdates = () => {
+    try {
+        console.log("Check for updates");
+        const update = await Updates.checkForUpdateAsync();
+        
+        if (update.isAvailable) {
+            await Updates.fetchUpdateAsync();
+        } //end if-statement
+    } catch (error) {
+        console.log("checkforUpdates(error):\t" + error);
+    }
+
+  }; 
+
+  componentDidMount = () => {
+    checkForUpdates();
+  };
 
   render() {
     return (
