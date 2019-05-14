@@ -23,11 +23,9 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.cvuhsd.portalMobile",
-      "buildNumber": "0.7.0"
     },
     "android": {
       "package": "com.cvuhsd.portalMobile",
-      "versionCode": 0.7,
       "permissions": []
     },
     "androidStatusBar": {

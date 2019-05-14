@@ -8,3 +8,4 @@ package-lock.json
 #Add Android Studio .idea folder to ignore
 .idea/
 
+.expo-shared/
