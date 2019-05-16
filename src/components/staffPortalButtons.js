@@ -28,12 +28,12 @@ let staffPortalButtons = {
             }
 
         },
-        //TODO : Need to get illuminate deep link working!
+        //TODO : Need to get illuminate (quickLinks) deep link working!
         illuminate_button : {
             buttonLink: "https://centinela.illuminateed.com/dna/?prev_page=Main_NotDashboardPage&amp;page=SisLogin",
             buttonImg: "illuminate.png",
             description: "Illuminate (Assessments)",
-            deepLink: "illuminate://",
+            deepLink: "illuminateed-education://",
             appLink_config : {
                 appName: "illuminate-hc",
                 appStoreId: "1082772020",
