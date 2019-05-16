@@ -22,7 +22,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.cvuhsd.portalMobile",
+      "bundleIdentifier": "com.cvuhsd.portalMobile"
     },
     "android": {
       "package": "com.cvuhsd.portalMobile",
