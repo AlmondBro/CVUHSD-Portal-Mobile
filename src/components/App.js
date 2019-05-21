@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { StyleSheet, View, ScrollView, Dimensions, StatusBar, Text, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, ScrollView, Dimensions, StatusBar, Text, Button, Platform } from 'react-native';
 //import { SafeAreaView } from 'react-native';
 
 import { Updates } from 'expo';
@@ -69,6 +69,8 @@ class App extends Component {
     };
 
     render() {
+        let androidWebViewDebug = false;
+
         return (
             <Fragment>
                 <StatusBar backgroundColor="#F4F7F9" barStyle="dark-content" translucent={true} />
@@ -83,33 +85,37 @@ class App extends Component {
                     <ScrollView contentContainerStyle={appStyles.scrollView}>
                         <Header />
                         {/*  Had to hardcode the width of this view to get it to stretch horizontally
-                                using the Dimensions module 
-                        */
-                        }
+                                using the Dimensions module */ }
                         
                         { this.state.showUpdate ?
-                             <Fragment>
-                             <View style={{backgroundColor: "#F4F7F9", marginBottom: 12}}>
-                                 <Text style={{fontSize: 13, alignSelf: "center", color: "#15516b"}} >A new update is available. Press here to update!</Text>
-                                 <Button
-                                     onPress={ () => { console.log("Update reload"); Updates.reload() } }
-                                     title="Update Mobile Portal"
-                                     color="#1E6C93"
-                                     accessibilityLabel="Update Mobile Portal"
-         
-                                 />
-                             </View>
-                             
-                         </Fragment>
+                            ( <Fragment>
+                                <View style={{backgroundColor: "#F4F7F9", marginBottom: 12}}>
+                                    <Text style={ {fontSize: 16, paddingLeft: 8, paddingRight: 8, alignSelf: "center", color: "#15516b"} } >A new update is available. Press here to update!</Text>
+                                    <Button
+                                        onPress={ () => { console.log("Update reload"); Updates.reload() } }
+                                        title="Update Mobile Portal"
+                                        color="#1E6C93"
+                                        accessibilityLabel="Update Mobile Portal"
+            
+                                    />
+                                </View>
+                            </Fragment>)
                         : null
                         }   
 
                         <View style={[appStyles.blueSectionContainer, this.getWidth()]}>
-                            <BlueSection 
-                                title="System Statuses" 
-                                expanded={!false}
-                                serviceStatuses={true}
-                        />
+                           
+                            {   /* Render service statuses only on iOS devices until the WebView 
+                                    under Scrollview (where the webview does not scroll) is fixed 
+                                */
+                                (Platform.OS === 'ios'|| androidWebViewDebug === true) ?
+                                    (   <BlueSection 
+                                            title="System Statuses" 
+                                            expanded={!false}
+                                            serviceStatuses={true}
+                                        />
+                                    ) : null
+                            } 
                             <BlueSection 
                                 title="Quick Links" 
                                 expanded={!true}

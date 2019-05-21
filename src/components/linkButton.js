@@ -266,6 +266,7 @@ const LinkButton = (props) => {
         CacheManager.clearCache();
     } 
    
+    CacheManager.clearCache();
     let uri = getImage(props.buttonImg);
 
     return (
