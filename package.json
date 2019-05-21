@@ -2,14 +2,15 @@
   "main": "./src/index.js",
   "entryPoint": "./src/index.js",
   "name": "src",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "scripts": {
     "start": "expo start",
     "publish": "expo publish",
-    "android": "expo start --android",
     "build-android": "expo build:android",
-    "ios": "expo start --ios",
+    "upload-android": "expo upload:android",
     "build-ios": "expo build:ios",
+    "ios": "expo start --ios",
+    "android": "expo start --android",
     "eject": "expo eject"
   },
   "dependencies": {
