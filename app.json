@@ -23,8 +23,7 @@
     "ios": {
       "icon": "./src/assets/app-icon.ios.png",
       "supportsTablet": true,
-      "bundleIdentifier": "com.cvuhsd.portalMobile",
-      "associatedDomains": ""
+      "bundleIdentifier": "com.cvuhsd.portalMobile"
     },
     "android": {
       "package": "com.cvuhsd.portalMobile",
