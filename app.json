@@ -10,7 +10,7 @@
     "primaryColor": "#1e6c93",
     "icon": "./src/assets/app-icon.ios.png",
     "splash": {
-      "image": "./src/assets/splash-screen.jpg",
+      "image": "./src/assets/splash-screen.png",
       "resizeMode": "cover",
       "backgroundColor": "#F4F7F9"
     },
@@ -21,7 +21,7 @@
       "android"
     ],
     "ios": {
-      "icon": "./src/assets/app-icon.ios.png",
+      "icon": "./src/assets/app-icon.ios.jpg",
       "supportsTablet": true,
       "bundleIdentifier": "com.cvuhsd.portalMobile"
     },
