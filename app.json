@@ -21,11 +21,12 @@
       "android"
     ],
     "ios": {
-      "icon": "./src/assets/app-icon.ios.jpg",
+      "icon": "./src/assets/app-icon.ios.png",
       "supportsTablet": true,
       "bundleIdentifier": "com.cvuhsd.portalMobile"
     },
     "android": {
+      "icon": "./src/assets/app-icon.android.png",
       "package": "com.cvuhsd.portalMobile",
       "versionCode": 2,
       "permissions": [],

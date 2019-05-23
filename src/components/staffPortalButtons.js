@@ -28,12 +28,12 @@ let staffPortalButtons = {
             }
 
         },
-        //TODO : Need to get illuminate (quickLinks) deep link working!
+        //TODO : Need to get illuminate (quickLinks) deep link working!Examined APK, looks like they put no effort into the cordova app. Look like tere is no deep link
         illuminate_button : {
             buttonLink: "https://centinela.illuminateed.com/dna/?prev_page=Main_NotDashboardPage&amp;page=SisLogin",
             buttonImg: "illuminate.png",
             description: "Illuminate (Assessments)",
-            deepLink: "illuminateed-education://",
+            deepLink: "com.illuminatehc.portal://",
             appLink_config : {
                 appName: "illuminate-hc",
                 appStoreId: "1082772020",
@@ -42,7 +42,7 @@ let staffPortalButtons = {
             }
         },
     
-        //TODO: Need to find hero deep link!!
+        //TODO: Need to find hero deep link!! Looksl they use cordova as well.
         hero_button : {
             buttonLink: "https://access.heropowered.com/login/centinelavalley-usd",
             buttonImg: "hero.png",
@@ -61,7 +61,7 @@ let staffPortalButtons = {
             buttonLink: "https://asp.schoolmessenger.com/centinela",
             buttonImg: "schoolmessenger-button.png",
             description: "School Messenger",
-            deepLink: "school-messenger://",
+            deepLink: "com.schoolmessenger://",
             appLink_config : {
                 appName: "schoolmessenger",
                 appStoreId: "978894818",
