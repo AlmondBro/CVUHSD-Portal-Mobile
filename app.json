@@ -10,7 +10,7 @@
     "primaryColor": "#1e6c93",
     "icon": "./src/assets/app-icon.ios.png",
     "splash": {
-      "image": "./src/assets/splash-screen.png",
+      "image": "./src/assets/splash-screen.jpg",
       "resizeMode": "cover",
       "backgroundColor": "#F4F7F9"
     },
@@ -21,13 +21,16 @@
       "android"
     ],
     "ios": {
+      "icon": "./src/assets/app-icon.ios.png",
       "supportsTablet": true,
-      "bundleIdentifier": "com.cvuhsd.portalMobile"
+      "bundleIdentifier": "com.cvuhsd.portalMobile",
+      "associatedDomains": ""
     },
     "android": {
       "package": "com.cvuhsd.portalMobile",
       "versionCode": 2,
-      "permissions": []
+      "permissions": [],
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.cvuhsd.portalMobile"
     },
     "androidStatusBar": {
       "barStyle": "dark-content",
