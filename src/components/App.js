@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { StyleSheet, View, ScrollView, Dimensions, StatusBar, Text, Button, Platform } from 'react-native';
 //import { SafeAreaView } from 'react-native';
-import { AuthSession } from 'expo';
+import { AuthSession, Linking } from 'expo';
 
 import { Updates } from 'expo';
 
@@ -70,17 +70,21 @@ class App extends Component {
     };
 
     handlePressAsync = async () => {
+        console.log("handlePressAsync()");
         let redirectUrl = AuthSession.getRedirectUrl();
+        //let redirectUrl = Linking.makeUrl();
         let result = await AuthSession.startAsync({
           authUrl:
             `https://sso.centinela.k12.ca.us/adfs/ls/?wa=wsignin1.0&wtrealm=${encodeURIComponent(redirectUrl)}`
         });
+        console.log(`\n\nhttps://sso.centinela.k12.ca.us/adfs/ls/?wa=wsignin1.0&wtrealm=${encodeURIComponent(redirectUrl)}`);
         console.log("\nRedirect URL:\t" + redirectUrl + "\n");
         this.setState({ result });
         console.log("\nRedirect URL:\t" + redirectUrl + "\n"
-         + "Result:\t" + JSON.stringify(result) + ".." + "\t\n");
-
-         console.log(`\n\nhttps://sso.centinela.k12.ca.us/adfs/ls/?wa=wsignin1.0&wtrealm=${encodeURIComponent(redirectUrl)}`);
+         + "Result:\t" + JSON.stringify(result) + ".." + "\t\n" 
+         + "\n\n" + "results.params:\t" + results.params);
+        //Link:
+        //  https://auth.expo.io/@almondbro/CVUHSD-Portal-Mobile
       };
 
     render() {
