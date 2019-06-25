@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet, Image, TouchableHighlight, Linking } from "react-native";
+import React from 'react';
+import { StyleSheet, TouchableHighlight, Linking } from 'react-native';
 
 import AppLink from 'react-native-app-link';
 
@@ -42,6 +42,9 @@ const LinkButton = (props) => {
         switch (imagePath_LowerCase) {
             case "aesop.png": 
                 return portalRoot +("/images/Buttons/Aesop.png");
+
+            case "apex.png": 
+                return portalRoot +("/images/Buttons/Apex.png")
 
             case "bb-admin.png" : 
                 return portalRoot +("/images/Buttons/BB-Admin.png");

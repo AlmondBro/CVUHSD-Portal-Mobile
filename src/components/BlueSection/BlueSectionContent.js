@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { StyleSheet, View, WebView} from "react-native";
+import { StyleSheet, WebView} from "react-native";
 
-import AppLink from "react-native-app-link";
 import Collapsible from 'react-native-collapsible';
 
 import LinkButton from "../LinkButton.js";
