@@ -252,6 +252,9 @@ const LinkButton = (props) => {
 
             case "wayside-publishing.png" : 
                 return portalRoot +("/images/Buttons/Wayside-publishing.png");
+            
+            case "unified-talent.png" : 
+                return portalRoot +("/images/Buttons/unified-talent.png");
 
             default :  
                 return portalRoot +("/images/Buttons/Outlook.png");
