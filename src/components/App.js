@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { StyleSheet, View, ScrollView, Dimensions, StatusBar, Text, Button, Platform } from 'react-native';
 //import { SafeAreaView } from 'react-native';
-import { AuthSession, Linking } from 'expo';
+import { AuthSession } from 'expo';
 
 import { Updates } from 'expo';
 
