@@ -253,7 +253,7 @@ let staffPortalButtons = {
 
     teacherTools : {
         //TODO: Find Frontline Education Deep Link!!
-        frontLine_button : {
+        /*frontLine_button : {
             buttonLink: "https://login.frontlineeducation.com/login?signin=dc20373fccea7afc2e324f7ceec30775&productId=ABSMGMT&clientId=ABSMGMT#/login",
             buttonImg: "aesop.png",
             description: "Frontline (Absence Management/Subfinder)",
@@ -264,6 +264,13 @@ let staffPortalButtons = {
                 appStoreLocale: "us",
                 playStoreId: "com.frontline.frontlinemobile"
             }
+        }, */
+
+          //Looks like there is no app for smartfind express
+          smartFindExpress_button : {
+            buttonLink: "https://centinela.eschoolsolutions.com/",
+            buttonImg: "unified-talent.png",
+            description: "PowerSchool Unified Talent SmartFind Express (Absence Management/Subfinder)"
         },
 
         cvuhsdCourseResources_button : {
