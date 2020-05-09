@@ -9,3 +9,5 @@ package-lock.json
 .idea/
 
 .expo-shared/
+
+.DS_Store
