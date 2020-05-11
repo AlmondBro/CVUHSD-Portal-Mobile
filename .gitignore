@@ -11,3 +11,5 @@ package-lock.json
 .expo-shared/
 
 .DS_Store
+
+web-build/

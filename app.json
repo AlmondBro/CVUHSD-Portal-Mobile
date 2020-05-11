@@ -15,7 +15,7 @@
       "backgroundColor": "#F4F7F9"
     },
     "scheme": "cvuhsdportal",
-    "sdkVersion": "33.0.0",
+    "sdkVersion": "34.0.0",
     "platforms": [
       "ios",
       "android"
