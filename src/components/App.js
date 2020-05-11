@@ -71,8 +71,8 @@ class App extends Component {
 
     handlePressAsync = async () => {
         console.log("handlePressAsync()");
-        // let redirectUrl = AuthSession.getRedirectUrl();
-        let redirectUrl = `portal.centinela.k12.ca.us`;
+        let redirectUrl = AuthSession.getRedirectUrl();
+        //let redirectUrl = `portal.centinela.k12.ca.us`;
 
         //let redirectUrl = Linking.makeUrl();
         console.log("\nRedirect URL:\t" + redirectUrl + "\n");        

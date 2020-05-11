@@ -35,232 +35,232 @@ const LinkButton = (props) => {
     };
 
     let getImage = (imagePath) => {
-        let baseImageFolder = `.././assets/images/Buttons/`;
+        let baseImageFolder = `.././assets/images/buttons/`;
         let portalRoot = 'https://portal.centinela.k12.ca.us'
         let imagePath_LowerCase = imagePath.toString().toLowerCase();
         
         switch (imagePath_LowerCase) {
             case "aesop.png": 
-                return portalRoot +("/images/Buttons/Aesop.png");
+                return portalRoot +("/images/buttons/Aesop.png");
 
             case "apex.png": 
-                return portalRoot +("/images/Buttons/Apex.png")
+                return portalRoot +("/images/buttons/Apex.png")
 
             case "bb-admin.png" : 
-                return portalRoot +("/images/Buttons/BB-Admin.png");
+                return portalRoot +("/images/buttons/BB-Admin.png");
 
             case "bb-teacher.png" : 
-                return portalRoot +("/images/Buttons/BB-Teacher.png");
+                return portalRoot +("/images/buttons/BB-Teacher.png");
 
             case "behavior-alert.png" : 
-                return portalRoot +("/images/Buttons/behavior-alert.png");
+                return portalRoot +("/images/buttons/behavior-alert.png");
 
             case "brainpop.png" : 
-                return portalRoot +("/images/Buttons/BrainPop.png");
+                return portalRoot +("/images/buttons/BrainPop.png");
         
             case "canvas.png" : 
-                return portalRoot +("/images/Buttons/Canvas.png");
+                return portalRoot +("/images/buttons/Canvas.png");
             
             case "ccgi-logo.png" : 
-                return portalRoot +("/images/Buttons/ccgi-logo.png");
+                return portalRoot +("/images/buttons/ccgi-logo.png");
 
             case "cviss-website.png" : 
-                return portalRoot +("/images/Buttons/CVISS-Website.png");
+                return portalRoot +("/images/buttons/CVISS-Website.png");
 
             case "cvod.png" : 
-                return portalRoot +("/images/Buttons/CVOD.png");
+                return portalRoot +("/images/buttons/CVOD.png");
             
             case "cvuhsd-course-resources.png" : 
-                return portalRoot +("/images/Buttons/CVUHSD-Course-Resources.png");
+                return portalRoot +("/images/buttons/CVUHSD-Course-Resources.png");
 
             case "cv-website.png" : 
-                return portalRoot +("/images/Buttons/CV-Website.png");
+                return portalRoot +("/images/buttons/CV-Website.png");
 
             case "destiny.png" : 
-                return portalRoot +("/images/Buttons/Destiny.png");
+                return portalRoot +("/images/buttons/Destiny.png");
 
             case "ebsco.png" : 
-                return portalRoot +("/images/Buttons/EBSCO.png");
+                return portalRoot +("/images/buttons/EBSCO.png");
             
             case "edgenuity.png" : 
-                return portalRoot +("/images/Buttons/Edgenuity.png");
+                return portalRoot +("/images/buttons/Edgenuity.png");
 
             case "edlio-cviss.png" : 
-                return portalRoot +("/images/Buttons/Edlio-CVISS.png");
+                return portalRoot +("/images/buttons/Edlio-CVISS.png");
             
             case "edlio-cvuhsd.png" : 
-                return portalRoot +("/images/Buttons/Edlio-CVUHSD.png");
+                return portalRoot +("/images/buttons/Edlio-CVUHSD.png");
             
             case "edlio-hw.png" : 
-                return portalRoot +("/images/Buttons/Edlio-HW.png");
+                return portalRoot +("/images/buttons/Edlio-HW.png");
 
             case "edlio-ll.png" : 
-                return portalRoot +("/images/Buttons/Edlio-LL.png");
+                return portalRoot +("/images/buttons/Edlio-LL.png");
 
             case "edlio-lw.png" : 
-                return portalRoot +("/images/Buttons/Edlio-LL.png");
+                return portalRoot +("/images/buttons/Edlio-LL.png");
 
             case "edlio-lz.png" : 
-                return portalRoot +("/images/Buttons/Edlio-LZ.png");
+                return portalRoot +("/images/buttons/Edlio-LZ.png");
 
             case "ed-tech-resources.png" : 
-                return portalRoot +("/images/Buttons/ed-tech-resources.png");
+                return portalRoot +("/images/buttons/ed-tech-resources.png");
             
             case "everfi.png" : 
-                return portalRoot +("/images/Buttons/everfi.jpg");
+                return portalRoot +("/images/buttons/everfi.jpg");
 
             case "flipsterhw.png" : 
-                return portalRoot +("/images/Buttons/FlipsterHW.png");
+                return portalRoot +("/images/buttons/FlipsterHW.png");
 
             case "flipsterlw.png" : 
-                return portalRoot +("/images/Buttons/FlipsterLW.png");
+                return portalRoot +("/images/buttons/FlipsterLW.png");
 
             case "flipsterlz.png" : 
-                return portalRoot +("/images/Buttons/FlipsterLZ.png");
+                return portalRoot +("/images/buttons/FlipsterLZ.png");
 
             case "gmail.png" : 
-                return portalRoot +("/images/Buttons/gmail.png"); 
+                return portalRoot +("/images/buttons/gmail.png"); 
                 
             case "goguardian.png" : 
-                return portalRoot +("/images/Buttons/GoGuardian.png");    
+                return portalRoot +("/images/buttons/GoGuardian.png");    
 
             case "google-drive.png" : 
-                return portalRoot +("/images/Buttons/google-drive.png"); 
+                return portalRoot +("/images/buttons/google-drive.png"); 
 
             case "hawthorne-laptop-cart-system.png" : 
-                return portalRoot +("/images/Buttons/hawthorne-laptop-cart-system.png"); 
+                return portalRoot +("/images/buttons/hawthorne-laptop-cart-system.png"); 
             
             case "helpdesk.png" : 
-                return portalRoot +("/images/Buttons/Helpdesk.png");
+                return portalRoot +("/images/buttons/Helpdesk.png");
 
             case "hero.png" : 
-                return portalRoot +("/images/Buttons/Hero.png");
+                return portalRoot +("/images/buttons/Hero.png");
 
             case "hmh.png" : 
-                return portalRoot +("/images/Buttons/HMH.png");
+                return portalRoot +("/images/buttons/HMH.png");
 
             case "hw-website.png" : 
-                return portalRoot +("/images/Buttons/HW-Website.png");
+                return portalRoot +("/images/buttons/HW-Website.png");
 
             case "illuminate.png" : 
-                return portalRoot +("/images/Buttons/Illuminate.png");
+                return portalRoot +("/images/buttons/Illuminate.png");
 
             case "illuminate-student.png" : 
-                return portalRoot +("/images/Buttons/Illuminate-Student.png");
+                return portalRoot +("/images/buttons/Illuminate-Student.png");
 
             case "illuminate-teacher.png" : 
-                return portalRoot +("/images/Buttons/Illuminate-Teacher.png");
+                return portalRoot +("/images/buttons/Illuminate-Teacher.png");
             
             case "infosnap.png" : 
-                return portalRoot +("/images/Buttons/infosnap.png");
+                return portalRoot +("/images/buttons/infosnap.png");
 
             case "lacoe-media.jpg" : 
-                return portalRoot +("/images/Buttons/lacoe-media.jpg");
+                return portalRoot +("/images/buttons/lacoe-media.jpg");
 
             case "lawndale-laptop-cart-system.png" : 
-                return portalRoot +("/images/Buttons/lawndale-laptop-cart-system.png");
+                return portalRoot +("/images/buttons/lawndale-laptop-cart-system.png");
 
             case "leuzinger-laptop-cart-system.png" : 
-                return portalRoot +("/images/Buttons/lawndale-laptop-cart-system.png");
+                return portalRoot +("/images/buttons/lawndale-laptop-cart-system.png");
 
             case "ll-website.png" : 
-                return portalRoot +("/images/Buttons/LL-Website.png");
+                return portalRoot +("/images/buttons/LL-Website.png");
 
             case "lw-website.png" : 
-                return portalRoot +("/images/Buttons/LW-Website.png");
+                return portalRoot +("/images/buttons/LW-Website.png");
 
             case "lz-website.png" : 
-                return portalRoot +("/images/Buttons/LZ-Website.png");
+                return portalRoot +("/images/buttons/LZ-Website.png");
 
             case "office365.png" : 
-                return portalRoot +("/images/Buttons/office365.png");
+                return portalRoot +("/images/buttons/office365.png");
 
             case "outlook.png" : 
-                return portalRoot +("/images/Buttons/Outlook.png");
+                return portalRoot +("/images/buttons/Outlook.png");
 
             case "overdrive.png" : 
-                return portalRoot +("/images/Buttons/Overdrive.png");  
+                return portalRoot +("/images/buttons/Overdrive.png");  
             
             case "password-portal.png" : 
-                return portalRoot +("/images/Buttons/password-portal.png"); 
+                return portalRoot +("/images/buttons/password-portal.png"); 
                 
             case "print-center.png" : 
-                return portalRoot +("/images/Buttons/print-center.png");   
+                return portalRoot +("/images/buttons/print-center.png");   
 
             case "ps.png" : 
-                return portalRoot +("/images/Buttons/PS.png"); 
+                return portalRoot +("/images/buttons/PS.png"); 
 
             case "ps-student.png" : 
-                return portalRoot +("/images/Buttons/PS-student.png");
+                return portalRoot +("/images/buttons/PS-student.png");
                            
             case "pt.png" : 
-                return portalRoot +("/images/Buttons/PT.png"); 
+                return portalRoot +("/images/buttons/PT.png"); 
 
             case "read180hw-student.png" : 
-                return portalRoot +("/images/Buttons/Read180HW-Student.png");
+                return portalRoot +("/images/buttons/Read180HW-Student.png");
                 
             case "read180hw-teacher.png" : 
-                return portalRoot +("/images/Buttons/Read180HW-Teacher.png"); 
+                return portalRoot +("/images/buttons/Read180HW-Teacher.png"); 
 
             case "read180lw-student.png" : 
-                return portalRoot +("/images/Buttons/Read180LW-Student.png");
+                return portalRoot +("/images/buttons/Read180LW-Student.png");
 
             case "read180lw-teacher.png" : 
-                return portalRoot +("/images/Buttons/Read180LW-Teacher.png");
+                return portalRoot +("/images/buttons/Read180LW-Teacher.png");
     
             case "read180lz-student.png" : 
-                return portalRoot +("/images/Buttons/Read180LZ-Student.png"); 
+                return portalRoot +("/images/buttons/Read180LZ-Student.png"); 
 
             case "read180lz-teacher.png" : 
-                return portalRoot +("/images/Buttons/Read180LZ-Teacher.png");
+                return portalRoot +("/images/buttons/Read180LZ-Teacher.png");
 
             case "schmoop.png" : 
-                return portalRoot +("/images/Buttons/schmoop.png");
+                return portalRoot +("/images/buttons/schmoop.png");
 
             case "school-dude.png" : 
-                return portalRoot +("/images/Buttons/school-dude.png");
+                return portalRoot +("/images/buttons/school-dude.png");
 
             case "school-dude-old.png" : 
-                return portalRoot +("/images/Buttons/school-dude-old.png");
+                return portalRoot +("/images/buttons/school-dude-old.png");
 
             case "schoolmessenger-button.png" : 
-                return portalRoot +("/images/Buttons/schoolmessenger-button.png");
+                return portalRoot +("/images/buttons/schoolmessenger-button.png");
 
             case "shmoop.png" : 
-                return portalRoot +("/images/Buttons/shmoop.png");
+                return portalRoot +("/images/buttons/shmoop.png");
 
             case "shmoop-mine.png" : 
-                return portalRoot +("/images/Buttons/shmoop.png");
+                return portalRoot +("/images/buttons/shmoop.png");
 
             case "smartetools.png" : 
-                return portalRoot +("/images/Buttons/smartetools.png");
+                return portalRoot +("/images/buttons/smartetools.png");
 
             case "smartetools-mine.png" : 
-                return portalRoot +("/images/Buttons/smartetools-mine.png");
+                return portalRoot +("/images/buttons/smartetools-mine.png");
 
             case "staff-only.png" : 
-                return portalRoot +("/images/Buttons/staff-only.png");
+                return portalRoot +("/images/buttons/staff-only.png");
 
             case "staff-only-mine.png" : 
-                return portalRoot +("/images/Buttons/staff-only-mine.png");
+                return portalRoot +("/images/buttons/staff-only-mine.png");
 
             case "techItOut_Button.png" : 
-                return portalRoot +("/images/Buttons/TechItOut_Button.png");
+                return portalRoot +("/images/buttons/TechItOut_Button.png");
 
             case "timeclockpluslogo.jpg" : 
-                return portalRoot +("/images/Buttons/TimeClockPlusLogo.jpg");
+                return portalRoot +("/images/buttons/TimeClockPlusLogo.jpg");
 
             case "turnitin.png" : 
-                return portalRoot +("/images/Buttons/turnitin.png");
+                return portalRoot +("/images/buttons/turnitin.png");
 
             case "wayside-publishing.png" : 
-                return portalRoot +("/images/Buttons/Wayside-publishing.png");
+                return portalRoot +("/images/buttons/Wayside-publishing.png");
 
             case "unified-talent.png" : 
-                return portalRoot +("/images/Buttons/unified-talent.png");
+                return portalRoot +("/images/buttons/unified-talent.png");
 
             default :  
-                return portalRoot +("/images/Buttons/Outlook.png");
+                return portalRoot +("/images/buttons/Outlook.png");
         } //end switch statement
        
     }; //return getImage
