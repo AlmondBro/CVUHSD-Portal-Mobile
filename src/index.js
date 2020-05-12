@@ -1,12 +1,11 @@
-import { KeepAwake, registerRootComponent } from 'expo';
+import { registerRootComponent } from 'expo';
+
+import { activateKeepAwake } from 'expo-keep-awake';
+
 import App from "./components/App.js";
 
-//import App from '../../App';
-
-//old main in package.json: node_modules/expo/AppEntry.js
-
 if (__DEV__) {
-    KeepAwake.activate();
+    activateKeepAwake();
 }
 
 registerRootComponent(App);

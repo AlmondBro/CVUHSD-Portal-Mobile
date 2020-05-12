@@ -253,7 +253,7 @@ let staffPortalButtons = {
 
     teacherTools : {
         //TODO: Find Frontline Education Deep Link!!
-        /*frontLine_button : {
+       /* frontLine_button : {
             buttonLink: "https://login.frontlineeducation.com/login?signin=dc20373fccea7afc2e324f7ceec30775&productId=ABSMGMT&clientId=ABSMGMT#/login",
             buttonImg: "aesop.png",
             description: "Frontline (Absence Management/Subfinder)",
@@ -266,8 +266,8 @@ let staffPortalButtons = {
             }
         }, */
 
-          //Looks like there is no app for smartfind express
-          smartFindExpress_button : {
+        //Looks like there is no app for smartfind express
+        smartFindExpress_button : {
             buttonLink: "https://centinela.eschoolsolutions.com/",
             buttonImg: "unified-talent.png",
             description: "PowerSchool Unified Talent SmartFind Express (Absence Management/Subfinder)"
@@ -339,6 +339,20 @@ let staffPortalButtons = {
     }, //end teacherTools
 
     classroomTools : {
+        //TODO: Find deep link for APEX
+        apex_button : {
+            buttonLink: "https://sso.centinela.k12.ca.us/adfs/ls/idpinitiatedsignon.aspx",
+            buttonImg: "apex.png",
+            description: "Apex Learning",
+            deepLink : "apex-learning://",
+            appLink_config : {
+                appName: "canvas-teacher",
+                appStoreId: "1257834464",
+                appStoreLocale: "us",
+                playStoreId: "com.instructure.teacher"
+            }
+        },
+
         canvas_button : {
             buttonLink: "https://centinela.instructure.com/",
             buttonImg: "canvas.png",

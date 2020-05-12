@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { StyleSheet, View, ScrollView, Dimensions, StatusBar, Text, Button, Platform } from 'react-native';
 //import { SafeAreaView } from 'react-native';
+import { AuthSession } from 'expo';
 
 import { Updates } from 'expo';
 
@@ -68,6 +69,27 @@ class App extends Component {
           });
     };
 
+    handlePressAsync = async () => {
+        console.log("handlePressAsync()");
+        let redirectUrl = AuthSession.getRedirectUrl();
+        //let redirectUrl = `portal.centinela.k12.ca.us`;
+
+        //let redirectUrl = Linking.makeUrl();
+        console.log("\nRedirect URL:\t" + redirectUrl + "\n");        
+        let result = await AuthSession.startAsync({
+          authUrl:
+            `https://sso.centinela.k12.ca.us/adfs/ls/?wa=wsignin1.0&wtrealm=${encodeURIComponent(redirectUrl)}`
+        });
+        console.log(`\n\nhttps://sso.centinela.k12.ca.us/adfs/ls/?wa=wsignin1.0&wtrealm=${encodeURIComponent(redirectUrl)}`);
+        console.log("\nRedirect URL:\t" + redirectUrl + "\n");
+        this.setState({ result });
+        console.log("\nRedirect URL:\t" + redirectUrl + "\n"
+         + "Result:\t" + JSON.stringify(result) + ".." + "\t\n" 
+         + "\n\n" + "results.params:\t" + results.params);
+        //Link:
+        //  https://auth.expo.io/@almondbro/CVUHSD-Portal-Mobile
+      };
+
     render() {
         let androidWebViewDebug = false;
 
@@ -102,6 +124,10 @@ class App extends Component {
                             </Fragment>)
                         : null
                         }   
+
+                        <View style={[appStyles.blueSectionContainer, this.getWidth()]}>
+                            <Button title="Open SSO" onPress={this.handlePressAsync}></Button>
+                        </View>
 
                         <View style={[appStyles.blueSectionContainer, this.getWidth()]}>
                            
