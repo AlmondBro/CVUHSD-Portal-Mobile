@@ -1,7 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import { StyleSheet, View, ScrollView, Dimensions, StatusBar, Text, Button, Platform } from 'react-native';
+
+import { AZURE_CLIENT_ID, AZURE_AD_CLIENT_SECRET, AZURE_AD_CLIENT_ID, AZURE_TENANT_ID } from 'react-native-dotenv'
+
 //import { SafeAreaView } from 'react-native';
+
 import { AuthSession } from 'expo';
+import { openAuthSession } from 'azure-ad-graph-expo';
 
 import { Updates } from 'expo';
 
@@ -45,7 +50,8 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showUpdate: false
+            showUpdate: false, 
+            result: null
         };
     }
 
@@ -69,26 +75,46 @@ class App extends Component {
           });
     };
 
+    azureAdAppProps = {
+        clientId        : AZURE_CLIENT_ID,
+        tenantId        :   AZURE_TENANT_ID,
+        scope           :   "user.read",
+        redirectUrl     : AuthSession.getRedirectUrl(),
+        clientSecret    :  AZURE_AD_CLIENT_SECRET,
+    };
+
     handlePressAsync = async () => {
         console.log("handlePressAsync()");
+
         let redirectUrl = AuthSession.getRedirectUrl();
+
         //let redirectUrl = `portal.centinela.k12.ca.us`;
 
         //let redirectUrl = Linking.makeUrl();
-        console.log("\nRedirect URL:\t" + redirectUrl + "\n");        
-        let result = await AuthSession.startAsync({
-          authUrl:
-            `https://sso.centinela.k12.ca.us/adfs/ls/?wa=wsignin1.0&wtrealm=${encodeURIComponent(redirectUrl)}`
-        });
+
+        console.log("\nRedirect URL:\t" + redirectUrl + "\n");    
+
+        console.log("openAUthSession:\t" + openAuthSession);
+
+        let result = await openAuthSession(this.azureAdAppProps);
+
+        // let result = await AuthSession.startAsync({
+        //   authUrl:
+        //     `https://sso.centinela.k12.ca.us/adfs/ls/?wa=wsignin1.0&wtrealm=${encodeURIComponent(redirectUrl)}`
+        // });
+
         console.log(`\n\nhttps://sso.centinela.k12.ca.us/adfs/ls/?wa=wsignin1.0&wtrealm=${encodeURIComponent(redirectUrl)}`);
         console.log("\nRedirect URL:\t" + redirectUrl + "\n");
+       
         this.setState({ result });
+       
         console.log("\nRedirect URL:\t" + redirectUrl + "\n"
          + "Result:\t" + JSON.stringify(result) + ".." + "\t\n" 
          + "\n\n" + "results.params:\t" + results.params);
         //Link:
         //  https://auth.expo.io/@almondbro/CVUHSD-Portal-Mobile
       };
+
 
     render() {
         let androidWebViewDebug = false;
@@ -122,11 +148,19 @@ class App extends Component {
                                     />
                                 </View>
                             </Fragment>)
-                        : null
+                            : null
                         }   
 
                         <View style={[appStyles.blueSectionContainer, this.getWidth()]}>
                             <Button title="Open SSO" onPress={this.handlePressAsync}></Button>
+                        </View>
+
+                        <View style={[appStyles.blueSectionContainer, this.getWidth()]}>
+                            {
+                                this.state.result ? (
+                                    <Text>{JSON.stringify(this.state.result)}</Text>
+                                    ) : <Text>Nothing to see here.</Text>
+                            }
                         </View>
 
                         <View style={[appStyles.blueSectionContainer, this.getWidth()]}>
