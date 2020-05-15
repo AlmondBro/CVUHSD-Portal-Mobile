@@ -14,4 +14,6 @@ package-lock.json
 
 web-build/
 
+#Environmental variables
+keys.env.js
 .env

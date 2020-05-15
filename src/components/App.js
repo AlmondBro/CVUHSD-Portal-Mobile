@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { StyleSheet, View, ScrollView, Dimensions, StatusBar, Text, Button, Platform } from 'react-native';
 
-import { AZURE_CLIENT_ID, AZURE_AD_CLIENT_SECRET, AZURE_AD_CLIENT_ID, AZURE_TENANT_ID } from 'react-native-dotenv'
+import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID } from "./../keys.env.js";
+//from 'react-native-dotenv'
 
 //import { SafeAreaView } from 'react-native';
 
@@ -80,7 +81,7 @@ class App extends Component {
         tenantId        :   AZURE_TENANT_ID,
         scope           :   "user.read",
         redirectUrl     : AuthSession.getRedirectUrl(),
-        clientSecret    :  AZURE_AD_CLIENT_SECRET,
+        clientSecret    :  AZURE_CLIENT_SECRET,
     };
 
     handlePressAsync = async () => {
