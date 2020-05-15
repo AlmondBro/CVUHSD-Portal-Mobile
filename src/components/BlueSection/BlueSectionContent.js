@@ -34,9 +34,9 @@ class BlueSectionContent extends Component {
         { maxHeight: this.state.expanded ? "100%" : "0%",
         opacity: this.state.expanded ? 1.0 : 0}
         */
-    componentWillReceiveProps = (newProps) => {
-        if (this.state.expanded !== newProps.expanded) {
-            this.setState({expanded: newProps.expanded});
+       componentDidUpdate = (prevProps) => {
+        if (this.state.expanded !== this.props.expanded) {
+            this.setState({expanded: this.props.expanded});
         }
       } //end componentWillReceiveProps(newProps)
         
