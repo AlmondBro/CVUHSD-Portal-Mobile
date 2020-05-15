@@ -7,7 +7,7 @@
     "privacy": "public",
     "githubUrl": "https://github.com/JuanDavidLopez95/CVUHSD-Portal-Mobile",
     "orientation": "portrait",
-    "primaryColor": "#1e6c93",
+    "primaryColor": "#1E6C93",
     "icon": "./src/assets/app-icon.ios.png",
     "splash": {
       "image": "./src/assets/splash-screen.png",
@@ -15,10 +15,10 @@
       "backgroundColor": "#F4F7F9"
     },
     "scheme": "cvuhsdportal",
-    "sdkVersion": "37.0.0",
     "platforms": [
       "ios",
-      "android"
+      "android",
+      "web"
     ],
     "ios": {
       "icon": "./src/assets/app-icon.ios.png",
@@ -40,6 +40,9 @@
       "enabled": true,
       "checkAutomatically": "ON_LOAD",
       "fallbackToCacheTimeout": 0
-    }
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ]
   }
 }

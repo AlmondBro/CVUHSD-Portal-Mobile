@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView, Dimensions, StatusBar, Text, Button, Platform } from 'react-native';
 
 import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID } from "./../../keys.env.js";
@@ -8,15 +8,19 @@ import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID } from "./../../k
 
 //import { SafeAreaView } from 'react-native';
 
-import { AuthSession, Updates } from 'expo';
-import { openAuthSession } from 'azure-ad-graph-expo';
+//import { Updates } from 'expo';
+
+import * as AuthSession from 'expo-auth-session';
+import * as Updates from 'expo-updates';
+//import { openAuthSession } from 'azure-ad-graph-expo';
 
 import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import BlueSection from "./BlueSection/BlueSection.js";
 import Header from "./Header.js";
 import { staffPortalButtons } from "./staffPortalButtons.js";
-//rgb(30, 108, 147)
+//rgb(30, 108, 147)0
 // #F4F7F9
 const appStyles = StyleSheet.create({
   container: {
@@ -76,11 +80,11 @@ class App extends Component {
     };
 
     azureAdAppProps = {
-        clientId        : AZURE_CLIENT_ID,
+        clientId        :   AZURE_CLIENT_ID,
         tenantId        :   AZURE_TENANT_ID,
         scope           :   "user.read",
-        redirectUrl     : AuthSession.getRedirectUrl(),
-        clientSecret    :  AZURE_CLIENT_SECRET,
+        redirectUrl     :   AuthSession.getRedirectUrl(),
+        clientSecret    :   AZURE_CLIENT_SECRET,
     };
 
     handlePressAsync = async () => {
@@ -94,9 +98,9 @@ class App extends Component {
 
         console.log("\nRedirect URL:\t" + redirectUrl + "\n");    
 
-        console.log("openAUthSession:\t" + openAuthSession);
+        //console.log("openAUthSession:\t" + openAuthSession);
 
-        let result = await openAuthSession(this.azureAdAppProps);
+        //let result = await openAuthSession(this.azureAdAppProps);
 
         // let result = await AuthSession.startAsync({
         //   authUrl:
@@ -120,7 +124,7 @@ class App extends Component {
         let androidWebViewDebug = false;
 
         return (
-            <Fragment>
+            <SafeAreaProvider>
                 <StatusBar backgroundColor="#F4F7F9" barStyle="dark-content" translucent={true} />
                 { /* The following is a technique using two SafeAreaViews to have the
                     statusbar/top padding be a different color than the bottom padding. 
@@ -152,7 +156,10 @@ class App extends Component {
                         }   
 
                         <View style={[appStyles.blueSectionContainer, this.getWidth()]}>
-                            <Button title="Open SSO" onPress={this.handlePressAsync}></Button>
+                            <Button 
+                                title="Open SSO" 
+                                //onPress={this.handlePressAsync}
+                            ></Button>
                         </View>
 
                         <View style={[appStyles.blueSectionContainer, this.getWidth()]}>
@@ -225,7 +232,7 @@ class App extends Component {
                     </View>
                 </ScrollView>
             </SafeAreaView>
-        </Fragment>
+        </SafeAreaProvider>
         );
     }
 }
