@@ -1,21 +1,20 @@
 import React, { Component, Fragment } from 'react';
 import { StyleSheet, View, ScrollView, Dimensions, StatusBar, Text, Button, Platform } from 'react-native';
 
-import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID } from "./../keys.env.js";
+import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID } from "./../../keys.env.js";
+//"./keys.env.js"
+// "./../../keys.env.js";
 //from 'react-native-dotenv'
 
 //import { SafeAreaView } from 'react-native';
 
-import { AuthSession } from 'expo';
+import { AuthSession, Updates } from 'expo';
 import { openAuthSession } from 'azure-ad-graph-expo';
-
-import { Updates } from 'expo';
-
-import BlueSection from "./BlueSection/BlueSection.js";
-import Header from "./Header.js";
 
 import SafeAreaView from "react-native-safe-area-view";
 
+import BlueSection from "./BlueSection/BlueSection.js";
+import Header from "./Header.js";
 import { staffPortalButtons } from "./staffPortalButtons.js";
 //rgb(30, 108, 147)
 // #F4F7F9
