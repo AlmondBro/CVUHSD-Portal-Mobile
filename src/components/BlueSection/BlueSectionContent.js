@@ -38,7 +38,7 @@ class BlueSectionContent extends Component {
         if (this.state.expanded !== this.props.expanded) {
             this.setState({expanded: this.props.expanded});
         }
-      } //end componentWillReceiveProps(newProps)
+      } //end componentDidUpdate()
         
     generateBlueSectionButtons = () => {
         if ( ( typeof(this.props.buttons) !== "undefined" ) ) {
