@@ -1,9 +1,9 @@
-import React from 'react';
-import { StyleSheet, TouchableHighlight, Linking } from 'react-native';
+import React from "react";
+import { StyleSheet, TouchableHighlight, Linking } from "react-native";
 
-import AppLink from 'react-native-app-link';
+import AppLink from "react-native-app-link";
 
-import { Image as ImageCache, CacheManager } from 'react-native-expo-image-cache';
+import { Image as ImageCache, CacheManager } from "react-native-expo-image-cache";
 
 const serviceButton_styles = StyleSheet.create({
     touchableHighlight: {
@@ -36,7 +36,7 @@ const LinkButton = (props) => {
 
     let getImage = (imagePath) => {
         let baseImageFolder = `.././assets/images/buttons/`;
-        let portalRoot = 'https://portal.centinela.k12.ca.us'
+        let portalRoot = "https://portal.centinela.k12.ca.us";
         let imagePath_LowerCase = imagePath.toString().toLowerCase();
         
         switch (imagePath_LowerCase) {
