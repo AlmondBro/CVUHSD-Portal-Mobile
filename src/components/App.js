@@ -50,6 +50,8 @@ const appStyles = StyleSheet.create({
   }
 });
 
+const checkforUpdatesDev = false;
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -72,11 +74,13 @@ class App extends Component {
     };
 
     componentDidMount = () => {
-        Updates.checkForUpdateAsync().then(update => {
-            if (update.isAvailable) {
-              this.setState({showUpdate: true});
-            } //end if-statement
-          });
+        if (!__DEV__ || checkforUpdatesDev === true) {
+            Updates.checkForUpdateAsync().then(update => {
+                if (update.isAvailable) {
+                  this.setState({showUpdate: true});
+                } //end if-statement
+              });
+        }
     };
 
     azureAdAppProps = {
