@@ -286,7 +286,7 @@ const LinkButton = (props) => {
                     accessibilityLabel={props.description}
                     {...{previewImage, uri}}
                     tint = "dark"
-                    transitionDuration={800}
+                    transitionDuration={300}
             />
         </TouchableHighlight>
     );
