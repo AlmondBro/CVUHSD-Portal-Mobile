@@ -1,25 +1,23 @@
+//Import React/React Native modules
 import React, { Component, Fragment } from 'react';
 import { StyleSheet, View, ScrollView, Dimensions, StatusBar, Text, Button, Platform } from 'react-native';
 
 import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID } from "./../../keys.env.js";
-//"./keys.env.js"
-// "./../../keys.env.js";
 //from 'react-native-dotenv'
-
-//import { SafeAreaView } from 'react-native';
-
-//import { Updates } from 'expo';
 
 import * as AuthSession from 'expo-auth-session';
 import * as Updates from 'expo-updates';
-//import { openAuthSession } from 'azure-ad-graph-expo';
+
+import { openAuthSession } from 'azure-ad-graph-expo';
 
 import SafeAreaView from "react-native-safe-area-view";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+//Import App/Page components
 import BlueSection from "./BlueSection/BlueSection.js";
 import Header from "./Header.js";
 import { staffPortalButtons } from "./staffPortalButtons.js";
+
 //rgb(30, 108, 147)0
 // #F4F7F9
 const appStyles = StyleSheet.create({
@@ -50,14 +48,12 @@ const appStyles = StyleSheet.create({
   }
 });
 
-const checkforUpdatesDev = false;
-
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
             showUpdate: false, 
-            result: null
+            adUserInfo: null
         };
     }
 
@@ -74,6 +70,8 @@ class App extends Component {
     };
 
     componentDidMount = () => {
+        const checkforUpdatesDev = false;
+        
         if (!__DEV__ || checkforUpdatesDev === true) {
             Updates.checkForUpdateAsync().then(update => {
                 if (update.isAvailable) {
@@ -87,41 +85,21 @@ class App extends Component {
         clientId        :   AZURE_CLIENT_ID,
         tenantId        :   AZURE_TENANT_ID,
         scope           :   "user.read",
-        redirectUrl     :   AuthSession.getRedirectUrl(),
+        redirectUrl     :   AuthSession.makeRedirectUri(),
         clientSecret    :   AZURE_CLIENT_SECRET,
+        domainHint      :   AZURE_DOMAIN_HINT,
+        prompt          :   "login"
     };
 
     handlePressAsync = async () => {
         console.log("handlePressAsync()");
 
-        let redirectUrl = AuthSession.getRedirectUrl();
-
-        //let redirectUrl = `portal.centinela.k12.ca.us`;
-
-        //let redirectUrl = Linking.makeUrl();
-
-        console.log("\nRedirect URL:\t" + redirectUrl + "\n");    
-
-        //console.log("openAUthSession:\t" + openAuthSession);
-
-        //let result = await openAuthSession(this.azureAdAppProps);
-
-        let result = await AuthSession.startAsync({
-          authUrl:
-            `https://sso.centinela.k12.ca.us/adfs/ls/?wa=wsignin1.0&wtrealm=${encodeURIComponent(redirectUrl)}`
-        });
+        let adUserInfo = await openAuthSession(azureAdAppProps);
 
         console.log(`\n\nhttps://sso.centinela.k12.ca.us/adfs/ls/?wa=wsignin1.0&wtrealm=${encodeURIComponent(redirectUrl)}`);
-        console.log("\nRedirect URL:\t" + redirectUrl + "\n");
-       
-        this.setState({ result });
-       
-        console.log("\nRedirect URL:\t" + redirectUrl + "\n"
-         + "Result:\t" + JSON.stringify(result) + ".." + "\t\n" 
-         + "\n\n" + "results.params:\t" + results.params);
-        //Link:
-        //  https://auth.expo.io/@almondbro/CVUHSD-Portal-Mobile
-      };
+        this.setState({ adUserInfo: adUserInfo });
+    
+    }; //handlePressAsync()
 
 
     render() {
