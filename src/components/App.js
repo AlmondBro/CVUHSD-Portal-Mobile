@@ -2,7 +2,7 @@
 import React, { Component, Fragment } from 'react';
 import { StyleSheet, View, ScrollView, Dimensions, StatusBar, Text, Button, Platform } from 'react-native';
 
-import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID } from "./../../keys.env.js";
+import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID, AZURE_DOMAIN_HINT } from "./../../keys.env.js";
 //from 'react-native-dotenv'
 
 import * as AuthSession from 'expo-auth-session';
@@ -94,11 +94,10 @@ class App extends Component {
     handlePressAsync = async () => {
         console.log("handlePressAsync()");
 
-        let adUserInfo = await openAuthSession(azureAdAppProps);
+        let adUserInfo = await openAuthSession(this.azureAdAppProps);
 
-        console.log(`\n\nhttps://sso.centinela.k12.ca.us/adfs/ls/?wa=wsignin1.0&wtrealm=${encodeURIComponent(redirectUrl)}`);
         this.setState({ adUserInfo: adUserInfo });
-    
+        console.log("adUserInfo:\t" + JSON.stringify(adUserInfo));
     }; //handlePressAsync()
 
 
@@ -146,9 +145,13 @@ class App extends Component {
 
                         <View style={[appStyles.blueSectionContainer, this.getWidth()]}>
                             {
-                                this.state.result ? (
-                                    <Text>{JSON.stringify(this.state.result)}</Text>
-                                    ) : <Text>Nothing to see here.</Text>
+                                this.state.adUserInfo ? (
+                                    <Fragment>
+                                        <Text>{this.state.adUserInfo.jobTitle + " from " + this.state.adUserInfo.officeLocationewef}</Text>
+                                        <Text>{ this.state.adUserInfo.givenName + " " + this.state.adUserInfo.surname }</Text>
+                                    </Fragment>
+                                    
+                                    ) : null
                             }
                         </View>
 

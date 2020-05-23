@@ -5,7 +5,7 @@
   "version": "0.7.1",
   "scripts": {
     "start": "expo start",
-    "start-reset": "rm -rf node_modules/ && npm install && npm audit fix && npm install",
+    "start-reset": "rm -rf node_modules/ && npm install && npm audit fix && npm install && npm start",
     "publish": "expo publish",
     "build-android": "expo build:android",
     "upload-android": "expo upload:android",
@@ -15,7 +15,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "azure-ad-graph-expo": "github:JuanDavidLopez95/azure-ad-graph-expo#latest-expo-use",
+    "azure-ad-graph-expo": "github:JuanDavidLopez95/azure-ad-graph-expo",
     "expo": "^37.0.11",
     "expo-auth-session": "~1.2.1",
     "expo-blur": "~8.1.0",
