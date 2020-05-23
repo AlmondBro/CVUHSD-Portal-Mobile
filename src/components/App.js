@@ -147,7 +147,7 @@ class App extends Component {
                             {
                                 this.state.adUserInfo ? (
                                     <Fragment>
-                                        <Text>{this.state.adUserInfo.jobTitle + " from " + this.state.adUserInfo.officeLocationewef}</Text>
+                                        <Text>{this.state.adUserInfo.jobTitle + " from " + this.state.adUserInfo.officeLocation}</Text>
                                         <Text>{ this.state.adUserInfo.givenName + " " + this.state.adUserInfo.surname }</Text>
                                     </Fragment>
                                     
