@@ -15,4 +15,18 @@ let PortalLogoImage = styled.Image.attrs( (props) => {
     height: 200;
 `;
 
-export { HeaderContainerView, PortalLogoImage }; 
+let UpdateAppView = styled.View`
+    background-color: "#F4F7F9";
+    margin-bottom: 12;
+`; 
+
+let UpdateTextDescription = styled.Text`
+    font-size: 16; 
+    padding-left: 8;
+    padding-right: 8;
+    align-self: "center";
+    color: "#15516b";
+`;
+
+
+export { HeaderContainerView, PortalLogoImage, UpdateAppView, UpdateTextDescription }; 

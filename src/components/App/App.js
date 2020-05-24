@@ -88,23 +88,8 @@ class App extends Component {
                     <ScrollViewStyled
                         width={ this.state.appWidth }
                     >
-                        <Header />        
-                        { this.state.showUpdate ?
-                            ( 
-                                <UpdateAppView>
-                                    <UpdateTextDescription>A new update is available. Press here to update!</UpdateTextDescription>
-                                    <Button
-                                        onPress={ () => { console.log("Update reload"); Updates.reload() } }
-                                        title="Update Mobile Portal"
-                                        color="#1E6C93"
-                                        accessibilityLabel="Update Mobile Portal"
-            
-                                    />
-                                </UpdateAppView>
-                            )
-                            : null
-                        }   
-
+                        <Header showUpdate={ this.state.showUpdate } />        
+                        
                         <BlueSectionContainer>
                             <Button 
                                 title="Open SSO" 

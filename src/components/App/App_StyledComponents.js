@@ -3,19 +3,6 @@ import css from 'styled-css/native';
 
 import SafeAreaView from "react-native-safe-area-view";
 
-let UpdateAppView = styled.View`
-    background-color: "#F4F7F9";
-    margin-bottom: 12;
-`; 
-
-let UpdateTextDescription = styled.Text`
-    font-size: 16; 
-    padding-left: 8;
-    padding-right: 8;
-    align-self: "center";
-    color: "#15516b";
-`;
-
 let BlueSectionContainer = styled.View`
     flex-direction: column;
     align-self: stretch;
@@ -51,4 +38,4 @@ let ScrollViewStyled = styled.ScrollView.attrs((props) => ({
   
 `;
 
-export { UpdateAppView, UpdateTextDescription, ScrollViewStyled, SafeAreaViewStyled, BlueSectionContainer };
+export { ScrollViewStyled, SafeAreaViewStyled, BlueSectionContainer };
