@@ -27,11 +27,12 @@
     "react-native-app-link": "^1.0.0",
     "react-native-collapsible": "^1.5.2",
     "react-native-expo-image-cache": "^4.1.0",
-    "react-native-safe-area-context": "^2.0.0",
+    "react-native-safe-area-context": "^0.7.3",
     "react-native-safe-area-view": "^1.1.1",
     "react-native-web": "~0.11.7",
-    "react-native-webview": "^9.4.0",
-    "styled-components": "^5.1.0"
+    "react-native-webview": "^8.1.1",
+    "styled-components": "^5.1.0",
+    "styled-css": "^1.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",

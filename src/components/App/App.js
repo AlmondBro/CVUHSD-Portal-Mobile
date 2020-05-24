@@ -1,6 +1,6 @@
 //Import React/React Native modules
 import React, { Component, Fragment } from 'react';
-import { StyleSheet, View, StatusBar, Text, Button, Platform } from 'react-native';
+import { StyleSheet, ScrollView, StatusBar, Text, Button, Platform } from 'react-native';
 
 import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID, AZURE_DOMAIN_HINT } from './../../../keys.env.js';
 //from 'react-native-dotenv'
@@ -27,7 +27,7 @@ import { staffPortalButtons } from "../staffPortalButtons.js";
 
 //rgb(30, 108, 147)0
 // #F4F7F9
-/*
+
 const appStyles = StyleSheet.create({
   container: {
     flex: 1,
@@ -37,25 +37,9 @@ const appStyles = StyleSheet.create({
     backgroundColor: '#F4F7F9',
     padding: 0,
     margin: 0
-  },
-
-  scrollView: {
-    flexDirection: 'column',
-    alignSelf: 'center',
-    justifyContent: 'flex-start',
-    padding: 0,
-    backgroundColor: '#F4F7F9'
-  },
-
-  blueSectionContainer: {
-    flexDirection: 'column',
-    alignSelf: 'stretch',
-    justifyContent: 'flex-start',
-    padding: 0,
-    margin: 0
   }
 });
-*/
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -118,7 +102,7 @@ class App extends Component {
                     Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
                 */ }
                 <SafeAreaView style={appStyles.container} forceInset={ {bottom: 'never'} }>
-                    <StyledScrollView
+                    <ScrollView
                         // contentContainerStyle={appStyles.scrollView}
                     >
                         <Header />
@@ -160,7 +144,7 @@ class App extends Component {
                             }
                         </BlueSectionContainer>
 
-                        <BlueSectionContainer width={this.props.width}>
+                        <BlueSectionContainer>
                            
                             {   /* Render service statuses only on iOS devices until the WebView 
                                     under Scrollview (where the webview does not scroll) is fixed 
@@ -220,7 +204,7 @@ class App extends Component {
                                 buttons={staffPortalButtons.schoolWebsites}
                             />
                     </BlueSectionContainer>
-                </StyledScrollView>
+                </ScrollView>
             </SafeAreaView>
         </SafeAreaProvider>
         );

@@ -1,4 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components/native';
+import css from 'styled-css/native';
+
 
 let UpdateAppView = styled.View`
     background-color: "#F4F7F9";
@@ -13,18 +15,24 @@ let UpdateTextDescription = styled.Text`
     color: "#15516b";
 `;
 
-let StyledScrollView = styled.ScrollView`
-    flex-direction: "column";
-    align-self: "center";
-    justify-content: "flex-start";
-    padding: 0;
-    background-color: "#F4F7F9";
+
+let StyledScrollView = styled.ScrollView.attrs((props) => ({
+    contentContainerStyle:  css`
+        flex-direction: column;
+        align-self: center;
+        justify-content: flex-start;
+        padding: 0;
+        background-color: "#F4F7F9;
+    `,
+}))`
+  flex: 1;
 `;
 
+
 let BlueSectionContainer = styled.View`
-    flex-direction: "column";
-    align-self: "stretch";
-    justify-content: "flex-start";
+    flex-direction: column;
+    align-self: stretch;
+    justify-content: flex-start;
     padding: 0;
     margin: 0;
     width: ${props => props.width ? props.width : "auto"};
