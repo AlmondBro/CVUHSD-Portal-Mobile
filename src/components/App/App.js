@@ -5,7 +5,7 @@ import { StyleSheet, View, ScrollView, StatusBar, Text, Button, Platform } from 
 import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID, AZURE_DOMAIN_HINT } from './../../../keys.env.js';
 //from 'react-native-dotenv'
 
-import dimensionsWidthHOC  from "./../../utility-functions.js";
+import { dimensionsWidthHOC } from "./../../utility-functions.js";
 
 import * as AuthSession from 'expo-auth-session';
 import * as Updates from 'expo-updates';

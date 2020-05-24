@@ -14,4 +14,4 @@ const dimensionsWidthHOC = (Component) => {
   
 }; //end (dimensionsWidthHOC)
 
-export  default dimensionsWidthHOC ;
+export  { dimensionsWidthHOC };
