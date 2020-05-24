@@ -1,7 +1,7 @@
-import React from "react";
-import { StyleSheet, TouchableOpacity, Text} from "react-native";
+import React from 'react';
+import { StyleSheet, TouchableOpacity, Text} from 'react-native';
 
-import ToggleButton from "./ToggleButton.js";
+import ToggleButton from './ToggleButton.js';
 
 const blueSection_Header_Styles = StyleSheet.create({
     blueSection_Header: {

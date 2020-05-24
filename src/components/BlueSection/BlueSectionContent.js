@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { StyleSheet } from "react-native";
+import React, { Component } from 'react';
+import { StyleSheet } from 'react-native';
 
 import { WebView } from 'react-native-webview';
 
 import Collapsible from 'react-native-collapsible';
 
-import LinkButton from "../LinkButton.js";
+import LinkButton from './../linkButton.js';
 
 const blueSectionContent_styles = StyleSheet.create({
     blueSection_Content: {

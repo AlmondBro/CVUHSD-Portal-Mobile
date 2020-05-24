@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { View, StyleSheet } from "react-native";
+import React, { Component } from 'react';
+import { View, StyleSheet } from 'react-native';
 
 //Import BlueSection components
-import BlueSectionHeader from "./BlueSectionHeader.js";
-import BlueSectionContent from "./BlueSectionContent.js"; 
+import BlueSectionHeader from './BlueSectionHeader.js';
+import BlueSectionContent from './BlueSectionContent.js'; 
 
 const styles = StyleSheet.create({
     blueSection: {
