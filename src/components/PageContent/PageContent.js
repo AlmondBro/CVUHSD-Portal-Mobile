@@ -1,0 +1,119 @@
+import React, { Fragment } from 'react';
+import { Text, Platform } from 'react-native';
+
+//Import list of buttons
+import { blueSectionInfo_Staff, redSectionInfo_Student} from "./../../objectFiles/blueSectionInfo.js";
+
+//import component's subcomponents
+import BlueSection from './../BlueSection/BlueSection.js';
+
+//Import styled components
+import { BlueSectionContainer, ScrollViewStyled } from './PageContent_StyledComponents.js';
+
+let PageContent  = (props) => {
+    let sectionInfoObject;
+    sectionInfoObject = (props.title === "Student" ) ? 
+                            redSectionInfo_Student : blueSectionInfo_Staff;
+
+    const generateBlueSections = (sectionInfoObject, title) => {
+        return sectionInfoObject.map( (blueSection_Object, index) => {
+            return (
+                <BlueSection 
+                    expanded    =   { blueSection_Object.expanded }
+                    headerTitle =   { blueSection_Object.headerTitle }
+                    buttons     =   { blueSection_Object.buttons }
+                    key         =   { index }
+                    title       =   { props.title  || title || "Student"}
+                    // TODO: Add render as student functionality {this.renderAsStudent || this.props.location.state.renderAsStudent}
+                />
+            ); //end return statement
+        }); //end outer return statement
+    }; //end generateBlueSections()
+
+    const androidWebViewDebug = false;
+
+    return (
+            <ScrollViewStyled
+                width   =   { props.appWidth }
+            >
+                <BlueSectionContainer>
+                    {
+                        props.title ? 
+                            (
+                                <Fragment>
+                                    <Text>{ props.title + " from " + props.serviceStatuses}</Text>
+                                    <Text>{ props.firstName + " " + props.lastName }</Text>
+                                </Fragment>
+                            ) : null
+                    }
+                </BlueSectionContainer>
+
+                <BlueSectionContainer>
+                    {   /* Render service statuses only on iOS devices until the WebView 
+                            under Scrollview (where the webview does not scroll) is fixed 
+                        */
+                        (   props.title !== "Student" ?
+                                (Platform.OS === "ios"|| androidWebViewDebug === true ?
+                                    (   <BlueSection 
+                                            title="System Statuses" 
+                                            expanded={!false}
+                                            serviceStatuses={true}
+                                        />
+                                    ) : null
+                                ) : null
+                        )
+                    } 
+                    <Fragment>
+                        { generateBlueSections(sectionInfoObject, props.title) }
+                    </Fragment>
+                    {/* <BlueSection 
+                        title="Quick Links" 
+                        expanded={!true}
+                        buttons={staffPortalButtons.quickLinks}
+                    />
+                    <BlueSection 
+                        title="Standard Staff Tools " 
+                        expanded={!false}
+                        buttons={staffPortalButtons.standardStaffTools}
+                    />
+                    <BlueSection 
+                        title="Administrative Tools" 
+                        expanded={!false}
+                        buttons={staffPortalButtons.administrativeTools}
+                    />
+                    <BlueSection 
+                        title="Teacher Tools" 
+                        expanded={!false}
+                        buttons={staffPortalButtons.teacherTools}
+                    />
+                    <BlueSection 
+                        title="Classroom Tools" 
+                        expanded={!false}
+                        buttons={staffPortalButtons.classroomTools}
+                    />
+                    <BlueSection 
+                        title="Learning Tools" 
+                        expanded={!false}
+                        buttons={staffPortalButtons.learningTools}
+                    />
+                    <BlueSection 
+                        title="Digital Textbooks" 
+                        expanded={!false}
+                        buttons={staffPortalButtons.digitalTextbooks}
+                    />
+                    <BlueSection 
+                        title="Digital Library Resources" 
+                        expanded={!false}
+                        buttons={staffPortalButtons.digitalLibraryResources}
+                    />
+                    <BlueSection 
+                        title="School Websites" 
+                        expanded={!false}
+                        buttons={staffPortalButtons.schoolWebsites}
+                    /> */}
+            </BlueSectionContainer>
+        </ScrollViewStyled>
+    ); //end return statement
+}; //end PageContent
+
+export default PageContent;

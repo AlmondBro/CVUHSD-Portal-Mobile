@@ -18,11 +18,11 @@ class BlueSection extends Component {
         super(props);
         this.state = {
           expanded: this.props.expanded
-        }
-    }
+        } //end  this.state object
+    } //end constructor()
 
     expandToggle = () => {
-        this.setState({expanded: !this.state.expanded});
+        this.setState({ expanded: !this.state.expanded });
         console.log("expandToggle");
         console.log("Expand state:\t" + this.state.expanded);
     }
@@ -31,15 +31,16 @@ class BlueSection extends Component {
         return (
             <View style={styles.blueSection}>
                 <BlueSectionHeader 
-                    title={this.props.title} 
-                    expanded={this.state.expanded} 
-                    expandToggle={this.expandToggle}
+                    title           =   { this.props.title } 
+                    headerTitle     =   { this.props.headerTitle }
+                    expanded        =   { this.state.expanded } 
+                    expandToggle    =   { this.expandToggle }
                 /> 
                 <BlueSectionContent  
-                  expanded={this.state.expanded}
-                  expandToggle={this.expandToggle}
-                  buttons={this.props.buttons}
-                  serviceStatuses={this.props.serviceStatuses}
+                  expanded          =   { this.state.expanded } 
+                  expandToggle      =   { this.expandToggle }
+                  buttons           =   { this.props.buttons }
+                  serviceStatuses   =   { this.props.serviceStatuses}
                 />
             </View>
         );

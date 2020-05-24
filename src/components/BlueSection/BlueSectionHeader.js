@@ -24,7 +24,7 @@ const blueSection_Header_Styles = StyleSheet.create({
 
 const BlueSectionHeader = (props) => {
     let onPress = () => {
-      props.expandToggle() 
+      props.expandToggle(); 
     }; //end onPress
 
     //TODO: How would i trigger the TouchableOpacity's onPresss button in the toggleButton?
@@ -36,7 +36,7 @@ const BlueSectionHeader = (props) => {
               onPress={onPress}
               activeOpacity={0.5} //Defaults to 0.2
         >
-            <Text style={blueSection_Header_Styles.blueSection_HeaderText}>{props.title}</Text>
+            <Text style={blueSection_Header_Styles.blueSection_HeaderText}>{props.headerTitle}</Text>
             <ToggleButton expanded={props.expanded} expandToggle={onPress} />
         </TouchableOpacity>
     );

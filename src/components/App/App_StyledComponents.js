@@ -24,18 +24,6 @@ let SafeAreaViewStyled = styled.SafeAreaView.attrs( (props) => ({
     margin: 0
 `;
 
-let ScrollViewStyled = styled.ScrollView.attrs((props) => ({
-    contentContainerStyle:  css`
-        flex-direction: column;
-        align-self: center;
-        justify-content: flex-start;
-        padding: 0;
-        background-color: #F4F7F9;
-        width: ${ props.width ? props.width : "auto" };
-    `,
-}))`
-  flex: 1;
-  
-`;
 
-export { ScrollViewStyled, SafeAreaViewStyled, BlueSectionContainer };
+
+export { SafeAreaViewStyled, BlueSectionContainer };

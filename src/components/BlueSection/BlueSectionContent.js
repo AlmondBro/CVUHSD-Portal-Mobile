@@ -41,7 +41,7 @@ class BlueSectionContent extends Component {
       } //end componentDidUpdate()
         
     generateBlueSectionButtons = () => {
-        if ( ( typeof(this.props.buttons) !== "undefined" ) ) {
+        if ( ( typeof(this.props.buttons) !== "undefined"  || null) ) {
 
                     let buttonsArray = Object.values(this.props.buttons);
 
@@ -73,7 +73,9 @@ class BlueSectionContent extends Component {
             
             return buttonsArray; */
         
-        } //end else-statement
+        } else {
+            return null;
+        }
     };
 
     render() {
