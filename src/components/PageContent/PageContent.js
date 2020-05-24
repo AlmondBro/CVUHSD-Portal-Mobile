@@ -55,7 +55,7 @@ let PageContent  = (props) => {
                         (   props.title !== "Student" ?
                                 (Platform.OS === "ios"|| androidWebViewDebug === true ?
                                     (   <BlueSection 
-                                            title="System Statuses" 
+                                            headerTitle="System Statuses" 
                                             expanded={!false}
                                             serviceStatuses={true}
                                         />
@@ -66,51 +66,6 @@ let PageContent  = (props) => {
                     <Fragment>
                         { generateBlueSections(sectionInfoObject, props.title) }
                     </Fragment>
-                    {/* <BlueSection 
-                        title="Quick Links" 
-                        expanded={!true}
-                        buttons={staffPortalButtons.quickLinks}
-                    />
-                    <BlueSection 
-                        title="Standard Staff Tools " 
-                        expanded={!false}
-                        buttons={staffPortalButtons.standardStaffTools}
-                    />
-                    <BlueSection 
-                        title="Administrative Tools" 
-                        expanded={!false}
-                        buttons={staffPortalButtons.administrativeTools}
-                    />
-                    <BlueSection 
-                        title="Teacher Tools" 
-                        expanded={!false}
-                        buttons={staffPortalButtons.teacherTools}
-                    />
-                    <BlueSection 
-                        title="Classroom Tools" 
-                        expanded={!false}
-                        buttons={staffPortalButtons.classroomTools}
-                    />
-                    <BlueSection 
-                        title="Learning Tools" 
-                        expanded={!false}
-                        buttons={staffPortalButtons.learningTools}
-                    />
-                    <BlueSection 
-                        title="Digital Textbooks" 
-                        expanded={!false}
-                        buttons={staffPortalButtons.digitalTextbooks}
-                    />
-                    <BlueSection 
-                        title="Digital Library Resources" 
-                        expanded={!false}
-                        buttons={staffPortalButtons.digitalLibraryResources}
-                    />
-                    <BlueSection 
-                        title="School Websites" 
-                        expanded={!false}
-                        buttons={staffPortalButtons.schoolWebsites}
-                    /> */}
             </BlueSectionContainer>
         </ScrollViewStyled>
     ); //end return statement

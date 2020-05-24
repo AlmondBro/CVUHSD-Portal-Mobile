@@ -14,10 +14,11 @@ const styles = StyleSheet.create({
 });
 
 class BlueSection extends Component {
+    //TODO: Fix this bandage of a hard hack of negating the expanded prop
     constructor(props) {
         super(props);
         this.state = {
-          expanded: this.props.expanded
+          expanded: !this.props.expanded
         } //end  this.state object
     } //end constructor()
 

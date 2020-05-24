@@ -1,15 +1,16 @@
 import { staffPortalButtons, studentPortalButtons } from "./portalButtons.js"
 
 //TODO: Add an appear as mobile link property 
-let blueSectionInfo_systemStatuses = {
-    blueSectionName: "systemStatuses",
-    expanded: false,
-    headerTitle: "System Statuses",
-    buttonRowID: "systemStatusesButtonRow",
-    showInMobileNav: true,
-    showInDesktopNav: true, 
-    buttons: null
-};
+//TODO: Figure out a way to get around the 'null' error
+// let blueSectionInfo_systemStatuses = {
+//     blueSectionName: "systemStatuses",
+//     expanded: false,
+//     headerTitle: "System Statuses",
+//     buttonRowID: "systemStatusesButtonRow",
+//     showInMobileNav: true,
+//     showInDesktopNav: true, 
+//     buttons: null
+// };
 
 let blueSectionInfo_quickLinks = {
     blueSectionName: "quickLinks",
@@ -101,7 +102,7 @@ let blueSectionInfo_allLinks = {
 };
 
 let blueSectionInfo_Staff = [
-    blueSectionInfo_systemStatuses,
+    // blueSectionInfo_systemStatuses,
     blueSectionInfo_quickLinks,
     blueSectionInfo_standardStaffTools,
     blueSectionInfo_administratorTools,
