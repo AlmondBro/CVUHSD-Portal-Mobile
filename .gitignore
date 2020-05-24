@@ -13,3 +13,7 @@ package-lock.json
 .DS_Store
 
 web-build/
+
+#Environmental variables
+keys.env.js
+.env

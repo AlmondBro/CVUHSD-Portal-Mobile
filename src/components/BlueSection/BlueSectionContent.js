@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { StyleSheet, WebView} from "react-native";
+import { StyleSheet } from "react-native";
+
+import { WebView } from 'react-native-webview';
 
 import Collapsible from 'react-native-collapsible';
 
@@ -32,11 +34,11 @@ class BlueSectionContent extends Component {
         { maxHeight: this.state.expanded ? "100%" : "0%",
         opacity: this.state.expanded ? 1.0 : 0}
         */
-    componentWillReceiveProps = (newProps) => {
-        if (this.state.expanded !== newProps.expanded) {
-            this.setState({expanded: newProps.expanded});
+       componentDidUpdate = (prevProps) => {
+        if (this.state.expanded !== this.props.expanded) {
+            this.setState({expanded: this.props.expanded});
         }
-      } //end componentWillReceiveProps(newProps)
+      } //end componentDidUpdate()
         
     generateBlueSectionButtons = () => {
         if ( ( typeof(this.props.buttons) !== "undefined" ) ) {

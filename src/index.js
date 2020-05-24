@@ -1,11 +1,9 @@
 import { registerRootComponent } from 'expo';
+//import {  dimensionsWidthHOC } from "./utility-functions.js";
 
-import { activateKeepAwake } from 'expo-keep-awake';
-
-import App from "./components/App.js";
-
-if (__DEV__) {
-    activateKeepAwake();
-}
+import App from './components/App/App.js';
 
 registerRootComponent(App);
+
+//dimensionsWidthHOC(App);
+

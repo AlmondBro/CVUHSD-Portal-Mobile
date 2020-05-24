@@ -5,6 +5,7 @@
   "version": "0.7.1",
   "scripts": {
     "start": "expo start",
+    "start-reset": "rm -rf node_modules/ && npm install && npm audit fix && npm install && npm start --reset-cache",
     "publish": "expo publish",
     "build-android": "expo build:android",
     "upload-android": "expo upload:android",
@@ -14,19 +15,29 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "expo": "^34.0.4",
-    "expo-blur": "~6.0.0",
+    "azure-ad-graph-expo": "github:JuanDavidLopez95/azure-ad-graph-expo",
+    "expo": "^37.0.11",
+    "expo-auth-session": "~1.2.1",
+    "expo-blur": "~8.1.0",
+    "expo-updates": "^0.2.5",
     "kind-of": "^6.0.3",
-    "react": "16.8.3",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
+    "react": "~16.9.0",
+    "react-dom": "~16.9.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
     "react-native-app-link": "^1.0.0",
-    "react-native-collapsible": "^1.4.0",
+    "react-native-collapsible": "^1.5.2",
     "react-native-expo-image-cache": "^4.1.0",
-    "react-native-safe-area-view": "^0.14.5",
-    "expo-keep-awake": "~6.0.0"
+    "react-native-safe-area-context": "^0.7.3",
+    "react-native-safe-area-view": "^1.1.1",
+    "react-native-web": "~0.11.7",
+    "react-native-webview": "^8.1.1",
+    "styled-components": "^5.1.0",
+    "styled-css": "^1.1.0"
   },
   "devDependencies": {
-    "babel-preset-expo": "^5.1.1"
+    "@babel/core": "^7.8.6",
+    "babel-preset-expo": "^8.2.1",
+    "react-native-dotenv": "^0.2.0"
   },
   "private": false
 }

@@ -1,9 +1,9 @@
-import React from 'react';
-import { StyleSheet, TouchableHighlight, Linking } from 'react-native';
+import React from "react";
+import { StyleSheet, TouchableHighlight, Linking } from "react-native";
 
-import AppLink from 'react-native-app-link';
+import AppLink from "react-native-app-link";
 
-import { Image as ImageCache, CacheManager } from 'react-native-expo-image-cache';
+import { Image as ImageCache, CacheManager } from "react-native-expo-image-cache";
 
 const serviceButton_styles = StyleSheet.create({
     touchableHighlight: {
@@ -36,7 +36,7 @@ const LinkButton = (props) => {
 
     let getImage = (imagePath) => {
         let baseImageFolder = `.././assets/images/buttons/`;
-        let portalRoot = 'https://portal.centinela.k12.ca.us'
+        let portalRoot = "https://portal.centinela.k12.ca.us";
         let imagePath_LowerCase = imagePath.toString().toLowerCase();
         
         switch (imagePath_LowerCase) {
@@ -267,12 +267,12 @@ const LinkButton = (props) => {
 
     let previewImage = { uri: "data:image/svg+xml,%3Csvg class='lds-spinner' width='200px' height='200px' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 100 100' preserveAspectRatio='xMidYMid' style='shape-rendering: auto; animation-play-state: running; animation-delay: 0s; background: rgba(0, 0, 0, 0) none repeat scroll 0%25 0%25;'%3E%3Cg transform='rotate(0 50 50)' style='animation-play-state: running; animation-delay: 0s;'%3E%3Crect x='47' y='26' rx='9.4' ry='5.2' width='6' height='8' fill='%231e6c93' style='animation-play-state: running; animation-delay: 0s;'%3E%3Canimate attributeName='opacity' values='1;0' keyTimes='0;1' dur='1s' begin='-0.9s' repeatCount='indefinite' style='animation-play-state: running; animation-delay: 0s;'%3E%3C/animate%3E%3C/rect%3E%3C/g%3E%3Cg transform='rotate(36 50 50)' style='animation-play-state: running; animation-delay: 0s;'%3E%3Crect x='47' y='26' rx='9.4' ry='5.2' width='6' height='8' fill='%231e6c93' style='animation-play-state: running; animation-delay: 0s;'%3E%3Canimate attributeName='opacity' values='1;0' keyTimes='0;1' dur='1s' begin='-0.8s' repeatCount='indefinite' style='animation-play-state: running; animation-delay: 0s;'%3E%3C/animate%3E%3C/rect%3E%3C/g%3E%3Cg transform='rotate(72 50 50)' style='animation-play-state: running; animation-delay: 0s;'%3E%3Crect x='47' y='26' rx='9.4' ry='5.2' width='6' height='8' fill='%231e6c93' style='animation-play-state: running; animation-delay: 0s;'%3E%3Canimate attributeName='opacity' values='1;0' keyTimes='0;1' dur='1s' begin='-0.7s' repeatCount='indefinite' style='animation-play-state: running; animation-delay: 0s;'%3E%3C/animate%3E%3C/rect%3E%3C/g%3E%3Cg transform='rotate(108 50 50)' style='animation-play-state: running; animation-delay: 0s;'%3E%3Crect x='47' y='26' rx='9.4' ry='5.2' width='6' height='8' fill='%231e6c93' style='animation-play-state: running; animation-delay: 0s;'%3E%3Canimate attributeName='opacity' values='1;0' keyTimes='0;1' dur='1s' begin='-0.6s' repeatCount='indefinite' style='animation-play-state: running; animation-delay: 0s;'%3E%3C/animate%3E%3C/rect%3E%3C/g%3E%3Cg transform='rotate(144 50 50)' style='animation-play-state: running; animation-delay: 0s;'%3E%3Crect x='47' y='26' rx='9.4' ry='5.2' width='6' height='8' fill='%231e6c93' style='animation-play-state: running; animation-delay: 0s;'%3E%3Canimate attributeName='opacity' values='1;0' keyTimes='0;1' dur='1s' begin='-0.5s' repeatCount='indefinite' style='animation-play-state: running; animation-delay: 0s;'%3E%3C/animate%3E%3C/rect%3E%3C/g%3E%3Cg transform='rotate(180 50 50)' style='animation-play-state: running; animation-delay: 0s;'%3E%3Crect x='47' y='26' rx='9.4' ry='5.2' width='6' height='8' fill='%231e6c93' style='animation-play-state: running; animation-delay: 0s;'%3E%3Canimate attributeName='opacity' values='1;0' keyTimes='0;1' dur='1s' begin='-0.4s' repeatCount='indefinite' style='animation-play-state: running; animation-delay: 0s;'%3E%3C/animate%3E%3C/rect%3E%3C/g%3E%3Cg transform='rotate(216 50 50)' style='animation-play-state: running; animation-delay: 0s;'%3E%3Crect x='47' y='26' rx='9.4' ry='5.2' width='6' height='8' fill='%231e6c93' style='animation-play-state: running; animation-delay: 0s;'%3E%3Canimate attributeName='opacity' values='1;0' keyTimes='0;1' dur='1s' begin='-0.3s' repeatCount='indefinite' style='animation-play-state: running; animation-delay: 0s;'%3E%3C/animate%3E%3C/rect%3E%3C/g%3E%3Cg transform='rotate(252 50 50)' style='animation-play-state: running; animation-delay: 0s;'%3E%3Crect x='47' y='26' rx='9.4' ry='5.2' width='6' height='8' fill='%231e6c93' style='animation-play-state: running; animation-delay: 0s;'%3E%3Canimate attributeName='opacity' values='1;0' keyTimes='0;1' dur='1s' begin='-0.2s' repeatCount='indefinite' style='animation-play-state: running; animation-delay: 0s;'%3E%3C/animate%3E%3C/rect%3E%3C/g%3E%3Cg transform='rotate(288 50 50)' style='animation-play-state: running; animation-delay: 0s;'%3E%3Crect x='47' y='26' rx='9.4' ry='5.2' width='6' height='8' fill='%231e6c93' style='animation-play-state: running; animation-delay: 0s;'%3E%3Canimate attributeName='opacity' values='1;0' keyTimes='0;1' dur='1s' begin='-0.1s' repeatCount='indefinite' style='animation-play-state: running; animation-delay: 0s;'%3E%3C/animate%3E%3C/rect%3E%3C/g%3E%3Cg transform='rotate(324 50 50)' style='animation-play-state: running; animation-delay: 0s;'%3E%3Crect x='47' y='26' rx='9.4' ry='5.2' width='6' height='8' fill='%231e6c93' style='animation-play-state: running; animation-delay: 0s;'%3E%3Canimate attributeName='opacity' values='1;0' keyTimes='0;1' dur='1s' begin='0s' repeatCount='indefinite' style='animation-play-state: running; animation-delay: 0s;'%3E%3C/animate%3E%3C/rect%3E%3C/g%3E%3C/svg%3E"};
 
-    if (__DEV__) {
-        console.log('I am in development');
-        CacheManager.clearCache();
-    } 
+    // if (__DEV__) {
+    //     console.log('I am in development');
+    //     CacheManager.clearCache();
+    // } 
    
-    CacheManager.clearCache();
+    // CacheManager.clearCache();
     let uri = getImage(props.buttonImg);
 
     return (
@@ -286,7 +286,7 @@ const LinkButton = (props) => {
                     accessibilityLabel={props.description}
                     {...{previewImage, uri}}
                     tint = "dark"
-                    transitionDuration={800}
+                    transitionDuration={300}
             />
         </TouchableHighlight>
     );

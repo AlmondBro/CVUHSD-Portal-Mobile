@@ -28,11 +28,11 @@ class ToggleButton extends Component {
         };
     } //end constructor()
 
-    componentWillReceiveProps = (newProps) => {
-        if (this.state.expanded !== newProps.expanded) {
-            this.setState({expanded: newProps.expanded});
+    componentDidUpdate = (prevProps) => {
+        if (this.state.expanded !== this.props.expanded) {
+            this.setState({expanded: this.props.expanded});
         } //end if-statement
-      } //end componentWillReceiveProps(newProps)
+      } //end componentDidUpdate()
 
     onPress = () => {
         console.log("ToggleButton pressed:\t" + this.state.expanded);

@@ -1,4 +1,4 @@
-import React from "React";
+import React from "react";
 import {View, StyleSheet, Image} from "react-native";
 
 const headerStyles = StyleSheet.create({
