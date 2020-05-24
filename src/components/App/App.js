@@ -20,7 +20,7 @@ import { UpdateAppView, UpdateTextDescription, ScrollViewStyled, SafeAreaViewSty
 
 //Import App/Page components
 import BlueSection from '../BlueSection/BlueSection.js';
-import Header from '../Header.js';
+import Header from './../Header/Header.js';
 import { staffPortalButtons } from './../staffPortalButtons.js';
 
 class App extends Component {
