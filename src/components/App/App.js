@@ -6,63 +6,32 @@ import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID, AZURE_DOMAIN_HIN
 //from 'react-native-dotenv'
 
 //Import utility functions
-import { dimensionsWidthHOC } from "./../../utility-functions.js";
+import { dimensionsWidthHOC } from './../../utility-functions.js';
 
 import * as AuthSession from 'expo-auth-session';
 import * as Updates from 'expo-updates';
 
 import { openAuthSession } from 'azure-ad-graph-expo';
 
-import SafeAreaView from "react-native-safe-area-view";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-
 //import styled components
-import { UpdateAppView, UpdateTextDescription, StyledScrollView, BlueSectionContainer } from './App_StyledComponents.js';
+import { UpdateAppView, UpdateTextDescription, ScrollViewStyled, SafeAreaViewStyled, BlueSectionContainer } from './App_StyledComponents.js';
 
 //Import App/Page components
-import BlueSection from "../BlueSection/BlueSection.js";
-import Header from "../Header.js";
-import { staffPortalButtons } from "../staffPortalButtons.js";
-
-//rgb(30, 108, 147)0
-// #F4F7F9
-
-const appStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignSelf: 'stretch',
-    backgroundColor: '#F4F7F9',
-    padding: 0,
-    margin: 0
-  }
-});
+import BlueSection from '../BlueSection/BlueSection.js';
+import Header from '../Header.js';
+import { staffPortalButtons } from './../staffPortalButtons.js';
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
             showUpdate: false, 
-            adUserInfo: null
+            adUserInfo: null,
+            appWidth: this.props.width
         };
     }
-
-    componentDidMount = () => {
-        const checkforUpdatesDev = false;
-        
-        console.log("Props:\t" + this.props);
-        console.log("Width:\t" + this.props.width);
-
-        if (!__DEV__ || checkforUpdatesDev === true) {
-            Updates.checkForUpdateAsync().then(update => {
-                if (update.isAvailable) {
-                  this.setState({showUpdate: true});
-                } //end if-statement
-              });
-        }
-    };
 
     azureAdAppProps = {
         clientId        :   AZURE_CLIENT_ID,
@@ -84,6 +53,20 @@ class App extends Component {
         console.log("adUserInfo:\t" + JSON.stringify(adUserInfo));
     }; //handlePressAsync()
 
+    componentDidMount = () => {
+        const checkforUpdatesDev = false;
+        
+        console.log("Props:\t" + JSON.stringify(this.props) );
+        console.log("Width:\t" + this.props.width);
+
+        if (!__DEV__ || checkforUpdatesDev === true) {
+            Updates.checkForUpdateAsync().then(update => {
+                if (update.isAvailable) {
+                  this.setState({showUpdate: true});
+                } //end if-statement
+              });
+        }
+    };
 
     render() {
         let androidWebViewDebug = false;
@@ -101,14 +84,11 @@ class App extends Component {
 
                     Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
                 */ }
-                <SafeAreaView style={appStyles.container} forceInset={ {bottom: 'never'} }>
-                    <ScrollView
-                        // contentContainerStyle={appStyles.scrollView}
+                <SafeAreaViewStyled>
+                    <ScrollViewStyled
+                        width={ this.state.appWidth }
                     >
-                        <Header />
-                        {/*  Had to hardcode the width of this view to get it to stretch horizontally
-                                using the Dimensions module */ }
-                        
+                        <Header />        
                         { this.state.showUpdate ?
                             ( 
                                 <UpdateAppView>
@@ -204,8 +184,8 @@ class App extends Component {
                                 buttons={staffPortalButtons.schoolWebsites}
                             />
                     </BlueSectionContainer>
-                </ScrollView>
-            </SafeAreaView>
+                </ScrollViewStyled>
+            </SafeAreaViewStyled>
         </SafeAreaProvider>
         );
     }

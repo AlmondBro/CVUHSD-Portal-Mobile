@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 import css from 'styled-css/native';
 
+import SafeAreaView from "react-native-safe-area-view";
 
 let UpdateAppView = styled.View`
     background-color: "#F4F7F9";
@@ -15,20 +16,6 @@ let UpdateTextDescription = styled.Text`
     color: "#15516b";
 `;
 
-
-let StyledScrollView = styled.ScrollView.attrs((props) => ({
-    contentContainerStyle:  css`
-        flex-direction: column;
-        align-self: center;
-        justify-content: flex-start;
-        padding: 0;
-        background-color: "#F4F7F9;
-    `,
-}))`
-  flex: 1;
-`;
-
-
 let BlueSectionContainer = styled.View`
     flex-direction: column;
     align-self: stretch;
@@ -38,4 +25,30 @@ let BlueSectionContainer = styled.View`
     width: ${props => props.width ? props.width : "auto"};
 `;
 
-export { UpdateAppView, UpdateTextDescription, StyledScrollView, BlueSectionContainer };
+let SafeAreaViewStyled = styled.SafeAreaView.attrs( (props) => ({
+    forceInset: { bottom: 'never' },
+}))`
+    flex: 1;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-self: stretch;
+    background-color: #F4F7F9;
+    padding: 0;
+    margin: 0
+`;
+
+let ScrollViewStyled = styled.ScrollView.attrs((props) => ({
+    contentContainerStyle:  css`
+        flex-direction: column;
+        align-self: center;
+        justify-content: flex-start;
+        padding: 0;
+        background-color: #F4F7F9;
+        width: ${ props.width ? props.width : "auto" };
+    `,
+}))`
+  flex: 1;
+  
+`;
+
+export { UpdateAppView, UpdateTextDescription, ScrollViewStyled, SafeAreaViewStyled, BlueSectionContainer };
