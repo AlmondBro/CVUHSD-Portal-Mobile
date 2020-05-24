@@ -1,9 +1,11 @@
 //Import React/React Native modules
 import React, { Component, Fragment } from 'react';
-import { StyleSheet, View, ScrollView, Dimensions, StatusBar, Text, Button, Platform } from 'react-native';
+import { StyleSheet, View, ScrollView, StatusBar, Text, Button, Platform } from 'react-native';
 
-import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID, AZURE_DOMAIN_HINT } from "./../../keys.env.js";
+import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID, AZURE_DOMAIN_HINT } from './../../../keys.env.js';
 //from 'react-native-dotenv'
+
+import dimensionsWidthHOC  from "./../../utility-functions.js";
 
 import * as AuthSession from 'expo-auth-session';
 import * as Updates from 'expo-updates';
@@ -14,9 +16,9 @@ import SafeAreaView from "react-native-safe-area-view";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 //Import App/Page components
-import BlueSection from "./BlueSection/BlueSection.js";
-import Header from "./Header.js";
-import { staffPortalButtons } from "./staffPortalButtons.js";
+import BlueSection from "../BlueSection/BlueSection.js";
+import Header from "../Header.js";
+import { staffPortalButtons } from "../staffPortalButtons.js";
 
 //rgb(30, 108, 147)0
 // #F4F7F9
@@ -57,21 +59,12 @@ class App extends Component {
         };
     }
 
-    getWidth = () => {
-        return {
-            width: Dimensions.get('window').width
-        }
-    };
-
-    getHeight= () => {
-        return {
-            height: Dimensions.get('window').height
-        }
-    };
-
     componentDidMount = () => {
         const checkforUpdatesDev = false;
         
+        console.log("Props:\t" + this.props);
+        console.log("Width:\t" + this.props.width);
+
         if (!__DEV__ || checkforUpdatesDev === true) {
             Updates.checkForUpdateAsync().then(update => {
                 if (update.isAvailable) {
@@ -113,7 +106,6 @@ class App extends Component {
 
                     Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
                 */ }
-                {/* <SafeAreaView style={{ flex:0, backgroundColor: '#F4F7F9' }} /> */}
                 <SafeAreaView style={appStyles.container} forceInset={ {bottom: 'never'} }>
                     <ScrollView contentContainerStyle={appStyles.scrollView}>
                         <Header />
@@ -121,7 +113,7 @@ class App extends Component {
                                 using the Dimensions module */ }
                         
                         { this.state.showUpdate ?
-                            ( <Fragment>
+                            ( 
                                 <View style={{backgroundColor: "#F4F7F9", marginBottom: 12}}>
                                     <Text style={ {fontSize: 16, paddingLeft: 8, paddingRight: 8, alignSelf: "center", color: "#15516b"} } >A new update is available. Press here to update!</Text>
                                     <Button
@@ -132,18 +124,18 @@ class App extends Component {
             
                                     />
                                 </View>
-                            </Fragment>)
+                            )
                             : null
                         }   
 
-                        <View style={[appStyles.blueSectionContainer, this.getWidth()]}>
+                        <View style={[appStyles.blueSectionContainer]}>
                             <Button 
                                 title="Open SSO" 
                                 onPress={this.handlePressAsync}
                             ></Button>
                         </View>
 
-                        <View style={[appStyles.blueSectionContainer, this.getWidth()]}>
+                        <View style={[appStyles.blueSectionContainer]}>
                             {
                                 this.state.adUserInfo ? (
                                     <Fragment>
@@ -155,7 +147,7 @@ class App extends Component {
                             }
                         </View>
 
-                        <View style={[appStyles.blueSectionContainer, this.getWidth()]}>
+                        <View style={[appStyles.blueSectionContainer, {width: this.props.width}]}>
                            
                             {   /* Render service statuses only on iOS devices until the WebView 
                                     under Scrollview (where the webview does not scroll) is fixed 
@@ -222,4 +214,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default dimensionsWidthHOC(App);
