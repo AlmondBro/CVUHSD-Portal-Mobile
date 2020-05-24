@@ -1,10 +1,11 @@
 //Import React/React Native modules
 import React, { Component, Fragment } from 'react';
-import { StyleSheet, View, ScrollView, StatusBar, Text, Button, Platform } from 'react-native';
+import { StyleSheet, View, StatusBar, Text, Button, Platform } from 'react-native';
 
 import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID, AZURE_DOMAIN_HINT } from './../../../keys.env.js';
 //from 'react-native-dotenv'
 
+//Import utility functions
 import { dimensionsWidthHOC } from "./../../utility-functions.js";
 
 import * as AuthSession from 'expo-auth-session';
@@ -15,6 +16,10 @@ import { openAuthSession } from 'azure-ad-graph-expo';
 import SafeAreaView from "react-native-safe-area-view";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+
+//import styled components
+import { UpdateAppView, UpdateTextDescription, StyledScrollView, BlueSectionContainer } from './App_StyledComponents.js';
+
 //Import App/Page components
 import BlueSection from "../BlueSection/BlueSection.js";
 import Header from "../Header.js";
@@ -22,6 +27,7 @@ import { staffPortalButtons } from "../staffPortalButtons.js";
 
 //rgb(30, 108, 147)0
 // #F4F7F9
+/*
 const appStyles = StyleSheet.create({
   container: {
     flex: 1,
@@ -49,7 +55,7 @@ const appStyles = StyleSheet.create({
     margin: 0
   }
 });
-
+*/
 class App extends Component {
     constructor(props) {
         super(props);
@@ -78,15 +84,16 @@ class App extends Component {
         clientId        :   AZURE_CLIENT_ID,
         tenantId        :   AZURE_TENANT_ID,
         scope           :   "user.read",
-        redirectUrl     :   AuthSession.makeRedirectUri(),
+        redirectUrl     :   AuthSession.getRedirectUrl(),
         clientSecret    :   AZURE_CLIENT_SECRET,
         domainHint      :   AZURE_DOMAIN_HINT,
         prompt          :   "login"
     };
 
+
     handlePressAsync = async () => {
         console.log("handlePressAsync()");
-
+        console.log("AuthSession.makeRedirectUri():\t" + AuthSession.makeRedirectUri());
         let adUserInfo = await openAuthSession(this.azureAdAppProps);
 
         this.setState({ adUserInfo: adUserInfo });
@@ -99,7 +106,11 @@ class App extends Component {
 
         return (
             <SafeAreaProvider>
-                <StatusBar backgroundColor="#F4F7F9" barStyle="dark-content" translucent={true} />
+                <StatusBar 
+                    backgroundColor="#F4F7F9" 
+                    barStyle="dark-content" 
+                    translucent={true} 
+                />
                 { /* The following is a technique using two SafeAreaViews to have the
                     statusbar/top padding be a different color than the bottom padding. 
                     SafeAreaViews are only applicable on iOs 11+ on >iPhone X 
@@ -107,15 +118,17 @@ class App extends Component {
                     Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
                 */ }
                 <SafeAreaView style={appStyles.container} forceInset={ {bottom: 'never'} }>
-                    <ScrollView contentContainerStyle={appStyles.scrollView}>
+                    <StyledScrollView
+                        // contentContainerStyle={appStyles.scrollView}
+                    >
                         <Header />
                         {/*  Had to hardcode the width of this view to get it to stretch horizontally
                                 using the Dimensions module */ }
                         
                         { this.state.showUpdate ?
                             ( 
-                                <View style={{backgroundColor: "#F4F7F9", marginBottom: 12}}>
-                                    <Text style={ {fontSize: 16, paddingLeft: 8, paddingRight: 8, alignSelf: "center", color: "#15516b"} } >A new update is available. Press here to update!</Text>
+                                <UpdateAppView>
+                                    <UpdateTextDescription>A new update is available. Press here to update!</UpdateTextDescription>
                                     <Button
                                         onPress={ () => { console.log("Update reload"); Updates.reload() } }
                                         title="Update Mobile Portal"
@@ -123,19 +136,19 @@ class App extends Component {
                                         accessibilityLabel="Update Mobile Portal"
             
                                     />
-                                </View>
+                                </UpdateAppView>
                             )
                             : null
                         }   
 
-                        <View style={[appStyles.blueSectionContainer]}>
+                        <BlueSectionContainer>
                             <Button 
                                 title="Open SSO" 
                                 onPress={this.handlePressAsync}
                             ></Button>
-                        </View>
+                        </BlueSectionContainer>
 
-                        <View style={[appStyles.blueSectionContainer]}>
+                        <BlueSectionContainer>
                             {
                                 this.state.adUserInfo ? (
                                     <Fragment>
@@ -145,9 +158,9 @@ class App extends Component {
                                     
                                     ) : null
                             }
-                        </View>
+                        </BlueSectionContainer>
 
-                        <View style={[appStyles.blueSectionContainer, {width: this.props.width}]}>
+                        <BlueSectionContainer width={this.props.width}>
                            
                             {   /* Render service statuses only on iOS devices until the WebView 
                                     under Scrollview (where the webview does not scroll) is fixed 
@@ -206,8 +219,8 @@ class App extends Component {
                                 expanded={!false}
                                 buttons={staffPortalButtons.schoolWebsites}
                             />
-                    </View>
-                </ScrollView>
+                    </BlueSectionContainer>
+                </StyledScrollView>
             </SafeAreaView>
         </SafeAreaProvider>
         );

@@ -5,7 +5,7 @@
   "version": "0.7.1",
   "scripts": {
     "start": "expo start",
-    "start-reset": "rm -rf node_modules/ && npm install && npm audit fix && npm install && npm start",
+    "start-reset": "rm -rf node_modules/ && npm install && npm audit fix && npm install && npm start --reset-cache",
     "publish": "expo publish",
     "build-android": "expo build:android",
     "upload-android": "expo upload:android",
@@ -19,7 +19,7 @@
     "expo": "^37.0.11",
     "expo-auth-session": "~1.2.1",
     "expo-blur": "~8.1.0",
-    "expo-updates": "~0.2.1",
+    "expo-updates": "^0.2.5",
     "kind-of": "^6.0.3",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
@@ -27,14 +27,15 @@
     "react-native-app-link": "^1.0.0",
     "react-native-collapsible": "^1.5.2",
     "react-native-expo-image-cache": "^4.1.0",
-    "react-native-safe-area-context": "0.7.3",
+    "react-native-safe-area-context": "^2.0.0",
     "react-native-safe-area-view": "^1.1.1",
     "react-native-web": "~0.11.7",
-    "react-native-webview": "8.1.1"
+    "react-native-webview": "^9.4.0",
+    "styled-components": "^5.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
-    "babel-preset-expo": "~8.1.0",
+    "babel-preset-expo": "^8.2.1",
     "react-native-dotenv": "^0.2.0"
   },
   "private": false
