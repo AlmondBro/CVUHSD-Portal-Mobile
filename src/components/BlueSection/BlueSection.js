@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 });
 
 class BlueSection extends Component {
-    //TODO: Fix this bandage of a hard hack of negating the expanded prop
+    //TODO: Fix this bandage of a hard hack of negating the expanded prop0
     constructor(props) {
         super(props);
         this.state = {
