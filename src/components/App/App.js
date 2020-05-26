@@ -131,9 +131,10 @@ class App extends Component {
                                     <Header 
                                         showUpdate  =   { this.state.showUpdate } 
                                         firstName   =   { this.state.firstName}
-                                        lastName    =   {this.state.lastName}
-                                        title       =   {this.state.title}
-                                        site        =   {this.state.site}
+                                        lastName    =   { this.state.lastName }
+                                        title       =   { this.state.title }
+                                        site        =   { this.state.site }
+                                        // onPress    =   { navigate ? navigate: null }
                                     />
                                     
                                     { this.state.title ? null : <WelcomeText>Welcome</WelcomeText> }
@@ -170,21 +171,6 @@ class App extends Component {
                                     }
                                 </Screen>
                             </Navigator>
-
-                            {/* <Stack.Screen name="Home">
-                                {props => <HomeScreen {...props} extraData={someData} />}
-                            </Stack.Screen> */}
-                            {/* <HomeScreen openADSingleSignOn={ this.openADSingleSignOn } /> */}
-
-                        {/* <PageContent 
-                            showUpdate  =   { this.state.showUpdate } 
-                            firstName   =   { this.state.firstName}
-                            lastName    =   { this.state.lastName }
-                            title       =   { this.state.title }
-                            site        =   { this.state.site }
-                            appWidth    =   { this.state.appWidth }
-                        /> */}
-                      
                         </AppContainerView>
                     </SafeAreaViewStyled>
                 </SafeAreaProvider>

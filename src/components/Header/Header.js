@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Text } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 
 //Import component's styled parts
 import { HeaderContainerView, PortalLogoImage, UpdateAppView, UpdateTextDescription  } from './Header_StyledComponents.js';
@@ -8,11 +8,17 @@ import { BlueSectionContainer } from './../App/App_StyledComponents.js';
 const Header = (props) => {
     return (
       <HeaderContainerView>
-        <PortalLogoImage  
-            {...props}
-            source={require("./../../assets/images/CV-600x600-portal-red.png")} 
-        />
-
+          <TouchableOpacity
+            activeOpacity = { 0.5 }
+            // onPress={ props.onPress('Home') }
+          >
+            <PortalLogoImage  
+                {...props}
+                source={require("./../../assets/images/CV-600x600-portal-red.png")} 
+                
+            />
+          </TouchableOpacity>
+    
         <Fragment>
         { props.showUpdate ?
             ( 
