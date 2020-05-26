@@ -17,7 +17,7 @@ import { openAuthSession } from 'azure-ad-graph-expo';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 //import styled components
-import { SafeAreaViewStyled, BlueSectionContainer } from './App_StyledComponents.js';
+import { AppContainerView, AppHeaderContainerView, SafeAreaViewStyled, OpenSSOContainer, SignInButtonTouchableOpacity } from './App_StyledComponents.js';
 
 //Import App/Page components
 import Header from './../Header/Header.js';
@@ -98,28 +98,34 @@ class App extends Component {
                     Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
                 */ }
                 <SafeAreaViewStyled>
-                    <Header 
-                        showUpdate  =   { this.state.showUpdate } 
-                        firstName   =   { this.state.firstName}
-                        lastName    =   {this.state.lastName}
-                        title       =   {this.state.title}
-                        site        =   {this.state.site}
-                    />
-                    <BlueSectionContainer>
-                            <Button 
-                                title="Open SSO" 
-                                onPress={this.handlePressAsync}
-                            ></Button>
-                    </BlueSectionContainer> 
+                    <AppContainerView>
+                        <AppHeaderContainerView>
+                            <Header 
+                                showUpdate  =   { this.state.showUpdate } 
+                                firstName   =   { this.state.firstName}
+                                lastName    =   {this.state.lastName}
+                                title       =   {this.state.title}
+                                site        =   {this.state.site}
+                            />
+                        </AppHeaderContainerView>
+               
+                    <OpenSSOContainer>
+                            <SignInButtonTouchableOpacity 
+                                title="Sign In" 
+                                color="white"
+                                onPress={ this.handlePressAsync }
+                            />
+                    </OpenSSOContainer> 
 
-                    <PageContent 
+                    {/* <PageContent 
                         showUpdate  =   { this.state.showUpdate } 
                         firstName   =   { this.state.firstName}
                         lastName    =   { this.state.lastName }
                         title       =   { this.state.title }
                         site        =   { this.state.site }
                         appWidth    =   { this.state.appWidth }
-                    />
+                    /> */}
+                    </AppContainerView>
                 </SafeAreaViewStyled>
             </SafeAreaProvider>
         );

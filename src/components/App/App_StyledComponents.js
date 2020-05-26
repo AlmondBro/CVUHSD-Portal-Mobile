@@ -1,7 +1,19 @@
+import React from 'react';
 import styled from 'styled-components/native';
-import css from 'styled-css/native';
 
-import SafeAreaView from "react-native-safe-area-view";
+import { TouchableOpacity } from 'react-native';
+
+let AppContainerView = styled.View`
+    flex: 1;
+`;
+
+let AppHeaderContainerView = styled.View`
+    flex: 2;
+
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 20;
+`;
 
 let BlueSectionContainer = styled.View`
     flex-direction: column;
@@ -11,6 +23,48 @@ let BlueSectionContainer = styled.View`
     margin: 0;
     width: ${props => props.width ? props.width : "auto"};
 `;
+
+let OpenSSOContainer = styled(BlueSectionContainer)`
+    background-color: #B41A1F;
+    border-top-left-radius: 25;
+    border-top-right-radius: 25;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
+const SignInButtonView = styled.View`
+    background-color: white;
+    color: red;
+    border-radius: 15;
+
+    width: 120;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 10;
+    padding-bottom: 10;
+`;
+
+const SignInButtonText= styled.Text`
+    color: #B41A1F;
+    font-size: 20;
+    flex-direction: row;
+    justify-content: center;
+`;
+
+const SignInButtonTouchableOpacity = (props) => {
+    return (
+        <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={ props.onPress }
+        >
+            <SignInButtonView>
+                <SignInButtonText>{ props.buttonTitle || "Sign In" }</SignInButtonText>
+            </SignInButtonView>
+        </TouchableOpacity>
+    ); //end return
+}
 
 let SafeAreaViewStyled = styled.SafeAreaView.attrs( (props) => ({
     forceInset: { bottom: 'never' },
@@ -26,4 +80,4 @@ let SafeAreaViewStyled = styled.SafeAreaView.attrs( (props) => ({
 
 
 
-export { SafeAreaViewStyled, BlueSectionContainer };
+export { AppContainerView, AppHeaderContainerView, SafeAreaViewStyled, BlueSectionContainer, OpenSSOContainer, SignInButtonTouchableOpacity };
