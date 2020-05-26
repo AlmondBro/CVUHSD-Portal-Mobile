@@ -37,18 +37,6 @@ let PageContent  = (props) => {
                 width   =   { props.appWidth }
             >
                 <BlueSectionContainer>
-                    {
-                        props.title ? 
-                            (
-                                <Fragment>
-                                    <Text>{ props.title + " from " + props.serviceStatuses}</Text>
-                                    <Text>{ props.firstName + " " + props.lastName }</Text>
-                                </Fragment>
-                            ) : null
-                    }
-                </BlueSectionContainer>
-
-                <BlueSectionContainer>
                     {   /* Render service statuses only on iOS devices until the WebView 
                             under Scrollview (where the webview does not scroll) is fixed 
                         */
