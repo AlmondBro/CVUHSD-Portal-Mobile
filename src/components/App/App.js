@@ -17,7 +17,7 @@ import { openAuthSession } from 'azure-ad-graph-expo';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 //import styled components
-import { AppContainerView, AppHeaderContainerView, SafeAreaViewStyled, OpenSSOContainer, SignInButtonTouchableOpacity } from './App_StyledComponents.js';
+import { AppContainerView, AppHeaderContainerView, WelcomeText, SafeAreaViewStyled, OpenSSOContainer, SignInButtonTouchableOpacity } from './App_StyledComponents.js';
 
 //Import App/Page components
 import Header from './../Header/Header.js';
@@ -107,6 +107,7 @@ class App extends Component {
                                 title       =   {this.state.title}
                                 site        =   {this.state.site}
                             />
+                            <WelcomeText>Welcome</WelcomeText>
                         </AppHeaderContainerView>
                
                     <OpenSSOContainer>

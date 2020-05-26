@@ -11,8 +11,16 @@ let AppHeaderContainerView = styled.View`
     flex: 2;
 
     flex-direction: column;
-    justify-content: flex-start;
-    margin-top: 20;
+    justify-content: space-evenly;
+    align-items: center;
+`;
+
+const WelcomeText = styled.Text`
+    color: #B41A1F;
+    font-size: 25;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `;
 
 let BlueSectionContainer = styled.View`
@@ -80,4 +88,4 @@ let SafeAreaViewStyled = styled.SafeAreaView.attrs( (props) => ({
 
 
 
-export { AppContainerView, AppHeaderContainerView, SafeAreaViewStyled, BlueSectionContainer, OpenSSOContainer, SignInButtonTouchableOpacity };
+export { AppContainerView, AppHeaderContainerView, WelcomeText, SafeAreaViewStyled, BlueSectionContainer, OpenSSOContainer, SignInButtonTouchableOpacity };
