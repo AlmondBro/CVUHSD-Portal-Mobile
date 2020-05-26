@@ -1,6 +1,7 @@
 //Import React/React Native modules
 import React, { Component, Fragment } from 'react';
 import { StatusBar, Button } from 'react-native';
+import Reactotron from 'reactotron-react-native';
 
 import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID, AZURE_DOMAIN_HINT } from './../../../keys.env.js';
 //from 'react-native-dotenv'
@@ -41,7 +42,7 @@ class App extends Component {
         clientId        :   AZURE_CLIENT_ID,
         tenantId        :   AZURE_TENANT_ID,
         scope           :   "user.read",
-        redirectUrl     :   AuthSession.getRedirectUrl(),
+        redirectUrl     :   AuthSession.makeRedirectUri(),
         clientSecret    :   AZURE_CLIENT_SECRET,
         domainHint      :   AZURE_DOMAIN_HINT,
         prompt          :   "login"
@@ -69,6 +70,10 @@ class App extends Component {
         console.log("Props:\t" + JSON.stringify(this.props) );
         console.log("Width:\t" + this.props.width);
 
+        if (__DEV__) {
+            Reactotron.log('hello rendering world 1');
+        }
+        
         if (!__DEV__ || checkforUpdatesDev === true) {
             Updates.checkForUpdateAsync().then(update => {
                 if (update.isAvailable) {
@@ -93,7 +98,7 @@ class App extends Component {
                     Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
                 */ }
                 <SafeAreaViewStyled>
-                    {/* <Header 
+                    <Header 
                         showUpdate  =   { this.state.showUpdate } 
                         firstName   =   { this.state.firstName}
                         lastName    =   {this.state.lastName}
@@ -105,7 +110,7 @@ class App extends Component {
                                 title="Open SSO" 
                                 onPress={this.handlePressAsync}
                             ></Button>
-                    </BlueSectionContainer>  */}
+                    </BlueSectionContainer> 
 
                     <PageContent 
                         showUpdate  =   { this.state.showUpdate } 
