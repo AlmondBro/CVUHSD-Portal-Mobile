@@ -8,9 +8,9 @@ import { BlueSectionContainer } from './../App/App_StyledComponents.js';
 const Header = (props) => {
     return (
       <HeaderContainerView>
-
         <PortalLogoImage  
-          source={require("./../../assets/images/CV-600x600-portal-red.png")} 
+            {...props}
+            source={require("./../../assets/images/CV-600x600-portal-red.png")} 
         />
 
         <Fragment>
@@ -42,7 +42,6 @@ const Header = (props) => {
                             ) : null
                     }
         </BlueSectionContainer>
-        
       </HeaderContainerView>
     );
 };

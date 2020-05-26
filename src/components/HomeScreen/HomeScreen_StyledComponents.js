@@ -28,7 +28,7 @@ let AppHeaderContainerView = styled.View`
 
 const WelcomeText = styled.Text`
     color: #B41A1F;
-    font-size: 25;
+    font-size: 20;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -59,6 +59,7 @@ const SignInButtonView = styled.View`
 const SignInButtonText= styled.Text`
     color: #B41A1F;
     font-size: 20;
+    font-weight: bold;
     flex-direction: row;
     justify-content: center;
 `;

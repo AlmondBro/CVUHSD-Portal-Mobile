@@ -11,8 +11,8 @@ let HeaderContainerView = styled.View`
 let PortalLogoImage = styled.Image.attrs( (props) => {
     
 })`
-    width: 200;
-    height: 200;
+    width: 150;
+    height: 150;
 `;
 
 let UpdateAppView = styled.View`

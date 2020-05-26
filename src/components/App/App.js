@@ -1,6 +1,6 @@
 //Import React/React Native modules
 import React, { Component, Fragment } from 'react';
-import { StatusBar, Button } from 'react-native';
+import { StatusBar, Button, ImageBackground } from 'react-native';
 
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
@@ -22,7 +22,7 @@ import { openAuthSession } from 'azure-ad-graph-expo';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 //import styled components
-import { AppContainerView, AppHeaderContainerView, WelcomeText, SafeAreaViewStyled, OpenSSOContainer, SignInButtonTouchableOpacity } from './App_StyledComponents.js';
+import { AppContainerView, AppHeaderContainerView, ImageBackgroundStyled, WelcomeText, SafeAreaViewStyled } from './App_StyledComponents.js';
 
 //Import App/Page components
 import Header from './../Header/Header.js';
@@ -31,6 +31,8 @@ import PageContent from './../PageContent/PageContent.js';
 import HomeScreen from './../HomeScreen/HomeScreen.js';
 
 const { Navigator, Screen } = createStackNavigator();
+
+const backgroundImage = require('./../../assets/images/theCVway-white.png');
 
 class App extends Component {
     constructor(props) {
@@ -113,17 +115,30 @@ class App extends Component {
                         Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
                     */ }
                     <SafeAreaViewStyled>
+
                         <AppContainerView>
-                            <AppHeaderContainerView>
-                                <Header 
-                                    showUpdate  =   { this.state.showUpdate } 
-                                    firstName   =   { this.state.firstName}
-                                    lastName    =   {this.state.lastName}
-                                    title       =   {this.state.title}
-                                    site        =   {this.state.site}
-                                />
-                                <WelcomeText>Welcome</WelcomeText>
-                            </AppHeaderContainerView>
+                            <ImageBackground
+                                source={ backgroundImage }
+                                style={ 
+                                    { 
+                                        flex: 1,
+                                        resizeMode: "cover",
+                                        justifyContent: "center"
+                                    }
+                                }
+                            >
+                                <AppHeaderContainerView>
+                                    <Header 
+                                        showUpdate  =   { this.state.showUpdate } 
+                                        firstName   =   { this.state.firstName}
+                                        lastName    =   {this.state.lastName}
+                                        title       =   {this.state.title}
+                                        site        =   {this.state.site}
+                                    />
+                                    
+                                    { this.state.title ? null : <WelcomeText>Welcome</WelcomeText> }
+                                </AppHeaderContainerView>
+                            </ImageBackground>
 
                             <Navigator
                                 screenOptions={{ title: null, headerShown: false }}
@@ -169,6 +184,7 @@ class App extends Component {
                             site        =   { this.state.site }
                             appWidth    =   { this.state.appWidth }
                         /> */}
+                      
                         </AppContainerView>
                     </SafeAreaViewStyled>
                 </SafeAreaProvider>

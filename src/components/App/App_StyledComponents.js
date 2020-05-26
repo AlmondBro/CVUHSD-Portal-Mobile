@@ -12,6 +12,11 @@ let AppHeaderContainerView = styled.View`
     align-items: center;
 `;
 
+const ImageBackgroundStyled = styled.ImageBackground`
+    flex: 1;
+    justify-content: "center"
+`;
+
 const WelcomeText = styled.Text`
     color: #B41A1F;
     font-size: 25;
@@ -43,4 +48,4 @@ let SafeAreaViewStyled = styled.SafeAreaView.attrs( (props) => ({
 
 
 
-export { AppContainerView, AppHeaderContainerView, WelcomeText, SafeAreaViewStyled, BlueSectionContainer };
+export { AppContainerView, AppHeaderContainerView, ImageBackgroundStyled, WelcomeText, SafeAreaViewStyled, BlueSectionContainer };
