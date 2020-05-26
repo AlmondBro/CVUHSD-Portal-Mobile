@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import { useWindowDimensions } from 'react-native';
 
+const navigationRef = React.createRef();
+
+const navigate = (name, params) => {
+    return navigationRef.current?.navigate(name, params);
+}
 
 const dimensionsWidthHOC = (Component) => {
     return (props) => {
@@ -17,4 +22,4 @@ const dimensionsWidthHOC = (Component) => {
   
 }; //end (dimensionsWidthHOC)
 
-export  { dimensionsWidthHOC };
+export  { dimensionsWidthHOC, navigationRef, navigate };

@@ -12,7 +12,7 @@ import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID, AZURE_DOMAIN_HIN
 //from 'react-native-dotenv'
 
 //Import utility functions
-import { dimensionsWidthHOC } from './../../utility-functions.js';
+import { dimensionsWidthHOC, navigationRef, navigate } from './../../utility-functions.js';
 
 import * as AuthSession from 'expo-auth-session';
 import * as Updates from 'expo-updates';
@@ -63,12 +63,17 @@ class App extends Component {
         console.log("AuthSession.makeRedirectUri():\t" + AuthSession.makeRedirectUri());
         let adUserInfo = await openAuthSession(this.azureAdAppProps);
 
-        this.setState({ adUserInfo: adUserInfo });
+        if (adUserInfo) {
+            this.setState({ adUserInfo: adUserInfo });
 
-        this.setState({ firstName : adUserInfo.givenName });
-        this.setState({ lastName : adUserInfo.surname});
-        this.setState({ title : adUserInfo.jobTitle});
-        this.setState({ site : adUserInfo.officeLocation});
+            this.setState({ firstName : adUserInfo.givenName });
+            this.setState({ lastName : adUserInfo.surname});
+            this.setState({ title : adUserInfo.jobTitle});
+            this.setState({ site : adUserInfo.officeLocation});
+
+            navigate('Page-Content');
+        }
+
 
         console.log("adUserInfo:\t" + JSON.stringify(adUserInfo));
     }; //handlePressAsync()
@@ -94,7 +99,7 @@ class App extends Component {
 
     render() {
         return (
-            <NavigationContainer>
+            <NavigationContainer ref={navigationRef}>
                 <SafeAreaProvider>
                     <StatusBar 
                         backgroundColor="#F4F7F9" 
@@ -135,7 +140,7 @@ class App extends Component {
                                 </Screen>
 
                                 <Screen 
-                                    name="Page Content"
+                                    name="Page-Content"
                                     // options={{ title: null, headerShown: false }}
                                 >
                                     { props => <PageContent 
