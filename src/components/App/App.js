@@ -1,6 +1,11 @@
 //Import React/React Native modules
 import React, { Component, Fragment } from 'react';
 import { StatusBar, Button } from 'react-native';
+
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
 import Reactotron from 'reactotron-react-native';
 
 import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID, AZURE_DOMAIN_HINT } from './../../../keys.env.js';
@@ -22,6 +27,10 @@ import { AppContainerView, AppHeaderContainerView, WelcomeText, SafeAreaViewStyl
 //Import App/Page components
 import Header from './../Header/Header.js';
 import PageContent from './../PageContent/PageContent.js';
+
+import HomeScreen from './../HomeScreen/HomeScreen.js';
+
+const { Navigator, Screen } = createStackNavigator();
 
 class App extends Component {
     constructor(props) {
@@ -49,7 +58,7 @@ class App extends Component {
     };
 
 
-    handlePressAsync = async () => {
+    openADSingleSignOn = async () => {
         console.log("handlePressAsync()");
         console.log("AuthSession.makeRedirectUri():\t" + AuthSession.makeRedirectUri());
         let adUserInfo = await openAuthSession(this.azureAdAppProps);
@@ -85,50 +94,80 @@ class App extends Component {
 
     render() {
         return (
-            <SafeAreaProvider>
-                <StatusBar 
-                    backgroundColor="#F4F7F9" 
-                    barStyle="dark-content" 
-                    translucent={true} 
-                />
-                { /* The following is a technique using two SafeAreaViews to have the
-                    statusbar/top padding be a different color than the bottom padding. 
-                    SafeAreaViews are only applicable on iOs 11+ on >iPhone X 
+            <NavigationContainer>
+                <SafeAreaProvider>
+                    <StatusBar 
+                        backgroundColor="#F4F7F9" 
+                        barStyle="dark-content" 
+                        translucent={true} 
+                    />
+                    { /* The following is a technique using two SafeAreaViews to have the
+                        statusbar/top padding be a different color than the bottom padding. 
+                        SafeAreaViews are only applicable on iOs 11+ on >iPhone X 
 
-                    Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
-                */ }
-                <SafeAreaViewStyled>
-                    <AppContainerView>
-                        <AppHeaderContainerView>
-                            <Header 
-                                showUpdate  =   { this.state.showUpdate } 
-                                firstName   =   { this.state.firstName}
-                                lastName    =   {this.state.lastName}
-                                title       =   {this.state.title}
-                                site        =   {this.state.site}
-                            />
-                            <WelcomeText>Welcome</WelcomeText>
-                        </AppHeaderContainerView>
-               
-                    <OpenSSOContainer>
-                            <SignInButtonTouchableOpacity 
-                                title="Sign In" 
-                                color="white"
-                                onPress={ this.handlePressAsync }
-                            />
-                    </OpenSSOContainer> 
+                        Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
+                    */ }
+                    <SafeAreaViewStyled>
+                        <AppContainerView>
+                            <AppHeaderContainerView>
+                                <Header 
+                                    showUpdate  =   { this.state.showUpdate } 
+                                    firstName   =   { this.state.firstName}
+                                    lastName    =   {this.state.lastName}
+                                    title       =   {this.state.title}
+                                    site        =   {this.state.site}
+                                />
+                                <WelcomeText>Welcome</WelcomeText>
+                            </AppHeaderContainerView>
 
-                    {/* <PageContent 
-                        showUpdate  =   { this.state.showUpdate } 
-                        firstName   =   { this.state.firstName}
-                        lastName    =   { this.state.lastName }
-                        title       =   { this.state.title }
-                        site        =   { this.state.site }
-                        appWidth    =   { this.state.appWidth }
-                    /> */}
-                    </AppContainerView>
-                </SafeAreaViewStyled>
-            </SafeAreaProvider>
+                            <Navigator
+                                screenOptions={{ title: null, headerShown: false }}
+
+                            >
+                                <Screen 
+                                    name="Home" 
+                                    // options={{ title: null, headerShown: false }}
+                                >
+                                    { props => <HomeScreen 
+                                                    {...props}
+                                                    openADSingleSignOn={ this.openADSingleSignOn } 
+                                                /> }
+                                </Screen>
+
+                                <Screen 
+                                    name="Page Content"
+                                    // options={{ title: null, headerShown: false }}
+                                >
+                                    { props => <PageContent 
+                                                    {...props}
+                                                    showUpdate  =   { this.state.showUpdate } 
+                                                    firstName   =   { this.state.firstName}
+                                                    lastName    =   { this.state.lastName }
+                                                    title       =   { this.state.title }
+                                                    site        =   { this.state.site }
+                                                    appWidth    =   { this.state.appWidth }
+                                                />
+                                    }
+                                </Screen>
+                            </Navigator>
+
+                            {/* <Stack.Screen name="Home">
+                                {props => <HomeScreen {...props} extraData={someData} />}
+                            </Stack.Screen> */}
+                            {/* <HomeScreen openADSingleSignOn={ this.openADSingleSignOn } /> */}
+
+                        {/* <PageContent 
+                            showUpdate  =   { this.state.showUpdate } 
+                            firstName   =   { this.state.firstName}
+                            lastName    =   { this.state.lastName }
+                            title       =   { this.state.title }
+                            site        =   { this.state.site }
+                            appWidth    =   { this.state.appWidth }
+                        /> */}
+                        </AppContainerView>
+                    </SafeAreaViewStyled>
+                </SafeAreaProvider>
+            </NavigationContainer>
         );
     }
 }

@@ -1,16 +1,19 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { useWindowDimensions } from 'react-native';
+
 
 const dimensionsWidthHOC = (Component) => {
     return (props) => {
         let width = useWindowDimensions().width;
+
         return (
-            <Component width={width}>
+            <Component 
+                width={width}
+            >
                 { props.children }
             </Component>
-
     ); 
-    }; //end inline()
+}; //end inline()
   
 }; //end (dimensionsWidthHOC)
 
