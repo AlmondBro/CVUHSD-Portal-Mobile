@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
 
 //Import BlueSection components
 import BlueSectionHeader from './BlueSectionHeader.js';
 import BlueSectionContent from './BlueSectionContent.js'; 
 
-const styles = StyleSheet.create({
-    blueSection: {
-        flexDirection: 'column',
-        alignSelf: 'stretch',
-        justifyContent: 'center'
-    }
-});
+//Import BlueSection styled component
+import { BlueSectionContainerView } from './BlueSection_StyledComponents.js';
 
 class BlueSection extends Component {
     //TODO: Fix this bandage of a hard hack of negating the expanded prop0
@@ -30,7 +24,7 @@ class BlueSection extends Component {
 
     render = () => {
         return (
-            <View style={styles.blueSection}>
+            <BlueSectionContainerView>
                 <BlueSectionHeader 
                     title           =   { this.props.title } 
                     headerTitle     =   { this.props.headerTitle }
@@ -43,7 +37,7 @@ class BlueSection extends Component {
                     buttons           =   { this.props.buttons }
                     serviceStatuses   =   { this.props.serviceStatuses}
                 />
-            </View>
+            </BlueSectionContainerView>
         );
     } //end render() method
 } //BlueSection class

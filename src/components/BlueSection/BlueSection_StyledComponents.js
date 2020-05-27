@@ -1,7 +1,12 @@
 import styled from 'styled-components/native';
 
-let BlueSectionHeaderTouchableOpacity = styled.TouchableOpacity`
-    flex: 1; 
+let BlueSectionContainerView = styled.View`
+    flex-direction: column;
+    align-self: stretch;
+    justify-content: center;
+`;
+
+let BlueSectionHeaderTouchableOpacity = styled.TouchableOpacity` 
     flex-direction: row;
     align-self: stretch;
     justify-content: center;
@@ -36,4 +41,4 @@ let ToggleButtonText  = styled.Text`
     color: ${props => (props.title === "Student") ? "#B41A1F" : "#1E6C93" };
 `;
 
-export { BlueSectionHeaderTouchableOpacity, BlueSectionHeaderText, ToggleButtonTouchableOpacity, ToggleButtonText };
+export { BlueSectionContainerView, BlueSectionHeaderTouchableOpacity, BlueSectionHeaderText, ToggleButtonTouchableOpacity, ToggleButtonText };
