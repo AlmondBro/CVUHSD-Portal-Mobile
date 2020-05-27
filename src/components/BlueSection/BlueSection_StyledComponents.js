@@ -22,19 +22,25 @@ let BlueSectionHeaderTouchableOpacity = styled.TouchableOpacity`
 let BlueSectionHeaderText = styled.Text`
     color: white;
     font-size: 20;
-    margin-right: 12;
+    flex-direction: column;
+    align-self: center;
+    justify-content: center;
+    text-align: center;
+    margin-left: auto;
 `;
 
 const ToggleButtonTouchableOpacity = styled.TouchableOpacity`
     background-color: white;
-    padding-top: 2;
+    padding-top: 3;
     padding-bottom: 3;
     padding-left: 4;
-    padding-right: 4;
+    padding-right: 3;
     border-radius: 30;
     border-width: 0;
     height: 35;
     width: 35;
+
+    margin-left: auto;
 `;
 
 let ToggleButtonText  = styled.Text`
