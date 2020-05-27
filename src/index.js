@@ -1,9 +1,12 @@
 import { registerRootComponent } from 'expo';
-//import {  dimensionsWidthHOC } from "./utility-functions.js";
 
 import App from './components/App/App.js';
 
+if(__DEV__) {
+    //Initialize Reactotron
+    import('./config/reactotron.dev.js').then(() => console.log('Reactotron Configured'));
+}
+
 registerRootComponent(App);
 
-//dimensionsWidthHOC(App);
 

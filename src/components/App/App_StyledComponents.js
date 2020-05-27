@@ -1,19 +1,28 @@
 import styled from 'styled-components/native';
-import css from 'styled-css/native';
 
-import SafeAreaView from "react-native-safe-area-view";
+let AppContainerView = styled.View`
+    flex: 1;
+`;
 
-let UpdateAppView = styled.View`
-    background-color: "#F4F7F9";
-    margin-bottom: 12;
-`; 
+let AppHeaderContainerView = styled.View`
+    flex: 2;
 
-let UpdateTextDescription = styled.Text`
-    font-size: 16; 
-    padding-left: 8;
-    padding-right: 8;
-    align-self: "center";
-    color: "#15516b";
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+`;
+
+const ImageBackgroundStyled = styled.ImageBackground`
+    flex: 1;
+    justify-content: "center"
+`;
+
+const WelcomeText = styled.Text`
+    color: #B41A1F;
+    font-size: 25;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `;
 
 let BlueSectionContainer = styled.View`
@@ -37,18 +46,6 @@ let SafeAreaViewStyled = styled.SafeAreaView.attrs( (props) => ({
     margin: 0
 `;
 
-let ScrollViewStyled = styled.ScrollView.attrs((props) => ({
-    contentContainerStyle:  css`
-        flex-direction: column;
-        align-self: center;
-        justify-content: flex-start;
-        padding: 0;
-        background-color: #F4F7F9;
-        width: ${ props.width ? props.width : "auto" };
-    `,
-}))`
-  flex: 1;
-  
-`;
 
-export { UpdateAppView, UpdateTextDescription, ScrollViewStyled, SafeAreaViewStyled, BlueSectionContainer };
+
+export { AppContainerView, AppHeaderContainerView, ImageBackgroundStyled, WelcomeText, SafeAreaViewStyled, BlueSectionContainer };
