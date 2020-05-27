@@ -1,23 +1,6 @@
 import React, { Component } from 'react';
 
-import { StyleSheet, TouchableOpacity, Text } from 'react-native';
-
-const styles = StyleSheet.create({
-    touchableHighlight: {
-        backgroundColor: 'white',
-        paddingTop: 2,
-        paddingBottom: 3,
-        paddingLeft: 4,
-        paddingRight: 4,
-        borderRadius: 30,
-        borderWidth: 0,
-    },
-    text: {
-        fontSize: 18,
-        textAlign: 'center',
-        color: 'rgb(30, 108, 147)'
-    }
-});
+import { ToggleButtonTouchableOpacity, ToggleButtonText } from './BlueSection_StyledComponents.js'
 
 class ToggleButton extends Component {
     constructor(props) {
@@ -46,12 +29,11 @@ class ToggleButton extends Component {
     
     render() {
         return (
-            <TouchableOpacity 
-                style={styles.touchableHighlight}
+            <ToggleButtonTouchableOpacity 
                 onPress={this.onPress}
             >
-                <Text style={styles.text}>{!this.state.expanded ? "-" : "+"}</Text>
-            </TouchableOpacity>
+                <ToggleButtonText title={this.props.title}>{!this.state.expanded ? "-" : "+"}</ToggleButtonText>
+            </ToggleButtonTouchableOpacity>
         );
     }
 } //ToggleButton class

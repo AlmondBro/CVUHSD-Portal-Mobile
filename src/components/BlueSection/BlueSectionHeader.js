@@ -1,26 +1,8 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, Text} from 'react-native';
 
 import ToggleButton from './ToggleButton.js';
 
-const blueSection_Header_Styles = StyleSheet.create({
-    blueSection_Header: {
-      flex: 1, 
-      flexDirection: 'row',
-      alignSelf: 'stretch',
-      justifyContent: 'center',
-      backgroundColor: '#1e6c93',
-      paddingTop: 8,
-      paddingBottom: 8
-    },
-  
-    blueSection_HeaderText: {
-      color: "white",
-      fontSize: 20,
-      marginRight: 12
-    },
-});
-
+import { BlueSectionHeaderTouchableOpacity, BlueSectionHeaderText } from './BlueSection_StyledComponents.js';
 
 const BlueSectionHeader = (props) => {
     let onPress = () => {
@@ -29,16 +11,20 @@ const BlueSectionHeader = (props) => {
 
     //TODO: How would i trigger the TouchableOpacity's onPresss button in the toggleButton?
     return (
-        <TouchableOpacity style={[ blueSection_Header_Styles.blueSection_Header, 
-                                  {backgroundColor: !props.expanded ? "#15516b" : "#1e6c93",
-                                  borderBottomColor: '#F4F7F9', borderBottomWidth: props.expanded ? 1 : 0}
-                                ]}
-              onPress={onPress}
-              activeOpacity={0.5} //Defaults to 0.2
+        <BlueSectionHeaderTouchableOpacity
+              {...props } 
+              onPress       = { onPress }
+              activeOpacity = { 0.5 } //Defaults to 0.2
         >
-            <Text style={blueSection_Header_Styles.blueSection_HeaderText}>{props.headerTitle}</Text>
-            <ToggleButton expanded={props.expanded} expandToggle={onPress} />
-        </TouchableOpacity>
+            <BlueSectionHeaderText >
+              { props.headerTitle }
+            </BlueSectionHeaderText>
+            <ToggleButton 
+              {...props }
+              expanded      = { props.expanded } 
+              expandToggle  = { onPress } 
+            />
+        </BlueSectionHeaderTouchableOpacity>
     );
 }; //end BlueSectionHeader
 
