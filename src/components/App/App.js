@@ -208,8 +208,13 @@ class App extends Component {
                             </ImageBackground>
 
                             <Navigator
-                                screenOptions={{ title: null, headerShown: false }}
-
+                                headerMode      = "none"
+                                screenOptions   =   {   { 
+                                                            title: null, 
+                                                            headerShown: false,
+                                                            gestureEnabled: false,
+                                                        }
+                                                    }
                             >
                                 <Screen 
                                     name="Home" 
