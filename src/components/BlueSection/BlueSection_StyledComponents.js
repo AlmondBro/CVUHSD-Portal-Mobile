@@ -33,6 +33,8 @@ const ToggleButtonTouchableOpacity = styled.TouchableOpacity`
     padding-right: 4;
     border-radius: 30;
     border-width: 0;
+    height: 35;
+    width: 35;
 `;
 
 let ToggleButtonText  = styled.Text`
