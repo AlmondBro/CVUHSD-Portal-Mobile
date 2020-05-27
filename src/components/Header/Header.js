@@ -41,8 +41,8 @@ const Header = (props) => {
                         props.title ? 
                             (
                                 <Fragment>
-                                    <UserInfoText>{ props.title + " from " + props.site}</UserInfoText>
-                                    <UserInfoText>{ props.firstName + " " + props.lastName }</UserInfoText>
+                                    <UserInfoText title={props.title}>{ props.title + " from " + props.site}</UserInfoText>
+                                    <UserInfoText title={props.title}>{ props.firstName + " " + props.lastName }</UserInfoText>
                                 </Fragment>
                             ) : null
                     }
