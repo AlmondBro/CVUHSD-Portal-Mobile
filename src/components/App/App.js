@@ -38,14 +38,15 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showUpdate  : false, 
-            adUserInfo  : null,
-            appWidth    : this.props.width,
+            showUpdate          : false, 
+            adUserInfo          : null,
+            appWidth            : this.props.width,
 
-            firstName   :   null,
-            lastName    :   null,
-            title       :   null,
-            site        :   null  
+            firstName           :   null,
+            lastName            :   null,
+            title               :   null,
+            site                :   null,
+            portalLogoSource    :   require("./../../assets/images/CV-600x600-portal-red.png")  
         }; //end this.state object
     } //end constructor
 
@@ -72,6 +73,12 @@ class App extends Component {
             this.setState({ lastName : adUserInfo.surname});
             this.setState({ title : adUserInfo.jobTitle});
             this.setState({ site : adUserInfo.officeLocation});
+
+            let portalLogoSource = (adUserInfo.jobTitle === "Student") ?
+                                        require("./../../assets/images/CV-600x600-portal-red.png")
+                                    :   require("./../../assets/images/CV-600x600-portal.png");
+            
+            this.setState({portalLogoSource: portalLogoSource });
 
             navigate('Page-Content');
         }
@@ -129,11 +136,12 @@ class App extends Component {
                             >
                                 <AppHeaderContainerView>
                                     <Header 
-                                        showUpdate  =   { this.state.showUpdate } 
-                                        firstName   =   { this.state.firstName}
-                                        lastName    =   { this.state.lastName }
-                                        title       =   { this.state.title }
-                                        site        =   { this.state.site }
+                                        showUpdate          =   { this.state.showUpdate } 
+                                        firstName           =   { this.state.firstName}
+                                        lastName            =   { this.state.lastName }
+                                        title               =   { this.state.title }
+                                        site                =   { this.state.site }
+                                        portalLogoSource    =   { this.state.portalLogoSource }
                                         // onPress    =   { navigate ? navigate: null }
                                     />
                                     

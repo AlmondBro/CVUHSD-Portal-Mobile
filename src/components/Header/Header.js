@@ -14,7 +14,7 @@ const Header = (props) => {
           >
             <PortalLogoImage  
                 {...props}
-                source={require("./../../assets/images/CV-600x600-portal-red.png")} 
+                source  =   { props.portalLogoSource} 
             />
           </TouchableOpacity>
     
