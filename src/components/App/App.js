@@ -36,6 +36,8 @@ const backgroundImage = require('./../../assets/images/theCVway-white.png');
 
 const isDev = __DEV__;
 
+const ReactotronDebug = isDev ? Reactotron : console;
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -93,11 +95,12 @@ class App extends Component {
             'Access-Control-Allow-Origin': '*',
         };
     
-        let getOU = fetch(getOU_URL, {
+        const getOU = fetch(getOU_URL, {
             method: 'POST',
             headers: getOU_headers,
             body: JSON.stringify({user: this.state.email})
         }).then((response) => {
+            ReactotronDebug.log("response:\t" + response);
             return response.json();     //Parse the JSON of the response
         }).then((OU) => {
             parseOUforSchool(OU);
@@ -105,6 +108,8 @@ class App extends Component {
         }).catch((error) => {
             console.error(`Catching error:\t ${error}`);
         });
+
+        getOU();
       }; //end getStudentSchool
 
     openADSingleSignOn = async () => {
@@ -119,6 +124,8 @@ class App extends Component {
             this.setState({ lastName : adUserInfo.surname});
             this.setState({ title : adUserInfo.jobTitle});
             this.setState({ site : adUserInfo.officeLocation});
+            this.setState({ email : adUserInfo.mail});
+
 
             let portalLogoSource = (adUserInfo.jobTitle === "Student") ?
                                         require("./../../assets/images/CV-600x600-portal-red.png")
@@ -130,7 +137,7 @@ class App extends Component {
                 this.getStudentSchool();
             }
 
-            Reactotron.log(JSON.stringify(this.state));
+            ReactotronDebug.log(JSON.stringify(this.state));
             navigate('Page-Content');
         }
 
