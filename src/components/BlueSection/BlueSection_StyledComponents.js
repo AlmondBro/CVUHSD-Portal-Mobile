@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 
 import { WebView } from 'react-native-webview';
+import Collapsible from 'react-native-collapsible';
 
 let BlueSectionContainerView = styled.View`
     flex-direction: column;
@@ -60,4 +61,9 @@ const WebViewStyled = styled(WebView)`
     background-color: #E1E5E8;
 `;
 
-export { BlueSectionContainerView, BlueSectionHeaderTouchableOpacity, BlueSectionHeaderText, ToggleButtonTouchableOpacity, ToggleButtonText, WebViewStyled };
+const CollapsibleStyled = styled(Collapsible)`
+    flex-direction: column;
+    justify-content: center;
+    background-color: #E1E5E8;
+`;
+export { BlueSectionContainerView, BlueSectionHeaderTouchableOpacity, BlueSectionHeaderText, ToggleButtonTouchableOpacity, ToggleButtonText, WebViewStyled, CollapsibleStyled };
