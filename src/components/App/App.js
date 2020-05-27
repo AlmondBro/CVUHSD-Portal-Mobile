@@ -133,9 +133,9 @@ class App extends Component {
             
             this.setState({portalLogoSource: portalLogoSource });
 
-            if ( (adUserInfo.jobTitle === "Student") && (adUserInfo.officeLocation === null) ) {
-                this.getStudentSchool();
-            }
+            // if ( (adUserInfo.jobTitle === "Student") && (adUserInfo.officeLocation === null) ) {
+            //     this.getStudentSchool();
+            // }
 
             ReactotronDebug.log(JSON.stringify(this.state));
             navigate('Page-Content');
