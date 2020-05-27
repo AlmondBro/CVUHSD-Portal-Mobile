@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { WebView } from 'react-native-webview';
+
 let BlueSectionContainerView = styled.View`
     flex-direction: column;
     align-self: stretch;
@@ -51,4 +53,11 @@ let ToggleButtonText  = styled.Text`
     color: ${props => (props.title === "Student") ? "#B41A1F" : "#1E6C93" };
 `;
 
-export { BlueSectionContainerView, BlueSectionHeaderTouchableOpacity, BlueSectionHeaderText, ToggleButtonTouchableOpacity, ToggleButtonText };
+const WebViewStyled = styled(WebView)`
+    align-self: center;
+    height: 150;
+    width: 250;
+    background-color: #E1E5E8;
+`;
+
+export { BlueSectionContainerView, BlueSectionHeaderTouchableOpacity, BlueSectionHeaderText, ToggleButtonTouchableOpacity, ToggleButtonText, WebViewStyled };

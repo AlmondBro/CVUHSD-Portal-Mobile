@@ -7,17 +7,12 @@ import Collapsible from 'react-native-collapsible';
 
 import LinkButton from './../linkButton.js';
 
+import { WebViewStyled } from './BlueSection_StyledComponents.js';
+
 const blueSectionContent_styles = StyleSheet.create({
     blueSection_Content: {
        flexDirection: 'column',
        justifyContent: 'center',
-       backgroundColor: "#e1e5e8"
-    },
-    webView: {
-       flex: 1,
-       alignSelf: 'center',
-       height: 150,
-       width: 250,
        backgroundColor: "#e1e5e8"
     }
 });
@@ -85,8 +80,8 @@ class BlueSectionContent extends Component {
                 collapsed={this.state.expanded}
                 duration={750}
             >
-                <WebView 
-                        style={blueSectionContent_styles.webView}
+                <WebViewStyled 
+                        // style={blueSectionContent_styles.webView}
                         originWhitelist={['*']}
                         source=
                         {{html: "<iframe src='https://www.site24x7.com/sv.do?id=-lTskTIBFC99AjBdJTzdd22ylcZvGBYnfGhcgwvt1-27W89lFFvf7WICSx8TdzUT6kB92hYLWdGYIInKaxcmHcJTzDPBf7IFLjpWmnUEJ18%3D&st=false' scrolling='yes'></iframe>"}}
