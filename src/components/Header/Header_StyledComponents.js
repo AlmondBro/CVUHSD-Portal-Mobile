@@ -28,5 +28,9 @@ let UpdateTextDescription = styled.Text`
     color: "#15516b";
 `;
 
+let UserInfoText = styled.Text`
+    color: ${props => (props.title === "Student") ? "#B41A1F" : "#1E6C93" };
+`;
 
-export { HeaderContainerView, PortalLogoImage, UpdateAppView, UpdateTextDescription }; 
+
+export { HeaderContainerView, PortalLogoImage, UpdateAppView, UpdateTextDescription, UserInfoText }; 

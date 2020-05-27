@@ -42,7 +42,7 @@ const ToggleButtonTouchableOpacity = styled.TouchableOpacity`
 
     margin-left: auto;
 
-    margin-right: 7;
+    margin-right: 8;
 `;
 
 let ToggleButtonText  = styled.Text`

@@ -16,7 +16,9 @@ const BlueSectionHeader = (props) => {
               onPress       = { onPress }
               activeOpacity = { 0.5 } //Defaults to 0.2
         >
-            <BlueSectionHeaderText>{ props.headerTitle }</BlueSectionHeaderText>
+            <BlueSectionHeaderText >
+              { props.headerTitle }
+            </BlueSectionHeaderText>
             <ToggleButton 
               {...props }
               expanded      = { props.expanded } 
