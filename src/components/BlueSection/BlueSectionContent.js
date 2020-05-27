@@ -1,26 +1,8 @@
-import React, { Component } from "react";
-import { StyleSheet } from "react-native";
+import React, { Component } from 'react';
 
-import { WebView } from 'react-native-webview';
+import LinkButton from './../linkButton.js';
 
-import Collapsible from 'react-native-collapsible';
-
-import LinkButton from "../LinkButton.js";
-
-const blueSectionContent_styles = StyleSheet.create({
-    blueSection_Content: {
-       flexDirection: 'column',
-       justifyContent: 'center',
-       backgroundColor: "#e1e5e8"
-    },
-    webView: {
-       flex: 1,
-       alignSelf: 'center',
-       height: 150,
-       width: 250,
-       backgroundColor: "#e1e5e8"
-    }
-});
+import { WebViewStyled, CollapsibleStyled } from './BlueSection_StyledComponents.js';
 
 class BlueSectionContent extends Component {
     constructor(props) {
@@ -41,7 +23,7 @@ class BlueSectionContent extends Component {
       } //end componentDidUpdate()
         
     generateBlueSectionButtons = () => {
-        if ( ( typeof(this.props.buttons) !== "undefined" ) ) {
+        if ( ( typeof(this.props.buttons) !== "undefined"  || null) ) {
 
                     let buttonsArray = Object.values(this.props.buttons);
 
@@ -73,18 +55,19 @@ class BlueSectionContent extends Component {
             
             return buttonsArray; */
         
-        } //end else-statement
+        } else {
+            return null;
+        }
     };
 
     render() {
         return this.props.serviceStatuses ? (
-            <Collapsible 
-                style={blueSectionContent_styles.blueSection_Content}
+            <CollapsibleStyled 
+                // style={blueSectionContent_styles.blueSection_Content}
                 collapsed={this.state.expanded}
                 duration={750}
             >
-                <WebView 
-                        style={blueSectionContent_styles.webView}
+                <WebViewStyled 
                         originWhitelist={['*']}
                         source=
                         {{html: "<iframe src='https://www.site24x7.com/sv.do?id=-lTskTIBFC99AjBdJTzdd22ylcZvGBYnfGhcgwvt1-27W89lFFvf7WICSx8TdzUT6kB92hYLWdGYIInKaxcmHcJTzDPBf7IFLjpWmnUEJ18%3D&st=false' scrolling='yes'></iframe>"}}
@@ -93,15 +76,15 @@ class BlueSectionContent extends Component {
                         injectedJavaScript={`const meta = document.createElement('meta'); meta.setAttribute('content', 'width=width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1.0'); meta.setAttribute('name', 'viewport'); document.getElementsByTagName('head')[0].appendChild(meta); `}
                         useWebKit={false}
                 />  
-                </Collapsible>
+                </CollapsibleStyled>
         ) : (
-                <Collapsible 
-                    style={blueSectionContent_styles.blueSection_Content}
+                <CollapsibleStyled 
+                    // style={blueSectionContent_styles.blueSection_Content}
                     collapsed={this.state.expanded}
                     duration={750}
                 >
                     { this.generateBlueSectionButtons() }
-                </Collapsible>
+                </CollapsibleStyled>
         );
     } //end render()
   
