@@ -117,6 +117,8 @@ class App extends Component {
     openADSingleSignOn = async () => {
         console.log("handlePressAsync()");
         console.log("AuthSession.makeRedirectUri():\t" + AuthSession.makeRedirectUri());
+        
+        this.setState({ authLoading: true });
         let adUserInfo = await openAuthSession(this.azureAdAppProps);
 
         if (adUserInfo) {
@@ -128,6 +130,9 @@ class App extends Component {
             this.setState({ site : adUserInfo.officeLocation});
             this.setState({ email : adUserInfo.mail});
 
+            //setTimeout(() => this.setState({ authLoading: false }), 5000);
+
+            this.setState({ authLoading: false })
 
             let portalLogoSource = (adUserInfo.jobTitle === "Student") ?
                                         require("./../../assets/images/CV-600x600-portal-red.png")
@@ -219,8 +224,10 @@ class App extends Component {
                                 >
                                     { props => <HomeScreen 
                                                     {...props}
-                                                    openADSingleSignOn={ this.openADSingleSignOn } 
-                                                /> }
+                                                    authLoading         =   {   this.state.authLoading  }
+                                                    openADSingleSignOn  =   {   this.openADSingleSignOn } 
+                                                /> 
+                                    }
                                 </Screen>
 
                                 <Screen 
