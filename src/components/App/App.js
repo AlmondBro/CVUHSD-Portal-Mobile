@@ -1,6 +1,6 @@
 //Import React/React Native modules
-import React, { Component, Fragment } from 'react';
-import { StatusBar, Button, ImageBackground } from 'react-native';
+import React, { Component } from 'react';
+import { StatusBar, ImageBackground } from 'react-native';
 
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
@@ -42,9 +42,9 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showUpdate          : false, 
-            adUserInfo          : null,
-            appWidth            : this.props.width,
+            showUpdate          :   false, 
+            adUserInfo          :   null,
+            appWidth            :   this.props.width,
 
             firstName           :   null,
             lastName            :   null,
@@ -121,18 +121,17 @@ class App extends Component {
         this.setState({ authLoading: true });
         let adUserInfo = await openAuthSession(this.azureAdAppProps);
 
-        if (adUserInfo) {
-            this.setState({ adUserInfo: adUserInfo });
+        ReactotronDebug.log("adUserInfo:\t" + JSON.stringify(adUserInfo));
 
-            this.setState({ firstName : adUserInfo.givenName });
-            this.setState({ lastName : adUserInfo.surname});
-            this.setState({ title : adUserInfo.jobTitle});
-            this.setState({ site : adUserInfo.officeLocation});
-            this.setState({ email : adUserInfo.mail});
-
-            //setTimeout(() => this.setState({ authLoading: false }), 5000);
-
-            this.setState({ authLoading: false })
+        if (  (adUserInfo.jobTitle != undefined) && (adUserInfo.type !== "cancel" || adUserInfo.type !== "dismiss" ) ) {
+            this.setState( {
+                firstName   : adUserInfo.givenName,
+                lastName : adUserInfo.surname,
+                title : adUserInfo.jobTitle,
+                site : adUserInfo.officeLocation,
+                email : adUserInfo.mail,
+                authLoading: false 
+            });
 
             let portalLogoSource = (adUserInfo.jobTitle === "Student") ?
                                         require("./../../assets/images/CV-600x600-portal-red.png")
@@ -145,11 +144,14 @@ class App extends Component {
             // }
 
             ReactotronDebug.log(JSON.stringify(this.state));
+
             navigate('Page-Content');
+               
+        } else {
+            ReactotronDebug.log("else-statemet");
+            this.setState({ authLoading: false });
+            return; 
         }
-
-
-        console.log("adUserInfo:\t" + JSON.stringify(adUserInfo));
     }; //handlePressAsync()
 
     componentDidMount = () => {
