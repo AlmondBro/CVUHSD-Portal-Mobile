@@ -15,6 +15,9 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-community/masked-view": "0.1.6",
+    "@react-navigation/native": "^5.4.3",
+    "@react-navigation/stack": "^5.4.0",
     "azure-ad-graph-expo": "github:JuanDavidLopez95/azure-ad-graph-expo",
     "expo": "^37.0.11",
     "expo-auth-session": "~1.2.1",
@@ -27,17 +30,22 @@
     "react-native-app-link": "^1.0.0",
     "react-native-collapsible": "^1.5.2",
     "react-native-expo-image-cache": "^4.1.0",
-    "react-native-safe-area-context": "^0.7.3",
+    "react-native-gesture-handler": "~1.6.0",
+    "react-native-reanimated": "~1.7.0",
+    "react-native-safe-area-context": "0.7.3",
     "react-native-safe-area-view": "^1.1.1",
+    "react-native-screens": "~2.2.0",
     "react-native-web": "~0.11.7",
     "react-native-webview": "^8.1.1",
     "styled-components": "^5.1.0",
-    "styled-css": "^1.1.0"
+    "styled-css": "^1.1.0",
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
     "babel-preset-expo": "^8.2.1",
-    "react-native-dotenv": "^0.2.0"
+    "react-native-dotenv": "^0.2.0",
+    "reactotron-react-native": "^5.0.0"
   },
   "private": false
 }
