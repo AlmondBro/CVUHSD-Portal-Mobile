@@ -1,13 +1,18 @@
 //Import React/React Native modules
 import React, { Component, Fragment } from 'react';
-import { StatusBar, Button } from 'react-native';
+import { StatusBar, Button, ImageBackground } from 'react-native';
+
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
 import Reactotron from 'reactotron-react-native';
 
 import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID, AZURE_DOMAIN_HINT } from './../../../keys.env.js';
 //from 'react-native-dotenv'
 
 //Import utility functions
-import { dimensionsWidthHOC } from './../../utility-functions.js';
+import { dimensionsWidthHOC, navigationRef, navigate } from './../../utility-functions.js';
 
 import * as AuthSession from 'expo-auth-session';
 import * as Updates from 'expo-updates';
@@ -17,24 +22,31 @@ import { openAuthSession } from 'azure-ad-graph-expo';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 //import styled components
-import { AppContainerView, AppHeaderContainerView, WelcomeText, SafeAreaViewStyled, OpenSSOContainer, SignInButtonTouchableOpacity } from './App_StyledComponents.js';
+import { AppContainerView, AppHeaderContainerView, ImageBackgroundStyled, WelcomeText, SafeAreaViewStyled } from './App_StyledComponents.js';
 
 //Import App/Page components
 import Header from './../Header/Header.js';
 import PageContent from './../PageContent/PageContent.js';
 
+import HomeScreen from './../HomeScreen/HomeScreen.js';
+
+const { Navigator, Screen } = createStackNavigator();
+
+const backgroundImage = require('./../../assets/images/theCVway-white.png');
+
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showUpdate  : false, 
-            adUserInfo  : null,
-            appWidth    : this.props.width,
+            showUpdate          : false, 
+            adUserInfo          : null,
+            appWidth            : this.props.width,
 
-            firstName   :   null,
-            lastName    :   null,
-            title       :   null,
-            site        :   null  
+            firstName           :   null,
+            lastName            :   null,
+            title               :   null,
+            site                :   null,
+            portalLogoSource    :   require("./../../assets/images/CV-600x600-portal-red.png")  
         }; //end this.state object
     } //end constructor
 
@@ -49,17 +61,28 @@ class App extends Component {
     };
 
 
-    handlePressAsync = async () => {
+    openADSingleSignOn = async () => {
         console.log("handlePressAsync()");
         console.log("AuthSession.makeRedirectUri():\t" + AuthSession.makeRedirectUri());
         let adUserInfo = await openAuthSession(this.azureAdAppProps);
 
-        this.setState({ adUserInfo: adUserInfo });
+        if (adUserInfo) {
+            this.setState({ adUserInfo: adUserInfo });
 
-        this.setState({ firstName : adUserInfo.givenName });
-        this.setState({ lastName : adUserInfo.surname});
-        this.setState({ title : adUserInfo.jobTitle});
-        this.setState({ site : adUserInfo.officeLocation});
+            this.setState({ firstName : adUserInfo.givenName });
+            this.setState({ lastName : adUserInfo.surname});
+            this.setState({ title : adUserInfo.jobTitle});
+            this.setState({ site : adUserInfo.officeLocation});
+
+            let portalLogoSource = (adUserInfo.jobTitle === "Student") ?
+                                        require("./../../assets/images/CV-600x600-portal-red.png")
+                                    :   require("./../../assets/images/CV-600x600-portal.png");
+            
+            this.setState({portalLogoSource: portalLogoSource });
+
+            navigate('Page-Content');
+        }
+
 
         console.log("adUserInfo:\t" + JSON.stringify(adUserInfo));
     }; //handlePressAsync()
@@ -85,50 +108,81 @@ class App extends Component {
 
     render() {
         return (
-            <SafeAreaProvider>
-                <StatusBar 
-                    backgroundColor="#F4F7F9" 
-                    barStyle="dark-content" 
-                    translucent={true} 
-                />
-                { /* The following is a technique using two SafeAreaViews to have the
-                    statusbar/top padding be a different color than the bottom padding. 
-                    SafeAreaViews are only applicable on iOs 11+ on >iPhone X 
+            <NavigationContainer ref={navigationRef}>
+                <SafeAreaProvider>
+                    <StatusBar 
+                        backgroundColor="#F4F7F9" 
+                        barStyle="dark-content" 
+                        translucent={true} 
+                    />
+                    { /* The following is a technique using two SafeAreaViews to have the
+                        statusbar/top padding be a different color than the bottom padding. 
+                        SafeAreaViews are only applicable on iOs 11+ on >iPhone X 
 
-                    Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
-                */ }
-                <SafeAreaViewStyled>
-                    <AppContainerView>
-                        <AppHeaderContainerView>
-                            <Header 
-                                showUpdate  =   { this.state.showUpdate } 
-                                firstName   =   { this.state.firstName}
-                                lastName    =   {this.state.lastName}
-                                title       =   {this.state.title}
-                                site        =   {this.state.site}
-                            />
-                            <WelcomeText>Welcome</WelcomeText>
-                        </AppHeaderContainerView>
-               
-                    <OpenSSOContainer>
-                            <SignInButtonTouchableOpacity 
-                                title="Sign In" 
-                                color="white"
-                                onPress={ this.handlePressAsync }
-                            />
-                    </OpenSSOContainer> 
+                        Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
+                    */ }
+                    <SafeAreaViewStyled>
 
-                    {/* <PageContent 
-                        showUpdate  =   { this.state.showUpdate } 
-                        firstName   =   { this.state.firstName}
-                        lastName    =   { this.state.lastName }
-                        title       =   { this.state.title }
-                        site        =   { this.state.site }
-                        appWidth    =   { this.state.appWidth }
-                    /> */}
-                    </AppContainerView>
-                </SafeAreaViewStyled>
-            </SafeAreaProvider>
+                        <AppContainerView>
+                            <ImageBackground
+                                source={ backgroundImage }
+                                style={ 
+                                    { 
+                                        flex: 1,
+                                        resizeMode: "cover",
+                                        justifyContent: "center"
+                                    }
+                                }
+                            >
+                                <AppHeaderContainerView>
+                                    <Header 
+                                        showUpdate          =   { this.state.showUpdate } 
+                                        firstName           =   { this.state.firstName}
+                                        lastName            =   { this.state.lastName }
+                                        title               =   { this.state.title }
+                                        site                =   { this.state.site }
+                                        portalLogoSource    =   { this.state.portalLogoSource }
+                                        // onPress    =   { navigate ? navigate: null }
+                                    />
+                                    
+                                    { this.state.title ? null : <WelcomeText>Welcome</WelcomeText> }
+                                </AppHeaderContainerView>
+                            </ImageBackground>
+
+                            <Navigator
+                                screenOptions={{ title: null, headerShown: false }}
+
+                            >
+                                <Screen 
+                                    name="Home" 
+                                    // options={{ title: null, headerShown: false }}
+                                >
+                                    { props => <HomeScreen 
+                                                    {...props}
+                                                    openADSingleSignOn={ this.openADSingleSignOn } 
+                                                /> }
+                                </Screen>
+
+                                <Screen 
+                                    name="Page-Content"
+                                    // options={{ title: null, headerShown: false }}
+                                >
+                                    { props => <PageContent 
+                                                    {...props}
+                                                    showUpdate  =   { this.state.showUpdate } 
+                                                    firstName   =   { this.state.firstName}
+                                                    lastName    =   { this.state.lastName }
+                                                    title       =   { this.state.title }
+                                                    site        =   { this.state.site }
+                                                    appWidth    =   { this.state.appWidth }
+                                                />
+                                    }
+                                </Screen>
+                            </Navigator>
+                        </AppContainerView>
+                    </SafeAreaViewStyled>
+                </SafeAreaProvider>
+            </NavigationContainer>
         );
     }
 }

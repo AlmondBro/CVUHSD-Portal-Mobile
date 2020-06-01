@@ -1,18 +1,23 @@
 import React, { Fragment } from 'react';
-import { Text } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 
 //Import component's styled parts
-import { HeaderContainerView, PortalLogoImage, UpdateAppView, UpdateTextDescription  } from './Header_StyledComponents.js';
+import { HeaderContainerView, PortalLogoImage, UpdateAppView, UpdateTextDescription, UserInfoText  } from './Header_StyledComponents.js';
 import { BlueSectionContainer } from './../App/App_StyledComponents.js';
 
 const Header = (props) => {
     return (
       <HeaderContainerView>
-
-        <PortalLogoImage  
-          source={require("./../../assets/images/CV-600x600-portal-red.png")} 
-        />
-
+          <TouchableOpacity
+            activeOpacity = { 0.5 }
+            // onPress={ props.onPress('Home') }
+          >
+            <PortalLogoImage  
+                {...props}
+                source  =   { props.portalLogoSource} 
+            />
+          </TouchableOpacity>
+    
         <Fragment>
         { props.showUpdate ?
             ( 
@@ -36,13 +41,12 @@ const Header = (props) => {
                         props.title ? 
                             (
                                 <Fragment>
-                                    <Text>{ props.title + " from " + props.site}</Text>
-                                    <Text>{ props.firstName + " " + props.lastName }</Text>
+                                    <UserInfoText title={props.title}>{ props.title + " from " + props.site}</UserInfoText>
+                                    <UserInfoText title={props.title}>{ props.firstName + " " + props.lastName }</UserInfoText>
                                 </Fragment>
                             ) : null
                     }
         </BlueSectionContainer>
-        
       </HeaderContainerView>
     );
 };
