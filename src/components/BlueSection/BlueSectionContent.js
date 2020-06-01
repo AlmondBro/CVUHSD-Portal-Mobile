@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import LinkButton from './../linkButton.js';
+import LinkButton from './../LinkButton.js';
 
 import { WebViewStyled, CollapsibleStyled } from './BlueSection_StyledComponents.js';
 
