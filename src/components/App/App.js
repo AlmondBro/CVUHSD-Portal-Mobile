@@ -55,7 +55,9 @@ class App extends Component {
             phoneNumber         :   null,
             OU                  :   null,
             renderAsStuddent    :   false,
-            portalLogoSource    :   require("./../../assets/images/CV-600x600-portal-red.png")  
+            portalLogoSource    :   require("./../../assets/images/CV-600x600-portal-red.png"),
+            
+            authLoading         :   null
         }; //end this.state object
     } //end constructor
 

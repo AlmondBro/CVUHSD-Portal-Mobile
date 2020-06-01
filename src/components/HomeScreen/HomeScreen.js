@@ -20,7 +20,7 @@ const HomeScreen = (props) => {
             >
             <OpenSSOContainer>
                 <SignInButtonTouchableOpacity 
-                    title="Sign In" 
+                    buttonTitle="Sign In" 
                     color="white"
                     onPress={ props.openADSingleSignOn || console.log("No onPress function")}
                 />
