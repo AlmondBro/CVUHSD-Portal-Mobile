@@ -122,12 +122,6 @@ class App extends Component {
 
         let adUserInfo = await  openAuthSession(this.azureAdAppProps);
                                
-
-        // if (adUserInfo === undefined) {
-        //     ReactotronDebug.log("adUserinfo from Ap..js undefined");
-        //     this.setState({ authLoading: false }); //Set loading to true
-        // }
-
         ReactotronDebug.log("adUserInfo from App.js:\t" + JSON.stringify(adUserInfo) );
 
         let portalLogoSource = (adUserInfo.jobTitle === "Student") ?
@@ -136,16 +130,15 @@ class App extends Component {
 
 
         if ( !adUserInfo.error && (adUserInfo.type === "success") ) {
-            this.setState( {
-                firstName   : adUserInfo.givenName,
-                lastName    : adUserInfo.surname,
-                title       : adUserInfo.jobTitle,
-                site        : adUserInfo.officeLocation,
-                email       : adUserInfo.mail,
-                portalLogoSource: portalLogoSource,
-                authLoading : false 
+            this.setState({
+                firstName           : adUserInfo.givenName,
+                lastName            : adUserInfo.surname,
+                title               : adUserInfo.jobTitle,
+                site                : adUserInfo.officeLocation,
+                email               : adUserInfo.mail,
+                portalLogoSource    : portalLogoSource,
+                authLoading         : false 
             });
-
     
             /*
             if ( (adUserInfo.jobTitle === "Student") && (adUserInfo.officeLocation === null) ) {
@@ -160,7 +153,7 @@ class App extends Component {
             ReactotronDebug.log("User canceled operation from App.js");
             this.setState({ authLoading: false });
             return; 
-        }
+        } //end else-statement
     }; //handlePressAsync()
 
     componentDidMount = () => {
