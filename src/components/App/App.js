@@ -1,6 +1,6 @@
 //Import React/React Native modules
-import React, { Component, Fragment } from 'react';
-import { StatusBar, Button, ImageBackground } from 'react-native';
+import React, { Component } from 'react';
+import { StatusBar, ImageBackground, Alert } from 'react-native';
 
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
@@ -42,9 +42,9 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showUpdate          : false, 
-            adUserInfo          : null,
-            appWidth            : this.props.width,
+            showUpdate          :   false, 
+            adUserInfo          :   null,
+            appWidth            :   this.props.width,
 
             firstName           :   null,
             lastName            :   null,
@@ -55,7 +55,9 @@ class App extends Component {
             phoneNumber         :   null,
             OU                  :   null,
             renderAsStuddent    :   false,
-            portalLogoSource    :   require("./../../assets/images/CV-600x600-portal-red.png")  
+            portalLogoSource    :   require("./../../assets/images/CV-600x600-portal-red.png"),
+            
+            authLoading         :   null
         }; //end this.state object
     } //end constructor
 
@@ -115,43 +117,69 @@ class App extends Component {
     openADSingleSignOn = async () => {
         console.log("handlePressAsync()");
         console.log("AuthSession.makeRedirectUri():\t" + AuthSession.makeRedirectUri());
-        let adUserInfo = await openAuthSession(this.azureAdAppProps);
+        
+        this.setState({ authLoading: true }); //Set loading to true
 
-        if (adUserInfo) {
-            this.setState({ adUserInfo: adUserInfo });
+        let adUserInfo = await  openAuthSession(this.azureAdAppProps);
+                               
+        ReactotronDebug.log("adUserInfo from App.js:\t" + JSON.stringify(adUserInfo) );
 
-            this.setState({ firstName : adUserInfo.givenName });
-            this.setState({ lastName : adUserInfo.surname});
-            this.setState({ title : adUserInfo.jobTitle});
-            this.setState({ site : adUserInfo.officeLocation});
-            this.setState({ email : adUserInfo.mail});
+        let portalLogoSource = (adUserInfo.jobTitle === "Student") ?
+                                require("./../../assets/images/CV-600x600-portal-red.png")
+                            :   require("./../../assets/images/CV-600x600-portal.png");
 
 
-            let portalLogoSource = (adUserInfo.jobTitle === "Student") ?
-                                        require("./../../assets/images/CV-600x600-portal-red.png")
-                                    :   require("./../../assets/images/CV-600x600-portal.png");
-            
-            this.setState({portalLogoSource: portalLogoSource });
+        if ( !adUserInfo.error && (adUserInfo.type === "success") ) {
+            this.setState({
+                firstName           : adUserInfo.givenName,
+                lastName            : adUserInfo.surname,
+                title               : adUserInfo.jobTitle,
+                site                : adUserInfo.officeLocation,
+                email               : adUserInfo.mail,
+                portalLogoSource    : portalLogoSource,
+                authLoading         : false 
+            });
+    
+            /*
+            if ( (adUserInfo.jobTitle === "Student") && (adUserInfo.officeLocation === null) ) {
+                this.getStudentSchool();
+            }
+            */
 
-            // if ( (adUserInfo.jobTitle === "Student") && (adUserInfo.officeLocation === null) ) {
-            //     this.getStudentSchool();
-            // }
-
-            ReactotronDebug.log(JSON.stringify(this.state));
+            ReactotronDebug.log("App State after authentication:\t" + JSON.stringify(this.state));
             navigate('Page-Content');
-        }
+               
+        } else {
+            ReactotronDebug.log("User canceled operation from App.js");
+            this.setState({ authLoading: false });
+            
+            const alertTitle = "Sign-in failed" ;
+            const alertMessage = adUserInfo.error;
 
+            Alert.alert(
+                alertTitle,
+                alertMessage,
+                [
+                  {
+                    text: "OK",
+                    onPress: () => console.log("OK Pressed"),
+                    style: "cancel"
+                  },
+                ],
+                { cancelable: false }
+              );
 
-        console.log("adUserInfo:\t" + JSON.stringify(adUserInfo));
+            return; 
+        } //end else-statement
     }; //handlePressAsync()
 
     componentDidMount = () => {
         const checkforUpdatesDev = false;
         
-        console.log("Props:\t" + JSON.stringify(this.props) );
+        //console.log("Props:\t" + JSON.stringify(this.props) );
         console.log("Width:\t" + this.props.width);
 
-        if (__DEV__) {
+        if (__DEV__ && Reactotron) {
             Reactotron.log('Reactotron running');
         }
         
@@ -208,8 +236,13 @@ class App extends Component {
                             </ImageBackground>
 
                             <Navigator
-                                screenOptions={{ title: null, headerShown: false }}
-
+                                headerMode      = "none"
+                                screenOptions   =   {   { 
+                                                            title: null, 
+                                                            headerShown: false,
+                                                            gestureEnabled: false,
+                                                        }
+                                                    }
                             >
                                 <Screen 
                                     name="Home" 
@@ -217,8 +250,10 @@ class App extends Component {
                                 >
                                     { props => <HomeScreen 
                                                     {...props}
-                                                    openADSingleSignOn={ this.openADSingleSignOn } 
-                                                /> }
+                                                    authLoading         =   {   this.state.authLoading  }
+                                                    openADSingleSignOn  =   {   this.openADSingleSignOn } 
+                                                /> 
+                                    }
                                 </Screen>
 
                                 <Screen 
@@ -245,4 +280,5 @@ class App extends Component {
     }
 }
 
-export default dimensionsWidthHOC(App);
+export default App;
+//dimensionsWidthHOC(App);
