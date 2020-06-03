@@ -120,41 +120,44 @@ class App extends Component {
         
         this.setState({ authLoading: true }); //Set loading to true
 
-        let adUserInfo = await openAuthSession(this.azureAdAppProps);
+        let adUserInfo = await  openAuthSession(this.azureAdAppProps);
+                               
 
-        if (adUserInfo === undefined) {
-            this.setState({ authLoading: false }); //Set loading to true
-        }
+        // if (adUserInfo === undefined) {
+        //     ReactotronDebug.log("adUserinfo from Ap..js undefined");
+        //     this.setState({ authLoading: false }); //Set loading to true
+        // }
 
-        ReactotronDebug.log("adUserInfo:\t" + JSON.stringify(adUserInfo));
+        ReactotronDebug.log("adUserInfo from App.js:\t" + JSON.stringify(adUserInfo) );
 
-        if (  (adUserInfo) && (adUserInfo.type !== "cancel" || adUserInfo.type !== "dismiss" ) ) {
+        let portalLogoSource = (adUserInfo.jobTitle === "Student") ?
+                                require("./../../assets/images/CV-600x600-portal-red.png")
+                            :   require("./../../assets/images/CV-600x600-portal.png");
+
+
+        if ( !adUserInfo.error && (adUserInfo.type === "success") ) {
             this.setState( {
                 firstName   : adUserInfo.givenName,
-                lastName : adUserInfo.surname,
-                title : adUserInfo.jobTitle,
-                site : adUserInfo.officeLocation,
-                email : adUserInfo.mail,
-                authLoading: false 
+                lastName    : adUserInfo.surname,
+                title       : adUserInfo.jobTitle,
+                site        : adUserInfo.officeLocation,
+                email       : adUserInfo.mail,
+                portalLogoSource: portalLogoSource,
+                authLoading : false 
             });
 
-            let portalLogoSource = (adUserInfo.jobTitle === "Student") ?
-                                        require("./../../assets/images/CV-600x600-portal-red.png")
-                                    :   require("./../../assets/images/CV-600x600-portal.png");
-            
-            this.setState({portalLogoSource: portalLogoSource });
-
+    
             /*
             if ( (adUserInfo.jobTitle === "Student") && (adUserInfo.officeLocation === null) ) {
                 this.getStudentSchool();
             }
             */
-            ReactotronDebug.log("App State:\t" + JSON.stringify(this.state));
 
+            ReactotronDebug.log("App State after authentication:\t" + JSON.stringify(this.state));
             navigate('Page-Content');
                
         } else {
-            ReactotronDebug.log("else-statemet");
+            ReactotronDebug.log("User canceled operation from App.js");
             this.setState({ authLoading: false });
             return; 
         }
@@ -163,10 +166,10 @@ class App extends Component {
     componentDidMount = () => {
         const checkforUpdatesDev = false;
         
-        console.log("Props:\t" + JSON.stringify(this.props) );
+        //console.log("Props:\t" + JSON.stringify(this.props) );
         console.log("Width:\t" + this.props.width);
 
-        if (__DEV__) {
+        if (__DEV__ && Reactotron) {
             Reactotron.log('Reactotron running');
         }
         
@@ -267,4 +270,5 @@ class App extends Component {
     }
 }
 
-export default dimensionsWidthHOC(App);
+export default App;
+//dimensionsWidthHOC(App);
