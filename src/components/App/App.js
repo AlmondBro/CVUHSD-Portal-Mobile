@@ -118,12 +118,17 @@ class App extends Component {
         console.log("handlePressAsync()");
         console.log("AuthSession.makeRedirectUri():\t" + AuthSession.makeRedirectUri());
         
-        this.setState({ authLoading: true });
+        this.setState({ authLoading: true }); //Set loading to true
+
         let adUserInfo = await openAuthSession(this.azureAdAppProps);
+
+        if (adUserInfo === undefined) {
+            this.setState({ authLoading: false }); //Set loading to true
+        }
 
         ReactotronDebug.log("adUserInfo:\t" + JSON.stringify(adUserInfo));
 
-        if (  (adUserInfo.jobTitle != undefined) && (adUserInfo.type !== "cancel" || adUserInfo.type !== "dismiss" ) ) {
+        if (  (adUserInfo) && (adUserInfo.type !== "cancel" || adUserInfo.type !== "dismiss" ) ) {
             this.setState( {
                 firstName   : adUserInfo.givenName,
                 lastName : adUserInfo.surname,
@@ -139,11 +144,12 @@ class App extends Component {
             
             this.setState({portalLogoSource: portalLogoSource });
 
-            // if ( (adUserInfo.jobTitle === "Student") && (adUserInfo.officeLocation === null) ) {
-            //     this.getStudentSchool();
-            // }
-
-            ReactotronDebug.log(JSON.stringify(this.state));
+            /*
+            if ( (adUserInfo.jobTitle === "Student") && (adUserInfo.officeLocation === null) ) {
+                this.getStudentSchool();
+            }
+            */
+            ReactotronDebug.log("App State:\t" + JSON.stringify(this.state));
 
             navigate('Page-Content');
                
