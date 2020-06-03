@@ -1,6 +1,6 @@
 //Import React/React Native modules
 import React, { Component } from 'react';
-import { StatusBar, ImageBackground } from 'react-native';
+import { StatusBar, ImageBackground, Alert } from 'react-native';
 
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
@@ -152,6 +152,23 @@ class App extends Component {
         } else {
             ReactotronDebug.log("User canceled operation from App.js");
             this.setState({ authLoading: false });
+            
+            const alertTitle = "Sign-in failed" ;
+            const alertMessage = adUserInfo.error;
+
+            Alert.alert(
+                alertTitle,
+                alertMessage,
+                [
+                  {
+                    text: "OK",
+                    onPress: () => console.log("OK Pressed"),
+                    style: "cancel"
+                  },
+                ],
+                { cancelable: false }
+              );
+
             return; 
         } //end else-statement
     }; //handlePressAsync()
