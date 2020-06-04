@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import { StatusBar, ImageBackground, Alert } from 'react-native';
 
+import AsyncStorage from '@react-native-community/async-storage';
+
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -280,5 +282,4 @@ class App extends Component {
     }
 }
 
-export default App;
-//dimensionsWidthHOC(App);
+export default dimensionsWidthHOC(App);
