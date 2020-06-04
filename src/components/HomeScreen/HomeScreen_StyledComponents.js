@@ -71,7 +71,13 @@ const SignInButtonTouchableOpacity = (props) => {
             onPress={ props.onPress }
         >
             <SignInButtonView>
-                <SignInButtonText>{ props.buttonTitle || "Sign In" }</SignInButtonText>
+                {   (props.buttonTitle && !props.children) ? 
+                    (<SignInButtonText>
+                        { props.buttonTitle || "Sign In" }
+                    </SignInButtonText>)
+                    : null
+                }
+                { props.children }
             </SignInButtonView>
         </TouchableOpacity>
     ); //end return
