@@ -17,3 +17,6 @@ web-build/
 #Environmental variables
 keys.env.js
 .env
+
+#Ignore iOS folder
+ios/
