@@ -192,9 +192,11 @@ class App extends Component {
                 } //end if-statement
               });
         }
+
+
     };
 
-    render() {
+    render = () => {
         return (
             <NavigationContainer ref={navigationRef}>
                 <SafeAreaProvider>
@@ -210,7 +212,6 @@ class App extends Component {
                         Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
                     */ }
                     <SafeAreaViewStyled>
-
                         <AppContainerView>
                             <ImageBackground
                                 source={ backgroundImage }
@@ -278,8 +279,8 @@ class App extends Component {
                     </SafeAreaViewStyled>
                 </SafeAreaProvider>
             </NavigationContainer>
-        );
-    }
-}
+        ); //end return statementt
+    } //end render() function
+} //end App class
 
 export default dimensionsWidthHOC(App);
