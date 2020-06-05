@@ -1,26 +1,18 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { FontAwesome } from '@expo/vector-icons'; 
 
-import { Text } from 'react-native';
+import * as Svg from 'react-native-svg';
+import { FontAwesome } from '@expo/vector-icons'; 
 
 import { TabsFooterContainerView, TabsFooterBoxView, TabsFooterBoxText}  from './TabsFooter_StyledComponents.js';
 
+import ChangePasswordIcon from './../../assets/images/icons/change-password.svg';
 
-const TabsFooter = (props) => {
-    // const mounted = useRef();
+const TabsFooter = (props) => {    
+    // let [userTitle, setUserTitle] = useState(props.title);
+
     // useEffect(() => {
-    //     if (!mounted.current) {
-    //         mounted.current = true;
-    //     } else {
-    //         // do componentDidUpate logic
-    //     }
-    // });
-    
-    let [userTitle, setUserTitle] = useState(props.title);
-
-    useEffect(() => {
-        console.log(userTitle)
-      }, [userTitle]);
+    //     console.log(userTitle)
+    //   }, [userTitle]);
 
     return (
         <TabsFooterContainerView 
@@ -30,7 +22,7 @@ const TabsFooter = (props) => {
             <TabsFooterBoxView
                 title={props.title}
             >
-                <TabsFooterBoxText>1</TabsFooterBoxText>
+                <ChangePasswordIcon width={95} height={30}/>
             </TabsFooterBoxView>
 
             <TabsFooterBoxView
