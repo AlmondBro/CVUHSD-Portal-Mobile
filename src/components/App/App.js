@@ -204,6 +204,16 @@ class App extends Component {
           }
     };
 
+    clearLogOnUserData = async () => {
+        try {
+          await AsyncStorage.clear();
+        } catch(e) {
+            ReactotronDebug.log('clearLogOnUserData() clear');
+        }
+      
+        console.log('Done.')
+      }
+
     componentDidMount = () => {
         const checkforUpdatesDev = false;
         
@@ -222,9 +232,11 @@ class App extends Component {
               });
         }
 
-        if (this.checkforExistingLogOn() === true) {
-            navigate('Page-Content');
-        };
+        // if (this.checkforExistingLogOn() === true) {
+        //     navigate('Page-Content');
+        // };
+
+        this.clearLogOnUserData();
     }; //end componentDidMount
 
     render = () => {

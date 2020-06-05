@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { FontAwesome } from '@expo/vector-icons'; 
 
 import { Text } from 'react-native';
 
@@ -15,6 +16,11 @@ const TabsFooter = (props) => {
     //     }
     // });
     
+    let [userTitle, setUserTitle] = useState(props.title);
+
+    useEffect(() => {
+        console.log(userTitle)
+      }, [userTitle]);
 
     return (
         <TabsFooterContainerView 
@@ -30,14 +36,22 @@ const TabsFooter = (props) => {
             <TabsFooterBoxView
                 title={props.title}
             >
-                <TabsFooterBoxText>2</TabsFooterBoxText>
+                  <FontAwesome 
+                    name="graduation-cap" 
+                    size={30} 
+                    color="white" 
+                />
             </TabsFooterBoxView>
 
             <TabsFooterBoxView
                 title={props.title}
                 noBorder
             >
-                <TabsFooterBoxText>3</TabsFooterBoxText>
+                <FontAwesome 
+                    name="sign-out" 
+                    size={30} 
+                    color="white" 
+                />
                 
             </TabsFooterBoxView>
         </TabsFooterContainerView>

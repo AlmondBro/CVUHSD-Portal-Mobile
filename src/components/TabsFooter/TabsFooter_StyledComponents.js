@@ -5,7 +5,7 @@ const TabsFooterContainerView = styled.View`
     flex-direction: row;
 
     border-radius: 0;
-    border-top-width: 1px;
+    border-top-width: 0px;
     border-color: white;
 `;
 
@@ -20,6 +20,8 @@ const TabsFooterBoxView = styled.View`
     border-radius: 0;
     border-right-width: ${props => props.noBorder ? "0px" : "1px"};
     border-color: white;
+
+    box-shadow: 10px 3px 5px black;
 `;
 
 const TabsFooterBoxText = styled.Text`
