@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import { Text } from 'react-native';
 
-import { TabsFooterContainerView, TabsFooterBoxView, TabsFooterBoxText} from './TabsFooter_StyledComponents.js';
+import { TabsFooterContainerView, TabsFooterBoxView, TabsFooterBoxText}  from './TabsFooter_StyledComponents.js';
 
 
 const TabsFooter = (props) => {
+    // const mounted = useRef();
+    // useEffect(() => {
+    //     if (!mounted.current) {
+    //         mounted.current = true;
+    //     } else {
+    //         // do componentDidUpate logic
+    //     }
+    // });
+    
+
     return (
         <TabsFooterContainerView 
             title={props.title}

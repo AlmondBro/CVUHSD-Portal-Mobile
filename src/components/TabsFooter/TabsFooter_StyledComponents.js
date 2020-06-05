@@ -15,7 +15,7 @@ const TabsFooterBoxView = styled.View`
     align-items: center;
 
     color: white;
-    background-color:  ${props => (props.title !== "Student") ? "#B41A1F" : "#1E6C93" };
+    background-color:  ${props => (props.title === "Student") ? "#B41A1F" : "#1E6C93" };
 
     border-radius: 0;
     border-right-width: ${props => props.noBorder ? "0px" : "1px"};
