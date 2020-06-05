@@ -1,3 +1,6 @@
+import React from 'react';
+
+//Import styled to create react native styled components
 import styled from 'styled-components/native';
 
 const TabsFooterContainerView = styled.View`
@@ -24,7 +27,26 @@ const TabsFooterBoxView = styled.View`
     box-shadow: 10px 3px 5px black;
 `;
 
+let TabsFooterButtonTouchableOpacity = styled.TouchableOpacity`
+
+`;
+
+let TabsFooterButton = ({ title, noBorder, activeOpacity, ...props }) => {
+    return (
+        <TabsFooterBoxView
+            title       =   {   title    }
+            noBorder    =   {   noBorder  }
+        >
+            <TabsFooterButtonTouchableOpacity
+                activeOpacity = { activeOpacity || 0.2}
+            >
+                { props.children }
+            </TabsFooterButtonTouchableOpacity>
+        </TabsFooterBoxView>
+    );
+}; //end return statement
+
 const TabsFooterBoxText = styled.Text`
     color: white;
 `;
-export { TabsFooterContainerView, TabsFooterBoxView, TabsFooterBoxText};
+export { TabsFooterContainerView, TabsFooterButton};

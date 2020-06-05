@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import * as Svg from 'react-native-svg';
 import { FontAwesome } from '@expo/vector-icons'; 
 
-import { TabsFooterContainerView, TabsFooterBoxView, TabsFooterBoxText}  from './TabsFooter_StyledComponents.js';
+import { TabsFooterContainerView, TabsFooterButton}  from './TabsFooter_StyledComponents.js';
 
 import ChangePasswordIcon from './../../assets/images/icons/change-password.svg';
 
@@ -16,36 +16,41 @@ const TabsFooter = (props) => {
 
     return (
         <TabsFooterContainerView 
-            title={props.title}
+            title   =   {   props.title }    
         >
-
-            <TabsFooterBoxView
-                title={props.title}
+            <TabsFooterButton
+                title           =   {   props.title }    
+                activeOpacity   =   {   0.5 }
             >
-                <ChangePasswordIcon width={95} height={30}/>
-            </TabsFooterBoxView>
+                <ChangePasswordIcon 
+                    width={95} 
+                    height={30}
+                />
+            </TabsFooterButton>
 
-            <TabsFooterBoxView
-                title={props.title}
+            <TabsFooterButton
+                title           =   {   props.title }    
+                activeOpacity   =   {   0.5 }
             >
                   <FontAwesome 
-                    name="graduation-cap" 
-                    size={30} 
-                    color="white" 
+                    name    =   "graduation-cap" 
+                    size    =   {   30  } 
+                    color   =   "white" 
                 />
-            </TabsFooterBoxView>
+            </TabsFooterButton>
 
-            <TabsFooterBoxView
-                title={props.title}
+            <TabsFooterButton
+                title           =   {   props.title }    
+                activeOpacity   =   {   0.5 }
                 noBorder
             >
                 <FontAwesome 
-                    name="sign-out" 
-                    size={30} 
-                    color="white" 
+                    name    =   "sign-out" 
+                    size    =   {30} 
+                    color   =   "white" 
                 />
                 
-            </TabsFooterBoxView>
+            </TabsFooterButton>
         </TabsFooterContainerView>
     ); //end return statement
 }; //end TabsFooter()
