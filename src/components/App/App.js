@@ -73,6 +73,7 @@ class App extends Component {
         prompt          :   "login"
     };
 
+    USER_INFO = '@user_info';
 
     getStudentSchool = () => {
         console.log("getStudentSchool()");
@@ -141,6 +142,8 @@ class App extends Component {
                 portalLogoSource    : portalLogoSource,
                 authLoading         : false 
             });
+
+            this.setLogOnUserData({...this.state});
     
             /*
             if ( (adUserInfo.jobTitle === "Student") && (adUserInfo.officeLocation === null) ) {
@@ -175,6 +178,31 @@ class App extends Component {
         } //end else-statement
     }; //handlePressAsync()
 
+    
+    checkforExistingLogOn = async () => {
+        try {
+            let currentUserState = await AsyncStorage.getItem(this.USER_INFO);
+
+            if (currentUserState !== null) {
+                this.setState({ ...JSON.parse(currentUserState) });
+                return true;
+            } else {
+                return false;
+            }
+        } catch (error) {
+            Reactotron.log("checkforExistingLogOn() Error:\t" + JSON.stringify(error));
+        }
+    }; //end checkforExistingLogOn
+
+    setLogOnUserData = async (userDataObject) => {
+        try {
+            const userDataObjectJSON = JSON.stringify(userDataObject);
+            await AsyncStorage.setItem(this.USER_INFO, userDataObjectJSON);
+          } catch (e) {
+            Reactotron.log("setLogOnUserData() Error:\t" + JSON.stringify(error));
+          }
+    };
+
     componentDidMount = () => {
         const checkforUpdatesDev = false;
         
@@ -193,8 +221,10 @@ class App extends Component {
               });
         }
 
-
-    };
+        if (this.checkforExistingLogOn() === true) {
+            navigate('Page-Content');
+        };
+    }; //end componentDidMount
 
     render = () => {
         return (
@@ -247,6 +277,7 @@ class App extends Component {
                                                         }
                                                     }
                             >
+                              
                                 <Screen 
                                     name="Home" 
                                     // options={{ title: null, headerShown: false }}
