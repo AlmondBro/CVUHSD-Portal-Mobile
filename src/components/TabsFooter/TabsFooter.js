@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { Fragment, useEffect, useState, useRef } from 'react';
 
 import * as Svg from 'react-native-svg';
 import { FontAwesome } from '@expo/vector-icons'; 
@@ -18,27 +18,35 @@ const TabsFooter = (props) => {
         <TabsFooterContainerView 
             title   =   {   props.title }    
         >
-            <TabsFooterButton
-                title           =   {   props.title }    
-                activeOpacity   =   {   0.5 }
-            >
-                <ChangePasswordIcon 
-                    width={95} 
-                    height={30}
-                />
-            </TabsFooterButton>
+            { 
+                (props.title !== "Student") ? 
+                (
+                    <Fragment>
+                        <TabsFooterButton
+                            title           =   {   props.title }    
+                            activeOpacity   =   {   0.5 }
+                        >
+                        <ChangePasswordIcon 
+                            width={95} 
+                            height={30}
+                        />
+                        </TabsFooterButton>
 
-            <TabsFooterButton
-                title           =   {   props.title }    
-                activeOpacity   =   {   0.5 }
-            >
-                  <FontAwesome 
-                    name    =   "graduation-cap" 
-                    size    =   {   30  } 
-                    color   =   "white" 
-                />
-            </TabsFooterButton>
-
+                        <TabsFooterButton
+                            title           =   {   props.title }    
+                            activeOpacity   =   {   0.5 }
+                        >
+                        <FontAwesome 
+                            name    =   "graduation-cap" 
+                            size    =   {   30  } 
+                            color   =   "white" 
+                        />
+                        </TabsFooterButton>
+                    </Fragment>
+                )
+                : null
+            } 
+          
             <TabsFooterButton
                 title           =   {   props.title }    
                 activeOpacity   =   {   0.5 }
