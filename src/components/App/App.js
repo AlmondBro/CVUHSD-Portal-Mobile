@@ -29,6 +29,7 @@ import { AppContainerView, AppHeaderContainerView, ImageBackgroundStyled, Welcom
 //Import App/Page components
 import Header from './../Header/Header.js';
 import PageContent from './../PageContent/PageContent.js';
+import TabsFooter from './../TabsFooter/TabsFooter.js'
 
 import HomeScreen from './../HomeScreen/HomeScreen.js';
 
@@ -306,6 +307,12 @@ class App extends Component {
                                     }
                                 </Screen>
                             </Navigator>
+                            {   this.state.title ? 
+                                <TabsFooter 
+                                    title   =   { this.state.title}
+                                />
+                                : null    
+                            } 
                         </AppContainerView>
                     </SafeAreaViewStyled>
                 </SafeAreaProvider>
