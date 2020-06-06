@@ -29,6 +29,7 @@ import { AppContainerView, AppHeaderContainerView, ImageBackgroundStyled, Welcom
 //Import App/Page components
 import Header from './../Header/Header.js';
 import PageContent from './../PageContent/PageContent.js';
+import TabsFooter from './../TabsFooter/TabsFooter.js'
 
 import HomeScreen from './../HomeScreen/HomeScreen.js';
 
@@ -203,6 +204,16 @@ class App extends Component {
           }
     };
 
+    clearLogOnUserData = async () => {
+        try {
+          await AsyncStorage.clear();
+        } catch(e) {
+            ReactotronDebug.log('clearLogOnUserData() clear');
+        }
+      
+        console.log('Done.')
+      }
+
     componentDidMount = () => {
         const checkforUpdatesDev = false;
         
@@ -221,9 +232,11 @@ class App extends Component {
               });
         }
 
-        if (this.checkforExistingLogOn() === true) {
-            navigate('Page-Content');
-        };
+        // if (this.checkforExistingLogOn() === true) {
+        //     navigate('Page-Content');
+        // };
+
+        this.clearLogOnUserData();
     }; //end componentDidMount
 
     render = () => {
@@ -306,6 +319,12 @@ class App extends Component {
                                     }
                                 </Screen>
                             </Navigator>
+                            {   this.state.title ? 
+                                <TabsFooter 
+                                    title   =   { this.state.title}
+                                />
+                                : null    
+                            } 
                         </AppContainerView>
                     </SafeAreaViewStyled>
                 </SafeAreaProvider>
