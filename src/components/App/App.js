@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import { StatusBar, ImageBackground, Alert } from 'react-native';
 
+import AsyncStorage from '@react-native-community/async-storage';
+
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -27,6 +29,7 @@ import { AppContainerView, AppHeaderContainerView, ImageBackgroundStyled, Welcom
 //Import App/Page components
 import Header from './../Header/Header.js';
 import PageContent from './../PageContent/PageContent.js';
+import TabsFooter from './../TabsFooter/TabsFooter.js'
 
 import HomeScreen from './../HomeScreen/HomeScreen.js';
 
@@ -71,6 +74,7 @@ class App extends Component {
         prompt          :   "login"
     };
 
+    USER_INFO = '@user_info';
 
     getStudentSchool = () => {
         console.log("getStudentSchool()");
@@ -139,6 +143,8 @@ class App extends Component {
                 portalLogoSource    : portalLogoSource,
                 authLoading         : false 
             });
+
+            this.setLogOnUserData({...this.state});
     
             /*
             if ( (adUserInfo.jobTitle === "Student") && (adUserInfo.officeLocation === null) ) {
@@ -173,6 +179,41 @@ class App extends Component {
         } //end else-statement
     }; //handlePressAsync()
 
+    
+    checkforExistingLogOn = async () => {
+        try {
+            let currentUserState = await AsyncStorage.getItem(this.USER_INFO);
+
+            if (currentUserState !== null) {
+                this.setState({ ...JSON.parse(currentUserState) });
+                return true;
+            } else {
+                return false;
+            }
+        } catch (error) {
+            Reactotron.log("checkforExistingLogOn() Error:\t" + JSON.stringify(error));
+        }
+    }; //end checkforExistingLogOn
+
+    setLogOnUserData = async (userDataObject) => {
+        try {
+            const userDataObjectJSON = JSON.stringify(userDataObject);
+            await AsyncStorage.setItem(this.USER_INFO, userDataObjectJSON);
+          } catch (e) {
+            Reactotron.log("setLogOnUserData() Error:\t" + JSON.stringify(error));
+          }
+    };
+
+    clearLogOnUserData = async () => {
+        try {
+          await AsyncStorage.clear();
+        } catch(e) {
+            ReactotronDebug.log('clearLogOnUserData() clear');
+        }
+      
+        console.log('Done.')
+      }
+
     componentDidMount = () => {
         const checkforUpdatesDev = false;
         
@@ -190,9 +231,15 @@ class App extends Component {
                 } //end if-statement
               });
         }
-    };
 
-    render() {
+        // if (this.checkforExistingLogOn() === true) {
+        //     navigate('Page-Content');
+        // };
+
+        this.clearLogOnUserData();
+    }; //end componentDidMount
+
+    render = () => {
         return (
             <NavigationContainer ref={navigationRef}>
                 <SafeAreaProvider>
@@ -208,7 +255,6 @@ class App extends Component {
                         Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
                     */ }
                     <SafeAreaViewStyled>
-
                         <AppContainerView>
                             <ImageBackground
                                 source={ backgroundImage }
@@ -244,6 +290,7 @@ class App extends Component {
                                                         }
                                                     }
                             >
+                              
                                 <Screen 
                                     name="Home" 
                                     // options={{ title: null, headerShown: false }}
@@ -272,13 +319,18 @@ class App extends Component {
                                     }
                                 </Screen>
                             </Navigator>
+                            {   this.state.title ? 
+                                <TabsFooter 
+                                    title   =   { this.state.title}
+                                />
+                                : null    
+                            } 
                         </AppContainerView>
                     </SafeAreaViewStyled>
                 </SafeAreaProvider>
             </NavigationContainer>
-        );
-    }
-}
+        ); //end return statementt
+    } //end render() function
+} //end App class
 
-export default App;
-//dimensionsWidthHOC(App);
+export default dimensionsWidthHOC(App);
