@@ -146,6 +146,10 @@ class App extends Component {
 
             this.setLogOnUserData({...this.state});
     
+            if ( adUserInfo.jobTitle !== "Student" ){
+                this.setRenderAsStudent(true);
+            }
+
             /*
             if ( (adUserInfo.jobTitle === "Student") && (adUserInfo.officeLocation === null) ) {
                 this.getStudentSchool();
@@ -214,6 +218,8 @@ class App extends Component {
         console.log('Done.')
       }
 
+    
+
     componentDidMount = () => {
         const checkforUpdatesDev = false;
         
@@ -238,6 +244,10 @@ class App extends Component {
 
         this.clearLogOnUserData();
     }; //end componentDidMount
+
+    setRenderAsStudent = (renderAsStudent) => {
+        this.setState( { renderAsStudent: renderAsStudent } );
+    }; //end setRenderAsStudent
 
     render = () => {
         return (
