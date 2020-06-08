@@ -45,7 +45,7 @@ const Header = ({ renderAsStudent, ...props }) => {
                                 title           =   { props.title }
                                 renderAsStudent =   { renderAsStudent }
                             >
-                                { props.title + " from " + props.site}
+                                { (props.title || "CVUHSD User") + " from " + (props.site || "CVUHSD") }
                             </UserInfoText>
                             <UserInfoText 
                                 title           =   { props.title }
