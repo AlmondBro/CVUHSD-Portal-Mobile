@@ -60,7 +60,7 @@ const Header = ({ renderAsStudent, ...props }) => {
                                 renderAsStudent =   { renderAsStudent }
                                 bold
                             >
-                                { "from " +  (props.site || "CVUHSD") }
+                                { (props.site || "CVUHSD") }
                             </UserInfoText>
                         </Fragment>
                     ) : null

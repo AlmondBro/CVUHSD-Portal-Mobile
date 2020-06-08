@@ -3,9 +3,9 @@ import css from 'styled-css/native';
 
 let HeaderContainerView = styled.View`
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    margin-top: 34;
-    margin-bottom: 20;
+
 `;
 
 let PortalLogoImage = styled.Image.attrs( (props) => {

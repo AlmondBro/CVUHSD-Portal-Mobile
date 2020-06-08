@@ -25,9 +25,10 @@ const ImageBackgroundStyled = styled.ImageBackground`
 const WelcomeText = styled.Text`
     color: #B41A1F;
     font-size: 25;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: flex-end;
     align-items: center;
+    align-content: center;
 `;
 
 let BlueSectionContainer = styled.View`

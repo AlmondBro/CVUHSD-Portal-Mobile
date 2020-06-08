@@ -35,7 +35,7 @@ import HomeScreen from './../HomeScreen/HomeScreen.js';
 
 const { Navigator, Screen } = createStackNavigator();
 
-const backgroundImage = require('./../../assets/images/theCVway-white.png');
+const backgroundImage = require('./../../assets/images/theCVway-red.png');
 
 const isDev = __DEV__;
 
@@ -290,7 +290,7 @@ class App extends Component {
                                             // onPress    =   { navigate ? navigate: null }
                                         />
                                         
-                                        { (this.state.title || this.state.renderAsStuddent) ? null : <WelcomeText>Welcome</WelcomeText> }
+                                        { (this.state.title || this.state.renderAsStudent) ? null : <WelcomeText>Welcome</WelcomeText> }
                                     </AppHeaderContainerView>
                                 </ImageBackground>
 
