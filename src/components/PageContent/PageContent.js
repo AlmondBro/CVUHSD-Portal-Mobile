@@ -41,7 +41,7 @@ let PageContent  = ({ renderAsStudent, title, ...props }) => {
                     {   /* Render service statuses only on iOS devices until the WebView 
                             under Scrollview (where the webview does not scroll) is fixed 
                         */
-                        (   props.title !== "Student" ?
+                        (   title !== "Student" ?
                                 (Platform.OS === "ios"|| androidWebViewDebug === true ?
                                     (   <BlueSection 
                                             headerTitle     =   "System Statuses" 
@@ -53,7 +53,7 @@ let PageContent  = ({ renderAsStudent, title, ...props }) => {
                         )
                     } 
                     <Fragment>
-                        { generateBlueSections(sectionInfoObject, props.title) }
+                        { generateBlueSections(sectionInfoObject, title) }
                     </Fragment>
             </BlueSectionContainer>
         </ScrollViewStyled>
