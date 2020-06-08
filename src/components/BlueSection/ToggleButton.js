@@ -32,7 +32,12 @@ class ToggleButton extends Component {
             <ToggleButtonTouchableOpacity 
                 onPress={this.onPress}
             >
-                <ToggleButtonText title={this.props.title}>{!this.state.expanded ? "-" : "+"}</ToggleButtonText>
+                <ToggleButtonText 
+                    renderAsStudent =   { this.props.renderAsStudent }
+                    title           =   { this.props.title }
+                >
+                    {!this.state.expanded ? "-" : "+"}
+                </ToggleButtonText>
             </ToggleButtonTouchableOpacity>
         );
     }

@@ -128,7 +128,7 @@ class App extends Component {
                                
         ReactotronDebug.log("adUserInfo from App.js:\t" + JSON.stringify(adUserInfo) );
 
-        let portalLogoSource = (adUserInfo.jobTitle === "Student") ?
+        let portalLogoSource = (adUserInfo.jobTitle === "Student" || this.state.renderAsStuddent) ?
                                 require("./../../assets/images/CV-600x600-portal-red.png")
                             :   require("./../../assets/images/CV-600x600-portal.png");
 
@@ -218,8 +218,6 @@ class App extends Component {
         console.log('Done.')
       }
 
-    
-
     componentDidMount = () => {
         const checkforUpdatesDev = false;
         
@@ -251,94 +249,100 @@ class App extends Component {
 
     render = () => {
         return (
-            <NavigationContainer ref={navigationRef}>
-                <SafeAreaProvider>
-                    <StatusBar 
-                        backgroundColor="#F4F7F9" 
-                        barStyle="dark-content" 
-                        translucent={true} 
-                    />
-                    { /* The following is a technique using two SafeAreaViews to have the
-                        statusbar/top padding be a different color than the bottom padding. 
-                        SafeAreaViews are only applicable on iOs 11+ on >iPhone X 
+            <SafeAreaProvider>
+                <NavigationContainer ref={navigationRef}>
+                        <StatusBar 
+                            backgroundColor =   "white" 
+                            barStyle        =   "dark-content" 
+                            translucent     =   { true } 
+                        />
+                        { /* The following is a technique using two SafeAreaViews to have the
+                            statusbar/top padding be a different color than the bottom padding. 
+                            SafeAreaViews are only applicable on iOs 11+ on >iPhone X 
 
-                        Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
-                    */ }
-                    <SafeAreaViewStyled>
-                        <AppContainerView>
-                            <ImageBackground
-                                source={ backgroundImage }
-                                style={ 
-                                    { 
-                                        flex: 1,
-                                        resizeMode: "cover",
-                                        justifyContent: "center"
+                            Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
+                        */ }
+                        <SafeAreaViewStyled>
+                            <AppContainerView>
+                                <ImageBackground
+                                    source={ backgroundImage }
+                                    style={ 
+                                        { 
+                                            flex: 1,
+                                            resizeMode: "cover",
+                                            justifyContent: "center"
+                                        }
                                     }
-                                }
-                            >
-                                <AppHeaderContainerView>
-                                    <Header 
-                                        showUpdate          =   { this.state.showUpdate } 
-                                        firstName           =   { this.state.firstName}
-                                        lastName            =   { this.state.lastName }
-                                        title               =   { this.state.title }
-                                        site                =   { this.state.site }
-                                        portalLogoSource    =   { this.state.portalLogoSource }
-                                        // onPress    =   { navigate ? navigate: null }
-                                    />
-                                    
-                                    { this.state.title ? null : <WelcomeText>Welcome</WelcomeText> }
-                                </AppHeaderContainerView>
-                            </ImageBackground>
+                                >
+                                    <AppHeaderContainerView>
+                                        <Header 
+                                            showUpdate          =   { this.state.showUpdate } 
+                                            firstName           =   { this.state.firstName}
+                                            lastName            =   { this.state.lastName }
+                                            title               =   { this.state.title }
+                                            site                =   { this.state.site }
+                                            renderAsStudent     =   { this.state.renderAsStuddent }
+                                            portalLogoSource    =   { this.state.portalLogoSource }
+                                            // onPress    =   { navigate ? navigate: null }
+                                        />
+                                        
+                                        { (this.state.title || this.state.renderAsStuddent) ? null : <WelcomeText>Welcome</WelcomeText> }
+                                    </AppHeaderContainerView>
+                                </ImageBackground>
 
-                            <Navigator
-                                headerMode      = "none"
-                                screenOptions   =   {   { 
-                                                            title: null, 
-                                                            headerShown: false,
-                                                            gestureEnabled: false,
+                                <Navigator
+                                    headerMode      = "none"
+                                    screenOptions   =   {   { 
+                                                                title: null, 
+                                                                headerShown: false,
+                                                                gestureEnabled: false,
+                                                            }
                                                         }
-                                                    }
-                            >
-                              
-                                <Screen 
-                                    name="Home" 
-                                    // options={{ title: null, headerShown: false }}
                                 >
-                                    { props => <HomeScreen 
-                                                    {...props}
-                                                    authLoading         =   {   this.state.authLoading  }
-                                                    openADSingleSignOn  =   {   this.openADSingleSignOn } 
-                                                /> 
-                                    }
-                                </Screen>
+                                
+                                    <Screen 
+                                        name="Home" 
+                                        // options={{ title: null, headerShown: false }}
+                                    >
+                                        { props => <HomeScreen 
+                                                        {...props}
+                                                        authLoading         =   {   this.state.authLoading  }
+                                                        title               =   {   this.state.title    }
+                                                        renderAsStudent     =   {   this.state.renderAsStuddent }
+                                                        openADSingleSignOn  =   {   this.openADSingleSignOn } 
+                                                    /> 
+                                        }
+                                    </Screen>
 
-                                <Screen 
-                                    name="Page-Content"
-                                    // options={{ title: null, headerShown: false }}
-                                >
-                                    { props => <PageContent 
-                                                    {...props}
-                                                    showUpdate  =   { this.state.showUpdate } 
-                                                    firstName   =   { this.state.firstName}
-                                                    lastName    =   { this.state.lastName }
-                                                    title       =   { this.state.title }
-                                                    site        =   { this.state.site }
-                                                    appWidth    =   { this.state.appWidth }
-                                                />
-                                    }
-                                </Screen>
-                            </Navigator>
-                            {   this.state.title ? 
-                                <TabsFooter 
-                                    title   =   { this.state.title}
-                                />
-                                : null    
-                            } 
-                        </AppContainerView>
-                    </SafeAreaViewStyled>
-                </SafeAreaProvider>
-            </NavigationContainer>
+                                    <Screen 
+                                        name="Page-Content"
+                                        // options={{ title: null, headerShown: false }}
+                                    >
+                                        { props => <PageContent 
+                                                        {...props}
+                                                        showUpdate          =   { this.state.showUpdate } 
+                                                        firstName           =   { this.state.firstName}
+                                                        lastName            =   { this.state.lastName }
+                                                        title               =   { this.state.title }
+                                                        renderAsStudent     =   { this.state.renderAsStuddent }
+                                                        site                =   { this.state.site }
+                                                        appWidth            =   { this.state.appWidth }
+                                                    />
+                                        }
+                                    </Screen>
+                                </Navigator>
+                                {   this.state.title ? 
+                                    <TabsFooter 
+                                        title               =   { this.state.title}
+                                        renderAsStudent     =   { this.state.renderAsStuddent }
+                                        setRenderAsStudent  =   { this.setRenderAsStudent }
+                                    />
+                                    : null    
+                                } 
+                            </AppContainerView>
+                        </SafeAreaViewStyled>
+                </NavigationContainer>
+            </SafeAreaProvider>
         ); //end return statementt
     } //end render() function
 } //end App class

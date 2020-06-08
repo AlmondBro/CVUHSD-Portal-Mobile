@@ -4,7 +4,7 @@ import ToggleButton from './ToggleButton.js';
 
 import { BlueSectionHeaderTouchableOpacity, BlueSectionHeaderText } from './BlueSection_StyledComponents.js';
 
-const BlueSectionHeader = (props) => {
+const BlueSectionHeader = ({ renderAsStudent, title, ...props }) => {
     let onPress = () => {
       props.expandToggle(); 
     }; //end onPress
@@ -12,17 +12,20 @@ const BlueSectionHeader = (props) => {
     //TODO: How would i trigger the TouchableOpacity's onPresss button in the toggleButton?
     return (
         <BlueSectionHeaderTouchableOpacity
-              {...props } 
-              onPress       = { onPress }
-              activeOpacity = { 0.5 } //Defaults to 0.2
+              title           = { title }
+              renderAsStudent = { renderAsStudent }
+              onPress         = { onPress }
+              activeOpacity   = { 0.5 } //Defaults to 0.2
         >
-            <BlueSectionHeaderText >
+            <BlueSectionHeaderText>
               { props.headerTitle }
             </BlueSectionHeaderText>
+            
             <ToggleButton 
-              {...props }
-              expanded      = { props.expanded } 
-              expandToggle  = { onPress } 
+              title           = { title }
+              renderAsStudent = { renderAsStudent }
+              expanded        = { props.expanded } 
+              expandToggle    = { onPress } 
             />
         </BlueSectionHeaderTouchableOpacity>
     );

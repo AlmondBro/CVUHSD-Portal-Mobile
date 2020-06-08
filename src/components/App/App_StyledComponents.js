@@ -1,7 +1,9 @@
 import styled from 'styled-components/native';
+import { SafeAreaView as SafeAreaViewTwo } from 'react-native-safe-area-context';
 
 let AppContainerView = styled.View`
     flex: 1;
+    background-color: white;
 `;
 
 let AppHeaderContainerView = styled.View`
@@ -35,13 +37,13 @@ let BlueSectionContainer = styled.View`
 `;
 
 let SafeAreaViewStyled = styled.SafeAreaView.attrs( (props) => ({
-    forceInset: { bottom: 'never' },
+    forceInset: { bottom: 'never' }
 }))`
     flex: 1;
     flex-direction: column;
     justify-content: flex-start;
     align-self: stretch;
-    background-color: #F4F7F9;
+    background-color: white;
     padding: 0;
     margin: 0
 `;

@@ -10,20 +10,21 @@ import BlueSection from './../BlueSection/BlueSection.js';
 //Import styled components
 import { BlueSectionContainer, ScrollViewStyled } from './PageContent_StyledComponents.js';
 
-let PageContent  = (props) => {
+let PageContent  = ({ renderAsStudent, title, ...props }) => {
     let sectionInfoObject;
-    sectionInfoObject = (props.title === "Student" ) ? 
+    sectionInfoObject = (title === "Student" || renderAsStudent) ? 
                             redSectionInfo_Student : blueSectionInfo_Staff;
 
     const generateBlueSections = (sectionInfoObject, title) => {
         return sectionInfoObject.map( (blueSection_Object, index) => {
             return (
                 <BlueSection 
-                    expanded    =   { blueSection_Object.expanded }
-                    headerTitle =   { blueSection_Object.headerTitle }
-                    buttons     =   { blueSection_Object.buttons }
-                    key         =   { index }
-                    title       =   { props.title  || title || "Student"}
+                    expanded        =   { blueSection_Object.expanded }
+                    headerTitle     =   { blueSection_Object.headerTitle }
+                    buttons         =   { blueSection_Object.buttons }
+                    key             =   { index }
+                    title           =   { title || "Student"}
+                    renderAsStudent =   { renderAsStudent }
                     // TODO: Add render as student functionality {this.renderAsStudent || this.props.location.state.renderAsStudent}
                 />
             ); //end return statement
@@ -43,9 +44,9 @@ let PageContent  = (props) => {
                         (   props.title !== "Student" ?
                                 (Platform.OS === "ios"|| androidWebViewDebug === true ?
                                     (   <BlueSection 
-                                            headerTitle="System Statuses" 
-                                            expanded={!false}
-                                            serviceStatuses={true}
+                                            headerTitle     =   "System Statuses" 
+                                            expanded        =   {!false}
+                                            serviceStatuses =   {true}
                                         />
                                     ) : null
                                 ) : null

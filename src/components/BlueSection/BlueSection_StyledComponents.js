@@ -51,7 +51,7 @@ const ToggleButtonTouchableOpacity = styled.TouchableOpacity`
 let ToggleButtonText  = styled.Text`
     font-size: 18;
     text-align: center;
-    color: ${props => (props.title === "Student") ? "#B41A1F" : "#1E6C93" };
+    color: ${props => (props.title === "Student" || props.renderAsStudent) ? "#B41A1F" : "#1E6C93" };
 `;
 
 const WebViewStyled = styled(WebView)`

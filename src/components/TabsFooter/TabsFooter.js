@@ -7,8 +7,8 @@ import { TabsFooterContainerView, TabsFooterButton}  from './TabsFooter_StyledCo
 
 import ChangePasswordIcon from './../../assets/images/icons/change-password.svg';
 
-const TabsFooter = (props) => {    
-    // let [userTitle, setUserTitle] = useState(props.title);
+const TabsFooter = ({ renderAsStudent,setRenderAsStudent, title,  ...props }) => {    
+    // let [userTitle, setUserTitle] = useState(title);
 
     // useEffect(() => {
     //     console.log(userTitle)
@@ -16,15 +16,16 @@ const TabsFooter = (props) => {
 
     return (
         <TabsFooterContainerView 
-            title   =   {   props.title }    
+            title   =   { title }    
         >
             { 
-                (props.title !== "Student") ? 
+                (title !== "Student") ? 
                 (
                     <Fragment>
                         <TabsFooterButton
-                            title           =   {   props.title }    
-                            activeOpacity   =   {   0.5 }
+                            renderAsStudent =   { renderAsStudent }
+                            title           =   { title }    
+                            activeOpacity   =   { 0.5 }
                         >
                         <ChangePasswordIcon 
                             width={95} 
@@ -33,14 +34,15 @@ const TabsFooter = (props) => {
                         </TabsFooterButton>
 
                         <TabsFooterButton
-                            title           =   {   props.title }    
+                            renderAsStudent =   { renderAsStudent }
+                            title           =   {   title }    
                             activeOpacity   =   {   0.5 }
                         >
-                        <FontAwesome 
-                            name    =   "graduation-cap" 
-                            size    =   {   30  } 
-                            color   =   "white" 
-                        />
+                            <FontAwesome 
+                                name    =   "graduation-cap" 
+                                size    =   {   30  } 
+                                color   =   "white" 
+                            />
                         </TabsFooterButton>
                     </Fragment>
                 )
@@ -48,9 +50,11 @@ const TabsFooter = (props) => {
             } 
           
             <TabsFooterButton
-                title           =   {   props.title }    
-                activeOpacity   =   {   0.5 }
-                noBorder
+                renderAsStudent =   { renderAsStudent }
+                title           =   { title }    
+                activeOpacity   =   { 0.5 }
+                onPress         =   { setRenderAsStudent }
+                noBorder        
             >
                 <FontAwesome 
                     name    =   "sign-out" 
