@@ -247,22 +247,26 @@ class App extends Component {
         this.setState( { renderAsStudent: renderAsStudent } );
     }; //end setRenderAsStudent
 
+    // #B41A1F" : "#1E6C93
     render = () => {
         return (
             <SafeAreaProvider>
+                <StatusBar 
+                    backgroundColor =   "#B41A1F" 
+                    barStyle        =   "light-content" 
+                    translucent     =   { true } 
+                />
                 <NavigationContainer ref={navigationRef}>
-                        <StatusBar 
-                            backgroundColor =   "white" 
-                            barStyle        =   "dark-content" 
-                            translucent     =   { true } 
-                        />
+                    
                         { /* The following is a technique using two SafeAreaViews to have the
                             statusbar/top padding be a different color than the bottom padding. 
                             SafeAreaViews are only applicable on iOs 11+ on >iPhone X 
 
                             Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
                         */ }
-                        <SafeAreaViewStyled>
+                        <SafeAreaViewStyled 
+                            title={this.state.title}
+                        >
                             <AppContainerView>
                                 <ImageBackground
                                     source={ backgroundImage }

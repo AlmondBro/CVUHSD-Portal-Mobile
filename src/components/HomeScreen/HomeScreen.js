@@ -34,7 +34,11 @@ const HomeScreen = ({ renderAsStudent, title, ...props }) => {
                         props.authLoading ? (
                             <ActivityIndicator 
                                 size        =   "large" 
-                                color       =   { (props.title === "Student" || props.renderAsStudent) ? "#B41A1F" : "#1E6C93" } 
+                                color       =   { (title === null) 
+                                                    ? "#B41A1F" 
+                                                    : (props.title === "Student" || props.renderAsStudent) 
+                                                        ? "#B41A1F" : "#1E6C93" 
+                                                } 
                                 animating   =   { props.authLoading  }
                             />
                             )

@@ -4,6 +4,9 @@ import { SafeAreaView as SafeAreaViewTwo } from 'react-native-safe-area-context'
 let AppContainerView = styled.View`
     flex: 1;
     background-color: white;
+/* 
+    flex-direction: column;
+    justify-content: space-between; */
 `;
 
 let AppHeaderContainerView = styled.View`
@@ -43,7 +46,11 @@ let SafeAreaViewStyled = styled.SafeAreaView.attrs( (props) => ({
     flex-direction: column;
     justify-content: flex-start;
     align-self: stretch;
-    background-color: white;
+    background-color:   ${   props => (props.title === null) 
+                            ? "#B41A1F" : 
+                            (props.title === "Student" || props.renderAsStudent) 
+                                ? "#B41A1F" : "#1E6C93" 
+                        };
     padding: 0;
     margin: 0
 `;

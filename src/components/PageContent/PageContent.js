@@ -23,7 +23,7 @@ let PageContent  = ({ renderAsStudent, title, ...props }) => {
                     headerTitle     =   { blueSection_Object.headerTitle }
                     buttons         =   { blueSection_Object.buttons }
                     key             =   { index }
-                    title           =   { title || "Student"}
+                    title           =   { title }
                     renderAsStudent =   { renderAsStudent }
                     // TODO: Add render as student functionality {this.renderAsStudent || this.props.location.state.renderAsStudent}
                 />

@@ -8,7 +8,7 @@ const TabsFooterContainerView = styled.View`
     flex-direction: row;
 
     border-radius: 0;
-    border-top-width: 0px;
+    border-top-width: 4px;
     border-color: white;
 `;
 
@@ -24,7 +24,7 @@ const TabsFooterBoxView = styled.View`
     border-right-width: ${props => props.noBorder ? "0px" : "1px"};
     border-color: white;
 
-    box-shadow: 10px 3px 5px black;
+    /* box-shadow: 10px 3px 5px black; */
 `;
 
 let TabsFooterButtonTouchableOpacity = styled.TouchableOpacity`

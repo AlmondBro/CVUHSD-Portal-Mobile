@@ -26,6 +26,7 @@ const TabsFooter = ({ renderAsStudent,setRenderAsStudent, title,  ...props }) =>
                             renderAsStudent =   { renderAsStudent }
                             title           =   { title }    
                             activeOpacity   =   { 0.5 }
+                            noBorder        
                         >
                         <ChangePasswordIcon 
                             width={95} 
@@ -37,6 +38,7 @@ const TabsFooter = ({ renderAsStudent,setRenderAsStudent, title,  ...props }) =>
                             renderAsStudent =   { renderAsStudent }
                             title           =   {   title }    
                             activeOpacity   =   {   0.5 }
+                            noBorder        
                         >
                             <FontAwesome 
                                 name    =   "graduation-cap" 
