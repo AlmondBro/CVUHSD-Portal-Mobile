@@ -24,11 +24,15 @@ const ImageBackgroundStyled = styled.ImageBackground`
 
 const WelcomeText = styled.Text`
     color: #B41A1F;
+    /* background-color: white; */
+    /* width: 100%; */
+    text-align: center;
     font-size: 25;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
     align-content: center;
+    align-self: center;
 `;
 
 let BlueSectionContainer = styled.View`
@@ -49,7 +53,7 @@ let SafeAreaViewStyled = styled.SafeAreaView.attrs( (props) => ({
     align-self: stretch;
     background-color:   ${   props => (props.title === null) 
                             ? "#B41A1F" : 
-                            (props.title === "Student" || props.renderAsStudent) 
+                            (props.title === "Student" || props.renderAsStudent === "true") 
                                 ? "#B41A1F" : "#1E6C93" 
                         };
     padding: 0;

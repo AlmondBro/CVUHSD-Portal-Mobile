@@ -35,8 +35,6 @@ import HomeScreen from './../HomeScreen/HomeScreen.js';
 
 const { Navigator, Screen } = createStackNavigator();
 
-const backgroundImage = require('./../../assets/images/theCVway-red.png');
-
 const isDev = __DEV__;
 
 const ReactotronDebug = isDev ? Reactotron : console;
@@ -57,8 +55,9 @@ class App extends Component {
             email               :   null,
             phoneNumber         :   null,
             OU                  :   null,
-            renderAsStuddent    :   false,
+            renderAsStudent    :   false,
             portalLogoSource    :   require("./../../assets/images/CV-600x600-portal-red.png"),
+            backgroundImage     :   require('./../../assets/images/theCVway-red.png') ,
             
             authLoading         :   null
         }; //end this.state object
@@ -128,9 +127,15 @@ class App extends Component {
                                
         ReactotronDebug.log("adUserInfo from App.js:\t" + JSON.stringify(adUserInfo) );
 
-        let portalLogoSource = (adUserInfo.jobTitle === "Student" || this.state.renderAsStuddent) ?
+        let portalLogoSource = ( (adUserInfo.jobTitle === "Student") || (this.state.renderAsStudent === true)) ?
                                 require("./../../assets/images/CV-600x600-portal-red.png")
                             :   require("./../../assets/images/CV-600x600-portal.png");
+
+        let backgroundImage = (adUserInfo.jobTitle === "Student" || this.state.renderAsStudent) ?
+                                require('./../../assets/images/theCVway-red.png')
+                            :   require('./../../assets/images/theCVway-blue.png');
+
+                            
 
 
         if ( !adUserInfo.error && (adUserInfo.type === "success") ) {
@@ -141,13 +146,14 @@ class App extends Component {
                 site                : adUserInfo.officeLocation,
                 email               : adUserInfo.mail,
                 portalLogoSource    : portalLogoSource,
+                backgroundImage     : backgroundImage,
                 authLoading         : false 
             });
 
             this.setLogOnUserData({...this.state});
     
             if ( adUserInfo.jobTitle !== "Student" ){
-                this.setRenderAsStudent(true);
+                //this.setRenderAsStudent(true);
             }
 
             /*
@@ -245,6 +251,12 @@ class App extends Component {
 
     setRenderAsStudent = (renderAsStudent) => {
         this.setState( { renderAsStudent: renderAsStudent } );
+
+        let portalLogoSource = ( this.state.renderAsStudent === false ) ?
+            require("./../../assets/images/CV-600x600-portal-red.png")
+        :   require("./../../assets/images/CV-600x600-portal.png");
+        
+        this.setState({portalLogoSource: portalLogoSource});
     }; //end setRenderAsStudent
 
     // #B41A1F" : "#1E6C93
@@ -252,7 +264,7 @@ class App extends Component {
         return (
             <SafeAreaProvider>
                 <StatusBar 
-                    backgroundColor =   "#B41A1F" 
+                    backgroundColor =   { this.state.renderAsStudent ? "#B41A1F" : "#1E6C93" } 
                     barStyle        =   "light-content" 
                     translucent     =   { true } 
                 />
@@ -265,14 +277,15 @@ class App extends Component {
                             Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
                         */ }
                         <SafeAreaViewStyled 
-                            title={this.state.title}
+                            title           =   { this.state.title }
+                            renderAsStudent =   { this.state.renderAsStudent }
                         >
                             <AppContainerView>
                                 <ImageBackground
-                                    source={ backgroundImage }
+                                    source={ this.state.backgroundImage }
                                     style={ 
                                         { 
-                                            flex: 1,
+                                            flex: 0.75,
                                             resizeMode: "cover",
                                             justifyContent: "center"
                                         }
@@ -285,7 +298,7 @@ class App extends Component {
                                             lastName            =   { this.state.lastName }
                                             title               =   { this.state.title }
                                             site                =   { this.state.site }
-                                            renderAsStudent     =   { this.state.renderAsStuddent }
+                                            renderAsStudent     =   { this.state.renderAsStudent }
                                             portalLogoSource    =   { this.state.portalLogoSource }
                                             // onPress    =   { navigate ? navigate: null }
                                         />
@@ -312,7 +325,7 @@ class App extends Component {
                                                         {...props}
                                                         authLoading         =   {   this.state.authLoading  }
                                                         title               =   {   this.state.title    }
-                                                        renderAsStudent     =   {   this.state.renderAsStuddent }
+                                                        renderAsStudent     =   {   this.state.renderAsStudent }
                                                         openADSingleSignOn  =   {   this.openADSingleSignOn } 
                                                     /> 
                                         }
@@ -328,7 +341,7 @@ class App extends Component {
                                                         firstName           =   { this.state.firstName}
                                                         lastName            =   { this.state.lastName }
                                                         title               =   { this.state.title }
-                                                        renderAsStudent     =   { this.state.renderAsStuddent }
+                                                        renderAsStudent     =   { this.state.renderAsStudent }
                                                         site                =   { this.state.site }
                                                         appWidth            =   { this.state.appWidth }
                                                     />
@@ -338,7 +351,7 @@ class App extends Component {
                                 {   this.state.title ? 
                                     <TabsFooter 
                                         title               =   { this.state.title}
-                                        renderAsStudent     =   { this.state.renderAsStuddent }
+                                        renderAsStudent     =   { this.state.renderAsStudent }
                                         setRenderAsStudent  =   { this.setRenderAsStudent }
                                     />
                                     : null    

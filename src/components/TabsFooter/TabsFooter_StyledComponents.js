@@ -18,7 +18,7 @@ const TabsFooterBoxView = styled.View`
     align-items: center;
 
     color: white;
-    background-color:  ${props => (props.title === "Student" || props.renderAsStudent) ? "#B41A1F" : "#1E6C93" };
+    background-color:  ${props => ( (props.title === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" };
 
     border-radius: 0;
     border-right-width: ${props => props.noBorder ? "0px" : "1px"};
@@ -31,7 +31,7 @@ let TabsFooterButtonTouchableOpacity = styled.TouchableOpacity`
 
 `;
 
-let TabsFooterButton = ({ renderAsStudent, setRenderAsStudent, title, noBorder, activeOpacity, ...props }) => {
+let TabsFooterButton = ({ renderAsStudent, setRenderAsStudent, onPress, title, noBorder, activeOpacity, ...props }) => {
     return (
         <TabsFooterBoxView
             renderAsStudent =   { renderAsStudent }
@@ -40,7 +40,7 @@ let TabsFooterButton = ({ renderAsStudent, setRenderAsStudent, title, noBorder, 
         >
             <TabsFooterButtonTouchableOpacity
                 activeOpacity   =   { activeOpacity || 0.2}
-                onPress         =   { setRenderAsStudent }
+                onPress         =   { onPress }
             >
                 { props.children }
             </TabsFooterButtonTouchableOpacity>

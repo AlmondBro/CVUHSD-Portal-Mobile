@@ -7,13 +7,21 @@ import { TabsFooterContainerView, TabsFooterButton}  from './TabsFooter_StyledCo
 
 import ChangePasswordIcon from './../../assets/images/icons/change-password.svg';
 
-const TabsFooter = ({ renderAsStudent,setRenderAsStudent, title,  ...props }) => {    
+import Reactotron from 'reactotron-react-native';
+
+const isDev = __DEV__;
+const ReactotronDebug = isDev ? Reactotron : console;
+
+const TabsFooter = ({renderAsStudent, setRenderAsStudent, title, ...props }) => {    
     // let [userTitle, setUserTitle] = useState(title);
 
     // useEffect(() => {
     //     console.log(userTitle)
     //   }, [userTitle]);
 
+    //Reactotron.log("props.renderAsStudent:\t" + props.renderAsStudent);
+    Reactotron.log("renderAsStudent spread:\t" + renderAsStudent);
+    //Reactotron.log("TabsFooter props:\t" + JSON.stringify(props) );
     return (
         <TabsFooterContainerView 
             title   =   { title }    
@@ -35,13 +43,14 @@ const TabsFooter = ({ renderAsStudent,setRenderAsStudent, title,  ...props }) =>
                         </TabsFooterButton>
 
                         <TabsFooterButton
-                            renderAsStudent =   { renderAsStudent }
+                            renderAsStudent =   {  renderAsStudent }
                             title           =   {   title }    
                             activeOpacity   =   {   0.5 }
+                            onPress         =   { () => setRenderAsStudent(!renderAsStudent) }
                             noBorder        
                         >
                             <FontAwesome 
-                                name    =   "graduation-cap" 
+                                name    =   { renderAsStudent ? "user" : "graduation-cap" } 
                                 size    =   {   30  } 
                                 color   =   "white" 
                             />
@@ -52,10 +61,9 @@ const TabsFooter = ({ renderAsStudent,setRenderAsStudent, title,  ...props }) =>
             } 
           
             <TabsFooterButton
-                renderAsStudent =   { renderAsStudent }
+                renderAsStudent =   {  renderAsStudent }
                 title           =   { title }    
                 activeOpacity   =   { 0.5 }
-                onPress         =   { setRenderAsStudent }
                 noBorder        
             >
                 <FontAwesome 

@@ -12,7 +12,7 @@ import { BlueSectionContainer, ScrollViewStyled } from './PageContent_StyledComp
 
 let PageContent  = ({ renderAsStudent, title, ...props }) => {
     let sectionInfoObject;
-    sectionInfoObject = (title === "Student" || renderAsStudent) ? 
+    sectionInfoObject = (title === "Student" || renderAsStudent === true) ? 
                             redSectionInfo_Student : blueSectionInfo_Staff;
 
     const generateBlueSections = (sectionInfoObject, title) => {
@@ -41,12 +41,16 @@ let PageContent  = ({ renderAsStudent, title, ...props }) => {
                     {   /* Render service statuses only on iOS devices until the WebView 
                             under Scrollview (where the webview does not scroll) is fixed 
                         */
-                        (   title !== "Student" ?
+                        (   ( (title !== "Student") && !renderAsStudent) ?
                                 (Platform.OS === "ios"|| androidWebViewDebug === true ?
                                     (   <BlueSection 
                                             headerTitle     =   "System Statuses" 
                                             expanded        =   {!false}
                                             serviceStatuses =   {true}
+
+                                            key             =   "Services Statuses"
+                                            title           =   { title }
+                                            renderAsStudent =   { renderAsStudent }
                                         />
                                     ) : null
                                 ) : null
