@@ -30,6 +30,9 @@ let UpdateTextDescription = styled.Text`
 
 let UserInfoText = styled.Text`
     color: ${props => (props.title === "Student" || props.renderAsStudent) ? "#B41A1F" : "#1E6C93" };
+    align-self: center;
+    font-weight: ${props => props.bold ? "bold" : "normal"};
+    font-style: ${props => props.italic ? "italic" : "normal"};
 `;
 
 

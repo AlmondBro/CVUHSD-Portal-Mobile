@@ -44,14 +44,23 @@ const Header = ({ renderAsStudent, ...props }) => {
                             <UserInfoText 
                                 title           =   { props.title }
                                 renderAsStudent =   { renderAsStudent }
+                                bold
                             >
-                                { (props.title || "CVUHSD User") + " from " + (props.site || "CVUHSD") }
+                                { props.firstName + " " + props.lastName }
                             </UserInfoText>
                             <UserInfoText 
                                 title           =   { props.title }
                                 renderAsStudent =   { renderAsStudent }
+                                italic
                             >
-                                { props.firstName + " " + props.lastName }
+                                { (props.title || "CVUHSD User")  }
+                            </UserInfoText>
+                            <UserInfoText 
+                                title           =   { props.title }
+                                renderAsStudent =   { renderAsStudent }
+                                bold
+                            >
+                                { "from " +  (props.site || "CVUHSD") }
                             </UserInfoText>
                         </Fragment>
                     ) : null
