@@ -8,7 +8,7 @@ const TabsFooterContainerView = styled.View`
     flex-direction: row;
 
     border-radius: 0;
-    border-top-width: 4px;
+    border-top-width: 0px;
     border-color: white;
 `;
 

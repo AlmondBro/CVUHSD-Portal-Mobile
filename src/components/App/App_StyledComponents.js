@@ -40,7 +40,7 @@ let BlueSectionContainer = styled.View`
 `;
 
 let SafeAreaViewStyled = styled.SafeAreaView.attrs( (props) => ({
-    forceInset: { bottom: 'never' }
+    forceInset: { top: 'never' }
 }))`
     flex: 1;
     flex-direction: column;
@@ -52,7 +52,7 @@ let SafeAreaViewStyled = styled.SafeAreaView.attrs( (props) => ({
                                 ? "#B41A1F" : "#1E6C93" 
                         };
     padding: 0;
-    margin: 0
+    margin: 0;
 `;
 
 
