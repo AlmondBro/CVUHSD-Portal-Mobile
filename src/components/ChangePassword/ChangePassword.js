@@ -1,41 +1,39 @@
-import React, { Component, useState } from 'react';
-import { Modal, Text, TouchableHighlight, View, Alert } from 'react-native';
+import React, { useEffect } from 'react';
+import { Text, TouchableHighlight, View, Alert, Button } from 'react-native';
 
-let ChangePassword = (props) => {
-    const [ modalVisible, setModalVisible ] = useState(false);
+import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+import { WebView } from 'react-native-webview';
+
+import Modal from 'react-native-modal';
+
+let ChangePassword = ({isModalVisible, setIsModalVisible, ...props}) => {
+
+    // useEffect(() => {
+    //     // action here
+    // }, [isModalVisible]);
+
     return (
-      <View style={{ marginTop: 0 }}>
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={modalVisible}
-          statusBarTranslucent={true}
-          transparent={true}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-          }}>
-          <View style={{ marginTop: 50, backgroundColor: "red", flex: 0.5 }}>
-            <View>
-              <Text>Hello World!</Text>
-  
-              <TouchableHighlight
-                onPress={() => {
-                  setModalVisible(!modalVisible);
-                }}>
-                <Text>Hide Modal</Text>
-              </TouchableHighlight>
-            </View>
-          </View>
+        // <SafeAreaProvider>
+            
+      <View >
+        <Modal 
+            isVisible={isModalVisible} 
+            style={{flex: 1, flexDirection: "column", width: "90%", position: 'relative', justifyContent: "center", alignSelf: "center",backgroundColor: "#1E6C93"}}
+            hasBackdrop={true}
+            backdropColor={"#1E6C93"}
+        >
+          <SafeAreaView style={{ flex: 1}} >
+            {/* <Text>Hello!</Text> */}
+            <WebView source={{ uri: 'https://sso.centinela.k12.ca.us/adfs/portal/updatepassword/' }} style={{ marginTop: 0, width: "100%" }} />
+
+            <Button title="Hide modal" onPress={ () => setIsModalVisible(!isModalVisible) } />
+          </SafeAreaView>
         </Modal>
-  
-        <TouchableHighlight
-          onPress={() => {
-            setModalVisible(true);
-          }}>
-          <Text>Show Modal</Text>
-        </TouchableHighlight>
       </View>
-    );
+    //   </SafeAreaProvider>
+    
+    )
+  
 }; //end ChangePassword
 
 export default ChangePassword;

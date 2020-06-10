@@ -55,10 +55,11 @@ class App extends Component {
             email               :   null,
             phoneNumber         :   null,
             OU                  :   null,
-            renderAsStudent    :   false,
+            renderAsStudent     :   false,
             portalLogoSource    :   require("./../../assets/images/CV-600x600-portal-red.png"),
             backgroundImage     :   require('./../../assets/images/theCVway-red.png') ,
             
+            isModalVisible      :   false,
             authLoading         :   null
         }; //end this.state object
     } //end constructor
@@ -215,6 +216,12 @@ class App extends Component {
         this.setState({portalLogoSource: portalLogoSource});
     }; //end setRenderAsStudent
 
+    setIsModalVisible = (isModalVisible) => {
+        this.setState( { isModalVisible: isModalVisible } );
+        console.log("Open change password");
+
+    }; //end setRenderAsStudent
+
     openChangePassword = () => {
         console.log("Open change password");
     }; //end openChangePassword
@@ -358,8 +365,11 @@ class App extends Component {
                                     <TabsFooter 
                                         title               =   { this.state.title}
                                         renderAsStudent     =   { this.state.renderAsStudent }
+                                        isModalVisible      =   { this.state.isModalVisible }
+                                        setIsModalVisible   =   { this.setIsModalVisible }
                                         setRenderAsStudent  =   { this.setRenderAsStudent }
                                         openChangePassword  =   { this.openChangePassword  }
+                                     
                                     />
                                     : null    
                                 } 

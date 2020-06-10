@@ -14,7 +14,7 @@ import Reactotron from 'reactotron-react-native';
 const isDev = __DEV__;
 const ReactotronDebug = isDev ? Reactotron : console;
 
-const TabsFooter = ({renderAsStudent, setRenderAsStudent, title, openChangePassword, ...props }) => {    
+const TabsFooter = ({renderAsStudent, setRenderAsStudent, isModalVisible, setIsModalVisible, title, ...props }) => {    
     // let [userTitle, setUserTitle] = useState(title);
 
     // useEffect(() => {
@@ -36,13 +36,13 @@ const TabsFooter = ({renderAsStudent, setRenderAsStudent, title, openChangePassw
                             renderAsStudent =   { renderAsStudent }
                             title           =   { title }    
                             activeOpacity   =   { 0.5 }
-                            onPress         =   { openChangePassword }
-                            noBorder        
+                            onPress         =   { () => setIsModalVisible(!isModalVisible) }
+                            noBorder    
                         >
-                        <ChangePasswordIcon 
-                            width={95} 
-                            height={30}
-                        />
+                            <ChangePasswordIcon 
+                                width={95} 
+                                height={30}
+                            />
                         </TabsFooterButton>
 
                         <TabsFooterButton
@@ -76,7 +76,10 @@ const TabsFooter = ({renderAsStudent, setRenderAsStudent, title, openChangePassw
                 />
                 
             </TabsFooterButton>
-            <ChangePassword/>
+            <ChangePassword 
+                isModalVisible      =   {   isModalVisible  }
+                setIsModalVisible   =   {   setIsModalVisible   }
+            />
         </TabsFooterContainerView>
     ); //end return statement
 }; //end TabsFooter()
