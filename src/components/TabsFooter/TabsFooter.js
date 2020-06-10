@@ -5,6 +5,8 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import { TabsFooterContainerView, TabsFooterButton}  from './TabsFooter_StyledComponents.js';
 
+import ChangePassword  from './../ChangePassword/ChangePassword.js';
+
 import ChangePasswordIcon from './../../assets/images/icons/change-password.svg';
 
 import Reactotron from 'reactotron-react-native';
@@ -74,6 +76,7 @@ const TabsFooter = ({renderAsStudent, setRenderAsStudent, title, openChangePassw
                 />
                 
             </TabsFooterButton>
+            <ChangePassword/>
         </TabsFooterContainerView>
     ); //end return statement
 }; //end TabsFooter()
