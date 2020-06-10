@@ -5,12 +5,13 @@ import { WebView } from 'react-native-webview';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const ModalStyled = styled(Modal).attrs((props) => ({
-    isVisible        :   props.isVisible,
-    onBackdropPress  :   props.onBackdropPress,
-    onSwipeComplete  :   props.onSwipeComplete, 
-    swipeDirection   :   props.swipeDirection,
-    injectJavaScript :   props.injectJavaScript,
-    injectedJavaScript :   props.injectedJavaScript
+    isVisible           :   props.isVisible,
+    onBackdropPress     :   props.onBackdropPress,
+    onSwipeComplete     :   props.onSwipeComplete, 
+    swipeDirection      :   props.swipeDirection,
+    javaScriptEnabled   :   props.javaScriptEnabled,
+    injectJavaScript    :   props.injectJavaScript,
+    injectedJavaScript  :   props.injectedJavaScript
 }))`
   flex              : 1;
   flex-direction    : column;

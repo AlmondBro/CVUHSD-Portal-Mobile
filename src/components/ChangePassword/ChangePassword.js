@@ -7,6 +7,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 //Iimport styled components
 import { ModalStyled, WebViewStyled } from './ChangePassword_StyledComponents.js';
 
+import { WebView } from 'react-native-webview';
+
 
 let ChangePassword = ({isModalVisible, setIsModalVisible, ...props}) => {
     return (
@@ -17,12 +19,19 @@ let ChangePassword = ({isModalVisible, setIsModalVisible, ...props}) => {
             onSwipeComplete = { () => setIsModalVisible(false) }
             swipeDirection  = { ["down", "up"] }
         >
-          <SafeAreaView style={{ flex: 1, borderTopLeftRadius: "100%", borderTopRightRadius: "100%"}} >
-            <WebViewStyled 
+          <SafeAreaView style={{ flex: 1, borderTopLeftRadius: "100%", borderTopRightRadius: "100%", height: "50%"}} >
+            <WebView 
                 source              =   { { uri: 'https://sso.centinela.k12.ca.us/adfs/portal/updatepassword/' } } 
                 originWhitelist     =   { ['https://'] }
                 bounces             =   { false }
-                // injectJavaScript    =
+                javaScriptEnabled   =   { true } 
+                injectedJavaScript  =   {   `
+                                                document.getElementById("footer").style.display = "none"; 
+                                                document.getElementById("cancelButton").style.display = "none";
+                                                document.getElementById("companyLogo").style.display = "none"
+                                            ` 
+                                        }
+
             />
 
             <Button 
