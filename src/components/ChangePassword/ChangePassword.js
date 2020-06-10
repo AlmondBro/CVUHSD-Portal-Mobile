@@ -21,7 +21,7 @@ let ChangePassword = ({isModalVisible, setIsModalVisible, ...props}) => {
             // backdropColor={"#1E6C93"}
             onBackdropPress = { () => setIsModalVisible(false) }
             onSwipeComplete = { () => setIsModalVisible(false) }
-            swipeDirection="down"
+            swipeDirection={["down", "up"]}
         >
           <SafeAreaView style={{ flex: 1, borderTopLeftRadius: "100%", borderTopRightRadius: "100%"}} >
             {/* <Text>Hello!</Text> */}
