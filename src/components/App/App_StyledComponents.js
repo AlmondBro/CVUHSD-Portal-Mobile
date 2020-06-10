@@ -1,7 +1,12 @@
 import styled from 'styled-components/native';
+import { SafeAreaView as SafeAreaViewTwo } from 'react-native-safe-area-context';
 
 let AppContainerView = styled.View`
     flex: 1;
+    background-color: white;
+/* 
+    flex-direction: column;
+    justify-content: space-between; */
 `;
 
 let AppHeaderContainerView = styled.View`
@@ -19,10 +24,15 @@ const ImageBackgroundStyled = styled.ImageBackground`
 
 const WelcomeText = styled.Text`
     color: #B41A1F;
+    /* background-color: white; */
+    /* width: 100%; */
+    text-align: center;
     font-size: 25;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: flex-end;
     align-items: center;
+    align-content: center;
+    align-self: center;
 `;
 
 let BlueSectionContainer = styled.View`
@@ -35,15 +45,19 @@ let BlueSectionContainer = styled.View`
 `;
 
 let SafeAreaViewStyled = styled.SafeAreaView.attrs( (props) => ({
-    forceInset: { bottom: 'never' },
+    forceInset: { top: 'never' }
 }))`
     flex: 1;
     flex-direction: column;
     justify-content: flex-start;
     align-self: stretch;
-    background-color: #F4F7F9;
+    background-color:   ${   props => (props.title === null) 
+                            ? "#B41A1F" : 
+                            (props.title === "Student" || props.renderAsStudent === "true") 
+                                ? "#B41A1F" : "#1E6C93" 
+                        };
     padding: 0;
-    margin: 0
+    margin: 0;
 `;
 
 

@@ -27,15 +27,18 @@ class BlueSection extends Component {
             <BlueSectionContainerView>
                 <BlueSectionHeader 
                     title           =   { this.props.title } 
+                    renderAsStudent =   { this.props.renderAsStudent }
                     headerTitle     =   { this.props.headerTitle }
                     expanded        =   { this.state.expanded } 
                     expandToggle    =   { this.expandToggle }
                 /> 
                 <BlueSectionContent  
-                    expanded          =   { this.state.expanded } 
-                    expandToggle      =   { this.expandToggle }
-                    buttons           =   { this.props.buttons }
-                    serviceStatuses   =   { this.props.serviceStatuses}
+                    title               =   { this.props.title } 
+                    renderAsStudent     =   { this.props.renderAsStudent }
+                    expanded            =   { this.state.expanded } 
+                    expandToggle        =   { this.expandToggle }
+                    buttons             =   { this.props.buttons }
+                    serviceStatuses     =   { this.props.serviceStatuses}
                 />
             </BlueSectionContainerView>
         );

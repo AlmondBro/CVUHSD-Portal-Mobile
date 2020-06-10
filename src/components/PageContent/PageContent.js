@@ -10,20 +10,21 @@ import BlueSection from './../BlueSection/BlueSection.js';
 //Import styled components
 import { BlueSectionContainer, ScrollViewStyled } from './PageContent_StyledComponents.js';
 
-let PageContent  = (props) => {
+let PageContent  = ({ renderAsStudent, title, ...props }) => {
     let sectionInfoObject;
-    sectionInfoObject = (props.title === "Student" ) ? 
+    sectionInfoObject = (title === "Student" || renderAsStudent === true) ? 
                             redSectionInfo_Student : blueSectionInfo_Staff;
 
     const generateBlueSections = (sectionInfoObject, title) => {
         return sectionInfoObject.map( (blueSection_Object, index) => {
             return (
                 <BlueSection 
-                    expanded    =   { blueSection_Object.expanded }
-                    headerTitle =   { blueSection_Object.headerTitle }
-                    buttons     =   { blueSection_Object.buttons }
-                    key         =   { index }
-                    title       =   { props.title  || title || "Student"}
+                    expanded        =   { blueSection_Object.expanded }
+                    headerTitle     =   { blueSection_Object.headerTitle }
+                    buttons         =   { blueSection_Object.buttons }
+                    key             =   { index }
+                    title           =   { title }
+                    renderAsStudent =   { renderAsStudent }
                     // TODO: Add render as student functionality {this.renderAsStudent || this.props.location.state.renderAsStudent}
                 />
             ); //end return statement
@@ -40,19 +41,23 @@ let PageContent  = (props) => {
                     {   /* Render service statuses only on iOS devices until the WebView 
                             under Scrollview (where the webview does not scroll) is fixed 
                         */
-                        (   props.title !== "Student" ?
+                        (   ( (title !== "Student") && !renderAsStudent) ?
                                 (Platform.OS === "ios"|| androidWebViewDebug === true ?
                                     (   <BlueSection 
-                                            headerTitle="System Statuses" 
-                                            expanded={!false}
-                                            serviceStatuses={true}
+                                            headerTitle     =   "System Statuses" 
+                                            expanded        =   {!false}
+                                            serviceStatuses =   {true}
+
+                                            key             =   "Services Statuses"
+                                            title           =   { title }
+                                            renderAsStudent =   { renderAsStudent }
                                         />
                                     ) : null
                                 ) : null
                         )
                     } 
                     <Fragment>
-                        { generateBlueSections(sectionInfoObject, props.title) }
+                        { generateBlueSections(sectionInfoObject, title) }
                     </Fragment>
             </BlueSectionContainer>
         </ScrollViewStyled>
