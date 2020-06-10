@@ -1,30 +1,28 @@
-import React, { useEffect } from 'react';
-import { Text, TouchableHighlight, View, Alert, Button } from 'react-native';
+import React from 'react';
+import { Button } from 'react-native';
 
-import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
-import { WebView } from 'react-native-webview';
+//Import SafeAreaView so that elements do not overlap with status bars or notches
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import Modal from 'react-native-modal';
+//Iimport styled components
+import { ModalStyled, WebViewStyled } from './ChangePassword_StyledComponents.js';
+
 
 let ChangePassword = ({isModalVisible, setIsModalVisible, ...props}) => {
     return (
     //   <View style={{ flex: 1}}>
-        <Modal 
+        <ModalStyled 
             isVisible       = {isModalVisible} 
-            style           = {{flex: 1, flexDirection: "column", width: "90%", position: 'relative', justifyContent: "center", alignSelf: "center",backgroundColor: "transparent"}}
-            // hasBackdrop     =   { true}
-            // backdropColor   =   { "#1E6C93"}
             onBackdropPress = { () => setIsModalVisible(false) }
             onSwipeComplete = { () => setIsModalVisible(false) }
             swipeDirection  = { ["down", "up"] }
         >
           <SafeAreaView style={{ flex: 1, borderTopLeftRadius: "100%", borderTopRightRadius: "100%"}} >
-            {/* <Text>Hello!</Text> */}
-            <WebView 
-                source          =   { { uri: 'https://sso.centinela.k12.ca.us/adfs/portal/updatepassword/' } } 
-                style           =   { { marginTop: 0, width: "100%" }} 
-                originWhitelist =   { ['https://'] }
-                bounces         =   { false }
+            <WebViewStyled 
+                source              =   { { uri: 'https://sso.centinela.k12.ca.us/adfs/portal/updatepassword/' } } 
+                originWhitelist     =   { ['https://'] }
+                bounces             =   { false }
+                // injectJavaScript    =
             />
 
             <Button 
@@ -32,7 +30,7 @@ let ChangePassword = ({isModalVisible, setIsModalVisible, ...props}) => {
                 onPress={ () => setIsModalVisible(!isModalVisible) } 
             />
           </SafeAreaView>
-        </Modal>
+        </ModalStyled>
     //   </View>
     ); //end return statement
   
