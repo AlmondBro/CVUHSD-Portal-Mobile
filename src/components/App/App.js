@@ -205,6 +205,20 @@ class App extends Component {
         }
     }; //end checkforExistingLogOn
 
+    setRenderAsStudent = (renderAsStudent) => {
+        this.setState( { renderAsStudent: renderAsStudent } );
+
+        let portalLogoSource = ( this.state.renderAsStudent === false ) ?
+            require("./../../assets/images/CV-600x600-portal-red.png")
+        :   require("./../../assets/images/CV-600x600-portal.png");
+        
+        this.setState({portalLogoSource: portalLogoSource});
+    }; //end setRenderAsStudent
+
+    openChangePassword = () => {
+            
+    }; //end openChangePassword
+    
     setLogOnUserData = async (userDataObject) => {
         try {
             const userDataObjectJSON = JSON.stringify(userDataObject);
@@ -223,6 +237,8 @@ class App extends Component {
       
         console.log('Done.')
       }
+
+
 
     componentDidMount = () => {
         const checkforUpdatesDev = false;
@@ -248,16 +264,6 @@ class App extends Component {
 
         this.clearLogOnUserData();
     }; //end componentDidMount
-
-    setRenderAsStudent = (renderAsStudent) => {
-        this.setState( { renderAsStudent: renderAsStudent } );
-
-        let portalLogoSource = ( this.state.renderAsStudent === false ) ?
-            require("./../../assets/images/CV-600x600-portal-red.png")
-        :   require("./../../assets/images/CV-600x600-portal.png");
-        
-        this.setState({portalLogoSource: portalLogoSource});
-    }; //end setRenderAsStudent
 
     // #B41A1F" : "#1E6C93
     render = () => {
