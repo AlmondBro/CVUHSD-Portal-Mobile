@@ -13,16 +13,17 @@ let ChangePassword = ({isModalVisible, setIsModalVisible, ...props}) => {
     // }, [isModalVisible]);
 
     return (
-        // <SafeAreaProvider>
-            
-      <View >
+      <View style={{ flex: 1}}>
         <Modal 
             isVisible={isModalVisible} 
-            style={{flex: 1, flexDirection: "column", width: "90%", position: 'relative', justifyContent: "center", alignSelf: "center",backgroundColor: "#1E6C93"}}
-            hasBackdrop={true}
-            backdropColor={"#1E6C93"}
+            style={{flex: 1, flexDirection: "column", width: "90%", height: 0, position: 'relative', justifyContent: "center", alignSelf: "center",backgroundColor: "transparent"}}
+            // hasBackdrop={true}
+            // backdropColor={"#1E6C93"}
+            onBackdropPress = { () => setIsModalVisible(false) }
+            onSwipeComplete = { () => setIsModalVisible(false) }
+            swipeDirection="down"
         >
-          <SafeAreaView style={{ flex: 1}} >
+          <SafeAreaView style={{ flex: 1, borderTopLeftRadius: "100%", borderTopRightRadius: "100%"}} >
             {/* <Text>Hello!</Text> */}
             <WebView source={{ uri: 'https://sso.centinela.k12.ca.us/adfs/portal/updatepassword/' }} style={{ marginTop: 0, width: "100%" }} />
 
@@ -30,9 +31,7 @@ let ChangePassword = ({isModalVisible, setIsModalVisible, ...props}) => {
           </SafeAreaView>
         </Modal>
       </View>
-    //   </SafeAreaProvider>
-    
-    )
+    ); //end return statement
   
 }; //end ChangePassword
 

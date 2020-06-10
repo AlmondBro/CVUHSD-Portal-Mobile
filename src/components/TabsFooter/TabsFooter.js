@@ -76,10 +76,19 @@ const TabsFooter = ({renderAsStudent, setRenderAsStudent, isModalVisible, setIsM
                 />
                 
             </TabsFooterButton>
-            <ChangePassword 
-                isModalVisible      =   {   isModalVisible  }
-                setIsModalVisible   =   {   setIsModalVisible   }
-            />
+           
+            { 
+                /* Only render the ChangePasswordModal if the signed-in user is not a student */
+                (title !== "Student") ? 
+                    (
+                        <ChangePassword 
+                            isModalVisible      =   {   isModalVisible  }
+                            setIsModalVisible   =   {   setIsModalVisible   }
+                        />
+                    )
+                    : null
+            }
+            
         </TabsFooterContainerView>
     ); //end return statement
 }; //end TabsFooter()
