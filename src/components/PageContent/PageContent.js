@@ -35,7 +35,9 @@ let PageContent  = ({ renderAsStudent, title, ...props }) => {
 
     return (
             <ScrollViewStyled
-                width   =   { props.appWidth }
+                width                   =   { props.appWidth }
+                alwaysBounceVertical    =   { false }
+                bounce                  =   { false }
             >
                 <BlueSectionContainer>
                     {   /* Render service statuses only on iOS devices until the WebView 
