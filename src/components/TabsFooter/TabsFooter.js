@@ -12,7 +12,7 @@ import Reactotron from 'reactotron-react-native';
 const isDev = __DEV__;
 const ReactotronDebug = isDev ? Reactotron : console;
 
-const TabsFooter = ({renderAsStudent, setRenderAsStudent, title, ...props }) => {    
+const TabsFooter = ({renderAsStudent, setRenderAsStudent, title, openChangePassword, ...props }) => {    
     // let [userTitle, setUserTitle] = useState(title);
 
     // useEffect(() => {
@@ -34,6 +34,7 @@ const TabsFooter = ({renderAsStudent, setRenderAsStudent, title, ...props }) => 
                             renderAsStudent =   { renderAsStudent }
                             title           =   { title }    
                             activeOpacity   =   { 0.5 }
+                            onPress         =   { openChangePassword }
                             noBorder        
                         >
                         <ChangePasswordIcon 

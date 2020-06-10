@@ -216,9 +216,9 @@ class App extends Component {
     }; //end setRenderAsStudent
 
     openChangePassword = () => {
-            
+        console.log("Open change password");
     }; //end openChangePassword
-    
+
     setLogOnUserData = async (userDataObject) => {
         try {
             const userDataObjectJSON = JSON.stringify(userDataObject);
@@ -359,6 +359,7 @@ class App extends Component {
                                         title               =   { this.state.title}
                                         renderAsStudent     =   { this.state.renderAsStudent }
                                         setRenderAsStudent  =   { this.setRenderAsStudent }
+                                        openChangePassword  =   { this.openChangePassword  }
                                     />
                                     : null    
                                 } 
