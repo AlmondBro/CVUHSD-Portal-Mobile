@@ -24,7 +24,7 @@ let ChangePassword = ({isModalVisible, setIsModalVisible, title, renderAsStudent
             isVisible       = {isModalVisible} 
             onBackdropPress = { () => setIsModalVisible(false) }
             onSwipeComplete = { () => setIsModalVisible(false) }
-            swipeDirection  = { ["down"] }
+            swipeDirection  = { ["up"] }
         >
           <SafeAreaView style={{ flex: 1, borderTopLeftRadius: "100%", borderTopRightRadius: "100%", paddingBottom: 100}} >
             <WebViewContainer
