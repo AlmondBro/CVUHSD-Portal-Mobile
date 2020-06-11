@@ -62,6 +62,9 @@ class App extends Component {
             isModalVisible      :   false,
             authLoading         :   null
         }; //end this.state object
+
+
+        this.initialState = { ...this.state };
     } //end constructor
 
     azureAdAppProps = {
@@ -236,15 +239,16 @@ class App extends Component {
     };
 
     clearLogOnUserData = async () => {
+        console.log("Clearlogout data.")
         try {
-          await AsyncStorage.clear();
+            await AsyncStorage.clear();
         } catch(e) {
             ReactotronDebug.log('clearLogOnUserData() clear');
         }
-      
+        this.setState({ ...this.initialState });
+        navigate('Home');
         console.log('Done.')
-      }
-
+    }; //end clearLogOnUserData
 
 
     componentDidMount = () => {
@@ -369,7 +373,7 @@ class App extends Component {
                                         setIsModalVisible   =   { this.setIsModalVisible }
                                         setRenderAsStudent  =   { this.setRenderAsStudent }
                                         openChangePassword  =   { this.openChangePassword  }
-                                     
+                                        logOut              =   { this.clearLogOnUserData }
                                     />
                                     : null    
                                 } 
