@@ -14,16 +14,7 @@ import Reactotron from 'reactotron-react-native';
 const isDev = __DEV__;
 const ReactotronDebug = isDev ? Reactotron : console;
 
-const TabsFooter = ({ renderAsStudent, setRenderAsStudent, isModalVisible, setIsModalVisible, title, ...props }) => {    
-    // let [userTitle, setUserTitle] = useState(title);
-
-    // useEffect(() => {
-    //     console.log(userTitle)
-    //   }, [userTitle]);
-
-    //Reactotron.log("props.renderAsStudent:\t" + props.renderAsStudent);
-    Reactotron.log("renderAsStudent spread:\t" + renderAsStudent);
-    //Reactotron.log("TabsFooter props:\t" + JSON.stringify(props) );
+const TabsFooter = ({ renderAsStudent, setRenderAsStudent, isModalVisible, setIsModalVisible, title, logOut, ...props }) => {    
     return (
         <TabsFooterContainerView 
             title   =   { title }    
@@ -67,6 +58,7 @@ const TabsFooter = ({ renderAsStudent, setRenderAsStudent, isModalVisible, setIs
                 renderAsStudent =   {  renderAsStudent }
                 title           =   { title }    
                 activeOpacity   =   { 0.5 }
+                onPress         =   { logOut }
                 noBorder        
             >
                 <FontAwesome 
