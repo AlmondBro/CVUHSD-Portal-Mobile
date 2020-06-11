@@ -27,9 +27,49 @@ const ModalStyled = styled(Modal).attrs((props) => ({
 
 let WebViewContainer = styled.View`
     flex: 1;
-    border-radius: 100;
-    background-color: red;
+    border-radius: 20;
+    width: 100%;
+    background-color:  ${   props => (props.title === null) 
+                            ? "#B41A1F" : 
+                            (props.title === "Student" || props.renderAsStudent === "true") 
+                                ? "#B41A1F" : "#1E6C93" 
+                        };
+    padding: 0;;
 `;
+
+let ChangePasswordTextHeaderContainer = styled.View`
+    flex: 1;
+    border-radius: 20;
+    width: 100%;
+    background-color:  ${   props => (props.title === null) 
+                            ? "#B41A1F" : 
+                            (props.title === "Student" || props.renderAsStudent === "true") 
+                                ? "#B41A1F" : "#1E6C93" 
+                        };
+    padding: 0;
+`;
+
+
+let ChangePasswordText = styled.Text`
+    flex: 1;
+    border-radius: 20;
+    width: 100%;
+    color:  ${   props => (props.title === null) 
+                            ? "#B41A1F" : 
+                            (props.title === "Student" || props.renderAsStudent === "true") 
+                                ? "#B41A1F" : "#1E6C93" 
+                        };
+    padding: 0;
+`;
+
+let ChangePasswordTextHeader = (props) => {
+    return (
+        <ChangePasswordTextHeaderContainer {...props}>
+            <ChangePasswordText {...props}>{props.title}</ChangePasswordText>
+        </ChangePasswordTextHeaderContainer>
+    );
+};
+
 
 const WebViewStyled = styled(WebView).attrs((props) => ({
     source          :   props.source,
@@ -39,4 +79,4 @@ const WebViewStyled = styled(WebView).attrs((props) => ({
   flex              :   1;
 `;
 
-export { ModalStyled, WebViewContainer, WebViewStyled };
+export { ModalStyled, WebViewContainer, WebViewStyled, ChangePasswordTextHeader };
