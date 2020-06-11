@@ -1,7 +1,7 @@
 {
   "main": "./src/index.js",
   "entryPoint": "./src/index.js",
-  "name": "src",
+  "name": "cvuhsd-portal-mobile",
   "version": "2.0.0",
   "scripts": {
     "start": "expo start",
