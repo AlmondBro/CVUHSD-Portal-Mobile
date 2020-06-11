@@ -1,3 +1,5 @@
+import React from 'react';
+
 import styled from 'styled-components/native';
 
 import Modal from 'react-native-modal';
@@ -24,7 +26,6 @@ const ModalStyled = styled(Modal).attrs((props) => ({
 `;
 
 
-
 let WebViewContainer = styled.View`
     flex: 1;
     border-radius: 20;
@@ -34,7 +35,7 @@ let WebViewContainer = styled.View`
                             (props.title === "Student" || props.renderAsStudent === "true") 
                                 ? "#B41A1F" : "#1E6C93" 
                         };
-    padding: 0;;
+    padding: 0;
 `;
 
 let ChangePasswordTextHeaderContainer = styled.View`
