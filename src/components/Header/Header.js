@@ -5,7 +5,7 @@ import { Text, TouchableOpacity } from 'react-native';
 import { HeaderContainerView, PortalLogoImage, UpdateAppView, UpdateTextDescription, UserInfoText  } from './Header_StyledComponents.js';
 import { BlueSectionContainer } from './../App/App_StyledComponents.js';
 
-const Header = ({ renderAsStudent, ...props }) => {
+const Header = ({ renderAsStudent, title, firstName, lastName, site,...props }) => {
     return (
       <HeaderContainerView>
           <TouchableOpacity
@@ -38,30 +38,37 @@ const Header = ({ renderAsStudent, ...props }) => {
 
         <BlueSectionContainer>
             {
-                props.title ? 
+                title ? 
                     (
                         <Fragment>
                             <UserInfoText 
-                                title           =   { props.title }
+                                title           =   { title }
                                 renderAsStudent =   { renderAsStudent }
                                 bold
                             >
-                                { props.firstName + " " + props.lastName }
+                                { firstName + " " + lastName }
                             </UserInfoText>
-                            <UserInfoText 
-                                title           =   { props.title }
-                                renderAsStudent =   { renderAsStudent }
-                                italic
-                            >
-                                { (props.title || "CVUHSD User")  }
-                            </UserInfoText>
-                            <UserInfoText 
-                                title           =   { props.title }
-                                renderAsStudent =   { renderAsStudent }
-                                bold
-                            >
-                                { (props.site || "CVUHSD") }
-                            </UserInfoText>
+                            {
+                                (title === "Student") ? (
+                                    <Fragment>
+                                    <UserInfoText 
+                                        title           =   { title }
+                                        renderAsStudent =   { renderAsStudent }
+                                        italic
+                                    >
+                                        { (title || "CVUHSD User")  }
+                                    </UserInfoText>
+                                    <UserInfoText 
+                                        title           =   { title }
+                                        renderAsStudent =   { renderAsStudent }
+                                        bold
+                                    >
+                                        { (site || "CVUHSD") }
+                                    </UserInfoText>
+                                    </Fragment>
+                                ) : null
+                            }
+                      
                         </Fragment>
                     ) : null
             }

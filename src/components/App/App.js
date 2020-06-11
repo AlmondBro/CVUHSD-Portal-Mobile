@@ -55,12 +55,16 @@ class App extends Component {
             email               :   null,
             phoneNumber         :   null,
             OU                  :   null,
-            renderAsStudent    :   false,
+            renderAsStudent     :   false,
             portalLogoSource    :   require("./../../assets/images/CV-600x600-portal-red.png"),
             backgroundImage     :   require('./../../assets/images/theCVway-red.png') ,
             
+            isModalVisible      :   false,
             authLoading         :   null
         }; //end this.state object
+
+
+        this.initialState = { ...this.state };
     } //end constructor
 
     azureAdAppProps = {
@@ -205,6 +209,26 @@ class App extends Component {
         }
     }; //end checkforExistingLogOn
 
+    setRenderAsStudent = (renderAsStudent) => {
+        this.setState( { renderAsStudent: renderAsStudent } );
+
+        let portalLogoSource = ( this.state.renderAsStudent === false ) ?
+            require("./../../assets/images/CV-600x600-portal-red.png")
+        :   require("./../../assets/images/CV-600x600-portal.png");
+        
+        this.setState({portalLogoSource: portalLogoSource});
+    }; //end setRenderAsStudent
+
+    setIsModalVisible = (isModalVisible) => {
+        this.setState( { isModalVisible: isModalVisible } );
+        console.log("Open change password");
+
+    }; //end setRenderAsStudent
+
+    openChangePassword = () => {
+        console.log("Open change password");
+    }; //end openChangePassword
+
     setLogOnUserData = async (userDataObject) => {
         try {
             const userDataObjectJSON = JSON.stringify(userDataObject);
@@ -215,14 +239,17 @@ class App extends Component {
     };
 
     clearLogOnUserData = async () => {
+        console.log("Clearlogout data.")
         try {
-          await AsyncStorage.clear();
+            await AsyncStorage.clear();
         } catch(e) {
             ReactotronDebug.log('clearLogOnUserData() clear');
         }
-      
+        this.setState({ ...this.initialState });
+        navigate('Home');
         console.log('Done.')
-      }
+    }; //end clearLogOnUserData
+
 
     componentDidMount = () => {
         const checkforUpdatesDev = false;
@@ -248,16 +275,6 @@ class App extends Component {
 
         this.clearLogOnUserData();
     }; //end componentDidMount
-
-    setRenderAsStudent = (renderAsStudent) => {
-        this.setState( { renderAsStudent: renderAsStudent } );
-
-        let portalLogoSource = ( this.state.renderAsStudent === false ) ?
-            require("./../../assets/images/CV-600x600-portal-red.png")
-        :   require("./../../assets/images/CV-600x600-portal.png");
-        
-        this.setState({portalLogoSource: portalLogoSource});
-    }; //end setRenderAsStudent
 
     // #B41A1F" : "#1E6C93
     render = () => {
@@ -352,7 +369,11 @@ class App extends Component {
                                     <TabsFooter 
                                         title               =   { this.state.title}
                                         renderAsStudent     =   { this.state.renderAsStudent }
+                                        isModalVisible      =   { this.state.isModalVisible }
+                                        setIsModalVisible   =   { this.setIsModalVisible }
                                         setRenderAsStudent  =   { this.setRenderAsStudent }
+                                        openChangePassword  =   { this.openChangePassword  }
+                                        logOut              =   { this.clearLogOnUserData }
                                     />
                                     : null    
                                 } 

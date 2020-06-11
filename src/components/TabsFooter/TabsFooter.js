@@ -5,6 +5,8 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import { TabsFooterContainerView, TabsFooterButton}  from './TabsFooter_StyledComponents.js';
 
+import ChangePassword  from './../ChangePassword/ChangePassword.js';
+
 import ChangePasswordIcon from './../../assets/images/icons/change-password.svg';
 
 import Reactotron from 'reactotron-react-native';
@@ -12,16 +14,7 @@ import Reactotron from 'reactotron-react-native';
 const isDev = __DEV__;
 const ReactotronDebug = isDev ? Reactotron : console;
 
-const TabsFooter = ({renderAsStudent, setRenderAsStudent, title, ...props }) => {    
-    // let [userTitle, setUserTitle] = useState(title);
-
-    // useEffect(() => {
-    //     console.log(userTitle)
-    //   }, [userTitle]);
-
-    //Reactotron.log("props.renderAsStudent:\t" + props.renderAsStudent);
-    Reactotron.log("renderAsStudent spread:\t" + renderAsStudent);
-    //Reactotron.log("TabsFooter props:\t" + JSON.stringify(props) );
+const TabsFooter = ({ renderAsStudent, setRenderAsStudent, isModalVisible, setIsModalVisible, title, logOut, ...props }) => {    
     return (
         <TabsFooterContainerView 
             title   =   { title }    
@@ -34,12 +27,13 @@ const TabsFooter = ({renderAsStudent, setRenderAsStudent, title, ...props }) => 
                             renderAsStudent =   { renderAsStudent }
                             title           =   { title }    
                             activeOpacity   =   { 0.5 }
-                            noBorder        
+                            onPress         =   { () => setIsModalVisible(!isModalVisible) }
+                            noBorder    
                         >
-                        <ChangePasswordIcon 
-                            width={95} 
-                            height={30}
-                        />
+                            <ChangePasswordIcon 
+                                width={95} 
+                                height={30}
+                            />
                         </TabsFooterButton>
 
                         <TabsFooterButton
@@ -64,6 +58,7 @@ const TabsFooter = ({renderAsStudent, setRenderAsStudent, title, ...props }) => 
                 renderAsStudent =   {  renderAsStudent }
                 title           =   { title }    
                 activeOpacity   =   { 0.5 }
+                onPress         =   { logOut }
                 noBorder        
             >
                 <FontAwesome 
@@ -73,6 +68,21 @@ const TabsFooter = ({renderAsStudent, setRenderAsStudent, title, ...props }) => 
                 />
                 
             </TabsFooterButton>
+           
+            { 
+                /* Only render the ChangePasswordModal if the signed-in user is not a student */
+                (title !== "Student") ? 
+                    (
+                        <ChangePassword 
+                            isModalVisible      =   {   isModalVisible  }
+                            setIsModalVisible   =   {   setIsModalVisible   }
+                            title               =   {   title   }
+                            renderAsStudent     =   {   renderAsStudent }
+                        />
+                    )
+                    : null
+            }
+            
         </TabsFooterContainerView>
     ); //end return statement
 }; //end TabsFooter()
