@@ -14,7 +14,7 @@ import Reactotron from 'reactotron-react-native';
 const isDev = __DEV__;
 const ReactotronDebug = isDev ? Reactotron : console;
 
-const TabsFooter = ({renderAsStudent, setRenderAsStudent, isModalVisible, setIsModalVisible, title, ...props }) => {    
+const TabsFooter = ({ renderAsStudent, setRenderAsStudent, isModalVisible, setIsModalVisible, title, ...props }) => {    
     // let [userTitle, setUserTitle] = useState(title);
 
     // useEffect(() => {
@@ -84,6 +84,8 @@ const TabsFooter = ({renderAsStudent, setRenderAsStudent, isModalVisible, setIsM
                         <ChangePassword 
                             isModalVisible      =   {   isModalVisible  }
                             setIsModalVisible   =   {   setIsModalVisible   }
+                            title               =   {   title   }
+                            renderAsStudent     =   {   renderAsStudent }
                         />
                     )
                     : null
