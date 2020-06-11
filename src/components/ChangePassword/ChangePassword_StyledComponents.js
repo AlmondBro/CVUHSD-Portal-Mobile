@@ -25,6 +25,12 @@ const ModalStyled = styled(Modal).attrs((props) => ({
 
 
 
+let WebViewContainer = styled.View`
+    flex: 1;
+    border-radius: 100;
+    background-color: red;
+`;
+
 const WebViewStyled = styled(WebView).attrs((props) => ({
     source          :   props.source,
     originWhitelist :   props.originWhitelist,
@@ -33,4 +39,4 @@ const WebViewStyled = styled(WebView).attrs((props) => ({
   flex              :   1;
 `;
 
-export { ModalStyled, WebViewStyled };
+export { ModalStyled, WebViewContainer, WebViewStyled };
