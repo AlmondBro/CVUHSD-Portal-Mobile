@@ -28,7 +28,6 @@ let ChangePassword = ({isModalVisible, setIsModalVisible, ...props}) => {
                 injectedJavaScript  =   {   `
                                                 document.getElementById("footer").style.display = "none"; 
                                                 document.getElementById("cancelButton").style.display = "none";
-                                                document.getElementById("companyLogo").style.display = "none"
                                             ` 
                                         }
 
