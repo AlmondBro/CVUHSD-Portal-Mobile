@@ -31,7 +31,7 @@ let ChangePassword = ({isModalVisible, setIsModalVisible, title, renderAsStudent
                 title           =   { title }
                 renderAsStudent =   { renderAsStudent }
             >
-             <ChangePasswordTextHeader/>
+             <ChangePasswordTextHeader title="Change Password"/>
                
                 <WebViewStyled 
                     source              =   { { uri: 'https://sso.centinela.k12.ca.us/adfs/portal/updatepassword/' } } 

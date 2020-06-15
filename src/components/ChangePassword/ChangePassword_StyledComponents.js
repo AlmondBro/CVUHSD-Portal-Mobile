@@ -39,7 +39,11 @@ let WebViewContainer = styled.View`
 `;
 
 let ChangePasswordTextHeaderContainer = styled.View`
-    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    flex: 0.15;
     border-radius: 20;
     width: 100%;
     background-color:  ${   props => (props.title === null) 
@@ -50,17 +54,28 @@ let ChangePasswordTextHeaderContainer = styled.View`
     padding: 0;
 `;
 
-
-let ChangePasswordText = styled.Text`
-    flex: 1;
-    border-radius: 20;
-    width: 100%;
-    color:  ${   props => (props.title === null) 
+/*
+${   props => (props.title === null) 
                             ? "#B41A1F" : 
                             (props.title === "Student" || props.renderAsStudent === "true") 
                                 ? "#B41A1F" : "#1E6C93" 
                         };
+
+*/
+
+let ChangePasswordText = styled.Text`
+    display: flex;
+    flex: 1;
+
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    align-content: center;
+    border-radius: 20;
+    width: 100%;
+    color:  white;
     padding: 0;
+    font-size: 30;
 `;
 
 let ChangePasswordTextHeader = (props) => {
