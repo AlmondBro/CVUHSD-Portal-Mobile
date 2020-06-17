@@ -35,7 +35,11 @@ const WelcomeText = styled.Text`
 `;
 
 let OpenSSOContainer = styled(BlueSectionContainer)`
-    background-color: #B41A1F;
+    background-color:  ${   props => (props.title === null) 
+                            ? "#B41A1F" : 
+                            (props.title === "Student" || props.renderAsStudent) 
+                                ? "#B41A1F" : "#1E6C93" 
+                        };
     border-top-left-radius: 25;
     border-top-right-radius: 25;
     flex: 1;
@@ -46,7 +50,8 @@ let OpenSSOContainer = styled(BlueSectionContainer)`
 
 const SignInButtonView = styled.View`
     background-color: white;
-    color: red;
+    color: ${props => (props.title === "Student" || props.renderAsStudent) ? "#B41A1F" : "#1E6C93" };
+
     border-radius: 15;
 
     width: 120;
@@ -57,25 +62,37 @@ const SignInButtonView = styled.View`
 `;
 
 const SignInButtonText= styled.Text`
-    color: #B41A1F;
+    color: ${props => (props.title === null) 
+                    ? "#B41A1F" : 
+                        (props.title === "Student" || props.renderAsStudent) 
+                        ? "#B41A1F" : "#1E6C93" 
+            };
+
     font-size: 20;
     font-weight: bold;
     flex-direction: row;
     justify-content: center;
 `;
 
-const SignInButtonTouchableOpacity = (props) => {
+const SignInButtonTouchableOpacity = ({ renderAsStudent, title, ...props }) => {
     return (
         <TouchableOpacity
             activeOpacity={0.5}
             onPress={ props.onPress }
         >
-            <SignInButtonView>
+            <SignInButtonView
+                title           =   { title }
+                renderAsStudent =   { renderAsStudent } 
+            >
                 {   (props.buttonTitle && !props.children) ? 
-                    (<SignInButtonText>
-                        { props.buttonTitle || "Sign In" }
-                    </SignInButtonText>)
-                    : null
+                    (
+                        <SignInButtonText
+                            title           =   { title }
+                            renderAsStudent =   { renderAsStudent } 
+                        >
+                            { props.buttonTitle || "Sign In" }
+                        </SignInButtonText>
+                    )   : null
                 }
                 { props.children }
             </SignInButtonView>

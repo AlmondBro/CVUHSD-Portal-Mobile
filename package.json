@@ -1,8 +1,8 @@
 {
   "main": "./src/index.js",
   "entryPoint": "./src/index.js",
-  "name": "src",
-  "version": "0.7.1",
+  "name": "cvuhsd-portal-mobile",
+  "version": "2.0.0",
   "scripts": {
     "start": "expo start",
     "start-reset": "rm -rf node_modules/ && npm install && npm audit fix && npm install && npm start --reset-cache",
@@ -34,6 +34,7 @@
     "react-native-collapsible": "^1.5.2",
     "react-native-expo-image-cache": "^4.1.0",
     "react-native-gesture-handler": "~1.6.0",
+    "react-native-modal": "^11.5.6",
     "react-native-reanimated": "~1.7.0",
     "react-native-safe-area-context": "0.7.3",
     "react-native-safe-area-view": "^1.1.1",
@@ -41,7 +42,7 @@
     "react-native-svg": "11.0.1",
     "react-native-svg-transformer": "^0.14.3",
     "react-native-web": "~0.11.7",
-    "react-native-webview": "^8.1.1",
+    "react-native-webview": "8.1.1",
     "styled-components": "^5.1.0",
     "styled-css": "^1.1.0",
     "url": "^0.11.0"
