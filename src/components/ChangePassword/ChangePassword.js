@@ -5,7 +5,7 @@ import { Button } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 //Iimport styled components
-import { ModalStyled, WebViewContainer, WebViewStyled } from './ChangePassword_StyledComponents.js';
+import { ModalStyled, WebViewContainer, WebViewStyled, ChangePasswordTextHeader } from './ChangePassword_StyledComponents.js';
 
 import { WebView } from 'react-native-webview';
 
@@ -17,17 +17,22 @@ import { WebView } from 'react-native-webview';
                                                 };
                         
 */
-let ChangePassword = ({isModalVisible, setIsModalVisible, title, ...props}) => {
+let ChangePassword = ({isModalVisible, setIsModalVisible, title, renderAsStudent, ...props}) => {
     return (
     //   <View style={{ flex: 1}}>
         <ModalStyled 
             isVisible       = {isModalVisible} 
             onBackdropPress = { () => setIsModalVisible(false) }
             onSwipeComplete = { () => setIsModalVisible(false) }
-            swipeDirection  = { ["down"] }
+            swipeDirection  = { ["up"] }
         >
-          <SafeAreaView style={{ flex: 1, borderTopLeftRadius: "100%", borderTopRightRadius: "100%", paddingBottom: 1000000}} >
-            <WebViewContainer>
+          <SafeAreaView style={{ flex: 1, borderTopLeftRadius: "100%", borderTopRightRadius: "100%", paddingBottom: 100}} >
+            <WebViewContainer
+                title           =   { title }
+                renderAsStudent =   { renderAsStudent }
+            >
+             <ChangePasswordTextHeader title="Change Password"/>
+               
                 <WebViewStyled 
                     source              =   { { uri: 'https://sso.centinela.k12.ca.us/adfs/portal/updatepassword/' } } 
                     originWhitelist     =   { ['https://'] }
