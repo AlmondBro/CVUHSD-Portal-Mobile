@@ -221,13 +221,7 @@ class App extends Component {
 
     setIsModalVisible = (isModalVisible) => {
         this.setState( { isModalVisible: isModalVisible } );
-        console.log("Open change password");
-
     }; //end setRenderAsStudent
-
-    openChangePassword = () => {
-        console.log("Open change password");
-    }; //end openChangePassword
 
     setLogOnUserData = async (userDataObject) => {
         try {
@@ -382,7 +376,6 @@ class App extends Component {
                                         isModalVisible      =   { this.state.isModalVisible }
                                         setIsModalVisible   =   { this.setIsModalVisible }
                                         setRenderAsStudent  =   { this.setRenderAsStudent }
-                                        openChangePassword  =   { this.openChangePassword  }
                                         logOut              =   { this.clearLogOnUserData }
                                     />
                                     : null    
