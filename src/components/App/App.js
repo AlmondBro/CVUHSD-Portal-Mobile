@@ -280,8 +280,18 @@ class App extends Component {
     render = () => {
         return (
             <SafeAreaProvider>
+                {/* This statusbar component's effect applies more on Android */}
                 <StatusBar 
-                    backgroundColor =   { this.state.renderAsStudent ? "#B41A1F" : "#1E6C93" } 
+                    backgroundColor =   {   this.state.title ? 
+                                                (   ( 
+                                                        this.state.title === "Student" || 
+                                                        this.state.renderAsStudent === true
+                                                    ) 
+                                                    ? "#B41A1F" 
+                                                    : "#1E6C93"
+                                                )
+                                                : "#B41A1F" 
+                                        } 
                     barStyle        =   "light-content" 
                     translucent     =   { true } 
                 />
