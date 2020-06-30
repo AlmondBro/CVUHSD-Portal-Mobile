@@ -79,6 +79,8 @@ let ChangePassword = ({isModalVisible, setIsModalVisible, title, renderAsStudent
                         color               =   { (Platform.OS === "android") ? buttonColor : "white" }
                         accessibilityLabel  =   "Close modal"
                         onPress             =   { () => setIsModalVisible(!isModalVisible) } 
+
+                        style={{borderBottomLeftRadius: 25}}
                     />
                 </WebViewContainer>
             </SafeAreaViewStyled>
