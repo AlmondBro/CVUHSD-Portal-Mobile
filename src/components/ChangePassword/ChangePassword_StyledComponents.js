@@ -4,7 +4,8 @@ import styled from 'styled-components/native';
 
 import Modal from 'react-native-modal';
 import { WebView } from 'react-native-webview';
-import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { SafeAreaView } from 'react-native-safe-area-context'; //Import SafeAreaView so that elements do not overlap with status bars or notches
 
 const ModalStyled = styled(Modal).attrs((props) => ({
     isVisible           :   props.isVisible,
@@ -36,6 +37,17 @@ let WebViewContainer = styled.View`
                                 ? "#B41A1F" : "#1E6C93" 
                         };
     padding: 0;
+`;
+
+let SafeAreaViewStyled = styled(SafeAreaView)`
+    flex: 1;
+    border-top-left-radius: 25;
+    border-top-right-radius: 25;
+
+    padding-top: 75;
+    padding-bottom: 100;
+
+    overflow: hidden;
 `;
 
 let ChangePasswordTextHeaderContainer = styled.View`
@@ -85,7 +97,10 @@ const WebViewStyled = styled(WebView).attrs((props) => ({
     originWhitelist :   props.originWhitelist,
     bounces         :   props.bounces
 }))`
+
   flex              :   1;
+  flex-direction    : column;
+  justify-content   : center;
 `;
 
-export { ModalStyled, WebViewContainer, WebViewStyled, ChangePasswordTextHeader };
+export { ModalStyled, SafeAreaViewStyled, WebViewContainer, WebViewStyled, ChangePasswordTextHeader };
