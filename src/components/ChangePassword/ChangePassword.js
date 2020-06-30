@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-native';
+import { Button, Platform } from 'react-native';
 
 //Import SafeAreaView so that elements do not overlap with status bars or notches
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -18,6 +18,8 @@ import { WebView } from 'react-native-webview';
                         
 */
 let ChangePassword = ({isModalVisible, setIsModalVisible, title, renderAsStudent, ...props}) => {
+    let buttonColor =  (title === "Student" || renderAsStudent === "true") 
+                        ? "#B41A1F" : "#1E6C93";
     return (
     //   <View style={{ flex: 1}}>
         <ModalStyled 
@@ -74,7 +76,7 @@ let ChangePassword = ({isModalVisible, setIsModalVisible, title, renderAsStudent
 
                     <Button 
                         title               =   "Close modal" 
-                        color               =   "white"
+                        color               =   { (Platform.OS === "android") ? buttonColor : "white" }
                         accessibilityLabel  =   "Close modal"
                         onPress             =   { () => setIsModalVisible(!isModalVisible) } 
                     />
