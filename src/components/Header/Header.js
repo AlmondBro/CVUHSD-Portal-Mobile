@@ -5,7 +5,7 @@ import { Text, TouchableOpacity } from 'react-native';
 import { HeaderContainerView, PortalLogoImage, UpdateAppView, UpdateTextDescription, UserInfoText  } from './Header_StyledComponents.js';
 import { BlueSectionContainer } from './../App/App_StyledComponents.js';
 
-const Header = (props) => {
+const Header = ({ renderAsStudent, title, firstName, lastName, site,...props }) => {
     return (
       <HeaderContainerView>
           <TouchableOpacity
@@ -13,39 +13,65 @@ const Header = (props) => {
             // onPress={ props.onPress('Home') }
           >
             <PortalLogoImage  
-                {...props}
+                            {...props}
                 source  =   { props.portalLogoSource} 
             />
           </TouchableOpacity>
     
         <Fragment>
-        { props.showUpdate ?
-            ( 
-                <UpdateAppView>
-                    <UpdateTextDescription>A new update is available. Press here to update!</UpdateTextDescription>
-                    <Button
-                        onPress={ () => { console.log("Update reload"); Updates.reload() } }
-                        title="Update Mobile Portal"
-                        color="#1E6C93"
-                        accessibilityLabel="Update Mobile Portal"
+            { props.showUpdate ?
+                ( 
+                    <UpdateAppView>
+                        <UpdateTextDescription>A new update is available. Press here to update!</UpdateTextDescription>
+                        <Button
+                            onPress={ () => { console.log("Update reload"); Updates.reload() } }
+                            title="Update Mobile Portal"
+                            color="#1E6C93"
+                            accessibilityLabel="Update Mobile Portal"
 
-                    />
-                </UpdateAppView>
-            )
-            : null
-        }  
+                        />
+                    </UpdateAppView>
+                )
+                : null
+            }  
         </Fragment> 
 
         <BlueSectionContainer>
-                    {
-                        props.title ? 
-                            (
-                                <Fragment>
-                                    <UserInfoText title={props.title}>{ props.title + " from " + props.site}</UserInfoText>
-                                    <UserInfoText title={props.title}>{ props.firstName + " " + props.lastName }</UserInfoText>
-                                </Fragment>
-                            ) : null
-                    }
+            {
+                title ? 
+                    (
+                        <Fragment>
+                            <UserInfoText 
+                                title           =   { title }
+                                renderAsStudent =   { renderAsStudent }
+                                bold
+                            >
+                                { firstName + " " + lastName }
+                            </UserInfoText>
+                            {
+                                (title === "Student") ? (
+                                    <Fragment>
+                                    <UserInfoText 
+                                        title           =   { title }
+                                        renderAsStudent =   { renderAsStudent }
+                                        italic
+                                    >
+                                        { (title || "CVUHSD User")  }
+                                    </UserInfoText>
+                                    <UserInfoText 
+                                        title           =   { title }
+                                        renderAsStudent =   { renderAsStudent }
+                                        bold
+                                    >
+                                        { (site || "CVUHSD") }
+                                    </UserInfoText>
+                                    </Fragment>
+                                ) : null
+                            }
+                      
+                        </Fragment>
+                    ) : null
+            }
         </BlueSectionContainer>
       </HeaderContainerView>
     );

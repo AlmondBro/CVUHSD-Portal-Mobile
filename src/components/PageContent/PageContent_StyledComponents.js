@@ -19,6 +19,8 @@ let ScrollViewStyled = styled.ScrollView.attrs((props) => ({
         background-color: #F4F7F9;
         width: ${ props.width ? props.width : "auto" };
     `,
+    alwaysBounceVertical: props.alwaysBounceVertical,
+    bounces: props.bounce
 }))`
   flex: 1;
 `;
