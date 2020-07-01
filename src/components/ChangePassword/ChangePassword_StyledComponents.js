@@ -41,8 +41,7 @@ let WebViewContainer = styled.View`
 
 let SafeAreaViewStyled = styled(SafeAreaView)`
     flex: 1;
-    border-top-left-radius: 25;
-    border-top-right-radius: 25;
+    border-radius: 25;
 
     padding-top: 75;
     padding-bottom: 100;
