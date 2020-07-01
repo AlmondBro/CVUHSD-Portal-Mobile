@@ -71,7 +71,7 @@ class App extends Component {
         clientId        :   AZURE_CLIENT_ID,
         tenantId        :   AZURE_TENANT_ID,
         scope           :   "user.read",
-        redirectUrl     :   AuthSession.makeRedirectUri({native: 'cvuhsd.portal://redirect'}),
+        redirectUrl     :   AuthSession.makeRedirectUri({ native: 'cvuhsd.portal://redirect' }),
         clientSecret    :   AZURE_CLIENT_SECRET,
         domainHint      :   AZURE_DOMAIN_HINT,
         prompt          :   "login"
@@ -155,10 +155,6 @@ class App extends Component {
             });
 
             this.setLogOnUserData({...this.state});
-    
-            if ( adUserInfo.jobTitle !== "Student" ){
-                //this.setRenderAsStudent(true);
-            }
 
             /*
             if ( (adUserInfo.jobTitle === "Student") && (adUserInfo.officeLocation === null) ) {
@@ -263,11 +259,11 @@ class App extends Component {
               });
         }
 
-        // if (this.checkforExistingLogOn() === true) {
-        //     navigate('Page-Content');
-        // };
+        if (this.checkforExistingLogOn() === true) {
+            navigate('Page-Content');
+        };
 
-        this.clearLogOnUserData();
+        //this.clearLogOnUserData();
     }; //end componentDidMount
 
     // #B41A1F" : "#1E6C93
