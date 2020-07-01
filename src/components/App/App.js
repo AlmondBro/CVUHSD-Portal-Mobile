@@ -196,6 +196,8 @@ class App extends Component {
 
             if (currentUserState !== null) {
                 this.setState({ ...JSON.parse(currentUserState) });
+                navigate('Page-Content');
+
                 return true;
             } else {
                 return false;
@@ -259,9 +261,11 @@ class App extends Component {
               });
         }
 
-        if (this.checkforExistingLogOn() === true) {
-            navigate('Page-Content');
-        };
+        // if (this.checkforExistingLogOn() === true) {
+        //     navigate('Page-Content');
+        // };
+
+        this.checkforExistingLogOn();
 
         //this.clearLogOnUserData();
     }; //end componentDidMount
