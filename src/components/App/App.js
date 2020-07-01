@@ -71,7 +71,7 @@ class App extends Component {
         clientId        :   AZURE_CLIENT_ID,
         tenantId        :   AZURE_TENANT_ID,
         scope           :   "user.read",
-        redirectUrl     :   AuthSession.makeRedirectUri({native: 'cvuhsd-portal://redirect'}),
+        redirectUrl     :   AuthSession.makeRedirectUri({native: 'cvuhsd.portal://redirect'}),
         clientSecret    :   AZURE_CLIENT_SECRET,
         domainHint      :   AZURE_DOMAIN_HINT,
         prompt          :   "login"
@@ -221,13 +221,7 @@ class App extends Component {
 
     setIsModalVisible = (isModalVisible) => {
         this.setState( { isModalVisible: isModalVisible } );
-        console.log("Open change password");
-
     }; //end setRenderAsStudent
-
-    openChangePassword = () => {
-        console.log("Open change password");
-    }; //end openChangePassword
 
     setLogOnUserData = async (userDataObject) => {
         try {
@@ -280,8 +274,18 @@ class App extends Component {
     render = () => {
         return (
             <SafeAreaProvider>
+                {/* This statusbar component's effect applies more on Android */}
                 <StatusBar 
-                    backgroundColor =   { this.state.renderAsStudent ? "#B41A1F" : "#1E6C93" } 
+                    backgroundColor =   {   this.state.title ? 
+                                                (   ( 
+                                                        this.state.title === "Student" || 
+                                                        this.state.renderAsStudent === true
+                                                    ) 
+                                                    ? "#B41A1F" 
+                                                    : "#1E6C93"
+                                                )
+                                                : "#B41A1F" 
+                                        } 
                     barStyle        =   "light-content" 
                     translucent     =   { true } 
                 />
@@ -372,7 +376,6 @@ class App extends Component {
                                         isModalVisible      =   { this.state.isModalVisible }
                                         setIsModalVisible   =   { this.setIsModalVisible }
                                         setRenderAsStudent  =   { this.setRenderAsStudent }
-                                        openChangePassword  =   { this.openChangePassword  }
                                         logOut              =   { this.clearLogOnUserData }
                                     />
                                     : null    

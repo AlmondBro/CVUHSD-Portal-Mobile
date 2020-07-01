@@ -13,12 +13,13 @@ let BlueSectionHeaderTouchableOpacity = styled.TouchableOpacity`
     flex-direction: row;
     align-self: stretch;
     justify-content: center;
+
     background-color: ${props => (props.title === "Student" || props.renderAsStudent) ? "#B41A1F" : "#1E6C93" };
+    
     padding-top: 8;
     padding-bottom: 8;
 
     border-bottom-color: #F4F7F9;
-    
     border-bottom-width: ${props => props.expanded ? 1 : 0};
 `;
 
