@@ -33,6 +33,9 @@ import TabsFooter from './../TabsFooter/TabsFooter.js'
 
 import HomeScreen from './../HomeScreen/HomeScreen.js';
 
+import Images from '@assets';
+// './../../assets';
+
 const { Navigator, Screen } = createStackNavigator();  //<Navigator> is equivalent to a <Switch> on React Router, <Screen/> is equivalent to <Route>
 
 const isDev = __DEV__;
@@ -56,12 +59,11 @@ class App extends Component {
             phoneNumber         :   null,
             OU                  :   null,
             renderAsStudent     :   false,
-            portalLogoSource    :   require("./../../assets/images/CV-600x600-portal-red.png"),
-            backgroundImage     :   require('./../../assets/images/theCVway-red.png') ,
+            portalLogoSource    :   Images.appHeader.portalLogoRed,
+            backgroundImage     :   Images.appHeader.backgroundImageRed ,
             
             isModalVisible      :   false,
             authLoading         :   null,
-            //navigateFunction    :   () => null
         }; //end this.state object
 
 
@@ -133,14 +135,13 @@ class App extends Component {
         ReactotronDebug.log("adUserInfo from App.js:\t" + JSON.stringify(adUserInfo) );
 
         let portalLogoSource = ( (adUserInfo.jobTitle === "Student") || (this.state.renderAsStudent === true)) ?
-                                "./../../assets/images/CV-600x600-portal-red.png"
-                            :   "./../../assets/images/CV-600x600-portal.png";
+                                Images.appHeader.portalLogoRed
+                            :   Images.appHeader.portalLogoBlue;
 
         let backgroundImage = (adUserInfo.jobTitle === "Student" || this.state.renderAsStudent) ?
-                                './../../assets/images/theCVway-red.png'
-                            :   './../../assets/images/theCVway-blue.png';
-
-                            
+                                Images.appHeader.backgroundImageRed
+                            :   Images.appHeader.backgroundImageBlue;
+               
         if ( !adUserInfo.error && (adUserInfo.type === "success") ) {
             this.setState({
                 firstName           : adUserInfo.givenName,
@@ -215,11 +216,16 @@ class App extends Component {
     setRenderAsStudent = (renderAsStudent) => {
         this.setState( { renderAsStudent: renderAsStudent } );
 
-        let portalLogoSource = ( this.state.renderAsStudent === false ) ?
-            require("./../../assets/images/CV-600x600-portal-red.png")
-        :   require("./../../assets/images/CV-600x600-portal.png");
-        
-        this.setState({portalLogoSource: portalLogoSource});
+        const portalLogoSource = ( this.state.renderAsStudent === false ) ?
+            Images.appHeader.portalLogoRed
+        :   Images.appHeader.portalLogoBlue;
+
+        // TODO: Figure out why the logic here, although inversed, works
+        const backgroundImage = (this.state.title === "Student" || this.state.renderAsStudent) ?
+            Images.appHeader.backgroundImageBlue
+        :   Images.appHeader.backgroundImageRed;
+
+        this.setState({portalLogoSource: portalLogoSource, backgroundImage: backgroundImage});
         this.setLogOnUserData({...this.state });
     }; //end setRenderAsStudent
 
