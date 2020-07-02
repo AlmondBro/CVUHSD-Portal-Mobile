@@ -157,8 +157,8 @@ class App extends Component {
             });
 
             
-            setInterval(() => this.setLogOnUserData({...this.state}), 1500);
-
+            //setInterval(() => this.setLogOnUserData({...this.state}), 1500);
+            this.setLogOnUserData({...this.state});
 
             /*
             if ( (adUserInfo.jobTitle === "Student") && (adUserInfo.officeLocation === null) ) {
@@ -197,19 +197,20 @@ class App extends Component {
     
     checkforExistingLogOn = async () => {
         try {
-            let currentUserState = await AsyncStorage.getItem(this.USER_INFO);
+            const currentUserState = await AsyncStorage.getItem(this.USER_INFO);
 
             if (currentUserState !== null) {
                 ReactotronDebug.log("Session exists");
+                ReactotronDebug.log(JSON.parse(currentUserState));
+
                 this.setState({ ...JSON.parse(currentUserState) });
-                this.state.navigateFunction('Page-Content');
 
                 return true;
             } else {
                 return false;
             }
         } catch (error) {
-            Reactotron.log("checkforExistingLogOn() Error:\t" + JSON.stringify(error));
+            ReactotronDebug.log("checkforExistingLogOn() Error:\t" + JSON.stringify(error));
         }
     }; //end checkforExistingLogOn
 
@@ -221,6 +222,7 @@ class App extends Component {
         :   require("./../../assets/images/CV-600x600-portal.png");
         
         this.setState({portalLogoSource: portalLogoSource});
+        this.setLogOnUserData({...this.state });
     }; //end setRenderAsStudent
 
     setIsModalVisible = (isModalVisible) => {
@@ -232,7 +234,7 @@ class App extends Component {
             const userDataObjectJSON = JSON.stringify(userDataObject);
             await AsyncStorage.setItem(this.USER_INFO, userDataObjectJSON);
           } catch (e) {
-            Reactotron.log("setLogOnUserData() Error:\t" + JSON.stringify(error));
+            Reactotron.error("setLogOnUserData() Error:\t" + JSON.stringify(error));
           }
     };
 
