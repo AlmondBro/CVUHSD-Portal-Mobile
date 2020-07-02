@@ -1,8 +1,10 @@
 import Reactotron from 'reactotron-react-native';
-import { NativeModules, AsyncStorage } from 'react-native';
+import { NativeModules } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+
 import url from 'url';
 
-const {hostname} = url.parse(NativeModules.SourceCode.scriptURL);
+const { hostname } = url.parse(NativeModules.SourceCode.scriptURL);
 console.log(hostname); // mine was 192.168.1.2
 
 Reactotron
