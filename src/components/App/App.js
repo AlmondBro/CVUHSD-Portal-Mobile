@@ -235,10 +235,11 @@ class App extends Component {
 
     setLogOnUserData = async (userDataObject) => {
         try {
+            ReactotronDebug.log("setLogOnUserData()");
             const userDataObjectJSON = JSON.stringify(userDataObject);
             await AsyncStorage.setItem(this.USER_INFO, userDataObjectJSON);
           } catch (e) {
-            Reactotron.error("setLogOnUserData() Error:\t" + JSON.stringify(error));
+            ReactotronDebug.error("setLogOnUserData() Error:\t" + JSON.stringify(error));
           }
     };
 
