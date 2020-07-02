@@ -133,16 +133,14 @@ class App extends Component {
         ReactotronDebug.log("adUserInfo from App.js:\t" + JSON.stringify(adUserInfo) );
 
         let portalLogoSource = ( (adUserInfo.jobTitle === "Student") || (this.state.renderAsStudent === true)) ?
-                                require("./../../assets/images/CV-600x600-portal-red.png")
-                            :   require("./../../assets/images/CV-600x600-portal.png");
+                                "./../../assets/images/CV-600x600-portal-red.png"
+                            :   "./../../assets/images/CV-600x600-portal.png";
 
         let backgroundImage = (adUserInfo.jobTitle === "Student" || this.state.renderAsStudent) ?
-                                require('./../../assets/images/theCVway-red.png')
-                            :   require('./../../assets/images/theCVway-blue.png');
+                                './../../assets/images/theCVway-red.png'
+                            :   './../../assets/images/theCVway-blue.png';
 
                             
-
-
         if ( !adUserInfo.error && (adUserInfo.type === "success") ) {
             this.setState({
                 firstName           : adUserInfo.givenName,
