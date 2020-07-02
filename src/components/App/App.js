@@ -61,7 +61,7 @@ class App extends Component {
             
             isModalVisible      :   false,
             authLoading         :   null,
-            navigateFunction    :   () => null
+            //navigateFunction    :   () => null
         }; //end this.state object
 
 
@@ -152,7 +152,7 @@ class App extends Component {
                 email               : adUserInfo.mail,
                 portalLogoSource    : portalLogoSource,
                 backgroundImage     : backgroundImage,
-                navigateFunction    : navigate,
+               // navigateFunction    : navigate,
                 authLoading         : false 
             });
 
@@ -168,9 +168,7 @@ class App extends Component {
 
             ReactotronDebug.log("App State after authentication:\t" + JSON.stringify(this.state));
 
-            this.setState({});
-
-            navigate('Page-Content');
+            navigate('Home');
                
         } else {
             ReactotronDebug.log("User canceled operation from App.js");
@@ -246,7 +244,7 @@ class App extends Component {
             ReactotronDebug.log('clearLogOnUserData() clear');
         }
         this.setState({ ...this.initialState });
-        navigate('Home');
+        //navigate('Home');
         console.log('Done.')
     }; //end clearLogOnUserData
 
@@ -347,40 +345,48 @@ class App extends Component {
                                                                 title: null, 
                                                                 headerShown: false,
                                                                 gestureEnabled: false,
+                                                                animationTypeForReplace: this.state.title ? 'push' : 'pop',
                                                             }
                                                         }
                                 >
                                 
-                                    <Screen 
-                                        name="Home" 
-                                        // options={{ title: null, headerShown: false }}
-                                    >
-                                        { props => <HomeScreen 
-                                                        {...props}
-                                                        authLoading         =   {   this.state.authLoading  }
-                                                        title               =   {   this.state.title    }
-                                                        renderAsStudent     =   {   this.state.renderAsStudent }
-                                                        openADSingleSignOn  =   {   this.openADSingleSignOn } 
-                                                    /> 
+                                {
+                                    (this.state.title === null) ? (
+                                        <Screen 
+                                            name="signIn-screen" 
+                                            // options={{ title: null, headerShown: false }}
+                                        >
+                                            { props => <HomeScreen 
+                                                            {...props}
+                                                            authLoading         =   {   this.state.authLoading  }
+                                                            title               =   {   this.state.title    }
+                                                            renderAsStudent     =   {   this.state.renderAsStudent }
+                                                            openADSingleSignOn  =   {   this.openADSingleSignOn } 
+                                                        /> 
+                                            }
+                                        </Screen>
+                                    ) : (
+                                        <Screen 
+                                            name="Home"
+                                            // options={{ title: null, headerShown: false }}
+                                        >
+                                            { props => <PageContent 
+                                                            {...props}
+                                                            showUpdate          =   { this.state.showUpdate } 
+                                                            firstName           =   { this.state.firstName}
+                                                            lastName            =   { this.state.lastName }
+                                                            title               =   { this.state.title }
+                                                            renderAsStudent     =   { this.state.renderAsStudent }
+                                                            site                =   { this.state.site }
+                                                            appWidth            =   { this.state.appWidth }
+                                                        />
                                         }
                                     </Screen>
+                                    )
+                                }
+                                    
 
-                                    <Screen 
-                                        name="Page-Content"
-                                        // options={{ title: null, headerShown: false }}
-                                    >
-                                        { props => <PageContent 
-                                                        {...props}
-                                                        showUpdate          =   { this.state.showUpdate } 
-                                                        firstName           =   { this.state.firstName}
-                                                        lastName            =   { this.state.lastName }
-                                                        title               =   { this.state.title }
-                                                        renderAsStudent     =   { this.state.renderAsStudent }
-                                                        site                =   { this.state.site }
-                                                        appWidth            =   { this.state.appWidth }
-                                                    />
-                                        }
-                                    </Screen>
+                                
                                 </Navigator>
                                 {   this.state.title ? 
                                     <TabsFooter 
