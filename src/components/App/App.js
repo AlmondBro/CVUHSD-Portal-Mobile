@@ -5,8 +5,8 @@ import { StatusBar, ImageBackground, Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import 'react-native-gesture-handler';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native'; //Equivalent to the BrowserRouter in ReactRouter
+import { createStackNavigator } from '@react-navigation/stack'; 
 
 import Reactotron from 'reactotron-react-native';
 
@@ -33,7 +33,7 @@ import TabsFooter from './../TabsFooter/TabsFooter.js'
 
 import HomeScreen from './../HomeScreen/HomeScreen.js';
 
-const { Navigator, Screen } = createStackNavigator();
+const { Navigator, Screen } = createStackNavigator();  //<Navigator> is equivalent to a <Switch> on React Router, <Screen/> is equivalent to <Route>
 
 const isDev = __DEV__;
 
@@ -60,7 +60,8 @@ class App extends Component {
             backgroundImage     :   require('./../../assets/images/theCVway-red.png') ,
             
             isModalVisible      :   false,
-            authLoading         :   null
+            authLoading         :   null,
+            navigateFunction    :   () => null
         }; //end this.state object
 
 
@@ -151,10 +152,13 @@ class App extends Component {
                 email               : adUserInfo.mail,
                 portalLogoSource    : portalLogoSource,
                 backgroundImage     : backgroundImage,
+                navigateFunction    : navigate,
                 authLoading         : false 
             });
 
-            this.setLogOnUserData({...this.state});
+            
+            setInterval(() => this.setLogOnUserData({...this.state}), 1500);
+
 
             /*
             if ( (adUserInfo.jobTitle === "Student") && (adUserInfo.officeLocation === null) ) {
@@ -163,6 +167,9 @@ class App extends Component {
             */
 
             ReactotronDebug.log("App State after authentication:\t" + JSON.stringify(this.state));
+
+            this.setState({});
+
             navigate('Page-Content');
                
         } else {
@@ -195,8 +202,9 @@ class App extends Component {
             let currentUserState = await AsyncStorage.getItem(this.USER_INFO);
 
             if (currentUserState !== null) {
+                ReactotronDebug.log("Session exists");
                 this.setState({ ...JSON.parse(currentUserState) });
-                navigate('Page-Content');
+                this.state.navigateFunction('Page-Content');
 
                 return true;
             } else {
@@ -266,6 +274,11 @@ class App extends Component {
         // };
 
         this.checkforExistingLogOn();
+        // if (this.checkforExistingLogOn()) {
+        //     navigate('Page-Content');
+
+        // }
+       // navigate('Page-Content');
 
         //this.clearLogOnUserData();
     }; //end componentDidMount
