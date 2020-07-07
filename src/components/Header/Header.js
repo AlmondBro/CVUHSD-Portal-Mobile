@@ -5,6 +5,9 @@ import { Text, TouchableOpacity } from 'react-native';
 import { HeaderContainerView, PortalLogoImage, UpdateAppView, UpdateTextDescription, UserInfoText  } from './Header_StyledComponents.js';
 import { BlueSectionContainer } from './../App/App_StyledComponents.js';
 
+//Import 3rd-party APIs
+import greeting from 'greeting';
+
 const Header = ({ renderAsStudent, title, firstName, lastName, site,...props }) => {
     return (
       <HeaderContainerView>
@@ -46,7 +49,7 @@ const Header = ({ renderAsStudent, title, firstName, lastName, site,...props }) 
                                 renderAsStudent =   { renderAsStudent }
                                 bold
                             >
-                                { firstName + " " + lastName }
+                                { greeting.random() + " " + firstName + " " + lastName }
                             </UserInfoText>
                             {
                                 (title === "Student") ? (
