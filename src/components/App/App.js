@@ -1,7 +1,9 @@
 //Import React/React Native modules
 import React, { Component } from 'react';
-import { StatusBar, ImageBackground, Alert } from 'react-native';
+import { ImageBackground, Alert } from 'react-native';
 
+//Import expo/react native components that now exist as separate packages
+import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from '@react-native-community/async-storage';
 
 //Import React Navigation Packages
