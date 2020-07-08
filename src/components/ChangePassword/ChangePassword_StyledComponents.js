@@ -92,9 +92,12 @@ let ChangePasswordTextHeader = (props) => {
 
 
 const WebViewStyled = styled(WebView).attrs((props) => ({
-    source          :   props.source,
-    originWhitelist :   props.originWhitelist,
-    bounces         :   props.bounces
+    source              :  props.source,
+    originWhitelist     :  props.originWhitelist,
+    bounces             :  props.bounces,
+    javaScriptEnabled   :  props.javaScriptEnabled,
+    injectedJavaScript  :  props.injectedJavaScript,   
+    injectJavaScript    :  props.injectJavaScript 
 }))`
 
   flex              :   1;
