@@ -291,14 +291,9 @@ class App extends Component {
         //     navigate('Page-Content');
         // };
 
-        this.checkforExistingLogOn();
-        // if (this.checkforExistingLogOn()) {
-        //     navigate('Page-Content');
+        //this.checkforExistingLogOn();
 
-        // }
-       // navigate('Page-Content');
-
-        //this.clearLogOnUserData();
+        this.clearLogOnUserData();
     }; //end componentDidMount
 
     // #B41A1F" : "#1E6C93
