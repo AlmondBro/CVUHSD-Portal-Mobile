@@ -4,11 +4,7 @@ import { StatusBar, ImageBackground, Alert } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
-import { SafeAreaView } from 'react-native-safe-area-context';
-
-import { AppLoading } from 'expo';
-import * as Font from 'expo-font';
-
+//Import React Navigation Packages
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native'; //Equivalent to the BrowserRouter in ReactRouter
 import { createStackNavigator } from '@react-navigation/stack'; 
@@ -20,6 +16,23 @@ import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID, AZURE_DOMAIN_HIN
 
 //Import utility functions
 import { dimensionsWidthHOC, navigationRef, navigate } from './../../utility-functions.js';
+
+import { AppLoading } from 'expo';
+import * as Font from 'expo-font';
+import { 
+    SourceSansPro_200ExtraLight,
+    SourceSansPro_200ExtraLight_Italic,
+    SourceSansPro_300Light,
+    SourceSansPro_300Light_Italic,
+    SourceSansPro_400Regular,
+    SourceSansPro_400Regular_Italic,
+    SourceSansPro_600SemiBold,
+    SourceSansPro_600SemiBold_Italic,
+    SourceSansPro_700Bold,
+    SourceSansPro_700Bold_Italic,
+    SourceSansPro_900Black,
+    SourceSansPro_900Black_Italic 
+  } from '@expo-google-fonts/source-sans-pro';
 
 import * as AuthSession from 'expo-auth-session';
 import * as Updates from 'expo-updates';
@@ -69,7 +82,7 @@ class App extends Component {
             
             isModalVisible      :   false,
             authLoading         :   null,
-            fontLoaded          :   false
+            fontLoaded          :   true
         }; //end this.state object
 
 
@@ -261,6 +274,26 @@ class App extends Component {
         console.log('Done.')
     }; //end clearLogOnUserData
 
+    loadFontsAsync = async () => {
+        const customFonts = {
+            SourceSansPro_200ExtraLight,
+            SourceSansPro_200ExtraLight_Italic,
+            SourceSansPro_300Light,
+            SourceSansPro_300Light_Italic,
+            SourceSansPro_400Regular,
+            SourceSansPro_400Regular_Italic,
+            SourceSansPro_600SemiBold,
+            SourceSansPro_600SemiBold_Italic,
+            SourceSansPro_700Bold,
+            SourceSansPro_700Bold_Italic,
+            SourceSansPro_900Black,
+            SourceSansPro_900Black_Italic 
+        };
+        //SourceSansPro : '@expo-google-fonts/source-sans-pro'
+        //
+        await Font.loadAsync(customFonts);
+        this.setState({ fontsLoaded: true });
+    }
 
     componentDidMount = async () => {
         const checkforUpdatesDev = false;
@@ -280,150 +313,138 @@ class App extends Component {
               });
         }
 
-        //require('./../../../node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/FontAwesome.ttf')
-        // await Font.loadAsync({
-        //     "FontAwesome"   : require('@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/FontAwesome.ttf')
-        // });
+        this.setState({ fontLoaded: this.props.fontLoaded});
+        //this.loadFontsAsync();
 
-        // this.setState({ fontLoaded: true });
-
-        // if (this.checkforExistingLogOn() === true) {
-        //     navigate('Page-Content');
-        // };
-
-        //this.checkforExistingLogOn();
-
+        // this.checkforExistingLogOn();
         this.clearLogOnUserData();
     }; //end componentDidMount
 
     // #B41A1F" : "#1E6C93
     render = () => {
-
         // if (!this.state.fontLoaded) {
-        //     return <AppLoading />
-        //   }
+        //     return ( <AppLoading /> );
+        // } else {
+            return (
+                <SafeAreaProvider>
+                    {/* This statusbar component's effect applies more on Android */}
+                    <StatusBar 
+                        backgroundColor =   {   this.state.title ? 
+                                                    (   ( 
+                                                            this.state.title === "Student" || 
+                                                            this.state.renderAsStudent === true
+                                                        ) 
+                                                        ? "#B41A1F" 
+                                                        : "#1E6C93"
+                                                    )
+                                                    : "#B41A1F" 
+                                            } 
+                        barStyle        =   "light-content" 
+                        translucent     =   { true } 
+                    />
+                    <NavigationContainer ref={navigationRef}>
+                        
+                            { /* The following is a technique using two SafeAreaViews to have the
+                                statusbar/top padding be a different color than the bottom padding. 
+                                SafeAreaViews are only applicable on iOs 11+ on >iPhone X 
 
-        return (
-            <SafeAreaProvider>
-                {/* This statusbar component's effect applies more on Android */}
-                <StatusBar 
-                    backgroundColor =   {   this.state.title ? 
-                                                (   ( 
-                                                        this.state.title === "Student" || 
-                                                        this.state.renderAsStudent === true
-                                                    ) 
-                                                    ? "#B41A1F" 
-                                                    : "#1E6C93"
-                                                )
-                                                : "#B41A1F" 
-                                        } 
-                    barStyle        =   "light-content" 
-                    translucent     =   { true } 
-                />
-                <NavigationContainer ref={navigationRef}>
-                    
-                        { /* The following is a technique using two SafeAreaViews to have the
-                            statusbar/top padding be a different color than the bottom padding. 
-                            SafeAreaViews are only applicable on iOs 11+ on >iPhone X 
-
-                            Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
-                        */ }
-                        <SafeAreaViewStyled 
-                            title           =   { this.state.title }
-                            renderAsStudent =   { this.state.renderAsStudent }
-                        >
-                            <AppContainerView>
-                                <ImageBackground
-                                    source={ this.state.backgroundImage }
-                                    style={ 
-                                        { 
-                                            flex: 0.75,
-                                            resizeMode: "cover",
-                                            justifyContent: "center"
+                                Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
+                            */ }
+                            <SafeAreaViewStyled 
+                                title           =   { this.state.title }
+                                renderAsStudent =   { this.state.renderAsStudent }
+                            >
+                                <AppContainerView>
+                                    <ImageBackground
+                                        source={ this.state.backgroundImage }
+                                        style={ 
+                                            { 
+                                                flex: 0.75,
+                                                resizeMode: "cover",
+                                                justifyContent: "center"
+                                            }
                                         }
-                                    }
-                                >
-                                    <AppHeaderContainerView>
-                                        <Header 
-                                            showUpdate          =   { this.state.showUpdate } 
-                                            firstName           =   { this.state.firstName}
-                                            lastName            =   { this.state.lastName }
-                                            title               =   { this.state.title }
-                                            site                =   { this.state.site }
-                                            renderAsStudent     =   { this.state.renderAsStudent }
-                                            portalLogoSource    =   { this.state.portalLogoSource }
-                                            // onPress    =   { navigate ? navigate: null }
-                                        />
-                                        
-                                        { (this.state.title || this.state.renderAsStudent) ? null : <WelcomeText>Welcome</WelcomeText> }
-                                    </AppHeaderContainerView>
-                                </ImageBackground>
+                                    >
+                                        <AppHeaderContainerView>
+                                            <Header 
+                                                showUpdate          =   { this.state.showUpdate } 
+                                                firstName           =   { this.state.firstName}
+                                                lastName            =   { this.state.lastName }
+                                                title               =   { this.state.title }
+                                                site                =   { this.state.site }
+                                                renderAsStudent     =   { this.state.renderAsStudent }
+                                                portalLogoSource    =   { this.state.portalLogoSource }
+                                                // onPress    =   { navigate ? navigate: null }
+                                            />
+                                            
+                                            { (this.state.title || this.state.renderAsStudent) ? null : <WelcomeText>Welcome</WelcomeText> }
+                                        </AppHeaderContainerView>
+                                    </ImageBackground>
 
-                                <Navigator
-                                    headerMode      = "none"
-                                    screenOptions   =   {   { 
-                                                                title: null, 
-                                                                headerShown: false,
-                                                                gestureEnabled: false,
-                                                                animationTypeForReplace: this.state.title ? 'push' : 'pop',
+                                    <Navigator
+                                        headerMode      = "none"
+                                        screenOptions   =   {   { 
+                                                                    title: null, 
+                                                                    headerShown: false,
+                                                                    gestureEnabled: false,
+                                                                    animationTypeForReplace: this.state.title ? 'push' : 'pop',
+                                                                }
                                                             }
-                                                        }
-                                >
-                                
-                                {
-                                    (this.state.title === null) ? (
-                                        <Screen 
-                                            name="signIn-screen" 
-                                            // options={{ title: null, headerShown: false }}
-                                        >
-                                            { props => <HomeScreen 
-                                                            {...props}
-                                                            authLoading         =   {   this.state.authLoading  }
-                                                            title               =   {   this.state.title    }
-                                                            renderAsStudent     =   {   this.state.renderAsStudent }
-                                                            openADSingleSignOn  =   {   this.openADSingleSignOn } 
-                                                        /> 
+                                    >
+                                    
+                                    {
+                                        (this.state.title === null) ? (
+                                            <Screen 
+                                                name="signIn-screen" 
+                                                // options={{ title: null, headerShown: false }}
+                                            >
+                                                { props => <HomeScreen 
+                                                                {...props}
+                                                                authLoading         =   {   this.state.authLoading  }
+                                                                title               =   {   this.state.title    }
+                                                                renderAsStudent     =   {   this.state.renderAsStudent }
+                                                                openADSingleSignOn  =   {   this.openADSingleSignOn } 
+                                                            /> 
+                                                }
+                                            </Screen>
+                                        ) : (
+                                            <Screen 
+                                                name="Home"
+                                                // options={{ title: null, headerShown: false }}
+                                            >
+                                                { props => <PageContent 
+                                                                {...props}
+                                                                showUpdate          =   { this.state.showUpdate } 
+                                                                firstName           =   { this.state.firstName}
+                                                                lastName            =   { this.state.lastName }
+                                                                title               =   { this.state.title }
+                                                                renderAsStudent     =   { this.state.renderAsStudent }
+                                                                site                =   { this.state.site }
+                                                                appWidth            =   { this.state.appWidth }
+                                                            />
                                             }
                                         </Screen>
-                                    ) : (
-                                        <Screen 
-                                            name="Home"
-                                            // options={{ title: null, headerShown: false }}
-                                        >
-                                            { props => <PageContent 
-                                                            {...props}
-                                                            showUpdate          =   { this.state.showUpdate } 
-                                                            firstName           =   { this.state.firstName}
-                                                            lastName            =   { this.state.lastName }
-                                                            title               =   { this.state.title }
-                                                            renderAsStudent     =   { this.state.renderAsStudent }
-                                                            site                =   { this.state.site }
-                                                            appWidth            =   { this.state.appWidth }
-                                                        />
-                                        }
-                                    </Screen>
-                                    )
-                                }
-                                    
-
-                                
-                                </Navigator>
-                                {   this.state.title ? 
-                                    <TabsFooter 
-                                        title               =   { this.state.title}
-                                        renderAsStudent     =   { this.state.renderAsStudent }
-                                        isModalVisible      =   { this.state.isModalVisible }
-                                        setIsModalVisible   =   { this.setIsModalVisible }
-                                        setRenderAsStudent  =   { this.setRenderAsStudent }
-                                        logOut              =   { this.clearLogOnUserData }
-                                    />
-                                    : null    
-                                } 
-                            </AppContainerView>
-                        </SafeAreaViewStyled>
-                </NavigationContainer>
-            </SafeAreaProvider>
-        ); //end return statementt
+                                        )
+                                    }
+                                        
+                                    </Navigator>
+                                    {   this.state.title ? 
+                                        <TabsFooter 
+                                            title               =   { this.state.title}
+                                            renderAsStudent     =   { this.state.renderAsStudent }
+                                            isModalVisible      =   { this.state.isModalVisible }
+                                            setIsModalVisible   =   { this.setIsModalVisible }
+                                            setRenderAsStudent  =   { this.setRenderAsStudent }
+                                            logOut              =   { this.clearLogOnUserData }
+                                        />
+                                        : null    
+                                    } 
+                                </AppContainerView>
+                            </SafeAreaViewStyled>
+                    </NavigationContainer>
+                </SafeAreaProvider>
+            ); //end return statementt
+        // }
     } //end render() function
 } //end App class
 

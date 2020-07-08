@@ -1,6 +1,31 @@
 import React, { createRef } from 'react';
 import { Platform } from 'react-native';
 
+import { AppLoading } from 'expo';
+
+import {
+    setCustomView,
+    setCustomTextInput,
+    setCustomText,
+    setCustomImage,
+    setCustomTouchableOpacity
+} from 'react-native-global-props';
+
+import { 
+    useFonts,
+    SourceSansPro_200ExtraLight,
+    SourceSansPro_200ExtraLight_Italic,
+    SourceSansPro_300Light,
+    SourceSansPro_300Light_Italic,
+    SourceSansPro_400Regular,
+    SourceSansPro_400Regular_Italic,
+    SourceSansPro_600SemiBold,
+    SourceSansPro_600SemiBold_Italic,
+    SourceSansPro_700Bold,
+    SourceSansPro_700Bold_Italic,
+    SourceSansPro_900Black,
+    SourceSansPro_900Black_Italic 
+  } from '@expo-google-fonts/source-sans-pro';
 
 let useDimensions = null;
 
@@ -9,6 +34,15 @@ const navigationRef = React.createRef();
 const navigate = (name, params) => {
     return navigationRef.current?.navigate(name, params);
 }
+
+// Setting default styles for all Text components.
+const customTextProps = {
+    style: {
+    //   fontSize: 16,
+      fontFamily: 'SourceSansPro_400Regular',
+    //   color: 'black'
+    }
+  };
 
 /* 
     Use the windows dimensions module from the react community if the 
@@ -25,17 +59,44 @@ if (Platform.OS === "android") {
 }
 
 const dimensionsWidthHOC = (Component) => {
+    const customFonts = {
+        SourceSansPro_200ExtraLight,
+        SourceSansPro_200ExtraLight_Italic,
+        SourceSansPro_300Light,
+        SourceSansPro_300Light_Italic,
+        SourceSansPro_400Regular,
+        SourceSansPro_400Regular_Italic,
+        SourceSansPro_600SemiBold,
+        SourceSansPro_600SemiBold_Italic,
+        SourceSansPro_700Bold,
+        SourceSansPro_700Bold_Italic,
+        SourceSansPro_900Black,
+        SourceSansPro_900Black_Italic 
+    };
+
     return (props) => {
         let { width }  = (Platform.OS === "android") ? 
                             useDimensions().window 
                         :   useDimensions();
-        return (
-            <Component 
-                width={width}
-            >
-                { props.children }
-            </Component>
-    ); 
+        let [ fontsLoaded ] = useFonts({
+            ...customFonts
+          });
+        
+        if (width && (fontsLoaded === true)) {
+            
+            setCustomText(customTextProps);
+
+            return (
+                <Component 
+                    width       =   { width }
+                    fontsLoaded =   { fontsLoaded }
+                >
+                    { props.children }
+                </Component>
+            ); 
+        } else {
+            return (<AppLoading/>);
+        }
 }; //end inline()
   
 }; //end (dimensionsWidthHOC)

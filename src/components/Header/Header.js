@@ -31,7 +31,6 @@ const Header = ({ renderAsStudent, title, firstName, lastName, site,...props }) 
                             title="Update Mobile Portal"
                             color="#1E6C93"
                             accessibilityLabel="Update Mobile Portal"
-
                         />
                     </UpdateAppView>
                 )
