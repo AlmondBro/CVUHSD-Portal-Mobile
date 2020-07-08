@@ -1,6 +1,23 @@
 import React, { createRef } from 'react';
 import { Platform } from 'react-native';
 
+import { AppLoading } from 'expo';
+
+import { 
+    useFonts,
+    SourceSansPro_200ExtraLight,
+    SourceSansPro_200ExtraLight_Italic,
+    SourceSansPro_300Light,
+    SourceSansPro_300Light_Italic,
+    SourceSansPro_400Regular,
+    SourceSansPro_400Regular_Italic,
+    SourceSansPro_600SemiBold,
+    SourceSansPro_600SemiBold_Italic,
+    SourceSansPro_700Bold,
+    SourceSansPro_700Bold_Italic,
+    SourceSansPro_900Black,
+    SourceSansPro_900Black_Italic 
+  } from '@expo-google-fonts/source-sans-pro';
 
 let useDimensions = null;
 
@@ -25,17 +42,42 @@ if (Platform.OS === "android") {
 }
 
 const dimensionsWidthHOC = (Component) => {
+    const customFonts = {
+        SourceSansPro_200ExtraLight,
+        SourceSansPro_200ExtraLight_Italic,
+        SourceSansPro_300Light,
+        SourceSansPro_300Light_Italic,
+        SourceSansPro_400Regular,
+        SourceSansPro_400Regular_Italic,
+        SourceSansPro_600SemiBold,
+        SourceSansPro_600SemiBold_Italic,
+        SourceSansPro_700Bold,
+        SourceSansPro_700Bold_Italic,
+        SourceSansPro_900Black,
+        SourceSansPro_900Black_Italic 
+    };
+
     return (props) => {
         let { width }  = (Platform.OS === "android") ? 
                             useDimensions().window 
                         :   useDimensions();
-        return (
-            <Component 
-                width={width}
-            >
-                { props.children }
-            </Component>
-    ); 
+        let [ fontsLoaded ] = useFonts({
+            ...customFonts
+          });
+        
+        if (width && (fontsLoaded === true)) {
+            return (
+                <Component 
+                    width       =   { width }
+                    fontsLoaded =   { fontsLoaded }
+                    style       =   { { fontFamily: "SourceSansPro_400Regular" } }
+                >
+                    { props.children }
+                </Component>
+            ); 
+        } else {
+            return (<AppLoading/>);
+        }
 }; //end inline()
   
 }; //end (dimensionsWidthHOC)

@@ -58,6 +58,7 @@ let SafeAreaViewStyled = styled(SafeAreaView).attrs( (props) => ({
                         };
     padding: 0;
     margin: 0;
+    font-family: 'SourceSansPro_400Regular';
 `;
 
 

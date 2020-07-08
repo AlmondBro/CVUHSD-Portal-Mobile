@@ -313,17 +313,18 @@ class App extends Component {
               });
         }
 
+        this.setState({ fontLoaded: this.props.fontLoaded});
         //this.loadFontsAsync();
 
-        this.checkforExistingLogOn();
-        //this.clearLogOnUserData();
+        // this.checkforExistingLogOn();
+        this.clearLogOnUserData();
     }; //end componentDidMount
 
     // #B41A1F" : "#1E6C93
     render = () => {
-        if (!this.state.fontLoaded) {
-            return ( <AppLoading /> );
-        } else {
+        // if (!this.state.fontLoaded) {
+        //     return ( <AppLoading /> );
+        // } else {
             return (
                 <SafeAreaProvider>
                     {/* This statusbar component's effect applies more on Android */}
@@ -445,7 +446,7 @@ class App extends Component {
                     </NavigationContainer>
                 </SafeAreaProvider>
             ); //end return statementt
-        }
+        // }
     } //end render() function
 } //end App class
 
