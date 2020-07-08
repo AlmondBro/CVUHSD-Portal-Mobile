@@ -48,8 +48,15 @@ const Header = ({ renderAsStudent, title, firstName, lastName, site,...props }) 
                                 title           =   { title }
                                 renderAsStudent =   { renderAsStudent }
                                 bold
+                                italic
                             >
-                                { greeting.random() + " " + firstName + " " + lastName }
+                                <UserInfoText 
+                                    title           =   { title }
+                                    renderAsStudent =   { renderAsStudent }
+                                >
+                                    { greeting.random() + " " }
+                                </UserInfoText>
+                                {  firstName + " " + lastName }
                             </UserInfoText>
                             {
                                 (title === "Student") ? (
