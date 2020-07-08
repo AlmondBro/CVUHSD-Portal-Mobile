@@ -28,6 +28,10 @@ let UpdateTextDescription = styled.Text`
     color: "#15516b";
 `;
 
+let GreetingText = styled.Text`
+
+`;
+
 let UserInfoText = styled.Text`
     color: ${props => (props.title === "Student" || props.renderAsStudent) ? "#B41A1F" : "#1E6C93" };
     

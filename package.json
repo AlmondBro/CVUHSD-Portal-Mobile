@@ -25,6 +25,7 @@
     "expo-auth-session": "~1.2.1",
     "expo-blur": "~8.1.0",
     "expo-updates": "^0.2.5",
+    "greeting": "^1.0.6",
     "kind-of": "^6.0.3",
     "pod-install": "^0.1.6",
     "react": "~16.9.0",
