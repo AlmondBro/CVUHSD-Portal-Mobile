@@ -427,8 +427,6 @@ class App extends Component {
                                         )
                                     }
                                         
-
-                                    
                                     </Navigator>
                                     {   this.state.title ? 
                                         <TabsFooter 
