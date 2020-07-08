@@ -4,11 +4,7 @@ import { StatusBar, ImageBackground, Alert } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
-import { SafeAreaView } from 'react-native-safe-area-context';
-
-import { AppLoading } from 'expo';
-import * as Font from 'expo-font';
-
+//Import React Navigation Packages
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native'; //Equivalent to the BrowserRouter in ReactRouter
 import { createStackNavigator } from '@react-navigation/stack'; 
