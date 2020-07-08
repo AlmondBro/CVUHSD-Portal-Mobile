@@ -3,7 +3,7 @@ import css from 'styled-css/native';
 
 let HeaderContainerView = styled.View`
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-around;
     align-items: center;
     flex: 1;
 `;
