@@ -276,20 +276,9 @@ class App extends Component {
               });
         }
 
-        //require('./../../../node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/FontAwesome.ttf')
-        // await Font.loadAsync({
-        //     "FontAwesome"   : require('@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/FontAwesome.ttf')
-        // });
+        this.checkforExistingLogOn();
 
-        // this.setState({ fontLoaded: true });
-
-        // if (this.checkforExistingLogOn() === true) {
-        //     navigate('Page-Content');
-        // };
-
-        //this.checkforExistingLogOn();
-
-        this.clearLogOnUserData();
+        //this.clearLogOnUserData();
     }; //end componentDidMount
 
     // #B41A1F" : "#1E6C93
