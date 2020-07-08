@@ -3,16 +3,18 @@ import css from 'styled-css/native';
 
 let HeaderContainerView = styled.View`
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-
+    flex: 1;
 `;
 
 let PortalLogoImage = styled.Image.attrs( (props) => {
   
 })`
-    width: 150;
-    height: 150;
+    width: 130;
+    height: 130;
+
+    margin-top: 5;
 `;
 
 let UpdateAppView = styled.View`
@@ -34,9 +36,11 @@ let UserInfoText = styled.Text`
     font-weight: ${props => props.bold ? "bold" : "normal"};
     font-style: ${props => props.italic ? "italic" : "normal"};
 
-    margin-top: 30;
+    margin-top: 0;
 
     align-self: center;
+
+    margin-top: 5;
 `;
 
 
