@@ -23,6 +23,7 @@ const ImageBackgroundStyled = styled.ImageBackground`
 `;
 
 const WelcomeText = styled.Text`
+    font-family: 'SourceSansPro_400Regular';
     color: #B41A1F;
     /* background-color: white; */
     /* width: 100%; */
@@ -33,6 +34,7 @@ const WelcomeText = styled.Text`
     align-items: center;
     align-content: center;
     align-self: center;
+    margin-bottom: 5;
 `;
 
 let BlueSectionContainer = styled.View`
@@ -58,6 +60,7 @@ let SafeAreaViewStyled = styled(SafeAreaView).attrs( (props) => ({
                         };
     padding: 0;
     margin: 0;
+    font-family: 'SourceSansPro_400Regular';
 `;
 
 
