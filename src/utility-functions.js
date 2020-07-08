@@ -1,15 +1,9 @@
-import React, { createRef } from 'react';
+import React from 'react';
 import { Platform } from 'react-native';
 
 import { AppLoading } from 'expo';
 
-import {
-    setCustomView,
-    setCustomTextInput,
-    setCustomText,
-    setCustomImage,
-    setCustomTouchableOpacity
-} from 'react-native-global-props';
+import { setCustomText } from 'react-native-global-props';
 
 import { 
     useFonts,
@@ -97,8 +91,7 @@ const dimensionsWidthHOC = (Component) => {
         } else {
             return (<AppLoading/>);
         }
-}; //end inline()
-  
+    }; //end inline()
 }; //end (dimensionsWidthHOC)
 
 export  { dimensionsWidthHOC, navigationRef, navigate };

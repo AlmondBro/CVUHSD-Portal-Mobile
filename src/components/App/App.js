@@ -1,7 +1,9 @@
 //Import React/React Native modules
 import React, { Component } from 'react';
-import { StatusBar, ImageBackground, Alert } from 'react-native';
+import { ImageBackground, Alert } from 'react-native';
 
+//Import expo/react native components that now exist as separate packages
+import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from '@react-native-community/async-storage';
 
 //Import React Navigation Packages
@@ -16,23 +18,6 @@ import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID, AZURE_DOMAIN_HIN
 
 //Import utility functions
 import { dimensionsWidthHOC, navigationRef, navigate } from './../../utility-functions.js';
-
-import { AppLoading } from 'expo';
-import * as Font from 'expo-font';
-import { 
-    SourceSansPro_200ExtraLight,
-    SourceSansPro_200ExtraLight_Italic,
-    SourceSansPro_300Light,
-    SourceSansPro_300Light_Italic,
-    SourceSansPro_400Regular,
-    SourceSansPro_400Regular_Italic,
-    SourceSansPro_600SemiBold,
-    SourceSansPro_600SemiBold_Italic,
-    SourceSansPro_700Bold,
-    SourceSansPro_700Bold_Italic,
-    SourceSansPro_900Black,
-    SourceSansPro_900Black_Italic 
-  } from '@expo-google-fonts/source-sans-pro';
 
 import * as AuthSession from 'expo-auth-session';
 import * as Updates from 'expo-updates';
@@ -273,27 +258,6 @@ class App extends Component {
         //navigate('Home');
         console.log('Done.')
     }; //end clearLogOnUserData
-
-    loadFontsAsync = async () => {
-        const customFonts = {
-            SourceSansPro_200ExtraLight,
-            SourceSansPro_200ExtraLight_Italic,
-            SourceSansPro_300Light,
-            SourceSansPro_300Light_Italic,
-            SourceSansPro_400Regular,
-            SourceSansPro_400Regular_Italic,
-            SourceSansPro_600SemiBold,
-            SourceSansPro_600SemiBold_Italic,
-            SourceSansPro_700Bold,
-            SourceSansPro_700Bold_Italic,
-            SourceSansPro_900Black,
-            SourceSansPro_900Black_Italic 
-        };
-        //SourceSansPro : '@expo-google-fonts/source-sans-pro'
-        //
-        await Font.loadAsync(customFonts);
-        this.setState({ fontsLoaded: true });
-    }
 
     componentDidMount = async () => {
         const checkforUpdatesDev = false;
