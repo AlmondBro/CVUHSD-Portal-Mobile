@@ -5,7 +5,7 @@ let HeaderContainerView = styled.View`
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-
+    flex: 1;
 `;
 
 let PortalLogoImage = styled.Image.attrs( (props) => {
@@ -13,6 +13,8 @@ let PortalLogoImage = styled.Image.attrs( (props) => {
 })`
     width: 150;
     height: 150;
+
+    margin-top: 5;
 `;
 
 let UpdateAppView = styled.View`
