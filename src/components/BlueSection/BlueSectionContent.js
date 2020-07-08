@@ -73,6 +73,10 @@ class BlueSectionContent extends Component {
                         javaScriptEnabled   =   { true }
                         injectedJavaScript  =   { `const meta = document.createElement('meta'); meta.setAttribute('content', 'width=width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1.0'); meta.setAttribute('name', 'viewport'); document.getElementsByTagName('head')[0].appendChild(meta); ` }
                         useWebKit           =   { false}
+                        onMessage           =   { (event) => {
+                                                        console.log('event: ', event)
+                                                    }
+                                                }   
                 />  
                 </CollapsibleStyled>
         ) : (

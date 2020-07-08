@@ -14,7 +14,9 @@ const ModalStyled = styled(Modal).attrs((props) => ({
     swipeDirection      :   props.swipeDirection,
     javaScriptEnabled   :   props.javaScriptEnabled,
     injectJavaScript    :   props.injectJavaScript,
-    injectedJavaScript  :   props.injectedJavaScript
+    injectedJavaScript  :   props.injectedJavaScript,
+    onMessage           :   props.onMessage,
+    mixedContentMode    :   props.mixedContentMode
 }))`
   flex              : 1;
   flex-direction    : column;
@@ -94,10 +96,13 @@ let ChangePasswordTextHeader = (props) => {
 const WebViewStyled = styled(WebView).attrs((props) => ({
     source              :  props.source,
     originWhitelist     :  props.originWhitelist,
+    scalesPageToFit     :  props.scalesPageToFit,
     bounces             :  props.bounces,
     javaScriptEnabled   :  props.javaScriptEnabled,
     injectedJavaScript  :  props.injectedJavaScript,   
-    injectJavaScript    :  props.injectJavaScript 
+    injectJavaScript    :  props.injectJavaScript,
+    mixedContentMode    :  props.mixedContentMode,
+    onMessage           :  props.onMessage
 }))`
 
   flex              :   1;
