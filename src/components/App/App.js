@@ -4,6 +4,11 @@ import { StatusBar, ImageBackground, Alert } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { AppLoading } from 'expo';
+import * as Font from 'expo-font';
+
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native'; //Equivalent to the BrowserRouter in ReactRouter
 import { createStackNavigator } from '@react-navigation/stack'; 
@@ -64,6 +69,7 @@ class App extends Component {
             
             isModalVisible      :   false,
             authLoading         :   null,
+            fontLoaded          :   false
         }; //end this.state object
 
 
@@ -256,7 +262,7 @@ class App extends Component {
     }; //end clearLogOnUserData
 
 
-    componentDidMount = () => {
+    componentDidMount = async () => {
         const checkforUpdatesDev = false;
         
         //console.log("Props:\t" + JSON.stringify(this.props) );
@@ -274,22 +280,29 @@ class App extends Component {
               });
         }
 
+        //require('./../../../node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/FontAwesome.ttf')
+        // await Font.loadAsync({
+        //     "FontAwesome"   : require('@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/FontAwesome.ttf')
+        // });
+
+        // this.setState({ fontLoaded: true });
+
         // if (this.checkforExistingLogOn() === true) {
         //     navigate('Page-Content');
         // };
 
-        this.checkforExistingLogOn();
-        // if (this.checkforExistingLogOn()) {
-        //     navigate('Page-Content');
+        //this.checkforExistingLogOn();
 
-        // }
-       // navigate('Page-Content');
-
-        //this.clearLogOnUserData();
+        this.clearLogOnUserData();
     }; //end componentDidMount
 
     // #B41A1F" : "#1E6C93
     render = () => {
+
+        // if (!this.state.fontLoaded) {
+        //     return <AppLoading />
+        //   }
+
         return (
             <SafeAreaProvider>
                 {/* This statusbar component's effect applies more on Android */}
