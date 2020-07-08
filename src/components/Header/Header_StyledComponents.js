@@ -3,7 +3,7 @@ import css from 'styled-css/native';
 
 let HeaderContainerView = styled.View`
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     flex: 1;
 `;
@@ -11,8 +11,8 @@ let HeaderContainerView = styled.View`
 let PortalLogoImage = styled.Image.attrs( (props) => {
   
 })`
-    width: 150;
-    height: 150;
+    width: 130;
+    height: 130;
 
     margin-top: 5;
 `;
@@ -30,10 +30,6 @@ let UpdateTextDescription = styled.Text`
     color: "#15516b";
 `;
 
-let GreetingText = styled.Text`
-
-`;
-
 let UserInfoText = styled.Text`
     color: ${props => (props.title === "Student" || props.renderAsStudent) ? "#B41A1F" : "#1E6C93" };
     
@@ -43,6 +39,8 @@ let UserInfoText = styled.Text`
     margin-top: 0;
 
     align-self: center;
+
+    margin-top: 5;
 `;
 
 
