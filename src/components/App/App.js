@@ -299,9 +299,9 @@ class App extends Component {
     // #B41A1F" : "#1E6C93
     render = () => {
 
-        if (!this.state.fontLoaded) {
-            return <AppLoading />
-          }
+        // if (!this.state.fontLoaded) {
+        //     return <AppLoading />
+        //   }
 
         return (
             <SafeAreaProvider>
@@ -328,7 +328,7 @@ class App extends Component {
 
                             Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
                         */ }
-                        <SafeAreaView 
+                        <SafeAreaViewStyled 
                             title           =   { this.state.title }
                             renderAsStudent =   { this.state.renderAsStudent }
                         >
@@ -420,7 +420,7 @@ class App extends Component {
                                     : null    
                                 } 
                             </AppContainerView>
-                        </SafeAreaView>
+                        </SafeAreaViewStyled>
                 </NavigationContainer>
             </SafeAreaProvider>
         ); //end return statementt

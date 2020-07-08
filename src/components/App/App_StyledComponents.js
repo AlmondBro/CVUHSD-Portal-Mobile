@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { SafeAreaView as SafeAreaViewTwo } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 let AppContainerView = styled.View`
     flex: 1;
@@ -44,7 +44,7 @@ let BlueSectionContainer = styled.View`
     width: ${props => props.width ? props.width : "auto"};
 `;
 
-let SafeAreaViewStyled = styled.SafeAreaView.attrs( (props) => ({
+let SafeAreaViewStyled = styled(SafeAreaView).attrs( (props) => ({
     forceInset: { top: 'never' }
 }))`
     flex: 1;
