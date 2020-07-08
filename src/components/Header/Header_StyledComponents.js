@@ -36,6 +36,8 @@ let UserInfoText = styled.Text`
     font-weight: ${props => props.bold ? "bold" : "normal"};
     font-style: ${props => props.italic ? "italic" : "normal"};
 
+    font-family: ${props => (props.italic && props.bold) ? "SourceSansPro_600SemiBold_Italic" : "SourceSansPro_400Regular"};
+
     margin-top: 0;
 
     align-self: center;

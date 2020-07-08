@@ -3,6 +3,14 @@ import { Platform } from 'react-native';
 
 import { AppLoading } from 'expo';
 
+import {
+    setCustomView,
+    setCustomTextInput,
+    setCustomText,
+    setCustomImage,
+    setCustomTouchableOpacity
+} from 'react-native-global-props';
+
 import { 
     useFonts,
     SourceSansPro_200ExtraLight,
@@ -26,6 +34,15 @@ const navigationRef = React.createRef();
 const navigate = (name, params) => {
     return navigationRef.current?.navigate(name, params);
 }
+
+// Setting default styles for all Text components.
+const customTextProps = {
+    style: {
+    //   fontSize: 16,
+      fontFamily: 'SourceSansPro_400Regular',
+    //   color: 'black'
+    }
+  };
 
 /* 
     Use the windows dimensions module from the react community if the 
@@ -66,11 +83,13 @@ const dimensionsWidthHOC = (Component) => {
           });
         
         if (width && (fontsLoaded === true)) {
+            
+            setCustomText(customTextProps);
+
             return (
                 <Component 
                     width       =   { width }
                     fontsLoaded =   { fontsLoaded }
-                    style       =   { { fontFamily: "SourceSansPro_400Regular" } }
                 >
                     { props.children }
                 </Component>
