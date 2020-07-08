@@ -1,6 +1,6 @@
 //Import React/React Native modules
 import React, { Component } from 'react';
-import { ImageBackground, Alert } from 'react-native';
+import { StatusBar as RNStatusBar, ImageBackground, Alert } from 'react-native';
 
 //Import expo/react native components that now exist as separate packages
 import { StatusBar } from 'expo-status-bar';
@@ -292,7 +292,7 @@ class App extends Component {
             return (
                 <SafeAreaProvider>
                     {/* This statusbar component's effect applies more on Android */}
-                    <StatusBar 
+                    <RNStatusBar 
                         backgroundColor =   {   this.state.title ? 
                                                     (   ( 
                                                             this.state.title === "Student" || 
@@ -303,7 +303,9 @@ class App extends Component {
                                                     )
                                                     : "#B41A1F" 
                                             } 
-                        barStyle        =   "light-content" 
+                        barStyle        =   "light-content"                   
+                        style           =   "light" 
+                        animated        =   { true }
                         translucent     =   { true } 
                     />
                     <NavigationContainer ref={navigationRef}>
