@@ -1,12 +1,14 @@
 import { Platform, NativeModules } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
+//import Reactotron from 'reactotron-react-native';
+
 import url from 'url';
 
 const { hostname } = url.parse(NativeModules.SourceCode.scriptURL);
-console.log(hostname); // mine was 192.168.1.2
+console.log(hostname); 
 
-const Reactotron = (Platform.OS === "web") ? require('reactotron-react-js') : require('reactotron-react-native');
+const Reactotron = (Platform.OS === "web") ? require('reactotron-react-js').default : require('reactotron-react-native').default;
 
 if (Platform.OS === "web" ) {
   Reactotron
@@ -19,4 +21,6 @@ if (Platform.OS === "web" ) {
   .useReactNative() // add all built-in react native plugins
   .connect(); // let's connect!
 }
+
+export { Reactotron }; 
 

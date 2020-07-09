@@ -1,6 +1,6 @@
 //Import React/React Native modules
 import React, { Component } from 'react';
-import { StatusBar as RNStatusBar, ImageBackground, Alert } from 'react-native';
+import { StatusBar as RNStatusBar, ImageBackground, Alert, Platform } from 'react-native';
 
 //Import expo/react native components that now exist as separate packages
 import { StatusBar } from 'expo-status-bar';
@@ -11,7 +11,7 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native'; //Equivalent to the BrowserRouter in ReactRouter
 import { createStackNavigator } from '@react-navigation/stack'; 
 
-import Reactotron from 'reactotron-react-native';
+import { Reactotron } from './../../config/reactotron.dev.js';
 
 import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID, AZURE_DOMAIN_HINT } from './../../../keys.env.js';
 //from 'react-native-dotenv'
@@ -36,14 +36,16 @@ import TabsFooter from './../TabsFooter/TabsFooter.js'
 
 import HomeScreen from './../HomeScreen/HomeScreen.js';
 
-import Images from '@assets';
-// './../../assets';
+const imagesObjectPath = (Platform.OS === "web") ? require('./../../assets/images/index.js') : require('@assets');
+const Images = imagesObjectPath.default;
+
+//Import Images from @assets';
 
 const { Navigator, Screen } = createStackNavigator();  //<Navigator> is equivalent to a <Switch> on React Router, <Screen/> is equivalent to <Route>
 
 const isDev = __DEV__;
 
-const ReactotronDebug = isDev ? Reactotron : console;
+const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
 
 class App extends Component {
     constructor(props) {

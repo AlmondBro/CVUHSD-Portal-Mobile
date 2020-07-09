@@ -9,7 +9,8 @@
     "publish": "expo publish",
     "build-android": "expo build:android",
     "upload-android": "expo upload:android",
-    "expo-clean-start": "npm install -g expo-cli && rm -rf node_modules/ && npm cache clean --force && npm install expo@latest && expo install && expo start -c",
+    "expo-clean-start": "rm -rf /tmp/metro-* && rm -rf node_modules/ && npm cache clean --force && npm install expo@latest && expo install && expo start -c",
+    "expo-clean-start-expo-install": "rm -rf /tmp/metro-* && npm install -g expo-cli && rm -rf node_modules/ && npm cache clean --force && npm install expo@latest && expo install && expo start -c",
     "build-ios": "expo build:ios",
     "ios": "expo start --ios",
     "android": "expo start --android",
@@ -58,6 +59,7 @@
     "@babel/core": "^7.8.6",
     "babel-preset-expo": "^8.2.3",
     "react-native-dotenv": "^0.2.0",
+    "reactotron-react-js": "^3.3.7",
     "reactotron-react-native": "^5.0.0"
   },
   "private": false

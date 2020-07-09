@@ -9,10 +9,7 @@ import ChangePassword  from './../ChangePassword/ChangePassword.js';
 
 import ChangePasswordIcon from './../../assets/images/icons/change-password.svg';
 
-import Reactotron from 'reactotron-react-native';
-
 const isDev = __DEV__;
-const ReactotronDebug = isDev ? Reactotron : console;
 
 const TabsFooter = ({ renderAsStudent, setRenderAsStudent, isModalVisible, setIsModalVisible, title, logOut, ...props }) => {    
     return (
