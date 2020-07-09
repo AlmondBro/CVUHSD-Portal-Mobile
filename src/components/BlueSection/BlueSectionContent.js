@@ -60,36 +60,56 @@ class BlueSectionContent extends Component {
     };
 
     render() {
-        return this.props.serviceStatuses ? (
-            <CollapsibleStyled 
-                // style={blueSectionContent_styles.blueSection_Content}
-                collapsed={this.state.expanded}
-                duration={750}
-            >
-                <WebViewStyled 
-                        originWhitelist     =   { ['*'] }
-                        source              =   { {html: "<iframe src='https://www.site24x7.com/sv.do?id=-lTskTIBFC99AjBdJTzdd22ylcZvGBYnfGhcgwvt1-27W89lFFvf7WICSx8TdzUT6kB92hYLWdGYIInKaxcmHcJTzDPBf7IFLjpWmnUEJ18%3D&st=false' scrolling='yes'></iframe>"} }
-                        scalesPageToFit     =   { false }
-                        javaScriptEnabled   =   { true }
-                        injectedJavaScript  =   { `const meta = document.createElement('meta'); meta.setAttribute('content', 'width=width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1.0'); meta.setAttribute('name', 'viewport'); document.getElementsByTagName('head')[0].appendChild(meta); ` }
-                        useWebKit           =   { false}
-                        onMessage           =   { (event) => {
-                                                        console.log('event: ', event)
-                                                    }
-                                                }   
-                />  
-                </CollapsibleStyled>
-        ) : (
+        if (this.props.headerTitle === "ALL LINKS") {
+            return (
                 <CollapsibleStyled 
-                    // style={blueSectionContent_styles.blueSection_Content}
-                    collapsed={this.state.expanded}
-                    duration={750}
+                    collapsed   =   { this.state.expanded }
+                    duration    =   { 750 }
                 >
-                    { this.generateBlueSectionButtons() }
+                    <WebViewStyled 
+                            originWhitelist     =   { ['*'] }
+                            source              =   { {uri: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOPMzFTLmTXsOzY172KN_3IaJqeO9bLPl_3TIgc_bBQiWEanznykV6cEiPBuV9WUHEnL2vesphHEWZ/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"} }
+                            scalesPageToFit     =   { false }
+                            useWebKit           =   { false}
+                            onMessage           =   { (event) => {
+                                                            console.log('event: ', event)
+                                                        }
+                                                    }   
+                    />  
                 </CollapsibleStyled>
-        );
+            ); //end return
+        } else if (this.props.serviceStatuses) {
+            return (
+                <CollapsibleStyled 
+                    collapsed   =   { this.state.expanded }
+                    duration    =   { 750 }
+                >
+                    <WebViewStyled 
+                            originWhitelist     =   { ['*'] }
+                            source              =   { {html: "<iframe src='https://www.site24x7.com/sv.do?id=-lTskTIBFC99AjBdJTzdd22ylcZvGBYnfGhcgwvt1-27W89lFFvf7WICSx8TdzUT6kB92hYLWdGYIInKaxcmHcJTzDPBf7IFLjpWmnUEJ18%3D&st=false' scrolling='yes'></iframe>"} }
+                            scalesPageToFit     =   { false }
+                            javaScriptEnabled   =   { true }
+                            injectedJavaScript  =   { `const meta = document.createElement('meta'); meta.setAttribute('content', 'width=width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1.0'); meta.setAttribute('name', 'viewport'); document.getElementsByTagName('head')[0].appendChild(meta); ` }
+                            useWebKit           =   { false}
+                            onMessage           =   { (event) => {
+                                                            console.log('event: ', event)
+                                                        }
+                                                    }   
+                    />  
+                </CollapsibleStyled>
+            ) 
+        } else {
+                return (
+                    <CollapsibleStyled 
+                        // style={blueSectionContent_styles.blueSection_Content}
+                        collapsed={this.state.expanded}
+                        duration={750}
+                    >
+                        { this.generateBlueSectionButtons() }
+                    </CollapsibleStyled>
+            );
+        }
     } //end render()
-  
 } //end BlueSectionContent class
 
 export default BlueSectionContent;
