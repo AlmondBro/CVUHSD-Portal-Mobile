@@ -9,6 +9,7 @@
     "publish": "expo publish",
     "build-android": "expo build:android",
     "upload-android": "expo upload:android",
+    "expo-clean-start": "npm install -g expo-cli && rm -rf node_modules/ && npm cache clean --force && npm install expo@latest && expo install && expo start -c",
     "build-ios": "expo build:ios",
     "ios": "expo start --ios",
     "android": "expo start --android",
@@ -27,6 +28,7 @@
     "expo-auth-session": "~1.4.0",
     "expo-blur": "~8.1.2",
     "expo-font": "~8.2.1",
+    "expo-status-bar": "^1.0.0",
     "expo-updates": "~0.2.8",
     "greeting": "^1.0.6",
     "kind-of": "^6.0.3",
@@ -50,8 +52,7 @@
     "react-native-webview": "9.4.0",
     "styled-components": "^5.1.0",
     "styled-css": "^1.1.0",
-    "url": "^0.11.0",
-    "expo-status-bar": "^1.0.0"
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
