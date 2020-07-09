@@ -59,7 +59,11 @@ class BlueSectionContent extends Component {
         }
     };
 
+
     render() {
+        const allLinksSrc = `<iframe src='https://docs.google.com/spreadsheets/d/e/2PACX-1vSOPMzFTLmTXsOzY172KN_3IaJqeO9bLPl_3TIgc_bBQiWEanznykV6cEiPBuV9WUHEnL2vesphHEWZ/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false' scrolling='yes'></iframe>`;
+        const systemStatusesWebView = `<iframe src='https://www.site24x7.com/sv.do?id=-lTskTIBFC99AjBdJTzdd22ylcZvGBYnfGhcgwvt1-27W89lFFvf7WICSx8TdzUT6kB92hYLWdGYIInKaxcmHcJTzDPBf7IFLjpWmnUEJ18%3D&st=false' scrolling='yes'></iframe>`;
+        
         if (this.props.headerTitle === "ALL LINKS") {
             return (
                 <CollapsibleStyled 
@@ -68,8 +72,10 @@ class BlueSectionContent extends Component {
                 >
                     <WebViewStyled 
                             originWhitelist     =   { ['*'] }
-                            source              =   { {uri: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOPMzFTLmTXsOzY172KN_3IaJqeO9bLPl_3TIgc_bBQiWEanznykV6cEiPBuV9WUHEnL2vesphHEWZ/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"} }
+                            source              =   { { html: allLinksSrc} }
                             scalesPageToFit     =   { false }
+                            javaScriptEnabled   =   { true }
+                            injectedJavaScript  =   { `const meta = document.createElement('meta'); meta.setAttribute('content', 'width=width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1.0'); meta.setAttribute('name', 'viewport'); document.getElementsByTagName('head')[0].appendChild(meta); ` }
                             useWebKit           =   { false}
                             onMessage           =   { (event) => {
                                                             console.log('event: ', event)
@@ -86,7 +92,7 @@ class BlueSectionContent extends Component {
                 >
                     <WebViewStyled 
                             originWhitelist     =   { ['*'] }
-                            source              =   { {html: "<iframe src='https://www.site24x7.com/sv.do?id=-lTskTIBFC99AjBdJTzdd22ylcZvGBYnfGhcgwvt1-27W89lFFvf7WICSx8TdzUT6kB92hYLWdGYIInKaxcmHcJTzDPBf7IFLjpWmnUEJ18%3D&st=false' scrolling='yes'></iframe>"} }
+                            source              =   { { html: systemStatusesWebView} }
                             scalesPageToFit     =   { false }
                             javaScriptEnabled   =   { true }
                             injectedJavaScript  =   { `const meta = document.createElement('meta'); meta.setAttribute('content', 'width=width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1.0'); meta.setAttribute('name', 'viewport'); document.getElementsByTagName('head')[0].appendChild(meta); ` }
