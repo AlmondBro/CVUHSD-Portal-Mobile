@@ -14,7 +14,7 @@
       "resizeMode": "cover",
       "backgroundColor": "#F4F7F9"
     },
-    "scheme": "cvuhsd-portal",
+    "scheme": "cvuhsd.portal",
     "platforms": [
       "ios",
       "android",

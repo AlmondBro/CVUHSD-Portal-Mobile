@@ -1,14 +1,17 @@
 //Import React/React Native modules
 import React, { Component } from 'react';
-import { StatusBar, ImageBackground, Alert } from 'react-native';
+import { StatusBar as RNStatusBar, ImageBackground, Alert, Platform } from 'react-native';
 
+//Import expo/react native components that now exist as separate packages
+import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from '@react-native-community/async-storage';
 
+//Import React Navigation Packages
 import 'react-native-gesture-handler';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native'; //Equivalent to the BrowserRouter in ReactRouter
+import { createStackNavigator } from '@react-navigation/stack'; 
 
-import Reactotron from 'reactotron-react-native';
+import { Reactotron } from './../../config/reactotron.dev.js';
 
 import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID, AZURE_DOMAIN_HINT } from './../../../keys.env.js';
 //from 'react-native-dotenv'
@@ -33,11 +36,16 @@ import TabsFooter from './../TabsFooter/TabsFooter.js'
 
 import HomeScreen from './../HomeScreen/HomeScreen.js';
 
-const { Navigator, Screen } = createStackNavigator();
+const imagesObjectPath = (Platform.OS === "web") ? require('./../../assets/images/index.js') : require('@assets');
+const Images = imagesObjectPath.default;
+
+//Import Images from @assets';
+
+const { Navigator, Screen } = createStackNavigator();  //<Navigator> is equivalent to a <Switch> on React Router, <Screen/> is equivalent to <Route>
 
 const isDev = __DEV__;
 
-const ReactotronDebug = isDev ? Reactotron : console;
+const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
 
 class App extends Component {
     constructor(props) {
@@ -56,11 +64,12 @@ class App extends Component {
             phoneNumber         :   null,
             OU                  :   null,
             renderAsStudent     :   false,
-            portalLogoSource    :   require("./../../assets/images/CV-600x600-portal-red.png"),
-            backgroundImage     :   require('./../../assets/images/theCVway-red.png') ,
+            portalLogoSource    :   Images.appHeader.portalLogoRed,
+            backgroundImage     :   Images.appHeader.backgroundImageRed ,
             
             isModalVisible      :   false,
-            authLoading         :   null
+            authLoading         :   null,
+            fontLoaded          :   true
         }; //end this.state object
 
 
@@ -71,7 +80,7 @@ class App extends Component {
         clientId        :   AZURE_CLIENT_ID,
         tenantId        :   AZURE_TENANT_ID,
         scope           :   "user.read",
-        redirectUrl     :   AuthSession.makeRedirectUri({native: 'cvuhsd-portal://redirect'}),
+        redirectUrl     :   AuthSession.makeRedirectUri({ native: 'cvuhsd.portal://redirect' }),
         clientSecret    :   AZURE_CLIENT_SECRET,
         domainHint      :   AZURE_DOMAIN_HINT,
         prompt          :   "login"
@@ -132,16 +141,13 @@ class App extends Component {
         ReactotronDebug.log("adUserInfo from App.js:\t" + JSON.stringify(adUserInfo) );
 
         let portalLogoSource = ( (adUserInfo.jobTitle === "Student") || (this.state.renderAsStudent === true)) ?
-                                require("./../../assets/images/CV-600x600-portal-red.png")
-                            :   require("./../../assets/images/CV-600x600-portal.png");
+                                Images.appHeader.portalLogoRed
+                            :   Images.appHeader.portalLogoBlue;
 
         let backgroundImage = (adUserInfo.jobTitle === "Student" || this.state.renderAsStudent) ?
-                                require('./../../assets/images/theCVway-red.png')
-                            :   require('./../../assets/images/theCVway-blue.png');
-
-                            
-
-
+                                Images.appHeader.backgroundImageRed
+                            :   Images.appHeader.backgroundImageBlue;
+               
         if ( !adUserInfo.error && (adUserInfo.type === "success") ) {
             this.setState({
                 firstName           : adUserInfo.givenName,
@@ -151,14 +157,13 @@ class App extends Component {
                 email               : adUserInfo.mail,
                 portalLogoSource    : portalLogoSource,
                 backgroundImage     : backgroundImage,
+               // navigateFunction    : navigate,
                 authLoading         : false 
             });
 
+            
+            //setInterval(() => this.setLogOnUserData({...this.state}), 1500);
             this.setLogOnUserData({...this.state});
-    
-            if ( adUserInfo.jobTitle !== "Student" ){
-                //this.setRenderAsStudent(true);
-            }
 
             /*
             if ( (adUserInfo.jobTitle === "Student") && (adUserInfo.officeLocation === null) ) {
@@ -167,7 +172,8 @@ class App extends Component {
             */
 
             ReactotronDebug.log("App State after authentication:\t" + JSON.stringify(this.state));
-            navigate('Page-Content');
+
+            navigate('Home');
                
         } else {
             ReactotronDebug.log("User canceled operation from App.js");
@@ -196,27 +202,37 @@ class App extends Component {
     
     checkforExistingLogOn = async () => {
         try {
-            let currentUserState = await AsyncStorage.getItem(this.USER_INFO);
+            const currentUserState = await AsyncStorage.getItem(this.USER_INFO);
 
             if (currentUserState !== null) {
+                ReactotronDebug.log("Session exists");
+                ReactotronDebug.log(JSON.parse(currentUserState));
+
                 this.setState({ ...JSON.parse(currentUserState) });
+
                 return true;
             } else {
                 return false;
             }
         } catch (error) {
-            Reactotron.log("checkforExistingLogOn() Error:\t" + JSON.stringify(error));
+            ReactotronDebug.log("checkforExistingLogOn() Error:\t" + JSON.stringify(error));
         }
     }; //end checkforExistingLogOn
 
     setRenderAsStudent = (renderAsStudent) => {
         this.setState( { renderAsStudent: renderAsStudent } );
 
-        let portalLogoSource = ( this.state.renderAsStudent === false ) ?
-            require("./../../assets/images/CV-600x600-portal-red.png")
-        :   require("./../../assets/images/CV-600x600-portal.png");
-        
-        this.setState({portalLogoSource: portalLogoSource});
+        const portalLogoSource = ( this.state.renderAsStudent === false ) ?
+            Images.appHeader.portalLogoRed
+        :   Images.appHeader.portalLogoBlue;
+
+        // TODO: Figure out why the logic here, although inversed, works
+        const backgroundImage = (this.state.title === "Student" || this.state.renderAsStudent) ?
+            Images.appHeader.backgroundImageBlue
+        :   Images.appHeader.backgroundImageRed;
+
+        this.setState({portalLogoSource: portalLogoSource, backgroundImage: backgroundImage});
+        this.setLogOnUserData({...this.state });
     }; //end setRenderAsStudent
 
     setIsModalVisible = (isModalVisible) => {
@@ -225,10 +241,11 @@ class App extends Component {
 
     setLogOnUserData = async (userDataObject) => {
         try {
+            ReactotronDebug.log("setLogOnUserData()");
             const userDataObjectJSON = JSON.stringify(userDataObject);
             await AsyncStorage.setItem(this.USER_INFO, userDataObjectJSON);
           } catch (e) {
-            Reactotron.log("setLogOnUserData() Error:\t" + JSON.stringify(error));
+            ReactotronDebug.error("setLogOnUserData() Error:\t" + JSON.stringify(error));
           }
     };
 
@@ -240,12 +257,11 @@ class App extends Component {
             ReactotronDebug.log('clearLogOnUserData() clear');
         }
         this.setState({ ...this.initialState });
-        navigate('Home');
+        //navigate('Home');
         console.log('Done.')
     }; //end clearLogOnUserData
 
-
-    componentDidMount = () => {
+    componentDidMount = async () => {
         const checkforUpdatesDev = false;
         
         //console.log("Props:\t" + JSON.stringify(this.props) );
@@ -263,128 +279,140 @@ class App extends Component {
               });
         }
 
-        // if (this.checkforExistingLogOn() === true) {
-        //     navigate('Page-Content');
-        // };
+        this.setState({ fontLoaded: this.props.fontLoaded});
+        //this.loadFontsAsync();
 
+        // this.checkforExistingLogOn();
         this.clearLogOnUserData();
     }; //end componentDidMount
 
     // #B41A1F" : "#1E6C93
     render = () => {
-        return (
-            <SafeAreaProvider>
-                {/* This statusbar component's effect applies more on Android */}
-                <StatusBar 
-                    backgroundColor =   {   this.state.title ? 
-                                                (   ( 
-                                                        this.state.title === "Student" || 
-                                                        this.state.renderAsStudent === true
-                                                    ) 
-                                                    ? "#B41A1F" 
-                                                    : "#1E6C93"
-                                                )
-                                                : "#B41A1F" 
-                                        } 
-                    barStyle        =   "light-content" 
-                    translucent     =   { true } 
-                />
-                <NavigationContainer ref={navigationRef}>
-                    
-                        { /* The following is a technique using two SafeAreaViews to have the
-                            statusbar/top padding be a different color than the bottom padding. 
-                            SafeAreaViews are only applicable on iOs 11+ on >iPhone X 
+        // if (!this.state.fontLoaded) {
+        //     return ( <AppLoading /> );
+        // } else {
+            return (
+                <SafeAreaProvider>
+                    {/* This statusbar component's effect applies more on Android */}
+                    <RNStatusBar 
+                        backgroundColor =   {   this.state.title ? 
+                                                    (   ( 
+                                                            this.state.title === "Student" || 
+                                                            this.state.renderAsStudent === true
+                                                        ) 
+                                                        ? "#B41A1F" 
+                                                        : "#1E6C93"
+                                                    )
+                                                    : "#B41A1F" 
+                                            } 
+                        barStyle        =   "light-content"                   
+                        style           =   "light" 
+                        animated        =   { true }
+                        translucent     =   { true } 
+                    />
+                    <NavigationContainer ref={navigationRef}>
+                        
+                            { /* The following is a technique using two SafeAreaViews to have the
+                                statusbar/top padding be a different color than the bottom padding. 
+                                SafeAreaViews are only applicable on iOs 11+ on >iPhone X 
 
-                            Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
-                        */ }
-                        <SafeAreaViewStyled 
-                            title           =   { this.state.title }
-                            renderAsStudent =   { this.state.renderAsStudent }
-                        >
-                            <AppContainerView>
-                                <ImageBackground
-                                    source={ this.state.backgroundImage }
-                                    style={ 
-                                        { 
-                                            flex: 0.75,
-                                            resizeMode: "cover",
-                                            justifyContent: "center"
+                                Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
+                            */ }
+                            <SafeAreaViewStyled 
+                                title           =   { this.state.title }
+                                renderAsStudent =   { this.state.renderAsStudent }
+                            >
+                                <AppContainerView>
+                                    <ImageBackground
+                                        source={ this.state.backgroundImage }
+                                        style={ 
+                                            { 
+                                                flex: 0.75,
+                                                resizeMode: "cover",
+                                                justifyContent: "center"
+                                            }
                                         }
-                                    }
-                                >
-                                    <AppHeaderContainerView>
-                                        <Header 
-                                            showUpdate          =   { this.state.showUpdate } 
-                                            firstName           =   { this.state.firstName}
-                                            lastName            =   { this.state.lastName }
-                                            title               =   { this.state.title }
-                                            site                =   { this.state.site }
-                                            renderAsStudent     =   { this.state.renderAsStudent }
-                                            portalLogoSource    =   { this.state.portalLogoSource }
-                                            // onPress    =   { navigate ? navigate: null }
-                                        />
-                                        
-                                        { (this.state.title || this.state.renderAsStudent) ? null : <WelcomeText>Welcome</WelcomeText> }
-                                    </AppHeaderContainerView>
-                                </ImageBackground>
+                                    >
+                                        <AppHeaderContainerView>
+                                            <Header 
+                                                showUpdate          =   { this.state.showUpdate } 
+                                                firstName           =   { this.state.firstName}
+                                                lastName            =   { this.state.lastName }
+                                                title               =   { this.state.title }
+                                                site                =   { this.state.site }
+                                                renderAsStudent     =   { this.state.renderAsStudent }
+                                                portalLogoSource    =   { this.state.portalLogoSource }
+                                                // onPress    =   { navigate ? navigate: null }
+                                            />
+                                            
+                                            { (this.state.title || this.state.renderAsStudent) ? null : <WelcomeText>Welcome</WelcomeText> }
+                                        </AppHeaderContainerView>
+                                    </ImageBackground>
 
-                                <Navigator
-                                    headerMode      = "none"
-                                    screenOptions   =   {   { 
-                                                                title: null, 
-                                                                headerShown: false,
-                                                                gestureEnabled: false,
+                                    <Navigator
+                                        headerMode      = "none"
+                                        screenOptions   =   {   { 
+                                                                    title: null, 
+                                                                    headerShown: false,
+                                                                    gestureEnabled: false,
+                                                                    animationTypeForReplace: this.state.title ? 'push' : 'pop',
+                                                                }
                                                             }
-                                                        }
-                                >
-                                
-                                    <Screen 
-                                        name="Home" 
-                                        // options={{ title: null, headerShown: false }}
                                     >
-                                        { props => <HomeScreen 
-                                                        {...props}
-                                                        authLoading         =   {   this.state.authLoading  }
-                                                        title               =   {   this.state.title    }
-                                                        renderAsStudent     =   {   this.state.renderAsStudent }
-                                                        openADSingleSignOn  =   {   this.openADSingleSignOn } 
-                                                    /> 
-                                        }
-                                    </Screen>
-
-                                    <Screen 
-                                        name="Page-Content"
-                                        // options={{ title: null, headerShown: false }}
-                                    >
-                                        { props => <PageContent 
-                                                        {...props}
-                                                        showUpdate          =   { this.state.showUpdate } 
-                                                        firstName           =   { this.state.firstName}
-                                                        lastName            =   { this.state.lastName }
-                                                        title               =   { this.state.title }
-                                                        renderAsStudent     =   { this.state.renderAsStudent }
-                                                        site                =   { this.state.site }
-                                                        appWidth            =   { this.state.appWidth }
-                                                    />
-                                        }
-                                    </Screen>
-                                </Navigator>
-                                {   this.state.title ? 
-                                    <TabsFooter 
-                                        title               =   { this.state.title}
-                                        renderAsStudent     =   { this.state.renderAsStudent }
-                                        isModalVisible      =   { this.state.isModalVisible }
-                                        setIsModalVisible   =   { this.setIsModalVisible }
-                                        setRenderAsStudent  =   { this.setRenderAsStudent }
-                                        logOut              =   { this.clearLogOnUserData }
-                                    />
-                                    : null    
-                                } 
-                            </AppContainerView>
-                        </SafeAreaViewStyled>
-                </NavigationContainer>
-            </SafeAreaProvider>
-        ); //end return statementt
+                                    
+                                    {
+                                        (this.state.title === null) ? (
+                                            <Screen 
+                                                name="signIn-screen" 
+                                                // options={{ title: null, headerShown: false }}
+                                            >
+                                                { props => <HomeScreen 
+                                                                {...props}
+                                                                authLoading         =   {   this.state.authLoading  }
+                                                                title               =   {   this.state.title    }
+                                                                renderAsStudent     =   {   this.state.renderAsStudent }
+                                                                openADSingleSignOn  =   {   this.openADSingleSignOn } 
+                                                            /> 
+                                                }
+                                            </Screen>
+                                        ) : (
+                                            <Screen 
+                                                name="Home"
+                                                // options={{ title: null, headerShown: false }}
+                                            >
+                                                { props => <PageContent 
+                                                                {...props}
+                                                                showUpdate          =   { this.state.showUpdate } 
+                                                                firstName           =   { this.state.firstName}
+                                                                lastName            =   { this.state.lastName }
+                                                                title               =   { this.state.title }
+                                                                renderAsStudent     =   { this.state.renderAsStudent }
+                                                                site                =   { this.state.site }
+                                                                appWidth            =   { this.state.appWidth }
+                                                            />
+                                            }
+                                        </Screen>
+                                        )
+                                    }
+                                        
+                                    </Navigator>
+                                    {   this.state.title ? 
+                                        <TabsFooter 
+                                            title               =   { this.state.title}
+                                            renderAsStudent     =   { this.state.renderAsStudent }
+                                            isModalVisible      =   { this.state.isModalVisible }
+                                            setIsModalVisible   =   { this.setIsModalVisible }
+                                            setRenderAsStudent  =   { this.setRenderAsStudent }
+                                            logOut              =   { this.clearLogOnUserData }
+                                        />
+                                        : null    
+                                    } 
+                                </AppContainerView>
+                            </SafeAreaViewStyled>
+                    </NavigationContainer>
+                </SafeAreaProvider>
+            ); //end return statementt
+        // }
     } //end render() function
 } //end App class
 

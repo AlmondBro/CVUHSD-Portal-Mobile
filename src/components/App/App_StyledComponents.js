@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { SafeAreaView as SafeAreaViewTwo } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 let AppContainerView = styled.View`
     flex: 1;
@@ -23,6 +23,7 @@ const ImageBackgroundStyled = styled.ImageBackground`
 `;
 
 const WelcomeText = styled.Text`
+    font-family: 'SourceSansPro_400Regular';
     color: #B41A1F;
     /* background-color: white; */
     /* width: 100%; */
@@ -33,6 +34,7 @@ const WelcomeText = styled.Text`
     align-items: center;
     align-content: center;
     align-self: center;
+    margin-bottom: 5;
 `;
 
 let BlueSectionContainer = styled.View`
@@ -44,7 +46,7 @@ let BlueSectionContainer = styled.View`
     width: ${props => props.width ? props.width : "auto"};
 `;
 
-let SafeAreaViewStyled = styled.SafeAreaView.attrs( (props) => ({
+let SafeAreaViewStyled = styled(SafeAreaView).attrs( (props) => ({
     forceInset: { top: 'never' }
 }))`
     flex: 1;
@@ -58,6 +60,7 @@ let SafeAreaViewStyled = styled.SafeAreaView.attrs( (props) => ({
                         };
     padding: 0;
     margin: 0;
+    font-family: 'SourceSansPro_400Regular';
 `;
 
 

@@ -25,7 +25,6 @@ let PageContent  = ({ renderAsStudent, title, ...props }) => {
                     key             =   { index }
                     title           =   { title }
                     renderAsStudent =   { renderAsStudent }
-                    // TODO: Add render as student functionality {this.renderAsStudent || this.props.location.state.renderAsStudent}
                 />
             ); //end return statement
         }); //end outer return statement

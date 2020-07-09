@@ -14,7 +14,9 @@ const ModalStyled = styled(Modal).attrs((props) => ({
     swipeDirection      :   props.swipeDirection,
     javaScriptEnabled   :   props.javaScriptEnabled,
     injectJavaScript    :   props.injectJavaScript,
-    injectedJavaScript  :   props.injectedJavaScript
+    injectedJavaScript  :   props.injectedJavaScript,
+    onMessage           :   props.onMessage,
+    mixedContentMode    :   props.mixedContentMode
 }))`
   flex              : 1;
   flex-direction    : column;
@@ -41,8 +43,7 @@ let WebViewContainer = styled.View`
 
 let SafeAreaViewStyled = styled(SafeAreaView)`
     flex: 1;
-    border-top-left-radius: 25;
-    border-top-right-radius: 25;
+    border-radius: 25;
 
     padding-top: 75;
     padding-bottom: 100;
@@ -93,9 +94,15 @@ let ChangePasswordTextHeader = (props) => {
 
 
 const WebViewStyled = styled(WebView).attrs((props) => ({
-    source          :   props.source,
-    originWhitelist :   props.originWhitelist,
-    bounces         :   props.bounces
+    source              :  props.source,
+    originWhitelist     :  props.originWhitelist,
+    scalesPageToFit     :  props.scalesPageToFit,
+    bounces             :  props.bounces,
+    javaScriptEnabled   :  props.javaScriptEnabled,
+    injectedJavaScript  :  props.injectedJavaScript,   
+    injectJavaScript    :  props.injectJavaScript,
+    mixedContentMode    :  props.mixedContentMode,
+    onMessage           :  props.onMessage
 }))`
 
   flex              :   1;
