@@ -8,7 +8,7 @@ import { BlueSectionContainer } from './../App/App_StyledComponents.js';
 //Import 3rd-party APIs
 import greeting from 'greeting';
 
-const Header = ({ renderAsStudent, title, firstName, lastName, site,...props }) => {
+const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel,...props }) => {
     return (
       <HeaderContainerView>
           <TouchableOpacity
@@ -63,9 +63,10 @@ const Header = ({ renderAsStudent, title, firstName, lastName, site,...props }) 
                                     <UserInfoText 
                                         title           =   { title }
                                         renderAsStudent =   { renderAsStudent }
+                                        bold
                                         italic
                                     >
-                                        { (title || "CVUHSD User")  }
+                                        { ( gradeLevel + "th grade " + title) || "CVUHSD User"  }
                                     </UserInfoText>
                                     <UserInfoText 
                                         title           =   { title }
