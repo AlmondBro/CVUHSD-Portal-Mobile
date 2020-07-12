@@ -1,14 +1,74 @@
 import React, { Fragment } from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 
 //Import component's styled parts
-import { HeaderContainerView, PortalLogoImage, UpdateAppView, UpdateTextDescription, UserInfoText  } from './Header_StyledComponents.js';
+import { HeaderContainerView, PortalLogoImage, UpdateAppView, UpdateTextDescription, UserInfoText, SchoolNameLogoView, SchoolLogo  } from './Header_StyledComponents.js';
 import { BlueSectionContainer } from './../App/App_StyledComponents.js';
 
 //Import 3rd-party APIs
 import greeting from 'greeting';
 
-const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel,...props }) => {
+const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel,...props }) => {  
+    let parseSchoolName = (site) => {
+        if (site && (site !== "Centinela Valley Independent Study School" )) {
+            console.log("Site:\t" + site);
+            return site.toString().split(" ", 1)[0];
+        } 
+
+        if (site === "Centinela Valley Independent Study School" ) {
+            return "cviss";
+        } 
+
+        return ""; 
+    }; //end parseSchoolName
+
+    let getSchoolLogoSite = (schoolName) => {
+        let schoolLogoSite = "https://www.centinela.k12.ca.us/";
+        if (schoolName.toLowerCase() === "leuzinger") {
+            schoolLogoSite = "https://www.leuzinger.org/";
+        } 
+
+        if (schoolName.toLowerCase() === "lawndale") {
+            schoolLogoSite = "https://www.lawndalehs.org/";
+        } 
+
+        if (schoolName.toLowerCase() === "hawthorne") {
+            schoolLogoSite = "https://www.hhscougars.org/";
+        } 
+
+        if (schoolName.toLowerCase() === "lloyde") {
+            schoolLogoSite = "https://www.lloydehs.org/";
+        } 
+
+        if (schoolName.toLowerCase() === "Centinela Valley Independent Study School") {
+            schoolLogoSite = "https://www.cvalternatives.org/";
+        }
+        
+        return schoolLogoSite;
+    }; //end getSchoolLogoSite
+
+    let getSchoolLogoImagePath = (schoolName) => {
+        console.log("schoolName:" + schoolName);
+
+        switch (schoolName.toLowerCase()) {
+            case 'cviss' :
+                return require(`./../../assets/images/school-logo-cviss.png`);
+            case 'hawthorne' :
+                return require(`./../../assets/images/school-logo-hawthorne.png`);
+            case 'lawndale' :
+                return require(`./../../assets/images/school-logo-lawndale.png`);
+            case 'leuzinger' :
+                return require(`./../../assets/images/school-logo-leuzinger.png`);
+            
+            default:
+                return require(`./../../assets/images/school-logo-leuzinger.png`);
+        }
+    };
+
+    let schoolName = parseSchoolName(site);
+
+    let schoolLogoImagePath = getSchoolLogoImagePath(schoolName);
+
     return (
       <HeaderContainerView>
           <TouchableOpacity
@@ -27,10 +87,10 @@ const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel,
                     <UpdateAppView>
                         <UpdateTextDescription>A new update is available. Press here to update!</UpdateTextDescription>
                         <Button
-                            onPress={ () => { console.log("Update reload"); Updates.reload() } }
-                            title="Update Mobile Portal"
-                            color="#1E6C93"
-                            accessibilityLabel="Update Mobile Portal"
+                            onPress             =   { () => { console.log("Update reload"); Updates.reload() } }
+                            title               =   "Update Mobile Portal"
+                            color               =   "#1E6C93"
+                            accessibilityLabel  =   "Update Mobile Portal"
                         />
                     </UpdateAppView>
                 )
@@ -39,8 +99,28 @@ const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel,
         </Fragment> 
 
         <BlueSectionContainer>
+        {
+            title ? 
+                (
+                    
+                        <UserInfoText 
+                            title           =   { title }
+                            renderAsStudent =   { renderAsStudent }
+                            bold
+                            italic
+                        >
+                            <UserInfoText 
+                                title           =   { title }
+                                renderAsStudent =   { renderAsStudent }
+                            >
+                                { greeting.random() + " " }
+                            </UserInfoText>
+                            {  firstName + " " + lastName }
+                        </UserInfoText>
+                ) : null     
+            }
             {
-                title ? 
+                (title === "Student") ? 
                     (
                         <Fragment>
                             <UserInfoText 
@@ -49,42 +129,34 @@ const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel,
                                 bold
                                 italic
                             >
-                                <UserInfoText 
-                                    title           =   { title }
-                                    renderAsStudent =   { renderAsStudent }
-                                >
-                                    { greeting.random() + " " }
-                                </UserInfoText>
-                                {  firstName + " " + lastName }
+                                { ( gradeLevel ? gradeLevel + "th grade " + title : null) || "CVUHSD User"  }
                             </UserInfoText>
-                            {
-                                (title === "Student") ? (
-                                    <Fragment>
-                                    <UserInfoText 
-                                        title           =   { title }
-                                        renderAsStudent =   { renderAsStudent }
-                                        bold
-                                        italic
-                                    >
-                                        { ( gradeLevel + "th grade " + title) || "CVUHSD User"  }
-                                    </UserInfoText>
-                                    <UserInfoText 
-                                        title           =   { title }
-                                        renderAsStudent =   { renderAsStudent }
-                                        bold
-                                    >
-                                        { (site || "CVUHSD") }
-                                    </UserInfoText>
-                                    </Fragment>
-                                ) : null
-                            }
-                      
                         </Fragment>
                     ) : null
             }
+            {              
+                ( title === "Student") && site ? 
+                    (
+                        <Fragment>
+                            <SchoolNameLogoView>
+                                <UserInfoText 
+                                    title           =   { title }
+                                    renderAsStudent =   { renderAsStudent }
+                                    bold
+                                >
+                                    { (site || "CVUHSD") }
+                                </UserInfoText>
+                        
+                                <SchoolLogo  
+                                    source = { schoolLogoImagePath } 
+                                />  
+                            </SchoolNameLogoView> 
+                        </Fragment> 
+                    ) : null      
+            }
         </BlueSectionContainer>
       </HeaderContainerView>
-    );
+    ); //end return statement
 };
 
 export default Header;
