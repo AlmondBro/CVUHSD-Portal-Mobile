@@ -45,5 +45,20 @@ let UserInfoText = styled.Text`
     margin-top: 5;
 `;
 
+const SchoolNameLogoView = styled.View`
+    flex-direction: row;
+    justify-content:  center;
+    margin-bottom: 5;
+`;
 
-export { HeaderContainerView, PortalLogoImage, UpdateAppView, UpdateTextDescription, UserInfoText }; 
+const SchoolLogo = styled.Image`
+    flex-direction: row;
+    height: 25;
+    width: 25;
+
+    margin-left: 5;
+
+    overflow: visible;
+`;
+
+export { HeaderContainerView, PortalLogoImage, UpdateAppView, UpdateTextDescription, UserInfoText, SchoolNameLogoView, SchoolLogo }; 
