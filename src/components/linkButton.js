@@ -64,7 +64,7 @@ const LinkButton = (props) => {
             case "ccgi-logo.png" : 
                 return portalRoot +("/images/buttons/ccgi-logo.png");
             
-            case "clever_button_level.png" : 
+            case "clever_button_bevel.png" : 
                 return portalRoot +("/images/buttons/Clever_Button_Bevel.png");
 
             case "cviss-website.png" : 
@@ -284,11 +284,11 @@ const LinkButton = (props) => {
             onPress =   { () => { openLink(props) } }
         >
             <ImageCache  
-                    style               =   {serviceButton_styles.image}
-                    accessible          =   {props.description ? true : false}
-                    accessibilityLabel  =   {props.description}           
+                    style               =   { serviceButton_styles.image }
+                    accessible          =   { props.description ? true : false }
+                    accessibilityLabel  =   { props.description }           
                     tint                =   "dark"
-                    transitionDuration  =   {300}
+                    transitionDuration  =   { 300}
                     {...{ previewImage, uri } }
             />
         </TouchableHighlight>
