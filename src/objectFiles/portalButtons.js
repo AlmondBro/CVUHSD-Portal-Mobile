@@ -1014,7 +1014,7 @@ let studentPortalButtons = {
             buttonLink: "https://www.clever.com/in/cvuhsd",
             buttonImg: "Clever_Button_Bevel.png",
             description: "Clever Portal",
-            deepLink: "wayside-publishing://",
+            deepLink: "clever://",
             appLink_config : {
                 appName: "learning-site",
                 appStoreId: "948682851",
