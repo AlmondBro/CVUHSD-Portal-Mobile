@@ -63,6 +63,9 @@ const LinkButton = (props) => {
             
             case "ccgi-logo.png" : 
                 return portalRoot +("/images/buttons/ccgi-logo.png");
+            
+            case "clever_button_bevel.png" : 
+                return portalRoot +("/images/buttons/Clever_Button_Bevel.png");
 
             case "cviss-website.png" : 
                 return portalRoot +("/images/buttons/CVISS-Website.png");
@@ -106,7 +109,7 @@ const LinkButton = (props) => {
             case "ed-tech-resources.png" : 
                 return portalRoot +("/images/buttons/ed-tech-resources.png");
             
-            case "everfi.png" : 
+            case "everfi.jpg" : 
                 return portalRoot +("/images/buttons/everfi.jpg");
 
             case "flipsterhw.png" : 
@@ -244,7 +247,7 @@ const LinkButton = (props) => {
             case "staff-only-mine.png" : 
                 return portalRoot +("/images/buttons/staff-only-mine.png");
 
-            case "techItOut_Button.png" : 
+            case "techitout_button.png" : 
                 return portalRoot +("/images/buttons/TechItOut_Button.png");
 
             case "timeclockpluslogo.jpg" : 
@@ -277,16 +280,16 @@ const LinkButton = (props) => {
 
     return (
         <TouchableHighlight 
-            style={serviceButton_styles.touchableHighlight}
-            onPress={ () => { openLink(props) } }
+            style   =   { serviceButton_styles.touchableHighlight }
+            onPress =   { () => { openLink(props) } }
         >
             <ImageCache  
-                    style={serviceButton_styles.image}
-                    accessible={props.description ? true : false}
-                    accessibilityLabel={props.description}
-                    {...{previewImage, uri}}
-                    tint = "dark"
-                    transitionDuration={300}
+                    style               =   { serviceButton_styles.image }
+                    accessible          =   { props.description ? true : false }
+                    accessibilityLabel  =   { props.description }           
+                    tint                =   "dark"
+                    transitionDuration  =   { 300}
+                    {...{ previewImage, uri } }
             />
         </TouchableHighlight>
     );
