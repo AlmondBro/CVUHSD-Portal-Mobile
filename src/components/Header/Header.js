@@ -115,7 +115,8 @@ const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel,
                             >
                                 { greeting.random() + " " }
                             </UserInfoText>
-                            {  firstName + " " + lastName }
+                            {  firstName + " " + lastName + " 😃"}
+
                         </UserInfoText>
                 ) : null     
             }
@@ -129,7 +130,7 @@ const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel,
                                 bold
                                 italic
                             >
-                                { ( gradeLevel ? gradeLevel + "th grade " + title : null) || "CVUHSD User"  }
+                                { ( gradeLevel ? gradeLevel + "th grade " + title : null)  || "CVUHSD User" }
                             </UserInfoText>
                         </Fragment>
                     ) : null
