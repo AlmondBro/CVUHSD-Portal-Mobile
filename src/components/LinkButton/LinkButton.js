@@ -7,6 +7,8 @@ import AppLink from 'react-native-app-link';
 
 import { Image as ImageCache, CacheManager } from "react-native-expo-image-cache";
 
+import { FastImageStyled } from './LinkButton_StyledComponents.js';
+
 const serviceButton_styles = StyleSheet.create({
     touchableHighlight: {
        alignSelf: 'center',
@@ -285,7 +287,7 @@ const LinkButton = (props) => {
             style   =   { serviceButton_styles.touchableHighlight }
             onPress =   { () => { openLink(props) } }
         >
-            <ImageCache  
+            <FastImageStyled  
                     style               =   { serviceButton_styles.image }
                     accessible          =   { props.description ? true : false }
                     accessibilityLabel  =   { props.description }           
