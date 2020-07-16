@@ -1,7 +1,9 @@
-import React from "react";
-import { StyleSheet, TouchableHighlight, Linking } from "react-native";
+import React from 'react';
+import { StyleSheet, TouchableHighlight } from 'react-native';
 
-import AppLink from "react-native-app-link";
+import * as Linking from 'expo-linking';
+
+import AppLink from 'react-native-app-link';
 
 import { TouchableHighlightStyled, LinkButtonImage } from './LinkButton_StyledComponents.js'
 
