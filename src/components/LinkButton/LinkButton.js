@@ -3,20 +3,7 @@ import { StyleSheet, TouchableHighlight, Linking } from "react-native";
 
 import AppLink from "react-native-app-link";
 
-import { Image as ImageCache, CacheManager } from "react-native-expo-image-cache";
-
-const serviceButton_styles = StyleSheet.create({
-    touchableHighlight: {
-       alignSelf: 'center',
-       marginTop: 13,
-       marginBottom: 13
-    },
-
-    image: {
-        width: 300,
-        height: 100
-    }
-});
+import { TouchableHighlightStyled, LinkButtonImage } from './LinkButton_StyledComponents.js'
 
 const LinkButton = (props) => {
     let openLink = (props) => {
@@ -167,7 +154,10 @@ const LinkButton = (props) => {
                 return portalRoot +("/images/buttons/lawndale-laptop-cart-system.png");
 
             case "ll-website.png" : 
-                return portalRoot +("/images/buttons/LL-Website.png");
+                return portalRoot + ("/images/buttons/LL-Website.png");
+
+            case "lunchtechbytes_button_bevel.png" :
+                return portalRoot + ("/images/buttons/LunchTechBytes_Button_Bevel.png")
 
             case "lw-website.png" : 
                 return portalRoot +("/images/buttons/LW-Website.png");
@@ -279,19 +269,17 @@ const LinkButton = (props) => {
     let uri = getImage(props.buttonImg);
 
     return (
-        <TouchableHighlight 
-            style   =   { serviceButton_styles.touchableHighlight }
+        <TouchableHighlightStyled 
             onPress =   { () => { openLink(props) } }
         >
-            <ImageCache  
-                    style               =   { serviceButton_styles.image }
+            <LinkButtonImage  
                     accessible          =   { props.description ? true : false }
                     accessibilityLabel  =   { props.description }           
                     tint                =   "dark"
                     transitionDuration  =   { 300}
                     {...{ previewImage, uri } }
             />
-        </TouchableHighlight>
+        </TouchableHighlightStyled>
     );
 };
 
