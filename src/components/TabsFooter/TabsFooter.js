@@ -1,17 +1,15 @@
-import React, { Fragment, useEffect, useState, useRef } from 'react';
+import React, { Fragment } from 'react';
 
-import * as Svg from 'react-native-svg';
 import { FontAwesome } from '@expo/vector-icons'; 
 
-import { TabsFooterContainerView, TabsFooterButton}  from './TabsFooter_StyledComponents.js';
-
+//Import ChangePasswordModal and its associated icon
 import ChangePassword  from './../ChangePassword/ChangePassword.js';
-
 import ChangePasswordIcon from './../../assets/images/icons/change-password.svg';
 
-const isDev = __DEV__;
+//Import styled components
+import { TabsFooterContainerView, TabsFooterButton}  from './TabsFooter_StyledComponents.js';
 
-const TabsFooter = ({ renderAsStudent, setRenderAsStudent, isModalVisible, setIsModalVisible, title, logOut, ...props }) => {    
+const TabsFooter = ({ renderAsStudent, setRenderAsStudent, isModalVisible, setIsModalVisible, title, logOut }) => {    
     return (
         <TabsFooterContainerView 
             title   =   { title }    
@@ -65,7 +63,6 @@ const TabsFooter = ({ renderAsStudent, setRenderAsStudent, isModalVisible, setIs
                 />
                 
             </TabsFooterButton>
-           
             { 
                 /* Only render the ChangePasswordModal if the signed-in user is not a student */
                 (title !== "Student") ? 
@@ -79,7 +76,6 @@ const TabsFooter = ({ renderAsStudent, setRenderAsStudent, isModalVisible, setIs
                     )
                     : null
             }
-            
         </TabsFooterContainerView>
     ); //end return statement
 }; //end TabsFooter()
