@@ -57,7 +57,17 @@ let ToggleButtonText  = styled.Text`
     color: ${props => (props.title === "Student" || props.renderAsStudent) ? "#B41A1F" : "#1E6C93" };
 `;
 
-const WebViewStyled = styled(WebView)`
+const WebViewStyled = styled(WebView).attrs((props) => ({
+    source              :  props.source,
+    originWhitelist     :  props.originWhitelist,
+    scalesPageToFit     :  props.scalesPageToFit,
+    bounces             :  props.bounces,
+    javaScriptEnabled   :  props.javaScriptEnabled,
+    injectedJavaScript  :  props.injectedJavaScript,   
+    injectJavaScript    :  props.injectJavaScript,
+    mixedContentMode    :  props.mixedContentMode,
+    onMessage           :  props.onMessage
+}))`
     align-self: center;
     height: 150;
     width: 250;

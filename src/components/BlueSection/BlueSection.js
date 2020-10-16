@@ -35,6 +35,7 @@ class BlueSection extends Component {
                 <BlueSectionContent  
                     title               =   { this.props.title } 
                     renderAsStudent     =   { this.props.renderAsStudent }
+                    headerTitle         =   { this.props.headerTitle }
                     expanded            =   { this.state.expanded } 
                     expandToggle        =   { this.expandToggle }
                     buttons             =   { this.props.buttons }

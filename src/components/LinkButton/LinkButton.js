@@ -1,22 +1,11 @@
-import React from "react";
-import { StyleSheet, TouchableHighlight, Linking } from "react-native";
+import React from 'react';
+import { StyleSheet, TouchableHighlight } from 'react-native';
 
-import AppLink from "react-native-app-link";
+import * as Linking from 'expo-linking';
 
-import { Image as ImageCache, CacheManager } from "react-native-expo-image-cache";
+import AppLink from 'react-native-app-link';
 
-const serviceButton_styles = StyleSheet.create({
-    touchableHighlight: {
-       alignSelf: 'center',
-       marginTop: 13,
-       marginBottom: 13
-    },
-
-    image: {
-        width: 300,
-        height: 100
-    }
-});
+import { TouchableHighlightStyled, LinkButtonImage } from './LinkButton_StyledComponents.js'
 
 const LinkButton = (props) => {
     let openLink = (props) => {
@@ -63,6 +52,9 @@ const LinkButton = (props) => {
             
             case "ccgi-logo.png" : 
                 return portalRoot +("/images/buttons/ccgi-logo.png");
+            
+            case "clever_button_bevel.png" : 
+                return portalRoot +("/images/buttons/Clever_Button_Bevel.png");
 
             case "cviss-website.png" : 
                 return portalRoot +("/images/buttons/CVISS-Website.png");
@@ -106,7 +98,7 @@ const LinkButton = (props) => {
             case "ed-tech-resources.png" : 
                 return portalRoot +("/images/buttons/ed-tech-resources.png");
             
-            case "everfi.png" : 
+            case "everfi.jpg" : 
                 return portalRoot +("/images/buttons/everfi.jpg");
 
             case "flipsterhw.png" : 
@@ -164,7 +156,10 @@ const LinkButton = (props) => {
                 return portalRoot +("/images/buttons/lawndale-laptop-cart-system.png");
 
             case "ll-website.png" : 
-                return portalRoot +("/images/buttons/LL-Website.png");
+                return portalRoot + ("/images/buttons/LL-Website.png");
+
+            case "lunchtechbytes_button_bevel.png" :
+                return portalRoot + ("/images/buttons/LunchTechBytes_Button_Bevel.png")
 
             case "lw-website.png" : 
                 return portalRoot +("/images/buttons/LW-Website.png");
@@ -244,7 +239,7 @@ const LinkButton = (props) => {
             case "staff-only-mine.png" : 
                 return portalRoot +("/images/buttons/staff-only-mine.png");
 
-            case "techItOut_Button.png" : 
+            case "techitout_button.png" : 
                 return portalRoot +("/images/buttons/TechItOut_Button.png");
 
             case "timeclockpluslogo.jpg" : 
@@ -276,19 +271,17 @@ const LinkButton = (props) => {
     let uri = getImage(props.buttonImg);
 
     return (
-        <TouchableHighlight 
-            style={serviceButton_styles.touchableHighlight}
-            onPress={ () => { openLink(props) } }
+        <TouchableHighlightStyled 
+            onPress =   { () => { openLink(props) } }
         >
-            <ImageCache  
-                    style={serviceButton_styles.image}
-                    accessible={props.description ? true : false}
-                    accessibilityLabel={props.description}
-                    {...{previewImage, uri}}
-                    tint = "dark"
-                    transitionDuration={300}
+            <LinkButtonImage  
+                    accessible          =   { props.description ? true : false }
+                    accessibilityLabel  =   { props.description }           
+                    tint                =   "dark"
+                    transitionDuration  =   { 300}
+                    {...{ previewImage, uri } }
             />
-        </TouchableHighlight>
+        </TouchableHighlightStyled>
     );
 };
 

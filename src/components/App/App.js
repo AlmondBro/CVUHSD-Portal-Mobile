@@ -1,6 +1,6 @@
 //Import React/React Native modules
 import React, { Component } from 'react';
-import { StatusBar as RNStatusBar, ImageBackground, Alert } from 'react-native';
+import { StatusBar as RNStatusBar, ImageBackground, Alert, Platform } from 'react-native';
 
 //Import expo/react native components that now exist as separate packages
 import { StatusBar } from 'expo-status-bar';
@@ -11,7 +11,7 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native'; //Equivalent to the BrowserRouter in ReactRouter
 import { createStackNavigator } from '@react-navigation/stack'; 
 
-import Reactotron from 'reactotron-react-native';
+import { Reactotron } from './../../config/reactotron.dev.js';
 
 import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID, AZURE_DOMAIN_HINT } from './../../../keys.env.js';
 //from 'react-native-dotenv'
@@ -36,14 +36,16 @@ import TabsFooter from './../TabsFooter/TabsFooter.js'
 
 import HomeScreen from './../HomeScreen/HomeScreen.js';
 
-import Images from '@assets';
-// './../../assets';
+const imagesObjectPath = (Platform.OS === "web") ? require('./../../assets/images/index.js') : require('@assets');
+const Images = imagesObjectPath.default;
+
+//Import Images from @assets';
 
 const { Navigator, Screen } = createStackNavigator();  //<Navigator> is equivalent to a <Switch> on React Router, <Screen/> is equivalent to <Route>
 
 const isDev = __DEV__;
 
-const ReactotronDebug = isDev ? Reactotron : console;
+const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
 
 class App extends Component {
     constructor(props) {
@@ -116,7 +118,7 @@ class App extends Component {
             headers: getOU_headers,
             body: JSON.stringify({user: this.state.email})
         }).then((response) => {
-            ReactotronDebug.log("response:\t" + response);
+            console.log("getOU response:\t" + JSON.stringify(response));
             return response.json();     //Parse the JSON of the response
         }).then((OU) => {
             parseOUforSchool(OU);
@@ -159,7 +161,8 @@ class App extends Component {
                 authLoading         : false 
             });
 
-            
+            this.getStudentSchool();
+
             //setInterval(() => this.setLogOnUserData({...this.state}), 1500);
             this.setLogOnUserData({...this.state});
 
@@ -197,7 +200,6 @@ class App extends Component {
         } //end else-statement
     }; //handlePressAsync()
 
-    
     checkforExistingLogOn = async () => {
         try {
             const currentUserState = await AsyncStorage.getItem(this.USER_INFO);
@@ -207,6 +209,7 @@ class App extends Component {
                 ReactotronDebug.log(JSON.parse(currentUserState));
 
                 this.setState({ ...JSON.parse(currentUserState) });
+                this.getStudentSchool();
 
                 return true;
             } else {
@@ -280,8 +283,8 @@ class App extends Component {
         this.setState({ fontLoaded: this.props.fontLoaded});
         //this.loadFontsAsync();
 
-        // this.checkforExistingLogOn();
-        this.clearLogOnUserData();
+        this.checkforExistingLogOn();
+        //this.clearLogOnUserData();
     }; //end componentDidMount
 
     // #B41A1F" : "#1E6C93
@@ -338,6 +341,7 @@ class App extends Component {
                                                 lastName            =   { this.state.lastName }
                                                 title               =   { this.state.title }
                                                 site                =   { this.state.site }
+                                                gradeLevel          =   { this.state.gradeLevel }
                                                 renderAsStudent     =   { this.state.renderAsStudent }
                                                 portalLogoSource    =   { this.state.portalLogoSource }
                                                 // onPress    =   { navigate ? navigate: null }
