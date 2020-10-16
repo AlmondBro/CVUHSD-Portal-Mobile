@@ -23,14 +23,14 @@
     "ios": {
       "icon": "./src/assets/app-icon.ios.png",
       "supportsTablet": true,
-      "bundleIdentifier": "com.cvuhsd.portalMobile"
+      "bundleIdentifier": "com.cvuhsd.portal"
     },
     "android": {
       "icon": "./src/assets/app-icon.android.png",
-      "package": "com.cvuhsd.portalMobile",
-      "versionCode": 3,
+      "package": "com.cvuhsd.portal",
+      "versionCode": 4,
       "permissions": [],
-      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.cvuhsd.portalMobile"
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.cvuhsd.portal"
     },
     "androidStatusBar": {
       "barStyle": "dark-content",
