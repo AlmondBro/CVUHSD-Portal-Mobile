@@ -1,6 +1,8 @@
 import styled from 'styled-components/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import Constants from 'expo-constants';
+
 let AppContainerView = styled.View`
     flex: 1;
     background-color: white;
@@ -47,22 +49,31 @@ let BlueSectionContainer = styled.View`
 `;
 
 let SafeAreaViewStyled = styled(SafeAreaView).attrs( (props) => ({
-    forceInset: { top: 'never' }
+    // forceInset: { bottom: 'never' },
 }))`
     flex: 1;
     flex-direction: column;
     justify-content: flex-start;
     align-self: stretch;
-    background-color:   ${   props => (props.title === null) 
-                            ? "#B41A1F" : 
-                            (props.title === "Student" || props.renderAsStudent === "true") 
-                                ? "#B41A1F" : "#1E6C93" 
+    background-color: ${props =>  props.title ? 
+                            ( props.title === "Student" || props.renderAsStudent === true) ? 
+                                "#B41A1F" : "#1E6C93"
+                            : "#B41A1F" 
                         };
     padding: 0;
     margin: 0;
-    font-family: 'SourceSansPro_400Regular';
+`;
+
+let StatusBarSafeView = styled(SafeAreaView).attrs( (props) => ({
+    // forceInset: { bottom: 'never' },
+}))`
+    flex: 0;
+    flex-direction: row;
+    height: ${Constants.statusBarHeight};
+    background-color: white;
 `;
 
 
 
-export { AppContainerView, AppHeaderContainerView, ImageBackgroundStyled, WelcomeText, SafeAreaViewStyled, BlueSectionContainer };
+
+export { AppContainerView, AppHeaderContainerView, ImageBackgroundStyled, WelcomeText, SafeAreaViewStyled, BlueSectionContainer, StatusBarSafeView,  };

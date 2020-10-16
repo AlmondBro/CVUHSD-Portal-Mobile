@@ -1,4 +1,7 @@
+import React from 'react';
 import { registerRootComponent } from 'expo';
+
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import App from './components/App/App.js';
 
@@ -9,6 +12,14 @@ if (__DEV__) {
 
 console.disableYellowBox = true;
 
-registerRootComponent(App);
+const SafeProvidedApp = () => {
+    return (
+        <SafeAreaProvider>
+            <App/>
+        </SafeAreaProvider>
+    ); //end return statement
+}; //end SafeProvidedAp
+
+registerRootComponent(SafeProvidedApp);
 
 
