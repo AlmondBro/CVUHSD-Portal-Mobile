@@ -327,15 +327,9 @@ class App extends Component {
                 
                         <NavigationContainer ref={navigationRef}>
                                 <AppContainerView>
-                                    <ImageBackground
+                                    <ImageBackgroundStyled
                                         source={ this.state.backgroundImage }
-                                        style={ 
-                                            { 
-                                                flex: 0.75,
-                                                resizeMode: "cover",
-                                                justifyContent: "center"
-                                            }
-                                        }
+                                        accessibilityLabel= "CVUHSD Mobile Portal"
                                     >
                                         {/* <AppHeaderContainerView> */}
                                             <Header 
@@ -352,7 +346,7 @@ class App extends Component {
                                             
                                             { (this.state.title || this.state.renderAsStudent) ? null : <WelcomeText>Welcome</WelcomeText> }
                                         {/* </AppHeaderContainerView> */}
-                                    </ImageBackground>
+                                    </ImageBackgroundStyled>
 
                                     <Navigator
                                         headerMode      = "none"

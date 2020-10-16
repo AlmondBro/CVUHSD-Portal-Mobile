@@ -7,7 +7,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 //Iimport styled components
 import { ModalStyled, SafeAreaViewStyled, WebViewContainer, WebViewStyled, ChangePasswordTextHeader } from './ChangePassword_StyledComponents.js';
 
-import { WebView } from 'react-native-webview';
 
 /*
  ${  (title === null) 

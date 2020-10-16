@@ -19,9 +19,11 @@ let AppHeaderContainerView = styled.View`
     align-items: center;
 `;
 
-const ImageBackgroundStyled = styled.ImageBackground`
-    flex: 1;
-    justify-content: "center"
+const ImageBackgroundStyled = styled.ImageBackground.attrs( (props) => ({
+    resizeMode: "cover"
+}))`
+    flex: 0.75;
+    justify-content: center;
 `;
 
 const WelcomeText = styled.Text`
