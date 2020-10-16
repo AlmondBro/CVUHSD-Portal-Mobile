@@ -313,7 +313,7 @@ class App extends Component {
                                                         : "#B41A1F" 
                                                 } 
                             barStyle        =   "light-content"                   
-                            style           =   "dark" 
+                            style           =   "light" 
                             animated        =   { true }
                             translucent     =   { false } 
                         />
