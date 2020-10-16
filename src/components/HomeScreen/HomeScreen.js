@@ -3,7 +3,7 @@ import { ImageBackground, ActivityIndicator } from 'react-native';
 
 import { HomeScreenContainerView, OpenSSOContainer, SignInButtonTouchableOpacity } from './HomeScreen_StyledComponents.js';
 
-const HomeScreen = ({ renderAsStudent, title, authLoading, children }) => {
+const HomeScreen = ({ renderAsStudent, title, authLoading, openADSingleSignOn, children }) => {
     const backgroundImage = require('./../../assets/images/theCVway-white.png');
 
     return (
@@ -25,7 +25,7 @@ const HomeScreen = ({ renderAsStudent, title, authLoading, children }) => {
                     <SignInButtonTouchableOpacity 
                         buttonTitle     =   "Sign In" 
                         color           =   "white"
-                        onPress         =   { props.openADSingleSignOn || console.log("No onPress function")}
+                        onPress         =   { openADSingleSignOn || console.log("No onPress function")}
 
                         title           =   { title }
                         renderAsStudent =   { renderAsStudent } 
