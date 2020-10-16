@@ -16,7 +16,7 @@ import { ModalStyled, SafeAreaViewStyled, WebViewContainer, WebViewStyled, Chang
                                                 };
                         
 */
-let ChangePassword = ({isModalVisible, setIsModalVisible, title, renderAsStudent, ...props}) => {
+let ChangePassword = ({ isModalVisible, setIsModalVisible, title, renderAsStudent }) => {
     let buttonColor =  (title === "Student" || renderAsStudent === "true") 
                         ? "#B41A1F" : "#1E6C93";
 
