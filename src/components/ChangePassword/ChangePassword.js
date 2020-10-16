@@ -1,21 +1,9 @@
 import React from 'react';
 import { Button, Platform } from 'react-native';
 
-//Import SafeAreaView so that elements do not overlap with status bars or notches
-import { SafeAreaView } from 'react-native-safe-area-context';
-
-//Iimport styled components
+//Import styled components
 import { ModalStyled, SafeAreaViewStyled, WebViewContainer, WebViewStyled, ChangePasswordTextHeader } from './ChangePassword_StyledComponents.js';
 
-
-/*
- ${  (title === null) 
-                                                    ? "#B41A1F" : 
-                                                    (title === "Student" || renderAsStudent === "true") 
-                                                        ? "#B41A1F" : "#1E6C93" 
-                                                };
-                        
-*/
 let ChangePassword = ({ isModalVisible, setIsModalVisible, title, renderAsStudent }) => {
     let buttonColor =  (title === "Student" || renderAsStudent === "true") 
                         ? "#B41A1F" : "#1E6C93";
@@ -96,7 +84,6 @@ let ChangePassword = ({ isModalVisible, setIsModalVisible, title, renderAsStuden
         </ModalStyled>
     //   </View>
     ); //end return statement
-  
 }; //end ChangePassword
 
 export default ChangePassword;
