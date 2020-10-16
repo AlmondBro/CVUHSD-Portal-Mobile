@@ -5,7 +5,7 @@
   "version": "2.0.0",
   "scripts": {
     "start": "expo start",
-    "start-reset": "rm -rf node_modules/ && npm install && npm audit fix && npm install && npm start --reset-cache",
+    "start-reset": "rm -rf node_modules/ && npm install && npm audit fix  && npm start --reset-cache",
     "publish": "expo publish",
     "build-android": "expo build:android",
     "upload-android": "expo upload:android",
@@ -25,7 +25,7 @@
     "@react-navigation/native": "^5.4.3",
     "@react-navigation/stack": "^5.4.0",
     "azure-ad-graph-expo": "github:JuanDavidLopez95/azure-ad-graph-expo",
-    "expo": "^39.0.0",
+    "expo": "~39.0.2",
     "expo-auth-session": "~2.0.0",
     "expo-blur": "~8.2.0",
     "expo-font": "~8.3.0",
@@ -51,7 +51,7 @@
     "react-native-screens": "~2.10.1",
     "react-native-svg": "12.1.0",
     "react-native-svg-transformer": "^0.14.3",
-    "react-native-web": "~0.13.7",
+    "react-native-web": "~0.13.12",
     "styled-components": "^5.1.0",
     "styled-css": "^1.1.0",
     "url": "^0.11.0",
@@ -59,7 +59,7 @@
     "react-native-webview": "10.7.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.6",
+    "@babel/core": "~7.9.0",
     "babel-preset-expo": "^8.3.0",
     "reactotron-react-js": "^3.3.7",
     "reactotron-react-native": "^5.0.0"
