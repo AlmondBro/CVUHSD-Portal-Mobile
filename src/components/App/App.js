@@ -136,7 +136,7 @@ class App extends Component {
         
         this.setState({ authLoading: true }); //Set loading to true
 
-        let adUserInfo = await  openAuthSession(this.azureAdAppProps);
+        let adUserInfo = await openAuthSession(this.azureAdAppProps);
                                
         ReactotronDebug.log("adUserInfo from App.js:\t" + JSON.stringify(adUserInfo) );
 
