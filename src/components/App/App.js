@@ -51,7 +51,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showUpdate          :   true, 
+            showUpdate          :   false, 
             adUserInfo          :   null,
             appWidth            :   this.props.width,
 
