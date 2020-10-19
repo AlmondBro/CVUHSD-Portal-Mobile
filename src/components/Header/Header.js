@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { Button, TouchableOpacity } from 'react-native';
 
 //Import component's styled parts
 import { HeaderContainerView, PortalLogoImage, UpdateAppView, UpdateTextDescription, UserInfoText, SchoolNameLogoView, SchoolLogo  } from './Header_StyledComponents.js';
@@ -8,7 +8,7 @@ import { BlueSectionContainer } from './../App/App_StyledComponents.js';
 //Import 3rd-party APIs
 import greeting from 'greeting';
 
-const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel,...props }) => {  
+const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel, portalLogoSource, showUpdate }) => {  
     let parseSchoolName = (site) => {
         if (site && (site !== "Centinela Valley Independent Study School" )) {
             console.log("Site:\t" + site);
@@ -76,20 +76,28 @@ const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel,
             // onPress={ props.onPress('Home') }
           >
             <PortalLogoImage  
-                            {...props}
-                source  =   { props.portalLogoSource} 
+                source  =   { portalLogoSource} 
             />
           </TouchableOpacity>
     
         <Fragment>
-            { props.showUpdate ?
+            { showUpdate ?
                 ( 
                     <UpdateAppView>
-                        <UpdateTextDescription>A new update is available. Press here to update!</UpdateTextDescription>
+                        <UpdateTextDescription
+                            title           =   { title }
+                            renderAsStudent =   { renderAsStudent }
+                        >
+                            A new update is available. Press here to update!
+                        </UpdateTextDescription>
                         <Button
                             onPress             =   { () => { console.log("Update reload"); Updates.reload() } }
-                            title               =   "Update Mobile Portal"
-                            color               =   "#1E6C93"
+                            title               =   "Update"
+                            color               =    {  (title === null) 
+                                                        ? "#B41A1F" : 
+                                                        (title === "Student" ||renderAsStudent) 
+                                                            ? "#B41A1F" : "#1E6C93" 
+                                                    }
                             accessibilityLabel  =   "Update Mobile Portal"
                         />
                     </UpdateAppView>

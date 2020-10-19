@@ -18,16 +18,25 @@ let PortalLogoImage = styled.Image.attrs( (props) => {
 `;
 
 let UpdateAppView = styled.View`
-    background-color: "#F4F7F9";
+    background-color: transparent;
+
+    margin-top: 10;
     margin-bottom: 12;
+
+    padding-left: 50;
+    padding-right: 50;
 `; 
 
 let UpdateTextDescription = styled.Text`
-    font-size: 16; 
+    font-size: 14; 
     padding-left: 8;
     padding-right: 8;
-    align-self: "center";
-    color: "#15516b";
+    align-self: center;
+    color:  ${   props => (props.title === null) 
+                            ? "#B41A1F" : 
+                            (props.title === "Student" || props.renderAsStudent) 
+                                ? "#B41A1F" : "#1E6C93" 
+                        };
 `;
 
 let UserInfoText = styled.Text`

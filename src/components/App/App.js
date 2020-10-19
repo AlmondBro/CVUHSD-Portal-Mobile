@@ -17,7 +17,9 @@ import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID, AZURE_DOMAIN_HIN
 //from 'react-native-dotenv'
 
 import * as AuthSession from 'expo-auth-session';
-import * as Updates from 'expo-updates';
+
+// import * as Updates from 'expo-updates';
+import { reloadAsync, checkForUpdateAsync, fetchForUpdate } from 'expo-updates';
 
 import { openAuthSession } from 'azure-ad-graph-expo';
 
@@ -49,7 +51,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showUpdate          :   false, 
+            showUpdate          :   true, 
             adUserInfo          :   null,
             appWidth            :   this.props.width,
 
@@ -260,9 +262,33 @@ class App extends Component {
         console.log('Done.')
     }; //end clearLogOnUserData
 
-    componentDidMount = async () => {
+    reloadAppFromUpdate = async () => {
+        await Updates.reloadAsync();
+        return;
+    };
+
+    checkForUpdates = async () => {
         const checkforUpdatesDev = false;
-        
+
+        if (!__DEV__ || checkforUpdatesDev === true) {
+            const update = await checkForUpdateAsync();
+
+            if (update.isAvailable) {
+                await fetchUpdateAsync();
+
+                this.setState({ showUpdate: true } );
+
+                return;
+            } //end if-statement 
+            else {
+                return;
+            }
+        } else {
+            return;
+        }
+    };
+
+    componentDidMount = () => {
         //console.log("Props:\t" + JSON.stringify(this.props) );
         console.log("Width:\t" + this.props.width);
 
@@ -270,14 +296,8 @@ class App extends Component {
             Reactotron.log('Reactotron running');
         }
         
-        if (!__DEV__ || checkforUpdatesDev === true) {
-            Updates.checkForUpdateAsync().then(update => {
-                if (update.isAvailable) {
-                  this.setState({ showUpdate: true } );
-                } //end if-statement
-              });
-        }
-
+        this.checkForUpdates();
+        
         this.setState({ fontLoaded: this.props.fontLoaded});
         //this.loadFontsAsync();
 
