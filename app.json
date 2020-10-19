@@ -28,7 +28,7 @@
     "android": {
       "icon": "./src/assets/app-icon.android.png",
       "package": "com.cvuhsd.portal",
-      "versionCode": 4,
+      "versionCode": 6,
       "permissions": [],
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.cvuhsd.portal"
     },
