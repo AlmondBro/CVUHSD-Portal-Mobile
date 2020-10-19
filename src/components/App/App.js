@@ -361,6 +361,7 @@ class App extends Component {
                                                 gradeLevel          =   { this.state.gradeLevel }
                                                 renderAsStudent     =   { this.state.renderAsStudent }
                                                 portalLogoSource    =   { this.state.portalLogoSource }
+                                                reloadAppFromUpdate =   { this.reloadAppFromUpdate }
                                                 // onPress    =   { navigate ? navigate: null }
                                             />
                                             

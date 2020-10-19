@@ -8,7 +8,7 @@ import { BlueSectionContainer } from './../App/App_StyledComponents.js';
 //Import 3rd-party APIs
 import greeting from 'greeting';
 
-const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel, portalLogoSource, showUpdate }) => {  
+const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel, portalLogoSource, showUpdate, reloadAppFromUpdate }) => {  
     let parseSchoolName = (site) => {
         if (site && (site !== "Centinela Valley Independent Study School" )) {
             console.log("Site:\t" + site);
@@ -91,7 +91,7 @@ const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel,
                             A new update is available. Press here to update!
                         </UpdateTextDescription>
                         <Button
-                            onPress             =   { () => { console.log("Update reload"); Updates.reload() } }
+                            onPress             =   { () => { console.log("Update reload"); reloadAppFromUpdate(); } }
                             title               =   "Update"
                             color               =    {  (title === null) 
                                                         ? "#B41A1F" : 
