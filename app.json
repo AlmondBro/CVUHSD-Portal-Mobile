@@ -23,6 +23,7 @@
     "ios": {
       "icon": "./src/assets/app-icon.ios.png",
       "supportsTablet": true,
+      "buildNumber": 6,
       "bundleIdentifier": "com.cvuhsd.portal"
     },
     "android": {
