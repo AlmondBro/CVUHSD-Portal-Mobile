@@ -102,10 +102,7 @@ const SignInButtonTouchableOpacity = ({ renderAsStudent, title, ...props }) => {
             </SignInButtonView>
         </TouchableOpacity>
     ); //end return
-};
-
-
-
+}; //SignInButtonTouchableOpacity
 
 
 export { HomeScreenContainerView, AppHeaderContainerView, WelcomeText, BlueSectionContainer, OpenSSOContainer, SignInButtonTouchableOpacity };

@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Button, TouchableOpacity } from 'react-native';
 
 //Import component's styled parts
-import { HeaderContainerView, PortalLogoImage, UpdateAppView, UpdateTextDescription, UserInfoText, SchoolNameLogoView, SchoolLogo  } from './Header_StyledComponents.js';
+import { HeaderContainerView, PortalLogoImage, UpdateAppView, UpdateTextDescription, UserInfoText, SchoolNameLogoView, SchoolLogo, UpdateButtonTouchableOpacity } from './Header_StyledComponents.js';
 import { BlueSectionContainer } from './../App/App_StyledComponents.js';
 
 //Import 3rd-party APIs
@@ -90,14 +90,13 @@ const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel,
                         >
                             A new update is available. Press here to update!
                         </UpdateTextDescription>
-                        <Button
+                        <UpdateButtonTouchableOpacity
+                            title           =   { title }
+                            renderAsStudent =   { renderAsStudent }
+                            buttonTitle               =   "Update"
+
+
                             onPress             =   { () => { console.log("Update reload"); reloadAppFromUpdate(); } }
-                            title               =   "Update"
-                            color               =    {  (title === null) 
-                                                        ? "#B41A1F" : 
-                                                        (title === "Student" ||renderAsStudent) 
-                                                            ? "#B41A1F" : "#1E6C93" 
-                                                    }
                             accessibilityLabel  =   "Update Mobile Portal"
                         />
                     </UpdateAppView>
