@@ -1,6 +1,6 @@
 //Import React/React Native modules
-import React, { Component } from 'react';
-import { StatusBar as RNStatusBar, ImageBackground, Alert, Platform } from 'react-native';
+import React, { Fragment, Component } from 'react';
+import { ImageBackground, Alert, Platform } from 'react-native';
 
 //Import expo/react native components that now exist as separate packages
 import { StatusBar } from 'expo-status-bar';
@@ -16,18 +16,15 @@ import { Reactotron } from './../../config/reactotron.dev.js';
 import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID, AZURE_DOMAIN_HINT } from './../../../keys.env.js';
 //from 'react-native-dotenv'
 
-//Import utility functions
-import { dimensionsWidthHOC, navigationRef, navigate } from './../../utility-functions.js';
-
 import * as AuthSession from 'expo-auth-session';
-import * as Updates from 'expo-updates';
+
+// import * as Updates from 'expo-updates';
+import { reloadAsync, checkForUpdateAsync, fetchForUpdate } from 'expo-updates';
 
 import { openAuthSession } from 'azure-ad-graph-expo';
 
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-
-//import styled components
-import { AppContainerView, AppHeaderContainerView, ImageBackgroundStyled, WelcomeText, SafeAreaViewStyled } from './App_StyledComponents.js';
+//Import utility functions
+import { dimensionsWidthHOC, navigationRef, navigate } from './../../utility-functions.js';
 
 //Import App/Page components
 import Header from './../Header/Header.js';
@@ -35,6 +32,9 @@ import PageContent from './../PageContent/PageContent.js';
 import TabsFooter from './../TabsFooter/TabsFooter.js'
 
 import HomeScreen from './../HomeScreen/HomeScreen.js';
+
+//import styled components
+import { AppContainerView, AppHeaderContainerView, ImageBackgroundStyled, WelcomeText, StatusBarSafeView, SafeAreaViewStyled } from './App_StyledComponents.js';
 
 const imagesObjectPath = (Platform.OS === "web") ? require('./../../assets/images/index.js') : require('@assets');
 const Images = imagesObjectPath.default;
@@ -136,7 +136,7 @@ class App extends Component {
         
         this.setState({ authLoading: true }); //Set loading to true
 
-        let adUserInfo = await  openAuthSession(this.azureAdAppProps);
+        let adUserInfo = await openAuthSession(this.azureAdAppProps);
                                
         ReactotronDebug.log("adUserInfo from App.js:\t" + JSON.stringify(adUserInfo) );
 
@@ -262,9 +262,33 @@ class App extends Component {
         console.log('Done.')
     }; //end clearLogOnUserData
 
-    componentDidMount = async () => {
+    reloadAppFromUpdate = async () => {
+        await Updates.reloadAsync();
+        return;
+    };
+
+    checkForUpdates = async () => {
         const checkforUpdatesDev = false;
-        
+
+        if (!__DEV__ || checkforUpdatesDev === true) {
+            const update = await checkForUpdateAsync();
+
+            if (update.isAvailable) {
+                await fetchUpdateAsync();
+
+                this.setState({ showUpdate: true } );
+
+                return;
+            } //end if-statement 
+            else {
+                return;
+            }
+        } else {
+            return;
+        }
+    };
+
+    componentDidMount = () => {
         //console.log("Props:\t" + JSON.stringify(this.props) );
         console.log("Width:\t" + this.props.width);
 
@@ -272,14 +296,8 @@ class App extends Component {
             Reactotron.log('Reactotron running');
         }
         
-        if (!__DEV__ || checkforUpdatesDev === true) {
-            Updates.checkForUpdateAsync().then(update => {
-                if (update.isAvailable) {
-                  this.setState({ showUpdate: true } );
-                } //end if-statement
-              });
-        }
-
+        this.checkForUpdates();
+        
         this.setState({ fontLoaded: this.props.fontLoaded});
         //this.loadFontsAsync();
 
@@ -293,48 +311,47 @@ class App extends Component {
         //     return ( <AppLoading /> );
         // } else {
             return (
-                <SafeAreaProvider>
+                <Fragment>
                     {/* This statusbar component's effect applies more on Android */}
-                    <RNStatusBar 
-                        backgroundColor =   {   this.state.title ? 
-                                                    (   ( 
-                                                            this.state.title === "Student" || 
-                                                            this.state.renderAsStudent === true
-                                                        ) 
-                                                        ? "#B41A1F" 
-                                                        : "#1E6C93"
-                                                    )
-                                                    : "#B41A1F" 
-                                            } 
-                        barStyle        =   "light-content"                   
-                        style           =   "light" 
-                        animated        =   { true }
-                        translucent     =   { true } 
-                    />
-                    <NavigationContainer ref={navigationRef}>
-                        
-                            { /* The following is a technique using two SafeAreaViews to have the
+                    { /* The following is a technique using two SafeAreaViews to have the
                                 statusbar/top padding be a different color than the bottom padding. 
                                 SafeAreaViews are only applicable on iOs 11+ on >iPhone X 
 
                                 Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
-                            */ }
-                            <SafeAreaViewStyled 
+                        */ 
+                    }
+                    <StatusBarSafeView edges={['top']}>
+                        <StatusBar 
+                            backgroundColor =   {   this.state.title ? 
+                                                        (   ( 
+                                                                this.state.title === "Student" || 
+                                                                this.state.renderAsStudent === true
+                                                            ) 
+                                                            ? "#B41A1F" 
+                                                            : "#1E6C93"
+                                                        )
+                                                        : "#B41A1F" 
+                                                } 
+                            barStyle        =   "light-content"                   
+                            style           =   "light" 
+                            animated        =   { true }
+                            translucent     =   { false } 
+                        />
+                    </StatusBarSafeView>
+
+                    <SafeAreaViewStyled 
                                 title           =   { this.state.title }
                                 renderAsStudent =   { this.state.renderAsStudent }
-                            >
+                                edges           =   { ['left', 'right', 'bottom'] }
+                    >
+                
+                        <NavigationContainer ref={navigationRef}>
                                 <AppContainerView>
-                                    <ImageBackground
+                                    <ImageBackgroundStyled
                                         source={ this.state.backgroundImage }
-                                        style={ 
-                                            { 
-                                                flex: 0.75,
-                                                resizeMode: "cover",
-                                                justifyContent: "center"
-                                            }
-                                        }
+                                        accessibilityLabel= "CVUHSD Mobile Portal"
                                     >
-                                        <AppHeaderContainerView>
+                                        {/* <AppHeaderContainerView> */}
                                             <Header 
                                                 showUpdate          =   { this.state.showUpdate } 
                                                 firstName           =   { this.state.firstName}
@@ -344,12 +361,13 @@ class App extends Component {
                                                 gradeLevel          =   { this.state.gradeLevel }
                                                 renderAsStudent     =   { this.state.renderAsStudent }
                                                 portalLogoSource    =   { this.state.portalLogoSource }
+                                                reloadAppFromUpdate =   { this.reloadAppFromUpdate }
                                                 // onPress    =   { navigate ? navigate: null }
                                             />
                                             
                                             { (this.state.title || this.state.renderAsStudent) ? null : <WelcomeText>Welcome</WelcomeText> }
-                                        </AppHeaderContainerView>
-                                    </ImageBackground>
+                                        {/* </AppHeaderContainerView> */}
+                                    </ImageBackgroundStyled>
 
                                     <Navigator
                                         headerMode      = "none"
@@ -410,9 +428,9 @@ class App extends Component {
                                         : null    
                                     } 
                                 </AppContainerView>
-                            </SafeAreaViewStyled>
-                    </NavigationContainer>
-                </SafeAreaProvider>
+                        </NavigationContainer>
+                    </SafeAreaViewStyled>            
+                </Fragment>
             ); //end return statementt
         // }
     } //end render() function

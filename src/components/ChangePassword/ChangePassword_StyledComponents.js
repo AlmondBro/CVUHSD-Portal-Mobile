@@ -62,8 +62,7 @@ let ChangePasswordTextHeaderContainer = styled.View`
     flex: 0.1;
     border-radius: 20;
     width: 100%;
-    background-color:  ${   props => (props.title === null) 
-                            ? "#B41A1F" : 
+    background-color:  ${   props => (props.title === null) ? "#B41A1F" : 
                             (props.title === "Student" || props.renderAsStudent === "true") 
                                 ? "#B41A1F" : "#1E6C93" 
                         };
@@ -84,10 +83,14 @@ let ChangePasswordText = styled.Text`
     padding: 0;
 `;
 
-let ChangePasswordTextHeader = (props) => {
+
+let ChangePasswordTextHeader = ({ title, renderAsStudent, children, ...props }) => {
     return (
-        <ChangePasswordTextHeaderContainer {...props}>
-            <ChangePasswordText {...props}>{ props.title || props.children }</ChangePasswordText>
+        <ChangePasswordTextHeaderContainer
+            title           = { title }
+            renderAsStudent = { renderAsStudent }
+        >
+            <ChangePasswordText>{ children }</ChangePasswordText>
         </ChangePasswordTextHeaderContainer>
     );
 };

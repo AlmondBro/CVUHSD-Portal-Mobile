@@ -1,23 +1,10 @@
 import React from 'react';
 import { Button, Platform } from 'react-native';
 
-//Import SafeAreaView so that elements do not overlap with status bars or notches
-import { SafeAreaView } from 'react-native-safe-area-context';
-
-//Iimport styled components
+//Import styled components
 import { ModalStyled, SafeAreaViewStyled, WebViewContainer, WebViewStyled, ChangePasswordTextHeader } from './ChangePassword_StyledComponents.js';
 
-import { WebView } from 'react-native-webview';
-
-/*
- ${  (title === null) 
-                                                    ? "#B41A1F" : 
-                                                    (title === "Student" || renderAsStudent === "true") 
-                                                        ? "#B41A1F" : "#1E6C93" 
-                                                };
-                        
-*/
-let ChangePassword = ({isModalVisible, setIsModalVisible, title, renderAsStudent, ...props}) => {
+let ChangePassword = ({ isModalVisible, setIsModalVisible, title, renderAsStudent }) => {
     let buttonColor =  (title === "Student" || renderAsStudent === "true") 
                         ? "#B41A1F" : "#1E6C93";
 
@@ -65,7 +52,12 @@ let ChangePassword = ({isModalVisible, setIsModalVisible, title, renderAsStudent
                     title           =   { title }
                     renderAsStudent =   { renderAsStudent }
                 >
-                <ChangePasswordTextHeader>Change Password</ChangePasswordTextHeader> 
+                <ChangePasswordTextHeader
+                    title           =   { title }
+                    renderAsStudent =   { renderAsStudent }
+                >
+                    Change Password
+                </ChangePasswordTextHeader> 
                 
                     <WebViewStyled 
                         source              =   { { uri: 'https://sso.centinela.k12.ca.us/adfs/portal/updatepassword/' } } 
@@ -92,7 +84,6 @@ let ChangePassword = ({isModalVisible, setIsModalVisible, title, renderAsStudent
         </ModalStyled>
     //   </View>
     ); //end return statement
-  
 }; //end ChangePassword
 
 export default ChangePassword;
