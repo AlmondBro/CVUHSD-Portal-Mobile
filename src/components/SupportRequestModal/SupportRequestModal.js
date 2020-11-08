@@ -43,9 +43,10 @@ const { handleSubmit, register, setValue, errors } = useForm();
 
                                 <Input name="password" label="Password" secureTextEntry={true} />
 
-                                <Button title="Submit" onPress={handleSubmit(()  => console.log("hello"))} />
 
                             </Form>
+                                {/* <Button title="Submit" onPress={handleSubmit(()  => console.log("hello"))} /> */}
+
                             <Text>Support Request</Text>
                             <TouchableOpacity 
                                 title   =   "close"
