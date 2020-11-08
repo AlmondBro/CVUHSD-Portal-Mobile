@@ -16,7 +16,7 @@ import {  TextInput } from 'react-native';
 
 const Input = forwardRef(
     (props, ref) => {
-        const { label, labelStyle, error, name, ...inputProps } = props;
+        const { label, labelStyle, error, name, onSubmitEditing, ...inputProps } = props;
 
         return (
             <View>
@@ -24,7 +24,7 @@ const Input = forwardRef(
                 <TextInput
                     label  = {  label }
                     autoCapitalize  =   "none"
-                    onSubmitEditing =   { inputProps.onSubmitEditing  }
+                    onSubmitEditing =   { onSubmitEditing  }
                     ref             =   { ref } 
                     name            =   { name }
                                         {...inputProps}

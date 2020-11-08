@@ -12,7 +12,7 @@ import validation from './validation.js';
 
 const SupportRequestModal = ({ showRequestModal, setShowRequestModal }) => {
 
-const { handleSubmit, register, setValue, errors } = useForm();
+    const { handleSubmit, register, setValue, errors } = useForm();
     return (
             <ModalStyled 
                 animationType       =   "slide"
@@ -36,16 +36,26 @@ const { handleSubmit, register, setValue, errors } = useForm();
                     <SafeAreaViewStyled>
                         <KeyboardAwareScrollViewStyled>
                             <Form {...{ register, setValue, validation, errors }}>
+                                <Input 
+                                    name            =   "name" 
+                                    label           =   "Name" 
+                                />
 
-                                <Input name="name" label="Name " />
+                                 <Input 
+                                    name            =   "email" 
+                                    label           =   "E-mail" 
+                                />
 
-                                <Input name="email" label="Email" />
+                                <Input 
+                                    name            =   "password" 
+                                    label           =   "Password" 
+                                    secureTextEntry =   { true } 
+                                />
 
-                                <Input name="password" label="Password" secureTextEntry={true} />
-
-
+                                <Button title       =   "Submit" 
+                                        onPress     =   {  () => handleSubmit(()  => console.log("hello")) } 
+                                />
                             </Form>
-                                {/* <Button title="Submit" onPress={handleSubmit(()  => console.log("hello"))} /> */}
 
                             <Text>Support Request</Text>
                             <TouchableOpacity 
