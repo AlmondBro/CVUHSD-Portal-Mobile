@@ -6,6 +6,8 @@ import Modal from 'react-native-modal';
 
 import { SafeAreaView } from 'react-native-safe-area-context'; //Import SafeAreaView so that elements do not overlap with status bars or notches
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 let SafeAreaViewStyled = styled(SafeAreaView)`
     flex: 1;
 
@@ -54,6 +56,10 @@ const ModalContentContainer = styled.View`
     background-color:  red;
 `;
 
-export { SafeAreaViewStyled, ModalStyled, ModalContentContainer};
+const KeyboardAwareScrollViewStyled = styled(KeyboardAwareScrollView)`
+
+`;
+
+export { SafeAreaViewStyled, ModalStyled, ModalContentContainer, KeyboardAwareScrollViewStyled };
 
 
