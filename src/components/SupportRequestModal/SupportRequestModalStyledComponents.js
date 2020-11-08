@@ -35,7 +35,7 @@ const ModalStyled = styled(Modal).attrs((props) => ({
   align-items       : flex-end;
 
   position          : relative;
-  background-color  : red;
+  background-color  : white;
 
   margin            :   0;
 

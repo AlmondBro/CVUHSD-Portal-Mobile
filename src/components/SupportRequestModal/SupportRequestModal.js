@@ -20,7 +20,7 @@ const { handleSubmit, register, setValue, errors } = useForm();
                 onSwipeComplete     =   { () => setShowRequestModal(false) }
 
                 swipeDirection      =   { ["up", "down"] }
-                hasBackdrop         =   { true }
+                hasBackdrop         =   { false }
                 isVisible           =   { showRequestModal  }  
                 
                 onDismiss           =   { () => setShowRequestModal(false) }

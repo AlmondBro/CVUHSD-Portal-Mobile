@@ -2,7 +2,6 @@ import React, { forwardRef } from 'react';
 
 import {
     View,
-    TextInput,
     Text,
     StyleSheet,
     ViewStyle,
@@ -12,6 +11,8 @@ import {
 
 import { ValidationOptions, FieldError } from 'react-hook-form';
 
+import { TextInput } from 'react-native-paper';
+
 const Input = forwardRef(
     (props, ref) => {
         const { label, labelStyle, error, ...inputProps } = props;
@@ -20,6 +21,7 @@ const Input = forwardRef(
             <View>
                 {label && <Text>{label}</Text>}
                 <TextInput
+                    label  = {  label }
                     autoCapitalize  =   "none"
                     ref             =   { ref } 
                                         {...inputProps}

@@ -7,6 +7,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import App from './components/App/App.js';
 
+import { Provider as PaperProvider } from 'react-native-paper';
+
 if (__DEV__) {
     //Initialize Reactotron
     import('./config/reactotron.dev.js').then(() => console.log('Reactotron Configured'));
@@ -16,9 +18,12 @@ console.disableYellowBox = true;
 
 const SafeProvidedApp = () => {
     return (
-        <SafeAreaProvider>
-            <App/>
-        </SafeAreaProvider>
+        <PaperProvider>
+            <SafeAreaProvider>
+                <App/>
+            </SafeAreaProvider>
+        </PaperProvider>
+       
     ); //end return statement
 }; //end SafeProvidedAp
 
