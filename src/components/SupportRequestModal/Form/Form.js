@@ -1,10 +1,16 @@
 import React, { useRef, useEffect, Fragment } from 'react';
-import { TextInput, KeyboardAvoidingView, findNodeHandle, Text } from 'react-native';
+import { TextInput, KeyboardAvoidingView, findNodeHandle, Text, Alert } from 'react-native';
 import { ValidationOptions, FieldError } from 'react-hook-form';
-import Input from '../Input/Input';
+import Input from './../Input/Input';
 
 const Form = ({ register, errors, setValue, validation, children }) => {
+    const Inputs = useRef([]);
     useEffect(() => {
+
+        // Alert.alert(
+        //     "child props",
+        //     JSON.stringify(children[0].name)
+        // );
         (Array.isArray(children) ? [...children] : [children]).forEach((child) => {
 
             if (child.props.name)
@@ -12,19 +18,22 @@ const Form = ({ register, errors, setValue, validation, children }) => {
               register({ name: child.props.name }, validation[child.props.name]);
       
           });
+
+            console.log("children[0].props.name:\t", children[0].props.name);
+            console.log("children[0].props.name:\t", children[0].props.name);
+
     }, [ register ]);
 
     let InputComponent  = (InputComponent) => <InputComponent/>;
 
-    console.log("children[0].props.name:\t", children[0].props.name);
     return (
         <Fragment>
             {
                 ///*
                 children.length > 1
-                    ?   [ children ].map((child, i) => {
+                    ?   [ ...children ].map((child, i) => {
                             return true ? (
-                                <Component
+                                <Input
                                     ref             =   { (e) => { Inputs.current[i] = e; }}
                                     onChangeText    =   { (v) => setValue(child.props.name, v, true) }
                                     onSubmitEditing =   { 
