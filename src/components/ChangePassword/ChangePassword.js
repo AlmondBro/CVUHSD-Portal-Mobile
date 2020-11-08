@@ -42,7 +42,7 @@ let ChangePassword = ({ isModalVisible, setIsModalVisible, title, renderAsStuden
     return (
     //   <View style={{ flex: 1}}>
         <ModalStyled 
-            isVisible       = {isModalVisible} 
+            isVisible       = { isModalVisible } 
             onBackdropPress = { () => setIsModalVisible(false) }
             onSwipeComplete = { () => setIsModalVisible(false) }
             swipeDirection  = { ["up"] }
@@ -52,12 +52,12 @@ let ChangePassword = ({ isModalVisible, setIsModalVisible, title, renderAsStuden
                     title           =   { title }
                     renderAsStudent =   { renderAsStudent }
                 >
-                <ChangePasswordTextHeader
-                    title           =   { title }
-                    renderAsStudent =   { renderAsStudent }
-                >
-                    Change Password
-                </ChangePasswordTextHeader> 
+                    <ChangePasswordTextHeader
+                        title           =   { title }
+                        renderAsStudent =   { renderAsStudent }
+                    >
+                        Change Password
+                    </ChangePasswordTextHeader> 
                 
                     <WebViewStyled 
                         source              =   { { uri: 'https://sso.centinela.k12.ca.us/adfs/portal/updatepassword/' } } 

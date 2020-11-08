@@ -1,6 +1,8 @@
 import React from 'react';
 import { registerRootComponent } from 'expo';
 
+import 'react-native-gesture-handler';
+
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import App from './components/App/App.js';
