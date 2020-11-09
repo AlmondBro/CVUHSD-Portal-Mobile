@@ -121,7 +121,38 @@ const Button = ({ renderAsStudent, districtPosition, buttonTitle, children, onPr
     ); //end return
 }; //SignInButtonTouchableOpacity
 
+const HeaderContainer = styled.View`
+    display: flex;
+    flex: 0.2;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 
-export { SafeAreaViewStyled, ModalStyled, ModalContentContainer, KeyboardAwareScrollViewStyled, Button };
+    background-color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
+
+`;
+
+const HeaderText = styled.Text`
+    color: white;
+
+    font-size: 18;
+    font-weight: bold;
+`;
+
+
+const Header = ({ districtPosition, renderAsStudent, title }) => {
+    return (
+        <HeaderContainer
+            districtPosition    =   { districtPosition } 
+            renderAsStudent     =   { renderAsStudent }
+        >
+            <HeaderText>
+                { title }
+            </HeaderText>
+        </HeaderContainer>
+    ); //end return statement
+}; 
+
+export { SafeAreaViewStyled, ModalStyled, ModalContentContainer, KeyboardAwareScrollViewStyled, Header, Button };
 
 

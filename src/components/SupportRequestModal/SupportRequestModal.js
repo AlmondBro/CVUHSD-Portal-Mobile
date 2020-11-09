@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Text, TouchableOpacity } from 'react-native';
-import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Button, ModalContentContainer } from './SupportRequestModalStyledComponents.js';
+import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Header, Button, ModalContentContainer } from './SupportRequestModalStyledComponents.js';
 
 import Form from './Form/Form.js';
 import Input from './Input/Input.js';
@@ -42,6 +42,11 @@ const SupportRequestModal = ({ districtPosition, renderAsStudent, showRequestMod
 
             >
                 <SafeAreaViewStyled>
+                    <Header
+                        title               =   "Tech Support Request"  
+                        districtPosition    =   { districtPosition } 
+                        renderAsStudent     =   { renderAsStudent }
+                    />
                         <KeyboardAwareScrollViewStyled>
                             <Form {...{ register, setValue, validation, errors }}>
                                 <Input 
