@@ -18,6 +18,7 @@ console.disableYellowBox = true;
 
 const theme = {
     ...DefaultTheme,
+    roundness: 10,
     colors: {
       ...DefaultTheme.colors,
       primary: '#6200ee',
