@@ -50,8 +50,19 @@ const SupportRequestModal = ({ districtPosition, renderAsStudent, showRequestMod
                         <KeyboardAwareScrollViewStyled>
                             <Form {...{ register, setValue, validation, errors }}>
                                 <Input 
-                                    name                =   "name" 
-                                    label               =   "Name" 
+                                    name                =   "title" 
+                                    label               =   "Title" 
+
+                                    mode                =   "outlined"
+                                    theme               =   { inputColorsTheme }
+
+                                    districtPosition    =   { districtPosition } 
+                                    renderAsStudent     =   { renderAsStudent }
+                                />
+
+                                <Input  
+                                    name                =   "category" 
+                                    label               =   "category" 
 
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
@@ -61,24 +72,52 @@ const SupportRequestModal = ({ districtPosition, renderAsStudent, showRequestMod
                                 />
 
                                 <Input 
-                                    name            =   "email" 
-                                    label           =   "E-mail" 
+                                    name                =   "description" 
+                                    label               =   "Description" 
 
-                                    mode            =   "outlined"
-                                    theme           =   { inputColorsTheme }
+                                    mode                =   "outlined"
+                                    theme               =   { inputColorsTheme }
+
+                                    secureTextEntry     =   { true } 
 
                                     districtPosition    =   { districtPosition } 
                                     renderAsStudent     =   { renderAsStudent }
                                 />
 
                                 <Input 
-                                    name            =   "password" 
-                                    label           =   "Password" 
+                                    name                =   "location" 
+                                    label               =   "Location" 
 
-                                    mode            =   "outlined"
-                                    theme           =   { inputColorsTheme }
+                                    mode                =   "outlined"
+                                    theme               =   { inputColorsTheme }
 
-                                    secureTextEntry =   { true } 
+                                    secureTextEntry     =   { true } 
+
+                                    districtPosition    =   { districtPosition } 
+                                    renderAsStudent     =   { renderAsStudent }
+                                />
+
+                                <Input 
+                                    name                =   "phone-number" 
+                                    label               =   "Phone Number" 
+
+                                    mode                =   "outlined"
+                                    theme               =   { inputColorsTheme }
+
+                                    secureTextEntry     =   { true } 
+
+                                    districtPosition    =   { districtPosition } 
+                                    renderAsStudent     =   { renderAsStudent }
+                                />
+
+                                <Input 
+                                    name                =   "room" 
+                                    label               =   "Room Number" 
+
+                                    mode                =   "outlined"
+                                    theme               =   { inputColorsTheme }
+
+                                    secureTextEntry     =   { true } 
 
                                     districtPosition    =   { districtPosition } 
                                     renderAsStudent     =   { renderAsStudent }

@@ -125,13 +125,15 @@ const Button = ({ renderAsStudent, districtPosition, buttonTitle, children, onPr
 
 const HeaderContainer = styled.View`
     display: flex;
-    flex: 0.2;
+    flex: 2;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 
     background-color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
-
+/* 
+    padding-top: 5;
+    padding-bottom: 5; */
 `;
 
 const HeaderText = styled.Text`
