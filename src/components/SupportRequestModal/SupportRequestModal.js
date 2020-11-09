@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Text, Button, TouchableOpacity } from 'react-native';
-import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, ModalContentContainer } from './SupportRequestModalStyledComponents.js';
+import { Text, TouchableOpacity } from 'react-native';
+import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Button, ModalContentContainer } from './SupportRequestModalStyledComponents.js';
 
 import Form from './Form/Form.js';
 import Input from './Input/Input.js';
@@ -9,10 +9,23 @@ import Input from './Input/Input.js';
 import { useForm } from 'react-hook-form';
 
 import validation from './validation.js';
+import { render } from 'react-dom';
 
-const SupportRequestModal = ({ showRequestModal, setShowRequestModal }) => {
+const SupportRequestModal = ({ districtPosition, renderAsStudent, showRequestModal, setShowRequestModal }) => {
 
     const { handleSubmit, register, setValue, errors } = useForm();
+
+    const onSubmit = (formValues) => {
+        console.log("onSubmit() form values:\t", formValues);
+    }; 
+
+    const inputColorsTheme  = {
+        colors: {
+            primary:   ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
+            text:      "black",      
+        }
+    }
+
     return (
             <ModalStyled 
                 animationType       =   "slide"
@@ -28,47 +41,64 @@ const SupportRequestModal = ({ showRequestModal, setShowRequestModal }) => {
                 presentationStyle   =   "pageSheet"
 
             >
-                {/* <TouchableWithoutFeedback
-                    onPressOut  =   { () => setShowRequestModal(false) }  
-                > */}
-
-                    {/* <ModalContentContainer> */}
-                    <SafeAreaViewStyled>
+                <SafeAreaViewStyled>
                         <KeyboardAwareScrollViewStyled>
                             <Form {...{ register, setValue, validation, errors }}>
                                 <Input 
-                                    name            =   "name" 
-                                    label           =   "Name" 
+                                    name                =   "name" 
+                                    label               =   "Name" 
+
+                                    mode                =   "outlined"
+                                    theme               =   { inputColorsTheme }
+
+                                    districtPosition    =   { districtPosition } 
+                                    renderAsStudent     =   { renderAsStudent }
                                 />
 
-                                 <Input 
+                                <Input 
                                     name            =   "email" 
                                     label           =   "E-mail" 
+
+                                    mode            =   "outlined"
+                                    theme           =   { inputColorsTheme }
+
+                                    districtPosition    =   { districtPosition } 
+                                    renderAsStudent     =   { renderAsStudent }
                                 />
 
                                 <Input 
                                     name            =   "password" 
                                     label           =   "Password" 
+
+                                    mode            =   "outlined"
+                                    theme           =   { inputColorsTheme }
+
                                     secureTextEntry =   { true } 
+
+                                    districtPosition    =   { districtPosition } 
+                                    renderAsStudent     =   { renderAsStudent }
                                 />
 
-                                <Button title       =   "Submit" 
-                                        onPress     =   {  () => handleSubmit(()  => console.log("hello")) } 
+                                <Button 
+                                        buttonTitle       =   "Submit" 
+                                        onPress           =   {  handleSubmit(onSubmit) } 
+
+                                        districtPosition    =   { districtPosition } 
+                                        renderAsStudent     =   { renderAsStudent }
                                 />
                             </Form>
 
-                            <Text>Support Request</Text>
-                            <TouchableOpacity 
-                                title   =   "close"
-                                onPress =   { () => setShowRequestModal(false)  }   
-                            >
-                                <Text>Close</Text>
-                            </TouchableOpacity>
+                         
+                            <Button 
+                                buttonTitle   =   "Close"
+                                onPress       =   { () => setShowRequestModal(false)  }  
+                                
+                                districtPosition    =   { districtPosition } 
+                                renderAsStudent     =   { renderAsStudent }
+                            />
+                                
                         </KeyboardAwareScrollViewStyled>
                     </SafeAreaViewStyled>
-                {/* </TouchableWithoutFeedback> */}
-                      
-                    {/* </ModalContentContainer> */}
             </ModalStyled>  
     ); //end return statement
 }; //end SupportRequestModal()

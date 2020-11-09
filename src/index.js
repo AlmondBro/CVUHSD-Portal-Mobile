@@ -7,7 +7,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import App from './components/App/App.js';
 
-import { Provider as PaperProvider } from 'react-native-paper';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
 if (__DEV__) {
     //Initialize Reactotron
@@ -16,9 +16,18 @@ if (__DEV__) {
 
 console.disableYellowBox = true;
 
-const SafeProvidedApp = () => {
+const theme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: '#6200ee',
+      accent: 'yellow',
+    },
+  };
+
+const AppWithProviders = () => {
     return (
-        <PaperProvider>
+        <PaperProvider theme={theme}>
             <SafeAreaProvider>
                 <App/>
             </SafeAreaProvider>
@@ -27,6 +36,6 @@ const SafeProvidedApp = () => {
     ); //end return statement
 }; //end SafeProvidedAp
 
-registerRootComponent(SafeProvidedApp);
+registerRootComponent(AppWithProviders);
 
 

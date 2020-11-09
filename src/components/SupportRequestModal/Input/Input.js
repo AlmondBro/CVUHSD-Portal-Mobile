@@ -11,26 +11,30 @@ import {
 
 import { ValidationOptions, FieldError } from 'react-hook-form';
 
-import {  TextInput } from 'react-native';
-//import { TextInput } from 'react-native-paper';
+import { InputContainer, TextInputStyled, ErrorText } from './InputStyledComponents.js';
 
 const Input = forwardRef(
     (props, ref) => {
-        const { label, labelStyle, error, name, onSubmitEditing, ...inputProps } = props;
+        const { districtPosition, renderAsStudent,  label, labelStyle, error, name, onSubmitEditing, noOuterLabel, theme,  mode,...inputProps } = props;
 
         return (
-            <View>
-                {label && <Text>{label}</Text>}
-                <TextInput
-                    label  = {  label }
-                    autoCapitalize  =   "none"
-                    onSubmitEditing =   { onSubmitEditing  }
-                    ref             =   { ref } 
-                    name            =   { name }
-                                        {...inputProps}
+            <InputContainer>
+                {label && !noOuterLabel && <Text>{label}</Text>}
+                <TextInputStyled
+                    districtPosition    =   { districtPosition }
+                    renderAsStudent     =   { renderAsStudent }
+
+                    label               = {  label }
+                    autoCapitalize      =   "none"
+                    onSubmitEditing     =   { onSubmitEditing  }
+                    ref                 =   { ref } 
+                    name                =   { name }
+                    theme               =   { theme  }
+                    mode                =   { mode }
+                                            {...inputProps}
                 />
-                <Text>{error && error.message}</Text>
-            </View>
+                <ErrorText>{error && error.message}</ErrorText>
+            </InputContainer>
         )
     }
 ); //end forwarRef()

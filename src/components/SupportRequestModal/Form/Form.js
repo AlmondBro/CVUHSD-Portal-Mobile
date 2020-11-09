@@ -37,7 +37,8 @@ const Form = ({ register, errors, setValue, validation, children }) => {
                                         blurOnSubmit    =   { false }
                                         error           =   { errors[child.props.name] }
                                         key             =   { child.props.name }
-                                        {...child.props}
+                                                            {...child.props}
+                                        noOuterLabel
                                     />
                                 ) : child
                             }) //end map()

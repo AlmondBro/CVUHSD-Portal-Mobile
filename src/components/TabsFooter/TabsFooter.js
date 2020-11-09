@@ -94,6 +94,9 @@ const TabsFooter = ({ renderAsStudent, setRenderAsStudent, isModalVisible, showR
                     : null
             }
             <SupportRequestModal
+                districtPosition    =   {   title   }
+                renderAsStudent     =   {   renderAsStudent }
+
                 showRequestModal    =   {   showRequestModal }
                 setShowRequestModal =   {   setShowRequestModal }
             />
