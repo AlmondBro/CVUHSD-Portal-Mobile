@@ -2,6 +2,8 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
 
+import { FontAwesome } from '@expo/vector-icons'; 
+
 import Modal from 'react-native-modal';
 
 import { SafeAreaView } from 'react-native-safe-area-context'; //Import SafeAreaView so that elements do not overlap with status bars or notches
@@ -137,6 +139,8 @@ const HeaderText = styled.Text`
 
     font-size: 18;
     font-weight: bold;
+
+    margin-right: 5;
 `;
 
 
@@ -149,6 +153,11 @@ const Header = ({ districtPosition, renderAsStudent, title }) => {
             <HeaderText>
                 { title }
             </HeaderText>
+            <FontAwesome 
+                    name    =   "ticket" 
+                    size    =   {   30  } 
+                    color   =   "white" 
+            />
         </HeaderContainer>
     ); //end return statement
 }; 
