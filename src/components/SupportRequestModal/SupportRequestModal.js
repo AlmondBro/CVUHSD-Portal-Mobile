@@ -1,4 +1,5 @@
 import React from 'react';
+import color from 'color';
 
 import { Text, TouchableOpacity } from 'react-native';
 import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Header, Button, ModalContentContainer } from './SupportRequestModalStyledComponents.js';
@@ -11,7 +12,7 @@ import { useForm } from 'react-hook-form';
 import validation from './validation.js';
 import { render } from 'react-dom';
 
-const SupportRequestModal = ({ districtPosition, renderAsStudent, showRequestModal, setShowRequestModal }) => {
+const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, showRequestModal, setShowRequestModal }) => {
 
     const { handleSubmit, register, setValue, errors } = useForm();
 
@@ -21,18 +22,29 @@ const SupportRequestModal = ({ districtPosition, renderAsStudent, showRequestMod
 
     const inputColorsTheme  = {
         colors: {
-            primary:   ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
-            text:      "black",      
+            primary     :   ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
+            background  :   "#F6F6F6",
+            text        :   ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",  
+            placeholder :   districtPosition ?
+                            ( (districtPosition === "student") || renderAsStudent === true) ? 
+                                " rgba(147, 30, 29, 0.5)": "rgba(30, 108, 147, 0.5)"
+                            : "rgba(147, 30, 29, 0.5)",
         }
-    }
+    }; //end inputColorsTheme
+
+    const placeholder = {
+        label: 'Issue type...',
+        value: null,
+        color: color('#000000').alpha(0.5).rgb().string()
+    }; 
 
     return (
             <ModalStyled 
                 animationType       =   "slide"
                 onBackdropPress     =   { () => setShowRequestModal(false) }
-                onSwipeComplete     =   { () => setShowRequestModal(false) }
+                // onSwipeComplete     =   { () => setShowRequestModal(false) }
 
-                swipeDirection      =   { ["up", "down"] }
+                // swipeDirection      =   { ["up", "down"] }
                 hasBackdrop         =   { false }
                 isVisible           =   { showRequestModal  }  
                 
@@ -50,6 +62,8 @@ const SupportRequestModal = ({ districtPosition, renderAsStudent, showRequestMod
                         <KeyboardAwareScrollViewStyled>
                             <Form {...{ register, setValue, validation, errors }}>
                                 <Input 
+                                    appWidth            =   { appWidth }
+
                                     name                =   "title" 
                                     label               =   "Title" 
 
@@ -61,6 +75,8 @@ const SupportRequestModal = ({ districtPosition, renderAsStudent, showRequestMod
                                 />
 
                                 <Input  
+                                    appWidth            =   { appWidth }
+
                                     name                =   "category" 
                                     label               =   "category" 
 
@@ -69,9 +85,14 @@ const SupportRequestModal = ({ districtPosition, renderAsStudent, showRequestMod
 
                                     districtPosition    =   { districtPosition } 
                                     renderAsStudent     =   { renderAsStudent }
+
+                                    placeholder         =   { placeholder }
+                                    usePicker
                                 />
 
                                 <Input 
+                                    appWidth            =   { appWidth }
+
                                     name                =   "description" 
                                     label               =   "Description" 
 
@@ -85,6 +106,8 @@ const SupportRequestModal = ({ districtPosition, renderAsStudent, showRequestMod
                                 />
 
                                 <Input 
+                                    appWidth            =   { appWidth }
+
                                     name                =   "location" 
                                     label               =   "Location" 
 
@@ -95,9 +118,14 @@ const SupportRequestModal = ({ districtPosition, renderAsStudent, showRequestMod
 
                                     districtPosition    =   { districtPosition } 
                                     renderAsStudent     =   { renderAsStudent }
+
+                                    placeholder         =   { placeholder }
+                                    usePicker
                                 />
 
                                 <Input 
+                                    appWidth            =   { appWidth }
+
                                     name                =   "phone-number" 
                                     label               =   "Phone Number" 
 
@@ -111,6 +139,8 @@ const SupportRequestModal = ({ districtPosition, renderAsStudent, showRequestMod
                                 />
 
                                 <Input 
+                                    appWidth            =   { appWidth }
+
                                     name                =   "room" 
                                     label               =   "Room Number" 
 

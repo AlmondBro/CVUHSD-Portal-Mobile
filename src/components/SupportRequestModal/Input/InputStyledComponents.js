@@ -14,8 +14,11 @@ const InputContainer = styled.View`
 const TextInputStyled = styled(TextInput).attrs(props => ({
     selectionColor  :   ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
     underlineColor  :   ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
-    theme           :   props.theme
+    theme           :   props.theme,
+
+    placeholderTextColor : "#D50000"
 }))`
+    position: relative;
     width: 90%;
 
     margin-top: 5;
@@ -24,7 +27,6 @@ const TextInputStyled = styled(TextInput).attrs(props => ({
     border-radius: 50px;
 
     color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
-
 `;
 
 const ErrorText = styled.Text`

@@ -424,6 +424,7 @@ class App extends Component {
                                     </Navigator>
                                     {   this.state.title ? 
                                         <TabsFooter 
+                                            appWidth            =   { this.state.appWidth }
                                             title               =   { this.state.title}
                                             renderAsStudent     =   { this.state.renderAsStudent }
 
