@@ -126,7 +126,7 @@ const Button = ({ renderAsStudent, districtPosition, buttonTitle, children, onPr
 
 const HeaderContainer = styled.View`
     display: flex;
-    flex: 0.3;
+    flex: 1;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;

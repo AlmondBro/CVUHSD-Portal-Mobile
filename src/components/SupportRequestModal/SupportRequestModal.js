@@ -32,12 +32,6 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
         }
     }; //end inputColorsTheme
 
-    const placeholder = {
-        label: 'Issue type...',
-        value: null,
-        color: color('#000000').alpha(0.5).rgb().string()
-    }; 
-
     return (
             <ModalStyled 
                 animationType       =   "slide"
@@ -54,14 +48,14 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
 
             >
                 <SafeAreaViewStyled>
-                    <Header
-                        title               =   "Tech Support Request"  
-                        districtPosition    =   { districtPosition } 
-                        renderAsStudent     =   { renderAsStudent }
-
-                        closeModal          =   { () => setShowRequestModal(false) }
-                    />
                         <KeyboardAwareScrollViewStyled>
+                            <Header
+                                title               =   "Tech Support Request"  
+                                districtPosition    =   { districtPosition } 
+                                renderAsStudent     =   { renderAsStudent }
+
+                                closeModal          =   { () => setShowRequestModal(false) }
+                            />
                             <Form {...{ register, setValue, validation, errors }}>
                                 <Input 
                                     appWidth            =   { appWidth }
@@ -90,7 +84,6 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     districtPosition    =   { districtPosition } 
                                     renderAsStudent     =   { renderAsStudent }
 
-                                    placeholder         =   { placeholder }
                                     usePicker           =   { true }
                                 />
 
@@ -123,7 +116,6 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     districtPosition    =   { districtPosition } 
                                     renderAsStudent     =   { renderAsStudent }
 
-                                    placeholder         =   { placeholder }
                                     usePicker           =   { true }
                                 />
 
