@@ -23,15 +23,21 @@ const Form = ({ register, errors, setValue, validation, children }) => {
                 // /*
                 (children.length > 1)
                     ? [ ...children ].map((child, i) => {
+
+                                console.log("child.props:\t", child.props);
                                 return child.props.name ? (
                                     <Input
-                                        ref             =   { (input) => { Inputs.current[i] = input; }}
-                                        onChangeText    =   { (v) => setValue(child.props.name, v, true) }
+                                        ref             =   { (instance) => { Inputs.current[i] = instance; }}
+                                        onChangeText    =   { (value) => setValue(child.props.name, value, true) }
                                         onSubmitEditing =   { 
                                                                 () => {
                                                                     Inputs.current[i + 1] 
-                                                                        ?   Inputs.current[i + 1].focus()
+                                                                        ?   (Inputs.current[i + 1].props.usePicker === true)
+                                                                                ? Inputs.current[i + 1].togglePicker() 
+                                                                                : Inputs.current[i + 1].focus() 
                                                                         :   Inputs.current[i].blur()
+
+                                                                        console.log("child props:\t", child.props);
                                                                 }
                                                             }
                                         blurOnSubmit    =   { false }

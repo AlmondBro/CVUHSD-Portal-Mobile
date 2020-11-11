@@ -23,7 +23,6 @@ const Input = forwardRef(
     (props, ref) => {
         const { appWidth, districtPosition, renderAsStudent, usePicker, label, labelStyle, error, name, onSubmitEditing, noOuterLabel, theme, placeholder, mode,...inputProps } = props;
 
-
         const pickerSelectStyle = StyleSheet.create({
             width: 100,
             placeholder: {
@@ -105,6 +104,7 @@ const Input = forwardRef(
                     usePicker ? (
                         <RNPickerSelect
                         ref                 =   { ref } 
+                        name                =   { name }
                         onValueChange={(value) => console.log(value)}
                         style={{...pickerSelectStyle}}
                         items={ categories}
@@ -120,6 +120,8 @@ const Input = forwardRef(
                             size    =   {20} 
                             color   =   { ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" } 
                         />}
+
+                        usePicker   =   {   usePicker   }
                     />
                     ) : (
                         <TextInputStyled

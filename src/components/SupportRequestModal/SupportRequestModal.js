@@ -74,6 +74,8 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
 
                                     districtPosition    =   { districtPosition } 
                                     renderAsStudent     =   { renderAsStudent }
+
+                                    usePicker           =   { false }
                                 />
 
                                 <Input  
@@ -89,7 +91,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     renderAsStudent     =   { renderAsStudent }
 
                                     placeholder         =   { placeholder }
-                                    usePicker
+                                    usePicker           =   { true }
                                 />
 
                                 <Input 
@@ -122,7 +124,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     renderAsStudent     =   { renderAsStudent }
 
                                     placeholder         =   { placeholder }
-                                    usePicker
+                                    usePicker           =   { true }
                                 />
 
                                 <Input 
@@ -138,6 +140,9 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
 
                                     districtPosition    =   { districtPosition } 
                                     renderAsStudent     =   { renderAsStudent }
+
+                                    usePicker           =   { false }
+
                                 />
 
                                 <Input 
@@ -153,6 +158,9 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
 
                                     districtPosition    =   { districtPosition } 
                                     renderAsStudent     =   { renderAsStudent }
+
+                                    usePicker           =   { false }
+                                    
                                 />
 
                                 <Button 
