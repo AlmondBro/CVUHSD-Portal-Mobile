@@ -24,7 +24,6 @@ const Input = forwardRef(
         const { appWidth, districtPosition, renderAsStudent, usePicker, label, labelStyle, error, name, onSubmitEditing, noOuterLabel, theme, placeholder, mode,...inputProps } = props;
 
         const pickerSelectStyle = StyleSheet.create({
-            width: 100,
             placeholder: {
                 color:  districtPosition ?
                             ( (districtPosition === "student") || renderAsStudent === true) ? 
@@ -48,14 +47,20 @@ const Input = forwardRef(
                 paddingRight: 30, // to ensure the text is never behind the icon
             },
             inputAndroid: {
-              fontSize: 16,
-              paddingHorizontal: 10,
-              paddingVertical: 8,
-              borderWidth: 0.5,
-              borderColor: 'purple',
-              borderRadius: 8,
-              color: 'black',
-              paddingRight: 30, // to ensure the text is never behind the icon
+                position: "relative",
+                width: (appWidth * 0.9),
+                fontSize: 16,
+                paddingVertical: 12,
+                paddingHorizontal: 10,
+                borderWidth: 1,
+                borderColor:  districtPosition ?
+                                ( (districtPosition === "student") || renderAsStudent === true) ? 
+                                    " rgba(147, 30, 29, 0.5)": "rgba(30, 108, 147, 0.5)"
+                                : "rgba(147, 30, 29, 0.5)",
+                borderRadius: 10,
+                backgroundColor: '#F6F6F6',
+                color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
+                paddingRight: 30, // to ensure the text is never behind the icon
             },
             iconContainer: {
                 position: 'absolute',
@@ -122,6 +127,8 @@ const Input = forwardRef(
                         />}
 
                         usePicker   =   {   usePicker   }
+
+                        onDonePress = { () => onSubmitEditing() }
                     />
                     ) : (
                         <TextInputStyled
