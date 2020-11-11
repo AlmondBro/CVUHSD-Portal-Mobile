@@ -58,6 +58,8 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                         title               =   "Tech Support Request"  
                         districtPosition    =   { districtPosition } 
                         renderAsStudent     =   { renderAsStudent }
+
+                        closeModal          =   { () => setShowRequestModal(false) }
                     />
                         <KeyboardAwareScrollViewStyled>
                             <Form {...{ register, setValue, validation, errors }}>
@@ -161,16 +163,6 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                         renderAsStudent     =   { renderAsStudent }
                                 />
                             </Form>
-
-                         
-                            <Button 
-                                buttonTitle   =   "Close"
-                                onPress       =   { () => setShowRequestModal(false)  }  
-                                
-                                districtPosition    =   { districtPosition } 
-                                renderAsStudent     =   { renderAsStudent }
-                            />
-                                
                         </KeyboardAwareScrollViewStyled>
                     </SafeAreaViewStyled>
             </ModalStyled>  

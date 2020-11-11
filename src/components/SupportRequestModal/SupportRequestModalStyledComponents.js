@@ -3,6 +3,7 @@ import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
 
 import { FontAwesome } from '@expo/vector-icons'; 
+import { AntDesign } from '@expo/vector-icons'; 
 
 import Modal from 'react-native-modal';
 
@@ -125,9 +126,9 @@ const Button = ({ renderAsStudent, districtPosition, buttonTitle, children, onPr
 
 const HeaderContainer = styled.View`
     display: flex;
-    flex: 0.5;
+    flex: 0.3;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 
     background-color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
@@ -142,23 +143,65 @@ const HeaderText = styled.Text`
     font-size: 18;
     font-weight: bold;
 
-    margin-right: 5;
+    /* margin-right: 5; */
 `;
 
+const CloseIcon = styled(AntDesign)`
+    color: white;
+    /* background-color: white; */
 
-const Header = ({ districtPosition, renderAsStudent, title }) => {
+    margin-right: 20;
+
+    padding-top: 5;
+    padding-bottom: 5;
+    padding-left: 5;
+    padding-right: 5;
+`;
+
+const CloseIconButton = ({ districtPosition, renderAsStudent, onPress }) => {
+    return (
+        <TouchableOpacity
+            onPress = { onPress }
+        >
+            <CloseIcon 
+                    color               =   { ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" }
+                    name                =   "closecircle" 
+                    size                =   {   30  } 
+
+                    districtPosition    =   { districtPosition } 
+                />
+        </TouchableOpacity>
+    ); //end return statement
+}; //end
+const HeaderTitleIconContainer = styled.View`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    margin-left: 25;
+`;
+
+const Header = ({ districtPosition, renderAsStudent, title, closeModal }) => {
     return (
         <HeaderContainer
             districtPosition    =   { districtPosition } 
             renderAsStudent     =   { renderAsStudent }
         >
-            <HeaderText>
-                { title }
-            </HeaderText>
-            <FontAwesome 
-                    name    =   "ticket" 
-                    size    =   {   30  } 
-                    color   =   "white" 
+            <HeaderTitleIconContainer>
+                <HeaderText>
+                    { title }
+                </HeaderText>
+                <FontAwesome 
+                        name    =   "ticket" 
+                        size    =   {   30  } 
+                        color   =   "white" 
+                />
+            </HeaderTitleIconContainer>
+          
+            <CloseIconButton
+                districtPosition    =   { districtPosition } 
+                renderAsStudent     =   { renderAsStudent }
+                onPress             =   { closeModal }
             />
         </HeaderContainer>
     ); //end return statement
