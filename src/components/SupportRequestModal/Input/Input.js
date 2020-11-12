@@ -24,9 +24,10 @@ const Input = forwardRef((props, ref) => {
                 width: (appWidth * 0.9),
                 fontSize: 16,
                 marginTop: 6,
+                marginBottom: 0,
                 marginLeft:  "auto",
                 marginRight: "auto",
-                paddingVertical: 12,
+                paddingVertical: 10,
                 paddingHorizontal: 10,
                 paddingRight: 30, // to ensure the text is never behind the icon
 

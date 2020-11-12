@@ -28,8 +28,11 @@ const TextInputStyled = styled(TextInput).attrs(props => ({
 }))`
     position: relative;
 
+    color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
+
     margin-top: 0;
     padding-top: 0;
+
     display:  flex;
     flex-direction: column;
     align-self: center;
@@ -37,8 +40,6 @@ const TextInputStyled = styled(TextInput).attrs(props => ({
     width: 90%;
 
     border-radius: 50px;
-
-    color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
 `;
 
 const ErrorText = styled.Text`

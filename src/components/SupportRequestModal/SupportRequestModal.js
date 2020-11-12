@@ -7,7 +7,7 @@ import Input from './Input/Input.js';
 import { useForm } from 'react-hook-form';
 import validation from './validation.js';
 
-import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Button, Divider } from './SupportRequestModalStyledComponents.js';
+import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Button, InstructionsText, Divider } from './SupportRequestModalStyledComponents.js';
 
 const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, showRequestModal, setShowRequestModal }) => {
 
@@ -51,6 +51,13 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
 
                                 closeModal          =   { () => setShowRequestModal(false) }
                             />
+
+                            <InstructionsText
+                              districtPosition    =   { districtPosition } 
+                              renderAsStudent     =   { renderAsStudent }
+                            >
+                                Fill the form fields to submit a ticket:
+                            </InstructionsText>
                             <Form {...{ register, setValue, validation, errors }}>
                                 <Input 
                                     appWidth            =   { appWidth }

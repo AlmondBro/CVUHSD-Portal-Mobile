@@ -63,7 +63,7 @@ const KeyboardAwareScrollViewStyled = styled(KeyboardAwareScrollView)`
 const Divider = styled.View`
     width: 90%;
     height: ${StyleSheet.hairlineWidth};
-    
+
     margin: auto;
     margin-top: 10;
     margin-bottom: 10;
@@ -105,6 +105,21 @@ const ButtonText = styled.Text`
     font-weight: bold;
 `;
 
+const InstructionsText = styled(ButtonText)`
+    color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
+    
+    justify-content: flex-end;
+    
+    font-size: 12;
+
+    text-align: center;
+
+    width: 100%;
+
+    margin-top: 10;
+    margin-bottom: 5;
+`;
+
 const Button = ({ renderAsStudent, districtPosition, buttonTitle, children, onPress }) => {
     return (
         <TouchableOpacity
@@ -131,6 +146,6 @@ const Button = ({ renderAsStudent, districtPosition, buttonTitle, children, onPr
     ); //end return
 }; //SignInButtonTouchableOpacity
 
-export { SafeAreaViewStyled, ModalStyled, ModalContentContainer, KeyboardAwareScrollViewStyled, Button, Divider };
+export { SafeAreaViewStyled, ModalStyled, ModalContentContainer, KeyboardAwareScrollViewStyled, InstructionsText, Button, Divider };
 
 
