@@ -139,8 +139,8 @@ const Input = forwardRef((props, ref) => {
               
                 <ErrorText>{error && error.message}</ErrorText>
             </InputContainer>
-        )
-    }
-); //end forwarRef()
+        ); //end return statement()
+    } //end inline function() passed to forwardRef()
+); //end forwardRef()
 
 export default Input;
