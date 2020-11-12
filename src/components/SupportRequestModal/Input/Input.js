@@ -1,10 +1,10 @@
 import React, { forwardRef } from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 import RNPickerSelect from 'react-native-picker-select';
 import { ValidationOptions, FieldError } from 'react-hook-form';
 
-import { InputContainer, TextInputStyled, Select, ErrorText, DownArrow } from './InputStyledComponents.js';
+import { InputContainer, LabelText, TextInputStyled, Select, ErrorText, DownArrow } from './InputStyledComponents.js';
 
 const Input = forwardRef((props, ref) => {
         const { appWidth, districtPosition, renderAsStudent, usePicker, label, labelStyle, error, name, onSubmitEditing, noOuterLabel, theme, placeholder, mode,...inputProps } = props;
@@ -18,10 +18,18 @@ const Input = forwardRef((props, ref) => {
             },
             inputIOS: {
                 position: "relative",
+                // display: "flex",
+                // flexDirection: "row",
+                // justifyContent: "center",
                 width: (appWidth * 0.9),
                 fontSize: 16,
+                marginTop: 6,
+                marginLeft:  "auto",
+                marginRight: "auto",
                 paddingVertical: 12,
                 paddingHorizontal: 10,
+                paddingRight: 30, // to ensure the text is never behind the icon
+
                 borderWidth: 1,
                 borderColor:  districtPosition ?
                                 ( (districtPosition === "student") || renderAsStudent === true) ? 
@@ -29,13 +37,13 @@ const Input = forwardRef((props, ref) => {
                                 : "rgba(147, 30, 29, 0.5)",
                 borderRadius: 10,
                 backgroundColor: '#F6F6F6',
-                color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
-                paddingRight: 30, // to ensure the text is never behind the icon
+                color: ( (districtPosition.toLowerCase() === "student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
             },
             inputAndroid: {
                 position: "relative",
                 width: (appWidth * 0.9),
                 fontSize: 16,
+                marginTop: 3,
                 paddingVertical: 12,
                 paddingHorizontal: 10,
                 borderWidth: 1,
@@ -50,10 +58,9 @@ const Input = forwardRef((props, ref) => {
             },
             iconContainer: {
                 position: 'absolute',
-                left: '90%',
+                left: (Platform.OS === "ios") ? "85%" : "90%",
                 color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
-                top: 16,
-                translateX: -50,
+                top: 20
             }
           });
 
@@ -91,13 +98,23 @@ const Input = forwardRef((props, ref) => {
         const DownArrowIcon  =  () => (
                                 <DownArrow 
                                     districtPosition    =   { districtPosition }
-                                    renderAsStudent     =   { renderAsStudent   }
+                                    renderAsStudent     =   { renderAsStudent  }
                                 />
         ); //end DownArrowIcon()
 
         return (
             <InputContainer>
-                {label && !noOuterLabel && <Text>{label}</Text>}
+                {
+                    label && !noOuterLabel 
+                    && (
+                        <LabelText
+                            districtPosition    =   { districtPosition }
+                            renderAsStudent     =   { renderAsStudent  }
+                        >
+                            {   label   }
+                        </LabelText>
+                    )
+                }
                 {
                     usePicker ? (
                         <RNPickerSelect

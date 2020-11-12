@@ -61,7 +61,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     appWidth            =   { appWidth }
 
                                     name                =   "title" 
-                                    label               =   "Title" 
+                                    label               =   "Title:" 
 
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
@@ -76,7 +76,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     appWidth            =   { appWidth }
 
                                     name                =   "category" 
-                                    label               =   "category" 
+                                    label               =   "Category:" 
 
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
@@ -91,7 +91,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     appWidth            =   { appWidth }
 
                                     name                =   "description" 
-                                    label               =   "Description" 
+                                    label               =   "Description:" 
 
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
@@ -106,7 +106,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     appWidth            =   { appWidth }
 
                                     name                =   "location" 
-                                    label               =   "Location" 
+                                    label               =   "Location:" 
 
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
@@ -123,7 +123,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     appWidth            =   { appWidth }
 
                                     name                =   "phone-number" 
-                                    label               =   "Phone Number" 
+                                    label               =   "Phone Number:" 
 
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
