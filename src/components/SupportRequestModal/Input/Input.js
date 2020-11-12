@@ -101,25 +101,25 @@ const Input = forwardRef((props, ref) => {
                 {
                     usePicker ? (
                         <RNPickerSelect
-                        ref                         =   {   ref } 
-                        usePicker                   =   {   usePicker   }
+                            ref                         =   {   ref } 
+                            usePicker                   =   {   usePicker   }
 
-                        name                        =   {   name }
-                        useNativeAndroidPickerStyle =   {   false   }
-                        items                       =   { categories }
-                        placeholder                 =   {
-                                                            {
-                                                                label: 'Select a sport...',
-                                                                value: null,
-                                                                color: 'red',
+                            name                        =   {   name }
+                            useNativeAndroidPickerStyle =   {   false   }
+                            items                       =   { categories }
+                            placeholder                 =   {
+                                                                {
+                                                                    label: 'Select a sport...',
+                                                                    value: null,
+                                                                    color: 'red',
+                                                                }
                                                             }
-                                                        }
 
-                        style                       =   {   {...pickerSelectStyle}  }
-                        Icon                        =   {   DownArrowIcon }
-                        onValueChange               =   {   (value) => console.log(value)   }
-                        onDonePress                 =   {   () => onSubmitEditing()         }
-                    />
+                            style                       =   {   {...pickerSelectStyle}  }
+                            Icon                        =   {   DownArrowIcon }
+                            onValueChange               =   {   (value) => console.log(value)   }
+                            onDonePress                 =   {   () => onSubmitEditing()         }
+                        />
                     ) : (
                         <TextInputStyled
                             ref                 =   { ref } 
