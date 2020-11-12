@@ -1,26 +1,12 @@
 import React, { forwardRef } from 'react';
+import { Text, StyleSheet } from 'react-native';
 
 import RNPickerSelect from 'react-native-picker-select';
-
-import color from 'color';
-
-import { FontAwesome } from '@expo/vector-icons'; 
-
-import {
-    View,
-    Text,
-    StyleSheet,
-    ViewStyle,
-    TextStyle,
-    TextInputProps,
-  } from 'react-native';
-
 import { ValidationOptions, FieldError } from 'react-hook-form';
 
-import { InputContainer, TextInputStyled, ErrorText } from './InputStyledComponents.js';
+import { InputContainer, TextInputStyled, Select, ErrorText, DownArrow } from './InputStyledComponents.js';
 
-const Input = forwardRef(
-    (props, ref) => {
+const Input = forwardRef((props, ref) => {
         const { appWidth, districtPosition, renderAsStudent, usePicker, label, labelStyle, error, name, onSubmitEditing, noOuterLabel, theme, placeholder, mode,...inputProps } = props;
 
         const pickerSelectStyle = StyleSheet.create({
@@ -102,48 +88,52 @@ const Input = forwardRef(
 
         const categories = (districtPosition === "student") ? studentCategories : staffCategories;
 
+        const DownArrowIcon  =  () => (
+                                <DownArrow 
+                                    districtPosition    =   { districtPosition }
+                                    renderAsStudent     =   { renderAsStudent   }
+                                />
+        ); //end DownArrowIcon()
+
         return (
             <InputContainer>
                 {label && !noOuterLabel && <Text>{label}</Text>}
                 {
                     usePicker ? (
                         <RNPickerSelect
-                        ref                 =   { ref } 
-                        name                =   { name }
-                        onValueChange={(value) => console.log(value)}
-                        style={{...pickerSelectStyle}}
-                        items={ categories}
-                        placeholder={{
-                            label: 'Select a sport...',
-                            value: null,
-                            color: 'red',
-                          }
-                        }
-                        useNativeAndroidPickerStyle={false}
-                        Icon={() =>  <FontAwesome 
-                            name    =   "angle-down" 
-                            size    =   {20} 
-                            color   =   { ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" } 
-                        />}
+                        ref                         =   {   ref } 
+                        usePicker                   =   {   usePicker   }
 
-                        usePicker   =   {   usePicker   }
+                        name                        =   {   name }
+                        useNativeAndroidPickerStyle =   {   false   }
+                        items                       =   { categories }
+                        placeholder                 =   {
+                                                            {
+                                                                label: 'Select a sport...',
+                                                                value: null,
+                                                                color: 'red',
+                                                            }
+                                                        }
 
-                        onDonePress = { () => onSubmitEditing() }
+                        style                       =   {   {...pickerSelectStyle}  }
+                        Icon                        =   {   DownArrowIcon }
+                        onValueChange               =   {   (value) => console.log(value)   }
+                        onDonePress                 =   {   () => onSubmitEditing()         }
                     />
                     ) : (
                         <TextInputStyled
-                        districtPosition    =   { districtPosition }
-                        renderAsStudent     =   { renderAsStudent }
-    
-                        label               = {  label }
-                        autoCapitalize      =   "none"
-                        onSubmitEditing     =   { onSubmitEditing  }
-                        ref                 =   { ref } 
-                        name                =   { name }
-                        theme               =   { theme }
-                        mode                =   { mode }
-                                                {...inputProps}
-                    />
+                            ref                 =   { ref } 
+                            districtPosition    =   { districtPosition }
+                            renderAsStudent     =   { renderAsStudent }
+        
+                            name                =   { name }
+                            theme               =   { theme }
+                            mode                =   { mode }
+                            label               =   {  label }
+                            autoCapitalize      =   "none"
+                            onSubmitEditing     =   { onSubmitEditing  }
+                                                    {...inputProps}
+                        /> 
                     )
                 }
               

@@ -1,7 +1,15 @@
+import React from 'react';
+import { StyleSheet } from 'react-native';
+
 import styled from 'styled-components/native';
 import { TextInput } from 'react-native-paper';
-
 // import {  TextInput } from 'react-native';
+import RNPickerSelect from 'react-native-picker-select';
+
+import { FontAwesome } from '@expo/vector-icons'; 
+
+
+import css from 'styled-css/native';
 
 const InputContainer = styled.View`
     display: flex;
@@ -34,4 +42,22 @@ const ErrorText = styled.Text`
     color:  red;
     font-weight: bold;
 `;
-export {  InputContainer, TextInputStyled, ErrorText };
+
+const DownArrow  = ({ districtPosition, renderAsStudent }) =>  (
+                        <FontAwesome 
+                            name    =   "angle-down" 
+                            size    =   {20} 
+                            color   =   { ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" } 
+                        />
+); //end DownArrow()
+
+const Select = styled(RNPickerSelect).attrs(props => ({
+    style : {
+        backgroundColor: "red"
+    }
+}))`
+    color: red !important;
+
+    background-color: green !important;
+`;
+export {  InputContainer, TextInputStyled, Select, ErrorText, DownArrow };
