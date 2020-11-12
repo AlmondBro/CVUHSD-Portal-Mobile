@@ -155,6 +155,11 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     noOuterLabel        =   { true }
                                 />
 
+                                <Divider
+                                   districtPosition    =   { districtPosition } 
+                                   renderAsStudent     =   { renderAsStudent }
+                                />
+
                                 <Button 
                                         buttonTitle       =   "Submit" 
                                         onPress           =   {  handleSubmit(onSubmit) } 

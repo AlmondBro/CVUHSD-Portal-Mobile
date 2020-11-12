@@ -61,8 +61,14 @@ const KeyboardAwareScrollViewStyled = styled(KeyboardAwareScrollView)`
 `;
 
 const Divider = styled.View`
-    color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
+    width: 90%;
     height: ${StyleSheet.hairlineWidth};
+    
+    margin: auto;
+    margin-top: 10;
+    margin-bottom: 10;
+
+    background-color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
 `;
 
 const ButtonContainer = styled.View`
