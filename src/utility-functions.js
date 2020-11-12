@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { Platform } from 'react-native';
 
 import { AppLoading } from 'expo';
@@ -94,4 +94,21 @@ const dimensionsWidthHOC = (Component) => {
     }; //end inline()
 }; //end (dimensionsWidthHOC)
 
-export  { dimensionsWidthHOC, navigationRef, navigate };
+/*
+    Get the component size on render. Custom hook.
+    Courtesy of Stack Overflow's matto1990:
+    https://stackoverflow.com/questions/56738500/react-native-onlayout-with-react-hooks
+*/
+
+const useComponentSize = () => {
+    const [size, setSize] = useState(null);
+  
+    const onLayout = useCallback(event => {
+      const { width, height } = event.nativeEvent.layout;
+      setSize({ width, height });
+    }, []);
+  
+    return [size, onLayout];
+}; //end useComponentSize
+
+export  { dimensionsWidthHOC, useComponentSize, navigationRef, navigate };

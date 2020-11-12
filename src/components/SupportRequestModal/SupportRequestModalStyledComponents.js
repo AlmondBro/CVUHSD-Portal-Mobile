@@ -116,7 +116,7 @@ const InstructionsText = styled(ButtonText)`
 
     width: 100%;
 
-    margin-top: 10;
+    margin-top: 50; /*  TODO: This is hard-coded. FIx por favor */
     margin-bottom: 5;
 `;
 

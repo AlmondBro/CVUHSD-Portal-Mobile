@@ -43,7 +43,6 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                 // onSwipeComplete     =   { () => setShowRequestModal(false) }
             >
                 <SafeAreaViewStyled>
-                        <KeyboardAwareScrollViewStyled>
                             <Header
                                 title               =   "Tech Support Request"  
                                 districtPosition    =   { districtPosition } 
@@ -51,6 +50,8 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
 
                                 closeModal          =   { () => setShowRequestModal(false) }
                             />
+                        <KeyboardAwareScrollViewStyled>
+                         
 
                             <InstructionsText
                               districtPosition    =   { districtPosition } 

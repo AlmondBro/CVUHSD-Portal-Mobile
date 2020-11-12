@@ -6,12 +6,18 @@ import styled from 'styled-components/native';
 import { AntDesign } from '@expo/vector-icons'; 
 
 const HeaderContainer = styled.View`
+    position: absolute;
+    top: 0;
+    z-index: 1;
+
     display: flex;
     flex: 1;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    align-self:  stretch;
 
+    width:  100%;
     background-color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
 /* 
     padding-top: 5;
@@ -32,7 +38,7 @@ const HeaderText = styled.Text`
     font-size: 18;
     font-weight: bold;
 
-    /* margin-right: 5; */
+    margin-right: 5;
 `;
 
 const CloseIcon = styled(AntDesign)`
