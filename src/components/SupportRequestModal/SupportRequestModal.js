@@ -1,16 +1,13 @@
 import React from 'react';
-import color from 'color';
 
-import { Text, TouchableOpacity } from 'react-native';
-import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Header, Button, ModalContentContainer } from './SupportRequestModalStyledComponents.js';
-
+import Header from './Header/Header.js';
 import Form from './Form/Form.js';
 import Input from './Input/Input.js';
 
 import { useForm } from 'react-hook-form';
-
 import validation from './validation.js';
-import { render } from 'react-dom';
+
+import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Button, Divider } from './SupportRequestModalStyledComponents.js';
 
 const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, showRequestModal, setShowRequestModal }) => {
 
@@ -35,17 +32,15 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
     return (
             <ModalStyled 
                 animationType       =   "slide"
-                onBackdropPress     =   { () => setShowRequestModal(false) }
-                // onSwipeComplete     =   { () => setShowRequestModal(false) }
+                presentationStyle   =   "pageSheet"
 
                 // swipeDirection      =   { ["up", "down"] }
                 hasBackdrop         =   { false }
                 isVisible           =   { showRequestModal  }  
                 
                 onDismiss           =   { () => setShowRequestModal(false) }
-
-                presentationStyle   =   "pageSheet"
-
+                // onBackdropPress     =   { () => setShowRequestModal(false) }
+                // onSwipeComplete     =   { () => setShowRequestModal(false) }
             >
                 <SafeAreaViewStyled>
                         <KeyboardAwareScrollViewStyled>

@@ -1,14 +1,11 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
-import styled from 'styled-components/native';
+import { TouchableOpacity, StyleSheet } from 'react-native';
 
-import { FontAwesome } from '@expo/vector-icons'; 
-import { AntDesign } from '@expo/vector-icons'; 
+import styled from 'styled-components/native';
 
 import Modal from 'react-native-modal';
 
 import { SafeAreaView } from 'react-native-safe-area-context'; //Import SafeAreaView so that elements do not overlap with status bars or notches
-
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 let SafeAreaViewStyled = styled(SafeAreaView)`
@@ -63,8 +60,12 @@ const KeyboardAwareScrollViewStyled = styled(KeyboardAwareScrollView)`
 
 `;
 
-const ButtonContainer = styled.View`
+const Divider = styled.View`
+    color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
+    height: ${StyleSheet.hairlineWidth};
+`;
 
+const ButtonContainer = styled.View`
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -84,7 +85,7 @@ const ButtonContainer = styled.View`
     margin-bottom:  15;
 `;
 
-const ButtonText= styled.Text`
+const ButtonText = styled.Text`
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -124,89 +125,6 @@ const Button = ({ renderAsStudent, districtPosition, buttonTitle, children, onPr
     ); //end return
 }; //SignInButtonTouchableOpacity
 
-const HeaderContainer = styled.View`
-    display: flex;
-    flex: 1;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-    background-color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
-/* 
-    padding-top: 5;
-    padding-bottom: 5; */
-`;
-
-const HeaderText = styled.Text`
-    color: white;
-
-    font-size: 18;
-    font-weight: bold;
-
-    /* margin-right: 5; */
-`;
-
-const CloseIcon = styled(AntDesign)`
-    color: white;
-    /* background-color: white; */
-
-    margin-right: 20;
-
-    padding-top: 5;
-    padding-bottom: 5;
-    padding-left: 5;
-    padding-right: 5;
-`;
-
-const CloseIconButton = ({ districtPosition, renderAsStudent, onPress }) => {
-    return (
-        <TouchableOpacity
-            onPress = { onPress }
-        >
-            <CloseIcon 
-                    color               =   { ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" }
-                    name                =   "closecircle" 
-                    size                =   {   30  } 
-
-                    districtPosition    =   { districtPosition } 
-                />
-        </TouchableOpacity>
-    ); //end return statement
-}; //end
-const HeaderTitleIconContainer = styled.View`
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-
-    margin-left: 25;
-`;
-
-const Header = ({ districtPosition, renderAsStudent, title, closeModal }) => {
-    return (
-        <HeaderContainer
-            districtPosition    =   { districtPosition } 
-            renderAsStudent     =   { renderAsStudent }
-        >
-            <HeaderTitleIconContainer>
-                <HeaderText>
-                    { title }
-                </HeaderText>
-                <FontAwesome 
-                        name    =   "ticket" 
-                        size    =   {   30  } 
-                        color   =   "white" 
-                />
-            </HeaderTitleIconContainer>
-          
-            <CloseIconButton
-                districtPosition    =   { districtPosition } 
-                renderAsStudent     =   { renderAsStudent }
-                onPress             =   { closeModal }
-            />
-        </HeaderContainer>
-    ); //end return statement
-}; 
-
-export { SafeAreaViewStyled, ModalStyled, ModalContentContainer, KeyboardAwareScrollViewStyled, Header, Button };
+export { SafeAreaViewStyled, ModalStyled, ModalContentContainer, KeyboardAwareScrollViewStyled, Button, Divider };
 
 

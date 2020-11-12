@@ -126,7 +126,7 @@ const Input = forwardRef((props, ref) => {
                             items                       =   { categories }
                             placeholder                 =   {
                                                                 {
-                                                                    label: 'Select a sport...',
+                                                                    label: 'Select a category type...',
                                                                     value: null,
                                                                     color: 'red',
                                                                 }
