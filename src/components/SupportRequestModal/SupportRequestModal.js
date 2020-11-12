@@ -70,6 +70,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     renderAsStudent     =   { renderAsStudent }
 
                                     usePicker           =   { false }
+                                    noOuterLabel        =   { true }
                                 />
 
                                 <Input  
@@ -85,6 +86,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     renderAsStudent     =   { renderAsStudent }
 
                                     usePicker           =   { true }
+                                    noOuterLabel        =   { true }
                                 />
 
                                 <Input 
@@ -100,6 +102,8 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
 
                                     districtPosition    =   { districtPosition } 
                                     renderAsStudent     =   { renderAsStudent }
+
+                                    noOuterLabel        =   { true }
                                 />
 
                                 <Input 
@@ -117,6 +121,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     renderAsStudent     =   { renderAsStudent }
 
                                     usePicker           =   { true }
+                                    noOuterLabel        =   { true }
                                 />
 
                                 <Input 
@@ -134,7 +139,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     renderAsStudent     =   { renderAsStudent }
 
                                     usePicker           =   { false }
-
+                                    noOuterLabel        =   { true }
                                 />
 
                                 <Input 
@@ -152,7 +157,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     renderAsStudent     =   { renderAsStudent }
 
                                     usePicker           =   { false }
-                                    
+                                    noOuterLabel        =   { true }
                                 />
 
                                 <Button 
