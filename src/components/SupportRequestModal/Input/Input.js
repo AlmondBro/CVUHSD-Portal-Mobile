@@ -135,7 +135,6 @@ const Input = forwardRef((props, ref) => {
 
                             style                       =   {   {...pickerSelectStyle}  }
                             Icon                        =   {   DownArrowIcon }
-                            onChangeText               =    {   onChangeText  }
                             onValueChange               =   {   onChangeText  }
                             onDonePress                 =   {   () => onSubmitEditing()         }
                         />
@@ -150,6 +149,7 @@ const Input = forwardRef((props, ref) => {
                             mode                =   { mode }
                             label               =   {  label }
                             autoCapitalize      =   "none"
+                            onChangeText        =   { onChangeText }
                             onSubmitEditing     =   { onSubmitEditing  }
                                                     {...inputProps}
                         /> 
