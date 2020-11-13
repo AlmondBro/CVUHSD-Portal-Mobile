@@ -66,32 +66,32 @@ const Input = forwardRef((props, ref) => {
           });
 
         const staffCategories = [
-            { label: "Computer Issue"},
-            { label: "Printer Issue"},
-            { label: "Projector Issue"},
-            { label: "Password Issue"},
-            { label: "Canvas"},
-            { label: "PowerSchool"},
-            { label: "Illuminate"},
-            { label: "Google"},
-            { label: "Wi-fi Issue"},
-            { label: "Eno Pen -- Board"},
-            { label: "Software Installation"},
-            { label: "Student Chromebook"},
-            { label: "Phone Issue"},
-            { label: "Other"}
+            { label: "Computer Issue", value: "Computer Issue" },
+            { label: "Printer Issue", value: "Printer Issue" },
+            { label: "Projector Issue", value: "Projector Issue"},
+            { label: "Password Issue", value: "Password Issue"},
+            { label: "Canvas", value: "Canvas" },
+            { label: "PowerSchool", value: "PowerSchool"},
+            { label: "Illuminate", value: "Illuminate"},
+            { label: "Google", value: "Google"},
+            { label: "Wi-fi Issue", value: "Wi-fi Issue"},
+            { label: "Eno Pen -- Board", value: "Eno Pen -- Board"},
+            { label: "Software Installation", value: "Software Installation" },
+            { label: "Student Chromebook", value: "Student Chromebook"},
+            { label: "Phone Issue", value: "Phone Issue"},
+            { label: "Other", value: "Other"}
         ];
 
         const studentCategories = [
-            { label: "Password Issue"},
-            { label: "Canvas"},
-            { label: "PowerSchool"},
-            { label: "Illuminate"},
-            { label: "Google"},
-            { label: "Wi-fi Issue"},
-            { label: "Software Installation"},
-            { label: "Student Chromebook"},
-            { label: "Other"}
+            { label: "Password Issue", value: "Password Issue"},
+            { label: "Canvas", value: "Canvas" },
+            { label: "PowerSchool", value: "PowerSchool"},
+            { label: "Illuminate", value: "Illuminate"},
+            { label: "Google", value: "Google"},
+            { label: "Wi-fi Issue", value: "Wi-fi Issue"},
+            { label: "Software Installation", value: "Software Installation"},
+            { label: "Student Chromebook", value: "Student Chromebook"},
+            { label: "Other", value: "Other"}
         ];
 
         const categories = (districtPosition === "student") ? studentCategories : staffCategories;
