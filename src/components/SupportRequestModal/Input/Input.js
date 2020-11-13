@@ -7,7 +7,7 @@ import { ValidationOptions, FieldError } from 'react-hook-form';
 import { InputContainer, LabelText, TextInputStyled, Select, ErrorText, DownArrow } from './InputStyledComponents.js';
 
 const Input = forwardRef((props, ref) => {
-        const { appWidth, districtPosition, renderAsStudent, usePicker, label, labelStyle, error, name, onSubmitEditing, noOuterLabel, theme, placeholder, mode,...inputProps } = props;
+        const { appWidth, districtPosition, renderAsStudent, usePicker, label, labelStyle, error, name, onSubmitEditing, onChangeText, noOuterLabel, theme, placeholder, mode,...inputProps } = props;
 
         const pickerSelectStyle = StyleSheet.create({
             placeholder: {
@@ -135,7 +135,8 @@ const Input = forwardRef((props, ref) => {
 
                             style                       =   {   {...pickerSelectStyle}  }
                             Icon                        =   {   DownArrowIcon }
-                            onValueChange               =   {   (value) => console.log(value)   }
+                            onChangeText               =    {   onChangeText  }
+                            onValueChange               =   {   onChangeText  }
                             onDonePress                 =   {   () => onSubmitEditing()         }
                         />
                     ) : (

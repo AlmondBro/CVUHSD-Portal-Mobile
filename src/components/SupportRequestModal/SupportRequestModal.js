@@ -9,12 +9,14 @@ import validation from './validation.js';
 
 import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Button, InstructionsText, Divider } from './SupportRequestModalStyledComponents.js';
 
+import { Reactotron } from './../../config/reactotron.dev.js';
+
 const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, showRequestModal, setShowRequestModal }) => {
 
     const { handleSubmit, register, setValue, errors } = useForm();
 
     const onSubmit = (formValues) => {
-        console.log("onSubmit() form values:\t", formValues);
+        Reactotron.log("onSubmit():\t", formValues);
     }; 
 
     const inputColorsTheme  = {
