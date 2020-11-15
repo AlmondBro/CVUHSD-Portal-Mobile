@@ -10,7 +10,7 @@ import BlueSection from './../BlueSection/BlueSection.js';
 //Import styled components
 import { BlueSectionContainer, ScrollViewStyled } from './PageContent_StyledComponents.js';
 
-let PageContent  = ({ renderAsStudent, title, ...props }) => {
+let PageContent  = ({ renderAsStudent, title, appWidth, ...props }) => {
     let sectionInfoObject;
     sectionInfoObject = (title === "Student" || renderAsStudent === true) ? 
                             redSectionInfo_Student : blueSectionInfo_Staff;
@@ -19,6 +19,7 @@ let PageContent  = ({ renderAsStudent, title, ...props }) => {
         return sectionInfoObject.map( (blueSection_Object, index) => {
             return (
                 <BlueSection 
+                    appWidth        =   { appWidth }
                     expanded        =   { blueSection_Object.expanded }
                     headerTitle     =   { blueSection_Object.headerTitle }
                     buttons         =   { blueSection_Object.buttons }
@@ -34,7 +35,7 @@ let PageContent  = ({ renderAsStudent, title, ...props }) => {
 
     return (
             <ScrollViewStyled
-                width                   =   { props.appWidth }
+                width                   =   { appWidth }
                 alwaysBounceVertical    =   { false }
                 bounce                  =   { false }
             >
@@ -45,6 +46,7 @@ let PageContent  = ({ renderAsStudent, title, ...props }) => {
                         (   ( (title !== "Student") && !renderAsStudent) ?
                                 (Platform.OS === "ios"|| androidWebViewDebug === true ?
                                     (   <BlueSection 
+                                            appWidth        =   { appWidth }
                                             headerTitle     =   "System Statuses" 
                                             expanded        =   {!false}
                                             serviceStatuses =   {true}

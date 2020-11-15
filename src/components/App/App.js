@@ -68,6 +68,8 @@ class App extends Component {
             backgroundImage     :   Images.appHeader.backgroundImageRed ,
             
             isModalVisible      :   false,
+            showRequestModal    :   false,
+
             authLoading         :   null,
             fontLoaded          :   true
         }; //end this.state object
@@ -238,6 +240,10 @@ class App extends Component {
 
     setIsModalVisible = (isModalVisible) => {
         this.setState( { isModalVisible: isModalVisible } );
+    }; //end setRenderAsStudent
+
+    setShowRequestModal = (showRequestModal) => {
+        this.setState( { showRequestModal: showRequestModal } );
     }; //end setRenderAsStudent
 
     setLogOnUserData = async (userDataObject) => {
@@ -418,10 +424,17 @@ class App extends Component {
                                     </Navigator>
                                     {   this.state.title ? 
                                         <TabsFooter 
+                                            appWidth            =   { this.state.appWidth }
                                             title               =   { this.state.title}
+                                            site                =   { this.state.site }
                                             renderAsStudent     =   { this.state.renderAsStudent }
+
                                             isModalVisible      =   { this.state.isModalVisible }
+                                            showRequestModal    =   { this.state.showRequestModal }
+
                                             setIsModalVisible   =   { this.setIsModalVisible }
+                                            setShowRequestModal =   { this.setShowRequestModal }
+
                                             setRenderAsStudent  =   { this.setRenderAsStudent }
                                             logOut              =   { this.clearLogOnUserData }
                                         />
