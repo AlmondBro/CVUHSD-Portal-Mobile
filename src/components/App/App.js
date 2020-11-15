@@ -426,6 +426,7 @@ class App extends Component {
                                         <TabsFooter 
                                             appWidth            =   { this.state.appWidth }
                                             title               =   { this.state.title}
+                                            site                =   { this.state.site }
                                             renderAsStudent     =   { this.state.renderAsStudent }
 
                                             isModalVisible      =   { this.state.isModalVisible }

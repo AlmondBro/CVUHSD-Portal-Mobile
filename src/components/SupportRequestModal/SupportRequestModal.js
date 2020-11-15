@@ -11,7 +11,7 @@ import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Button,
 
 import { Reactotron } from './../../config/reactotron.dev.js';
 
-const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, showRequestModal, setShowRequestModal }) => {
+const SupportRequestModal = ({ appWidth, districtPosition, site, renderAsStudent, showRequestModal, setShowRequestModal }) => {
 
     const { handleSubmit, register, setValue, getValues, errors } = useForm();
 
@@ -62,9 +62,9 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
 
     const categories = (districtPosition === "Student") ? studentCategories : staffCategories;
       
-    const locations =   (districtPosition.toLowerCase() === "Student") ? [ {
-        label: site.toString(), 
-        value: site.toString()
+    const locations =   (districtPosition === "Student") ? [ {
+        label: site, 
+        value: site
     } ] :
     [   { label: "Lawndale High School", value: "Lawndale High School" }, 
         { label: "Leuzinger High School", value: "Leuzinger High School" }, 
@@ -75,11 +75,12 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
         { label: "Service Center", value: "Service Center"}
     ];
 
-    const pickerPlaceHolder =   (pickerText) => ({
-        label: pickerText || 'Select a category type...',
-        value: null,
-        color:  ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
+    const pickerPlaceHolder = (pickerText) => ({
+            label:  (pickerText || 'Select a category type...') ,
+            value: null,
+            color:  ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
     });
+           
 
     return (
             <ModalStyled 
@@ -182,7 +183,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     renderAsStudent     =   { renderAsStudent }
 
                                     usePicker           =   { true }
-                                    pickerPlaceHolder   =   { pickerPlaceHolder("Choose your site or location...") }
+                                    pickerPlaceHolder   =   { (districtPosition === "Student") ? {} : pickerPlaceHolder("Choose your site or location...") }
                                     items               =   { locations }
                                     noOuterLabel        =   { false }
                                 />
