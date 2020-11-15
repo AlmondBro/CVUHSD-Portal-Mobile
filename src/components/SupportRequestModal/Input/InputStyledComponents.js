@@ -16,8 +16,8 @@ const InputContainer = styled.View`
 
     width: 100%;
 
-    margin-top: 10;
-    margin-bottom: 10ijo;
+    margin-top: 12;
+    margin-bottom: 12;
 `;
 const TextInputStyled = styled(TextInput).attrs(props => ({
     selectionColor  :   ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",

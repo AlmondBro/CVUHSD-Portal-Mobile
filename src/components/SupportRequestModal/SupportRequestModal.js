@@ -67,7 +67,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
 
                                     name                =   "title" 
                                     label               =   "Title:" 
-                                    placeHolderText     =   "Support Request Title"
+                                    placeHolderText     =   "Support Request Title..."
 
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
@@ -106,7 +106,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
 
-                                    secureTextEntry     =   { true } 
+                                    secureTextEntry     =   { false } 
 
                                     districtPosition    =   { districtPosition } 
                                     renderAsStudent     =   { renderAsStudent }
@@ -125,7 +125,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
 
-                                    secureTextEntry     =   { true } 
+                                    secureTextEntry     =   { false } 
 
                                     districtPosition    =   { districtPosition } 
                                     renderAsStudent     =   { renderAsStudent }
@@ -144,7 +144,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
 
-                                    secureTextEntry     =   { true } 
+                                    secureTextEntry     =   { false } 
 
                                     districtPosition    =   { districtPosition } 
                                     renderAsStudent     =   { renderAsStudent }
@@ -163,7 +163,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
 
-                                    secureTextEntry     =   { true } 
+                                    secureTextEntry     =   { false } 
 
                                     districtPosition    =   { districtPosition } 
                                     renderAsStudent     =   { renderAsStudent }
