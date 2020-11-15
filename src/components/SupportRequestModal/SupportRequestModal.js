@@ -67,6 +67,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
 
                                     name                =   "title" 
                                     label               =   "Title:" 
+                                    placeHolderText     =   "Support Request Title"
 
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
@@ -83,6 +84,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
 
                                     name                =   "category" 
                                     label               =   "Category:" 
+                                    placeHolderText     =   "Issue Type..."
 
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
@@ -99,6 +101,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
 
                                     name                =   "description" 
                                     label               =   "Description:" 
+                                    placeHolderText     =   "What is the issue at hand?"
 
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
@@ -116,6 +119,8 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
 
                                     name                =   "location" 
                                     label               =   "Location:" 
+                                    placeHolderText     =   "Your School or Site..."
+
 
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
@@ -134,6 +139,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
 
                                     name                =   "phoneNumber" 
                                     label               =   "Phone Number:" 
+                                    placeHolderText     =   "XXX-XXX-XXXX"
 
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
@@ -151,7 +157,8 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     appWidth            =   { appWidth }
 
                                     name                =   "roomNumber" 
-                                    label               =   "Room Number" 
+                                    label               =   "Room Number"
+                                    placeHolderText     =   "Your room..."
 
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }

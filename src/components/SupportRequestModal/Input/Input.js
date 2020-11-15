@@ -7,7 +7,7 @@ import { ValidationOptions, FieldError } from 'react-hook-form';
 import { InputContainer, LabelText, TextInputStyled, Select, ErrorText, ErrorTextItalicalized, DownArrow } from './InputStyledComponents.js';
 
 const Input = forwardRef((props, ref) => {
-        const { appWidth, districtPosition, renderAsStudent, usePicker, label, labelStyle, error, name, onSubmitEditing, onChangeText, noOuterLabel, theme, placeholder, mode,...inputProps } = props;
+        const { appWidth, districtPosition, renderAsStudent, usePicker, label, labelStyle, error, name, onSubmitEditing, onChangeText, noOuterLabel, theme, placeholder, placeHolderText, mode,...inputProps } = props;
 
         const [ labelVisible, setLabelVisible ] = useState(label);
 
@@ -150,7 +150,7 @@ const Input = forwardRef((props, ref) => {
                             name                =   { name }
                             theme               =   { theme }
                             mode                =   { mode }
-                            label               =   {  label }
+                            label               =   {  placeHolderText }
                             autoCapitalize      =   "none"
                             onChangeText        =   { onChangeText }
 
