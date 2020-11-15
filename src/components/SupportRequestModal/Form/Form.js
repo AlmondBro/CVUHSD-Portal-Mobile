@@ -5,7 +5,7 @@ import { ValidationOptions, FieldError } from 'react-hook-form';
 
 import Input from './../Input/Input';
 
-const Form = ({ register, errors, setValue, validation, children }) => {
+const Form = ({ register, errors, setValue, getValues, validation, children }) => {
     const Inputs = useRef([]);
     
     useEffect(() => {
@@ -43,6 +43,7 @@ const Form = ({ register, errors, setValue, validation, children }) => {
                                                                 }
                                                             }
                                         blurOnSubmit    =   { false }
+                                        getValues       =   { getValues }
                                         error           =   { errors[child.props.name] }
                                         key             =   { child.props.name }
                                                             {...child.props}

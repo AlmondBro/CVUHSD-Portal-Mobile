@@ -13,7 +13,7 @@ import { Reactotron } from './../../config/reactotron.dev.js';
 
 const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, showRequestModal, setShowRequestModal }) => {
 
-    const { handleSubmit, register, setValue, errors } = useForm();
+    const { handleSubmit, register, setValue, getValues, errors } = useForm();
 
     const onSubmit = (formValues) => {
         Reactotron.log("onSubmit():\t", formValues);
@@ -61,7 +61,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                             >
                                 Fill the form fields to submit a ticket:
                             </InstructionsText>
-                            <Form {...{ register, setValue, validation, errors }}>
+                            <Form {...{ register, setValue, getValues, validation, errors }}>
                                 <Input 
                                     appWidth            =   { appWidth }
 

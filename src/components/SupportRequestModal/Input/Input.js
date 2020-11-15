@@ -2,14 +2,15 @@ import React, { forwardRef, useState } from 'react';
 import { Platform, StyleSheet } from 'react-native';
 
 import RNPickerSelect from 'react-native-picker-select';
-import { ValidationOptions, FieldError } from 'react-hook-form';
+import { useForm } from "react-hook-form";
 
 import { InputContainer, LabelText, TextInputStyled, Select, ErrorText, ErrorTextItalicalized, DownArrow } from './InputStyledComponents.js';
 
 const Input = forwardRef((props, ref) => {
-        const { appWidth, districtPosition, renderAsStudent, usePicker, label, labelStyle, error, name, onSubmitEditing, onChangeText, noOuterLabel, theme, placeholder, placeHolderText, mode,...inputProps } = props;
+        const { appWidth, districtPosition, renderAsStudent, usePicker, label, labelStyle, error, name, onSubmitEditing, onChangeText, noOuterLabel, theme, placeholder, placeHolderText, mode, getValues,...inputProps } = props;
 
         const [ labelVisible, setLabelVisible ] = useState(label);
+        const [ isFocused, setIsFocused ]   = useState(false);
 
         const pickerSelectStyle = StyleSheet.create({
             placeholder: {
@@ -104,12 +105,27 @@ const Input = forwardRef((props, ref) => {
             color: 'red',
         };
 
+        //const { getValues } = useForm();
+
+        const onFocus = () => { 
+            setIsFocused(true);
+            setLabelVisible(false); 
+            
+            return;
+        }; //end onFocus()
+    
+        const onBlur = () => { 
+            setIsFocused(false);
+            setLabelVisible(true); 
+            return;
+        };
+
         const DownArrowIcon  =  () => (
             <DownArrow 
                 districtPosition    =   { districtPosition }
                 renderAsStudent     =   { renderAsStudent  }
             />
-    ); //end DownArrowIcon()
+         ); //end DownArrowIcon()
 
 
         return (
@@ -150,13 +166,13 @@ const Input = forwardRef((props, ref) => {
                             name                =   { name }
                             theme               =   { theme }
                             mode                =   { mode }
-                            label               =   {  placeHolderText }
+                            label               =   {  getValues(name) && !isFocused ? "" : placeHolderText }
                             autoCapitalize      =   "none"
                             onChangeText        =   { onChangeText }
 
                             onSubmitEditing     =   { onSubmitEditing }
-                            onFocus             =   { () => setLabelVisible(false) }
-                            onBlur              =   { () => setLabelVisible(true) }
+                            onFocus             =   { onFocus }
+                            onBlur              =   { onBlur }
                                                     {...inputProps}
                         /> 
                     )
