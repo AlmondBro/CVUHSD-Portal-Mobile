@@ -1,13 +1,15 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 import { Platform, StyleSheet } from 'react-native';
 
 import RNPickerSelect from 'react-native-picker-select';
 import { ValidationOptions, FieldError } from 'react-hook-form';
 
-import { InputContainer, LabelText, TextInputStyled, Select, ErrorText, DownArrow } from './InputStyledComponents.js';
+import { InputContainer, LabelText, TextInputStyled, Select, ErrorText, ErrorTextItalicalized, DownArrow } from './InputStyledComponents.js';
 
 const Input = forwardRef((props, ref) => {
         const { appWidth, districtPosition, renderAsStudent, usePicker, label, labelStyle, error, name, onSubmitEditing, onChangeText, noOuterLabel, theme, placeholder, mode,...inputProps } = props;
+
+        const [ labelVisible, setLabelVisible ] = useState(label);
 
         const pickerSelectStyle = StyleSheet.create({
             placeholder: {
@@ -96,17 +98,24 @@ const Input = forwardRef((props, ref) => {
 
         const categories = (districtPosition === "student") ? studentCategories : staffCategories;
 
+        const pickerPlaceHolder =    {
+            label: 'Select a category type...',
+            value: null,
+            color: 'red',
+        };
+
         const DownArrowIcon  =  () => (
-                                <DownArrow 
-                                    districtPosition    =   { districtPosition }
-                                    renderAsStudent     =   { renderAsStudent  }
-                                />
-        ); //end DownArrowIcon()
+            <DownArrow 
+                districtPosition    =   { districtPosition }
+                renderAsStudent     =   { renderAsStudent  }
+            />
+    ); //end DownArrowIcon()
+
 
         return (
             <InputContainer>
                 {
-                    label && !noOuterLabel 
+                    label && labelVisible && !noOuterLabel 
                     && (
                         <LabelText
                             districtPosition    =   { districtPosition }
@@ -125,13 +134,7 @@ const Input = forwardRef((props, ref) => {
                             name                        =   {   name }
                             useNativeAndroidPickerStyle =   {   false   }
                             items                       =   { categories }
-                            placeholder                 =   {
-                                                                {
-                                                                    label: 'Select a category type...',
-                                                                    value: null,
-                                                                    color: 'red',
-                                                                }
-                                                            }
+                            //placeholder                 =   { pickerPlaceHolder }
 
                             style                       =   {   {...pickerSelectStyle}  }
                             Icon                        =   {   DownArrowIcon }
@@ -150,13 +153,31 @@ const Input = forwardRef((props, ref) => {
                             label               =   {  label }
                             autoCapitalize      =   "none"
                             onChangeText        =   { onChangeText }
-                            onSubmitEditing     =   { onSubmitEditing  }
+
+                            onSubmitEditing     =   { onSubmitEditing }
+                            onFocus             =   { () => setLabelVisible(false) }
+                            onBlur              =   { () => setLabelVisible(true) }
                                                     {...inputProps}
                         /> 
                     )
                 }
+                {
+                    error ? (
+                        <ErrorText 
+                            districtPosition    =   { districtPosition }
+                            renderAsStudent     =   { renderAsStudent }
+                        >
+                            <ErrorTextItalicalized
+                                districtPosition    =   { districtPosition }
+                                renderAsStudent     =   { renderAsStudent }
+                            >
+                                { `Error:  `}
+                            </ErrorTextItalicalized>
+                            { error && error.message }
+                        </ErrorText>
+                    ) : null
+                }
               
-                <ErrorText>{error && error.message}</ErrorText>
             </InputContainer>
         ); //end return statement()
     } //end inline function() passed to forwardRef()

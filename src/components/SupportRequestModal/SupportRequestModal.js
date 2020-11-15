@@ -75,7 +75,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     renderAsStudent     =   { renderAsStudent }
 
                                     usePicker           =   { false }
-                                    noOuterLabel        =   { true }
+                                    noOuterLabel        =   { false }
                                 />
 
                                 <Input  
@@ -91,7 +91,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     renderAsStudent     =   { renderAsStudent }
 
                                     usePicker           =   { true }
-                                    noOuterLabel        =   { true }
+                                    noOuterLabel        =   { false }
                                 />
 
                                 <Input 
@@ -108,7 +108,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     districtPosition    =   { districtPosition } 
                                     renderAsStudent     =   { renderAsStudent }
 
-                                    noOuterLabel        =   { true }
+                                    noOuterLabel        =   { false }
                                 />
 
                                 <Input 
@@ -126,13 +126,13 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     renderAsStudent     =   { renderAsStudent }
 
                                     usePicker           =   { true }
-                                    noOuterLabel        =   { true }
+                                    noOuterLabel        =   { false }
                                 />
 
                                 <Input 
                                     appWidth            =   { appWidth }
 
-                                    name                =   "phone-number" 
+                                    name                =   "phoneNumber" 
                                     label               =   "Phone Number:" 
 
                                     mode                =   "outlined"
@@ -144,13 +144,13 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     renderAsStudent     =   { renderAsStudent }
 
                                     usePicker           =   { false }
-                                    noOuterLabel        =   { true }
+                                    noOuterLabel        =   { false }
                                 />
 
                                 <Input 
                                     appWidth            =   { appWidth }
 
-                                    name                =   "room" 
+                                    name                =   "roomNumber" 
                                     label               =   "Room Number" 
 
                                     mode                =   "outlined"
@@ -162,7 +162,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     renderAsStudent     =   { renderAsStudent }
 
                                     usePicker           =   { false }
-                                    noOuterLabel        =   { true }
+                                    noOuterLabel        =   { false }
                                 />
 
                                 <Divider
