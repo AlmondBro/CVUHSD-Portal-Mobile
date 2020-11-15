@@ -2,12 +2,11 @@ import React, { forwardRef, useState } from 'react';
 import { Platform, StyleSheet } from 'react-native';
 
 import RNPickerSelect from 'react-native-picker-select';
-import { useForm } from "react-hook-form";
 
 import { InputContainer, LabelText, TextInputStyled, Select, ErrorText, ErrorTextItalicalized, DownArrow } from './InputStyledComponents.js';
 
 const Input = forwardRef((props, ref) => {
-        const { appWidth, districtPosition, renderAsStudent, usePicker, label, labelStyle, error, name, onSubmitEditing, onChangeText, noOuterLabel, theme, placeholder, placeHolderText, mode, getValues,...inputProps } = props;
+        const { appWidth, districtPosition, renderAsStudent, usePicker, pickerPlaceHolder, label, labelStyle, items, error, name, onSubmitEditing, onChangeText, noOuterLabel, theme, placeholder, placeHolderText, mode, getValues,...inputProps } = props;
 
         const [ labelVisible, setLabelVisible ] = useState(label);
         const [ isFocused, setIsFocused ]   = useState(false);
@@ -68,45 +67,6 @@ const Input = forwardRef((props, ref) => {
             }
           });
 
-        const staffCategories = [
-            { label: "Computer Issue", value: "Computer Issue" },
-            { label: "Printer Issue", value: "Printer Issue" },
-            { label: "Projector Issue", value: "Projector Issue"},
-            { label: "Password Issue", value: "Password Issue"},
-            { label: "Canvas", value: "Canvas" },
-            { label: "PowerSchool", value: "PowerSchool"},
-            { label: "Illuminate", value: "Illuminate"},
-            { label: "Google", value: "Google"},
-            { label: "Wi-fi Issue", value: "Wi-fi Issue"},
-            { label: "Eno Pen -- Board", value: "Eno Pen -- Board"},
-            { label: "Software Installation", value: "Software Installation" },
-            { label: "Student Chromebook", value: "Student Chromebook"},
-            { label: "Phone Issue", value: "Phone Issue"},
-            { label: "Other", value: "Other"}
-        ];
-
-        const studentCategories = [
-            { label: "Password Issue", value: "Password Issue"},
-            { label: "Canvas", value: "Canvas" },
-            { label: "PowerSchool", value: "PowerSchool"},
-            { label: "Illuminate", value: "Illuminate"},
-            { label: "Google", value: "Google"},
-            { label: "Wi-fi Issue", value: "Wi-fi Issue"},
-            { label: "Software Installation", value: "Software Installation"},
-            { label: "Student Chromebook", value: "Student Chromebook"},
-            { label: "Other", value: "Other"}
-        ];
-
-        const categories = (districtPosition === "student") ? studentCategories : staffCategories;
-
-        const pickerPlaceHolder =    {
-            label: 'Select a category type...',
-            value: null,
-            color: 'red',
-        };
-
-        //const { getValues } = useForm();
-
         const onFocus = () => { 
             setIsFocused(true);
             setLabelVisible(false); 
@@ -149,8 +109,8 @@ const Input = forwardRef((props, ref) => {
 
                             name                        =   {   name }
                             useNativeAndroidPickerStyle =   {   false   }
-                            items                       =   { categories }
-                            //placeholder                 =   { pickerPlaceHolder }
+                            items                       =   { items }
+                            placeholder                 =   { pickerPlaceHolder }
 
                             style                       =   {   {...pickerSelectStyle}  }
                             Icon                        =   {   DownArrowIcon }

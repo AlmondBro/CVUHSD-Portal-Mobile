@@ -31,6 +31,56 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
         }
     }; //end inputColorsTheme
 
+    const staffCategories = [
+        { label: "Computer Issue", value: "Computer Issue" },
+        { label: "Printer Issue", value: "Printer Issue" },
+        { label: "Projector Issue", value: "Projector Issue"},
+        { label: "Password Issue", value: "Password Issue"},
+        { label: "Canvas", value: "Canvas" },
+        { label: "PowerSchool", value: "PowerSchool"},
+        { label: "Illuminate", value: "Illuminate"},
+        { label: "Google", value: "Google"},
+        { label: "Wi-fi Issue", value: "Wi-fi Issue"},
+        { label: "Eno Pen -- Board", value: "Eno Pen -- Board"},
+        { label: "Software Installation", value: "Software Installation" },
+        { label: "Student Chromebook", value: "Student Chromebook"},
+        { label: "Phone Issue", value: "Phone Issue"},
+        { label: "Other", value: "Other"}
+    ];
+
+    const studentCategories = [
+        { label: "Password Issue", value: "Password Issue"},
+        { label: "Canvas", value: "Canvas" },
+        { label: "PowerSchool", value: "PowerSchool"},
+        { label: "Illuminate", value: "Illuminate"},
+        { label: "Google", value: "Google"},
+        { label: "Wi-fi Issue", value: "Wi-fi Issue"},
+        { label: "Software Installation", value: "Software Installation"},
+        { label: "Student Chromebook", value: "Student Chromebook"},
+        { label: "Other", value: "Other"}
+    ];
+
+    const categories = (districtPosition === "Student") ? studentCategories : staffCategories;
+      
+    const locations =   (districtPosition.toLowerCase() === "Student") ? [ {
+        label: site.toString(), 
+        value: site.toString()
+    } ] :
+    [   { label: "Lawndale High School", value: "Lawndale High School" }, 
+        { label: "Leuzinger High School", value: "Leuzinger High School" }, 
+        { label: "Hawthorne High School", value: "Hawthorne High School"}, 
+        { label: "District Office", value: "District Office"}, 
+        { label: "Lloyde High School", value: "Lloyde High School"}, 
+        { label: "CV Independent Study", value: "CV Independent Study"}, 
+        { label: "Service Center", value: "Service Center"}
+    ];
+
+    const pickerPlaceHolder =   (pickerText) => ({
+        label: pickerText || 'Select a category type...',
+        value: null,
+        color:  ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
+    });
+
     return (
             <ModalStyled 
                 animationType       =   "slide"
@@ -53,8 +103,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                 closeModal          =   { () => setShowRequestModal(false) }
                             />
                         <KeyboardAwareScrollViewStyled>
-                         
-
+                        
                             <InstructionsText
                               districtPosition    =   { districtPosition } 
                               renderAsStudent     =   { renderAsStudent }
@@ -93,6 +142,8 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     renderAsStudent     =   { renderAsStudent }
 
                                     usePicker           =   { true }
+                                    pickerPlaceHolder   =   { pickerPlaceHolder("Choose an issues category...") }
+                                    items               =   { categories }
                                     noOuterLabel        =   { false }
                                 />
 
@@ -131,6 +182,8 @@ const SupportRequestModal = ({ appWidth, districtPosition, renderAsStudent, show
                                     renderAsStudent     =   { renderAsStudent }
 
                                     usePicker           =   { true }
+                                    pickerPlaceHolder   =   { pickerPlaceHolder("Choose your site or location...") }
+                                    items               =   { locations }
                                     noOuterLabel        =   { false }
                                 />
 
