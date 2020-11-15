@@ -6,7 +6,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import { InputContainer, LabelText, TextInputStyled, Select, ErrorText, ErrorTextItalicalized, DownArrow } from './InputStyledComponents.js';
 
 const Input = forwardRef((props, ref) => {
-        const { appWidth, districtPosition, renderAsStudent, usePicker, pickerPlaceHolder, label, labelStyle, items, error, name, onSubmitEditing, onChangeText, noOuterLabel, theme, placeholder, placeHolderText, mode, getValues,...inputProps } = props;
+        const { appWidth, districtPosition, renderAsStudent, usePicker, pickerPlaceHolder, label, labelStyle, items, error, name, onSubmitEditing, onChangeText, noOuterLabel, theme, placeholder, placeHolderText, value, mode, getValues,...inputProps } = props;
 
         const [ labelVisible, setLabelVisible ] = useState(label);
         const [ isFocused, setIsFocused ]   = useState(false);
@@ -14,7 +14,7 @@ const Input = forwardRef((props, ref) => {
         const pickerSelectStyle = StyleSheet.create({
             placeholder: {
                 color:  districtPosition ?
-                            ( (districtPosition === "student") || renderAsStudent === true) ? 
+                            ( (districtPosition === "Student") || renderAsStudent === true) ? 
                                 " rgba(147, 30, 29, 0.6)": "rgba(30, 108, 147, 0.6)"
                             : "rgba(147, 30, 29, 0.6)",
             },
@@ -35,12 +35,12 @@ const Input = forwardRef((props, ref) => {
 
                 borderWidth: 1,
                 borderColor:  districtPosition ?
-                                ( (districtPosition === "student") || renderAsStudent === true) ? 
+                                ( (districtPosition === "Student") || renderAsStudent === true) ? 
                                     " rgba(147, 30, 29, 0.5)": "rgba(30, 108, 147, 0.5)"
                                 : "rgba(147, 30, 29, 0.5)",
                 borderRadius: 10,
                 backgroundColor: '#F6F6F6',
-                color: ( (districtPosition.toLowerCase() === "student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
+                color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
             },
             inputAndroid: {
                 position: "relative",
@@ -51,7 +51,7 @@ const Input = forwardRef((props, ref) => {
                 paddingHorizontal: 10,
                 borderWidth: 1,
                 borderColor:  districtPosition ?
-                                ( (districtPosition === "student") || renderAsStudent === true) ? 
+                                ( (districtPosition === "Student") || renderAsStudent === true) ? 
                                     " rgba(147, 30, 29, 0.5)": "rgba(30, 108, 147, 0.5)"
                                 : "rgba(147, 30, 29, 0.5)",
                 borderRadius: 10,
@@ -110,6 +110,7 @@ const Input = forwardRef((props, ref) => {
                             name                        =   {   name }
                             useNativeAndroidPickerStyle =   {   false   }
                             items                       =   { items }
+                            value                       =   { value }
                             placeholder                 =   { pickerPlaceHolder }
 
                             style                       =   {   {...pickerSelectStyle}  }

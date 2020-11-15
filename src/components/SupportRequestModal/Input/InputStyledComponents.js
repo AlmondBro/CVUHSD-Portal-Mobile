@@ -88,7 +88,7 @@ const LabelText = styled.Text`
     width: 90%;
     /* background-color: green; */
 
-    color: ${props => ( (props.districtPosition === "student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" }; 
+    color: ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" }; 
 
     font-weight: bold;
 `;

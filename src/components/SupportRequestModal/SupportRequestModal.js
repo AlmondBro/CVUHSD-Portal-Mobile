@@ -25,7 +25,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, site, renderAsStudent
             background  :   "#F6F6F6",
             text        :   ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",  
             placeholder :   districtPosition ?
-                            ( (districtPosition === "student") || renderAsStudent === true) ? 
+                            ( (districtPosition === "Student") || (renderAsStudent === true) ) ? 
                                 " rgba(147, 30, 29, 0.5)": "rgba(30, 108, 147, 0.5)"
                             : "rgba(147, 30, 29, 0.5)",
         }
@@ -144,6 +144,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, site, renderAsStudent
 
                                     usePicker           =   { true }
                                     pickerPlaceHolder   =   { pickerPlaceHolder("Choose an issues category...") }
+                                    value               =   { (districtPosition === "Student") ? site :  null}
                                     items               =   { categories }
                                     noOuterLabel        =   { false }
                                 />
