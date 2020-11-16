@@ -1,9 +1,5 @@
 import React, { useRef, useEffect, Fragment } from 'react';
-import { TextInput, KeyboardAvoidingView, findNodeHandle, Text, Alert } from 'react-native';
-
-import { ValidationOptions, FieldError } from 'react-hook-form';
-
-import Input from './../Input/Input';
+import Input from './Input/Input';
 
 const Form = ({ register, errors, setValue, getValues, validation, children }) => {
     const Inputs = useRef([]);

@@ -1,8 +1,8 @@
 import React from 'react';
 
 import Header from './Header/Header.js';
-import Form from './Form/Form.js';
-import Input from './Input/Input.js';
+import Form from './../FormComponents/Form/Form.js';
+import Input from './../FormComponents/Form/Input/Input.js';
 
 import { useForm } from 'react-hook-form';
 import validation from './validation.js';
@@ -81,7 +81,6 @@ const SupportRequestModal = ({ appWidth, districtPosition, site, renderAsStudent
             color:  ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
     });
            
-
     return (
             <ModalStyled 
                 animationType       =   "slide"

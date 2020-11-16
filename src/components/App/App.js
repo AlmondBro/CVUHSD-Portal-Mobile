@@ -69,6 +69,7 @@ class App extends Component {
             
             isModalVisible      :   false,
             showRequestModal    :   false,
+            showPasswordModal   :   true,   
 
             authLoading         :   null,
             fontLoaded          :   true
@@ -236,15 +237,24 @@ class App extends Component {
 
         this.setState({portalLogoSource: portalLogoSource, backgroundImage: backgroundImage});
         this.setLogOnUserData({...this.state });
+
+        return;
     }; //end setRenderAsStudent
 
     setIsModalVisible = (isModalVisible) => {
         this.setState( { isModalVisible: isModalVisible } );
+        return;
     }; //end setRenderAsStudent
 
     setShowRequestModal = (showRequestModal) => {
         this.setState( { showRequestModal: showRequestModal } );
+        return;
     }; //end setRenderAsStudent
+
+    setShowPasswordModal = (showPasswordModal) => {
+        this.setState({ showPasswordModal : showPasswordModal} );
+        return;
+    }; 
 
     setLogOnUserData = async (userDataObject) => {
         try {
