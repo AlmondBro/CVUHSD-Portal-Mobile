@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Header from './../Header/Header.js';
+import Header from './../FormComponents/Header/Header.js';
 import Form from './../FormComponents/Form/Form.js';
 import Input from './../FormComponents/Form/Input/Input.js';
 
@@ -11,7 +11,7 @@ import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Button,
 
 import { Reactotron } from './../../config/reactotron.dev.js';
 
-const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, showRequestModal, setShowRequestModal }) => {
+const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, showPasswordModal, setShowPasswordModal }) => {
 
     const { handleSubmit, register, setValue, getValues, errors } = useForm();
 
@@ -88,9 +88,9 @@ const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, sho
 
                 // swipeDirection      =   { ["up", "down"] }
                 hasBackdrop         =   { false }
-                isVisible           =   { showRequestModal  }  
+                isVisible           =   { showPasswordModal }  
                 
-                onDismiss           =   { () => setShowRequestModal(false) }
+                onDismiss           =   { () => setShowPasswordModal(false) }
                 // onBackdropPress     =   { () => setShowRequestModal(false) }
                 // onSwipeComplete     =   { () => setShowRequestModal(false) }
             >
@@ -100,7 +100,7 @@ const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, sho
                                 districtPosition    =   { districtPosition } 
                                 renderAsStudent     =   { renderAsStudent }
 
-                                closeModal          =   { () => setShowRequestModal(false) }
+                                closeModal          =   { () => setShowPasswordModal(false) }
                             />
                         <KeyboardAwareScrollViewStyled>
                         
@@ -127,86 +127,7 @@ const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, sho
                                     usePicker           =   { false }
                                     noOuterLabel        =   { false }
                                 />
-
-                                <Input  
-                                    appWidth            =   { appWidth }
-
-                                    name                =   "category" 
-                                    label               =   "Category:" 
-                                    placeHolderText     =   "Issue Type..."
-
-                                    mode                =   "outlined"
-                                    theme               =   { inputColorsTheme }
-
-                                    districtPosition    =   { districtPosition } 
-                                    renderAsStudent     =   { renderAsStudent }
-
-                                    usePicker           =   { true }
-                                    pickerPlaceHolder   =   { pickerPlaceHolder("Choose an issues category...") }
-                                    value               =   { (districtPosition === "Student") ? site :  null}
-                                    items               =   { categories }
-                                    noOuterLabel        =   { false }
-                                />
-
-                                <Input 
-                                    appWidth            =   { appWidth }
-
-                                    name                =   "description" 
-                                    label               =   "Description:" 
-                                    placeHolderText     =   "What is the issue at hand?"
-
-                                    mode                =   "outlined"
-                                    theme               =   { inputColorsTheme }
-
-                                    secureTextEntry     =   { false } 
-
-                                    districtPosition    =   { districtPosition } 
-                                    renderAsStudent     =   { renderAsStudent }
-
-                                    noOuterLabel        =   { false }
-                                />
-
-                                <Input 
-                                    appWidth            =   { appWidth }
-
-                                    name                =   "location" 
-                                    label               =   "Location:" 
-                                    placeHolderText     =   "Your School or Site..."
-
-
-                                    mode                =   "outlined"
-                                    theme               =   { inputColorsTheme }
-
-                                    secureTextEntry     =   { false } 
-
-                                    districtPosition    =   { districtPosition } 
-                                    renderAsStudent     =   { renderAsStudent }
-
-                                    usePicker           =   { true }
-                                    pickerPlaceHolder   =   { (districtPosition === "Student") ? {} : pickerPlaceHolder("Choose your site or location...") }
-                                    items               =   { locations }
-                                    noOuterLabel        =   { false }
-                                />
-
-                                <Input 
-                                    appWidth            =   { appWidth }
-
-                                    name                =   "phoneNumber" 
-                                    label               =   "Phone Number:" 
-                                    placeHolderText     =   "XXX-XXX-XXXX"
-
-                                    mode                =   "outlined"
-                                    theme               =   { inputColorsTheme }
-
-                                    secureTextEntry     =   { false } 
-
-                                    districtPosition    =   { districtPosition } 
-                                    renderAsStudent     =   { renderAsStudent }
-
-                                    usePicker           =   { false }
-                                    noOuterLabel        =   { false }
-                                />
-
+                                
                                 <Input 
                                     appWidth            =   { appWidth }
 

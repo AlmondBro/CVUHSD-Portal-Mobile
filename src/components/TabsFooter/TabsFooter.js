@@ -11,7 +11,7 @@ import SupportRequestModal  from './../SupportRequestModal/SupportRequestModal.j
 //Import styled components
 import { TabsFooterContainerView, TabsFooterButton }  from './TabsFooter_StyledComponents.js';
 
-const TabsFooter = ({ appWidth, renderAsStudent, site, setRenderAsStudent, isModalVisible, showRequestModal, setIsModalVisible, setShowRequestModal, title, logOut }) => {    
+const TabsFooter = ({ appWidth, renderAsStudent, site, setRenderAsStudent, isModalVisible, showRequestModal, setIsModalVisible, setShowRequestModal, showPasswordModal, setShowPasswordModal, title, logOut }) => {    
     return (
         <TabsFooterContainerView 
             title   =   { title }    
@@ -24,7 +24,7 @@ const TabsFooter = ({ appWidth, renderAsStudent, site, setRenderAsStudent, isMod
                             renderAsStudent =   { renderAsStudent }
                             title           =   { title }    
                             activeOpacity   =   { 0.5 }
-                            onPress         =   { () => setIsModalVisible(!isModalVisible) }
+                            onPress         =   { () => setShowPasswordModal(!showPasswordModal) }
                             noBorder    
                         >
                             <ChangePasswordIcon 
@@ -85,10 +85,13 @@ const TabsFooter = ({ appWidth, renderAsStudent, site, setRenderAsStudent, isMod
                 (title !== "Student") ? 
                     (
                         <ChangePassword 
-                            isModalVisible      =   {   isModalVisible  }
-                            setIsModalVisible   =   {   setIsModalVisible   }
-                            title               =   {   title   }
-                            renderAsStudent     =   {   renderAsStudent }
+                            appWidth                =   {   appWidth }
+                            districtPosition        =   {   title   }
+                            site                    =   {  site }
+                            renderAsStudent         =   {   renderAsStudent }
+ 
+                            showPasswordModal       =   { showPasswordModal }
+                            setShowPasswordModal    =   { setShowPasswordModal }    
                         />
                     )
                     : null

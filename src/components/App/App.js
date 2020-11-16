@@ -67,9 +67,8 @@ class App extends Component {
             portalLogoSource    :   Images.appHeader.portalLogoRed,
             backgroundImage     :   Images.appHeader.backgroundImageRed ,
             
-            isModalVisible      :   false,
             showRequestModal    :   false,
-            showPasswordModal   :   true,   
+            showPasswordModal   :   false,   
 
             authLoading         :   null,
             fontLoaded          :   true
@@ -238,11 +237,6 @@ class App extends Component {
         this.setState({portalLogoSource: portalLogoSource, backgroundImage: backgroundImage});
         this.setLogOnUserData({...this.state });
 
-        return;
-    }; //end setRenderAsStudent
-
-    setIsModalVisible = (isModalVisible) => {
-        this.setState( { isModalVisible: isModalVisible } );
         return;
     }; //end setRenderAsStudent
 
@@ -434,19 +428,22 @@ class App extends Component {
                                     </Navigator>
                                     {   this.state.title ? 
                                         <TabsFooter 
-                                            appWidth            =   { this.state.appWidth }
-                                            title               =   { this.state.title}
-                                            site                =   { this.state.site }
-                                            renderAsStudent     =   { this.state.renderAsStudent }
+                                            appWidth                =   { this.state.appWidth }
+                                            title                   =   { this.state.title}
+                                            site                    =   { this.state.site }
+                                            renderAsStudent         =   { this.state.renderAsStudent }
 
-                                            isModalVisible      =   { this.state.isModalVisible }
-                                            showRequestModal    =   { this.state.showRequestModal }
+                                            isModalVisible          =   { this.state.isModalVisible }
+                                            showRequestModal        =   { this.state.showRequestModal }
 
-                                            setIsModalVisible   =   { this.setIsModalVisible }
-                                            setShowRequestModal =   { this.setShowRequestModal }
+                                            setIsModalVisible       =   { this.setIsModalVisible }
+                                            setShowRequestModal     =   { this.setShowRequestModal }
 
-                                            setRenderAsStudent  =   { this.setRenderAsStudent }
-                                            logOut              =   { this.clearLogOnUserData }
+                                            setShowPasswordModal    =   {  this.setShowPasswordModal }
+                                            showPasswordModal       =   {  this.state.showPasswordModal } 
+
+                                            setRenderAsStudent      =   { this.setRenderAsStudent }
+                                            logOut                  =   { this.clearLogOnUserData }
                                         />
                                         : null    
                                     } 

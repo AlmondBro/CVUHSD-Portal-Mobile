@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Header from './Header/Header.js';
+import Header from './../FormComponents/Header/Header.js';
 import Form from './../FormComponents/Form/Form.js';
 import Input from './../FormComponents/Form/Input/Input.js';
 
