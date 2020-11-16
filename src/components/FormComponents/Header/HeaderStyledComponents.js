@@ -13,7 +13,7 @@ const HeaderContainer = styled.View`
     display: flex;
     flex: 1;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     align-self:  stretch;
 
@@ -27,9 +27,10 @@ const HeaderContainer = styled.View`
 const HeaderTitleIconContainer = styled.View`
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-evenly;
 
-    margin-left: 25;
+    margin-right: auto;
+    margin-left:  auto;
 `;
 
 const HeaderText = styled.Text`
@@ -39,6 +40,10 @@ const HeaderText = styled.Text`
     font-weight: bold;
 
     margin-right: 5;
+
+    text-align: center;
+
+    /* background-color: green; */
 `;
 
 const CloseIcon = styled(AntDesign)`

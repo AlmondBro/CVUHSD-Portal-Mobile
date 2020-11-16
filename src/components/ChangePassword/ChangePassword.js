@@ -96,7 +96,9 @@ const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, sho
             >
                 <SafeAreaViewStyled>
                             <Header
-                                title               =   "Tech Support Request"  
+                                title               =   "Change Password" 
+                                faIcon              =   "lock" 
+                                
                                 districtPosition    =   { districtPosition } 
                                 renderAsStudent     =   { renderAsStudent }
 
@@ -108,15 +110,15 @@ const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, sho
                               districtPosition    =   { districtPosition } 
                               renderAsStudent     =   { renderAsStudent }
                             >
-                                Fill the form fields to submit a ticket:
+                                Fill the form fields to change your password:
                             </InstructionsText>
                             <Form {...{ register, setValue, getValues, validation, errors }}>
                                 <Input 
                                     appWidth            =   { appWidth }
 
-                                    name                =   "title" 
-                                    label               =   "Title:" 
-                                    placeHolderText     =   "Support Request Title..."
+                                    name                =   "oldPassword" 
+                                    label               =   "Old Password:" 
+                                    placeHolderText     =   "Old Password..."
 
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
@@ -131,9 +133,28 @@ const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, sho
                                 <Input 
                                     appWidth            =   { appWidth }
 
-                                    name                =   "roomNumber" 
-                                    label               =   "Room Number"
-                                    placeHolderText     =   "Your room..."
+                                    name                =   "newPassword" 
+                                    label               =   "New Password:"
+                                    placeHolderText     =   "New Password..."
+
+                                    mode                =   "outlined"
+                                    theme               =   { inputColorsTheme }
+
+                                    secureTextEntry     =   { false } 
+
+                                    districtPosition    =   { districtPosition } 
+                                    renderAsStudent     =   { renderAsStudent }
+
+                                    usePicker           =   { false }
+                                    noOuterLabel        =   { false }
+                                />
+
+                                <Input 
+                                    appWidth            =   { appWidth }
+
+                                    name                =   "newPasswordConfirmed" 
+                                    label               =   "Confirmed New Password:"
+                                    placeHolderText     =   "Confirm New Password..."
 
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
@@ -153,7 +174,7 @@ const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, sho
                                 />
 
                                 <Button 
-                                        buttonTitle       =   "Submit" 
+                                        buttonTitle       =   "Change Password" 
                                         onPress           =   {  handleSubmit(onSubmit) } 
 
                                         districtPosition    =   { districtPosition } 

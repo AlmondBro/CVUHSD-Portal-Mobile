@@ -5,8 +5,7 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import { HeaderContainer, HeaderTitleIconContainer, HeaderText, CloseIconButton } from  './HeaderStyledComponents.js';
 
-import { useComponentSize } from './.../../../../../utility-functions.js';
-const Header = ({ districtPosition, renderAsStudent, title, closeModal }) => {
+const Header = ({ districtPosition, renderAsStudent, title, faIcon, closeModal }) => {
     //const [size, onLayout] = useComponentSize();
 
     const [ headerHeight, setHeaderHeight ]  = useState(0);
@@ -35,7 +34,7 @@ const Header = ({ districtPosition, renderAsStudent, title, closeModal }) => {
                     { title }
                 </HeaderText>
                 <FontAwesome 
-                        name    =   "ticket" 
+                        name    =   { faIcon || "ticket"} 
                         size    =   {   30  } 
                         color   =   "white" 
                 />
