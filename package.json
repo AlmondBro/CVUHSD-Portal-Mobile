@@ -6,6 +6,8 @@
   "scripts": {
     "start": "expo start",
     "start-reset": "rm -rf node_modules/ && npm install && npm audit fix  && npm start --reset-cache",
+    "server": "nodemon esm server/es6-entry.js --inspect",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm start\"",
     "publish": "expo publish",
     "build-android": "expo build:android",
     "upload-android": "expo upload:android",
@@ -71,5 +73,6 @@
     "reactotron-react-js": "^3.3.7",
     "reactotron-react-native": "^5.0.0"
   },
-  "private": false
+  "private": false,
+  "proxy": "http://localhost:3002"
 }
