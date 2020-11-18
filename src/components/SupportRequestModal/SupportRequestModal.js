@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState} from 'react';
 
 import Header from './../FormComponents/Header/Header.js';
 import Form from './../FormComponents/Form/Form.js';
@@ -11,9 +11,118 @@ import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Button,
 
 import { Reactotron } from './../../config/reactotron.dev.js';
 
+const isDev = __DEV__;
+
 const SupportRequestModal = ({ appWidth, districtPosition, site, renderAsStudent, showRequestModal, setShowRequestModal }) => {
+    let [ isLoading, setIsLoading ]     = useState(false);
+    
+    let [ isRequestSuccessful, setIsRequestSuccessful ] = useState(null);
+
+    let [ submitEnabled, setSubmitEnabled ] = useState(false);
 
     const { handleSubmit, register, setValue, getValues, errors } = useForm();
+    
+    const submitTicket = () => {
+        let submitReqResponse = "";
+
+        let formField = getValues();
+
+        if (submitEnabled && (isLoading === false) ) {
+            setIsLoading(true);
+    
+            // window.alert(JSON.stringify(formField));
+        
+            setSubmitEnabled(false);
+    
+            let {     
+                supportRequestTitle,
+                category,
+                description,
+                location,
+                phoneExt,
+                room,
+                attachment 
+            } = formField;
+        
+            let supportReqDetails = {
+                fullName,
+                email,
+                supportRequestTitle,
+                category,
+                description,
+                location,
+                phoneExt,
+                room
+            }
+        
+            const submitRequest_URL = `${isDev ? "" : "/server"}/helpdesk/request/create`;
+            const submitRequest_headers = {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                "Access-Control-Allow-Credentials": true
+            };
+        
+            submitReqResponse = await fetch(submitRequest_URL, {
+                method: 'POST',
+                headers: submitRequest_headers,
+                body: JSON.stringify({ ...supportReqDetails} )
+            })
+            .then((serverResponse) => serverResponse.json()) //Parse the JSON of the response
+            .then((jsonResponse) => jsonResponse)
+            .catch((error) => {
+                console.error(`Catching error:\t ${error}`);
+            });
+        
+            //window.alert(JSON.stringify(submitReqResponse));
+        
+    
+            if (submitReqResponse) {
+                const responseStatus = submitReqResponse["response_status"].status;
+        
+                setIsLoading(false);
+    
+                notify(
+                        <HelpdeskSubmitMessage
+                        districtPosition    =   { districtPosition }
+                        message             =   "Helpdesk Request Submitted"
+                        icon                =   { faTicketAlt }
+                        />
+                );
+        
+                // window.alert("responseStatus:\t", responseStatus);
+        
+                if (responseStatus === "success") {
+        
+                    setIsRequestSuccessful(true);
+        
+                    setTimeout(() => {
+                             //Reset the form field after submitting.
+        
+                        toggleModal(false);
+                        
+                        setFormField({
+                            supportRequestTitle :   "",
+                            category            :   "",
+                            description         :   "",
+                            location            :   "",
+                            phoneExt            :   "",
+                            room                :   "",
+                            attachment          :   "",
+                        });
+                    }, 800);
+               
+                } else {
+                    setIsRequestSuccessful(false);
+                }
+        
+            }
+        } else{
+            console.log("Submitting duplicate tickets prohibited.");
+        }
+     
+    
+        return submitReqResponse;
+    };
 
     const onSubmit = (formValues) => {
         Reactotron.log("onSubmit():\t", formValues);
