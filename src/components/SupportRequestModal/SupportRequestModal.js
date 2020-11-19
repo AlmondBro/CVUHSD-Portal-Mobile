@@ -22,7 +22,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, site, renderAsStudent
 
     const { handleSubmit, register, setValue, getValues, errors } = useForm();
     
-    const submitTicket = () => {
+    const submitTicket = async () => {
         let submitReqResponse = "";
 
         let formField = getValues();
