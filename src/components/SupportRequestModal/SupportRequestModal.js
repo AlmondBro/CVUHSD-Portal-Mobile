@@ -13,7 +13,7 @@ import { Reactotron } from './../../config/reactotron.dev.js';
 
 const isDev = __DEV__;
 
-const SupportRequestModal = ({ appWidth, districtPosition, site, renderAsStudent, showRequestModal, setShowRequestModal }) => {
+const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPosition, site, renderAsStudent, showRequestModal, setShowRequestModal }) => {
     let [ isLoading, setIsLoading ]     = useState(false);
     
     let [ isRequestSuccessful, setIsRequestSuccessful ] = useState(null);
@@ -33,6 +33,8 @@ const SupportRequestModal = ({ appWidth, districtPosition, site, renderAsStudent
             // window.alert(JSON.stringify(formField));
         
             setSubmitEnabled(false);
+
+            const fullName = firstName + " " + lastName;
     
             let {     
                 title,
@@ -47,11 +49,11 @@ const SupportRequestModal = ({ appWidth, districtPosition, site, renderAsStudent
             let supportReqDetails = {
                 fullName,
                 email,
-                supportRequestTitle,
+                title: {...title} ,
                 category,
                 description,
                 location,
-                phoneExt,
+                phoneExt: {...phoneNumber},
                 room
             }
         
@@ -75,19 +77,21 @@ const SupportRequestModal = ({ appWidth, districtPosition, site, renderAsStudent
         
             //window.alert(JSON.stringify(submitReqResponse));
         
+            Reactotron.log("submitReqResponse:\t", submitReqResponse);
     
             if (submitReqResponse) {
                 const responseStatus = submitReqResponse["response_status"].status;
         
                 setIsLoading(false);
     
-                notify(
-                        <HelpdeskSubmitMessage
-                        districtPosition    =   { districtPosition }
-                        message             =   "Helpdesk Request Submitted"
-                        icon                =   { faTicketAlt }
-                        />
-                );
+                // notify(
+                //         <HelpdeskSubmitMessage
+                //         districtPosition    =   { districtPosition }
+                //         message             =   "Helpdesk Request Submitted"
+                //         icon                =   { faTicketAlt }
+                //         />
+                // );
+
         
                 // window.alert("responseStatus:\t", responseStatus);
         
@@ -126,6 +130,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, site, renderAsStudent
 
     const onSubmit = (formValues) => {
         Reactotron.log("onSubmit():\t", formValues);
+        submitTicket();
     }; 
 
     const inputColorsTheme  = {

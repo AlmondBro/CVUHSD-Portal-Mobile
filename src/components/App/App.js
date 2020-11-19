@@ -1,6 +1,6 @@
 //Import React/React Native modules
 import React, { Fragment, Component } from 'react';
-import { ImageBackground, Alert, Platform } from 'react-native';
+import { Alert, Platform } from 'react-native';
 
 //Import expo/react native components that now exist as separate packages
 import { StatusBar } from 'expo-status-bar';
@@ -429,6 +429,9 @@ class App extends Component {
                                     {   this.state.title ? 
                                         <TabsFooter 
                                             appWidth                =   { this.state.appWidth }
+                                            email                   =   { this.state.email }
+                                            firstName               =   { this.state.firstName }
+                                            lastName                =   { this.state.lastName }
                                             title                   =   { this.state.title}
                                             site                    =   { this.state.site }
                                             renderAsStudent         =   { this.state.renderAsStudent }
