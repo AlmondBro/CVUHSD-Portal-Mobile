@@ -18,7 +18,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
     
     let [ isRequestSuccessful, setIsRequestSuccessful ] = useState(null);
 
-    let [ submitEnabled, setSubmitEnabled ] = useState(false);
+    let [ submitEnabled, setSubmitEnabled ] = useState(true);
 
     const { handleSubmit, register, setValue, getValues, errors } = useForm();
     
@@ -28,6 +28,8 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
         let formField = getValues();
 
         if (submitEnabled && (isLoading === false) ) {
+
+            console.log("Submitting a ticket");
             setIsLoading(true);
     
             // window.alert(JSON.stringify(formField));
@@ -57,7 +59,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                 room
             }
         
-            const submitRequest_URL = `${isDev ? "" : "/server"}/helpdesk/request/create`;
+            const submitRequest_URL = `${isDev ? "http://localhost:3002" : "/server"}/helpdesk/request/create`;
             const submitRequest_headers = {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
@@ -77,7 +79,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
         
             //window.alert(JSON.stringify(submitReqResponse));
         
-            Reactotron.log("submitReqResponse:\t", submitReqResponse);
+            console.log("submitReqResponse:\t", submitReqResponse);
     
             if (submitReqResponse) {
                 const responseStatus = submitReqResponse["response_status"].status;
@@ -130,7 +132,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
 
     const onSubmit = (formValues) => {
         Reactotron.log("onSubmit():\t", formValues);
-        submitTicket();
+        return submitTicket();
     }; 
 
     const inputColorsTheme  = {

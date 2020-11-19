@@ -22,7 +22,7 @@ const Form = ({ register, errors, setValue, getValues, validation, children }) =
                 (children.length > 1)
                     ? [ ...children ].map((child, i) => {
 
-                                console.log("child.props:\t", child.props);
+                                // console.log("child.props:\t", child.props);
                                 return child.props.name ? (
                                     <Input
                                         ref             =   { (instance) => { Inputs.current[i] = instance; }}
@@ -35,7 +35,7 @@ const Form = ({ register, errors, setValue, getValues, validation, children }) =
                                                                                 : Inputs.current[i + 1].focus() 
                                                                         :   Inputs.current[i].blur()
 
-                                                                        console.log("child props:\t", child.props);
+                                                                        // console.log("child props:\t", child.props);
                                                                 }
                                                             }
                                         blurOnSubmit    =   { false }
