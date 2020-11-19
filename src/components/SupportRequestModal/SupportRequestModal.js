@@ -35,11 +35,11 @@ const SupportRequestModal = ({ appWidth, districtPosition, site, renderAsStudent
             setSubmitEnabled(false);
     
             let {     
-                supportRequestTitle,
+                title,
                 category,
                 description,
                 location,
-                phoneExt,
+                phoneNumber,
                 room,
                 attachment 
             } = formField;

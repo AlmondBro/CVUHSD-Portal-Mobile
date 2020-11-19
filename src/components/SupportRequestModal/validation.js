@@ -24,7 +24,7 @@ export default {
       }
     },
 
-    phoneNumber: { 
+    roomNumber: { 
       required: {   
         value: true,  
         message: 'Location is required'
