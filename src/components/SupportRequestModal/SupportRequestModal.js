@@ -252,7 +252,7 @@ const SupportRequestModal = ({ appWidth, districtPosition, site, renderAsStudent
 
                                     usePicker           =   { true }
                                     pickerPlaceHolder   =   { pickerPlaceHolder("Choose an issues category...") }
-                                    value               =   { (districtPosition === "Student") ? site :  null}
+                                 
                                     items               =   { categories }
                                     noOuterLabel        =   { false }
                                 />
