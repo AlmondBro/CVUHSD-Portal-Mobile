@@ -117,6 +117,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                                 //Reset the form field after submitting.
         
                         setShowRequestModal(false);
+                        setSubmitEnabled(true);
                         
                         setValue("supportRequestTitle", null);
                         setValue("category", null);
@@ -129,6 +130,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                 
                 } else {
                     setIsRequestSuccessful(false);
+                    setSubmitEnabled(true);
 
                     Alert.alert(
                         "Error Submitting", 
