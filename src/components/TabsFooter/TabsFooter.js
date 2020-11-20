@@ -6,10 +6,12 @@ import { FontAwesome } from '@expo/vector-icons';
 import ChangePassword  from './../ChangePassword/ChangePassword.js';
 import ChangePasswordIcon from './../../assets/images/icons/change-password.svg';
 
-//Import styled components
-import { TabsFooterContainerView, TabsFooterButton}  from './TabsFooter_StyledComponents.js';
+import SupportRequestModal  from './../SupportRequestModal/SupportRequestModal.js';
 
-const TabsFooter = ({ renderAsStudent, setRenderAsStudent, isModalVisible, setIsModalVisible, title, logOut }) => {    
+//Import styled components
+import { TabsFooterContainerView, TabsFooterButton }  from './TabsFooter_StyledComponents.js';
+
+const TabsFooter = ({ appWidth, email, firstName, lastName, renderAsStudent, site, setRenderAsStudent, isModalVisible, showRequestModal, setIsModalVisible, setShowRequestModal, showPasswordModal, setShowPasswordModal, title, logOut }) => {    
     return (
         <TabsFooterContainerView 
             title   =   { title }    
@@ -22,12 +24,12 @@ const TabsFooter = ({ renderAsStudent, setRenderAsStudent, isModalVisible, setIs
                             renderAsStudent =   { renderAsStudent }
                             title           =   { title }    
                             activeOpacity   =   { 0.5 }
-                            onPress         =   { () => setIsModalVisible(!isModalVisible) }
+                            onPress         =   { () => setShowPasswordModal(!showPasswordModal) }
                             noBorder    
                         >
                             <ChangePasswordIcon 
-                                width={95} 
-                                height={30}
+                                width   =   { 95 } 
+                                height  =   { 30 }
                             />
                         </TabsFooterButton>
 
@@ -48,6 +50,21 @@ const TabsFooter = ({ renderAsStudent, setRenderAsStudent, isModalVisible, setIs
                 )
                 : null
             } 
+
+
+            <TabsFooterButton
+                renderAsStudent =   {  renderAsStudent }
+                title           =   {   title }    
+                activeOpacity   =   {   0.5 }
+                onPress         =   { () => setShowRequestModal(true) }
+                noBorder        
+            >
+                <FontAwesome 
+                    name    =   "ticket" 
+                    size    =   {   30  } 
+                    color   =   "white" 
+                />
+            </TabsFooterButton>
           
             <TabsFooterButton
                 renderAsStudent =   {  renderAsStudent }
@@ -68,14 +85,29 @@ const TabsFooter = ({ renderAsStudent, setRenderAsStudent, isModalVisible, setIs
                 (title !== "Student") ? 
                     (
                         <ChangePassword 
-                            isModalVisible      =   {   isModalVisible  }
-                            setIsModalVisible   =   {   setIsModalVisible   }
-                            title               =   {   title   }
-                            renderAsStudent     =   {   renderAsStudent }
+                            appWidth                =   {   appWidth }
+                            districtPosition        =   {   title   }
+                            site                    =   {  site }
+                            renderAsStudent         =   {   renderAsStudent }
+ 
+                            showPasswordModal       =   { showPasswordModal }
+                            setShowPasswordModal    =   { setShowPasswordModal }    
                         />
                     )
                     : null
             }
+            <SupportRequestModal
+                appWidth            =   {   appWidth }
+                email               =   { email }
+                firstName           =   { firstName }
+                lastName            =   { lastName }
+                districtPosition    =   {   title   }
+                site                =   {  site }
+                renderAsStudent     =   {   renderAsStudent }
+
+                showRequestModal    =   {   showRequestModal }
+                setShowRequestModal =   {   setShowRequestModal }
+            />
         </TabsFooterContainerView>
     ); //end return statement
 }; //end TabsFooter()

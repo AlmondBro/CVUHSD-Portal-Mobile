@@ -1,9 +1,4 @@
-import React from 'react';
 import styled from 'styled-components/native';
-
-import { TouchableOpacity } from 'react-native';
-
-// import BlueSectionContainer from './../App/App_StyledComponents.js';
 
 let HomeScreenContainerView = styled.View`
     flex: 1;
@@ -48,61 +43,4 @@ let OpenSSOContainer = styled(BlueSectionContainer)`
     align-items: center;
 `;
 
-const SignInButtonView = styled.View`
-    background-color: white;
-    color: ${props => (props.title === "Student" || props.renderAsStudent) ? "#B41A1F" : "#1E6C93" };
-
-    border-radius: 15;
-
-    width: 120;
-    flex-direction: row;
-    justify-content: center;
-    padding-top: 10;
-    padding-bottom: 10;
-`;
-
-const SignInButtonText= styled.Text`
-    color: ${props => (props.title === null) 
-                    ? "#B41A1F" : 
-                        (props.title === "Student" || props.renderAsStudent) 
-                        ? "#B41A1F" : "#1E6C93" 
-            };
-
-    font-family: 'SourceSansPro_600SemiBold';
-    /* 'SourceSansPro_400Regular','SourceSansPro_200ExtraLight', 'SourceSansPro_200ExtraLight_Italic','SourceSansPro_300Light','SourceSansPro_300Light_Italic','SourceSansPro_400Regular_Italic','SourceSansPro_600SemiBold', 'SourceSansPro_600SemiBold_Italic','SourceSansPro_700Bold','SourceSansPro_700Bold_Italic', 'SourceSansPro_900Black', 'SourceSansPro_900Black_Italic'; */
-
-    font-size: 20;
-    font-weight: bold;
-    flex-direction: row;
-
-    justify-content: center;
-`;
-
-const SignInButtonTouchableOpacity = ({ renderAsStudent, title, ...props }) => {
-    return (
-        <TouchableOpacity
-            activeOpacity={0.5}
-            onPress={ props.onPress }
-        >
-            <SignInButtonView
-                title           =   { title }
-                renderAsStudent =   { renderAsStudent } 
-            >
-                {   (props.buttonTitle && !props.children) ? 
-                    (
-                        <SignInButtonText
-                            title           =   { title }
-                            renderAsStudent =   { renderAsStudent } 
-                        >
-                            { props.buttonTitle || "Sign In" }
-                        </SignInButtonText>
-                    )   : null
-                }
-                { props.children }
-            </SignInButtonView>
-        </TouchableOpacity>
-    ); //end return
-}; //SignInButtonTouchableOpacity
-
-
-export { HomeScreenContainerView, AppHeaderContainerView, WelcomeText, BlueSectionContainer, OpenSSOContainer, SignInButtonTouchableOpacity };
+export { HomeScreenContainerView, AppHeaderContainerView, WelcomeText, BlueSectionContainer, OpenSSOContainer };

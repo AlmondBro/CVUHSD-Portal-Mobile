@@ -1,6 +1,6 @@
 //Import React/React Native modules
 import React, { Fragment, Component } from 'react';
-import { ImageBackground, Alert, Platform } from 'react-native';
+import { Alert, Platform } from 'react-native';
 
 //Import expo/react native components that now exist as separate packages
 import { StatusBar } from 'expo-status-bar';
@@ -67,7 +67,9 @@ class App extends Component {
             portalLogoSource    :   Images.appHeader.portalLogoRed,
             backgroundImage     :   Images.appHeader.backgroundImageRed ,
             
-            isModalVisible      :   false,
+            showRequestModal    :   false,
+            showPasswordModal   :   false,   
+
             authLoading         :   null,
             fontLoaded          :   true
         }; //end this.state object
@@ -234,11 +236,19 @@ class App extends Component {
 
         this.setState({portalLogoSource: portalLogoSource, backgroundImage: backgroundImage});
         this.setLogOnUserData({...this.state });
+
+        return;
     }; //end setRenderAsStudent
 
-    setIsModalVisible = (isModalVisible) => {
-        this.setState( { isModalVisible: isModalVisible } );
+    setShowRequestModal = (showRequestModal) => {
+        this.setState( { showRequestModal: showRequestModal } );
+        return;
     }; //end setRenderAsStudent
+
+    setShowPasswordModal = (showPasswordModal) => {
+        this.setState({ showPasswordModal : showPasswordModal} );
+        return;
+    }; 
 
     setLogOnUserData = async (userDataObject) => {
         try {
@@ -418,12 +428,25 @@ class App extends Component {
                                     </Navigator>
                                     {   this.state.title ? 
                                         <TabsFooter 
-                                            title               =   { this.state.title}
-                                            renderAsStudent     =   { this.state.renderAsStudent }
-                                            isModalVisible      =   { this.state.isModalVisible }
-                                            setIsModalVisible   =   { this.setIsModalVisible }
-                                            setRenderAsStudent  =   { this.setRenderAsStudent }
-                                            logOut              =   { this.clearLogOnUserData }
+                                            appWidth                =   { this.state.appWidth }
+                                            email                   =   { this.state.email }
+                                            firstName               =   { this.state.firstName }
+                                            lastName                =   { this.state.lastName }
+                                            title                   =   { this.state.title}
+                                            site                    =   { this.state.site }
+                                            renderAsStudent         =   { this.state.renderAsStudent }
+
+                                            isModalVisible          =   { this.state.isModalVisible }
+                                            showRequestModal        =   { this.state.showRequestModal }
+
+                                            setIsModalVisible       =   { this.setIsModalVisible }
+                                            setShowRequestModal     =   { this.setShowRequestModal }
+
+                                            setShowPasswordModal    =   {  this.setShowPasswordModal }
+                                            showPasswordModal       =   {  this.state.showPasswordModal } 
+
+                                            setRenderAsStudent      =   { this.setRenderAsStudent }
+                                            logOut                  =   { this.clearLogOnUserData }
                                         />
                                         : null    
                                     } 

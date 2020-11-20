@@ -1,9 +1,13 @@
 import React from 'react';
 import { registerRootComponent } from 'expo';
 
+import 'react-native-gesture-handler';
+
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import App from './components/App/App.js';
+
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
 if (__DEV__) {
     //Initialize Reactotron
@@ -12,14 +16,27 @@ if (__DEV__) {
 
 console.disableYellowBox = true;
 
-const SafeProvidedApp = () => {
+const theme = {
+    ...DefaultTheme,
+    roundness: 10,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: '#6200ee',
+      accent: 'yellow',
+    },
+  };
+
+const AppWithProviders = () => {
     return (
-        <SafeAreaProvider>
-            <App/>
-        </SafeAreaProvider>
+        <PaperProvider theme={theme}>
+            <SafeAreaProvider>
+                <App/>
+            </SafeAreaProvider>
+        </PaperProvider>
+       
     ); //end return statement
 }; //end SafeProvidedAp
 
-registerRootComponent(SafeProvidedApp);
+registerRootComponent(AppWithProviders);
 
 
