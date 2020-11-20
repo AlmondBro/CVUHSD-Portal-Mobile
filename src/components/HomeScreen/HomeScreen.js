@@ -1,7 +1,9 @@
 import React from 'react';
 import { ImageBackground, ActivityIndicator } from 'react-native';
 
-import { HomeScreenContainerView, OpenSSOContainer, SignInButtonTouchableOpacity } from './HomeScreen_StyledComponents.js';
+import { HomeScreenContainerView, OpenSSOContainer } from './HomeScreen_StyledComponents.js';
+
+import TouchableButton from './../TouchableButton/TouchableButton.js';
 
 const HomeScreen = ({ renderAsStudent, title, authLoading, openADSingleSignOn, children }) => {
     const backgroundImage = require('./../../assets/images/theCVway-white.png');
@@ -22,13 +24,13 @@ const HomeScreen = ({ renderAsStudent, title, authLoading, openADSingleSignOn, c
                     title           =   { title }
                     renderAsStudent =   { renderAsStudent } 
                 >
-                    <SignInButtonTouchableOpacity 
-                        buttonTitle     =   "Sign In" 
-                        color           =   "white"
-                        onPress         =   { openADSingleSignOn || console.log("No onPress function")}
+                    <TouchableButton 
+                        buttonTitle         =   "Sign In" 
+                        color               =   "white"
+                        onPress             =   { openADSingleSignOn || console.log("No onPress function")}
 
-                        title           =   { title }
-                        renderAsStudent =   { renderAsStudent } 
+                        districtPosition    =   { title }
+                        renderAsStudent     =   { renderAsStudent } 
                     >
                     {
                         authLoading ? (
@@ -44,7 +46,7 @@ const HomeScreen = ({ renderAsStudent, title, authLoading, openADSingleSignOn, c
                             )
                             : null
                     } 
-                    </SignInButtonTouchableOpacity>
+                    </TouchableButton>
                     { children }
                 </OpenSSOContainer> 
             </ImageBackground>

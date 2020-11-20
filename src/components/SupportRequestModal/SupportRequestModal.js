@@ -7,6 +7,8 @@ import Input from './../FormComponents/Form/Input/Input.js';
 
 import SubmitFooterContainer from './../FormComponents/SubmitFooterContainer/SubmitFooterContainer.js';
 
+import TouchableButton from './../TouchableButton/TouchableButton.js';
+
 import { useForm } from 'react-hook-form';
 import validation from './validation.js';
 
@@ -412,7 +414,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                                 districtPosition    =   { districtPosition } 
                                 renderAsStudent     =   { renderAsStudent }
                             />
-                            <Button 
+                            <TouchableButton 
                                 buttonTitle       =   "Submit" 
                                 onPress           =   {  handleSubmit(onSubmit) } 
 
