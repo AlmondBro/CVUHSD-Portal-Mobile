@@ -53,7 +53,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                 description,
                 location,
                 phoneExt,
-                roo
+                room
             }
         
             const submitRequest_URL = `${isDev ? `http://${IP_ADDRESS_DEV}:3002` : "/server"}/helpdesk/request/create`;

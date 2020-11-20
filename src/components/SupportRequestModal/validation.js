@@ -24,7 +24,7 @@ export default {
       }
     },
 
-    phone: { 
+    phoneExt: { 
       required: {   
         value: true,  
         message: 'Location is required'
