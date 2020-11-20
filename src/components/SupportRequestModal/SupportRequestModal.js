@@ -430,7 +430,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                                                                 : (districtPosition === "Student" || renderAsStudent) 
                                                                     ? "#B41A1F" : "#1E6C93" 
                                                             } 
-                                            animating   =   { authLoading  }
+                                            animating   =   { isLoading  }
                                         />
                                         )
                                         : null
