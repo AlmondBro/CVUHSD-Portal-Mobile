@@ -415,9 +415,12 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                                 renderAsStudent     =   { renderAsStudent }
                             />
                             <TouchableButton 
-                                buttonTitle       =   "Submit" 
-                                onPress           =   {  handleSubmit(onSubmit) } 
+                                buttonTitle         =   "Submit" 
+                                onPress             =     {  handleSubmit(onSubmit) } 
 
+                                color               =   "white"         
+                                bgColor             =   { (districtPosition === "Student" || renderAsStudent) ? "#B41A1F" : "#1E6C93"}
+                               
                                 districtPosition    =   { districtPosition } 
                                 renderAsStudent     =   { renderAsStudent }
                             >

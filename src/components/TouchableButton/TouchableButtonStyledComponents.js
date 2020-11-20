@@ -1,8 +1,8 @@
 import styled from 'styled-components/native';
 
 const Container = styled.View`
-    background-color: white;
-    color: ${props => (props.districtPosition === "Student" || props.renderAsStudent) ? "#B41A1F" : "#1E6C93" };
+    background-color: ${props => props.bgColor || "white"};
+    color: ${props => props.color || (props.districtPosition === "Student" || props.renderAsStudent) ? "#B41A1F" : "#1E6C93" };
 
     border-radius: 15;
 
@@ -14,7 +14,7 @@ const Container = styled.View`
 `;
 
 const Text= styled.Text`
-    color: ${props => (props.districtPosition === null) 
+    color: ${props => props.color || (props.districtPosition === null) 
                     ? "#B41A1F" : 
                         (props.districtPosition === "Student" || props.renderAsStudent) 
                         ? "#B41A1F" : "#1E6C93" 

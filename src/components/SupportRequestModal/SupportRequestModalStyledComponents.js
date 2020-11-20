@@ -66,7 +66,7 @@ const Divider = styled.View`
 
     margin: auto;
     margin-top: 10;
-    margin-bottom: 10;
+    margin-bottom: 30;
 
     background-color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
 `;

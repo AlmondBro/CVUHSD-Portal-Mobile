@@ -27,7 +27,7 @@ export default {
     phoneExt: { 
       required: {   
         value: true,  
-        message: 'Location is required'
+        message: 'Phone number is required'
       },
       pattern: {
         value: /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/,

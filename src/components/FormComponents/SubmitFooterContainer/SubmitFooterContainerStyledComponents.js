@@ -3,16 +3,14 @@ import styled from 'styled-components/native';
 const Container = styled.View`
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
 
     position: absolute; 
-    bottom: 0;
+    bottom: 15;
    
     width:  100%;
 
     margin-top: 150;
-
-    background-color:  red;
 `;
 
 export { Container };
