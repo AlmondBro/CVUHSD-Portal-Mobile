@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import  { Dimensions } from 'react-native';
 
-import { HeaderContainer } from  './SubmitFooterContainerStyledComponents.js';
+import { Container } from  './SubmitFooterContainerStyledComponents.js';
 
 const SubmitFooterContainer = ({ districtPosition, renderAsStudent, children }) => {
     const [ headerHeight, setFooterHeight ]  = useState(0);
@@ -18,7 +18,7 @@ const SubmitFooterContainer = ({ districtPosition, renderAsStudent, children }) 
     }, [ headerHeight ]);
 
     return (
-        <HeaderContainer
+        <Container
             districtPosition    =   { districtPosition } 
             renderAsStudent     =   { renderAsStudent }
 
@@ -27,7 +27,7 @@ const SubmitFooterContainer = ({ districtPosition, renderAsStudent, children }) 
             onLayout            =   { onLayout }
         >
             { children }
-        </HeaderContainer>
+        </Container>
     ); //end return statement
 }; //end Header()
 
