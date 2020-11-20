@@ -1,5 +1,5 @@
 export default {
-    title: { 
+  supportRequestTitle: { 
             required: {   
               value: true,  
               message: 'Title is required'
@@ -24,14 +24,7 @@ export default {
       }
     },
 
-    roomNumber: { 
-      required: {   
-        value: true,  
-        message: 'Location is required'
-      }
-    },
-
-    phoneNumber: { 
+    phone: { 
       required: {   
         value: true,  
         message: 'Location is required'
@@ -41,21 +34,4 @@ export default {
         message: "Number format: (XXX) XXX-XXXX"
       }
     },
-
-    // roomNumber: { 
-    //   required: {   
-    //     value: false,  
-    //   }
-    // },
-
-    email: {
-      required: {value: true, message: 'Email is required'},
-      pattern: {
-        value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        message: 'Invalid Email Format',
-      },
-    },
-    password: {
-      required: {value: true, message: 'Password is required'},
-    },
-  };
+};

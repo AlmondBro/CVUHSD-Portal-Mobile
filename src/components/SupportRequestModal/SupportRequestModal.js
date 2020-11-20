@@ -1,5 +1,5 @@
 import React, { useState} from 'react';
-import Alert from 'react-native';
+import { Alert } from 'react-native';
 
 import Header from './../FormComponents/Header/Header.js';
 import Form from './../FormComponents/Form/Form.js';
@@ -15,17 +15,13 @@ import { Reactotron } from './../../config/reactotron.dev.js';
 const isDev = __DEV__;
 
 const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPosition, site, renderAsStudent, showRequestModal, setShowRequestModal }) => {
-    let [ isLoading, setIsLoading ]     = useState(false);
-    
-    let [ isRequestSuccessful, setIsRequestSuccessful ] = useState(null);
+    let [ isLoading, setIsLoading ]                                 = useState(false);
+    let [ isRequestSuccessful, setIsRequestSuccessful ]             = useState(null);
+    let [ submitEnabled, setSubmitEnabled ]                         = useState(true);
 
-    let [ submitEnabled, setSubmitEnabled ] = useState(true);
-
-    const { handleSubmit, register, setValue, getValues, errors } = useForm();
+    const { handleSubmit, register, setValue, getValues, errors }   = useForm();
     
     const IP_ADDRESS_DEV = "10.2.50.36";
-
-    const { alert } = Alert;
 
     const submitTicket = async () => {
         let submitReqResponse = "";
@@ -33,35 +29,31 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
         let formField = getValues();
 
         if (submitEnabled && (isLoading === false) ) {
-
-            console.log("Submitting a ticket");
             setIsLoading(true);
     
-            // window.alert(JSON.stringify(formField));
         
             setSubmitEnabled(false);
 
             const fullName = firstName + " " + lastName;
     
             let {     
-                title,
+                supportRequestTitle,
                 category,
                 description,
                 location,
-                phoneNumber,
-                room,
-                attachment 
+                phoneExt,
+                room, 
             } = formField;
         
             let supportReqDetails = {
                 fullName,
                 email,
-                supportRequestTitle: {...title} ,
+                supportRequestTitle,
                 category,
                 description,
                 location,
-                phoneExt: {...phoneNumber},
-                room
+                phoneExt,
+                roo
             }
         
             const submitRequest_URL = `${isDev ? `http://${IP_ADDRESS_DEV}:3002` : "/server"}/helpdesk/request/create`;
@@ -80,7 +72,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
             .then((jsonResponse) => jsonResponse)
             .catch((error) => {
                 console.error(`Catching error:\t ${error}`);
-                alert(
+                Alert.alert(
                     "Error on Submit", 
                     `${error}`, 
                     [
@@ -105,9 +97,9 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
         
                     setIsRequestSuccessful(true);
 
-                    alert(
+                    Alert.alert(
                         "Submission Successful", 
-                        `${error}`, 
+                        `Helpdesk Ticket submitted`, 
                         [
                             {
                                 text: "OK",
@@ -121,33 +113,31 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                         setShowRequestModal(false);
                         
                         setValue({
-                            title               :   "",
-                            category            :   "",
-                            description         :   "",
-                            location            :   "",
-                            roomNumber          :   "",
-                            phoneNumber         :   "",
+                            supportRequestTitle :   null,
+                            category            :   null,
+                            description         :   null,
+                            location            :   null,
+                            phoneNumber         :   null,
+                            roomNumber          :   null,
                         });
                     }, 800);
                
                 } else {
                     setIsRequestSuccessful(false);
 
-                    alert(
+                    Alert.alert(
                         "Error Submitting", 
-                        `Error submitting ticket`, 
+                        `Error submitting ticket. Please try again`, 
                         [
                             {
                                 text: "OK",
                             }
                         ]
                     ); //end alert() call
-                }
-        
-            }
+                } //end inner-else statement
+            } //end outer if-statement, checking to see if there is a response
         } else{
-
-            alert(
+            Alert.alert(
                 "Duplicate Ticket", 
                 "Submitting duplicate tickets prohibited", 
                 [
@@ -182,32 +172,33 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
     }; //end inputColorsTheme
 
     const staffCategories = [
-        { label: "Computer Issue", value: "Computer Issue" },
-        { label: "Printer Issue", value: "Printer Issue" },
-        { label: "Projector Issue", value: "Projector Issue"},
-        { label: "Password Issue", value: "Password Issue"},
-        { label: "Canvas", value: "Canvas" },
-        { label: "PowerSchool", value: "PowerSchool"},
-        { label: "Illuminate", value: "Illuminate"},
-        { label: "Google", value: "Google"},
-        { label: "Wi-fi Issue", value: "Wi-fi Issue"},
-        { label: "Eno Pen -- Board", value: "Eno Pen -- Board"},
-        { label: "Software Installation", value: "Software Installation" },
-        { label: "Student Chromebook", value: "Student Chromebook"},
-        { label: "Phone Issue", value: "Phone Issue"},
-        { label: "Other", value: "Other"}
+        { label: "Computer Issue", value: "Computer Issue", color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" },
+        { label: "Printer Issue", value: "Printer Issue", color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" },
+        { label: "Projector Issue", value: "Projector Issue", color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"},
+        { label: "Password Issue", value: "Password Issue", color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"},
+        { label: "Canvas", value: "Canvas", color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" },
+        { label: "PowerSchool", value: "PowerSchool", color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"},
+        { label: "Illuminate", value: "Illuminate", color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"},
+        { label: "Google", value: "Google", color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"},
+        { label: "Wi-fi Issue", value: "Wi-fi Issue", color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"},
+        { label: "Eno Pen -- Board", value: "Eno Pen -- Board", color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"},
+        { label: "Software Installation", value: "Software Installation", color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" },
+        { label: "Student Chromebook", value: "Student Chromebook", color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"},
+        { label: "Phone Issue", value: "Phone Issue", color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"},
+        { label: "Other", value: "Other", color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"}
     ];
 
     const studentCategories = [
-        { label: "Password Issue", value: "Password Issue"},
-        { label: "Canvas", value: "Canvas" },
-        { label: "PowerSchool", value: "PowerSchool"},
-        { label: "Illuminate", value: "Illuminate"},
-        { label: "Google", value: "Google"},
-        { label: "Wi-fi Issue", value: "Wi-fi Issue"},
-        { label: "Software Installation", value: "Software Installation"},
-        { label: "Student Chromebook", value: "Student Chromebook"},
-        { label: "Other", value: "Other"}
+               
+        { label: "Password Issue", value: "Password Issue", color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" },
+        { label: "Canvas", value: "Canvas", color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" },
+        { label: "PowerSchool", value: "PowerSchool", color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"},
+        { label: "Illuminate", value: "Illuminate", color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"},
+        { label: "Google", value: "Google", color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"},
+        { label: "Wi-fi Issue", value: "Wi-fi Issue", color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"},
+        { label: "Software Installation", value: "Software Installation", color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"},
+        { label: "Student Chromebook", value: "Student Chromebook", color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"},
+        { label: "Other", value: "Other", color: ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"}
     ];
 
     const categories = (districtPosition === "Student") ? studentCategories : staffCategories;
@@ -215,21 +206,53 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
     const locations =   (districtPosition === "Student") ? [ {
         label: site, 
         value: site
-    } ] :
-    [   { label: "Lawndale High School", value: "Lawndale High School" }, 
-        { label: "Leuzinger High School", value: "Leuzinger High School" }, 
-        { label: "Hawthorne High School", value: "Hawthorne High School"}, 
-        { label: "District Office", value: "District Office"}, 
-        { label: "Lloyde High School", value: "Lloyde High School"}, 
-        { label: "CV Independent Study", value: "CV Independent Study"}, 
-        { label: "Service Center", value: "Service Center"}
-    ];
+    } ] : [   
+            {   label: "Lawndale High School", 
+                value: "Lawndale High School", 
+                color:  ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
+            }, 
+            { 
+                label: "Leuzinger High School", 
+                value: "Leuzinger High School",
+                color:  ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
+            }, 
+            { 
+                label: "Hawthorne High School", 
+                value: "Hawthorne High School",
+                color:  ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
+            }, 
+            { 
+                label: "District Office", 
+                value: "District Office", 
+                color:  ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
+            }, 
+            { 
+                label: "Lloyde High School", 
+                value: "Lloyde High School",
+                color:  ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
+            }, 
+            { 
+                label: "CV Independent Study", 
+                value: "CV Independent Study",
+                color:  ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
+            }, 
+            { 
+                label: "Service Center", 
+                value: "Service Center", 
+                color:  ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
+            }
+        ];
 
     const pickerPlaceHolder = (pickerText) => ({
             label:  (pickerText || 'Select a category type...') ,
             value: null,
             color:  ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
     });
+
+    const onModalDismiss = () => {
+        setShowRequestModal(false);
+        setSubmitEnabled(true);
+    }; //end onModalDismiss()
            
     return (
             <ModalStyled 
@@ -240,7 +263,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                 hasBackdrop         =   { false }
                 isVisible           =   { showRequestModal  }  
                 
-                onDismiss           =   { () => setShowRequestModal(false) }
+                onDismiss           =   { onModalDismiss }
                 // onBackdropPress     =   { () => setShowRequestModal(false) }
                 // onSwipeComplete     =   { () => setShowRequestModal(false) }
             >
@@ -264,7 +287,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                                 <Input 
                                     appWidth            =   { appWidth }
 
-                                    name                =   "title" 
+                                    name                =   "supportRequestTitle" 
                                     label               =   "Title:" 
                                     placeHolderText     =   "Support Request Title..."
 
@@ -341,7 +364,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                                 <Input 
                                     appWidth            =   { appWidth }
 
-                                    name                =   "phoneNumber" 
+                                    name                =   "phoneExt" 
                                     label               =   "Phone Number:" 
                                     placeHolderText     =   "XXX-XXX-XXXX"
 
@@ -360,7 +383,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                                 <Input 
                                     appWidth            =   { appWidth }
 
-                                    name                =   "roomNumber" 
+                                    name                =   "room" 
                                     label               =   "Room Number"
                                     placeHolderText     =   "Your room..."
 
