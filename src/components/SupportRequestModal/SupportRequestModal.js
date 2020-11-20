@@ -19,14 +19,14 @@ import { Reactotron } from './../../config/reactotron.dev.js';
 const isDev = __DEV__;
 
 const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPosition, site, renderAsStudent, showRequestModal, setShowRequestModal }) => {
-    let [ isLoading, setIsLoading ]                                 = useState(false);
-    let [ isRequestSuccessful, setIsRequestSuccessful ]             = useState(null);
-    let [ submitEnabled, setSubmitEnabled ]                         = useState(true);
+    let [ isLoading, setIsLoading ]                                             = useState(false);
+    let [ isRequestSuccessful, setIsRequestSuccessful ]                         = useState(null);
+    let [ submitEnabled, setSubmitEnabled ]                                     = useState(true);
 
-    let [ topMargin, setTopMargin ] = useState(0);
-    let [ bottomMargin, setBottomMargin ] = useState(0);
+    let [ topMargin, setTopMargin ]                                             = useState(0);
+    let [ bottomMargin, setBottomMargin ]                                       = useState(0);
 
-    const { handleSubmit, register, setValue, getValues, clearErrors, errors }   = useForm();
+    const { handleSubmit, register, setValue, getValues, clearErrors, errors }  = useForm();
     
     const IP_ADDRESS_DEV = "10.2.50.36";
 
