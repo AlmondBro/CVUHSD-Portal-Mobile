@@ -112,14 +112,13 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
         
                         setShowRequestModal(false);
                         
-                        setValue({
-                            supportRequestTitle :   null,
-                            category            :   null,
-                            description         :   null,
-                            location            :   null,
-                            phoneNumber         :   null,
-                            roomNumber          :   null,
-                        });
+                        setValue("supportRequestTitle", null);
+                        setValue("category", null);
+                        setValue("description", null);
+                        setValue("location", null);
+                        setValue("phoneExt", null);
+                        setValue("room", null);
+                    
                     }, 800);
                
                 } else {
