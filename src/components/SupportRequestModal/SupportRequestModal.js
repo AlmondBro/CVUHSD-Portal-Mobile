@@ -108,14 +108,13 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
         
                         setShowRequestModal(false);
                         
-                        setFormField({
-                            supportRequestTitle :   "",
+                        setValue({
+                            title               :   "",
                             category            :   "",
                             description         :   "",
                             location            :   "",
-                            phoneExt            :   "",
-                            room                :   "",
-                            attachment          :   "",
+                            roomNumber          :   "",
+                            phoneNumber         :   "",
                         });
                     }, 800);
                
