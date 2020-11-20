@@ -444,11 +444,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                                     isLoading ? (
                                         <ActivityIndicator 
                                             size        =   "large" 
-                                            color       =   { (districtPosition === null) 
-                                                                ? "#B41A1F" 
-                                                                : (districtPosition === "Student" || renderAsStudent) 
-                                                                    ? "#B41A1F" : "#1E6C93" 
-                                                            } 
+                                            color       =   "white"
                                             animating   =   { isLoading  }
                                         />
                                         )
