@@ -26,7 +26,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
     let [ topMargin, setTopMargin ] = useState(0);
     let [ bottomMargin, setBottomMargin ] = useState(0);
 
-    const { handleSubmit, register, setValue, getValues, errors }   = useForm();
+    const { handleSubmit, register, setValue, getValues, clearErrors, errors }   = useForm();
     
     const IP_ADDRESS_DEV = "10.2.50.36";
 
@@ -35,53 +35,119 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
 
         let formField = getValues();
 
-        if (submitEnabled && (isLoading === false) ) {
-            setIsLoading(true);
-    
-        
-            setSubmitEnabled(false);
+        if (errors) {
 
-            const fullName = firstName + " " + lastName;
+        } else {
+            if (submitEnabled && (isLoading === false) ) {
+                setIsLoading(true);
+        
+                setSubmitEnabled(false);
     
-            let {     
-                supportRequestTitle,
-                category,
-                description,
-                location,
-                phoneExt,
-                room, 
-            } = formField;
+                const fullName = firstName + " " + lastName;
         
-            let supportReqDetails = {
-                fullName,
-                email,
-                supportRequestTitle,
-                category,
-                description,
-                location,
-                phoneExt,
-                room
-            }
+                let {     
+                    supportRequestTitle,
+                    category,
+                    description,
+                    location,
+                    phoneExt,
+                    room, 
+                } = formField;
+            
+                let supportReqDetails = {
+                    fullName,
+                    email,
+                    supportRequestTitle,
+                    category,
+                    description,
+                    location,
+                    phoneExt,
+                    room
+                }
+            
+                const submitRequest_URL = `${isDev ? `http://${IP_ADDRESS_DEV}:3002` : "/server"}/helpdesk/request/create`;
+                const submitRequest_headers = {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    "Access-Control-Allow-Credentials": true
+                };
+            
+                submitReqResponse = await fetch(submitRequest_URL, {
+                    method: 'POST',
+                    headers: submitRequest_headers,
+                    body: JSON.stringify({ ...supportReqDetails} )
+                })
+                .then((serverResponse) => serverResponse.json()) //Parse the JSON of the response
+                .then((jsonResponse) => jsonResponse)
+                .catch((error) => {
+                    console.error(`Catching error:\t ${error}`);
+                    Alert.alert(
+                        "Error on Submit", 
+                        `${error}`, 
+                        [
+                            {
+                                text: "OK",
+                                style: "cancel"
+                            }
+                        ]
+                    ); //end alert() call
+                });
+            
+                //window.alert(JSON.stringify(submitReqResponse));
+            
+                console.log("submitReqResponse:\t", submitReqResponse);
         
-            const submitRequest_URL = `${isDev ? `http://${IP_ADDRESS_DEV}:3002` : "/server"}/helpdesk/request/create`;
-            const submitRequest_headers = {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                "Access-Control-Allow-Credentials": true
-            };
+                if (submitReqResponse) {
+                    const responseStatus = submitReqResponse["response_status"].status;
+            
+                    setIsLoading(false);
         
-            submitReqResponse = await fetch(submitRequest_URL, {
-                method: 'POST',
-                headers: submitRequest_headers,
-                body: JSON.stringify({ ...supportReqDetails} )
-            })
-            .then((serverResponse) => serverResponse.json()) //Parse the JSON of the response
-            .then((jsonResponse) => jsonResponse)
-            .catch((error) => {
-                console.error(`Catching error:\t ${error}`);
+                    if (responseStatus === "success") {
+            
+                        setIsRequestSuccessful(true);
+    
+                        Alert.alert(
+                            "Submission Successful", 
+                            `Helpdesk Ticket submitted`, 
+                            [
+                                {
+                                    text: "OK",
+                                }
+                            ]
+                        ); //end alert() call
+            
+                        setTimeout(() => {
+                                 //Reset the form field after submitting.
+            
+                            setShowRequestModal(false);
+                            
+                            setValue("supportRequestTitle", null);
+                            setValue("category", null);
+                            setValue("description", null);
+                            setValue("location", null);
+                            setValue("phoneExt", null);
+                            setValue("room", null);
+                        
+                        }, 800);
+                   
+                    } else {
+                        setIsRequestSuccessful(false);
+    
+                        Alert.alert(
+                            "Error Submitting", 
+                            `Error submitting ticket. Please try again`, 
+                            [
+                                {
+                                    text: "OK",
+                                }
+                            ]
+                        ); //end alert() call
+                    } //end inner-else statement
+                } //end outer if-statement, checking to see if there is a response
+            } else{
                 Alert.alert(
-                    "Error on Submit", 
-                    `${error}`, 
+                    "Duplicate Ticket", 
+                    "Submitting duplicate tickets prohibited", 
                     [
                         {
                             text: "OK",
@@ -89,73 +155,11 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                         }
                     ]
                 ); //end alert() call
-            });
+                
+                console.log("Submitting duplicate tickets prohibited.");
+            }
+        } //end outer if-statement
         
-            //window.alert(JSON.stringify(submitReqResponse));
-        
-            console.log("submitReqResponse:\t", submitReqResponse);
-    
-            if (submitReqResponse) {
-                const responseStatus = submitReqResponse["response_status"].status;
-        
-                setIsLoading(false);
-    
-                if (responseStatus === "success") {
-        
-                    setIsRequestSuccessful(true);
-
-                    Alert.alert(
-                        "Submission Successful", 
-                        `Helpdesk Ticket submitted`, 
-                        [
-                            {
-                                text: "OK",
-                            }
-                        ]
-                    ); //end alert() call
-        
-                    setTimeout(() => {
-                             //Reset the form field after submitting.
-        
-                        setShowRequestModal(false);
-                        
-                        setValue("supportRequestTitle", null);
-                        setValue("category", null);
-                        setValue("description", null);
-                        setValue("location", null);
-                        setValue("phoneExt", null);
-                        setValue("room", null);
-                    
-                    }, 800);
-               
-                } else {
-                    setIsRequestSuccessful(false);
-
-                    Alert.alert(
-                        "Error Submitting", 
-                        `Error submitting ticket. Please try again`, 
-                        [
-                            {
-                                text: "OK",
-                            }
-                        ]
-                    ); //end alert() call
-                } //end inner-else statement
-            } //end outer if-statement, checking to see if there is a response
-        } else{
-            Alert.alert(
-                "Duplicate Ticket", 
-                "Submitting duplicate tickets prohibited", 
-                [
-                    {
-                        text: "OK",
-                        style: "cancel"
-                    }
-                ]
-            ); //end alert() call
-            
-            console.log("Submitting duplicate tickets prohibited.");
-        }
      
         return submitReqResponse;
     };
@@ -256,6 +260,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
     });
 
     const onModalDismiss = () => {
+        clearErrors();
         setShowRequestModal(false);
         setSubmitEnabled(true);
     }; //end onModalDismiss()
