@@ -162,22 +162,22 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
     const onSubmit = (formValues) => {
         Reactotron.log("onSubmit():\t", formValues);
 
-        if (errors) {
-            Alert.alert(
-                "Error", 
-                "Please fill all the form fields appropriately", 
-                [
-                    {
-                        text: "OK",
-                        style: "cancel"
-                    }
-                ]
-            ); //end alert() call
+        // if (errors) {
+        //     Alert.alert(
+        //         "Error", 
+        //         "Please fill all the form fields appropriately", 
+        //         [
+        //             {
+        //                 text: "OK",
+        //                 style: "cancel"
+        //             }
+        //         ]
+        //     ); //end alert() call
 
-            return;
-        } else {
+        //     return;
+        //} else {
             return submitTicket();
-        }
+        //}
     }; 
 
     const inputColorsTheme  = {
