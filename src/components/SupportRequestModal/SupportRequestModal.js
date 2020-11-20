@@ -1,4 +1,5 @@
 import React, { useState} from 'react';
+import Alert from 'react-native';
 
 import Header from './../FormComponents/Header/Header.js';
 import Form from './../FormComponents/Form/Form.js';
@@ -23,6 +24,8 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
     const { handleSubmit, register, setValue, getValues, errors } = useForm();
     
     const IP_ADDRESS_DEV = "10.2.50.36";
+
+    const { alert } = Alert;
 
     const submitTicket = async () => {
         let submitReqResponse = "";
@@ -77,6 +80,16 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
             .then((jsonResponse) => jsonResponse)
             .catch((error) => {
                 console.error(`Catching error:\t ${error}`);
+                alert(
+                    "Error on Submit", 
+                    `${error}`, 
+                    [
+                        {
+                            text: "OK",
+                            style: "cancel"
+                        }
+                    ]
+                ); //end alert() call
             });
         
             //window.alert(JSON.stringify(submitReqResponse));
@@ -88,20 +101,19 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
         
                 setIsLoading(false);
     
-                // notify(
-                //         <HelpdeskSubmitMessage
-                //         districtPosition    =   { districtPosition }
-                //         message             =   "Helpdesk Request Submitted"
-                //         icon                =   { faTicketAlt }
-                //         />
-                // );
-
-        
-                // window.alert("responseStatus:\t", responseStatus);
-        
                 if (responseStatus === "success") {
         
                     setIsRequestSuccessful(true);
+
+                    alert(
+                        "Submission Successful", 
+                        `${error}`, 
+                        [
+                            {
+                                text: "OK",
+                            }
+                        ]
+                    ); //end alert() call
         
                     setTimeout(() => {
                              //Reset the form field after submitting.
@@ -120,10 +132,32 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                
                 } else {
                     setIsRequestSuccessful(false);
+
+                    alert(
+                        "Error Submitting", 
+                        `Error submitting ticket`, 
+                        [
+                            {
+                                text: "OK",
+                            }
+                        ]
+                    ); //end alert() call
                 }
         
             }
         } else{
+
+            alert(
+                "Duplicate Ticket", 
+                "Submitting duplicate tickets prohibited", 
+                [
+                    {
+                        text: "OK",
+                        style: "cancel"
+                    }
+                ]
+            ); //end alert() call
+            
             console.log("Submitting duplicate tickets prohibited.");
         }
      
