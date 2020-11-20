@@ -15,35 +15,35 @@ let SafeAreaViewStyled = styled(SafeAreaView)`
 `;
 
 const ModalStyled = styled(Modal).attrs((props) => ({
-    isVisible           :   props.isVisible,
-    hasBackdrop         :   props.hasBackdrop,
-    onBackdropPress     :   props.onBackdropPress,
-    onSwipeComplete     :   props.onSwipeComplete, 
-    swipeDirection      :   props.swipeDirection,
-    javaScriptEnabled   :   props.javaScriptEnabled,
-    injectJavaScript    :   props.injectJavaScript,
-    injectedJavaScript  :   props.injectedJavaScript,
-    onMessage           :   props.onMessage,
-    mixedContentMode    :   props.mixedContentMode,
-    animationType       :   props.animationType,
-    presentationStyle   :   props.presentationStyle,
-    onDismiss           :   props.onDismiss
+    isVisible               :   props.isVisible,
+    hasBackdrop             :   props.hasBackdrop,
+    onBackdropPress         :   props.onBackdropPress,
+    onSwipeComplete         :   props.onSwipeComplete, 
+    swipeDirection          :   props.swipeDirection,
+    javaScriptEnabled       :   props.javaScriptEnabled,
+    injectJavaScript        :   props.injectJavaScript,
+    injectedJavaScript      :   props.injectedJavaScript,
+    onMessage               :   props.onMessage,
+    mixedContentMode        :   props.mixedContentMode,
+    animationType           :   props.animationType,
+    presentationStyle       :   props.presentationStyle,
+    onDismiss               :   props.onDismiss
 }))`
-  flex              : 1;
-  flex-direction    : row;
-  justify-content   : flex-start; 
-  align-items       : flex-end;
+  flex                      : 1;
+  flex-direction            : row;
+  justify-content           : flex-start; 
+  align-items               : flex-end;
 
-  position          : relative;
-  background-color  : white;
+  position                  : relative;
+  background-color          : white;
 
-  margin            :   0;
+  margin                    :   0;
 
-  width             : 100%;
-  height            : 100%;
+  width                     : 100%;
+  height                    : 100%;
 
-  border-top-left-radius: 10;
-  border-top-right-radius: 10;
+  border-top-left-radius    : 10;
+  border-top-right-radius   : 10;
 `;
 
 const ModalContentContainer = styled.View`
@@ -57,7 +57,7 @@ const ModalContentContainer = styled.View`
 `;
 
 const KeyboardAwareScrollViewStyled = styled(KeyboardAwareScrollView)`
-
+    margin-bottom: 56px;
 `;
 
 const Divider = styled.View`
@@ -88,7 +88,7 @@ const ButtonContainer = styled.View`
     margin: auto;
 
     margin-top: 15;
-    margin-bottom:  15;
+    margin-bottom:  25;
 `;
 
 const ButtonText = styled.Text`

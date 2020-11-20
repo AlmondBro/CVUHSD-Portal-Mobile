@@ -1,9 +1,11 @@
 import React, { useState} from 'react';
-import { Alert } from 'react-native';
+import { Alert, ActivityIndicator } from 'react-native';
 
 import Header from './../FormComponents/Header/Header.js';
 import Form from './../FormComponents/Form/Form.js';
 import Input from './../FormComponents/Form/Input/Input.js';
+
+import SubmitFooterContainer from './../FormComponents/SubmitFooterContainer/SubmitFooterContainer.js';
 
 import { useForm } from 'react-hook-form';
 import validation from './validation.js';
@@ -18,6 +20,9 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
     let [ isLoading, setIsLoading ]                                 = useState(false);
     let [ isRequestSuccessful, setIsRequestSuccessful ]             = useState(null);
     let [ submitEnabled, setSubmitEnabled ]                         = useState(true);
+
+    let [ topMargin, setTopMargin ] = useState(0);
+    let [ bottomMargin, setBottomMargin ] = useState(0);
 
     const { handleSubmit, register, setValue, getValues, errors }   = useForm();
     
@@ -398,20 +403,23 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                                     noOuterLabel        =   { false }
                                 />
 
-                                <Divider
-                                   districtPosition    =   { districtPosition } 
-                                   renderAsStudent     =   { renderAsStudent }
-                                />
-
-                                <Button 
-                                        buttonTitle       =   "Submit" 
-                                        onPress           =   {  handleSubmit(onSubmit) } 
-
-                                        districtPosition    =   { districtPosition } 
-                                        renderAsStudent     =   { renderAsStudent }
-                                />
+                            
                             </Form>
                         </KeyboardAwareScrollViewStyled>
+
+                        <SubmitFooterContainer>
+                            <Divider
+                                districtPosition    =   { districtPosition } 
+                                renderAsStudent     =   { renderAsStudent }
+                            />
+                            <Button 
+                                buttonTitle       =   "Submit" 
+                                onPress           =   {  handleSubmit(onSubmit) } 
+
+                                districtPosition    =   { districtPosition } 
+                                renderAsStudent     =   { renderAsStudent }
+                            />
+                        </SubmitFooterContainer>
                     </SafeAreaViewStyled>
             </ModalStyled>  
     ); //end return statement
