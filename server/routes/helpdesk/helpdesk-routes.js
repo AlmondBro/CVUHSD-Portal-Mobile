@@ -70,6 +70,7 @@ const createSDPRequest = async (
         console.error(`Catching error:\t ${error}`);
     });
 
+    console.log("sdpCreateReqResponse", JSON.stringify(sdpCreateReqResponse));
     return sdpCreateReqResponse;
 };
 

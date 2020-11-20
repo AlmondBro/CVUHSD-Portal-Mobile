@@ -22,6 +22,8 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
 
     const { handleSubmit, register, setValue, getValues, errors } = useForm();
     
+    const IP_ADDRESS_DEV = "10.2.50.36";
+
     const submitTicket = async () => {
         let submitReqResponse = "";
 
@@ -51,7 +53,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
             let supportReqDetails = {
                 fullName,
                 email,
-                title: {...title} ,
+                supportRequestTitle: {...title} ,
                 category,
                 description,
                 location,
@@ -59,7 +61,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                 room
             }
         
-            const submitRequest_URL = `${isDev ? "http://localhost:3002" : "/server"}/helpdesk/request/create`;
+            const submitRequest_URL = `${isDev ? `http://${IP_ADDRESS_DEV}:3002` : "/server"}/helpdesk/request/create`;
             const submitRequest_headers = {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
@@ -104,7 +106,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                     setTimeout(() => {
                              //Reset the form field after submitting.
         
-                        toggleModal(false);
+                        setShowRequestModal(false);
                         
                         setFormField({
                             supportRequestTitle :   "",
@@ -126,7 +128,6 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
             console.log("Submitting duplicate tickets prohibited.");
         }
      
-    
         return submitReqResponse;
     };
 
