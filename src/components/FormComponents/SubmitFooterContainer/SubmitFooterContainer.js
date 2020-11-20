@@ -7,14 +7,14 @@ const SubmitFooterContainer = ({ districtPosition, renderAsStudent, children }) 
     const [ headerHeight, setFooterHeight ]  = useState(0);
 
     const onLayout = (event) => {
-        //let { height } = event.nativeEvent.layout;
+        let { height } = event.nativeEvent.layout;
 
-        const {height} = Dimensions.get('window');
+        //const {height} = Dimensions.get('window');
         setFooterHeight(height);
     };
 
     useEffect(() => {
-        console.log("headerHeight:\t", headerHeight);
+        console.log("submitFooterHeight:\t", headerHeight);
     }, [ headerHeight ]);
 
     return (

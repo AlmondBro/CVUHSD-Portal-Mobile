@@ -9,12 +9,16 @@ const Container = styled.View`
     width: 120;
     flex-direction: row;
     justify-content: center;
+
+    margin-top: 10;
+    margin-bottom: 10;
+
     padding-top: 10;
     padding-bottom: 10;
 `;
 
 const Text= styled.Text`
-    color: ${props => props.color || (props.districtPosition === null) 
+    color: ${props => props.color ? props.color : (props.districtPosition === null) 
                     ? "#B41A1F" : 
                         (props.districtPosition === "Student" || props.renderAsStudent) 
                         ? "#B41A1F" : "#1E6C93" 

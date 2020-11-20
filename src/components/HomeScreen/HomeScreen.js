@@ -26,7 +26,6 @@ const HomeScreen = ({ renderAsStudent, title, authLoading, openADSingleSignOn, c
                 >
                     <TouchableButton 
                         buttonTitle         =   "Sign In" 
-                        color               =   "white"
                         onPress             =   { openADSingleSignOn || console.log("No onPress function")}
 
                         districtPosition    =   { title }
