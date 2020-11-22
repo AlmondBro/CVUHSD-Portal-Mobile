@@ -19,6 +19,8 @@ router.post('/password/update', async (req, res) => {
 
     let { username, currentPassword, newPassword } = req.body;
 
+    console.log("req.body:\t", JSON.stringify(req.body));
+
     const isAuthenticated = await activeDirectory.user(username).authenticate(currentPassword)
                             .catch((error) => { 
                               message = error.description || error;

@@ -44,6 +44,7 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
         let changePasswordReqResponse = "";
 
         let formField = getValues();
+        const  { currentPassword, newPassword } = formField;
 
         const username = email.split('@')[0];
 
@@ -64,7 +65,7 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
             changePasswordReqResponse = await fetch(changePassword_URL, {
                 method: 'POST',
                 headers: changePassword_headers,
-                body: JSON.stringify({ ...formField, username } )
+                body: JSON.stringify({ username, currentPassword, newPassword } )
             })
             .then((serverResponse) => {
                 Reactotron.log("serverResponse:\t", serverResponse);
