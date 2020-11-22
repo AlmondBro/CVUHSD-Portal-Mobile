@@ -363,27 +363,56 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                                     noOuterLabel        =   { false }
                                 />
 
-                                <Input 
-                                    appWidth            =   { appWidth }
+                                {
+                                     (districtPosition === "Student") ? (
+                                        <Input 
+                                            appWidth            =   { appWidth }
+        
+                                            name                =   "location" 
+                                            label               =   "Location:" 
+                                            placeHolderText     =   "Your School or Site..."
+        
+        
+                                            mode                =   "outlined"
+                                            theme               =   { inputColorsTheme }
+        
+                                            secureTextEntry     =   { false } 
+        
+                                            districtPosition    =   { districtPosition } 
+                                            renderAsStudent     =   { renderAsStudent }
+        
+                                            value               =   { categories[0].value }
+                                            usePicker           =   { true }
+                                            pickerPlaceHolder   =   { (districtPosition === "Student") ? {} : pickerPlaceHolder("Choose your site or location...") }
+                                            items               =   { locations }
+                                            noOuterLabel        =   { false }
+                                        />
+                                     ) : (
+                                            <Input 
+                                                appWidth            =   { appWidth }
+            
+                                                name                =   "location" 
+                                                label               =   "Location:" 
+                                                placeHolderText     =   "Your School or Site..."
+            
+            
+                                                mode                =   "outlined"
+                                                theme               =   { inputColorsTheme }
+            
+                                                secureTextEntry     =   { false } 
+            
+                                                districtPosition    =   { districtPosition } 
+                                                renderAsStudent     =   { renderAsStudent }
+            
+                                                usePicker           =   { true }
+                                                pickerPlaceHolder   =   { (districtPosition === "Student") ? {} : pickerPlaceHolder("Choose your site or location...") }
+                                                items               =   { locations }
+                                                noOuterLabel        =   { false }
+                                        />
+                                     )
+                                }
 
-                                    name                =   "location" 
-                                    label               =   "Location:" 
-                                    placeHolderText     =   "Your School or Site..."
-
-
-                                    mode                =   "outlined"
-                                    theme               =   { inputColorsTheme }
-
-                                    secureTextEntry     =   { false } 
-
-                                    districtPosition    =   { districtPosition } 
-                                    renderAsStudent     =   { renderAsStudent }
-
-                                    usePicker           =   { true }
-                                    pickerPlaceHolder   =   { (districtPosition === "Student") ? {} : pickerPlaceHolder("Choose your site or location...") }
-                                    items               =   { locations }
-                                    noOuterLabel        =   { false }
-                                />
+                                
 
                                 <Input 
                                     appWidth            =   { appWidth }
