@@ -6,7 +6,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import { InputContainer, LabelText, TextInputStyled, Select, ErrorText, ErrorTextItalicalized, DownArrow } from './InputStyledComponents.js';
 
 const Input = forwardRef((props, ref) => {
-        const { appWidth, districtPosition, renderAsStudent, usePicker, pickerPlaceHolder, label, labelStyle, items, error, name, onSubmitEditing, onChangeText, noOuterLabel, theme, placeholder, placeHolderText, value, mode, getValues,...inputProps } = props;
+        const { keyboardType,textContentType, passwordRules, appWidth, districtPosition, renderAsStudent, usePicker, pickerPlaceHolder, label, labelStyle, items, error, name, onSubmitEditing, onChangeText, noOuterLabel, theme, placeholder, placeHolderText, value, mode, getValues,...inputProps } = props;
 
         const [ labelVisible, setLabelVisible ] = useState(label);
         const [ isFocused, setIsFocused ]   = useState(false);
@@ -128,7 +128,12 @@ const Input = forwardRef((props, ref) => {
                             theme               =   { theme }
                             mode                =   { mode }
                             label               =   {  getValues(name) && !isFocused ? "" : placeHolderText }
+                            
                             autoCapitalize      =   "none"
+                            keyboardType        =   { keyboardType }
+                            textContentType     =   { textContentType }
+                            passwordRules       =   { passwordRules }
+                            
                             onChangeText        =   { onChangeText }
 
                             onSubmitEditing     =   { onSubmitEditing }
