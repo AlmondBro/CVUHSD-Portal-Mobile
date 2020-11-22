@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Header from './../FormComponents/Header/Header.js';
 import Form from './../FormComponents/Form/Form.js';
@@ -9,17 +9,133 @@ import validation from './validation.js';
 
 import SubmitFooterContainer from './../FormComponents/SubmitFooterContainer/SubmitFooterContainer.js';
 
+import TouchableButton from './../TouchableButton/TouchableButton.js';
+
 import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Button, InstructionsText, Divider } from './ChangePasswordStyledComponents.js';
 
 import { Reactotron } from './../../config/reactotron.dev.js';
 
 const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, showPasswordModal, setShowPasswordModal }) => {
+    const { handleSubmit, register, setValue, getValues, errors }               = useForm();
 
-    const { handleSubmit, register, setValue, getValues, errors } = useForm();
+    let [ isLoading, setIsLoading ]                                             = useState(false);
+    let [ isRequestSuccessful, setIsRequestSuccessful ]                         = useState(null);
+    let [ submitEnabled, setSubmitEnabled ]                                     = useState(true);
+
+    const IP_ADDRESS_DEV = "10.4.174.90.41";
+
+    const changeUserPassword = async () => {
+        let changePasswordReqResponse = "";
+
+        let formField = getValues();
+
+        if (submitEnabled && (isLoading === false) ) {
+            setIsLoading(true);
+    
+            setSubmitEnabled(false);
+
+            const fullName = firstName + " " + lastName;
+        
+            const changePassword_URL = `${isDev ? `http://${IP_ADDRESS_DEV}:3002` : "/server"}/user-ops/password/update`;
+            const changePassword_headers = {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                "Access-Control-Allow-Credentials": true
+            };
+        
+            changePasswordReqResponse = await fetch(changePassword_URL, {
+                method: 'POST',
+                headers: changePassword_headers,
+                body: JSON.stringify({ ...formField} )
+            })
+            .then((serverResponse) => serverResponse.json()) //Parse the JSON of the response
+            .then((jsonResponse) => jsonResponse)
+            .catch((error) => {
+                console.error(`Catching error:\t ${error}`);
+                Alert.alert(
+                    "Error on Submit", 
+                    `${error}`, 
+                    [
+                        {
+                            text: "OK",
+                            style: "cancel"
+                        }
+                    ]
+                ); //end alert() call
+            });
+        
+            //window.alert(JSON.stringify(submitReqResponse));
+        
+            console.log("submitReqResponse:\t", changePasswordReqResponse);
+    
+            if (changePasswordReqResponse) {
+                const { error: errorStatus, message } = changePasswordReqResponse;
+        
+                setIsLoading(false);
+    
+                if (errorStatus === "false") {
+        
+                    setIsRequestSuccessful(true);
+
+                    Alert.alert(
+                        "Change Password Successful", 
+                        `Password has been updated`, 
+                        [
+                            {
+                                text: "OK",
+                            }
+                        ]
+                    ); //end alert() call
+        
+                    setTimeout(() => {
+                        //Reset the form field after submitting.
+        
+                        setShowRequestModal(false);
+                        setSubmitEnabled(true);
+                        
+                        setValue("currentPassword", null);
+                        setValue("newPassword", null);
+                        setValue("newPasswordConfirmed", null);
+                    }, 800);
+                
+                } else {
+                    setIsRequestSuccessful(false);
+                    setSubmitEnabled(true);
+
+                    Alert.alert(
+                        "Error", 
+                        message, 
+                        [
+                            {
+                                text: "OK",
+                            }
+                        ]
+                    ); //end alert() call
+                } //end inner-else statement
+            } //end outer if-statement, checking to see if there is a response
+        } else{
+            Alert.alert(
+                "Duplicate Update", 
+                "Duplicate Password Updates Not Allowed", 
+                [
+                    {
+                        text: "OK",
+                        style: "cancel"
+                    }
+                ]
+            ); //end alert() call
+            
+            console.log("Duplicate Password Updates Not Allowed");
+        } //end else-statement
+        
+        return changePasswordReqResponse;
+    }; //end submitTicket()
 
     const onSubmit = (formValues) => {
         Reactotron.log("onSubmit():\t", formValues);
-    }; 
+
+        changeUserPassword();
+    }; //end onSubmit()
 
     const inputColorsTheme  = {
         colors: {
@@ -118,9 +234,9 @@ const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, sho
                                 <Input 
                                     appWidth            =   { appWidth }
 
-                                    name                =   "oldPassword" 
-                                    label               =   "Old Password:" 
-                                    placeHolderText     =   "Old Password..."
+                                    name                =   "currentPassword" 
+                                    label               =   "Current Password:" 
+                                    placeHolderText     =   "Current Password..."
 
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
@@ -180,19 +296,33 @@ const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, sho
                                 />
                             </Form>
                         </KeyboardAwareScrollViewStyled>
-                        <SubmitFooterContainer bottomPosition={205}>
+                        <SubmitFooterContainer bottomPosition={55}>
                             <Divider
                                 districtPosition    =   { districtPosition } 
                                 renderAsStudent     =   { renderAsStudent }
                             />
 
-                            <Button 
-                                buttonTitle       =   "Change Password" 
-                                onPress           =   {  handleSubmit(onSubmit) } 
+                            <TouchableButton 
+                                buttonTitle         =   "Change Password" 
+                                onPress             =     {  handleSubmit(onSubmit) } 
 
+                                color               =   "white"         
+                                bgColor             =   { (districtPosition === "Student" || renderAsStudent) ? "#B41A1F" : "#1E6C93"}
+                               
                                 districtPosition    =   { districtPosition } 
                                 renderAsStudent     =   { renderAsStudent }
-                            />
+                            >
+                                {
+                                    isLoading ? (
+                                        <ActivityIndicator 
+                                            size        =   "large" 
+                                            color       =   "white"
+                                            animating   =   { isLoading  }
+                                        />
+                                        )
+                                        : null
+                                } 
+                            </TouchableButton>
                         </SubmitFooterContainer>
                     </SafeAreaViewStyled>
             </ModalStyled>  
