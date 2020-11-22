@@ -16,7 +16,8 @@ import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Button,
 
 import { Reactotron } from './../../config/reactotron.dev.js';
 
-const isDev = __DEV__;
+const isDev = false;
+// __DEV__;
 
 const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStudent, showPasswordModal, setShowPasswordModal }) => {
     const { handleSubmit, register, setValue, getValues, clearErrors, errors }               = useForm();
@@ -25,8 +26,8 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
     let [ isRequestSuccessful, setIsRequestSuccessful ]                         = useState(null);
     let [ submitEnabled, setSubmitEnabled ]                                     = useState(true);
 
-    const IP_ADDRESS_DEV = "portal.centinela.k12.ca.us"
-    // "10.2.64.175";
+    const PORTAL_LIVE_LINK  = "portal.centinela.k12.ca.us";
+    const IP_ADDRESS_DEV    = "10.2.64.175";
 
     const changeUserPassword = async () => {
         let changePasswordReqResponse = "";
@@ -42,7 +43,7 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
     
             setSubmitEnabled(false);
         
-            const changePassword_URL = `${isDev ? `http://${IP_ADDRESS_DEV}` : "/server"}/user-ops/password/update`;
+            const changePassword_URL = `${isDev ? `http://${IP_ADDRESS_DEV}` : `http://${PORTAL_LIVE_LINK}/server`}/user-ops/password/update`;
             const changePassword_headers = {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
@@ -130,7 +131,7 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
 
             setSubmitEnabled(true);
             setIsLoading(false); 
-            
+
             Alert.alert(
                 "Duplicate Update", 
                 "Duplicate Password Updates Not Allowed", 
@@ -154,10 +155,26 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
         setSubmitEnabled(true);
     }; //end onModalDismiss()
 
-    const onSubmit = (formValues) => {
-        Reactotron.log("onSubmit():\t", formValues);
+    const onSubmit = () => {
+        Reactotron.log("onSubmit():\t", getValues());
 
-        changeUserPassword();
+        let { newPassword, newPasswordConfirmed } = getValues();
+
+        if (newPassword === newPasswordConfirmed) {
+            changeUserPassword();
+        } else {
+
+            Alert.alert(
+                "Password Mismatch", 
+                `New password and its confirmation do match`, 
+                [
+                    {
+                        text: "OK",
+                        style: "cancel"
+                    }
+                ]
+            ); //end alert() call
+        }
     }; //end onSubmit()
 
     const inputColorsTheme  = {
