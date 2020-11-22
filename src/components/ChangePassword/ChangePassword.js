@@ -26,7 +26,7 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
     let [ submitEnabled, setSubmitEnabled ]                                     = useState(true);
 
     const PORTAL_LIVE_LINK  = "portal.centinela.k12.ca.us";
-    const IP_ADDRESS_DEV    = "10.2.64.175";
+    const IP_ADDRESS_DEV    = "10.2.64.175:3002";
 
     const inputColorsTheme  = {
         colors: {
@@ -66,7 +66,10 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                 headers: changePassword_headers,
                 body: JSON.stringify({ ...formField, username } )
             })
-            .then((serverResponse) => serverResponse.json()) //Parse the JSON of the response
+            .then((serverResponse) => {
+                Reactotron.log("serverResponse:\t", serverResponse);
+                return serverResponse.json();
+            }) //Parse the JSON of the response
             .then((jsonResponse) => jsonResponse)
             .catch((error) => {
                 Reactotron.error(`Catching error:\t ${error}`);
