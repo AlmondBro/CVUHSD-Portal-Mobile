@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ActivityIndicator } from 'react-native';
+import { Alert, ActivityIndicator } from 'react-native';
 
 import Header from './../FormComponents/Header/Header.js';
 import Form from './../FormComponents/Form/Form.js';
@@ -16,6 +16,8 @@ import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Button,
 
 import { Reactotron } from './../../config/reactotron.dev.js';
 
+const isDev = __DEV__;
+
 const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStudent, showPasswordModal, setShowPasswordModal }) => {
     const { handleSubmit, register, setValue, getValues, clearErrors, errors }               = useForm();
 
@@ -23,7 +25,8 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
     let [ isRequestSuccessful, setIsRequestSuccessful ]                         = useState(null);
     let [ submitEnabled, setSubmitEnabled ]                                     = useState(true);
 
-    const IP_ADDRESS_DEV = "10.2.64.175";
+    const IP_ADDRESS_DEV = "portal.centinela.k12.ca.us"
+    // "10.2.64.175";
 
     const changeUserPassword = async () => {
         let changePasswordReqResponse = "";
@@ -33,11 +36,13 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
         const username = email.split('@')[0];
 
         if (submitEnabled && (isLoading === false) ) {
+            Reactotron.log("Making API call...");
+
             setIsLoading(true);
     
             setSubmitEnabled(false);
         
-            const changePassword_URL = `${isDev ? `http://${IP_ADDRESS_DEV}:3002` : "/server"}/user-ops/password/update`;
+            const changePassword_URL = `${isDev ? `http://${IP_ADDRESS_DEV}` : "/server"}/user-ops/password/update`;
             const changePassword_headers = {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
@@ -52,7 +57,11 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
             .then((serverResponse) => serverResponse.json()) //Parse the JSON of the response
             .then((jsonResponse) => jsonResponse)
             .catch((error) => {
-                console.error(`Catching error:\t ${error}`);
+                Reactotron.error(`Catching error:\t ${error}`);
+
+                setSubmitEnabled(true);
+                setIsLoading(false); 
+
                 Alert.alert(
                     "Error on Submit", 
                     `${error}`, 
@@ -65,9 +74,7 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                 ); //end alert() call
             });
         
-            //window.alert(JSON.stringify(submitReqResponse));
-        
-            console.log("submitReqResponse:\t", changePasswordReqResponse);
+            Reactotron.log("submitReqResponse:\t", changePasswordReqResponse);
     
             if (changePasswordReqResponse) {
                 const { error: errorStatus, message } = changePasswordReqResponse;
@@ -77,6 +84,9 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                 if (errorStatus === "false") {
         
                     setIsRequestSuccessful(true);
+
+                    setSubmitEnabled(false);
+                    setIsLoading(false); 
 
                     Alert.alert(
                         "Change Password Successful", 
@@ -103,6 +113,8 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                     setIsRequestSuccessful(false);
                     setSubmitEnabled(true);
 
+                    setIsLoading(false); 
+
                     Alert.alert(
                         "Error", 
                         message, 
@@ -114,7 +126,11 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                     ); //end alert() call
                 } //end inner-else statement
             } //end outer if-statement, checking to see if there is a response
-        } else{
+        } else  {
+
+            setSubmitEnabled(true);
+            setIsLoading(false); 
+            
             Alert.alert(
                 "Duplicate Update", 
                 "Duplicate Password Updates Not Allowed", 
@@ -126,7 +142,7 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                 ]
             ); //end alert() call
             
-            console.log("Duplicate Password Updates Not Allowed");
+            Reactotron.log("Duplicate Password Updates Not Allowed");
         } //end else-statement
         
         return changePasswordReqResponse;
