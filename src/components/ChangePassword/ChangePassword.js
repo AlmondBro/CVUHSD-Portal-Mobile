@@ -16,8 +16,7 @@ import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Button,
 
 import { Reactotron } from './../../config/reactotron.dev.js';
 
-const isDev = false;
-// __DEV__;
+const isDev = __DEV__;
 
 const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStudent, showPasswordModal, setShowPasswordModal }) => {
     const { handleSubmit, register, setValue, getValues, clearErrors, errors }               = useForm();
@@ -28,6 +27,18 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
 
     const PORTAL_LIVE_LINK  = "portal.centinela.k12.ca.us";
     const IP_ADDRESS_DEV    = "10.2.64.175";
+
+    const inputColorsTheme  = {
+        colors: {
+            primary     :   ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
+            background  :   "#F6F6F6",
+            text        :   ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",  
+            placeholder :   districtPosition ?
+                            ( (districtPosition === "Student") || (renderAsStudent === true) ) ? 
+                                " rgba(147, 30, 29, 0.5)": "rgba(30, 108, 147, 0.5)"
+                            : "rgba(147, 30, 29, 0.5)",
+        }
+    }; //end inputColorsTheme
 
     const changeUserPassword = async () => {
         let changePasswordReqResponse = "";
@@ -163,7 +174,6 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
         if (newPassword === newPasswordConfirmed) {
             changeUserPassword();
         } else {
-
             Alert.alert(
                 "Password Mismatch", 
                 `New password and its confirmation do match`, 
@@ -177,68 +187,6 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
         }
     }; //end onSubmit()
 
-    const inputColorsTheme  = {
-        colors: {
-            primary     :   ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
-            background  :   "#F6F6F6",
-            text        :   ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",  
-            placeholder :   districtPosition ?
-                            ( (districtPosition === "Student") || (renderAsStudent === true) ) ? 
-                                " rgba(147, 30, 29, 0.5)": "rgba(30, 108, 147, 0.5)"
-                            : "rgba(147, 30, 29, 0.5)",
-        }
-    }; //end inputColorsTheme
-
-    const staffCategories = [
-        { label: "Computer Issue", value: "Computer Issue" },
-        { label: "Printer Issue", value: "Printer Issue" },
-        { label: "Projector Issue", value: "Projector Issue"},
-        { label: "Password Issue", value: "Password Issue"},
-        { label: "Canvas", value: "Canvas" },
-        { label: "PowerSchool", value: "PowerSchool"},
-        { label: "Illuminate", value: "Illuminate"},
-        { label: "Google", value: "Google"},
-        { label: "Wi-fi Issue", value: "Wi-fi Issue"},
-        { label: "Eno Pen -- Board", value: "Eno Pen -- Board"},
-        { label: "Software Installation", value: "Software Installation" },
-        { label: "Student Chromebook", value: "Student Chromebook"},
-        { label: "Phone Issue", value: "Phone Issue"},
-        { label: "Other", value: "Other"}
-    ];
-
-    const studentCategories = [
-        { label: "Password Issue", value: "Password Issue"},
-        { label: "Canvas", value: "Canvas" },
-        { label: "PowerSchool", value: "PowerSchool"},
-        { label: "Illuminate", value: "Illuminate"},
-        { label: "Google", value: "Google"},
-        { label: "Wi-fi Issue", value: "Wi-fi Issue"},
-        { label: "Software Installation", value: "Software Installation"},
-        { label: "Student Chromebook", value: "Student Chromebook"},
-        { label: "Other", value: "Other"}
-    ];
-
-    const categories = (districtPosition === "Student") ? studentCategories : staffCategories;
-      
-    const locations =   (districtPosition === "Student") ? [ {
-        label: site, 
-        value: site
-    } ] :
-    [   { label: "Lawndale High School", value: "Lawndale High School" }, 
-        { label: "Leuzinger High School", value: "Leuzinger High School" }, 
-        { label: "Hawthorne High School", value: "Hawthorne High School"}, 
-        { label: "District Office", value: "District Office"}, 
-        { label: "Lloyde High School", value: "Lloyde High School"}, 
-        { label: "CV Independent Study", value: "CV Independent Study"}, 
-        { label: "Service Center", value: "Service Center"}
-    ];
-
-    const pickerPlaceHolder = (pickerText) => ({
-            label:  (pickerText || 'Select a category type...') ,
-            value: null,
-            color:  ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
-    });
-           
     return (
             <ModalStyled 
                 animationType       =   "slide"
