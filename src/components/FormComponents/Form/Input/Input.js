@@ -6,7 +6,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import { InputContainer, LabelText, TextInputStyled, EyeSymbol, ErrorText, ErrorTextItalicalized, DownArrow } from './InputStyledComponents.js';
 
 const Input = forwardRef((props, ref) => {
-        const { type, secureTextEntry, keyboardType,textContentType, passwordRules, appWidth, districtPosition, renderAsStudent, usePicker, pickerPlaceHolder, label, labelStyle, items, error, name, onSubmitEditing, onChangeText, noOuterLabel, theme, placeholder, placeHolderText, value, mode, getValues,...inputProps } = props;
+        const { type, secureTextEntry, keyboardType,textContentType, passwordRules, multiline, appWidth, districtPosition, renderAsStudent, usePicker, pickerPlaceHolder, label, labelStyle, items, error, name, onSubmitEditing, onChangeText, noOuterLabel, theme, placeholder, placeHolderText, value, mode, getValues,...inputProps } = props;
 
         const [ labelVisible, setLabelVisible ] = useState(label);
         const [ isFocused, setIsFocused ]   = useState(false);
@@ -135,7 +135,7 @@ const Input = forwardRef((props, ref) => {
                                 type                =   { type }
                                 secureTextEntry     =   { (type === "password") ? !showPassword : secureTextEntry}
 
-                                multiline           =   { false }
+                                multiline           =   { multiline || false }
                                 autoCapitalize      =   "none"
                                 keyboardType        =   { keyboardType }
                                 textContentType     =   { textContentType }
