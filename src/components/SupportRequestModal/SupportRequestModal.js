@@ -307,7 +307,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                             >
                                 Fill the form fields to submit a ticket:
                             </InstructionsText>
-                            <Form {...{ register, setValue, getValues, validation, errors }}>
+                            <Form {...{ register, setValue, getValues, validation, errors }} >
                                 <Input 
                                     appWidth            =   { appWidth }
 

@@ -289,7 +289,7 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                                 />
                             </Form>
                         </KeyboardAwareScrollViewStyled>
-                        <SubmitFooterContainer bottomPosition={55}>
+                        <SubmitFooterContainer bottomPosition={5}>
                             <Divider
                                 districtPosition    =   { districtPosition } 
                                 renderAsStudent     =   { renderAsStudent }

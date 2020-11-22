@@ -1,4 +1,7 @@
+import { Platform } from 'react-native';
 import styled from 'styled-components/native';
+
+const { OS } = Platform;
 
 const Container = styled.View`
     background-color: ${props => props.bgColor || "white"};
@@ -11,10 +14,10 @@ const Container = styled.View`
     justify-content: center;
 
     margin-top: 10;
-    margin-bottom: 10;
+    margin-bottom: ${ (OS === "android") ? 5 : 18};
 
-    padding-top: 10;
-    padding-bottom: 10;
+    padding-top: 5;
+    padding-bottom: 5;
 `;
 
 const Text= styled.Text`
