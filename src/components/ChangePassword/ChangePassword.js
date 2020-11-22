@@ -17,13 +17,13 @@ import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Button,
 import { Reactotron } from './../../config/reactotron.dev.js';
 
 const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStudent, showPasswordModal, setShowPasswordModal }) => {
-    const { handleSubmit, register, setValue, getValues, errors }               = useForm();
+    const { handleSubmit, register, setValue, getValues, clearErrors, errors }               = useForm();
 
     let [ isLoading, setIsLoading ]                                             = useState(false);
     let [ isRequestSuccessful, setIsRequestSuccessful ]                         = useState(null);
     let [ submitEnabled, setSubmitEnabled ]                                     = useState(true);
 
-    const IP_ADDRESS_DEV = "10.4.174.90.41";
+    const IP_ADDRESS_DEV = "10.2.64.175";
 
     const changeUserPassword = async () => {
         let changePasswordReqResponse = "";
@@ -132,6 +132,12 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
         return changePasswordReqResponse;
     }; //end submitTicket()
 
+    const onModalDismiss = () => {
+        clearErrors();
+        setShowPasswordModal(false);
+        setSubmitEnabled(true);
+    }; //end onModalDismiss()
+
     const onSubmit = (formValues) => {
         Reactotron.log("onSubmit():\t", formValues);
 
@@ -209,7 +215,7 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                 hasBackdrop         =   { false }
                 isVisible           =   { showPasswordModal }  
                 
-                onDismiss           =   { () => setShowPasswordModal(false) }
+                onDismiss           =   { onModalDismiss }
                 // onBackdropPress     =   { () => setShowRequestModal(false) }
                 // onSwipeComplete     =   { () => setShowRequestModal(false) }
             >
@@ -221,7 +227,7 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                                 districtPosition    =   { districtPosition } 
                                 renderAsStudent     =   { renderAsStudent }
 
-                                closeModal          =   { () => setShowPasswordModal(false) }
+                                closeModal          =   { () => setShowRequestModal(false) }
                             />
                         <KeyboardAwareScrollViewStyled>
                         
