@@ -227,7 +227,7 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                                 districtPosition    =   { districtPosition } 
                                 renderAsStudent     =   { renderAsStudent }
 
-                                closeModal          =   { () => setShowRequestModal(false) }
+                                closeModal          =   { () => setShowPasswordModal(false) }
                             />
                         <KeyboardAwareScrollViewStyled>
                         
