@@ -15,7 +15,7 @@ import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Button,
 
 import { Reactotron } from './../../config/reactotron.dev.js';
 
-const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, showPasswordModal, setShowPasswordModal }) => {
+const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStudent, showPasswordModal, setShowPasswordModal }) => {
     const { handleSubmit, register, setValue, getValues, errors }               = useForm();
 
     let [ isLoading, setIsLoading ]                                             = useState(false);
@@ -29,12 +29,12 @@ const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, sho
 
         let formField = getValues();
 
+        const username = email.split('@')[0];
+
         if (submitEnabled && (isLoading === false) ) {
             setIsLoading(true);
     
             setSubmitEnabled(false);
-
-            const fullName = firstName + " " + lastName;
         
             const changePassword_URL = `${isDev ? `http://${IP_ADDRESS_DEV}:3002` : "/server"}/user-ops/password/update`;
             const changePassword_headers = {
@@ -46,7 +46,7 @@ const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, sho
             changePasswordReqResponse = await fetch(changePassword_URL, {
                 method: 'POST',
                 headers: changePassword_headers,
-                body: JSON.stringify({ ...formField} )
+                body: JSON.stringify({ ...formField, username } )
             })
             .then((serverResponse) => serverResponse.json()) //Parse the JSON of the response
             .then((jsonResponse) => jsonResponse)

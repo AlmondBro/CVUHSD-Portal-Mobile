@@ -89,6 +89,8 @@ const TabsFooter = ({ appWidth, email, firstName, lastName, renderAsStudent, sit
                             districtPosition        =   {   title   }
                             site                    =   {  site }
                             renderAsStudent         =   {   renderAsStudent }
+
+                            email                   =   { email }
  
                             showPasswordModal       =   { showPasswordModal }
                             setShowPasswordModal    =   { setShowPasswordModal }    
