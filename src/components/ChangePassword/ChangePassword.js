@@ -238,6 +238,8 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                                     usePicker           =   { false }
                                     noOuterLabel        =   { false }
 
+                                    type                =   "password"
+
                                     keyboardType        =   "default"
                                     textContentType     =   "password"
                                 />
@@ -252,13 +254,13 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
 
-                                    secureTextEntry     =   { false } 
-
                                     districtPosition    =   { districtPosition } 
                                     renderAsStudent     =   { renderAsStudent }
 
                                     usePicker           =   { false }
                                     noOuterLabel        =   { false }
+
+                                    type                =   "password"
 
                                     keyboardType        =   "default"
                                     textContentType     =   "newPassword"
@@ -274,13 +276,13 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
 
-                                    secureTextEntry     =   { false } 
-
                                     districtPosition    =   { districtPosition } 
                                     renderAsStudent     =   { renderAsStudent }
 
                                     usePicker           =   { false }
                                     noOuterLabel        =   { false }
+
+                                    type                =   "password"
 
                                     keyboardType        =   "default"
                                     textContentType     =   "newPassword"
