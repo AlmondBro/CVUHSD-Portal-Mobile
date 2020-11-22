@@ -7,7 +7,7 @@ const Container = styled.View`
     align-items: center;
     
     position: absolute; 
-    bottom: 15;
+    bottom: ${props => props.bottomPosition || 15};
    
     width:  100%;
 

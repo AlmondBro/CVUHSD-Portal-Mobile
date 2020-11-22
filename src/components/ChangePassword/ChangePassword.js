@@ -7,6 +7,8 @@ import Input from './../FormComponents/Form/Input/Input.js';
 import { useForm } from 'react-hook-form';
 import validation from './validation.js';
 
+import SubmitFooterContainer from './../FormComponents/SubmitFooterContainer/SubmitFooterContainer.js';
+
 import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Button, InstructionsText, Divider } from './ChangePasswordStyledComponents.js';
 
 import { Reactotron } from './../../config/reactotron.dev.js';
@@ -128,6 +130,9 @@ const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, sho
 
                                     usePicker           =   { false }
                                     noOuterLabel        =   { false }
+
+                                    keyboardType        =   "default"
+                                    textContentType     =   "password"
                                 />
                                 
                                 <Input 
@@ -147,6 +152,9 @@ const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, sho
 
                                     usePicker           =   { false }
                                     noOuterLabel        =   { false }
+
+                                    keyboardType        =   "default"
+                                    textContentType     =   "newPassword"
                                 />
 
                                 <Input 
@@ -166,22 +174,26 @@ const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, sho
 
                                     usePicker           =   { false }
                                     noOuterLabel        =   { false }
-                                />
 
-                                <Divider
-                                   districtPosition    =   { districtPosition } 
-                                   renderAsStudent     =   { renderAsStudent }
-                                />
-
-                                <Button 
-                                        buttonTitle       =   "Change Password" 
-                                        onPress           =   {  handleSubmit(onSubmit) } 
-
-                                        districtPosition    =   { districtPosition } 
-                                        renderAsStudent     =   { renderAsStudent }
+                                    keyboardType        =   "default"
+                                    textContentType     =   "newPassword"
                                 />
                             </Form>
                         </KeyboardAwareScrollViewStyled>
+                        <SubmitFooterContainer bottomPosition={205}>
+                            <Divider
+                                districtPosition    =   { districtPosition } 
+                                renderAsStudent     =   { renderAsStudent }
+                            />
+
+                            <Button 
+                                buttonTitle       =   "Change Password" 
+                                onPress           =   {  handleSubmit(onSubmit) } 
+
+                                districtPosition    =   { districtPosition } 
+                                renderAsStudent     =   { renderAsStudent }
+                            />
+                        </SubmitFooterContainer>
                     </SafeAreaViewStyled>
             </ModalStyled>  
     ); //end return statement

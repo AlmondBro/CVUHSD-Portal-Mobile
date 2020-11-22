@@ -3,7 +3,7 @@ import  { Dimensions } from 'react-native';
 
 import { Container } from  './SubmitFooterContainerStyledComponents.js';
 
-const SubmitFooterContainer = ({ districtPosition, renderAsStudent, children }) => {
+const SubmitFooterContainer = ({ districtPosition, renderAsStudent, bottomPosition, children }) => {
     const [ headerHeight, setFooterHeight ]  = useState(0);
 
     const onLayout = (event) => {
@@ -23,6 +23,8 @@ const SubmitFooterContainer = ({ districtPosition, renderAsStudent, children }) 
             renderAsStudent     =   { renderAsStudent }
 
             headerHeight        =   { headerHeight } 
+
+            bottomPosition      =   { bottomPosition }
 
             onLayout            =   { onLayout }
         >
