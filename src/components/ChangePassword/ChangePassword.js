@@ -93,20 +93,19 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
             Reactotron.log("submitReqResponse:\t", changePasswordReqResponse);
     
             if (changePasswordReqResponse) {
-                const { error: errorStatus, message } = changePasswordReqResponse;
+                const { error, message } = changePasswordReqResponse;
         
                 setIsLoading(false);
     
-                if (errorStatus === "false") {
-        
+                if (error === false) {
                     setIsRequestSuccessful(true);
 
                     setSubmitEnabled(false);
                     setIsLoading(false); 
 
                     Alert.alert(
-                        "Change Password Successful", 
-                        `Password has been updated`, 
+                        "Success", 
+                        `Password has been changed`, 
                         [
                             {
                                 text: "OK",
@@ -117,7 +116,7 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                     setTimeout(() => {
                         //Reset the form field after submitting.
         
-                        setShowRequestModal(false);
+                        setShowPasswordModal(false);
                         setSubmitEnabled(true);
                         
                         setValue("currentPassword", null);
