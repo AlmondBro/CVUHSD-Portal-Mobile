@@ -25,6 +25,9 @@ const TextInputStyled = styled(TextInput).attrs(props => ({
     theme           :   props.theme,
     paddingVertical :   0,
     paddingHorizontal:  0,
+
+    // keyboardType    :   props.keyboardType,
+    // textContentType :   props.textContentType
 }))`
 
     display:  flex;

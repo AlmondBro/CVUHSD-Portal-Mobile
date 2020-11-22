@@ -413,7 +413,6 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                                 }
 
                                 
-
                                 <Input 
                                     appWidth            =   { appWidth }
 
@@ -425,6 +424,9 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                                     theme               =   { inputColorsTheme }
 
                                     secureTextEntry     =   { false } 
+
+                                    keyboardType        =   "phone-pad"
+                                    textContentType     =   "telephoneNumber"
 
                                     districtPosition    =   { districtPosition } 
                                     renderAsStudent     =   { renderAsStudent }
