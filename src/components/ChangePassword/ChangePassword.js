@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ActivityIndicator } from 'react-native';
 
 import Header from './../FormComponents/Header/Header.js';
 import Form from './../FormComponents/Form/Form.js';
