@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, Fragment } from 'react';
 import Input from './Input/Input';
 
+import { formatPhoneNumber } from './../../../utility-functions.js';
+
 const Form = ({ register, errors, setValue, getValues, validation, children }) => {
     const Inputs = useRef([]);
     
@@ -22,11 +24,19 @@ const Form = ({ register, errors, setValue, getValues, validation, children }) =
                 (children.length > 1)
                     ? [ ...children ].map((child, i) => {
 
+                                const onChangeText = (value) => {
+                                    if (child.props.keyboardType === "phone-pad") {
+                                        setValue(child.props.name, formatPhoneNumber(value), true); 
+                                    } else {
+                                        setValue(child.props.name, value, true); 
+                                    }
+                                }; //onChangeText()
+
                                 // console.log("child.props:\t", child.props);
                                 return child.props.name ? (
                                     <Input
                                         ref             =   { (instance) => { Inputs.current[i] = instance; }}
-                                        onChangeText    =   { (value) => setValue(child.props.name, value, true) }
+                                        onChangeText    =   { onChangeText }
                                         onSubmitEditing =   { 
                                                                 () => {
                                                                     Inputs.current[i + 1] 
