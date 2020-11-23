@@ -1,15 +1,17 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useState, Fragment } from 'react';
 import { Platform, StyleSheet } from 'react-native';
 
 import RNPickerSelect from 'react-native-picker-select';
 
-import { InputContainer, LabelText, TextInputStyled, Select, ErrorText, ErrorTextItalicalized, DownArrow } from './InputStyledComponents.js';
+import { InputContainer, LabelText, TextInputStyled, EyeSymbol, ErrorText, ErrorTextItalicalized, DownArrow } from './InputStyledComponents.js';
 
 const Input = forwardRef((props, ref) => {
-        const { keyboardType,textContentType, passwordRules, appWidth, districtPosition, renderAsStudent, usePicker, pickerPlaceHolder, label, labelStyle, items, error, name, onSubmitEditing, onChangeText, noOuterLabel, theme, placeholder, placeHolderText, value, mode, getValues,...inputProps } = props;
+        const { type, secureTextEntry, keyboardType,textContentType, passwordRules, multiline, appWidth, districtPosition, renderAsStudent, usePicker, pickerPlaceHolder, label, labelStyle, items, error, name, onSubmitEditing, onChangeText, noOuterLabel, theme, placeholder, placeHolderText, value, mode, getValues,...inputProps } = props;
 
         const [ labelVisible, setLabelVisible ] = useState(label);
         const [ isFocused, setIsFocused ]   = useState(false);
+
+        const [ showPassword, setShowPassword ] = useState(false);
 
         const pickerSelectStyle = StyleSheet.create({
             placeholder: {
@@ -87,7 +89,6 @@ const Input = forwardRef((props, ref) => {
             />
          ); //end DownArrowIcon()
 
-
         return (
             <InputContainer>
                 {
@@ -119,28 +120,48 @@ const Input = forwardRef((props, ref) => {
                             onDonePress                 =   {   () => onSubmitEditing()         }
                         />
                     ) : (
-                        <TextInputStyled
-                            ref                 =   { ref } 
-                            districtPosition    =   { districtPosition }
-                            renderAsStudent     =   { renderAsStudent }
-        
-                            name                =   { name }
-                            theme               =   { theme }
-                            mode                =   { mode }
-                            label               =   {  getValues(name) && !isFocused ? "" : placeHolderText }
-                            
-                            autoCapitalize      =   "none"
-                            keyboardType        =   { keyboardType }
-                            textContentType     =   { textContentType }
-                            passwordRules       =   { passwordRules }
-                            
-                            onChangeText        =   { onChangeText }
+                        <Fragment>
+                            <TextInputStyled
+                                ref                 =   { ref } 
+                                
+                                districtPosition    =   { districtPosition }
+                                renderAsStudent     =   { renderAsStudent }
+            
+                                name                =   { name }
+                                theme               =   { theme }
+                                mode                =   { mode }
+                                label               =   {  getValues(name) && !isFocused ? "" : placeHolderText }
+                                
+                                type                =   { type }
+                                secureTextEntry     =   { (type === "password") ? !showPassword : secureTextEntry}
 
-                            onSubmitEditing     =   { onSubmitEditing }
-                            onFocus             =   { onFocus }
-                            onBlur              =   { onBlur }
-                                                    {...inputProps}
-                        /> 
+                                multiline           =   { multiline || false }
+                                autoCapitalize      =   "none"
+                                keyboardType        =   { keyboardType }
+                                textContentType     =   { textContentType }
+                                passwordRules       =   { passwordRules }
+                                
+                                onChangeText        =   { onChangeText }
+
+                                onSubmitEditing     =   { onSubmitEditing }
+                                onFocus             =   { onFocus }
+                                onBlur              =   { onBlur }
+                                                        {...inputProps}
+                            />
+                            {
+                                (type === "password") ? (
+                                    <EyeSymbol
+                                        districtPosition    =   { districtPosition }
+                                        renderAsStudent     =   { renderAsStudent }
+                                        showPassword        =   { showPassword }
+        
+                                        onFocus             =   { () => { onFocus(); } }
+                                        onPress             =   { () => { onFocus(); setShowPassword(!showPassword); } }
+                                    /> 
+                                ) : null      
+                            }
+                        
+                        </Fragment>
                     )
                 }
                 {

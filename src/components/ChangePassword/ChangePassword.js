@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Alert, ActivityIndicator } from 'react-native';
 
 import Header from './../FormComponents/Header/Header.js';
 import Form from './../FormComponents/Form/Form.js';
@@ -7,17 +8,25 @@ import Input from './../FormComponents/Form/Input/Input.js';
 import { useForm } from 'react-hook-form';
 import validation from './validation.js';
 
+import SubmitFooterContainer from './../FormComponents/SubmitFooterContainer/SubmitFooterContainer.js';
+
+import TouchableButton from './../TouchableButton/TouchableButton.js';
+
 import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Button, InstructionsText, Divider } from './ChangePasswordStyledComponents.js';
 
 import { Reactotron } from './../../config/reactotron.dev.js';
 
-const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, showPasswordModal, setShowPasswordModal }) => {
+const isDev = __DEV__;
 
-    const { handleSubmit, register, setValue, getValues, errors } = useForm();
+const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStudent, showPasswordModal, setShowPasswordModal }) => {
+    const { handleSubmit, register, setValue, getValues, clearErrors, errors }               = useForm();
 
-    const onSubmit = (formValues) => {
-        Reactotron.log("onSubmit():\t", formValues);
-    }; 
+    let [ isLoading, setIsLoading ]                                             = useState(false);
+    let [ isRequestSuccessful, setIsRequestSuccessful ]                         = useState(null);
+    let [ submitEnabled, setSubmitEnabled ]                                     = useState(true);
+
+    const PORTAL_LIVE_LINK  = "portal.centinela.k12.ca.us";
+    const IP_ADDRESS_DEV    = "10.2.64.175:3002";
 
     const inputColorsTheme  = {
         colors: {
@@ -31,56 +40,156 @@ const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, sho
         }
     }; //end inputColorsTheme
 
-    const staffCategories = [
-        { label: "Computer Issue", value: "Computer Issue" },
-        { label: "Printer Issue", value: "Printer Issue" },
-        { label: "Projector Issue", value: "Projector Issue"},
-        { label: "Password Issue", value: "Password Issue"},
-        { label: "Canvas", value: "Canvas" },
-        { label: "PowerSchool", value: "PowerSchool"},
-        { label: "Illuminate", value: "Illuminate"},
-        { label: "Google", value: "Google"},
-        { label: "Wi-fi Issue", value: "Wi-fi Issue"},
-        { label: "Eno Pen -- Board", value: "Eno Pen -- Board"},
-        { label: "Software Installation", value: "Software Installation" },
-        { label: "Student Chromebook", value: "Student Chromebook"},
-        { label: "Phone Issue", value: "Phone Issue"},
-        { label: "Other", value: "Other"}
-    ];
+    const changeUserPassword = async () => {
+        let changePasswordReqResponse = "";
 
-    const studentCategories = [
-        { label: "Password Issue", value: "Password Issue"},
-        { label: "Canvas", value: "Canvas" },
-        { label: "PowerSchool", value: "PowerSchool"},
-        { label: "Illuminate", value: "Illuminate"},
-        { label: "Google", value: "Google"},
-        { label: "Wi-fi Issue", value: "Wi-fi Issue"},
-        { label: "Software Installation", value: "Software Installation"},
-        { label: "Student Chromebook", value: "Student Chromebook"},
-        { label: "Other", value: "Other"}
-    ];
+        let formField = getValues();
+        const  { currentPassword, newPassword } = formField;
 
-    const categories = (districtPosition === "Student") ? studentCategories : staffCategories;
-      
-    const locations =   (districtPosition === "Student") ? [ {
-        label: site, 
-        value: site
-    } ] :
-    [   { label: "Lawndale High School", value: "Lawndale High School" }, 
-        { label: "Leuzinger High School", value: "Leuzinger High School" }, 
-        { label: "Hawthorne High School", value: "Hawthorne High School"}, 
-        { label: "District Office", value: "District Office"}, 
-        { label: "Lloyde High School", value: "Lloyde High School"}, 
-        { label: "CV Independent Study", value: "CV Independent Study"}, 
-        { label: "Service Center", value: "Service Center"}
-    ];
+        const username = email.split('@')[0];
 
-    const pickerPlaceHolder = (pickerText) => ({
-            label:  (pickerText || 'Select a category type...') ,
-            value: null,
-            color:  ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
-    });
-           
+        if (submitEnabled && (isLoading === false) ) {
+            Reactotron.log("Making API call...");
+
+            setIsLoading(true);
+    
+            setSubmitEnabled(false);
+        
+            const changePassword_URL = `${isDev ? `http://${IP_ADDRESS_DEV}` : `http://${PORTAL_LIVE_LINK}/server`}/user-ops/password/update`;
+            const changePassword_headers = {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                "Access-Control-Allow-Credentials": true
+            };
+        
+            changePasswordReqResponse = await fetch(changePassword_URL, {
+                method: 'POST',
+                headers: changePassword_headers,
+                body: JSON.stringify({ username, currentPassword, newPassword } )
+            })
+            .then((serverResponse) => {
+                Reactotron.log("serverResponse:\t", serverResponse);
+                return serverResponse.json();
+            }) //Parse the JSON of the response
+            .then((jsonResponse) => jsonResponse)
+            .catch((error) => {
+                Reactotron.error(`Catching error:\t ${error}`);
+
+                setSubmitEnabled(true);
+                setIsLoading(false); 
+
+                Alert.alert(
+                    "Error on Submit", 
+                    `${error}`, 
+                    [
+                        {
+                            text: "OK",
+                            style: "cancel"
+                        }
+                    ]
+                ); //end alert() call
+            });
+        
+            Reactotron.log("submitReqResponse:\t", changePasswordReqResponse);
+    
+            if (changePasswordReqResponse) {
+                const { error, message } = changePasswordReqResponse;
+        
+                setIsLoading(false);
+    
+                if (error === false) {
+                    setIsRequestSuccessful(true);
+
+                    setSubmitEnabled(false);
+                    setIsLoading(false); 
+
+                    Alert.alert(
+                        "Success", 
+                        `Password has been changed`, 
+                        [
+                            {
+                                text: "OK",
+                            }
+                        ]
+                    ); //end alert() call
+        
+                    setTimeout(() => {
+                        //Reset the form field after submitting.
+        
+                        setShowPasswordModal(false);
+                        setSubmitEnabled(true);
+                        
+                        setValue("currentPassword", null);
+                        setValue("newPassword", null);
+                        setValue("newPasswordConfirmed", null);
+                    }, 800);
+                
+                } else {
+                    setIsRequestSuccessful(false);
+                    setSubmitEnabled(true);
+
+                    setIsLoading(false); 
+
+                    Alert.alert(
+                        "Error", 
+                        message, 
+                        [
+                            {
+                                text: "OK",
+                            }
+                        ]
+                    ); //end alert() call
+                } //end inner-else statement
+            } //end outer if-statement, checking to see if there is a response
+        } else  {
+
+            setSubmitEnabled(true);
+            setIsLoading(false); 
+
+            Alert.alert(
+                "Duplicate Update", 
+                "Duplicate Password Updates Not Allowed", 
+                [
+                    {
+                        text: "OK",
+                        style: "cancel"
+                    }
+                ]
+            ); //end alert() call
+            
+            Reactotron.log("Duplicate Password Updates Not Allowed");
+        } //end else-statement
+        
+        return changePasswordReqResponse;
+    }; //end submitTicket()
+
+    const onModalDismiss = () => {
+        clearErrors();
+        setShowPasswordModal(false);
+        setSubmitEnabled(true);
+    }; //end onModalDismiss()
+
+    const onSubmit = () => {
+        Reactotron.log("onSubmit():\t", getValues());
+
+        let { newPassword, newPasswordConfirmed } = getValues();
+
+        if (newPassword === newPasswordConfirmed) {
+            changeUserPassword();
+        } else {
+            Alert.alert(
+                "Password Mismatch", 
+                `New password and its confirmation do match`, 
+                [
+                    {
+                        text: "OK",
+                        style: "cancel"
+                    }
+                ]
+            ); //end alert() call
+        }
+    }; //end onSubmit()
+
     return (
             <ModalStyled 
                 animationType       =   "slide"
@@ -90,7 +199,7 @@ const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, sho
                 hasBackdrop         =   { false }
                 isVisible           =   { showPasswordModal }  
                 
-                onDismiss           =   { () => setShowPasswordModal(false) }
+                onDismiss           =   { onModalDismiss }
                 // onBackdropPress     =   { () => setShowRequestModal(false) }
                 // onSwipeComplete     =   { () => setShowRequestModal(false) }
             >
@@ -116,9 +225,9 @@ const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, sho
                                 <Input 
                                     appWidth            =   { appWidth }
 
-                                    name                =   "oldPassword" 
-                                    label               =   "Old Password:" 
-                                    placeHolderText     =   "Old Password..."
+                                    name                =   "currentPassword" 
+                                    label               =   "Current Password:" 
+                                    placeHolderText     =   "Current Password..."
 
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
@@ -128,6 +237,11 @@ const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, sho
 
                                     usePicker           =   { false }
                                     noOuterLabel        =   { false }
+
+                                    type                =   "password"
+
+                                    keyboardType        =   "default"
+                                    textContentType     =   "password"
                                 />
                                 
                                 <Input 
@@ -140,13 +254,16 @@ const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, sho
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
 
-                                    secureTextEntry     =   { false } 
-
                                     districtPosition    =   { districtPosition } 
                                     renderAsStudent     =   { renderAsStudent }
 
                                     usePicker           =   { false }
                                     noOuterLabel        =   { false }
+
+                                    type                =   "password"
+
+                                    keyboardType        =   "default"
+                                    textContentType     =   "newPassword"
                                 />
 
                                 <Input 
@@ -159,29 +276,47 @@ const ChangePassword = ({ appWidth, districtPosition, site, renderAsStudent, sho
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
 
-                                    secureTextEntry     =   { false } 
-
                                     districtPosition    =   { districtPosition } 
                                     renderAsStudent     =   { renderAsStudent }
 
                                     usePicker           =   { false }
                                     noOuterLabel        =   { false }
-                                />
 
-                                <Divider
-                                   districtPosition    =   { districtPosition } 
-                                   renderAsStudent     =   { renderAsStudent }
-                                />
+                                    type                =   "password"
 
-                                <Button 
-                                        buttonTitle       =   "Change Password" 
-                                        onPress           =   {  handleSubmit(onSubmit) } 
-
-                                        districtPosition    =   { districtPosition } 
-                                        renderAsStudent     =   { renderAsStudent }
+                                    keyboardType        =   "default"
+                                    textContentType     =   "newPassword"
                                 />
                             </Form>
                         </KeyboardAwareScrollViewStyled>
+                        <SubmitFooterContainer bottomPosition={5}>
+                            <Divider
+                                districtPosition    =   { districtPosition } 
+                                renderAsStudent     =   { renderAsStudent }
+                            />
+
+                            <TouchableButton 
+                                buttonTitle         =   "Change Password" 
+                                onPress             =     {  handleSubmit(onSubmit) } 
+
+                                color               =   "white"         
+                                bgColor             =   { (districtPosition === "Student" || renderAsStudent) ? "#B41A1F" : "#1E6C93"}
+                               
+                                districtPosition    =   { districtPosition } 
+                                renderAsStudent     =   { renderAsStudent }
+                            >
+                                {
+                                    isLoading ? (
+                                        <ActivityIndicator 
+                                            size        =   "large" 
+                                            color       =   "white"
+                                            animating   =   { isLoading  }
+                                        />
+                                        )
+                                        : null
+                                } 
+                            </TouchableButton>
+                        </SubmitFooterContainer>
                     </SafeAreaViewStyled>
             </ModalStyled>  
     ); //end return statement

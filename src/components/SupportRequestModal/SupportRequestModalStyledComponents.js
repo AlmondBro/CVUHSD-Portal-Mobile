@@ -65,8 +65,8 @@ const Divider = styled.View`
     height: ${StyleSheet.hairlineWidth};
 
     margin: auto;
-    margin-top: 10;
-    margin-bottom: 10;
+    margin-top: 15;
+    margin-bottom: 0;
 
     background-color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
 `;

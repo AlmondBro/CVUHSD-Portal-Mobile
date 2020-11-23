@@ -30,8 +30,8 @@ export default {
         message: 'Phone number is required'
       },
       pattern: {
-        value: /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/,
-        message: "Number format: (XXX) XXX-XXXX"
+        value: /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/,
+        message: "Number format: XXX XXX XXXX"
       }
     },
 };

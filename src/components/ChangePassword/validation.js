@@ -1,61 +1,32 @@
 export default {
-    title: { 
+    currentPassword: { 
             required: {   
               value: true,  
-              message: 'Title is required'
+              message: 'Current password is required'
             }
     },
-    category: { 
-      required: {   
-        value: true,  
-        message: 'Category is required'
-      }
-    },
-    description: { 
-      required: {   
-        value: true,  
-        message: 'Description is required'
-      }
-    },
-    location: { 
-      required: {   
-        value: true,  
-        message: 'Location is required'
-      }
-    },
 
-    phoneNumber: { 
+    newPassword: { 
       required: {   
         value: true,  
-        message: 'Location is required'
-      }
-    },
-
-    phoneNumber: { 
-      required: {   
-        value: true,  
-        message: 'Location is required'
+        message: 'New password is required'
       },
-      pattern: {
-        value: /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/,
-        message: "Number format: (XXX) XXX-XXXX"
+
+      minLength: {
+        value: 14,
+        message: "14 character minimum length"
       }
     },
 
-    // roomNumber: { 
-    //   required: {   
-    //     value: false,  
-    //   }
-    // },
-
-    email: {
-      required: {value: true, message: 'Email is required'},
-      pattern: {
-        value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        message: 'Invalid Email Format',
+    newPasswordConfirmed: { 
+      required: {   
+        value: true,  
+        message: 'New password confirmation is required'
       },
+
+      minLength: {
+        value: 14,
+        message: "14 character minimum length"
+      }
     },
-    password: {
-      required: {value: true, message: 'Password is required'},
-    },
-  };
+};
