@@ -1,4 +1,7 @@
+import { Platform } from 'react-native';
 import styled from 'styled-components/native';
+
+const { OS } = Platform;
 
 const Container = styled.View`
     background-color: ${props => props.bgColor || "white"};
@@ -11,10 +14,10 @@ const Container = styled.View`
     justify-content: center;
 
     margin-top: 10;
-    margin-bottom: 10;
+    margin-bottom: ${ (OS === "android") ? 5 : 18};
 
-    padding-top: 10;
-    padding-bottom: 10;
+    padding-top: 5;
+    padding-bottom: 5;
 `;
 
 const Text= styled.Text`
@@ -27,11 +30,13 @@ const Text= styled.Text`
     font-family: 'SourceSansPro_600SemiBold';
     /* 'SourceSansPro_400Regular','SourceSansPro_200ExtraLight', 'SourceSansPro_200ExtraLight_Italic','SourceSansPro_300Light','SourceSansPro_300Light_Italic','SourceSansPro_400Regular_Italic','SourceSansPro_600SemiBold', 'SourceSansPro_600SemiBold_Italic','SourceSansPro_700Bold','SourceSansPro_700Bold_Italic', 'SourceSansPro_900Black', 'SourceSansPro_900Black_Italic'; */
 
-    font-size: 20;
+    font-size: ${props => props.fontSize ? props.fontSize : 20};
     font-weight: bold;
     flex-direction: row;
 
     justify-content: center;
+
+    text-align: center;
 `;
 
 export { Container, Text };

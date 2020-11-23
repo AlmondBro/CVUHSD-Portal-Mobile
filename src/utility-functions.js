@@ -111,4 +111,21 @@ const useComponentSize = () => {
     return [size, onLayout];
 }; //end useComponentSize
 
-export  { dimensionsWidthHOC, useComponentSize, navigationRef, navigate };
+const formatPhoneNumber = (text) => {
+    let finalText = text;
+
+    var cleaned = ('' + text).replace(/\D/g, '');
+    var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
+
+    if (match) {
+        var intlCode = (match[1] ? '+1 ' : ''),
+            number = [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('');
+
+        finalText = number;
+    }
+
+     return finalText;
+};
+
+
+export  { dimensionsWidthHOC, useComponentSize, navigationRef, navigate, formatPhoneNumber };
