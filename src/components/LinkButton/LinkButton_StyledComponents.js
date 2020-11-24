@@ -13,6 +13,8 @@ const TouchableHighlightStyled = styled.TouchableHighlight`
 const LinkButtonImage = styled(ImageCache)`
     width: 300;
     height: 100;
+
+    border-radius: 10;
 `;
 
 const FastImageStyled = styled(FastImage).attrs(props => ({
