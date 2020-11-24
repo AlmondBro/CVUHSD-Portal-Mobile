@@ -8,6 +8,7 @@ const TouchableHighlightStyled = styled.TouchableHighlight`
     align-self: center;
     margin-top: 13;
     margin-bottom: 13;
+    border-radius: 10;
 `;
 
 const LinkButtonImage = styled(ImageCache)`
@@ -22,8 +23,10 @@ const FastImageStyled = styled(FastImage).attrs(props => ({
     header      : props.headers,
     priority    : props.priority
 }))`
-        width: 300;
-        height: 100;
+    width: 300;
+    height: 100;
+
+    border-radius: 10;
 `;
 
 export { TouchableHighlightStyled, LinkButtonImage };
