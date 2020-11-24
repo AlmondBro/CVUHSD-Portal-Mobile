@@ -12,7 +12,7 @@ import SubmitFooterContainer from './../FormComponents/SubmitFooterContainer/Sub
 
 import TouchableButton from './../TouchableButton/TouchableButton.js';
 
-import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Button, InstructionsText, Divider } from './ChangePasswordStyledComponents.js';
+import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, SubmitContainer, Button, InstructionsText, Divider } from './ChangePasswordStyledComponents.js';
 
 import { Reactotron } from './../../config/reactotron.dev.js';
 
@@ -289,14 +289,14 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                                 />
                             </Form>
                         </KeyboardAwareScrollViewStyled>
-                        <SubmitFooterContainer bottomPosition={5}>
+                        <SubmitContainer>
                             <Divider
                                 districtPosition    =   { districtPosition } 
                                 renderAsStudent     =   { renderAsStudent }
                             />
 
                             <TouchableButton 
-                                buttonTitle         =   "Change Password" 
+                                buttonTitle         =   "Update" 
                                 onPress             =     {  handleSubmit(onSubmit) } 
 
                                 color               =   "white"         
@@ -316,7 +316,7 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                                         : null
                                 } 
                             </TouchableButton>
-                        </SubmitFooterContainer>
+                        </SubmitContainer>
                     </SafeAreaViewStyled>
             </ModalStyled>  
     ); //end return statement
