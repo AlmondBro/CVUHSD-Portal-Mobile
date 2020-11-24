@@ -148,6 +148,12 @@ const Button = ({ renderAsStudent, districtPosition, buttonTitle, children, onPr
     ); //end return
 }; //SignInButtonTouchableOpacity
 
-export { SafeAreaViewStyled, ModalStyled, ModalContentContainer, KeyboardAwareScrollViewStyled, InstructionsText, Button, Divider };
+const SubmitContainer = styled.View`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+export { SafeAreaViewStyled, ModalStyled, ModalContentContainer, KeyboardAwareScrollViewStyled, InstructionsText, Button, Divider, SubmitContainer };
 
 
