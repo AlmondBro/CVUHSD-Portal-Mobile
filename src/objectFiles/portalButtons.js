@@ -28,7 +28,7 @@ let staffPortalButtons = {
         },
         //TODO : Need to get illuminate (quickLinks) deep link working!Examined APK, looks like they put no effort into the cordova app. Look like tere is no deep link
         illuminate_button : {
-            buttonLink: "https://centinela.illuminateed.com/dna/?prev_page=Main_NotDashboardPage&amp;page=SisLogin",
+            buttonLink: "https://accounts.illuminateed.net/saml/sp/form/899bd2d4-f0c6-4743-a647-9bdcdf7352d1?relayState=aHR0cHM6Ly9jZW50aW5lbGEuaWxsdW1pbmF0ZWVkLmNvbS9kbmEvP1NhbWxWZXJpZnk=&accountType=staff",
             buttonImg: "illuminate.png",
             description: "Illuminate (Assessments)",
             deepLink: "com.illuminatehc.portal://",
@@ -40,19 +40,6 @@ let staffPortalButtons = {
             }
         },
     
-        //TODO: Need to find hero deep link!! Looksl they use cordova as well.
-        hero_button : {
-            buttonLink: "https://access.heropowered.com/login/centinelavalley-usd",
-            buttonImg: "hero.png",
-            description: "Hero (PBIS System)",
-            deepLink: "hero://",
-            appLink_config : {
-                appName: "hero-k12",
-                appStoreId: "980722195",
-                appStoreLocale: "us",
-                playStoreId: "com.plascotrac.app.hero"
-            }
-        },
         
         //TODO: Need to find deep link for school messenger!
         schoolMessenger_button : {
@@ -83,7 +70,7 @@ let staffPortalButtons = {
         },
     
         googleDrive_button : { 
-            buttonLink: "https://accounts.google.com/signin/v2/sl/pwd?service=wise&amp;passive=1209600&amp;osid=1&amp;continue=https%3A%2F%2Fdrive.google.com%2F&amp;followup=https%3A%2F%2Fdrive.google.com%2F&amp;emr=1&amp;flowName=GlifWebSignIn&amp;flowEntry=ServiceLogin",
+            buttonLink: "https://sso.centinela.k12.ca.us/adfs/ls/?SAMLRequest=fVLLTsMwELwj8Q%2BR70nqIhCymqACQlTiEdHAgZux14nBsYPXSeHvcVMQcIDreHYe612cvHUmGcGjdrYgNJuRBKxwUtumIPf1RXpMTsr9vQXyzvRsOYTW3sHrABiSOGmRTQ8FGbxljqNGZnkHyIJg6%2BX1FZtnM9Z7F5xwhiSr84LYFyVeur5%2FbrnsuTZNqw1XymqpwD4pJ42UplGR%2FfAVa76NtUIcYGUxcBsiNJvPUkpTelDPKaOHjB49kqT6dDrVdtfgv1hPOxKyy7qu0up2XU8Co5bgbyK7II1zjYFMuG5rX3FEPUZYcYNAkiUi%2BBADnjmLQwd%2BDX7UAu7vrgrShtAjy%2FPNZpN9y%2BQ8F%2BPQosycb3IukJTTZtlUzv9Y6f%2FR%2BZc1Kf8QX%2BQ%2FdMvP79u2Wp1XzmjxniyNcZszDzzESsEPsdGF8x0Pf1vTjE6IlqmaqGyw2IPQSoMkSV7uXH%2FfSbyeDw%3D%3D&RelayState=https%3A%2F%2Faccounts.google.com%2FCheckCookie%3Fcontinue%3Dhttps%253A%252F%252Fdrive.google.com%252F%26service%3Dwise%26hl%3Den%26checkedDomains%3Dyoutube%26checkConnection%3Dyoutube%253A368%253A0%26pstMsg%3D1&continue=https%3A%2F%2Fdrive.google.com%2F",
             buttonImg: "google-drive.png",
             description: "Google Drive",
             deepLink: "googledrive://",
@@ -101,10 +88,10 @@ let staffPortalButtons = {
             description: "Printer Center"
         },
     
-        helpDesk_button : {
-            buttonLink: "https://helpdesk.centinela.k12.ca.us",
-            buttonImg: "helpdesk.png",
-            description: "Helpdesk (C.V. I.T. Department)"
+        helpDesk_live_chat_button : {
+            buttonLink: "https://cvhelpdesk.centinela.k12.ca.us:450/HomePage.do",
+            buttonImg: "helpdesk-live-chat.png",
+            description: "CV Helpdesk Live Chat"
         },
     
         /* Possible deep link: 
@@ -128,24 +115,30 @@ let staffPortalButtons = {
             description: "California College Guidance Initiative"
         },
 
-        //TODO: Find deep link for clever
         clever_button : { 
             buttonLink: "https://www.clever.com/in/cvuhsd",
             buttonImg: "Clever_Button_Bevel.png",
             description: "Clever Portal",
-            deepLink: "clever.app://",
+            deepLink: "clever://",
             appLink_config : {
                 appName: "clever-drive",
-                appStoreId: "1134186971",
+                appStoreId: "507874739",
                 appStoreLocale: "us",
                 playStoreId: "com.google.android.apps.docs"
             }
         },
+        
+        //TODO: There is query state variable with the access token you can add dynamically
+        webExTeams_button : {
+            buttonLink: "https://teams.webex.com/",
+            buttonImg: "webex-teams.jpg",
+            description: "WebEx Teams"
+        }
     }, //end quickLinks
 
     standardStaffTools : {
         gmail_button : {
-            buttonLink: "https://accounts.google.com/signin/v2/sl/pwd?service=mail&amp;passive=true&amp;rm=false&amp;continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&amp;ss=1&amp;scc=1&amp;ltmpl=default&amp;ltmplcache=2&amp;emr=1&amp;osid=1&amp;flowName=GlifWebSignIn&amp;flowEntry=ServiceLogin",
+            buttonLink: "https://mail.google.com/mail",
             buttonImg: "gmail.png",
             description: "Gmail",
             deepLink: "googlegmail://",
@@ -170,10 +163,10 @@ let staffPortalButtons = {
             }
         },
 
-        helpDesk_button : {
-            buttonLink: "https://helpdesk.centinela.k12.ca.us",
-            buttonImg: "Helpdesk.png",
-            description: "Helpdesk (CV It Department)"
+        helpDesk_live_chat_button : {
+            buttonLink: "https://cvhelpdesk.centinela.k12.ca.us:450/HomePage.do",
+            buttonImg: "helpdesk-live-chat.png",
+            description: "CV Helpdesk Live Chat"
         },
 
         outlook_button : {
@@ -189,12 +182,12 @@ let staffPortalButtons = {
             }
         },
 
-        //TO-DO: Find deep link for school messenger
+        //TO-DO: Find deep link!!
         schoolMessenger_button: {
             buttonLink: "https://asp.schoolmessenger.com/centinela",
             buttonImg: "schoolmessenger-button.png",
             description: "School Messenger",
-            deepLink: "reliance://",
+            deepLink: "school-messenger://",
             appLink_config : {
                 appName: "schoolmessenger",
                 appStoreId: "978894818",
@@ -203,24 +196,17 @@ let staffPortalButtons = {
             }
         },
 
-        passwordPortal_button: {
-            buttonLink: "https://updatemanager:9251/showLogin.cc",
-            buttonImg: "password-portal.png",
-            description: "Password Assistance"
-        },
-
         printCenter_button : {
             buttonLink: "https://cvprintcenter.myprintdesk.net/DSF/smartstore.aspx#!/Storefron",
             buttonImg: "print-center.png",
             description: "Print Center"
         },
 
-        //TO-DO: Find deep link for school dude
         schoolDude_button : {
             buttonLink: "https://login.schooldude.com/mlogin?productid=community",
             buttonImg: "school-dude.png",
             description: "School Dude",
-            deepLink: "schooldude://",
+            deepLink: "dudesolutions://",
             appLink_config : {
                 appName: "schooldude",
                 appStoreId: "787457415",
@@ -237,15 +223,15 @@ let staffPortalButtons = {
     }, //end standardStaffTools
 
     administrativeTools : {
-        //TODO: Need to find deep link for powerTeacher mobile!!Getting App not available error
+        //TODO: Need to find deep link for powerTeacher mobile!!
        powerSchool_button : {
             buttonLink: "https://powerschool.centinela.k12.ca.us/admin",
             buttonImg: "PS.png",
             description: "PowerSchool (Admin)",
-            deepLink: "powerschool-mobile://",
+            deepLink: "pss-teacher://",
             appLink_config : {
                 appName: "powerteacher-mobile",
-                appStoreId: "973741088",
+                appStoreId: "390563073",
                 appStoreLocale: "us",
                 playStoreId: "com.powerschool.portal"
             }
@@ -363,13 +349,13 @@ let staffPortalButtons = {
             buttonLink: "https://sso.centinela.k12.ca.us/adfs/ls/idpinitiatedsignon?LoginToRP=sp.apexlearning.com",
             buttonImg: "apex.png",
             description: "Apex Learning",
-            deepLink : "apex://",
-            // appLink_config : {
-            //     appName: "canvas-teacher",
-            //     appStoreId: "1257834464",
-            //     appStoreLocale: "us",
-            //     playStoreId: "com.instructure.teacher"
-            // }
+            deepLink : "canvas-teacher://",
+            appLink_config : {
+                appName: "canvas-teacher",
+                appStoreId: "1257834464",
+                appStoreLocale: "us",
+                playStoreId: "com.instructure.teacher"
+            }
         },
         canvas_button : {
             buttonLink: "https://centinela.instructure.com/",
@@ -384,30 +370,17 @@ let staffPortalButtons = {
             }
         },
 
-        edgenuity_button : {
-            buttonLink: "https://centinela.learn.edgenuity.com/",
-            buttonImg: "edgenuity.png",
-            description: "Edgenuity (Online Courses)"
-        },
-
         turnItIn_button : {
             buttonLink: "https://turnitin.com/",
             buttonImg: "turnitin.png",
-            description: "TurnItIn.com (Originality Check & Feedback)",
-            deepLink: "https://turnitin.com/",
-            // appLink_config : {
-            //     appName: "powerteacher-mobile",
-            //     appStoreId: "390563073",
-            //     appStoreLocale: "us",
-            //     playStoreId: "com.powerschool.portal"
-            // }
+            description: "TurnItIn.com (Originality Check & Feedback)"
         },
 
         illuminate_button : {
-            buttonLink: "https://centinela.illuminateed.com/dna/?prev_page=Main_NotDashboardPage&amp;page=SisLogin",
+            buttonLink: "https://accounts.illuminateed.net/saml/sp/form/899bd2d4-f0c6-4743-a647-9bdcdf7352d1?relayState=aHR0cHM6Ly9jZW50aW5lbGEuaWxsdW1pbmF0ZWVkLmNvbS9kbmEvP1NhbWxWZXJpZnk=&accountType=staff",
             buttonImg: "illuminate.png",
             description: "Illuminate (Assessments)",
-            deepLink: "illuminate-hc://",
+            deepLink: "illuminate://",
             appLink_config : {
                 appName: "illuminate-hc",
                 appStoreId: "1082772020",
@@ -421,19 +394,6 @@ let staffPortalButtons = {
             buttonImg: "GoGuardian.png",
             description: "Go Guardian"
         },
-
-        hero_button : {
-            buttonLink: "https://access.heropowered.com/login/centinelavalley-usd",
-            buttonImg: "hero.png",
-            description: "Hero (PBIS System)",
-            deepLink: "hero://",
-            appLink_config : {
-                appName: "hero-k12",
-                appStoreId: "980722195",
-                appStoreLocale: "us",
-                playStoreId: "com.plascotrac.app.hero"
-            }
-        }
     }, //end classroomTools
 
     learningTools : {
@@ -468,11 +428,6 @@ let staffPortalButtons = {
             description: "Read 180/System 44-LX Teacher"
         },
 
-        schmoop_button : {
-            buttonLink: "https://schools.shmoop.com/login/centinela-valley-UHSD",
-            buttonImg: "shmoop.png",
-            description: "Schmoop"
-        },
 
         //TODO: Need to find deep link for clever. NOTE: Appears to only be available on iOS!!
         everfi_button : {
@@ -684,16 +639,16 @@ let staffPortalButtons = {
     resourcesAndTraining: {
         //TODO: Need to find deep link and app if it exists
         lunchTechBytes_Button : {
-            buttonLink: "https://docs.google.com/document/d/1zh7QqUkzRFe2HnEY9AAXR76o9egHnkifNSBwC7WBjfc/edit",
+            buttonLink: "http://bit.ly/LunchTechBytesList",
             buttonImg: "LunchTechBytes_Button_Bevel.png",
             description: "Lunch Tech Bytes",
-            deepLink : "https://docs.google.com/document/d/1zh7QqUkzRFe2HnEY9AAXR76o9egHnkifNSBwC7WBjfc/edit",
-            // appLink_config : {
-            //     appName: "canvas-teacher",
-            //     appStoreId: "1257834464",
-            //     appStoreLocale: "us",
-            //     playStoreId: "com.instructure.teacher"
-            // }
+            deepLink : "canvas-teacher://",
+            appLink_config : {
+                appName: "canvas-teacher",
+                appStoreId: "1257834464",
+                appStoreLocale: "us",
+                playStoreId: "com.instructure.teacher"
+            }
         },
 
         //TODO: Need to find deep link and app if it exists
@@ -701,19 +656,24 @@ let staffPortalButtons = {
             buttonLink: "https://docs.google.com/document/d/1f4D4dwLN4UxhEOR52Yrdgr8M9yEMAz6fFoqD7-HI9b0/edit?usp=sharing",
             buttonImg: "TechItOut_Button.png",
             description: "Tech It Out",
-            deepLink : "https://docs.google.com/document/d/1f4D4dwLN4UxhEOR52Yrdgr8M9yEMAz6fFoqD7-HI9b0/edit?usp=sharing",
-            // appLink_config : {
-            //     appName: "canvas-teacher",
-            //     appStoreId: "1257834464",
-            //     appStoreLocale: "us",
-            //     playStoreId: "com.instructure.teacher"
-            // }
+            deepLink : "canvas-teacher://",
+            appLink_config : {
+                appName: "canvas-teacher",
+                appStoreId: "1257834464",
+                appStoreLocale: "us",
+                playStoreId: "com.instructure.teacher"
+            }
         },
     }
 }; //end staffPortalButtons
 
 let studentPortalButtons = {
     quickLinks : {
+        helpDesk_live_chat_button : {
+            buttonLink: "https://cvhelpdesk.centinela.k12.ca.us:450/HomePage.do",
+            buttonImg: "helpdesk-live-chat.png",
+            description: "CV Helpdesk Live Chat"
+        },
         //TODO: Find deepLink & appLink_config for student power school app
         powerSchool_button : {
             buttonLink: "https://powerschool.centinela.k12.ca.us/public/",
@@ -729,7 +689,7 @@ let studentPortalButtons = {
         },
         
         gmail_button : {
-            buttonLink: "https://accounts.google.com/signin/v2/sl/pwd?service=mail&amp;passive=true&amp;rm=false&amp;continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&amp;ss=1&amp;scc=1&amp;ltmpl=default&amp;ltmplcache=2&amp;emr=1&amp;osid=1&amp;flowName=GlifWebSignIn&amp;flowEntry=ServiceLogin",
+            buttonLink: "https://mail.google.com/mail",
             buttonImg: "gmail.png",
             description: "Gmail",
             deepLink: "googlegmail://",
@@ -742,7 +702,7 @@ let studentPortalButtons = {
         },
 
         googleDrive_button : { 
-            buttonLink: "https://accounts.google.com/signin/v2/sl/pwd?service=wise&amp;passive=1209600&amp;osid=1&amp;continue=https%3A%2F%2Fdrive.google.com%2F&amp;followup=https%3A%2F%2Fdrive.google.com%2F&amp;emr=1&amp;flowName=GlifWebSignIn&amp;flowEntry=ServiceLogin",
+            buttonLink: "https://sso.centinela.k12.ca.us/adfs/ls/?SAMLRequest=fVLLTsMwELwj8Q%2BR70nqIhCymqACQlTiEdHAgZux14nBsYPXSeHvcVMQcIDreHYe612cvHUmGcGjdrYgNJuRBKxwUtumIPf1RXpMTsr9vQXyzvRsOYTW3sHrABiSOGmRTQ8FGbxljqNGZnkHyIJg6%2BX1FZtnM9Z7F5xwhiSr84LYFyVeur5%2FbrnsuTZNqw1XymqpwD4pJ42UplGR%2FfAVa76NtUIcYGUxcBsiNJvPUkpTelDPKaOHjB49kqT6dDrVdtfgv1hPOxKyy7qu0up2XU8Co5bgbyK7II1zjYFMuG5rX3FEPUZYcYNAkiUi%2BBADnjmLQwd%2BDX7UAu7vrgrShtAjy%2FPNZpN9y%2BQ8F%2BPQosycb3IukJTTZtlUzv9Y6f%2FR%2BZc1Kf8QX%2BQ%2FdMvP79u2Wp1XzmjxniyNcZszDzzESsEPsdGF8x0Pf1vTjE6IlqmaqGyw2IPQSoMkSV7uXH%2FfSbyeDw%3D%3D&RelayState=https%3A%2F%2Faccounts.google.com%2FCheckCookie%3Fcontinue%3Dhttps%253A%252F%252Fdrive.google.com%252F%26service%3Dwise%26hl%3Den%26checkedDomains%3Dyoutube%26checkConnection%3Dyoutube%253A368%253A0%26pstMsg%3D1&continue=https%3A%2F%2Fdrive.google.com%2F",
             buttonImg: "google-drive.png",
             description: "Google Drive",
             deepLink: "googledrive://",
@@ -809,12 +769,25 @@ let studentPortalButtons = {
                 playStoreId: "com.instructure.teacher"
             }
         },
+        
+        englishLearnerResources_Button : {
+            buttonLink: "https://sites.google.com/cvuhsd.org/englishlearnerstudentresources/home",
+            buttonImg: "english-learner-resources.jpg",
+            description: "English Learner Resources / Recursos Para Estudiantes de Inglés",
+            // deepLink : "canvas-teacher://",
+            // appLink_config : {
+            //     appName: "canvas-teacher",
+            //     appStoreId: "1257834464",
+            //     appStoreLocale: "us",
+            //     playStoreId: "com.instructure.teacher"
+            // }
+        }
   
     }, //end quickLinks
 
     standardStudentTools : {
         gmail_button : {
-            buttonLink: "https://accounts.google.com/signin/v2/sl/pwd?service=mail&amp;passive=true&amp;rm=false&amp;continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&amp;ss=1&amp;scc=1&amp;ltmpl=default&amp;ltmplcache=2&amp;emr=1&amp;osid=1&amp;flowName=GlifWebSignIn&amp;flowEntry=ServiceLogin",
+            buttonLink: "https://mail.google.com/mail",
             buttonImg: "gmail.png",
             description: "Gmail",
             deepLink: "googlegmail://",
@@ -838,33 +811,6 @@ let studentPortalButtons = {
                 playStoreId: "com.google.android.apps.docs"
             }
         },
-
-        //TODO: Find deep link & app config for password portal
-        passwordPortal_button: {
-            buttonLink: "https://updatemanager:9251/showLogin.cc",
-            buttonImg: "password-portal.png",
-            description: "Password Assistance",
-            deepLink: "googledrive://",
-            appLink_config : {
-                appName: "google-drive",
-                appStoreId: "507874739",
-                appStoreLocale: "us",
-                playStoreId: "com.google.android.apps.docs"
-            }
-        },
-    
-        hero_button : {
-            buttonLink: "https://access.heropowered.com/login/centinelavalley-usd",
-            buttonImg: "hero.png",
-            description: "Hero (PBIS System)",
-            deepLink: "hero://",
-            appLink_config : {
-                appName: "hero-k12",
-                appStoreId: "980722195",
-                appStoreLocale: "us",
-                playStoreId: "com.plascotrac.app.hero"
-            }
-        }
     }, //end standardStudentTools
 
     //TODO: Find Deep Link & app config for apex!
@@ -873,13 +819,13 @@ let studentPortalButtons = {
             buttonLink: "https://sso.centinela.k12.ca.us/adfs/ls/idpinitiatedsignon?LoginToRP=sp.apexlearning.com",
             buttonImg: "apex.png",
             description: "Apex Learning",
-            deepLink : "apex://",
-            // appLink_config : {
-            //     appName: "canvas-teacher",
-            //     appStoreId: "1257834464",
-            //     appStoreLocale: "us",
-            //     playStoreId: "com.instructure.teacher"
-            // }
+            deepLink : "canvas-teacher://",
+            appLink_config : {
+                appName: "canvas-teacher",
+                appStoreId: "1257834464",
+                appStoreLocale: "us",
+                playStoreId: "com.instructure.teacher"
+            }
         },
 
         canvas_button : {
@@ -895,15 +841,8 @@ let studentPortalButtons = {
             }
         },
 
-        //TODO: FInd appLink & deepLink for edgenuity
-        edgenuity_button : {
-            buttonLink: "https://centinela.learn.edgenuity.com/",
-            buttonImg: "edgenuity.png",
-            description: "Edgenuity (Online Courses)"
-        },
-
         illuminate_button : {
-            buttonLink: "https://centinela.illuminatehc.com/login",
+            buttonLink: "https://accounts.illuminateed.net/saml/sp/form/899bd2d4-f0c6-4743-a647-9bdcdf7352d1?relayState=aHR0cHM6Ly9jZW50aW5lbGEuaWxsdW1pbmF0ZWhjLmNvbS9zYW1sL3ZlcmlmeQ==&accountType=student",
             buttonImg: "illuminate.png",
             description: "Illuminate (Student Portal)",
             deepLink: "illuminate://",
@@ -934,13 +873,13 @@ let studentPortalButtons = {
             buttonLink: "https://turnitin.com/",
             buttonImg: "turnitin.png",
             description: "TurnItIn.com (Originality Check & Feedback)",
-            deepLink: "https://turnitin.com/",
-            // appLink_config : {
-            //     appName: "powerteacher-mobile",
-            //     appStoreId: "390563073",
-            //     appStoreLocale: "us",
-            //     playStoreId: "com.powerschool.portal"
-            // }
+            deepLink: "pss-teacher://",
+            appLink_config : {
+                appName: "powerteacher-mobile",
+                appStoreId: "390563073",
+                appStoreLocale: "us",
+                playStoreId: "com.powerschool.portal"
+            }
         }
     }, //end classroomTools
 
@@ -974,12 +913,6 @@ let studentPortalButtons = {
             buttonLink: "https://lxread180.centinela.k12.ca.us:56243/slms/EducatorAccess",
             buttonImg: "Read180LZ-Teacher.png",
             description: "Read 180/System 44-LX Teacher"
-        },
-
-        schmoop_button : {
-            buttonLink: "https://schools.shmoop.com/login/centinela-valley-UHSD",
-            buttonImg: "shmoop.png",
-            description: "Schmoop"
         },
 
         //TODO: Need to find deep link for clever. NOTE: Appears to only be available on iOS!!
@@ -1016,7 +949,7 @@ let studentPortalButtons = {
             buttonLink: "https://www.clever.com/in/cvuhsd",
             buttonImg: "Clever_Button_Bevel.png",
             description: "Clever Portal",
-            deepLink: "clever://",
+            deepLink: "wayside-publishing://",
             appLink_config : {
                 appName: "learning-site",
                 appStoreId: "948682851",
