@@ -418,7 +418,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
 
                                     name                =   "phoneExt" 
                                     label               =   "Phone Number:" 
-                                    placeHolderText     =   "(XXX) XXX-XXXX"
+                                    placeHolderText     =   "XXX XXX XXXX"
 
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
