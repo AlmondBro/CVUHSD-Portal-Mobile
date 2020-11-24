@@ -29,6 +29,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
     const { handleSubmit, register, setValue, getValues, clearErrors, errors }  = useForm();
     
     const IP_ADDRESS_DEV = "10.2.50.36";
+    const PORTAL_LIVE_LINK  = "portal.centinela.k12.ca.us";
 
     const submitTicket = async () => {
         let submitReqResponse = "";
@@ -62,7 +63,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                 room
             }
         
-            const submitRequest_URL = `${isDev ? `http://${IP_ADDRESS_DEV}:3002` : "/server"}/helpdesk/request/create`;
+            const submitRequest_URL = `${isDev ? `http://${IP_ADDRESS_DEV}:3002` : `http://${PORTAL_LIVE_LINK}/server`}/helpdesk/request/create`;
             const submitRequest_headers = {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
