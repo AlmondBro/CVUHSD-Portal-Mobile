@@ -284,7 +284,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                 animationType       =   "slide"
                 presentationStyle   =   "pageSheet"
 
-                swipeDirection      =   { ["up", "down"] }
+                swipeDirection      =   "down"
                 onBackButtonPress   =   { () => setShowRequestModal(false) }
                 hasBackdrop         =   { false }
                 isVisible           =   { showRequestModal  }  
