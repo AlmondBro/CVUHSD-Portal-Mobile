@@ -195,7 +195,8 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                 animationType       =   "slide"
                 presentationStyle   =   "pageSheet"
 
-                // swipeDirection      =   { ["up", "down"] }
+                swipeDirection      =   { ["up", "down"] }
+                onBackButtonPress   =   { () => setShowPasswordModal(false) }
                 hasBackdrop         =   { false }
                 isVisible           =   { showPasswordModal }  
                 
