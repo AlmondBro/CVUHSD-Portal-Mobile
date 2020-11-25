@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import { Alert, Keyboard, ActivityIndicator } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
-import Header from './../FormComponents/Header/Header.js';
-import Form from './../FormComponents/Form/Form.js';
-import Input from './../FormComponents/Form/Input/Input.js';
-
 import { useForm } from 'react-hook-form';
 import validation from './validation.js';
 
+//Import subcomponents
+import Header from './../FormComponents/Header/Header.js';
+import Form from './../FormComponents/Form/Form.js';
+import Input from './../FormComponents/Form/Input/Input.js';
 import TouchableButton from './../TouchableButton/TouchableButton.js';
 
+//Import styled components
 import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, SubmitContainer, Button, InstructionsText, Divider } from './ChangePasswordStyledComponents.js';
 
 import { Reactotron } from './../../config/reactotron.dev.js';
