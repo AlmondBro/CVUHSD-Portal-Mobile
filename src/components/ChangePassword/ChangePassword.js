@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, ActivityIndicator } from 'react-native';
+import { Alert, Keyboard, ActivityIndicator } from 'react-native';
 
 import Header from './../FormComponents/Header/Header.js';
 import Form from './../FormComponents/Form/Form.js';
@@ -15,6 +15,7 @@ import TouchableButton from './../TouchableButton/TouchableButton.js';
 import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, SubmitContainer, Button, InstructionsText, Divider } from './ChangePasswordStyledComponents.js';
 
 import { Reactotron } from './../../config/reactotron.dev.js';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const isDev = __DEV__;
 
@@ -289,35 +290,47 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                                     textContentType     =   "newPassword"
                                 />
                             </Form>
-                        </KeyboardAwareScrollViewStyled>
-                        <SubmitContainer>
-                            <Divider
-                                districtPosition    =   { districtPosition } 
-                                renderAsStudent     =   { renderAsStudent }
-                            />
 
-                            <TouchableButton 
-                                buttonTitle         =   "Update" 
-                                onPress             =     {  handleSubmit(onSubmit) } 
-
-                                color               =   "white"         
-                                bgColor             =   { (districtPosition === "Student" || renderAsStudent) ? "#B41A1F" : "#1E6C93"}
-                               
-                                districtPosition    =   { districtPosition } 
-                                renderAsStudent     =   { renderAsStudent }
+                            <TouchableWithoutFeedback
+                                onPress = {() => Keyboard.dismiss() }
+                                hitSlop =   {
+                                    {
+                                        top: 25 
+                                    }
+                                }
                             >
-                                {
-                                    isLoading ? (
-                                        <ActivityIndicator 
-                                            size        =   "large" 
-                                            color       =   "white"
-                                            animating   =   { isLoading  }
-                                        />
-                                        )
-                                        : null
-                                } 
-                            </TouchableButton>
-                        </SubmitContainer>
+                                <SubmitContainer>
+                                    <Divider
+                                        districtPosition    =   { districtPosition } 
+                                        renderAsStudent     =   { renderAsStudent }
+                                    />
+
+                                    <TouchableButton 
+                                        buttonTitle         =   "Update" 
+                                        onPress             =     {  handleSubmit(onSubmit) } 
+
+                                        color               =   "white"         
+                                        bgColor             =   { (districtPosition === "Student" || renderAsStudent) ? "#B41A1F" : "#1E6C93"}
+                                    
+                                        districtPosition    =   { districtPosition } 
+                                        renderAsStudent     =   { renderAsStudent }
+                                    >
+                                        {
+                                            isLoading ? (
+                                                <ActivityIndicator 
+                                                    size        =   "large" 
+                                                    color       =   "white"
+                                                    animating   =   { isLoading  }
+                                                />
+                                                )
+                                                : null
+                                        } 
+                                    </TouchableButton>
+                                </SubmitContainer>
+                            </TouchableWithoutFeedback>
+
+                        </KeyboardAwareScrollViewStyled>
+                        
                     </SafeAreaViewStyled>
             </ModalStyled>  
     ); //end return statement
