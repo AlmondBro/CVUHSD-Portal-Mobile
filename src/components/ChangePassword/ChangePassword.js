@@ -213,8 +213,9 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
 
                                 closeModal          =   { () => setShowPasswordModal(false) }
                             />
-                        <KeyboardAwareScrollViewStyled>
-                        
+                        <KeyboardAwareScrollViewStyled
+                            keyboardShouldPersistTaps   =   { true } //Enable this so that the input form field for passwords stay focused even when the toggle visibility eye symbol is tapped
+                        >
                             <InstructionsText
                               districtPosition    =   { districtPosition } 
                               renderAsStudent     =   { renderAsStudent }
