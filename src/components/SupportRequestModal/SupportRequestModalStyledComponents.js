@@ -17,6 +17,7 @@ let SafeAreaViewStyled = styled(SafeAreaView)`
 const ModalStyled = styled(Modal).attrs((props) => ({
     isVisible               :   props.isVisible,
     hasBackdrop             :   props.hasBackdrop,
+    onBackButtonPress       :   props.onBackButtonPress,
     onBackdropPress         :   props.onBackdropPress,
     onSwipeComplete         :   props.onSwipeComplete, 
     swipeDirection          :   props.swipeDirection,
