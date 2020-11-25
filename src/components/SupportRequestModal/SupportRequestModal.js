@@ -291,7 +291,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                 
                 onDismiss           =   { onModalDismiss }
                 // onBackdropPress     =   { () => setShowRequestModal(false) }
-                // onSwipeComplete     =   { () => setShowRequestModal(false) }
+                onSwipeComplete     =   { () => setShowRequestModal(false) }
             >
                 <SafeAreaViewStyled>
                             <Header
