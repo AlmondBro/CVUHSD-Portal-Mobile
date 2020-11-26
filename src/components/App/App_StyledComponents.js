@@ -72,7 +72,7 @@ let StatusBarSafeView = styled(SafeAreaView).attrs( (props) => ({
     flex: 0;
     flex-direction: row;
     height: ${Constants.statusBarHeight};
-    background-color: white;
+    background-color:  ${props => props.title ? ( ((props.title === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93") : "#B41A1F" };
 `;
 
 

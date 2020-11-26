@@ -330,7 +330,11 @@ class App extends Component {
                                 Source: https://stackoverflow.com/questions/47725607/react-native-safeareaview-background-color-how-to-assign-two-different-backgro
                         */ 
                     }
-                    <StatusBarSafeView edges={['top']}>
+                    <StatusBarSafeView 
+                        title           =   { this.state.title }
+                        renderAsStudent =   { this.state.renderAsStudent }
+                        edges           =   { ['top'] }
+                    >
                         <StatusBar 
                             backgroundColor =   {   this.state.title ? 
                                                         (   ( 
