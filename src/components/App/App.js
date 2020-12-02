@@ -47,6 +47,8 @@ const isDev = __DEV__;
 
 const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
 
+const PORTAL_LIVE_LINK  = "portal.centinela.k12.ca.us";
+const IP_ADDRESS_DEV    = "10.2.64.175:3002";
 class App extends Component {
     constructor(props) {
         super(props);
@@ -105,10 +107,7 @@ class App extends Component {
           this.setState({site: school, gradeLevel: gradeLevel});
         }; //end parseOUforSchool()
   
-        const getOU_URL = `https://portal.centinela.k12.ca.us/server/getOU`;
-        
-        //`${isDev ? "" : "/server" }/getOU`; 
-  
+        const getOU_URL = `${isDev ? `http://${IP_ADDRESS_DEV}` : `http://${PORTAL_LIVE_LINK}/server`}/getOU`;
         const getOU_headers = {
             'Content-Type': 'application/json',
             'credentials': 'include',
@@ -120,13 +119,13 @@ class App extends Component {
             headers: getOU_headers,
             body: JSON.stringify({user: this.state.email})
         }).then((response) => {
-            console.log("getOU response:\t" + JSON.stringify(response));
             return response.json();     //Parse the JSON of the response
         }).then((OU) => {
+            Reactotron.log("getOU response:\t", OU);
             parseOUforSchool(OU);
             this.setState({OU:  OU})
         }).catch((error) => {
-            console.error(`Catching error:\t ${error}`);
+            Reactotron.error(`Catching error:\t ${error}`);
         });
 
         getOU();
