@@ -108,8 +108,6 @@ class App extends Component {
         }; //end parseOUforSchool()
   
         const getOU_URL = `${isDev ? `http://${IP_ADDRESS_DEV}` : `http://${PORTAL_LIVE_LINK}/server`}/getOU`;
-        
-  
         const getOU_headers = {
             'Content-Type': 'application/json',
             'credentials': 'include',
