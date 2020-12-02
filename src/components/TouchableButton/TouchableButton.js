@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Container, Text } from './TouchableButtonStyledComponents';
 
 const TouchableButton = ({ renderAsStudent, districtPosition, buttonTitle, color, bgColor, children, onPress }) => {

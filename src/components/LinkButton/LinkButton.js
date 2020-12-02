@@ -254,6 +254,11 @@ const LinkButton = (props) => {
             case "unified-talent.png" : 
                 return portalRoot +("/images/buttons/unified-talent.png");
 
+            case "webex-teams.jpg" :
+                return portalRoot +("/images/buttons/webex-teams.jpg");
+
+            case "helpdesk-live-chat.png" :
+                return portalRoot +("/images/buttons/helpdesk-live-chat.png");
             default :  
                 return portalRoot +("/images/buttons/Outlook.png");
         } //end switch statement

@@ -18,6 +18,7 @@ const ModalStyled = styled(Modal).attrs((props) => ({
     isVisible           :   props.isVisible,
     hasBackdrop         :   props.hasBackdrop,
     onBackdropPress     :   props.onBackdropPress,
+    onBackButtonPress   :   props.onBackButtonPress,
     onSwipeComplete     :   props.onSwipeComplete, 
     swipeDirection      :   props.swipeDirection,
     javaScriptEnabled   :   props.javaScriptEnabled,

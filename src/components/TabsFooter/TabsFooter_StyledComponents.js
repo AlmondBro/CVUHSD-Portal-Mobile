@@ -4,7 +4,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 const TabsFooterContainerView = styled.View`
-    flex: 0.2;
+    flex: 0.15;
     flex-direction: row;
 
     border-radius: 0;

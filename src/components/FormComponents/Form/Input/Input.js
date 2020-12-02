@@ -149,7 +149,7 @@ const Input = forwardRef((props, ref) => {
                                                         {...inputProps}
                             />
                             {
-                                (type === "password") ? (
+                                (type === "password") && isFocused ? (
                                     <EyeSymbol
                                         districtPosition    =   { districtPosition }
                                         renderAsStudent     =   { renderAsStudent }
