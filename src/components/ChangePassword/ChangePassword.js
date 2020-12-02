@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { Alert, ActivityIndicator } from 'react-native';
-
-import Header from './../FormComponents/Header/Header.js';
-import Form from './../FormComponents/Form/Form.js';
-import Input from './../FormComponents/Form/Input/Input.js';
+import { Alert, Keyboard, ActivityIndicator } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 import { useForm } from 'react-hook-form';
 import validation from './validation.js';
 
-import SubmitFooterContainer from './../FormComponents/SubmitFooterContainer/SubmitFooterContainer.js';
-
+//Import subcomponents
+import Header from './../FormComponents/Header/Header.js';
+import Form from './../FormComponents/Form/Form.js';
+import Input from './../FormComponents/Form/Input/Input.js';
 import TouchableButton from './../TouchableButton/TouchableButton.js';
 
+//Import styled components
 import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, SubmitContainer, Button, InstructionsText, Divider } from './ChangePasswordStyledComponents.js';
 
 import { Reactotron } from './../../config/reactotron.dev.js';
@@ -195,13 +195,14 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                 animationType       =   "slide"
                 presentationStyle   =   "pageSheet"
 
-                // swipeDirection      =   { ["up", "down"] }
+                swipeDirection      =   "down"
+                onBackButtonPress   =   { () => setShowPasswordModal(false) }
                 hasBackdrop         =   { false }
                 isVisible           =   { showPasswordModal }  
                 
                 onDismiss           =   { onModalDismiss }
                 // onBackdropPress     =   { () => setShowRequestModal(false) }
-                // onSwipeComplete     =   { () => setShowRequestModal(false) }
+                onSwipeComplete     =   { () => setShowPasswordModal(false) }
             >
                 <SafeAreaViewStyled>
                             <Header
@@ -213,8 +214,9 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
 
                                 closeModal          =   { () => setShowPasswordModal(false) }
                             />
-                        <KeyboardAwareScrollViewStyled>
-                        
+                        <KeyboardAwareScrollViewStyled
+                            keyboardShouldPersistTaps   =   { true } //Enable this so that the input form field for passwords stay focused even when the toggle visibility eye symbol is tapped
+                        >
                             <InstructionsText
                               districtPosition    =   { districtPosition } 
                               renderAsStudent     =   { renderAsStudent }
@@ -288,35 +290,47 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                                     textContentType     =   "newPassword"
                                 />
                             </Form>
-                        </KeyboardAwareScrollViewStyled>
-                        <SubmitContainer>
-                            <Divider
-                                districtPosition    =   { districtPosition } 
-                                renderAsStudent     =   { renderAsStudent }
-                            />
 
-                            <TouchableButton 
-                                buttonTitle         =   "Update" 
-                                onPress             =     {  handleSubmit(onSubmit) } 
-
-                                color               =   "white"         
-                                bgColor             =   { (districtPosition === "Student" || renderAsStudent) ? "#B41A1F" : "#1E6C93"}
-                               
-                                districtPosition    =   { districtPosition } 
-                                renderAsStudent     =   { renderAsStudent }
+                            <TouchableWithoutFeedback
+                                onPress = {() => Keyboard.dismiss() }
+                                hitSlop =   {
+                                    {
+                                        top: 25 
+                                    }
+                                }
                             >
-                                {
-                                    isLoading ? (
-                                        <ActivityIndicator 
-                                            size        =   "large" 
-                                            color       =   "white"
-                                            animating   =   { isLoading  }
-                                        />
-                                        )
-                                        : null
-                                } 
-                            </TouchableButton>
-                        </SubmitContainer>
+                                <SubmitContainer>
+                                    <Divider
+                                        districtPosition    =   { districtPosition } 
+                                        renderAsStudent     =   { renderAsStudent }
+                                    />
+
+                                    <TouchableButton 
+                                        buttonTitle         =   "Update" 
+                                        onPress             =     {  handleSubmit(onSubmit) } 
+
+                                        color               =   "white"         
+                                        bgColor             =   { (districtPosition === "Student" || renderAsStudent) ? "#B41A1F" : "#1E6C93"}
+                                    
+                                        districtPosition    =   { districtPosition } 
+                                        renderAsStudent     =   { renderAsStudent }
+                                    >
+                                        {
+                                            isLoading ? (
+                                                <ActivityIndicator 
+                                                    size        =   "large" 
+                                                    color       =   "white"
+                                                    animating   =   { isLoading  }
+                                                />
+                                                )
+                                                : null
+                                        } 
+                                    </TouchableButton>
+                                </SubmitContainer>
+                            </TouchableWithoutFeedback>
+
+                        </KeyboardAwareScrollViewStyled>
+                        
                     </SafeAreaViewStyled>
             </ModalStyled>  
     ); //end return statement

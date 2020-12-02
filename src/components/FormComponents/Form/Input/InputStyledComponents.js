@@ -131,6 +131,14 @@ const EyeSymbol = ({ districtPosition, renderAsStudent, showPassword, onFocus, o
             <TouchableOpacity
                 onFocus =   { onFocus }
                 onPress =   { onPress }
+                hitSlop =   {
+                    {
+                        top: 25, 
+                        bottom: 25, 
+                        left: 25, 
+                        right: 25
+                    }
+                }
             >
                 <FontAwesome 
                     name    =   { showPassword ? "eye-slash" : "eye" } 

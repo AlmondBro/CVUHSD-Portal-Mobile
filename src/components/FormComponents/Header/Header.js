@@ -6,14 +6,11 @@ import { FontAwesome } from '@expo/vector-icons';
 import { HeaderContainer, HeaderTitleIconContainer, HeaderText, CloseIconButton } from  './HeaderStyledComponents.js';
 
 const Header = ({ districtPosition, renderAsStudent, title, faIcon, closeModal }) => {
-    //const [size, onLayout] = useComponentSize();
-
     const [ headerHeight, setHeaderHeight ]  = useState(0);
 
     const onLayout = (event) => {
-        //let { height } = event.nativeEvent.layout;
-
-        const {height} = Dimensions.get('window');
+        const { height } = Dimensions.get('window');
+        
         setHeaderHeight(height);
     };
 
