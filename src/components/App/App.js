@@ -461,6 +461,8 @@ class App extends Component {
                                             setShowPasswordModal    =   {  this.setShowPasswordModal }
                                             showPasswordModal       =   {  this.state.showPasswordModal } 
 
+                                            showPortalLogo      =   { this.state.showPortalLogo }
+
                                             setRenderAsStudent      =   { this.setRenderAsStudent }
                                             logOut                  =   { this.clearLogOnUserData }
                                         />

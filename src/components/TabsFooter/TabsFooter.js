@@ -11,10 +11,11 @@ import SupportRequestModal  from './../SupportRequestModal/SupportRequestModal.j
 //Import styled components
 import { TabsFooterContainerView, TabsFooterButton }  from './TabsFooter_StyledComponents.js';
 
-const TabsFooter = ({ appWidth, email, firstName, lastName, renderAsStudent, site, setRenderAsStudent, isModalVisible, showRequestModal, setIsModalVisible, setShowRequestModal, showPasswordModal, setShowPasswordModal, title, logOut }) => {    
+const TabsFooter = ({ appWidth, email, firstName, lastName, renderAsStudent, site, setRenderAsStudent, isModalVisible, showRequestModal, setIsModalVisible, setShowRequestModal, showPasswordModal, setShowPasswordModal, showPortalLogo, title, logOut }) => {    
     return (
         <TabsFooterContainerView 
-            title   =   { title }    
+            title           =   { title }    
+            showPortalLogo  =   { showPortalLogo }
         >
             { 
                 (title !== "Student") ? 
