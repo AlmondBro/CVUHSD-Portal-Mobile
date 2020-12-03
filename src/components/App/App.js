@@ -67,6 +67,7 @@ class App extends Component {
             OU                  :   null,
             renderAsStudent     :   false,
             portalLogoSource    :   Images.appHeader.portalLogoRed,
+            showPortalLogo      :   true,
             backgroundImage     :   Images.appHeader.backgroundImageRed ,
             
             showRequestModal    :   false,
@@ -239,6 +240,11 @@ class App extends Component {
         return;
     }; //end setRenderAsStudent
 
+    setShowPortalLogo = (showPortalLogo) => {
+        this.setState({ showPortalLogo: showPortalLogo });
+        return;
+    }; //end setShowPortalLogo
+
     setShowRequestModal = (showRequestModal) => {
         this.setState( { showRequestModal: showRequestModal } );
         return;
@@ -375,6 +381,9 @@ class App extends Component {
                                                 renderAsStudent     =   { this.state.renderAsStudent }
                                                 portalLogoSource    =   { this.state.portalLogoSource }
                                                 reloadAppFromUpdate =   { this.reloadAppFromUpdate }
+
+                                                showPortalLogo      =   {  this.state.showPortalLogo    }
+                        
                                                 // onPress    =   { navigate ? navigate: null }
                                             />
                                             
@@ -405,6 +414,7 @@ class App extends Component {
                                                                 title               =   {   this.state.title    }
                                                                 renderAsStudent     =   {   this.state.renderAsStudent }
                                                                 openADSingleSignOn  =   {   this.openADSingleSignOn } 
+                                                                setShowPortalLogo   =   {  this.setShowPortalLogo }
                                                             /> 
                                                 }
                                             </Screen>
@@ -422,6 +432,8 @@ class App extends Component {
                                                                 renderAsStudent     =   { this.state.renderAsStudent }
                                                                 site                =   { this.state.site }
                                                                 appWidth            =   { this.state.appWidth }
+                                                                
+                                                                setShowPortalLogo   =   {  this.setShowPortalLogo }
                                                             />
                                             }
                                         </Screen>
