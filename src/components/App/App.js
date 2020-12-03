@@ -367,8 +367,9 @@ class App extends Component {
                         <NavigationContainer ref={navigationRef}>
                                 <AppContainerView>
                                     <ImageBackgroundStyled
-                                        source={ this.state.backgroundImage }
-                                        accessibilityLabel= "CVUHSD Mobile Portal"
+                                        source              =   { this.state.backgroundImage }
+                                        accessibilityLabel  =   "CVUHSD Mobile Portal"
+                                        showPortalLogo      =   { this.state.showPortalLogo }
                                     >
                                         {/* <AppHeaderContainerView> */}
                                             <Header 
