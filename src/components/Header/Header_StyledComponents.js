@@ -26,19 +26,15 @@ let UpdateAppView = styled.View`
     justify-content: center;
     align-items: center;
 
-    background-color: transparent;
+    /* background-color: white; */
 
-    margin-top: 15;
-    margin-bottom: 5;
+    margin-top: 10;
+    margin-bottom: 10;
 
-    padding-left: 50;
-    padding-right: 50;
-    padding-top: 15;
-    padding-bottom: 15;
 
     border-radius: 10;
 
-    width: 95%;
+    width: 100%;
 `; 
 
 let UpdateTextDescription = styled.Text`
@@ -99,10 +95,12 @@ const UpdateButtonView = styled.View`
 
     width: 120;
 
-    margin-top: 15;
+    margin-top: 10;
+    margin-bottom: 10;
+
     
-    padding-top: 10;
-    padding-bottom: 10;
+    padding-top: 8;
+    padding-bottom: 8;
 `;
 
 const UpdateButtonText= styled.Text`
@@ -111,7 +109,7 @@ const UpdateButtonText= styled.Text`
     font-family: 'SourceSansPro_600SemiBold';
     /* 'SourceSansPro_400Regular','SourceSansPro_200ExtraLight', 'SourceSansPro_200ExtraLight_Italic','SourceSansPro_300Light','SourceSansPro_300Light_Italic','SourceSansPro_400Regular_Italic','SourceSansPro_600SemiBold', 'SourceSansPro_600SemiBold_Italic','SourceSansPro_700Bold','SourceSansPro_700Bold_Italic', 'SourceSansPro_900Black', 'SourceSansPro_900Black_Italic'; */
 
-    font-size: 20;
+    font-size: 15;
     font-weight: bold;
     flex-direction: row;
 
