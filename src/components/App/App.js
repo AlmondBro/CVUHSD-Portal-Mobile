@@ -374,32 +374,27 @@ class App extends Component {
                                     />
                                 ) : null
                             }
-                             
                                 <AppContainerView>
                                     <ImageBackgroundStyled
                                         source              =   { this.state.backgroundImage }
                                         accessibilityLabel  =   "CVUHSD Mobile Portal"
                                         showPortalLogo      =   { this.state.showPortalLogo }
                                     >
-                                        {/* <AppHeaderContainerView> */}
-                                            <Header 
-                                                showUpdate          =   { this.state.showUpdate } 
-                                                firstName           =   { this.state.firstName}
-                                                lastName            =   { this.state.lastName }
-                                                title               =   { this.state.title }
-                                                site                =   { this.state.site }
-                                                gradeLevel          =   { this.state.gradeLevel }
-                                                renderAsStudent     =   { this.state.renderAsStudent }
-                                                portalLogoSource    =   { this.state.portalLogoSource }
-                                                reloadAppFromUpdate =   { this.reloadAppFromUpdate }
+                                        <Header 
+                                            showUpdate          =   { this.state.showUpdate } 
+                                            firstName           =   { this.state.firstName}
+                                            lastName            =   { this.state.lastName }
+                                            title               =   { this.state.title }
+                                            site                =   { this.state.site }
+                                            gradeLevel          =   { this.state.gradeLevel }
+                                            renderAsStudent     =   { this.state.renderAsStudent }
+                                            portalLogoSource    =   { this.state.portalLogoSource }
+                                            reloadAppFromUpdate =   { this.reloadAppFromUpdate }
 
-                                                showPortalLogo      =   {  this.state.showPortalLogo    }
-                        
-                                                // onPress    =   { navigate ? navigate: null }
-                                            />
-                                            
-                                            { (this.state.title || this.state.renderAsStudent) ? null : <WelcomeText>Welcome</WelcomeText> }
-                                        {/* </AppHeaderContainerView> */}
+                                            showPortalLogo      =   {  this.state.showPortalLogo    }
+                                        />
+                                        
+                                        { (this.state.title || this.state.renderAsStudent) && !this.state.showUpdate ? null : <WelcomeText>Welcome</WelcomeText> }
                                     </ImageBackgroundStyled>
 
                                     <Navigator

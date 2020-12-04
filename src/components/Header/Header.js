@@ -9,6 +9,7 @@ import { BlueSectionContainer } from './../App/App_StyledComponents.js';
 import greeting from 'greeting';
 
 const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel, portalLogoSource, showPortalLogo, showUpdate, reloadAppFromUpdate }) => {  
+    showUpdate = true;
     let parseSchoolName = (site) => {
         if (site && (site !== "Centinela Valley Independent Study School" )) {
             console.log("Site:\t" + site);
@@ -112,7 +113,7 @@ const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel,
 
         <BlueSectionContainer>
         {
-            title ? 
+            title && !showUpdate ? 
                 (
                     
                         <UserInfoText 
@@ -133,7 +134,7 @@ const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel,
                 ) : null     
             }
             {
-                (title === "Student") ? 
+                (title === "Student") && !showUpdate ? 
                     (
                         <Fragment>
                             <UserInfoText 
@@ -148,7 +149,7 @@ const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel,
                     ) : null
             }
             {              
-                ( title === "Student") && site ? 
+                ( title === "Student") && site && !showUpdate ? 
                     (
                         <Fragment>
                             <SchoolNameLogoView>
