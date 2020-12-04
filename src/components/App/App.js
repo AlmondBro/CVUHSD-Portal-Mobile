@@ -37,7 +37,7 @@ import HomeScreen from './../HomeScreen/HomeScreen.js';
 //import styled components
 import { AppContainerView, AppHeaderContainerView, ImageBackgroundStyled, WelcomeText, StatusBarSafeView, SafeAreaViewStyled } from './App_StyledComponents.js';
 
-const imagesObjectPath = (Platform.OS === "web") ? require('./../../assets/images/index.js') : require('@assets');
+const imagesObjectPath = (Platform.OS === "web") ? require('./../../assets/images/index.js') : require('@images');
 const Images = imagesObjectPath.default;
 
 //Import Images from @assets';
@@ -366,6 +366,7 @@ class App extends Component {
                     >
                 
                         <NavigationContainer ref={navigationRef}>
+                                <SettingsHeader/>
                                 <AppContainerView>
                                     <ImageBackgroundStyled
                                         source              =   { this.state.backgroundImage }
