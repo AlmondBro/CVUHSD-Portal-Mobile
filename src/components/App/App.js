@@ -27,6 +27,7 @@ import { openAuthSession } from 'azure-ad-graph-expo';
 import { dimensionsWidthHOC, navigationRef, navigate } from './../../utility-functions.js';
 
 //Import App/Page components
+import SettingsHeader from './../SettingsHeader/SettingsHeader.js';
 import Header from './../Header/Header.js';
 import PageContent from './../PageContent/PageContent.js';
 import TabsFooter from './../TabsFooter/TabsFooter.js'
