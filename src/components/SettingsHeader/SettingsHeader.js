@@ -18,9 +18,9 @@ const SettingsHeader = ({ districtPosition, renderAsStudent }) => {
                 source  =   { portalLogoSource} 
             />
             <SettingsFAIcon 
-                                name    =   { renderAsStudent ? "user" : "graduation-cap" } 
+                                name    =   "gear" 
                                 size    =   {   30  } 
-                                color   =   "gear" 
+                                color   =   "white" 
             />
         </Container>
     ); //end return statement

@@ -4,7 +4,7 @@ import { FontAwesome } from '@expo/vector-icons';
 let Container = styled.View`
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
 
     flex: 0.1;

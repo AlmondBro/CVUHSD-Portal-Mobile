@@ -366,10 +366,15 @@ class App extends Component {
                     >
                 
                         <NavigationContainer ref={navigationRef}>
-                                <SettingsHeader
-                                    title           =   { this.state.title }
-                                    renderAsStudent =   { this.state.renderAsStudent }
-                                />
+                            {
+                                !this.state.showPortalLogo ?(
+                                    <SettingsHeader
+                                        title           =   { this.state.title }
+                                        renderAsStudent =   { this.state.renderAsStudent }
+                                    />
+                                ) : null
+                            }
+                             
                                 <AppContainerView>
                                     <ImageBackgroundStyled
                                         source              =   { this.state.backgroundImage }
