@@ -9,7 +9,7 @@ import { BlueSectionContainer } from './../App/App_StyledComponents.js';
 import greeting from 'greeting';
 
 const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel, portalLogoSource, showPortalLogo, showUpdate, reloadAppFromUpdate }) => {  
-    showUpdate = true;
+    // showUpdate = true;
     let parseSchoolName = (site) => {
         if (site && (site !== "Centinela Valley Independent Study School" )) {
             console.log("Site:\t" + site);

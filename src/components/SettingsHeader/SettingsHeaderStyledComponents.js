@@ -4,7 +4,7 @@ import { FontAwesome } from '@expo/vector-icons';
 let Container = styled.View`
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 
     flex: 0.1;
@@ -24,7 +24,8 @@ const PortalLogo = styled.Image.attrs( (props) => {
     width: 50;
     height: 50;
 
-    margin-left: 12;
+    margin-left: auto;
+    /* margin-right: auto; */
 `;
 
 let SettingsFAIcon = styled(FontAwesome)`
