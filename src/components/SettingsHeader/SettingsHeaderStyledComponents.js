@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { FontAwesome } from '@expo/vector-icons';
 
 let Container = styled.View`
     display: flex;
@@ -17,15 +18,18 @@ let Container = styled.View`
 `;
 
 
-let PortalLogo = styled.Image.attrs( (props) => {
+const PortalLogo = styled.Image.attrs( (props) => {
   
 })`
     width: 50;
     height: 50;
 
     margin-left: 12;
-
 `;
 
+let SettingsFAIcon = styled(FontAwesome)`
+    margin-left: auto;
+    margin-right: 12;
+`;
 
-export { Container, PortalLogo };
+export { Container, PortalLogo, SettingsFAIcon };

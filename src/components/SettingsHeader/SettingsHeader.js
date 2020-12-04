@@ -1,8 +1,7 @@
 import React from 'react';
 import { Platform } from 'react-native';
-
 //Import the styled sub-components
-import { Container, PortalLogo } from './SettingsHeaderStyledComponents.js';
+import { Container, PortalLogo, SettingsFAIcon } from './SettingsHeaderStyledComponents.js';
 
 const imagesObjectPath = (Platform.OS === "web") ? require('./../../assets/images/index.js') : require('@images');
 const Images = imagesObjectPath.default;
@@ -17,6 +16,11 @@ const SettingsHeader = ({ districtPosition, renderAsStudent }) => {
         >
             <PortalLogo
                 source  =   { portalLogoSource} 
+            />
+            <SettingsFAIcon 
+                                name    =   { renderAsStudent ? "user" : "graduation-cap" } 
+                                size    =   {   30  } 
+                                color   =   "gear" 
             />
         </Container>
     ); //end return statement
