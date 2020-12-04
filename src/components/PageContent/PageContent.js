@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import { Text, Platform } from 'react-native';
+import React, { Fragment, useEffect } from 'react';
+import { Platform } from 'react-native';
 
 //Import list of buttons
 import { blueSectionInfo_Staff, redSectionInfo_Student} from "./../../objectFiles/blueSectionInfo.js";
@@ -10,7 +10,9 @@ import BlueSection from './../BlueSection/BlueSection.js';
 //Import styled components
 import { BlueSectionContainer, ScrollViewStyled } from './PageContent_StyledComponents.js';
 
-let PageContent  = ({ renderAsStudent, title, appWidth, ...props }) => {
+const androidWebViewDebug = false;
+
+let PageContent  = ({ renderAsStudent, title, appWidth, setShowPortalLogo,...props }) => {
     let sectionInfoObject;
     sectionInfoObject = (title === "Student" || renderAsStudent === true) ? 
                             redSectionInfo_Student : blueSectionInfo_Staff;
@@ -31,8 +33,9 @@ let PageContent  = ({ renderAsStudent, title, appWidth, ...props }) => {
         }); //end outer return statement
     }; //end generateBlueSections()
 
-    const androidWebViewDebug = false;
-
+    useEffect(() => {
+        setShowPortalLogo(false);
+    }, []);
     return (
             <ScrollViewStyled
                 width                   =   { appWidth }

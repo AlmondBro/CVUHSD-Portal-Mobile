@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Button, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
 //Import component's styled parts
 import { HeaderContainerView, PortalLogoImage, UpdateAppView, UpdateTextDescription, UserInfoText, SchoolNameLogoView, SchoolLogo, UpdateButtonTouchableOpacity } from './Header_StyledComponents.js';
@@ -8,7 +8,8 @@ import { BlueSectionContainer } from './../App/App_StyledComponents.js';
 //Import 3rd-party APIs
 import greeting from 'greeting';
 
-const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel, portalLogoSource, showUpdate, reloadAppFromUpdate }) => {  
+const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel, portalLogoSource, showPortalLogo, showUpdate, reloadAppFromUpdate }) => {  
+    // showUpdate = true;
     let parseSchoolName = (site) => {
         if (site && (site !== "Centinela Valley Independent Study School" )) {
             console.log("Site:\t" + site);
@@ -71,14 +72,19 @@ const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel,
 
     return (
       <HeaderContainerView>
-          <TouchableOpacity
-            activeOpacity = { 0.5 }
-            // onPress={ props.onPress('Home') }
-          >
-            <PortalLogoImage  
-                source  =   { portalLogoSource} 
-            />
-          </TouchableOpacity>
+          {
+              showPortalLogo ? (
+                <TouchableOpacity
+                    activeOpacity = { 0.5 }
+                    // onPress={ props.onPress('Home') }
+                >
+                <PortalLogoImage  
+                    source  =   { portalLogoSource} 
+                />
+              </TouchableOpacity>
+              ) : null
+          }
+     
     
         <Fragment>
             { showUpdate ?
@@ -107,7 +113,7 @@ const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel,
 
         <BlueSectionContainer>
         {
-            title ? 
+            title && !showUpdate ? 
                 (
                     
                         <UserInfoText 
@@ -128,7 +134,7 @@ const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel,
                 ) : null     
             }
             {
-                (title === "Student") ? 
+                (title === "Student") && !showUpdate ? 
                     (
                         <Fragment>
                             <UserInfoText 
@@ -143,7 +149,7 @@ const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel,
                     ) : null
             }
             {              
-                ( title === "Student") && site ? 
+                ( title === "Student") && site && !showUpdate ? 
                     (
                         <Fragment>
                             <SchoolNameLogoView>

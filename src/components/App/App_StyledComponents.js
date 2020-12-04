@@ -24,7 +24,7 @@ let AppHeaderContainerView = styled.View`
 const ImageBackgroundStyled = styled.ImageBackground.attrs( (props) => ({
     resizeMode: "cover"
 }))`
-    flex: 0.75;
+    flex: ${props => props.showPortalLogo ? 0.75 : 0.2};
     justify-content: center;
 `;
 
