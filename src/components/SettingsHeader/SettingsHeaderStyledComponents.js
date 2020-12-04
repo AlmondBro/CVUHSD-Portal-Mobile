@@ -1,10 +1,10 @@
 import styled from 'styled-components/native';
-import { FontAwesome } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 let Container = styled.View`
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
 
     flex: 0.1;
@@ -24,13 +24,16 @@ const PortalLogo = styled.Image.attrs( (props) => {
     width: 50;
     height: 50;
 
-    margin-left: auto;
     /* margin-right: auto; */
 `;
 
-let SettingsFAIcon = styled(FontAwesome)`
-    margin-left: auto;
-    margin-right: 12;
+const InfoIconTouchOpacity = styled.TouchableOpacity`
+    position: absolute;
+    left: 90%;
 `;
 
-export { Container, PortalLogo, SettingsFAIcon };
+let SettingsIcon = styled(MaterialCommunityIcons)`
+    margin-right: 15;
+`;
+
+export { Container, PortalLogo, InfoIconTouchOpacity, SettingsIcon };
