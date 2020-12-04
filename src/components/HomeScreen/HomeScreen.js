@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ImageBackground, ActivityIndicator } from 'react-native';
 
 import { HomeScreenContainerView, OpenSSOContainer } from './HomeScreen_StyledComponents.js';
 
 import TouchableButton from './../TouchableButton/TouchableButton.js';
 
-const HomeScreen = ({ renderAsStudent, title, authLoading, openADSingleSignOn, children }) => {
+const HomeScreen = ({ renderAsStudent, title, authLoading, openADSingleSignOn, setShowPortalLogo, children }) => {
     const backgroundImage = require('./../../assets/images/theCVway-white.png');
 
+    useEffect(() => {
+        setShowPortalLogo(true);
+    }, []);
     return (
         <HomeScreenContainerView>
             <ImageBackground

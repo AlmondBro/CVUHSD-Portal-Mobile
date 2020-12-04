@@ -27,6 +27,7 @@ import { openAuthSession } from 'azure-ad-graph-expo';
 import { dimensionsWidthHOC, navigationRef, navigate } from './../../utility-functions.js';
 
 //Import App/Page components
+import SettingsHeader from './../SettingsHeader/SettingsHeader.js';
 import Header from './../Header/Header.js';
 import PageContent from './../PageContent/PageContent.js';
 import TabsFooter from './../TabsFooter/TabsFooter.js'
@@ -36,7 +37,7 @@ import HomeScreen from './../HomeScreen/HomeScreen.js';
 //import styled components
 import { AppContainerView, AppHeaderContainerView, ImageBackgroundStyled, WelcomeText, StatusBarSafeView, SafeAreaViewStyled } from './App_StyledComponents.js';
 
-const imagesObjectPath = (Platform.OS === "web") ? require('./../../assets/images/index.js') : require('@assets');
+const imagesObjectPath = (Platform.OS === "web") ? require('./../../assets/images/index.js') : require('@images');
 const Images = imagesObjectPath.default;
 
 //Import Images from @assets';
@@ -48,7 +49,7 @@ const isDev = __DEV__;
 const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
 
 const PORTAL_LIVE_LINK  = "portal.centinela.k12.ca.us";
-const IP_ADDRESS_DEV    = "10.2.64.175:3002";
+const IP_ADDRESS_DEV    = "10.2.50.36:3002";
 class App extends Component {
     constructor(props) {
         super(props);
@@ -67,6 +68,7 @@ class App extends Component {
             OU                  :   null,
             renderAsStudent     :   false,
             portalLogoSource    :   Images.appHeader.portalLogoRed,
+            showPortalLogo      :   true,
             backgroundImage     :   Images.appHeader.backgroundImageRed ,
             
             showRequestModal    :   false,
@@ -239,6 +241,11 @@ class App extends Component {
         return;
     }; //end setRenderAsStudent
 
+    setShowPortalLogo = (showPortalLogo) => {
+        this.setState({ showPortalLogo: showPortalLogo });
+        return;
+    }; //end setShowPortalLogo
+
     setShowRequestModal = (showRequestModal) => {
         this.setState( { showRequestModal: showRequestModal } );
         return;
@@ -359,27 +366,35 @@ class App extends Component {
                     >
                 
                         <NavigationContainer ref={navigationRef}>
+                            {
+                                !this.state.showPortalLogo ?(
+                                    <SettingsHeader
+                                        title           =   { this.state.title }
+                                        renderAsStudent =   { this.state.renderAsStudent }
+                                    />
+                                ) : null
+                            }
                                 <AppContainerView>
                                     <ImageBackgroundStyled
-                                        source={ this.state.backgroundImage }
-                                        accessibilityLabel= "CVUHSD Mobile Portal"
+                                        source              =   { this.state.backgroundImage }
+                                        accessibilityLabel  =   "CVUHSD Mobile Portal"
+                                        showPortalLogo      =   { this.state.showPortalLogo }
                                     >
-                                        {/* <AppHeaderContainerView> */}
-                                            <Header 
-                                                showUpdate          =   { this.state.showUpdate } 
-                                                firstName           =   { this.state.firstName}
-                                                lastName            =   { this.state.lastName }
-                                                title               =   { this.state.title }
-                                                site                =   { this.state.site }
-                                                gradeLevel          =   { this.state.gradeLevel }
-                                                renderAsStudent     =   { this.state.renderAsStudent }
-                                                portalLogoSource    =   { this.state.portalLogoSource }
-                                                reloadAppFromUpdate =   { this.reloadAppFromUpdate }
-                                                // onPress    =   { navigate ? navigate: null }
-                                            />
-                                            
-                                            { (this.state.title || this.state.renderAsStudent) ? null : <WelcomeText>Welcome</WelcomeText> }
-                                        {/* </AppHeaderContainerView> */}
+                                        <Header 
+                                            showUpdate          =   { this.state.showUpdate } 
+                                            firstName           =   { this.state.firstName}
+                                            lastName            =   { this.state.lastName }
+                                            title               =   { this.state.title }
+                                            site                =   { this.state.site }
+                                            gradeLevel          =   { this.state.gradeLevel }
+                                            renderAsStudent     =   { this.state.renderAsStudent }
+                                            portalLogoSource    =   { this.state.portalLogoSource }
+                                            reloadAppFromUpdate =   { this.reloadAppFromUpdate }
+
+                                            showPortalLogo      =   {  this.state.showPortalLogo    }
+                                        />
+                                        
+                                        { (this.state.title || this.state.renderAsStudent) && !this.state.showUpdate ? null : <WelcomeText>Welcome</WelcomeText> }
                                     </ImageBackgroundStyled>
 
                                     <Navigator
@@ -405,6 +420,7 @@ class App extends Component {
                                                                 title               =   {   this.state.title    }
                                                                 renderAsStudent     =   {   this.state.renderAsStudent }
                                                                 openADSingleSignOn  =   {   this.openADSingleSignOn } 
+                                                                setShowPortalLogo   =   {  this.setShowPortalLogo }
                                                             /> 
                                                 }
                                             </Screen>
@@ -422,6 +438,8 @@ class App extends Component {
                                                                 renderAsStudent     =   { this.state.renderAsStudent }
                                                                 site                =   { this.state.site }
                                                                 appWidth            =   { this.state.appWidth }
+                                                                
+                                                                setShowPortalLogo   =   {  this.setShowPortalLogo }
                                                             />
                                             }
                                         </Screen>
@@ -447,6 +465,8 @@ class App extends Component {
 
                                             setShowPasswordModal    =   {  this.setShowPasswordModal }
                                             showPasswordModal       =   {  this.state.showPasswordModal } 
+
+                                            showPortalLogo      =   { this.state.showPortalLogo }
 
                                             setRenderAsStudent      =   { this.setRenderAsStudent }
                                             logOut                  =   { this.clearLogOnUserData }

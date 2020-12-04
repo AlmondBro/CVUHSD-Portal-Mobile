@@ -4,7 +4,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 const TabsFooterContainerView = styled.View`
-    flex: 0.15;
+    flex: ${props => props.showPortalLogo ? 0.15 : 0.10};
     flex-direction: row;
 
     border-radius: 0;
