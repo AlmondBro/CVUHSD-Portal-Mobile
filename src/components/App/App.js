@@ -49,7 +49,7 @@ const isDev = __DEV__;
 const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
 
 const PORTAL_LIVE_LINK  = "portal.centinela.k12.ca.us";
-const IP_ADDRESS_DEV    = "10.2.64.175:3002";
+const IP_ADDRESS_DEV    = "10.2.50.36:3002";
 class App extends Component {
     constructor(props) {
         super(props);
@@ -366,7 +366,10 @@ class App extends Component {
                     >
                 
                         <NavigationContainer ref={navigationRef}>
-                                <SettingsHeader/>
+                                <SettingsHeader
+                                    title           =   { this.state.title }
+                                    renderAsStudent =   { this.state.renderAsStudent }
+                                />
                                 <AppContainerView>
                                     <ImageBackgroundStyled
                                         source              =   { this.state.backgroundImage }

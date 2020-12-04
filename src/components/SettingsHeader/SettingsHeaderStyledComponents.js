@@ -8,9 +8,12 @@ let Container = styled.View`
 
     flex: 0.1;
 
-    background-color: red;
-
-    margin-bottom: 20;
+    background-color:  ${   props =>   props.districtPosition ? 
+                                        (  (props.districtPosition === "Student" || props.enderAsStudent) 
+                                            ? "#B41A1F" : "#1E6C93"
+                                        )
+                                        : "#B41A1F" 
+                        };
 `;
 
 

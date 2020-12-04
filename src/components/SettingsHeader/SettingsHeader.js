@@ -9,9 +9,12 @@ const Images = imagesObjectPath.default;
 
 const portalLogoSource =  Images.appHeader.portalLogoRed;
 
-const SettingsHeader = () => {
+const SettingsHeader = ({ districtPosition, renderAsStudent }) => {
     return (
-        <Container>
+        <Container
+            districtPosition    =   { districtPosition }
+            renderAsStudent     =   { renderAsStudent  }
+        >
             <PortalLogo
                 source  =   { portalLogoSource} 
             />
