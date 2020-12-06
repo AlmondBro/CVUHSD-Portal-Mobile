@@ -13,7 +13,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import { Reactotron } from './../../config/reactotron.dev.js';
 
-import { OAUTH_AUTH_URL, OAUTH_REDIRECT_URL, OAUTH_CLIENT_ID} from '@env';
+import { OAUTH_AUTH_URL, OAUTH_REDIRECT_URL, OAUTH_CLIENT_ID} from "@env";
 // './../../../keys.env.js';
 //from 'react-native-dotenv'
 
