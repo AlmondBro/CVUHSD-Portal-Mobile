@@ -37,6 +37,7 @@ import HomeScreen from './../HomeScreen/HomeScreen.js';
 
 //import styled components
 import { AppContainerView, AppHeaderContainerView, ImageBackgroundStyled, WelcomeText, StatusBarSafeView, SafeAreaViewStyled } from './App_StyledComponents.js';
+import { UserInfoText } from '../Header/Header_StyledComponents.js';
 
 const imagesObjectPath = (Platform.OS === "web") ? require('./../../assets/images/index.js') : require('@images');
 const Images = imagesObjectPath.default;
@@ -124,9 +125,32 @@ class App extends Component {
         });
 
         getOU();
-      }; //end getStudentSchool
+    }; //end getStudentSchool
 
-      openADSingleSignOn = async () => {
+    getUserInfo = async (authorizationCode) => {
+        const isDev = true; 
+        
+        const checkForLogin_URL = `${isDev ? `http://${IP_ADDRESS_DEV}` : `http://${PORTAL_LIVE_LINK}/server`}/auth/callback`;
+        const checkForLogin_headers = {
+            "Accept": "application/json",
+            'Content-Type': 'application/json',
+            'credentials': 'include',
+            "Access-Control-Allow-Credentials": true
+        };
+
+        const userInfo = await fetch(checkForLogin_URL + `?code=${authorizationCode}`, {
+            method: 'GET',
+            credentials: "include",
+            headers: checkForLogin_headers,
+        })
+        .then((response) => response.json())
+        .then((userInfo) => userInfo)
+        .catch((error) => Reactotron.log("getUserInfo() error:\t", error) );
+
+        return userInfo;
+    }; //end getUserInfo()
+
+    openADSingleSignOn = async () => {
         console.log("handlePressAsync()");
         console.log("AuthSession.makeRedirectUri():\t" + AuthSession.makeRedirectUri());
         
@@ -140,28 +164,48 @@ class App extends Component {
                             `?resource=${"http://localhost:3000"}` +
                             `&response_type=code` +
                             `&redirect_uri=${encodeURIComponent(redirectUrl)}` +
-                            `&client_id=${OAUTH_CLIENT_ID}`
-        let adUserInfo = await AuthSession.startAsync({
+                            `&client_id=${OAUTH_CLIENT_ID}`;
+
+        let authSessionResults = await AuthSession.startAsync({
             authUrl: authUrl   
         });
-                               
-        ReactotronDebug.log("adUserInfo from App.js:\t" + JSON.stringify(adUserInfo) );
 
-        let portalLogoSource = ( (adUserInfo.jobTitle === "Student") || (this.state.renderAsStudent === true)) ?
+        const { code: authorizationCode } = authSessionResults.params;
+                               
+        ReactotronDebug.log("adUserInfo from App.js:\t" + JSON.stringify(authSessionResults) );
+
+        const userInfo = await this.getUserInfo(authorizationCode);
+
+        ReactotronDebug.log("userInfo:\t", userInfo);
+
+        let portalLogoSource = ( (authSessionResults.jobTitle === "Student") || (this.state.renderAsStudent === true)) ?
                                 Images.appHeader.portalLogoRed
                             :   Images.appHeader.portalLogoBlue;
 
-        let backgroundImage = (adUserInfo.jobTitle === "Student" || this.state.renderAsStudent) ?
+        let backgroundImage = (authSessionResults.jobTitle === "Student" || this.state.renderAsStudent) ?
                                 Images.appHeader.backgroundImageRed
                             :   Images.appHeader.backgroundImageBlue;
                
-        if ( !adUserInfo.error && (adUserInfo.type === "success") ) {
+        if ( !authSessionResults.error && (authSessionResults.type === "success") && userInfo ) {
+            const { username, email, family_name, givenName, jobTitle, accessToken, uid } = userInfo;
+        
+            // this.setState({
+            //   loggedIn: true,
+            //   firstName:  givenName,
+            //   lastName: family_name,
+            //   username: username,
+            //   email: email,
+            //   title: jobTitle || "staff",
+            //   uid,
+            //   accessToken,
+            // });
+
             this.setState({
-                firstName           : adUserInfo.givenName,
-                lastName            : adUserInfo.surname,
-                title               : adUserInfo.jobTitle,
-                site                : adUserInfo.officeLocation,
-                email               : adUserInfo.mail,
+                firstName           : givenName,
+                lastName            : authSessionResults.surname,
+                title               : jobTitle || "staff",
+                site                : authSessionResults.officeLocation,
+                email               : email,
                 portalLogoSource    : portalLogoSource,
                 backgroundImage     : backgroundImage,
                // navigateFunction    : navigate,
@@ -188,7 +232,7 @@ class App extends Component {
             this.setState({ authLoading: false });
             
             const alertTitle = "Sign-in failed" ;
-            const alertMessage = adUserInfo.error;
+            const alertMessage = authSessionResults.error;
 
             Alert.alert(
                 alertTitle,
