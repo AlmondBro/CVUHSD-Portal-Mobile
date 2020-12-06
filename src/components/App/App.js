@@ -13,7 +13,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import { Reactotron } from './../../config/reactotron.dev.js';
 
-import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID, AZURE_DOMAIN_HINT } from './../../../keys.env.js';
+import { OAUTH_AUTH_URL, OAUTH_REDIRECT_URL, OAUTH_CLIENT_ID} from '@env';
+// './../../../keys.env.js';
 //from 'react-native-dotenv'
 
 import * as AuthSession from 'expo-auth-session';
@@ -82,15 +83,7 @@ class App extends Component {
         this.initialState = { ...this.state };
     } //end constructor
 
-    azureAdAppProps = {
-        clientId        :   AZURE_CLIENT_ID,
-        tenantId        :   AZURE_TENANT_ID,
-        scope           :   "user.read",
-        redirectUrl     :   AuthSession.makeRedirectUri({ native: 'cvuhsd.portal://redirect' }),
-        clientSecret    :   AZURE_CLIENT_SECRET,
-        domainHint      :   AZURE_DOMAIN_HINT,
-        prompt          :   "login"
-    };
+    //AuthSession.makeRedirectUri({ native: 'cvuhsd.portal://redirect' })
 
     USER_INFO = '@user_info';
 
@@ -133,13 +126,24 @@ class App extends Component {
         getOU();
       }; //end getStudentSchool
 
-    openADSingleSignOn = async () => {
+      openADSingleSignOn = async () => {
         console.log("handlePressAsync()");
         console.log("AuthSession.makeRedirectUri():\t" + AuthSession.makeRedirectUri());
         
         this.setState({ authLoading: true }); //Set loading to true
 
-        let adUserInfo = await openAuthSession(this.azureAdAppProps);
+        const redirectUrl = OAUTH_REDIRECT_URL;
+
+        ReactotronDebug.log("authUrl", OAUTH_AUTH_URL);
+
+        const authUrl  =    `${OAUTH_AUTH_URL}` +
+                            `?resource=${"http://localhost:3000"}` +
+                            `&response_type=code` +
+                            `&redirect_uri=${encodeURIComponent(redirectUrl)}` +
+                            `&client_id=${OAUTH_CLIENT_ID}`
+        let adUserInfo = await AuthSession.startAsync({
+            authUrl: authUrl   
+        });
                                
         ReactotronDebug.log("adUserInfo from App.js:\t" + JSON.stringify(adUserInfo) );
 
@@ -201,7 +205,7 @@ class App extends Component {
 
             return; 
         } //end else-statement
-    }; //handlePressAsync()
+    }; //openADSingleSignOn()
 
     checkforExistingLogOn = async () => {
         try {
