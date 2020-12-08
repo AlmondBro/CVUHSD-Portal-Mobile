@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs, { access } from 'fs';
 import path from 'path';
 import { Router } from 'express';
 import passport from 'passport';
@@ -53,6 +53,16 @@ router.get('/callback', passport.authenticate('provider'), async (req, res) => {
     const userInfo = validateAccessToken(accessToken);
   
     res.json({ ...userInfo, accessToken });
+    return;
+});
+
+router.post('/user-info', (req, res) => {
+    const { accessToken } = req.body;
+    console.log("\naccessToken", req.body);
+
+    const userInfo = validateAccessToken(accessToken);
+
+    res.json({ ...userInfo});
     return;
 });
 

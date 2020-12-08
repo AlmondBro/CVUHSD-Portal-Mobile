@@ -128,9 +128,9 @@ class App extends Component {
     }; //end getStudentSchool
 
     parseIntoQueryString = (requestParams) => {
-                  /* loop through object and encode each item as URI component before storing in array */
-          /* then join each element on & */
-          /* request is x-www-form-urlencoded as per docs: https://docs.microsoft.com/en-us/graph/use-the-api */
+        /* loop through object and encode each item as URI component before storing in array */
+        /* then join each element on & */
+        /* request is x-www-form-urlencoded as per docs: https://docs.microsoft.com/en-us/graph/use-the-api */
 
         let formBody = [];
         let queryString = "";
@@ -175,17 +175,18 @@ class App extends Component {
     }; //end getUserInfo()
 
     getUserInfo = async (accessToken) => {
-        const getUserInfoURL = OAUTH_USERINFO_URL;
+        const getUserInfoURL = `${isDev ? `http://${IP_ADDRESS_DEV}` : `http://${PORTAL_LIVE_LINK}/server`}/auth/user-info`;
+        
         const getOUHeaders = {
             'Content-Type': 'application/json',
             'credentials': 'include',
             'Access-Control-Allow-Origin': '*',
-            'Authorization' : `Bearer ${accessToken}`
         };
     
         const userInfo = fetch(getUserInfoURL, {
             method: 'POST',
             headers: getOUHeaders,
+            body: JSON.stringify({ accessToken: accessToken})
         })
         .then((response) => response.json())
         .then((userInfo) => userInfo)
@@ -236,8 +237,8 @@ class App extends Component {
                                 Images.appHeader.backgroundImageRed
                             :   Images.appHeader.backgroundImageBlue;
                
-        if ( !adfsUserInfo.error && (adfsUserInfo.type === "success") && accessToken ) {
-            const { username, email, family_name, givenName, jobTitle, accessToken, uid } = accessToken;
+        if ( adfsUserInfo && accessToken ) {
+            const { username, email, family_name, givenName, jobTitle, accessToken, uid } = adfsUserInfo;
         
             // this.setState({
             //   loggedIn: true,
@@ -252,9 +253,8 @@ class App extends Component {
 
             this.setState({
                 firstName           : givenName,
-                lastName            : authSessionResults.surname,
+                lastName            : family_name,
                 title               : jobTitle || "staff",
-                site                : authSessionResults.officeLocation,
                 email               : email,
                 portalLogoSource    : portalLogoSource,
                 backgroundImage     : backgroundImage,
@@ -467,8 +467,8 @@ class App extends Component {
                             {
                                 !this.state.showPortalLogo ?(
                                     <SettingsHeader
-                                        title           =   { this.state.title }
-                                        renderAsStudent =   { this.state.renderAsStudent }
+                                        districtPosition    =   { this.state.title }
+                                        renderAsStudent     =   { this.state.renderAsStudent }
                                     />
                                 ) : null
                             }
