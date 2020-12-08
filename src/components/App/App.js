@@ -13,7 +13,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import { Reactotron } from './../../config/reactotron.dev.js';
 
-import { OAUTH_AUTH_URL, OAUTH_REDIRECT_URL, OAUTH_CLIENT_ID} from "@env";
+import { OAUTH_AUTH_URL, OAUTH_TOKEN_URL, OAUTH_USERINFO_URL, OAUTH_REDIRECT_URL, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET } from "@env";
 // './../../../keys.env.js';
 //from 'react-native-dotenv'
 
@@ -127,25 +127,71 @@ class App extends Component {
         getOU();
     }; //end getStudentSchool
 
-    getUserInfo = async (authorizationCode) => {
-        const isDev = true; 
+    parseIntoQueryString = (requestParams) => {
+                  /* loop through object and encode each item as URI component before storing in array */
+          /* then join each element on & */
+          /* request is x-www-form-urlencoded as per docs: https://docs.microsoft.com/en-us/graph/use-the-api */
+
+        let formBody = [];
+        let queryString = "";
+
+        for (let property in requestParams) {
+          let encodedKey = encodeURIComponent(property),
+              encodedValue = encodeURIComponent(requestParams[property]);
+
+          formBody.push(encodedKey + '=' + encodedValue);
+        }
+
+        queryString = formBody.join('&');
+        return queryString;
+    }; //parseIntoQueryString()
+
+    getAccessToken = async (authorizationCode) => {
+        let requestParams = {
+            client_id: OAUTH_CLIENT_ID,
+            code: authorizationCode,
+            redirect_uri: OAUTH_REDIRECT_URL,
+            grant_type: "authorization_code",
+            client_secret: OAUTH_CLIENT_SECRET
+        };
         
-        const checkForLogin_URL = `${isDev ? `http://${IP_ADDRESS_DEV}` : `http://${PORTAL_LIVE_LINK}/server`}/auth/callback`;
-        const checkForLogin_headers = {
-            "Accept": "application/json",
-            'Content-Type': 'application/json',
-            'credentials': 'include',
-            "Access-Control-Allow-Credentials": true
+        let formBody = this.parseIntoQueryString(requestParams);
+      
+        const getAccessTokenURL = OAUTH_TOKEN_URL;
+        const getAccessTokenHeaders = {
+            'Content-Type': 'application/x-www-form-urlencoded',           
         };
 
-        const userInfo = await fetch(checkForLogin_URL + `?code=${authorizationCode}`, {
-            method: 'GET',
-            credentials: "include",
-            headers: checkForLogin_headers,
+        const accessToken = await fetch(getAccessTokenURL , {
+            method: 'POST',
+            headers: getAccessTokenHeaders,
+            body: formBody
+        })
+        .then((response) => response.json())
+        .then((tokenResponse) => tokenResponse)
+        .catch((error) => Reactotron.log("getAccessToken() error:\t", error) );
+
+        return accessToken;
+    }; //end getUserInfo()
+
+    getUserInfo = async (accessToken) => {
+        const getUserInfoURL = OAUTH_USERINFO_URL;
+        const getOUHeaders = {
+            'Content-Type': 'application/json',
+            'credentials': 'include',
+            'Access-Control-Allow-Origin': '*',
+            'Authorization' : `Bearer ${accessToken}`
+        };
+    
+        const userInfo = fetch(getUserInfoURL, {
+            method: 'POST',
+            headers: getOUHeaders,
         })
         .then((response) => response.json())
         .then((userInfo) => userInfo)
-        .catch((error) => Reactotron.log("getUserInfo() error:\t", error) );
+        .catch((error) => {
+            Reactotron.error(`getUserInfo() Catching error:\t ${error}`);
+        });
 
         return userInfo;
     }; //end getUserInfo()
@@ -162,7 +208,7 @@ class App extends Component {
 
         const authUrl  =    `${OAUTH_AUTH_URL}` +
                             `?resource=${"http://localhost:3000"}` +
-                            `&response_type=code` +
+                            `&response_type=${"code"}` +
                             `&redirect_uri=${encodeURIComponent(redirectUrl)}` +
                             `&client_id=${OAUTH_CLIENT_ID}`;
 
@@ -172,22 +218,26 @@ class App extends Component {
 
         const { code: authorizationCode } = authSessionResults.params;
                                
-        ReactotronDebug.log("adUserInfo from App.js:\t" + JSON.stringify(authSessionResults) );
+        ReactotronDebug.log("authSessionResults:\t" + JSON.stringify(authSessionResults) );
 
-        const userInfo = await this.getUserInfo(authorizationCode);
+        const {access_token : accessToken } = await this.getAccessToken(authorizationCode);
 
-        ReactotronDebug.log("userInfo:\t", userInfo);
+        ReactotronDebug.log("accessToken:\t", accessToken);
 
-        let portalLogoSource = ( (authSessionResults.jobTitle === "Student") || (this.state.renderAsStudent === true)) ?
+        const adfsUserInfo = await this.getUserInfo(accessToken);
+
+        ReactotronDebug.log("adfsUserInfo:\t", adfsUserInfo);
+
+        let portalLogoSource = ( (adfsUserInfo.jobTitle === "Student") || (this.state.renderAsStudent === true)) ?
                                 Images.appHeader.portalLogoRed
                             :   Images.appHeader.portalLogoBlue;
 
-        let backgroundImage = (authSessionResults.jobTitle === "Student" || this.state.renderAsStudent) ?
+        let backgroundImage = (adfsUserInfo.jobTitle === "Student" || this.state.renderAsStudent) ?
                                 Images.appHeader.backgroundImageRed
                             :   Images.appHeader.backgroundImageBlue;
                
-        if ( !authSessionResults.error && (authSessionResults.type === "success") && userInfo ) {
-            const { username, email, family_name, givenName, jobTitle, accessToken, uid } = userInfo;
+        if ( !adfsUserInfo.error && (adfsUserInfo.type === "success") && accessToken ) {
+            const { username, email, family_name, givenName, jobTitle, accessToken, uid } = accessToken;
         
             // this.setState({
             //   loggedIn: true,
