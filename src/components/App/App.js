@@ -14,15 +14,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Reactotron } from './../../config/reactotron.dev.js';
 
 import { OAUTH_AUTH_URL, OAUTH_TOKEN_URL, OAUTH_USERINFO_URL, OAUTH_REDIRECT_URL, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET } from "@env";
-// './../../../keys.env.js';
-//from 'react-native-dotenv'
 
 import * as AuthSession from 'expo-auth-session';
 
 // import * as Updates from 'expo-updates';
 import { reloadAsync, checkForUpdateAsync, fetchForUpdate } from 'expo-updates';
-
-import { openAuthSession } from 'azure-ad-graph-expo';
 
 //Import utility functions
 import { dimensionsWidthHOC, navigationRef, navigate } from './../../utility-functions.js';
