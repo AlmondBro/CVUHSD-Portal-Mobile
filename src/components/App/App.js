@@ -13,7 +13,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import { Reactotron } from './../../config/reactotron.dev.js';
 
-import { AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID, AZURE_DOMAIN_HINT } from './../../../keys.env.js';
+import { OAUTH_AUTH_URL, OAUTH_TOKEN_URL, OAUTH_USERINFO_URL, OAUTH_REDIRECT_URL, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET } from "@env";
+// './../../../keys.env.js';
 //from 'react-native-dotenv'
 
 import * as AuthSession from 'expo-auth-session';
@@ -36,6 +37,7 @@ import HomeScreen from './../HomeScreen/HomeScreen.js';
 
 //import styled components
 import { AppContainerView, AppHeaderContainerView, ImageBackgroundStyled, WelcomeText, StatusBarSafeView, SafeAreaViewStyled } from './App_StyledComponents.js';
+import { UserInfoText } from '../Header/Header_StyledComponents.js';
 
 const imagesObjectPath = (Platform.OS === "web") ? require('./../../assets/images/index.js') : require('@images');
 const Images = imagesObjectPath.default;
@@ -49,7 +51,7 @@ const isDev = __DEV__;
 const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
 
 const PORTAL_LIVE_LINK  = "portal.centinela.k12.ca.us";
-const IP_ADDRESS_DEV    = "10.2.50.36:3002";
+const IP_ADDRESS_DEV    = "10.2.64.175:3002";
 class App extends Component {
     constructor(props) {
         super(props);
@@ -82,15 +84,7 @@ class App extends Component {
         this.initialState = { ...this.state };
     } //end constructor
 
-    azureAdAppProps = {
-        clientId        :   AZURE_CLIENT_ID,
-        tenantId        :   AZURE_TENANT_ID,
-        scope           :   "user.read",
-        redirectUrl     :   AuthSession.makeRedirectUri({ native: 'cvuhsd.portal://redirect' }),
-        clientSecret    :   AZURE_CLIENT_SECRET,
-        domainHint      :   AZURE_DOMAIN_HINT,
-        prompt          :   "login"
-    };
+    //AuthSession.makeRedirectUri({ native: 'cvuhsd.portal://redirect' })
 
     USER_INFO = '@user_info';
 
@@ -131,7 +125,77 @@ class App extends Component {
         });
 
         getOU();
-      }; //end getStudentSchool
+    }; //end getStudentSchool
+
+    parseIntoQueryString = (requestParams) => {
+        /* loop through object and encode each item as URI component before storing in array */
+        /* then join each element on & */
+        /* request is x-www-form-urlencoded as per docs: https://docs.microsoft.com/en-us/graph/use-the-api */
+
+        let formBody = [];
+        let queryString = "";
+
+        for (let property in requestParams) {
+          let encodedKey = encodeURIComponent(property),
+              encodedValue = encodeURIComponent(requestParams[property]);
+
+          formBody.push(encodedKey + '=' + encodedValue);
+        }
+
+        queryString = formBody.join('&');
+        return queryString;
+    }; //parseIntoQueryString()
+
+    getAccessToken = async (authorizationCode) => {
+        let requestParams = {
+            client_id: OAUTH_CLIENT_ID,
+            code: authorizationCode,
+            redirect_uri: OAUTH_REDIRECT_URL,
+            grant_type: "authorization_code",
+            client_secret: OAUTH_CLIENT_SECRET
+        };
+        
+        let formBody = this.parseIntoQueryString(requestParams);
+      
+        const getAccessTokenURL = OAUTH_TOKEN_URL;
+        const getAccessTokenHeaders = {
+            'Content-Type': 'application/x-www-form-urlencoded',           
+        };
+
+        const accessToken = await fetch(getAccessTokenURL , {
+            method: 'POST',
+            headers: getAccessTokenHeaders,
+            body: formBody
+        })
+        .then((response) => response.json())
+        .then((tokenResponse) => tokenResponse)
+        .catch((error) => Reactotron.log("getAccessToken() error:\t", error) );
+
+        return accessToken;
+    }; //end getUserInfo()
+
+    getUserInfo = async (accessToken) => {
+        const getUserInfoURL = `${isDev ? `http://${IP_ADDRESS_DEV}` : `http://${PORTAL_LIVE_LINK}/server`}/auth/user-info`;
+        
+        const getOUHeaders = {
+            'Content-Type': 'application/json',
+            'credentials': 'include',
+            'Access-Control-Allow-Origin': '*',
+        };
+    
+        const userInfo = fetch(getUserInfoURL, {
+            method: 'POST',
+            headers: getOUHeaders,
+            body: JSON.stringify({ accessToken: accessToken})
+        })
+        .then((response) => response.json())
+        .then((userInfo) => userInfo)
+        .catch((error) => {
+            Reactotron.error(`getUserInfo() Catching error:\t ${error}`);
+        });
+
+        return userInfo;
+    }; //end getUserInfo()
 
     openADSingleSignOn = async () => {
         console.log("handlePressAsync()");
@@ -139,25 +203,59 @@ class App extends Component {
         
         this.setState({ authLoading: true }); //Set loading to true
 
-        let adUserInfo = await openAuthSession(this.azureAdAppProps);
-                               
-        ReactotronDebug.log("adUserInfo from App.js:\t" + JSON.stringify(adUserInfo) );
+        const redirectUrl = OAUTH_REDIRECT_URL;
 
-        let portalLogoSource = ( (adUserInfo.jobTitle === "Student") || (this.state.renderAsStudent === true)) ?
+        ReactotronDebug.log("authUrl", OAUTH_AUTH_URL);
+
+        const authUrl  =    `${OAUTH_AUTH_URL}` +
+                            `?resource=${"http://localhost:3000"}` +
+                            `&response_type=${"code"}` +
+                            `&redirect_uri=${encodeURIComponent(redirectUrl)}` +
+                            `&client_id=${OAUTH_CLIENT_ID}`;
+
+        let authSessionResults = await AuthSession.startAsync({
+            authUrl: authUrl   
+        });
+
+        const { code: authorizationCode } = authSessionResults.params;
+                               
+        ReactotronDebug.log("authSessionResults:\t" + JSON.stringify(authSessionResults) );
+
+        const {access_token : accessToken } = await this.getAccessToken(authorizationCode);
+
+        ReactotronDebug.log("accessToken:\t", accessToken);
+
+        const adfsUserInfo = await this.getUserInfo(accessToken);
+
+        ReactotronDebug.log("adfsUserInfo:\t", adfsUserInfo);
+
+        let portalLogoSource = ( (adfsUserInfo.jobTitle === "Student") || (this.state.renderAsStudent === true)) ?
                                 Images.appHeader.portalLogoRed
                             :   Images.appHeader.portalLogoBlue;
 
-        let backgroundImage = (adUserInfo.jobTitle === "Student" || this.state.renderAsStudent) ?
+        let backgroundImage = (adfsUserInfo.jobTitle === "Student" || this.state.renderAsStudent) ?
                                 Images.appHeader.backgroundImageRed
                             :   Images.appHeader.backgroundImageBlue;
                
-        if ( !adUserInfo.error && (adUserInfo.type === "success") ) {
+        if ( adfsUserInfo && accessToken ) {
+            const { username, email, family_name, givenName, jobTitle, accessToken, uid } = adfsUserInfo;
+        
+            // this.setState({
+            //   loggedIn: true,
+            //   firstName:  givenName,
+            //   lastName: family_name,
+            //   username: username,
+            //   email: email,
+            //   title: jobTitle || "staff",
+            //   uid,
+            //   accessToken,
+            // });
+
             this.setState({
-                firstName           : adUserInfo.givenName,
-                lastName            : adUserInfo.surname,
-                title               : adUserInfo.jobTitle,
-                site                : adUserInfo.officeLocation,
-                email               : adUserInfo.mail,
+                firstName           : givenName,
+                lastName            : family_name,
+                title               : jobTitle || "staff",
+                email               : email,
                 portalLogoSource    : portalLogoSource,
                 backgroundImage     : backgroundImage,
                // navigateFunction    : navigate,
@@ -184,7 +282,7 @@ class App extends Component {
             this.setState({ authLoading: false });
             
             const alertTitle = "Sign-in failed" ;
-            const alertMessage = adUserInfo.error;
+            const alertMessage = authSessionResults.error;
 
             Alert.alert(
                 alertTitle,
@@ -201,7 +299,7 @@ class App extends Component {
 
             return; 
         } //end else-statement
-    }; //handlePressAsync()
+    }; //openADSingleSignOn()
 
     checkforExistingLogOn = async () => {
         try {
@@ -369,8 +467,8 @@ class App extends Component {
                             {
                                 !this.state.showPortalLogo ?(
                                     <SettingsHeader
-                                        title           =   { this.state.title }
-                                        renderAsStudent =   { this.state.renderAsStudent }
+                                        districtPosition    =   { this.state.title }
+                                        renderAsStudent     =   { this.state.renderAsStudent }
                                     />
                                 ) : null
                             }
