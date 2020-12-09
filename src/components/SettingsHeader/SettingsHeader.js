@@ -16,7 +16,8 @@ const SettingsHeader = ({ districtPosition, renderAsStudent }) => {
     const imagesObjectPath = (Platform.OS === "web") ? require('./../../assets/images/index.js') : require('@images');
     const Images = imagesObjectPath.default;
 
-    const portalLogoSource =  Images.appHeader.portalLogoRed;
+    const portalLogoSource = (districtPosition === "Student" || renderAsStudent === true) 
+                                ? Images.appHeader.portalLogoRed : Images.appHeader.portalLogoBlue;
 
     const alertTitle = "App version" ;
 

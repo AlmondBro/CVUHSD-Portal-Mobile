@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs, { access } from 'fs';
 import path from 'path';
 import { Router } from 'express';
 import passport from 'passport';
@@ -34,7 +34,11 @@ router.use(limiter);
 router.get('/login-ie', (req, res) => {
     return res.json(
                         { 
-                            url: `${process.env.OAUTH_AUTH_URL}?resource=${encodeURIComponent("http://localhost:3000")}&response_type=${encodeURIComponent("code")}&redirect_uri=${isDev ? encodeURIComponent(process.env.OAUTH_CALLBACK_URL_DEV) : encodeURIComponent(process.env.OAUTH_CALLBACK_URL_PROD)}&client_id=${encodeURIComponent(process.env.OAUTH_CLIENT_ID)}`
+                            url:    `${process.env.OAUTH_AUTH_URL}`
+                                    `?resource=${encodeURIComponent("http://localhost:3000")}` +
+                                    `&response_type=${encodeURIComponent("code")}` + 
+                                    `&redirect_uri=${isDev ? encodeURIComponent(process.env.OAUTH_CALLBACK_URL_DEV) : encodeURIComponent(process.env.OAUTH_CALLBACK_URL_PROD)}` +
+                                    `&client_id=${encodeURIComponent(process.env.OAUTH_CLIENT_ID)}`
                         }
                     );
 });
@@ -49,6 +53,16 @@ router.get('/callback', passport.authenticate('provider'), async (req, res) => {
     const userInfo = validateAccessToken(accessToken);
   
     res.json({ ...userInfo, accessToken });
+    return;
+});
+
+router.post('/user-info', (req, res) => {
+    const { accessToken } = req.body;
+    console.log("\naccessToken", req.body);
+
+    const userInfo = validateAccessToken(accessToken);
+
+    res.json({ ...userInfo});
     return;
 });
 

@@ -10,7 +10,7 @@ let Container = styled.View`
     flex: 0.1;
 
     background-color:  ${   props =>   props.districtPosition ? 
-                                        (  (props.districtPosition === "Student" || props.enderAsStudent) 
+                                        (  (props.districtPosition === "Student" || props.renderAsStudent) 
                                             ? "#B41A1F" : "#1E6C93"
                                         )
                                         : "#B41A1F" 
