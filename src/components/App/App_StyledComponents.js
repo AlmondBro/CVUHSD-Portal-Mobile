@@ -34,21 +34,21 @@ const WelcomeText = styled.Text`
     /* background-color: white; */
     /* width: 100%; */
     text-align: center;
-    font-size: 25;
+    font-size: 25px;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
     align-content: center;
     align-self: center;
-    margin-bottom: 5;
+    margin-bottom: 5px;
 `;
 
 let BlueSectionContainer = styled.View`
     flex-direction: column;
     align-self: stretch;
     justify-content: flex-start;
-    padding: 0;
-    margin: 0;
+    padding: 0px;
+    margin: 0px;
     width: ${props => props.width ? props.width : "auto"};
 `;
 
@@ -64,8 +64,8 @@ let SafeAreaViewStyled = styled(SafeAreaView).attrs( (props) => ({
                                 "#B41A1F" : "#1E6C93"
                             : "#B41A1F" 
                         };
-    padding: 0;
-    margin: 0;
+    padding: 0px;
+    margin: 0px;
 `;
 
 let StatusBarSafeView = styled(SafeAreaView).attrs( (props) => ({
@@ -73,7 +73,7 @@ let StatusBarSafeView = styled(SafeAreaView).attrs( (props) => ({
 }))`
     flex: 0;
     flex-direction: row;
-    height: ${statusBarHeight};
+    height: ${statusBarHeight + "px"};
     background-color:  ${props => props.title ? ( ((props.title === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93") : "#B41A1F" };
 `;
 

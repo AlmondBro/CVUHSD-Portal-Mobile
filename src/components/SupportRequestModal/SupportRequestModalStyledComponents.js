@@ -38,21 +38,21 @@ const ModalStyled = styled(Modal).attrs((props) => ({
   position                  : relative;
   background-color          : white;
 
-  margin                    :   0;
+  margin                    : 0px;
 
   width                     : 100%;
   height                    : 100%;
 
-  border-top-left-radius    : 10;
-  border-top-right-radius   : 10;
+  border-top-left-radius    : 10px;
+  border-top-right-radius   : 10px;
 `;
 
 const ModalContentContainer = styled.View`
     flex: 1;
-    border-radius: 20;
+    border-radius: 20px;
 
     width: 100%;
-    padding: 0;
+    padding: 0px;
 
     background-color:  red;
 `;
@@ -66,8 +66,8 @@ const Divider = styled.View`
     height: ${StyleSheet.hairlineWidth};
 
     margin: auto;
-    margin-top: 15;
-    margin-bottom: 0;
+    margin-top: 15px;
+    margin-bottom: 0px;
 
     background-color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
 `;
@@ -79,17 +79,17 @@ const ButtonContainer = styled.View`
 
     background-color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
 
-    border-radius: 15;
+    border-radius: 15px;
 
-    width: 120;
+    width: 120px;
 
-    padding-top: 10;
-    padding-bottom: 10;
+    padding-top: 10px;
+    padding-bottom: 10px;
 
     margin: auto;
 
-    margin-top: 15;
-    margin-bottom:  25;
+    margin-top: 15px;
+    margin-bottom:  25px;
 `;
 
 const ButtonText = styled.Text`
@@ -102,7 +102,7 @@ const ButtonText = styled.Text`
     font-family: 'SourceSansPro_600SemiBold';
     /* 'SourceSansPro_400Regular','SourceSansPro_200ExtraLight', 'SourceSansPro_200ExtraLight_Italic','SourceSansPro_300Light','SourceSansPro_300Light_Italic','SourceSansPro_400Regular_Italic','SourceSansPro_600SemiBold', 'SourceSansPro_600SemiBold_Italic','SourceSansPro_700Bold','SourceSansPro_700Bold_Italic', 'SourceSansPro_900Black', 'SourceSansPro_900Black_Italic'; */
 
-    font-size: 17;
+    font-size: 17px;
     font-weight: bold;
 
     text-align: center;
@@ -113,14 +113,14 @@ const InstructionsText = styled(ButtonText)`
     
     justify-content: flex-end;
     
-    font-size: 12;
+    font-size: 12px;
 
     text-align: center;
 
     width: 100%;
 
-    margin-top: 50; /*  TODO: This is hard-coded. FIx por favor */
-    margin-bottom: 5;
+    margin-top: 50px; /*  TODO: This is hard-coded. FIx por favor */
+    margin-bottom: 5px;
 `;
 
 const Button = ({ renderAsStudent, districtPosition, buttonTitle, children, onPress }) => {

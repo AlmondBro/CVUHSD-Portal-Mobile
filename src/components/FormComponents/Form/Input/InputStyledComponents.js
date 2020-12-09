@@ -8,8 +8,6 @@ import RNPickerSelect from 'react-native-picker-select';
 
 import { FontAwesome } from '@expo/vector-icons'; 
 
-import css from 'styled-css/native';
-
 const InputContainer = styled.View`
     display: flex;
     flex-direction: column;
@@ -18,8 +16,8 @@ const InputContainer = styled.View`
 
     width: 100%;
 
-    margin-top: 12;
-    margin-bottom: 12;
+    margin-top: 12px;
+    margin-bottom: 12px;
 `;
 const TextInputStyled = styled(TextInput).attrs(props => ({
     selectionColor      :   ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
@@ -40,13 +38,13 @@ const TextInputStyled = styled(TextInput).attrs(props => ({
     position: relative;
 
     width: 90%;
-    height: 48;
+    height: 48px;
 
-    margin-top: 0;
-    margin-bottom: 0;
+    margin-top: 0px;
+    margin-bottom: 0px;
 
-    padding-top: 0;
-    padding-bottom: 0;
+    padding-top: 0px;
+    padding-bottom: 0px;
 
     color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
 
@@ -65,8 +63,8 @@ const ErrorText = styled.Text`
 
     width: 90%;
 
-    margin-top: 5;   
-    margin-bottom: 10;   
+    margin-top: 5px;   
+    margin-bottom: 10px;   
 
 `;
 
@@ -87,10 +85,10 @@ const LabelText = styled.Text`
     flex-direction: row;
     justify-content: flex-start;
 
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-top: 0;
-    padding-bottom: 0;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 
     width: 90%;
     /* background-color: green; */
@@ -117,11 +115,11 @@ const EyeSymbolContainer = styled.View`
     align-items: center;
 
     position: absolute;
-    right: 30;
-    bottom: 11;
-    z-index: 3;
+    right: 30px;
+    bottom: 11px;
+    z-index: 3px;
 
-    width: 30;
+    width: 30px;
 
     background-color: #F6F6F6;
 `;

@@ -16,8 +16,8 @@ let BlueSectionHeaderTouchableOpacity = styled.TouchableOpacity`
 
     background-color: ${props => (props.title === "Student" || props.renderAsStudent) ? "#B41A1F" : "#1E6C93" };
     
-    padding-top: 8;
-    padding-bottom: 8;
+    padding-top: 8px;
+    padding-bottom: 8px;
 
     border-bottom-color: #F4F7F9;
     border-bottom-width: ${props => props.expanded ? 1 : 0};
@@ -27,7 +27,7 @@ let BlueSectionHeaderText = styled.Text`
     font-family: 'SourceSansPro_400Regular';
     
     color: white;
-    font-size: 20;
+    font-size: 20px;
     flex-direction: column;
     align-self: center;
     justify-content: center;
@@ -37,22 +37,22 @@ let BlueSectionHeaderText = styled.Text`
 
 const ToggleButtonTouchableOpacity = styled.TouchableOpacity`
     background-color: white;
-    padding-top: 3;
-    padding-bottom: 3;
-    padding-left: 4;
-    padding-right: 3;
-    border-radius: 30;
-    border-width: 0;
-    height: 35;
-    width: 35;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 4px;
+    padding-right: 3px;
+    border-radius: 30px;
+    border-width: 0px;
+    height: 35px;
+    width: 35px;
 
     margin-left: auto;
 
-    margin-right: 8;
+    margin-right: 8px;
 `;
 
 let ToggleButtonText  = styled.Text`
-    font-size: 18;
+    font-size: 18px;
     text-align: center;
     color: ${props => (props.title === "Student" || props.renderAsStudent) ? "#B41A1F" : "#1E6C93" };
 `;
@@ -69,8 +69,8 @@ const WebViewStyled = styled(WebView).attrs((props) => ({
     onMessage           :  props.onMessage
 }))`
     align-self: center;
-    height: 150;
-    width: 250;
+    height: 150px;
+    width: 250px;
     background-color: #E1E5E8;
 `;
 
