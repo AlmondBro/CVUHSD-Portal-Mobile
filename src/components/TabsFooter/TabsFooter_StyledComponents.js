@@ -7,7 +7,7 @@ const TabsFooterContainerView = styled.View`
     flex: ${props => props.showPortalLogo ? 0.15 : 0.10};
     flex-direction: row;
 
-    border-radius: 0;
+    border-radius: 0px;
     border-top-width: 0px;
     border-color: white;
 `;
@@ -20,7 +20,7 @@ const TabsFooterBoxView = styled.View`
     color: white;
     background-color:  ${props => ( (props.title === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" };
 
-    border-radius: 0;
+    border-radius: 0px;
     border-right-width: ${props => props.noBorder ? "0px" : "1px"};
     border-color: white;
 
@@ -51,4 +51,5 @@ let TabsFooterButton = ({ renderAsStudent, setRenderAsStudent, onPress, title, n
 const TabsFooterBoxText = styled.Text`
     color: white;
 `;
+
 export { TabsFooterContainerView, TabsFooterButton};

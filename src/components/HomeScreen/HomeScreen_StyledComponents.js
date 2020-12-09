@@ -8,8 +8,8 @@ let BlueSectionContainer = styled.View`
     flex-direction: column;
     align-self: stretch;
     justify-content: flex-start;
-    padding: 0;
-    margin: 0;
+    padding: 0px;
+    margin: 0px;
     width: ${props => props.width ? props.width : "auto"};
 `;
 
@@ -23,7 +23,7 @@ let AppHeaderContainerView = styled.View`
 
 const WelcomeText = styled.Text`
     color: #B41A1F;
-    font-size: 20;
+    font-size: 20px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -35,8 +35,8 @@ let OpenSSOContainer = styled(BlueSectionContainer)`
                             (props.title === "Student" || props.renderAsStudent) 
                                 ? "#B41A1F" : "#1E6C93" 
                         };
-    border-top-left-radius: 25;
-    border-top-right-radius: 25;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
     flex: 1;
     flex-direction: column;
     justify-content: center;

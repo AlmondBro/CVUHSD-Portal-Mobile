@@ -14,8 +14,6 @@ if (__DEV__) {
     import('./config/reactotron.dev.js').then(() => console.log('Reactotron Configured'));
 }
 
-console.disableYellowBox = true;
-
 const theme = {
     ...DefaultTheme,
     roundness: 10,
