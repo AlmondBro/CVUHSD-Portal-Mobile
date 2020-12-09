@@ -1,12 +1,14 @@
 import React from 'react';
 import { Alert, Platform } from 'react-native';
 
+import Constants from 'expo-constants';
+
+import { Reactotron } from './../../config/reactotron.dev.js';
+
 //Import the styled sub-components
 import { Container, PortalLogo, InfoIconTouchOpacity, SettingsIcon } from './SettingsHeaderStyledComponents.js';
 
-import { version }  from './../../../package.json';
-
-import { Reactotron } from './../../config/reactotron.dev.js';
+const { nativeAppVersion: version } = Constants;
 
 const isDev = __DEV__;
 

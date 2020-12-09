@@ -194,7 +194,7 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
             <ModalStyled 
                 animationType       =   "slide"
                 presentationStyle   =   "pageSheet"
-                transparent         =   { false }
+                transparent         =   { true }
 
                 swipeDirection      =   "down"
                 onBackButtonPress   =   { () => setShowPasswordModal(false) }

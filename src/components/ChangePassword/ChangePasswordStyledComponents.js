@@ -58,13 +58,15 @@ const ModalContentContainer = styled.View`
     background-color:  red;
 `;
 
-const KeyboardAwareScrollViewStyled = styled(KeyboardAwareScrollView)`
+const KeyboardAwareScrollViewStyled = styled(KeyboardAwareScrollView).attrs((props) => ({
+    keyboardShouldPersistTaps : true
+}))`
 
 `;
 
 const Divider = styled.View`
     width: 90%;
-    height: ${StyleSheet.hairlineWidth};
+    height: ${StyleSheet.hairlineWidth + "px"};
 
     margin: auto;
     margin-top: 10px;
