@@ -13,13 +13,6 @@ let AppContainerView = styled.View`
     justify-content: space-between; */
 `;
 
-let AppHeaderContainerView = styled.View`
-    flex: 2;
-
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-`;
 
 const ImageBackgroundStyled = styled.ImageBackground.attrs( (props) => ({
     resizeMode: "cover"
@@ -80,4 +73,4 @@ let StatusBarSafeView = styled(SafeAreaView).attrs( (props) => ({
 
 
 
-export { AppContainerView, AppHeaderContainerView, ImageBackgroundStyled, WelcomeText, SafeAreaViewStyled, BlueSectionContainer, StatusBarSafeView,  };
+export { AppContainerView, ImageBackgroundStyled, WelcomeText, SafeAreaViewStyled, BlueSectionContainer, StatusBarSafeView,  };

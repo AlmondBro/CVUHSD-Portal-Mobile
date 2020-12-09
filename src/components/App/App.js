@@ -1,27 +1,21 @@
 //Import React/React Native modules
 import React, { Fragment, Component } from 'react';
 import { Alert, Platform } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 //Import expo/react native components that now exist as separate packages
 import { StatusBar } from 'expo-status-bar';
-import AsyncStorage from '@react-native-community/async-storage';
+import { checkForUpdateAsync } from 'expo-updates';
+import * as AuthSession from 'expo-auth-session';
 
 //Import React Navigation Packages
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native'; //Equivalent to the BrowserRouter in ReactRouter
 import { createStackNavigator } from '@react-navigation/stack'; 
 
-import { Reactotron } from './../../config/reactotron.dev.js';
-
-import { OAUTH_AUTH_URL, OAUTH_TOKEN_URL, OAUTH_USERINFO_URL, OAUTH_REDIRECT_URL, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET } from "@env";
-
-import * as AuthSession from 'expo-auth-session';
-
-// import * as Updates from 'expo-updates';
-import { reloadAsync, checkForUpdateAsync, fetchForUpdate } from 'expo-updates';
-
-//Import utility functions
+//Import utility functions and Reactotron for logging
 import { dimensionsWidthHOC, navigationRef, navigate } from './../../utility-functions.js';
+import { Reactotron } from './../../config/reactotron.dev.js';
 
 //Import App/Page components
 import SettingsHeader from './../SettingsHeader/SettingsHeader.js';
@@ -32,8 +26,9 @@ import TabsFooter from './../TabsFooter/TabsFooter.js'
 import HomeScreen from './../HomeScreen/HomeScreen.js';
 
 //import styled components
-import { AppContainerView, AppHeaderContainerView, ImageBackgroundStyled, WelcomeText, StatusBarSafeView, SafeAreaViewStyled } from './App_StyledComponents.js';
-import { UserInfoText } from '../Header/Header_StyledComponents.js';
+import { AppContainerView, ImageBackgroundStyled, WelcomeText, StatusBarSafeView, SafeAreaViewStyled } from './App_StyledComponents.js';
+
+import { OAUTH_AUTH_URL, OAUTH_TOKEN_URL, OAUTH_REDIRECT_URL, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET } from "@env";
 
 const imagesObjectPath = (Platform.OS === "web") ? require('./../../assets/images/index.js') : require('@images');
 const Images = imagesObjectPath.default;
