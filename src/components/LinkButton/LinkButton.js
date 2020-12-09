@@ -252,13 +252,23 @@ const LinkButton = (props) => {
                 return portalRoot +("/images/buttons/Wayside-publishing.png");
 
             case "unified-talent.png" : 
-                return portalRoot +("/images/buttons/unified-talent.png");
+                return portalRoot + ("/images/buttons/unified-talent.png");
 
             case "webex-teams.jpg" :
-                return portalRoot +("/images/buttons/webex-teams.jpg");
+                return portalRoot + ("/images/buttons/webex-teams.jpg");
 
             case "helpdesk-live-chat.png" :
-                return portalRoot +("/images/buttons/helpdesk-live-chat.png");
+                return portalRoot + ("/images/buttons/helpdesk-live-chat.png");
+
+            case "TechItOut_Button.png" :
+                return portalRoot + ("/images/buttons/TechItOut_Button.png");
+
+            case "english-learner-resources.jpg" :
+                return portalRoot + ("/images/buttons/english-learner-resources.jpg");
+
+            case "virtual-job-shadow.jpg" :
+                    return portalRoot + ("/images/buttons/virtual-job-shadow.jpg");
+
             default :  
                 return portalRoot +("/images/buttons/Outlook.png");
         } //end switch statement
