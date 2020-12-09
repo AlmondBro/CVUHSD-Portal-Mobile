@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet, TouchableHighlight } from 'react-native';
 
 import * as Linking from 'expo-linking';
 

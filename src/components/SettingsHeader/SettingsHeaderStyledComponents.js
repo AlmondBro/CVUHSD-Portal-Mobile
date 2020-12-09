@@ -21,8 +21,8 @@ let Container = styled.View`
 const PortalLogo = styled.Image.attrs( (props) => {
   
 })`
-    width: 50;
-    height: 50;
+    width: 50px;
+    height: 50px;
 
     /* margin-right: auto; */
 `;
@@ -33,7 +33,7 @@ const InfoIconTouchOpacity = styled.TouchableOpacity`
 `;
 
 let SettingsIcon = styled(MaterialCommunityIcons)`
-    margin-right: 15;
+    margin-right: 15px;
 `;
 
 export { Container, PortalLogo, InfoIconTouchOpacity, SettingsIcon };

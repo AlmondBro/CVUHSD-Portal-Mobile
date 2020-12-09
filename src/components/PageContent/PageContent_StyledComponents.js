@@ -5,8 +5,8 @@ let BlueSectionContainer = styled.View`
     flex-direction: column;
     align-self: stretch;
     justify-content: flex-start;
-    padding: 0;
-    margin: 0;
+    padding: 0px;
+    margin: 0px;
     width: ${props => props.width ? props.width : "auto"};
 `;
 
@@ -15,7 +15,7 @@ let ScrollViewStyled = styled.ScrollView.attrs((props) => ({
         flex-direction: column;
         align-self: center;
         justify-content: flex-start;
-        padding: 0;
+        padding: 0px;
         background-color: #F4F7F9;
         width: ${ props.width ? props.width : "auto" };
     `,

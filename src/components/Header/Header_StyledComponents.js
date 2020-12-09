@@ -14,10 +14,10 @@ let HeaderContainerView = styled.View`
 let PortalLogoImage = styled.Image.attrs( (props) => {
   
 })`
-    width: 130;
-    height: 130;
+    width: 130px;
+    height: 130px;
 
-    margin-top: 5;
+    margin-top: 5px;
 `;
 
 let UpdateAppView = styled.View`
@@ -28,19 +28,18 @@ let UpdateAppView = styled.View`
 
     /* background-color: white; */
 
-    margin-top: 10;
-    margin-bottom: 10;
+    margin-top: 10px;
+    margin-bottom: 10px;
 
-
-    border-radius: 10;
+    border-radius: 10px;
 
     width: 100%;
 `; 
 
 let UpdateTextDescription = styled.Text`
-    font-size: 14; 
-    padding-left: 8;
-    padding-right: 8;
+    font-size: 14px; 
+    padding-left: 8px;
+    padding-right: 8px;
     align-self: center;
     color:  ${   props => (props.title === null) 
                             ? "#B41A1F" : 
@@ -57,25 +56,25 @@ let UserInfoText = styled.Text`
 
     font-family: ${props => (props.italic && props.bold) ? "SourceSansPro_600SemiBold_Italic" : "SourceSansPro_400Regular"};
 
-    margin-top: 0;
+    margin-top: 0px;
 
     align-self: center;
 
-    margin-top: 5;
+    margin-top: 5px;
 `;
 
 const SchoolNameLogoView = styled.View`
     flex-direction: row;
     justify-content:  center;
-    margin-bottom: 5;
+    margin-bottom: 5px;
 `;
 
 const SchoolLogo = styled.Image`
     flex-direction: row;
-    height: 25;
-    width: 25;
+    height: 25px;
+    width: 25px;
 
-    margin-left: 5;
+    margin-left: 5px;
 
     overflow: visible;
 `;
@@ -91,16 +90,16 @@ const UpdateButtonView = styled.View`
                         };
     color: white;
 
-    border-radius: 15;
+    border-radius: 15px;
 
-    width: 120;
+    width: 120px;
 
-    margin-top: 10;
-    margin-bottom: 10;
+    margin-top: 10px;
+    margin-bottom: 10px;
 
     
-    padding-top: 8;
-    padding-bottom: 8;
+    padding-top: 8px;
+    padding-bottom: 8px;
 `;
 
 const UpdateButtonText= styled.Text`
@@ -109,7 +108,7 @@ const UpdateButtonText= styled.Text`
     font-family: 'SourceSansPro_600SemiBold';
     /* 'SourceSansPro_400Regular','SourceSansPro_200ExtraLight', 'SourceSansPro_200ExtraLight_Italic','SourceSansPro_300Light','SourceSansPro_300Light_Italic','SourceSansPro_400Regular_Italic','SourceSansPro_600SemiBold', 'SourceSansPro_600SemiBold_Italic','SourceSansPro_700Bold','SourceSansPro_700Bold_Italic', 'SourceSansPro_900Black', 'SourceSansPro_900Black_Italic'; */
 
-    font-size: 15;
+    font-size: 15px;
     font-weight: bold;
     flex-direction: row;
 

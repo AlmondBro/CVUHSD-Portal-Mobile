@@ -11,7 +11,7 @@ const Container = styled.View`
    
     width:  100%;
 
-    margin-top: 150;
+    margin-top: 150px;
 
     background-color: white;
 `;

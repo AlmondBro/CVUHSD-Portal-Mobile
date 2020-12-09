@@ -7,7 +7,7 @@ import { AntDesign } from '@expo/vector-icons';
 
 const HeaderContainer = styled.View`
     position: absolute;
-    top: 0;
+    top: 0px;
     z-index: 1;
 
     display: flex;
@@ -36,10 +36,10 @@ const HeaderTitleIconContainer = styled.View`
 const HeaderText = styled.Text`
     color: white;
 
-    font-size: 18;
+    font-size: 18px;
     font-weight: bold;
 
-    margin-right: 5;
+    margin-right: 5px;
 
     text-align: center;
 
@@ -50,12 +50,12 @@ const CloseIcon = styled(AntDesign)`
     color: white;
     /* background-color: white; */
 
-    margin-right: 20;
+    margin-right: 20px;
 
-    padding-top: 5;
-    padding-bottom: 5;
-    padding-left: 5;
-    padding-right: 5;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
 `;
 
 const CloseIconButton = ({ districtPosition, renderAsStudent, onPress }) => {

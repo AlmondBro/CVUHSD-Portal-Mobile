@@ -6,16 +6,16 @@ import FastImage from 'react-native-fast-image';
 
 const TouchableHighlightStyled = styled.TouchableHighlight`
     align-self: center;
-    margin-top: 13;
-    margin-bottom: 13;
-    border-radius: 10;
+    margin-top: 13px;
+    margin-bottom: 13px;
+    border-radius: 10px;
 `;
 
 const LinkButtonImage = styled(ImageCache)`
-    width: 300;
-    height: 100;
+    width: 300px;
+    height: 100px;
 
-    border-radius: 10;
+    border-radius: 10px;
 `;
 
 const FastImageStyled = styled(FastImage).attrs(props => ({
@@ -23,10 +23,10 @@ const FastImageStyled = styled(FastImage).attrs(props => ({
     header      : props.headers,
     priority    : props.priority
 }))`
-    width: 300;
-    height: 100;
+    width: 300px;
+    height: 100px;
 
-    border-radius: 10;
+    border-radius: 10px;
 `;
 
 export { TouchableHighlightStyled, LinkButtonImage };
