@@ -59,7 +59,7 @@ const ModalContentContainer = styled.View`
 `;
 
 const KeyboardAwareScrollViewStyled = styled(KeyboardAwareScrollView).attrs((props) => ({
-    keyboardShouldPersistTaps : true
+    keyboardShouldPersistTaps : "never"
 }))`
     margin-bottom: 56px;
 `;
