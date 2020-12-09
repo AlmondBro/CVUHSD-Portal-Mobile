@@ -30,19 +30,16 @@ import { AppContainerView, ImageBackgroundStyled, WelcomeText, StatusBarSafeView
 
 import { OAUTH_AUTH_URL, OAUTH_TOKEN_URL, OAUTH_REDIRECT_URL, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET } from "@env";
 
-const imagesObjectPath = (Platform.OS === "web") ? require('./../../assets/images/index.js') : require('@images');
-const Images = imagesObjectPath.default;
-
-//Import Images from @assets';
-
-const { Navigator, Screen } = createStackNavigator();  //<Navigator> is equivalent to a <Switch> on React Router, <Screen/> is equivalent to <Route>
-
 const isDev = __DEV__;
-
 const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
 
 const PORTAL_LIVE_LINK  = "portal.centinela.k12.ca.us";
 const IP_ADDRESS_DEV    = "10.2.64.175:3002";
+
+const imagesObjectPath = (Platform.OS === "web") ? require('./../../assets/images/index.js') : require('@images');
+const Images = imagesObjectPath.default;
+
+const { Navigator, Screen } = createStackNavigator();  //<Navigator> is equivalent to a <Switch> on React Router, <Screen/> is equivalent to <Route>
 class App extends Component {
     constructor(props) {
         super(props);
@@ -71,25 +68,22 @@ class App extends Component {
             fontLoaded          :   true
         }; //end this.state object
 
-
         this.initialState = { ...this.state };
     } //end constructor
-
-    //AuthSession.makeRedirectUri({ native: 'cvuhsd.portal://redirect' })
 
     USER_INFO = '@user_info';
 
     getStudentSchool = () => {
-        console.log("getStudentSchool()");
+        ReactotronDebug.log("getStudentSchool()");
   
         const parseOUforSchool = (organizationalUnit) => {
-          console.log("parseOUforSchool()");
+          ReactotronDebug.log("parseOUforSchool()");
 
           const splitDirectoriesArray = organizationalUnit.split("/");
           const school = splitDirectoriesArray[1];
           const gradeLevel = splitDirectoriesArray[2];
   
-          console.log("splitDirectoriesArray:\t" + splitDirectoriesArray);
+          ReactotronDebug.log("splitDirectoriesArray:\t" + splitDirectoriesArray);
 
           this.setState({site: school, gradeLevel: gradeLevel});
         }; //end parseOUforSchool()
@@ -119,9 +113,12 @@ class App extends Component {
     }; //end getStudentSchool
 
     parseIntoQueryString = (requestParams) => {
-        /* loop through object and encode each item as URI component before storing in array */
-        /* then join each element on & */
-        /* request is x-www-form-urlencoded as per docs: https://docs.microsoft.com/en-us/graph/use-the-api */
+        /* 
+            Loop through the requestParams object and encode each key/value as URI component. 
+            Create a string based off of this by appending '&' to each key/value pair. 
+            The request is x-www-form-urlencoded as per docs: 
+            https://docs.microsoft.com/en-us/graph/use-the-api 
+        */
 
         let formBody = [];
         let queryString = "";
@@ -189,8 +186,8 @@ class App extends Component {
     }; //end getUserInfo()
 
     openADSingleSignOn = async () => {
-        console.log("handlePressAsync()");
-        console.log("AuthSession.makeRedirectUri():\t" + AuthSession.makeRedirectUri());
+        ReactotronDebug.log("handlePressAsync()");
+        ReactotronDebug.log("AuthSession.makeRedirectUri():\t" + AuthSession.makeRedirectUri());
         
         this.setState({ authLoading: true }); //Set loading to true
 
@@ -231,17 +228,6 @@ class App extends Component {
         if ( adfsUserInfo && accessToken ) {
             const { username, email, family_name, givenName, jobTitle, accessToken, uid } = adfsUserInfo;
         
-            // this.setState({
-            //   loggedIn: true,
-            //   firstName:  givenName,
-            //   lastName: family_name,
-            //   username: username,
-            //   email: email,
-            //   title: jobTitle || "staff",
-            //   uid,
-            //   accessToken,
-            // });
-
             this.setState({
                 firstName           : givenName,
                 lastName            : family_name,
@@ -255,14 +241,7 @@ class App extends Component {
 
             this.getStudentSchool();
 
-            //setInterval(() => this.setLogOnUserData({...this.state}), 1500);
             this.setLogOnUserData({...this.state});
-
-            /*
-            if ( (adUserInfo.jobTitle === "Student") && (adUserInfo.officeLocation === null) ) {
-                this.getStudentSchool();
-            }
-            */
 
             ReactotronDebug.log("App State after authentication:\t" + JSON.stringify(this.state));
 
@@ -281,7 +260,7 @@ class App extends Component {
                 [
                   {
                     text: "OK",
-                    onPress: () => console.log("OK Pressed"),
+                    onPress: () => ReactotronDebug.log("OK Pressed"),
                     style: "cancel"
                   },
                 ],
@@ -356,15 +335,12 @@ class App extends Component {
     };
 
     clearLogOnUserData = async () => {
-        console.log("Clearlogout data.")
         try {
             await AsyncStorage.clear();
         } catch(e) {
             ReactotronDebug.log('clearLogOnUserData() clear');
         }
         this.setState({ ...this.initialState });
-        //navigate('Home');
-        console.log('Done.')
     }; //end clearLogOnUserData
 
     reloadAppFromUpdate = async () => {
@@ -394,11 +370,10 @@ class App extends Component {
     };
 
     componentDidMount = () => {
-        //console.log("Props:\t" + JSON.stringify(this.props) );
-        console.log("Width:\t" + this.props.width);
+        ReactotronDebug.log("Width:\t" + this.props.width);
 
         if (__DEV__ && Reactotron) {
-            Reactotron.log('Reactotron running');
+            ReactotronDebug.log('Reactotron running');
         }
         
         this.checkForUpdates();
@@ -410,11 +385,7 @@ class App extends Component {
         //this.clearLogOnUserData();
     }; //end componentDidMount
 
-    // #B41A1F" : "#1E6C93
     render = () => {
-        // if (!this.state.fontLoaded) {
-        //     return ( <AppLoading /> );
-        // } else {
             return (
                 <Fragment>
                     {/* This statusbar component's effect applies more on Android */}
