@@ -25,7 +25,10 @@
       "icon": "./src/assets/app-icon.ios.png",
       "supportsTablet": false,
       "buildNumber": "6",
-      "bundleIdentifier": "com.cvuhsd.portal"
+      "bundleIdentifier": "com.cvuhsd.portal",
+      "infoPlist" : {
+        "CFBundleShortVersionString" : "2.1.0"
+      }
     },
     "android": {
       "icon": "./src/assets/app-icon.android.png",
