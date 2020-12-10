@@ -94,7 +94,7 @@ class App extends Component {
             'Access-Control-Allow-Origin': '*',
         };
     
-        const getOU = fetch(getOU_URL, {
+        fetch(getOU_URL, {
             method: 'POST',
             headers: getOU_headers,
             body: JSON.stringify({user: this.state.email})
@@ -107,8 +107,6 @@ class App extends Component {
         }).catch((error) => {
             Reactotron.error(`Catching error:\t ${error}`);
         });
-
-        getOU();
     }; //end getStudentSchool
 
     parseIntoQueryString = (requestParams) => {
