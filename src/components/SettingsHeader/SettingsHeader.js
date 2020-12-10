@@ -5,6 +5,7 @@ import Constants from 'expo-constants';
 
 import { Reactotron } from './../../config/reactotron.dev.js';
 
+import Logo from './../../assets/images/wp-portal-logo-white.svg';
 //Import the styled sub-components
 import { Container, PortalLogo, InfoIconTouchOpacity, SettingsIcon } from './SettingsHeaderStyledComponents.js';
 
@@ -29,8 +30,9 @@ const SettingsHeader = ({ districtPosition, renderAsStudent }) => {
             districtPosition    =   { districtPosition }
             renderAsStudent     =   { renderAsStudent  }
         >
-            <PortalLogo
-                source  =   { portalLogoSource} 
+            <Logo
+                width   =   { 40 } 
+                height  =   { 40 } 
             />
             <InfoIconTouchOpacity
                 onPress = {
