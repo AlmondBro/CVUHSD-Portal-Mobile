@@ -202,70 +202,91 @@ class App extends Component {
             authUrl: authUrl   
         });
 
-        const { code: authorizationCode } = authSessionResults.params;
-                               
-        ReactotronDebug.log("authSessionResults:\t" + JSON.stringify(authSessionResults) );
+        if ( !(authSessionResults.type === "cancel" || authSessionResults.type === "dismiss" || authSessionResults.type === "error")) {
+            const { code: authorizationCode } = authSessionResults.params;
+                                
+            ReactotronDebug.log("authSessionResults:\t" + JSON.stringify(authSessionResults) );
 
-        const {access_token : accessToken } = await this.getAccessToken(authorizationCode);
+            const {access_token : accessToken } = await this.getAccessToken(authorizationCode);
 
-        ReactotronDebug.log("accessToken:\t", accessToken);
+            ReactotronDebug.log("accessToken:\t", accessToken);
 
-        const adfsUserInfo = await this.getUserInfo(accessToken);
+            const adfsUserInfo = await this.getUserInfo(accessToken);
 
-        ReactotronDebug.log("adfsUserInfo:\t", adfsUserInfo);
+            ReactotronDebug.log("adfsUserInfo:\t", adfsUserInfo);
 
-        let portalLogoSource = ( (adfsUserInfo.jobTitle === "Student") || (this.state.renderAsStudent === true)) ?
-                                Images.appHeader.portalLogoRed
-                            :   Images.appHeader.portalLogoBlue;
+            let portalLogoSource = ( (adfsUserInfo.jobTitle === "Student") || (this.state.renderAsStudent === true)) ?
+                                    Images.appHeader.portalLogoRed
+                                :   Images.appHeader.portalLogoBlue;
 
-        let backgroundImage = (adfsUserInfo.jobTitle === "Student" || this.state.renderAsStudent) ?
-                                Images.appHeader.backgroundImageRed
-                            :   Images.appHeader.backgroundImageBlue;
-               
-        if ( adfsUserInfo && accessToken ) {
-            const { username, email, family_name, givenName, jobTitle, accessToken, uid } = adfsUserInfo;
-        
-            this.setState({
-                firstName           : givenName,
-                lastName            : family_name,
-                title               : jobTitle || "staff",
-                email               : email,
-                portalLogoSource    : portalLogoSource,
-                backgroundImage     : backgroundImage,
-               // navigateFunction    : navigate,
-                authLoading         : false 
-            });
-
-            this.getStudentSchool();
-
-            this.setLogOnUserData({...this.state});
-
-            ReactotronDebug.log("App State after authentication:\t" + JSON.stringify(this.state));
-
-            navigate('Home');
-               
-        } else {
-            ReactotronDebug.log("User canceled operation from App.js");
-            this.setState({ authLoading: false });
+            let backgroundImage = (adfsUserInfo.jobTitle === "Student" || this.state.renderAsStudent) ?
+                                    Images.appHeader.backgroundImageRed
+                                :   Images.appHeader.backgroundImageBlue;
+                
+            if (adfsUserInfo && accessToken ) {
+                const { username, email, family_name, givenName, jobTitle, accessToken, uid } = adfsUserInfo;
             
-            const alertTitle = "Sign-in failed" ;
-            const alertMessage = authSessionResults.error;
+                this.setState({
+                    firstName           : givenName,
+                    lastName            : family_name,
+                    title               : jobTitle || "staff",
+                    email               : email,
+                    portalLogoSource    : portalLogoSource,
+                    backgroundImage     : backgroundImage,
+                // navigateFunction    : navigate,
+                    authLoading         : false 
+                });
 
-            Alert.alert(
-                alertTitle,
-                alertMessage,
-                [
-                  {
-                    text: "OK",
-                    onPress: () => ReactotronDebug.log("OK Pressed"),
-                    style: "cancel"
-                  },
-                ],
-                { cancelable: false }
-              );
+                this.getStudentSchool();
 
-            return; 
-        } //end else-statement
+                this.setLogOnUserData({...this.state});
+
+                ReactotronDebug.log("App State after authentication:\t" + JSON.stringify(this.state));
+
+                navigate('Home');
+                
+            } else {
+                ReactotronDebug.log("User canceled operation from App.js");
+                this.setState({ authLoading: false });
+                
+                const alertTitle = "Sign-in failed" ;
+                const alertMessage = authSessionResults.error;
+
+                Alert.alert(
+                    alertTitle,
+                    alertMessage,
+                    [
+                    {
+                        text: "OK",
+                        onPress: () => ReactotronDebug.log("OK Pressed"),
+                        style: "cancel"
+                    },
+                    ],
+                    { cancelable: false }
+                );
+
+                return; 
+            } //end else-statement
+        } else {
+                this.setState({ authLoading: false });
+                
+                const alertTitle = "Sign-in Dismissed" ;
+                const alertMessage = "Sign-in closed or authentication error";
+
+                Alert.alert(
+                    alertTitle,
+                    alertMessage,
+                    [
+                    {
+                        text: "OK",
+                        onPress: () => ReactotronDebug.log("OK Pressed"),
+                        style: "cancel"
+                    },
+                    ],
+                    { cancelable: false }
+                );
+        } //end outer else-statement
+
     }; //openADSingleSignOn()
 
     checkforExistingLogOn = async () => {

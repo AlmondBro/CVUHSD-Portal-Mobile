@@ -5,6 +5,9 @@ import { TouchableOpacity } from 'react-native';
 import { HeaderContainerView, PortalLogoImage, UpdateAppView, UpdateTextDescription, UserInfoText, SchoolNameLogoView, SchoolLogo, UpdateButtonTouchableOpacity } from './Header_StyledComponents.js';
 import { BlueSectionContainer } from './../App/App_StyledComponents.js';
 
+import LogoBlue from './../../assets/images/wp-portal-logo-blue.svg'; 
+import LogoRed from './../../assets/images/wp-portal-logo-red.svg'; 
+
 //Import 3rd-party APIs
 import greeting from 'greeting';
 
@@ -78,6 +81,13 @@ const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel,
                     activeOpacity = { 0.5 }
                     // onPress={ props.onPress('Home') }
                 >
+                {
+                    title ? 
+                        (title === "Student" || renderAsStudent) 
+                        ? (<LogoRed width={130} height={130} />)
+                        : (<LogoBlue width={130} height={130}/>)
+                    :  (<LogoRed  width={130} height={130}/>)
+                }
                 <PortalLogoImage  
                     source  =   { portalLogoSource} 
                 />
