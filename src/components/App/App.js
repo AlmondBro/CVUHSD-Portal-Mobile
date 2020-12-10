@@ -28,13 +28,12 @@ import HomeScreen from './../HomeScreen/HomeScreen.js';
 //import styled components
 import { AppContainerView, ImageBackgroundStyled, WelcomeText, StatusBarSafeView, SafeAreaViewStyled } from './App_StyledComponents.js';
 
-import { OAUTH_AUTH_URL, OAUTH_TOKEN_URL, OAUTH_REDIRECT_URL, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET } from "@env";
+import { PORTAL_LIVE_LINK, IP_ADDRESS,OAUTH_AUTH_URL, OAUTH_TOKEN_URL, OAUTH_REDIRECT_URL, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET } from "@env";
 
 const isDev = __DEV__;
 const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
 
-const PORTAL_LIVE_LINK  = "portal.centinela.k12.ca.us";
-const IP_ADDRESS_DEV    = "10.2.64.175:3002";
+const IP_ADDRESS_DEV = IP_ADDRESS;
 
 const imagesObjectPath = (Platform.OS === "web") ? require('./../../assets/images/index.js') : require('@images');
 const Images = imagesObjectPath.default;
