@@ -202,7 +202,7 @@ class App extends Component {
             authUrl: authUrl   
         });
 
-        if ( !(authSessionResults.type === "cancel" || authSessionResults.type === "dismiss" || authSessionResults.type === "error")) {
+        if ( !(authSessionResults.type === "cancel" || authSessionResults.type === "dismiss" || authSessionResults.type === "error" || authSessionResults.type === "locked")) {
             const { code: authorizationCode } = authSessionResults.params;
                                 
             ReactotronDebug.log("authSessionResults:\t" + JSON.stringify(authSessionResults) );
