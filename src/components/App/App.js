@@ -398,8 +398,8 @@ class App extends Component {
             await this.adfsLogOut();
             clearCookies();
             await AsyncStorage.clear();
-        } catch(e) {
-            ReactotronDebug.log('clearLogOnUserData() clear');
+        } catch(error) {
+            ReactotronDebug.log(`AppLogOut() error ${error}`);
         }
         this.setState({ ...this.initialState });
     }; //end clearLogOnUserData
