@@ -5,8 +5,10 @@ import { TouchableOpacity } from 'react-native';
 import { HeaderContainerView, PortalLogoImage, UpdateAppView, UpdateTextDescription, UserInfoText, SchoolNameLogoView, SchoolLogo, UpdateButtonTouchableOpacity } from './Header_StyledComponents.js';
 import { BlueSectionContainer } from './../App/App_StyledComponents.js';
 
-import LogoBlue from './../../assets/images/wp-portal-logo-blue.svg'; 
-import LogoRed from './../../assets/images/wp-portal-logo-red.svg'; 
+import LogoBlue from './../../assets/images/wp-portal-logo-blue-white-interior.svg'; 
+import LogoRed from './../../assets/images/wp-portal-logo-red-white-interior.svg'; 
+
+import WPTypography from './../../assets/images/wp-typography.svg';
 
 //Import 3rd-party APIs
 import greeting from 'greeting';
@@ -75,6 +77,8 @@ const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel,
 
     return (
       <HeaderContainerView>
+        {/* <WPTypography width={500} height={500} /> */}
+
           {
               showPortalLogo ? (
                 <TouchableOpacity
@@ -88,14 +92,14 @@ const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel,
                         : (<LogoBlue width={130} height={130}/>)
                     :  (<LogoRed  width={130} height={130}/>)
                 }
-                <PortalLogoImage  
+                {/* <PortalLogoImage  
                     source  =   { portalLogoSource} 
-                />
+                /> */}
               </TouchableOpacity>
               ) : null
           }
+
      
-    
         <Fragment>
             { showUpdate ?
                 ( 
