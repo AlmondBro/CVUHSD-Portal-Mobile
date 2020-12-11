@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { Platform } from 'react-native';
 
-import { AppLoading } from 'expo';
+import AppLoading from 'expo-app-loading';
 
 import { setCustomText } from 'react-native-global-props';
 
