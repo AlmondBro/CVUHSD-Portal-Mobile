@@ -32,8 +32,24 @@ const InfoIconTouchOpacity = styled.TouchableOpacity`
     left: 90%;
 `;
 
-let SettingsIcon = styled(MaterialCommunityIcons)`
+const SettingsIcon = styled(MaterialCommunityIcons)`
     margin-right: 15px;
 `;
 
-export { Container, PortalLogo, InfoIconTouchOpacity, SettingsIcon };
+const WayPointText = styled.Text`
+    font-family: 'SourceSansPro_400Regular';
+    color: white;
+    /* background-color: white; */
+    /* width: 100%; */
+    text-align: center;
+    font-size: 21px;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+
+    margin-left: 8px;
+`;
+
+export { Container, PortalLogo, WayPointText, InfoIconTouchOpacity, SettingsIcon };
