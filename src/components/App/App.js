@@ -162,7 +162,7 @@ class App extends Component {
     }; //end getUserInfo()
 
     getUserInfo = async (accessToken) => {
-        const getUserInfoURL = `${isDev ? `http://${IP_ADDRESS_DEV}` : `http://${PORTAL_LIVE_LINK}/server`}/auth/user-info`;
+        const getUserInfoURL = `${isDev ? `http://${IP_ADDRESS_DEV}` : `https://${PORTAL_LIVE_LINK}/server`}/auth/user-info`;
         
         const getOUHeaders = {
             'Content-Type': 'application/json',
@@ -173,7 +173,7 @@ class App extends Component {
         const userInfo = fetch(getUserInfoURL, {
             method: 'POST',
             headers: getOUHeaders,
-            body: JSON.stringify({ accessToken: accessToken})
+            body: JSON.stringify({ accessToken })
         })
         .then((response) => response.json())
         .then((userInfo) => userInfo)
@@ -209,11 +209,11 @@ class App extends Component {
                                 
             ReactotronDebug.log("authSessionResults:\t" + JSON.stringify(authSessionResults) );
 
-            const {access_token : accessToken } = await this.getAccessToken(authorizationCode);
+            const { access_token } = await this.getAccessToken(authorizationCode);
 
-            ReactotronDebug.log("accessToken:\t", accessToken);
+            ReactotronDebug.log("accessToken:\t", access_token);
 
-            const adfsUserInfo = await this.getUserInfo(accessToken);
+            const adfsUserInfo = await this.getUserInfo(access_token);
 
             ReactotronDebug.log("adfsUserInfo:\t", adfsUserInfo);
 
@@ -225,7 +225,7 @@ class App extends Component {
                                     Images.appHeader.backgroundImageRed
                                 :   Images.appHeader.backgroundImageBlue;
                 
-            if (adfsUserInfo && accessToken ) {
+            if (adfsUserInfo && access_token ) {
                 const { username, email, family_name, givenName, jobTitle, accessToken, uid } = adfsUserInfo;
             
                 this.setState({
@@ -396,7 +396,7 @@ class App extends Component {
     appLogOut = async () => {
         try {
             await this.adfsLogOut();
-            clearCookies();
+            this.clearCookies();
             await AsyncStorage.clear();
         } catch(error) {
             ReactotronDebug.log(`AppLogOut() error ${error}`);
