@@ -28,7 +28,7 @@ import HomeScreen from './../HomeScreen/HomeScreen.js';
 //import styled components
 import { AppContainerView, ImageBackgroundStyled, WelcomeText, StatusBarSafeView, SafeAreaViewStyled } from './App_StyledComponents.js';
 
-import { PORTAL_LIVE_LINK, IP_ADDRESS,OAUTH_AUTH_URL, OAUTH_TOKEN_URL, OAUTH_REDIRECT_URL, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET } from "@env";
+import { PORTAL_LIVE_LINK, IP_ADDRESS,OAUTH_AUTH_URL, OAUTH_TOKEN_URL, OAUTH_REDIRECT_URL, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET, OAUTH_LOGOUT_URL, ADFS_LOG_OUT } from "@env";
 
 const isDev = __DEV__;
 const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
@@ -352,8 +352,29 @@ class App extends Component {
           }
     };
 
-    clearLogOnUserData = async () => {
+    adfsLogOut = async () => {
+        const adfsLogOut_URL = ADFS_LOG_OUT;
+        const adfsLogOut_headers = {
+            'Content-Type': 'application/json',
+            'credentials': 'include',
+            'Access-Control-Allow-Origin': '*',
+        };
+    
+        return await fetch(adfsLogOut_URL, {
+            method: 'POST',
+            headers: adfsLogOut_headers
+        }).then((response) => {
+            return response.json();     //Parse the JSON of the response
+        }).then((response) => {
+            Reactotron.log("adfsLogOut response:\t", response);
+        }).catch((error) => {
+            Reactotron.error(`Catching error:\t ${error}`);
+        });
+    }; //end adfsLogOut()
+
+    appLogOut = async () => {
         try {
+            await this.adfsLogOut();
             await AsyncStorage.clear();
         } catch(e) {
             ReactotronDebug.log('clearLogOnUserData() clear');
@@ -547,7 +568,7 @@ class App extends Component {
                                             showPortalLogo      =   { this.state.showPortalLogo }
 
                                             setRenderAsStudent      =   { this.setRenderAsStudent }
-                                            logOut                  =   { this.clearLogOnUserData }
+                                            logOut                  =   { this.appLogOut }
                                         />
                                         : null    
                                     } 
