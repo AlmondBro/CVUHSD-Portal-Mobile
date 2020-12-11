@@ -1,6 +1,6 @@
 //Import React/React Native modules
 import React, { Fragment, Component } from 'react';
-import { Alert, Platform } from 'react-native';
+import { Alert, Platform, NativeModules } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 //Import expo/react native components that now exist as separate packages
@@ -38,6 +38,8 @@ const IP_ADDRESS_DEV = IP_ADDRESS;
 const imagesObjectPath = (Platform.OS === "web") ? require('./../../assets/images/index.js') : require('@images');
 const Images = imagesObjectPath.default;
 
+const { Networking } = NativeModules;
+ 
 const { Navigator, Screen } = createStackNavigator();  //<Navigator> is equivalent to a <Switch> on React Router, <Screen/> is equivalent to <Route>
 class App extends Component {
     constructor(props) {
@@ -360,7 +362,7 @@ class App extends Component {
             'Access-Control-Allow-Origin': '*',
         };
     
-        return await fetch(adfsLogOut_URL, {
+        await fetch(adfsLogOut_URL, {
             method: 'POST',
             headers: adfsLogOut_headers
         }).then((response) => {
@@ -368,13 +370,33 @@ class App extends Component {
         }).then((response) => {
             Reactotron.log("adfsLogOut response:\t", response);
         }).catch((error) => {
-            Reactotron.error(`Catching error:\t ${error}`);
+            Reactotron.error(`adfsLogOut() Catching error:\t ${error}`);
         });
+
+        
+        await fetch(OAUTH_LOGOUT_URL, {
+            method: 'POST',
+            headers: adfsLogOut_headers
+        }).then((response) => {
+            return response.json();     //Parse the JSON of the response
+        }).then((response) => {
+            Reactotron.log("adfsLogOut response:\t", response);
+        }).catch((error) => {
+            Reactotron.error(`adfsLogOut() Catching error:\t ${error}`);
+        });
+
+        return;
     }; //end adfsLogOut()
 
+    clearCookies = () => {
+        return Networking.clearCookies((cleared) => {
+            ReactotronDebug.log('cleared hadCookies: ' + cleared.toString());
+        });
+    };
     appLogOut = async () => {
         try {
             await this.adfsLogOut();
+            clearCookies();
             await AsyncStorage.clear();
         } catch(e) {
             ReactotronDebug.log('clearLogOnUserData() clear');
