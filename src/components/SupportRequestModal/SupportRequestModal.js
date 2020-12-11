@@ -384,7 +384,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                                             districtPosition    =   { districtPosition } 
                                             renderAsStudent     =   { renderAsStudent }
         
-                                            value               =   { categories[0].value }
+                                            value               =   { locations[0].value }
                                             usePicker           =   { true }
                                             pickerPlaceHolder   =   { (districtPosition === "Student") ? {} : pickerPlaceHolder("Choose your site or location...") }
                                             items               =   { locations }
