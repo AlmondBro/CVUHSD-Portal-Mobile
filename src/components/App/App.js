@@ -1,7 +1,7 @@
 //Import React/React Native modules
 import React, { Fragment, Component } from 'react';
 import { Alert, Platform, NativeModules } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 //Import expo/react native components that now exist as separate packages
 import { StatusBar } from 'expo-status-bar';
