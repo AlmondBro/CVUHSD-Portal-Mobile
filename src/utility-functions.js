@@ -33,7 +33,7 @@ const navigate = (name, params) => {
 const customTextProps = {
     style: {
     //   fontSize: 16,
-      fontFamily: 'SourceSansPro_400Regular',
+    //   fontFamily: 'SourceSansPro_400Regular',
     //   color: 'black'
     }
   };

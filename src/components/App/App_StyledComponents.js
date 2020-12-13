@@ -22,7 +22,6 @@ const ImageBackgroundStyled = styled.ImageBackground.attrs( (props) => ({
 `;
 
 const WelcomeText = styled.Text`
-    font-family: 'SourceSansPro_400Regular';
     color: #B41A1F;
     /* background-color: white; */
     /* width: 100%; */

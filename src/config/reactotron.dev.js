@@ -1,9 +1,13 @@
 import { Platform, NativeModules } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import MMKVStorage from "react-native-mmkv-storage";
+//import AsyncStorage from 'react-native';
+// '@react-native-async-storage/async-storage';
 
 //import Reactotron from 'reactotron-react-native';
 
 import url from 'url';
+
+const AsyncStorage = new MMKVStorage.Loader().initialize();
 
 const { hostname } = url.parse(NativeModules.SourceCode.scriptURL);
 console.log(hostname); 
