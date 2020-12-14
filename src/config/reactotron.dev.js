@@ -1,9 +1,5 @@
 import { Platform, NativeModules } from 'react-native';
 import MMKVStorage from "react-native-mmkv-storage";
-//import AsyncStorage from 'react-native';
-// '@react-native-async-storage/async-storage';
-
-//import Reactotron from 'reactotron-react-native';
 
 import url from 'url';
 

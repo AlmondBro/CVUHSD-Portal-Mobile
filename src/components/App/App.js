@@ -207,7 +207,7 @@ class App extends Component {
 
         let authSessionResults = await AuthSession.startAsync({
             authUrl: authUrl   
-        }).catch((error) => {
+        }).catch(() => {
             const alertTitle = "Sign-in Dismissed" ;
             const alertMessage = "Sign-in closed or authentication error";
 
