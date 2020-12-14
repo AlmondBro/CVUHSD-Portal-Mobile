@@ -37,7 +37,6 @@ const SettingsIcon = styled(MaterialCommunityIcons)`
 `;
 
 const WayPointText = styled.Text`
-    font-family: 'SourceSansPro_400Regular';
     color: white;
     /* background-color: white; */
     /* width: 100%; */

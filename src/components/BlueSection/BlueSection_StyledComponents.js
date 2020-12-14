@@ -24,8 +24,6 @@ let BlueSectionHeaderTouchableOpacity = styled.TouchableOpacity`
 `;
 
 let BlueSectionHeaderText = styled.Text`
-    font-family: 'SourceSansPro_400Regular';
-    
     color: white;
     font-size: 20px;
     flex-direction: column;

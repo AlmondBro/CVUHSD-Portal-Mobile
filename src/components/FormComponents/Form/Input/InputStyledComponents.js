@@ -56,7 +56,7 @@ const ErrorText = styled.Text`
     flex-direction: row;
     justify-content: flex-start;
 
-    font-family: SourceSansPro_700Bold;
+    font-family: 'SourceSansPro_700Bold';
     font-weight: bold;
 
     color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};

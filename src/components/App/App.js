@@ -1,7 +1,10 @@
 //Import React/React Native modules
 import React, { Fragment, Component } from 'react';
-import { Alert, Platform } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
+import { Alert, Platform, NativeModules } from 'react-native';
+//import AsyncStorage from 'react-native';
+import MMKVStorage from "react-native-mmkv-storage";
+
+// '@react-native-async-storage/async-storage';
 
 //Import expo/react native components that now exist as separate packages
 import { StatusBar } from 'expo-status-bar';
@@ -28,7 +31,7 @@ import HomeScreen from './../HomeScreen/HomeScreen.js';
 //import styled components
 import { AppContainerView, ImageBackgroundStyled, WelcomeText, StatusBarSafeView, SafeAreaViewStyled } from './App_StyledComponents.js';
 
-import { PORTAL_LIVE_LINK, IP_ADDRESS,OAUTH_AUTH_URL, OAUTH_TOKEN_URL, OAUTH_REDIRECT_URL, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET } from "@env";
+import { PORTAL_LIVE_LINK, IP_ADDRESS,OAUTH_AUTH_URL, OAUTH_TOKEN_URL, OAUTH_REDIRECT_URL, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET, OAUTH_LOGOUT_URL, ADFS_LOG_OUT } from "@env";
 
 const isDev = __DEV__;
 const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
@@ -37,6 +40,10 @@ const IP_ADDRESS_DEV = IP_ADDRESS;
 
 const imagesObjectPath = (Platform.OS === "web") ? require('./../../assets/images/index.js') : require('@images');
 const Images = imagesObjectPath.default;
+
+const { Networking } = NativeModules;
+ 
+const AsyncStorage = new MMKVStorage.Loader().initialize();
 
 const { Navigator, Screen } = createStackNavigator();  //<Navigator> is equivalent to a <Switch> on React Router, <Screen/> is equivalent to <Route>
 class App extends Component {
@@ -160,7 +167,7 @@ class App extends Component {
     }; //end getUserInfo()
 
     getUserInfo = async (accessToken) => {
-        const getUserInfoURL = `${isDev ? `http://${IP_ADDRESS_DEV}` : `http://${PORTAL_LIVE_LINK}/server`}/auth/user-info`;
+        const getUserInfoURL = `${isDev ? `http://${IP_ADDRESS_DEV}` : `https://${PORTAL_LIVE_LINK}/server`}/auth/user-info`;
         
         const getOUHeaders = {
             'Content-Type': 'application/json',
@@ -171,7 +178,7 @@ class App extends Component {
         const userInfo = fetch(getUserInfoURL, {
             method: 'POST',
             headers: getOUHeaders,
-            body: JSON.stringify({ accessToken: accessToken})
+            body: JSON.stringify({ accessToken })
         })
         .then((response) => response.json())
         .then((userInfo) => userInfo)
@@ -200,6 +207,24 @@ class App extends Component {
 
         let authSessionResults = await AuthSession.startAsync({
             authUrl: authUrl   
+        }).catch(() => {
+            const alertTitle = "Sign-in Dismissed" ;
+            const alertMessage = "Sign-in closed or authentication error";
+
+            Alert.alert(
+                alertTitle,
+                alertMessage,
+                [
+                {
+                    text: "OK",
+                    onPress: () => ReactotronDebug.log("OK Pressed"),
+                    style: "cancel"
+                },
+                ],
+                { cancelable: false }
+            );
+
+            return;
         });
 
         if ( !(authSessionResults.type === "cancel" || authSessionResults.type === "dismiss" || authSessionResults.type === "error" || authSessionResults.type === "locked")) {
@@ -207,11 +232,11 @@ class App extends Component {
                                 
             ReactotronDebug.log("authSessionResults:\t" + JSON.stringify(authSessionResults) );
 
-            const {access_token : accessToken } = await this.getAccessToken(authorizationCode);
+            const { access_token } = await this.getAccessToken(authorizationCode);
 
-            ReactotronDebug.log("accessToken:\t", accessToken);
+            ReactotronDebug.log("accessToken:\t", access_token);
 
-            const adfsUserInfo = await this.getUserInfo(accessToken);
+            const adfsUserInfo = await this.getUserInfo(access_token);
 
             ReactotronDebug.log("adfsUserInfo:\t", adfsUserInfo);
 
@@ -223,7 +248,7 @@ class App extends Component {
                                     Images.appHeader.backgroundImageRed
                                 :   Images.appHeader.backgroundImageBlue;
                 
-            if (adfsUserInfo && accessToken ) {
+            if (adfsUserInfo && access_token ) {
                 const { username, email, family_name, givenName, jobTitle, accessToken, uid } = adfsUserInfo;
             
                 this.setState({
@@ -285,13 +310,14 @@ class App extends Component {
                     ],
                     { cancelable: false }
                 );
-        } //end outer else-statement
 
+                return;
+        } //end outer else-statement
     }; //openADSingleSignOn()
 
     checkforExistingLogOn = async () => {
         try {
-            const currentUserState = await AsyncStorage.getItem(this.USER_INFO);
+            const currentUserState = await AsyncStorage.getStringAsync(this.USER_INFO);
 
             if (currentUserState !== null) {
                 ReactotronDebug.log("Session exists");
@@ -346,17 +372,58 @@ class App extends Component {
         try {
             ReactotronDebug.log("setLogOnUserData()");
             const userDataObjectJSON = JSON.stringify(userDataObject);
-            await AsyncStorage.setItem(this.USER_INFO, userDataObjectJSON);
+            await AsyncStorage.setStringAsync(this.USER_INFO, userDataObjectJSON);
           } catch (e) {
             ReactotronDebug.error("setLogOnUserData() Error:\t" + JSON.stringify(error));
           }
     };
 
-    clearLogOnUserData = async () => {
+    adfsLogOut = async () => {
+        const adfsLogOut_URL = ADFS_LOG_OUT;
+        const adfsLogOut_headers = {
+            'Content-Type': 'application/json',
+            'credentials': 'include',
+            'Access-Control-Allow-Origin': '*',
+        };
+    
+        await fetch(adfsLogOut_URL, {
+            method: 'POST',
+            headers: adfsLogOut_headers
+        }).then((response) => {
+            return response.json();     //Parse the JSON of the response
+        }).then((response) => {
+            Reactotron.log("adfsLogOut response:\t", response);
+        }).catch((error) => {
+            Reactotron.error(`adfsLogOut() Catching error:\t ${error}`);
+        });
+
+        
+        await fetch(OAUTH_LOGOUT_URL, {
+            method: 'POST',
+            headers: adfsLogOut_headers
+        }).then((response) => {
+            return response.json();     //Parse the JSON of the response
+        }).then((response) => {
+            Reactotron.log("adfsLogOut response:\t", response);
+        }).catch((error) => {
+            Reactotron.error(`adfsLogOut() Catching error:\t ${error}`);
+        });
+
+        return;
+    }; //end adfsLogOut()
+
+    clearCookies = () => {
+        return Networking.clearCookies((cleared) => {
+            ReactotronDebug.log('cleared hadCookies: ' + cleared.toString());
+        });
+    };
+    appLogOut = async () => {
         try {
-            await AsyncStorage.clear();
-        } catch(e) {
-            ReactotronDebug.log('clearLogOnUserData() clear');
+            await this.adfsLogOut();
+            this.clearCookies();
+            await AsyncStorage.clearStore();
+        } catch(error) {
+            ReactotronDebug.log(`AppLogOut() error ${error}`);
         }
         this.setState({ ...this.initialState });
     }; //end clearLogOnUserData
@@ -547,7 +614,7 @@ class App extends Component {
                                             showPortalLogo      =   { this.state.showPortalLogo }
 
                                             setRenderAsStudent      =   { this.setRenderAsStudent }
-                                            logOut                  =   { this.clearLogOnUserData }
+                                            logOut                  =   { this.appLogOut }
                                         />
                                         : null    
                                     } 
