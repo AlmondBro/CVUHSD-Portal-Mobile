@@ -1,18 +1,14 @@
 //Import React/React Native modules
 import React, { Fragment, Component } from 'react';
 import { Alert, Platform, NativeModules } from 'react-native';
-//import AsyncStorage from 'react-native';
-import MMKVStorage from "react-native-mmkv-storage";
-
-// '@react-native-async-storage/async-storage';
 
 //Import expo/react native components that now exist as separate packages
 import { StatusBar } from 'expo-status-bar';
 import { checkForUpdateAsync } from 'expo-updates';
 import * as AuthSession from 'expo-auth-session';
+import AsyncStorage from '@react-native-community/async-storage';
 
 //Import React Navigation Packages
-import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native'; //Equivalent to the BrowserRouter in ReactRouter
 import { createStackNavigator } from '@react-navigation/stack'; 
 
@@ -43,8 +39,6 @@ const Images = imagesObjectPath.default;
 
 const { Networking } = NativeModules;
  
-const AsyncStorage = new MMKVStorage.Loader().initialize();
-
 const { Navigator, Screen } = createStackNavigator();  //<Navigator> is equivalent to a <Switch> on React Router, <Screen/> is equivalent to <Route>
 class App extends Component {
     constructor(props) {
@@ -207,24 +201,6 @@ class App extends Component {
 
         let authSessionResults = await AuthSession.startAsync({
             authUrl: authUrl   
-        }).catch(() => {
-            const alertTitle = "Sign-in Dismissed" ;
-            const alertMessage = "Sign-in closed or authentication error";
-
-            Alert.alert(
-                alertTitle,
-                alertMessage,
-                [
-                {
-                    text: "OK",
-                    onPress: () => ReactotronDebug.log("OK Pressed"),
-                    style: "cancel"
-                },
-                ],
-                { cancelable: false }
-            );
-
-            return;
         });
 
         if ( !(authSessionResults.type === "cancel" || authSessionResults.type === "dismiss" || authSessionResults.type === "error" || authSessionResults.type === "locked")) {
@@ -310,14 +286,13 @@ class App extends Component {
                     ],
                     { cancelable: false }
                 );
-
-                return;
         } //end outer else-statement
+
     }; //openADSingleSignOn()
 
     checkforExistingLogOn = async () => {
         try {
-            const currentUserState = await AsyncStorage.getStringAsync(this.USER_INFO);
+            const currentUserState = await AsyncStorage.getItem(this.USER_INFO);
 
             if (currentUserState !== null) {
                 ReactotronDebug.log("Session exists");
@@ -372,7 +347,7 @@ class App extends Component {
         try {
             ReactotronDebug.log("setLogOnUserData()");
             const userDataObjectJSON = JSON.stringify(userDataObject);
-            await AsyncStorage.setStringAsync(this.USER_INFO, userDataObjectJSON);
+            await AsyncStorage.setItem(this.USER_INFO, userDataObjectJSON);
           } catch (e) {
             ReactotronDebug.error("setLogOnUserData() Error:\t" + JSON.stringify(error));
           }
@@ -421,7 +396,7 @@ class App extends Component {
         try {
             await this.adfsLogOut();
             this.clearCookies();
-            await AsyncStorage.clearStore();
+            await AsyncStorage.clear();
         } catch(error) {
             ReactotronDebug.log(`AppLogOut() error ${error}`);
         }
