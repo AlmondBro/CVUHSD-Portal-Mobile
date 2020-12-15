@@ -34,6 +34,8 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
         let formField = getValues();
 
         if (submitEnabled && (isLoading === false) ) {
+            // const isDev = false;
+
             setIsLoading(true);
     
             setSubmitEnabled(false);
