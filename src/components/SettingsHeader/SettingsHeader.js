@@ -5,11 +5,13 @@ import Constants from 'expo-constants';
 
 import { Reactotron } from './../../config/reactotron.dev.js';
 
-import Logo from './../../assets/images/wp-portal-logo-white.svg';
+import WhiteWPLogo from './../../assets/images/wp-portal-logo-white.svg';
+
+import { version } from './../../../package.json';
 //Import the styled sub-components
 import { Container, WayPointText, InfoIconTouchOpacity, SettingsIcon } from './SettingsHeaderStyledComponents.js';
 
-const { nativeAppVersion: version } = Constants;
+//const { nativeAppVersion: version } = Constants;
 
 const isDev = __DEV__;
 
@@ -31,7 +33,7 @@ const SettingsHeader = ({ districtPosition, renderAsStudent }) => {
             renderAsStudent     =   { renderAsStudent  }
         >
             
-            <Logo
+            <WhiteWPLogo
                 width   =   { 40 } 
                 height  =   { 40 } 
             />

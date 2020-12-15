@@ -57,7 +57,7 @@ const ErrorText = styled.Text`
     justify-content: flex-start;
 
     font-family: 'SourceSansPro_700Bold';
-    font-size: 11;
+    font-size: 11px;
 
     color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
 
@@ -97,7 +97,7 @@ const LabelText = styled.Text`
     color: ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" }; 
 
     font-family: "SourceSansPro_600SemiBold";
-    font-size: 14;
+    font-size: 14px;
 `;
 
 const Select = styled(RNPickerSelect).attrs(props => ({

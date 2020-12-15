@@ -58,7 +58,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                 supportRequestTitle,
                 category,
                 description,
-                location,
+                location : location ? location : site,
                 phoneExt,
                 room
             }
@@ -368,28 +368,29 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
 
                                 {
                                      (districtPosition === "Student") ? (
-                                        <Input 
-                                            appWidth            =   { appWidth }
+                                        // <Input 
+                                        //     appWidth            =   { appWidth }
         
-                                            name                =   "location" 
-                                            label               =   "Location:" 
-                                            placeHolderText     =   "Your School or Site..."
+                                        //     name                =   "location" 
+                                        //     label               =   "Location:" 
+                                        //     placeHolderText     =   "Your School or Site..."
         
         
-                                            mode                =   "outlined"
-                                            theme               =   { inputColorsTheme }
+                                        //     mode                =   "outlined"
+                                        //     theme               =   { inputColorsTheme }
         
-                                            secureTextEntry     =   { false } 
+                                        //     secureTextEntry     =   { false } 
         
-                                            districtPosition    =   { districtPosition } 
-                                            renderAsStudent     =   { renderAsStudent }
+                                        //     districtPosition    =   { districtPosition } 
+                                        //     renderAsStudent     =   { renderAsStudent }
         
-                                            value               =   { locations[0].value }
-                                            usePicker           =   { true }
-                                            pickerPlaceHolder   =   { (districtPosition === "Student") ? {} : pickerPlaceHolder("Choose your site or location...") }
-                                            items               =   { locations }
-                                            noOuterLabel        =   { false }
-                                        />
+                                        //     value               =   { locations[0].value }
+                                        //     usePicker           =   { true }
+                                        //     pickerPlaceHolder   =   { (districtPosition === "Student") ? {} : pickerPlaceHolder("Choose your site or location...") }
+                                        //     items               =   { locations }
+                                        //     noOuterLabel        =   { false }
+                                        // />
+                                        <Fragment/>
                                      ) : (
                                             <Input 
                                                 appWidth            =   { appWidth }
