@@ -154,10 +154,18 @@ const Header = ({ renderAsStudent, uid, title, firstName, lastName, site, gradeL
                             <UserInfoText 
                                 title           =   { title }
                                 renderAsStudent =   { renderAsStudent }
-                                bold
                                 italic
                             >
-                                { ( gradeLevel ? gradeLevel + "th grade " + title  + " (" + uid + ")" : null)  || "CVUHSD User" }
+                                { ( gradeLevel ? gradeLevel + "th grade " + title : null)  || "CVUHSD User" }
+                            
+                                <UserInfoText 
+                                    title           =   { title }
+                                    renderAsStudent =   { renderAsStudent }
+                                    bold
+                                    italic
+                                >
+                                    { " (" + uid  + ")"}
+                                </UserInfoText>
                             </UserInfoText>
                         </Fragment>
                     ) : null
