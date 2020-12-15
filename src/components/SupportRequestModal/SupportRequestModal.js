@@ -23,9 +23,6 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
     let [ isRequestSuccessful, setIsRequestSuccessful ]                         = useState(null);
     let [ submitEnabled, setSubmitEnabled ]                                     = useState(true);
 
-    let [ topMargin, setTopMargin ]                                             = useState(0);
-    let [ bottomMargin, setBottomMargin ]                                       = useState(0);
-
     const { handleSubmit, register, setValue, getValues, clearErrors, errors }  = useForm();
     
     const IP_ADDRESS_DEV = "10.2.50.36";
@@ -63,7 +60,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                 room
             }
         
-            const submitRequest_URL = `${isDev ? `http://${IP_ADDRESS_DEV}:3002` : `http://${PORTAL_LIVE_LINK}/server`}/helpdesk/request/create`;
+            const submitRequest_URL = `${isDev ? `http://${IP_ADDRESS_DEV}:3002` : `https://${PORTAL_LIVE_LINK}/server`}/helpdesk/request/create`;
             const submitRequest_headers = {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
@@ -131,6 +128,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                 
                 } else {
                     setIsRequestSuccessful(false);
+                    setIsLoading(false);
                     setSubmitEnabled(true);
 
                     Alert.alert(
@@ -145,6 +143,10 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                 } //end inner-else statement
             } //end outer if-statement, checking to see if there is a response
         } else{
+            setIsRequestSuccessful(false);
+            setIsLoading(false);
+            setSubmitEnabled(true);
+
             Alert.alert(
                 "Duplicate Ticket", 
                 "Submitting duplicate tickets prohibited", 
