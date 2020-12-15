@@ -1,15 +1,14 @@
 //Import React/React Native modules
 import React, { Fragment, Component } from 'react';
 import { Alert, Platform, NativeModules } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
 
 //Import expo/react native components that now exist as separate packages
 import { StatusBar } from 'expo-status-bar';
 import { checkForUpdateAsync } from 'expo-updates';
 import * as AuthSession from 'expo-auth-session';
+import AsyncStorage from '@react-native-community/async-storage';
 
 //Import React Navigation Packages
-import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native'; //Equivalent to the BrowserRouter in ReactRouter
 import { createStackNavigator } from '@react-navigation/stack'; 
 
@@ -49,6 +48,7 @@ class App extends Component {
             adUserInfo          :   null,
             appWidth            :   this.props.width,
 
+            uid                 :   null,
             firstName           :   null,
             lastName            :   null,
             title               :   null,
@@ -229,6 +229,7 @@ class App extends Component {
                 const { username, email, family_name, givenName, jobTitle, accessToken, uid } = adfsUserInfo;
             
                 this.setState({
+                    uid                 : uid,
                     firstName           : givenName,
                     lastName            : family_name,
                     title               : jobTitle || "staff",
@@ -503,6 +504,8 @@ class App extends Component {
                                     >
                                         <Header 
                                             showUpdate          =   { this.state.showUpdate } 
+
+                                            uid                 =   { this.state.uid }
                                             firstName           =   { this.state.firstName}
                                             lastName            =   { this.state.lastName }
                                             title               =   { this.state.title }

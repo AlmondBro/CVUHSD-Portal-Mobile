@@ -56,8 +56,8 @@ const ErrorText = styled.Text`
     flex-direction: row;
     justify-content: flex-start;
 
-    font-family: SourceSansPro_700Bold;
-    font-weight: bold;
+    font-family: 'SourceSansPro_700Bold';
+    font-size: 11;
 
     color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
 
@@ -69,7 +69,7 @@ const ErrorText = styled.Text`
 `;
 
 const ErrorTextItalicalized = styled(ErrorText)`
-    font-family: SourceSansPro_400Regular_Italic;
+    font-family: 'SourceSansPro_400Regular_Italic';
 `;
 
 const DownArrow  = ({ districtPosition, renderAsStudent }) =>  (
@@ -87,6 +87,7 @@ const LabelText = styled.Text`
 
     margin-top: 0px;
     margin-bottom: 0px;
+
     padding-top: 0px;
     padding-bottom: 0px;
 
@@ -95,7 +96,8 @@ const LabelText = styled.Text`
 
     color: ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" }; 
 
-    font-weight: bold;
+    font-family: "SourceSansPro_600SemiBold";
+    font-size: 14;
 `;
 
 const Select = styled(RNPickerSelect).attrs(props => ({

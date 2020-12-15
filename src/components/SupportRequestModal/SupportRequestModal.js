@@ -444,7 +444,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                                             appWidth            =   { appWidth }
         
                                             name                =   "room" 
-                                            label               =   "Room Number"
+                                            label               =   "Room Number:"
                                             placeHolderText     =   "Your room..."
         
                                             mode                =   "outlined"

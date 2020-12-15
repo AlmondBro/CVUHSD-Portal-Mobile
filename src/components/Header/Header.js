@@ -13,7 +13,7 @@ import WPTypography from './../../assets/images/wp-typography.svg';
 //Import 3rd-party APIs
 import greeting from 'greeting';
 
-const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel, portalLogoSource, showPortalLogo, showUpdate, reloadAppFromUpdate }) => {  
+const Header = ({ renderAsStudent, uid, title, firstName, lastName, site, gradeLevel, portalLogoSource, showPortalLogo, showUpdate, reloadAppFromUpdate }) => {  
     // showUpdate = true;
     let parseSchoolName = (site) => {
         if (site && (site !== "Centinela Valley Independent Study School" )) {
@@ -154,10 +154,18 @@ const Header = ({ renderAsStudent, title, firstName, lastName, site, gradeLevel,
                             <UserInfoText 
                                 title           =   { title }
                                 renderAsStudent =   { renderAsStudent }
-                                bold
                                 italic
                             >
                                 { ( gradeLevel ? gradeLevel + "th grade " + title : null)  || "CVUHSD User" }
+                            
+                                <UserInfoText 
+                                    title           =   { title }
+                                    renderAsStudent =   { renderAsStudent }
+                                    bold
+                                    italic
+                                >
+                                    { " (" + uid  + ")"}
+                                </UserInfoText>
                             </UserInfoText>
                         </Fragment>
                     ) : null

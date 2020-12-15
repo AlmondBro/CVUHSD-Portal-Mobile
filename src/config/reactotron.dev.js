@@ -1,9 +1,8 @@
 import { Platform, NativeModules } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
-
-//import Reactotron from 'reactotron-react-native';
 
 import url from 'url';
+
+import AsyncStorage from '@react-native-community/async-storage';
 
 const { hostname } = url.parse(NativeModules.SourceCode.scriptURL);
 console.log(hostname); 

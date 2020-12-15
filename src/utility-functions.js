@@ -32,9 +32,9 @@ const navigate = (name, params) => {
 // Setting default styles for all Text components.
 const customTextProps = {
     style: {
-    //   fontSize: 16,
+      fontSize: 16,
       fontFamily: 'SourceSansPro_400Regular',
-    //   color: 'black'
+      color: 'black'
     }
   };
 
