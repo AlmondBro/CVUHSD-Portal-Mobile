@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { TouchableOpacity } from 'react-native';
 
 //Import component's styled parts
-import { HeaderContainerView, PortalLogoImage, UpdateAppView, UpdateTextDescription, UserInfoText, SchoolNameLogoView, SchoolLogo, UpdateButtonTouchableOpacity } from './Header_StyledComponents.js';
+import { HeaderContainerView, UpdateAppView, UpdateTextDescription, UserInfoText, SchoolNameLogoView, SchoolLogo, UpdateButtonTouchableOpacity } from './Header_StyledComponents.js';
 import { BlueSectionContainer } from './../App/App_StyledComponents.js';
 
 import LogoBlue from './../../assets/images/wp-portal-logo-blue-white-interior.svg'; 
