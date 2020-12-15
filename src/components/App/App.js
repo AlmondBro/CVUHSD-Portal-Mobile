@@ -48,6 +48,7 @@ class App extends Component {
             adUserInfo          :   null,
             appWidth            :   this.props.width,
 
+            uid                 :   null,
             firstName           :   null,
             lastName            :   null,
             title               :   null,
@@ -228,6 +229,7 @@ class App extends Component {
                 const { username, email, family_name, givenName, jobTitle, accessToken, uid } = adfsUserInfo;
             
                 this.setState({
+                    uid                 : uid,
                     firstName           : givenName,
                     lastName            : family_name,
                     title               : jobTitle || "staff",
@@ -502,6 +504,8 @@ class App extends Component {
                                     >
                                         <Header 
                                             showUpdate          =   { this.state.showUpdate } 
+
+                                            uid                 =   { this.state.uid }
                                             firstName           =   { this.state.firstName}
                                             lastName            =   { this.state.lastName }
                                             title               =   { this.state.title }
