@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { TouchableOpacity } from 'react-native';
 
 //Import component's styled parts
-import { HeaderContainerView, PortalLogoImage, UpdateAppView, UpdateTextDescription, UserInfoText, SchoolNameLogoView, SchoolLogo, UpdateButtonTouchableOpacity } from './Header_StyledComponents.js';
+import { HeaderContainerView, UpdateAppView, UpdateTextDescription, UserInfoText, SchoolNameLogoView, SchoolLogo, UpdateButtonTouchableOpacity } from './Header_StyledComponents.js';
 import { BlueSectionContainer } from './../App/App_StyledComponents.js';
 
 import LogoBlue from './../../assets/images/wp-portal-logo-blue-white-interior.svg'; 
@@ -27,31 +27,6 @@ const Header = ({ renderAsStudent, uid, title, firstName, lastName, site, gradeL
 
         return ""; 
     }; //end parseSchoolName
-
-    let getSchoolLogoSite = (schoolName) => {
-        let schoolLogoSite = "https://www.centinela.k12.ca.us/";
-        if (schoolName.toLowerCase() === "leuzinger") {
-            schoolLogoSite = "https://www.leuzinger.org/";
-        } 
-
-        if (schoolName.toLowerCase() === "lawndale") {
-            schoolLogoSite = "https://www.lawndalehs.org/";
-        } 
-
-        if (schoolName.toLowerCase() === "hawthorne") {
-            schoolLogoSite = "https://www.hhscougars.org/";
-        } 
-
-        if (schoolName.toLowerCase() === "lloyde") {
-            schoolLogoSite = "https://www.lloydehs.org/";
-        } 
-
-        if (schoolName.toLowerCase() === "Centinela Valley Independent Study School") {
-            schoolLogoSite = "https://www.cvalternatives.org/";
-        }
-        
-        return schoolLogoSite;
-    }; //end getSchoolLogoSite
 
     let getSchoolLogoImagePath = (schoolName) => {
         console.log("schoolName:" + schoolName);
@@ -129,7 +104,6 @@ const Header = ({ renderAsStudent, uid, title, firstName, lastName, site, gradeL
         {
             title && !showUpdate ? 
                 (
-                    
                         <UserInfoText 
                             title           =   { title }
                             renderAsStudent =   { renderAsStudent }

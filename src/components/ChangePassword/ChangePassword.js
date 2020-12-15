@@ -142,7 +142,6 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                 } //end inner-else statement
             } //end outer if-statement, checking to see if there is a response
         } else  {
-
             setSubmitEnabled(true);
             setIsLoading(false); 
 
