@@ -1,7 +1,7 @@
 import React from 'react';
 import { Alert, Platform } from 'react-native';
 
-import Constants from 'expo-constants';
+//import Constants from 'expo-constants';
 
 import { Reactotron } from './../../config/reactotron.dev.js';
 
@@ -9,6 +9,7 @@ import WhiteWPLogo from './../../assets/images/wp-portal-logo-white.svg';
 
 import { version } from './../../../package.json';
 //Import the styled sub-components
+
 import { Container, WayPointText, InfoIconTouchOpacity, SettingsIcon } from './SettingsHeaderStyledComponents.js';
 
 //const { nativeAppVersion: version } = Constants;
@@ -20,9 +21,6 @@ const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
 const SettingsHeader = ({ districtPosition, renderAsStudent }) => {
     const imagesObjectPath = (Platform.OS === "web") ? require('./../../assets/images/index.js') : require('@images');
     const Images = imagesObjectPath.default;
-
-    const portalLogoSource = (districtPosition === "Student" || renderAsStudent === true) 
-                                ? Images.appHeader.portalLogoRed : Images.appHeader.portalLogoBlue;
 
     const alertTitle = "App version" ;
 

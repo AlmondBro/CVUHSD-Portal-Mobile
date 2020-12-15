@@ -129,7 +129,6 @@ const Header = ({ renderAsStudent, uid, title, firstName, lastName, site, gradeL
         {
             title && !showUpdate ? 
                 (
-                    
                         <UserInfoText 
                             title           =   { title }
                             renderAsStudent =   { renderAsStudent }
