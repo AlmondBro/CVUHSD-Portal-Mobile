@@ -1,15 +1,14 @@
 //Import React/React Native modules
 import React, { Fragment, Component } from 'react';
-import { Alert, Platform } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
+import { Alert, Platform, NativeModules } from 'react-native';
 
 //Import expo/react native components that now exist as separate packages
 import { StatusBar } from 'expo-status-bar';
 import { checkForUpdateAsync } from 'expo-updates';
 import * as AuthSession from 'expo-auth-session';
+import AsyncStorage from '@react-native-community/async-storage';
 
 //Import React Navigation Packages
-import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native'; //Equivalent to the BrowserRouter in ReactRouter
 import { createStackNavigator } from '@react-navigation/stack'; 
 
@@ -28,7 +27,7 @@ import HomeScreen from './../HomeScreen/HomeScreen.js';
 //import styled components
 import { AppContainerView, ImageBackgroundStyled, WelcomeText, StatusBarSafeView, SafeAreaViewStyled } from './App_StyledComponents.js';
 
-import { PORTAL_LIVE_LINK, IP_ADDRESS,OAUTH_AUTH_URL, OAUTH_TOKEN_URL, OAUTH_REDIRECT_URL, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET } from "@env";
+import { PORTAL_LIVE_LINK, IP_ADDRESS,OAUTH_AUTH_URL, OAUTH_TOKEN_URL, OAUTH_REDIRECT_URL, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET, OAUTH_LOGOUT_URL, ADFS_LOG_OUT } from "@env";
 
 const isDev = __DEV__;
 const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
@@ -38,6 +37,8 @@ const IP_ADDRESS_DEV = IP_ADDRESS;
 const imagesObjectPath = (Platform.OS === "web") ? require('./../../assets/images/index.js') : require('@images');
 const Images = imagesObjectPath.default;
 
+const { Networking } = NativeModules;
+ 
 const { Navigator, Screen } = createStackNavigator();  //<Navigator> is equivalent to a <Switch> on React Router, <Screen/> is equivalent to <Route>
 class App extends Component {
     constructor(props) {
@@ -47,6 +48,7 @@ class App extends Component {
             adUserInfo          :   null,
             appWidth            :   this.props.width,
 
+            uid                 :   null,
             firstName           :   null,
             lastName            :   null,
             title               :   null,
@@ -94,7 +96,7 @@ class App extends Component {
             'Access-Control-Allow-Origin': '*',
         };
     
-        const getOU = fetch(getOU_URL, {
+        fetch(getOU_URL, {
             method: 'POST',
             headers: getOU_headers,
             body: JSON.stringify({user: this.state.email})
@@ -107,8 +109,6 @@ class App extends Component {
         }).catch((error) => {
             Reactotron.error(`Catching error:\t ${error}`);
         });
-
-        getOU();
     }; //end getStudentSchool
 
     parseIntoQueryString = (requestParams) => {
@@ -162,7 +162,7 @@ class App extends Component {
     }; //end getUserInfo()
 
     getUserInfo = async (accessToken) => {
-        const getUserInfoURL = `${isDev ? `http://${IP_ADDRESS_DEV}` : `http://${PORTAL_LIVE_LINK}/server`}/auth/user-info`;
+        const getUserInfoURL = `${isDev ? `http://${IP_ADDRESS_DEV}` : `https://${PORTAL_LIVE_LINK}/server`}/auth/user-info`;
         
         const getOUHeaders = {
             'Content-Type': 'application/json',
@@ -173,7 +173,7 @@ class App extends Component {
         const userInfo = fetch(getUserInfoURL, {
             method: 'POST',
             headers: getOUHeaders,
-            body: JSON.stringify({ accessToken: accessToken})
+            body: JSON.stringify({ accessToken })
         })
         .then((response) => response.json())
         .then((userInfo) => userInfo)
@@ -204,70 +204,92 @@ class App extends Component {
             authUrl: authUrl   
         });
 
-        const { code: authorizationCode } = authSessionResults.params;
-                               
-        ReactotronDebug.log("authSessionResults:\t" + JSON.stringify(authSessionResults) );
+        if ( !(authSessionResults.type === "cancel" || authSessionResults.type === "dismiss" || authSessionResults.type === "error" || authSessionResults.type === "locked")) {
+            const { code: authorizationCode } = authSessionResults.params;
+                                
+            ReactotronDebug.log("authSessionResults:\t" + JSON.stringify(authSessionResults) );
 
-        const {access_token : accessToken } = await this.getAccessToken(authorizationCode);
+            const { access_token } = await this.getAccessToken(authorizationCode);
 
-        ReactotronDebug.log("accessToken:\t", accessToken);
+            ReactotronDebug.log("accessToken:\t", access_token);
 
-        const adfsUserInfo = await this.getUserInfo(accessToken);
+            const adfsUserInfo = await this.getUserInfo(access_token);
 
-        ReactotronDebug.log("adfsUserInfo:\t", adfsUserInfo);
+            ReactotronDebug.log("adfsUserInfo:\t", adfsUserInfo);
 
-        let portalLogoSource = ( (adfsUserInfo.jobTitle === "Student") || (this.state.renderAsStudent === true)) ?
-                                Images.appHeader.portalLogoRed
-                            :   Images.appHeader.portalLogoBlue;
+            let portalLogoSource = ( (adfsUserInfo.jobTitle === "Student") || (this.state.renderAsStudent === true)) ?
+                                    Images.appHeader.portalLogoRed
+                                :   Images.appHeader.portalLogoBlue;
 
-        let backgroundImage = (adfsUserInfo.jobTitle === "Student" || this.state.renderAsStudent) ?
-                                Images.appHeader.backgroundImageRed
-                            :   Images.appHeader.backgroundImageBlue;
-               
-        if ( adfsUserInfo && accessToken ) {
-            const { username, email, family_name, givenName, jobTitle, accessToken, uid } = adfsUserInfo;
-        
-            this.setState({
-                firstName           : givenName,
-                lastName            : family_name,
-                title               : jobTitle || "staff",
-                email               : email,
-                portalLogoSource    : portalLogoSource,
-                backgroundImage     : backgroundImage,
-               // navigateFunction    : navigate,
-                authLoading         : false 
-            });
-
-            this.getStudentSchool();
-
-            this.setLogOnUserData({...this.state});
-
-            ReactotronDebug.log("App State after authentication:\t" + JSON.stringify(this.state));
-
-            navigate('Home');
-               
-        } else {
-            ReactotronDebug.log("User canceled operation from App.js");
-            this.setState({ authLoading: false });
+            let backgroundImage = (adfsUserInfo.jobTitle === "Student" || this.state.renderAsStudent) ?
+                                    Images.appHeader.backgroundImageRed
+                                :   Images.appHeader.backgroundImageBlue;
+                
+            if (adfsUserInfo && access_token ) {
+                const { username, email, family_name, givenName, jobTitle, accessToken, uid } = adfsUserInfo;
             
-            const alertTitle = "Sign-in failed" ;
-            const alertMessage = authSessionResults.error;
+                this.setState({
+                    uid                 : uid,
+                    firstName           : givenName,
+                    lastName            : family_name,
+                    title               : jobTitle || "staff",
+                    email               : email,
+                    portalLogoSource    : portalLogoSource,
+                    backgroundImage     : backgroundImage,
+                // navigateFunction    : navigate,
+                    authLoading         : false 
+                });
 
-            Alert.alert(
-                alertTitle,
-                alertMessage,
-                [
-                  {
-                    text: "OK",
-                    onPress: () => ReactotronDebug.log("OK Pressed"),
-                    style: "cancel"
-                  },
-                ],
-                { cancelable: false }
-              );
+                this.getStudentSchool();
 
-            return; 
-        } //end else-statement
+                this.setLogOnUserData({...this.state});
+
+                ReactotronDebug.log("App State after authentication:\t" + JSON.stringify(this.state));
+
+                navigate('Home');
+                
+            } else {
+                ReactotronDebug.log("User canceled operation from App.js");
+                this.setState({ authLoading: false });
+                
+                const alertTitle = "Sign-in failed" ;
+                const alertMessage = authSessionResults.error;
+
+                Alert.alert(
+                    alertTitle,
+                    alertMessage,
+                    [
+                    {
+                        text: "OK",
+                        onPress: () => ReactotronDebug.log("OK Pressed"),
+                        style: "cancel"
+                    },
+                    ],
+                    { cancelable: false }
+                );
+
+                return; 
+            } //end else-statement
+        } else {
+                this.setState({ authLoading: false });
+                
+                const alertTitle = "Sign-in Dismissed" ;
+                const alertMessage = "Sign-in closed or authentication error";
+
+                Alert.alert(
+                    alertTitle,
+                    alertMessage,
+                    [
+                    {
+                        text: "OK",
+                        onPress: () => ReactotronDebug.log("OK Pressed"),
+                        style: "cancel"
+                    },
+                    ],
+                    { cancelable: false }
+                );
+        } //end outer else-statement
+
     }; //openADSingleSignOn()
 
     checkforExistingLogOn = async () => {
@@ -333,11 +355,52 @@ class App extends Component {
           }
     };
 
-    clearLogOnUserData = async () => {
+    adfsLogOut = async () => {
+        const adfsLogOut_URL = ADFS_LOG_OUT;
+        const adfsLogOut_headers = {
+            'Content-Type': 'application/json',
+            'credentials': 'include',
+            'Access-Control-Allow-Origin': '*',
+        };
+    
+        await fetch(adfsLogOut_URL, {
+            method: 'POST',
+            headers: adfsLogOut_headers
+        }).then((response) => {
+            return response.json();     //Parse the JSON of the response
+        }).then((response) => {
+            Reactotron.log("adfsLogOut response:\t", response);
+        }).catch((error) => {
+            Reactotron.error(`adfsLogOut() Catching error:\t ${error}`);
+        });
+
+        
+        await fetch(OAUTH_LOGOUT_URL, {
+            method: 'POST',
+            headers: adfsLogOut_headers
+        }).then((response) => {
+            return response.json();     //Parse the JSON of the response
+        }).then((response) => {
+            Reactotron.log("adfsLogOut response:\t", response);
+        }).catch((error) => {
+            Reactotron.error(`adfsLogOut() Catching error:\t ${error}`);
+        });
+
+        return;
+    }; //end adfsLogOut()
+
+    clearCookies = () => {
+        return Networking.clearCookies((cleared) => {
+            ReactotronDebug.log('cleared hadCookies: ' + cleared.toString());
+        });
+    };
+    appLogOut = async () => {
         try {
+            await this.adfsLogOut();
+            this.clearCookies();
             await AsyncStorage.clear();
-        } catch(e) {
-            ReactotronDebug.log('clearLogOnUserData() clear');
+        } catch(error) {
+            ReactotronDebug.log(`AppLogOut() error ${error}`);
         }
         this.setState({ ...this.initialState });
     }; //end clearLogOnUserData
@@ -441,6 +504,8 @@ class App extends Component {
                                     >
                                         <Header 
                                             showUpdate          =   { this.state.showUpdate } 
+
+                                            uid                 =   { this.state.uid }
                                             firstName           =   { this.state.firstName}
                                             lastName            =   { this.state.lastName }
                                             title               =   { this.state.title }
@@ -453,7 +518,7 @@ class App extends Component {
                                             showPortalLogo      =   {  this.state.showPortalLogo    }
                                         />
                                         
-                                        { (this.state.title || this.state.renderAsStudent) && !this.state.showUpdate ? null : <WelcomeText>Welcome</WelcomeText> }
+                                        { (this.state.title || this.state.renderAsStudent) && !this.state.showUpdate ? null : <WelcomeText>CVUHSD Portal</WelcomeText> }
                                     </ImageBackgroundStyled>
 
                                     <Navigator
@@ -528,7 +593,7 @@ class App extends Component {
                                             showPortalLogo      =   { this.state.showPortalLogo }
 
                                             setRenderAsStudent      =   { this.setRenderAsStudent }
-                                            logOut                  =   { this.clearLogOnUserData }
+                                            logOut                  =   { this.appLogOut }
                                         />
                                         : null    
                                     } 

@@ -384,7 +384,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                                             districtPosition    =   { districtPosition } 
                                             renderAsStudent     =   { renderAsStudent }
         
-                                            value               =   { categories[0].value }
+                                            value               =   { locations[0].value }
                                             usePicker           =   { true }
                                             pickerPlaceHolder   =   { (districtPosition === "Student") ? {} : pickerPlaceHolder("Choose your site or location...") }
                                             items               =   { locations }
@@ -444,7 +444,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                                             appWidth            =   { appWidth }
         
                                             name                =   "room" 
-                                            label               =   "Room Number"
+                                            label               =   "Room Number:"
                                             placeHolderText     =   "Your room..."
         
                                             mode                =   "outlined"

@@ -4,7 +4,7 @@ module.exports = function(api) {
   api.cache(true);
 
   return {
-    presets: ["babel-preset-expo", "module:metro-react-native-babel-preset"],
+    presets: ["babel-preset-expo"],
     plugins: [
       ["module:react-native-dotenv", {
         "moduleName": "@env",
@@ -17,7 +17,7 @@ module.exports = function(api) {
     ],
     env: {
       production: {
-        plugins: ["react-native-paper/babel", "module:react-native-dotenv"], 
+        plugins: ["module:react-native-dotenv"], 
       }  //end production object property
     } //end env object property
   }; //end return statement

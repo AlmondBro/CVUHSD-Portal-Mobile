@@ -9,7 +9,6 @@
     "orientation": "portrait",
     "primaryColor": "#1E6C93",
     "icon": "./src/assets/app-icon.ios.png",
-    "sdkVersion": "39.0.0",
     "splash": {
       "image": "./src/assets/splash-screen.png",
       "resizeMode": "cover",
@@ -26,8 +25,8 @@
       "supportsTablet": false,
       "buildNumber": "6",
       "bundleIdentifier": "com.cvuhsd.portal",
-      "infoPlist" : {
-        "CFBundleShortVersionString" : "2.1.0"
+      "infoPlist": {
+        "CFBundleShortVersionString": "2.1.0"
       }
     },
     "android": {
