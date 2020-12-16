@@ -17,6 +17,7 @@ import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Button,
 import { Reactotron } from './../../config/reactotron.dev.js';
 
 const isDev = __DEV__;
+const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
 
 const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPosition, site, renderAsStudent, showRequestModal, setShowRequestModal }) => {
     let [ isLoading, setIsLoading ]                                             = useState(false);
@@ -167,7 +168,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
     };
 
     const onSubmit = (formValues) => {
-        Reactotron.log("onSubmit():\t", formValues);
+        ReactotronDebug.log("onSubmit():\t", formValues);
 
         // if (errors) {
         //     Alert.alert(
