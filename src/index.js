@@ -1,13 +1,13 @@
-import React from 'react';
-import { registerRootComponent } from 'expo';
-
 import 'react-native-gesture-handler';
 
+import React from 'react';
+
+import { registerRootComponent } from 'expo';
+
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
 import App from './components/App/App.js';
-
-import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
 if (__DEV__) {
     //Initialize Reactotron
