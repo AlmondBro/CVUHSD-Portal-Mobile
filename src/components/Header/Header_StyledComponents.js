@@ -2,7 +2,8 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 
 import styled from 'styled-components/native';
-import css from 'styled-css/native';
+
+import WPTypography from './../../assets/images/wp-typography-red.svg';
 
 let HeaderContainerView = styled.View`
     flex-direction: column;
@@ -115,6 +116,16 @@ const UpdateButtonText= styled.Text`
     justify-content: center;
 `;
 
+
+const WayPointTypography = styled(WPTypography)`
+    margin-top: 5px;
+    margin-bottom: 0px;
+    margin-left: 8px;
+    display: flex;
+    align-self: center;
+
+`;
+
 const UpdateButtonTouchableOpacity = ({ renderAsStudent, title, buttonTitle, accessibilityLabel, onPress }) => {
     return (
         <TouchableOpacity
@@ -141,4 +152,4 @@ const UpdateButtonTouchableOpacity = ({ renderAsStudent, title, buttonTitle, acc
     ); //end return
 }; //SignInButtonTouchableOpacity
 
-export { HeaderContainerView, PortalLogoImage, UpdateAppView, UpdateTextDescription, UserInfoText, SchoolNameLogoView, SchoolLogo, UpdateButtonTouchableOpacity }; 
+export { HeaderContainerView, PortalLogoImage, UpdateAppView, UpdateTextDescription, UserInfoText, SchoolNameLogoView, SchoolLogo, UpdateButtonTouchableOpacity, WayPointTypography }; 

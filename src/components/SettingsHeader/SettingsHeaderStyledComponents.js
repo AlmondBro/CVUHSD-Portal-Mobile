@@ -6,6 +6,7 @@ let Container = styled.View`
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    align-content: center;
 
     flex: 0.1;
 
@@ -50,5 +51,6 @@ const WayPointText = styled.Text`
 
     margin-left: 8px;
 `;
+
 
 export { Container, PortalLogo, WayPointText, InfoIconTouchOpacity, SettingsIcon };
