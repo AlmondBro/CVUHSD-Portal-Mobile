@@ -17,6 +17,7 @@ import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, SubmitC
 import { Reactotron } from './../../config/reactotron.dev.js';
 
 const isDev = __DEV__;
+const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
 
 const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStudent, showPasswordModal, setShowPasswordModal }) => {
     const { handleSubmit, register, setValue, getValues, clearErrors, errors }               = useForm();
@@ -49,7 +50,7 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
         const username = email.split('@')[0];
 
         if (submitEnabled && (isLoading === false) ) {
-            Reactotron.log("Making API call...");
+            ReactotronDebug.log("Making API call...");
 
             setIsLoading(true);
     
@@ -68,12 +69,12 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                 body: JSON.stringify({ username, currentPassword, newPassword } )
             })
             .then((serverResponse) => {
-                Reactotron.log("serverResponse:\t", serverResponse);
+                ReactotronDebug.log("serverResponse:\t", serverResponse);
                 return serverResponse.json();
             }) //Parse the JSON of the response
             .then((jsonResponse) => jsonResponse)
             .catch((error) => {
-                Reactotron.error(`Catching error:\t ${error}`);
+                ReactotronDebug.error(`Catching error:\t ${error}`);
 
                 setSubmitEnabled(true);
                 setIsLoading(false); 
@@ -90,7 +91,7 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                 ); //end alert() call
             });
         
-            Reactotron.log("submitReqResponse:\t", changePasswordReqResponse);
+            ReactotronDebug.log("submitReqResponse:\t", changePasswordReqResponse);
     
             if (changePasswordReqResponse) {
                 const { error, message } = changePasswordReqResponse;
@@ -156,7 +157,7 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                 ]
             ); //end alert() call
             
-            Reactotron.log("Duplicate Password Updates Not Allowed");
+            ReactotronDebug.log("Duplicate Password Updates Not Allowed");
         } //end else-statement
         
         return changePasswordReqResponse;
@@ -169,7 +170,7 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
     }; //end onModalDismiss()
 
     const onSubmit = () => {
-        Reactotron.log("onSubmit():\t", getValues());
+        ReactotronDebug.log("onSubmit():\t", getValues());
 
         let { newPassword, newPasswordConfirmed } = getValues();
 
