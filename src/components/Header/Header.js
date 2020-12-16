@@ -2,13 +2,11 @@ import React, { Fragment } from 'react';
 import { TouchableOpacity } from 'react-native';
 
 //Import component's styled parts
-import { HeaderContainerView, UpdateAppView, UpdateTextDescription, UserInfoText, SchoolNameLogoView, SchoolLogo, UpdateButtonTouchableOpacity } from './Header_StyledComponents.js';
+import { HeaderContainerView, UpdateAppView, UpdateTextDescription, UserInfoText, SchoolNameLogoView, SchoolLogo, UpdateButtonTouchableOpacity, WayPointTypography } from './Header_StyledComponents.js';
 import { BlueSectionContainer } from './../App/App_StyledComponents.js';
 
 import LogoBlue from './../../assets/images/wp-portal-logo-blue-white-interior.svg'; 
 import LogoRed from './../../assets/images/wp-portal-logo-red-white-interior.svg'; 
-
-import WPTypography from './../../assets/images/wp-typography.svg';
 
 //Import 3rd-party APIs
 import greeting from 'greeting';
@@ -56,21 +54,27 @@ const Header = ({ renderAsStudent, uid, title, firstName, lastName, site, gradeL
 
           {
               showPortalLogo ? (
-                <TouchableOpacity
-                    activeOpacity = { 0.5 }
-                    // onPress={ props.onPress('Home') }
-                >
-                {
-                    title ? 
-                        (title === "Student" || renderAsStudent) 
-                        ? (<LogoRed width={130} height={130} />)
-                        : (<LogoBlue width={130} height={130}/>)
-                    :  (<LogoRed  width={130} height={130}/>)
-                }
-                {/* <PortalLogoImage  
-                    source  =   { portalLogoSource} 
-                /> */}
-              </TouchableOpacity>
+                  <Fragment>
+                    <TouchableOpacity
+                        activeOpacity = { 0.5 }
+                        // onPress={ props.onPress('Home') }
+                    >
+                        {
+                            title ? 
+                                (title === "Student" || renderAsStudent) 
+                                ? (<LogoRed width={130} height={130} />)
+                                : (<LogoBlue width={130} height={130}/>)
+                            :  (<LogoRed  width={130} height={130}/>)
+                        }
+
+                    </TouchableOpacity>
+                     {/* Rato is 204/45 (width/height) */}
+                    <WayPointTypography
+                        width   =   { 136 } 
+                        height  =   { 30 } 
+                    />
+                  </Fragment>
+        
               ) : null
           }
 

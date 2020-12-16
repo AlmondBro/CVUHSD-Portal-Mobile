@@ -11,6 +11,7 @@ const HomeScreen = ({ renderAsStudent, title, authLoading, openADSingleSignOn, s
     useEffect(() => {
         setShowPortalLogo(true);
     }, []);
+    
     return (
         <HomeScreenContainerView>
             <ImageBackground
