@@ -16,6 +16,8 @@ import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Button,
 
 import { Reactotron } from './../../config/reactotron.dev.js';
 
+import { IP_ADDRESS, PORTAL_LIVE_LINK, NODEJS_SERVER_PORT } from "@env";
+
 const isDev = __DEV__;
 const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
 
@@ -26,8 +28,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
 
     const { handleSubmit, register, setValue, getValues, clearErrors, errors }  = useForm();
     
-    const IP_ADDRESS_DEV = "10.2.50.36";
-    const PORTAL_LIVE_LINK  = "portal.centinela.k12.ca.us";
+    const IP_ADDRESS_DEV = IP_ADDRESS;
 
     const submitTicket = async () => {
         let submitReqResponse = "";
@@ -63,7 +64,7 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                 room
             }
         
-            const submitRequest_URL = `${isDev ? `http://${IP_ADDRESS_DEV}:3002` : `https://${PORTAL_LIVE_LINK}/server`}/helpdesk/request/create`;
+            const submitRequest_URL = `${isDev ? `http://${IP_ADDRESS_DEV}:${NODEJS_SERVER_PORT}` : `https://${PORTAL_LIVE_LINK}/server`}/helpdesk/request/create`;
             const submitRequest_headers = {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
