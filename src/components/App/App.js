@@ -411,7 +411,7 @@ class App extends Component {
     };
 
     checkForUpdates = async () => {
-        const checkforUpdatesDev = true;
+        const checkforUpdatesDev = false;
 
         if (!__DEV__ || checkforUpdatesDev === true) {
             const update = await checkForUpdateAsync();
