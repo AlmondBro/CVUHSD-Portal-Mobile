@@ -162,7 +162,7 @@ class App extends Component {
     }; //end getUserInfo()
 
     getUserInfo = async (accessToken) => {
-        const getUserInfoURL = `${isDev ? `http://${IP_ADDRESS_DEV}` : `https://${PORTAL_LIVE_LINK}/server`}/auth/user-info`;
+        const getUserInfoURL = `${isDev ? `http://${IP_ADDRESS_DEV}:${NODEJS_SERVER_PORT}` : `https://${PORTAL_LIVE_LINK}/server`}/auth/user-info`;
         
         const getOUHeaders = {
             'Content-Type': 'application/json',
