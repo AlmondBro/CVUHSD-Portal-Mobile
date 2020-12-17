@@ -16,6 +16,8 @@ import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, SubmitC
 
 import { Reactotron } from './../../config/reactotron.dev.js';
 
+import { IP_ADDRESS, PORTAL_LIVE_LINK, NODEJS_SERVER_PORT } from "@env";
+
 const isDev = __DEV__;
 const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
 
@@ -26,8 +28,7 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
     let [ isRequestSuccessful, setIsRequestSuccessful ]                         = useState(null);
     let [ submitEnabled, setSubmitEnabled ]                                     = useState(true);
 
-    const PORTAL_LIVE_LINK  = "portal.centinela.k12.ca.us";
-    const IP_ADDRESS_DEV    = "10.2.64.175:3002";
+    const IP_ADDRESS_DEV    = IP_ADDRESS;
 
     const inputColorsTheme  = {
         colors: {
@@ -56,7 +57,7 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
     
             setSubmitEnabled(false);
         
-            const changePassword_URL = `${isDev ? `http://${IP_ADDRESS_DEV}` : `http://${PORTAL_LIVE_LINK}/server`}/user-ops/password/update`;
+            const changePassword_URL = `${isDev ? `http://${IP_ADDRESS_DEV}:${NODEJS_SERVER_PORT}` : `https://${PORTAL_LIVE_LINK}/server`}/user-ops/password/update`;
             const changePassword_headers = {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
