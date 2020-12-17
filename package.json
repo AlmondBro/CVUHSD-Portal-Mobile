@@ -2,7 +2,7 @@
   "main": "./src/index.js",
   "entryPoint": "./src/index.js",
   "name": "cvuhsd-portal-mobile",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "scripts": {
     "start": "expo start",
     "start-reset": "rm -rf node_modules/ && npm install && npm audit fix  && npm start --reset-cache",
