@@ -8,8 +8,8 @@ If a service's app is not installed on a user's mobile device, the user is redir
 
 Staff members and students may also submit helpdesk tickets and change their password via this app.
 
-Built on React Native and Expo, this app provides a solution for staff members wishing to do the above in a quick and accessible manner.  
+Built on React Native and Expo. This app provides a solution for staff members wishing to do the above in a quick and accessible manner from anywhere.  
 
 Soon to be available on the Apple App Store and Google Play Store; waiting for Apple and Google review approval.
 
-<!-- ![til](./demo.gif) -->
+![til](./demo.gif)
