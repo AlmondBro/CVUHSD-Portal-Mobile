@@ -12,4 +12,4 @@ Built on React Native and Expo, this app provides a solution for staff members w
 
 Soon to be available on the Apple App Store and Google Play Store; waiting for Apple and Google review approval.
 
-![til](./demo.gif)
+<!-- ![til](./demo.gif) -->
