@@ -24,3 +24,6 @@ ios/
 #Ignore certificates folder
 certificates/*
 /certificates
+
+#Ignore Google Play API json file
+api-*.json
