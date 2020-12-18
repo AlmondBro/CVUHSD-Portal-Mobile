@@ -1,6 +1,6 @@
 # WayPoint: CVUHSD Mobile Portal
 
-WayPoint, CVUHSD's Mobile Portal, allows for quick access in mobile devices to internal and 3rd-party CVUHSD staff service apps, such as PowerSchool and Canvas. 
+WayPoint, CVUHSD's Mobile Portal, allows for quick, authenticated access in mobile devices to internal and 3rd-party CVUHSD staff service apps Two such services are PowerSchool and Canvas.  
 
 Centinela Valley Union High School District Members sign in to WayPoint via their credentials on Active Directory single sign-on.   
 
@@ -8,4 +8,4 @@ If a service's app is not installed on a user's mobile device, the user is redir
 
 Staff members and students may also submit helpdesk tickets and change their password via this app.
 
-![til](./cvuhsd-mobile-portal.gif)
+![til](./demo.gif)
