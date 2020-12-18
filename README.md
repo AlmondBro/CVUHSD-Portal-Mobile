@@ -10,6 +10,6 @@ Staff members and students may also submit helpdesk tickets and change their pas
 
 Built on React Native and Expo, this app provides a solution for staff members wishing to do the above in a quick and accessible manner.  
 
-Soon to be available on the Apple App Store and Google Play Store. 
+Soon to be available on the Apple App Store and Google Play Store; waiting for Apple and Google review approval.
 
 ![til](./demo.gif)
