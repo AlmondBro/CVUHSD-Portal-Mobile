@@ -12,6 +12,7 @@ let SafeAreaViewStyled = styled(SafeAreaView)`
     flex: 1;
     justify-content: center;
     overflow: hidden;
+    background-color: white;
 `;
 
 let NavScreensContainer = styled.View`

@@ -1,7 +1,6 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { Alert, ActivityIndicator } from 'react-native';
 
-import Header from './../FormComponents/Header/Header.js';
 import Form from './../FormComponents/Form/Form.js';
 import Input from './../FormComponents/Form/Input/Input.js';
 
@@ -21,7 +20,7 @@ import { IP_ADDRESS, PORTAL_LIVE_LINK, NODEJS_SERVER_PORT } from "@env";
 const isDev = __DEV__;
 const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
 
-const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPosition, site, renderAsStudent, showRequestModal, setShowRequestModal }) => {
+const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPosition, site, renderAsStudent, showRequestModal, setShowRequestModal, setModalHeaderTitle }) => {
     let [ isLoading, setIsLoading ]                                             = useState(false);
     let [ isRequestSuccessful, setIsRequestSuccessful ]                         = useState(null);
     let [ submitEnabled, setSubmitEnabled ]                                     = useState(true);
@@ -279,12 +278,10 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
             color:  ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
     });
 
-    const onModalDismiss = () => {
-        clearErrors();
-        setShowRequestModal(false);
-        setSubmitEnabled(true);
-    }; //end onModalDismiss()
-           
+    useEffect(() => {
+        setModalHeaderTitle("Submit Request");
+    }, []);
+
     return (
       <Fragment>
         <KeyboardAwareScrollViewStyled>

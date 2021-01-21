@@ -23,13 +23,12 @@ const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
 const { Navigator, Screen } = createStackNavigator();  //<Navigator> is equivalent to a <Switch> on React Router, <Screen/> is equivalent to <Route>
 
 const RequestOptions = ({ appWidth, email, firstName, lastName, districtPosition, site, renderAsStudent, showRequestModal, setShowRequestModal }) => {
+    let [ modalHeaderTitle, setModalHeaderTitle ] = useState("View/Submit Requests");
 
     const onModalDismiss = () => {
-        clearErrors();
         setShowRequestModal(false);
-        setSubmitEnabled(true);
     }; //end onModalDismiss()
-           
+    
     return (
             <ModalStyled 
                 animationType       =   "slide"
@@ -47,7 +46,7 @@ const RequestOptions = ({ appWidth, email, firstName, lastName, districtPosition
             >
                 <SafeAreaViewStyled>
                             <Header
-                                title               =   "View/Submit Requests"  
+                                title               =   { modalHeaderTitle } 
                                 districtPosition    =   { districtPosition } 
                                 renderAsStudent     =   { renderAsStudent }
 
@@ -72,12 +71,20 @@ const RequestOptions = ({ appWidth, email, firstName, lastName, districtPosition
                                     //                         }
                                     //                     }
                                     
-                                    initialRouteName="request-options"
+                                    initialRouteName    =   "request-options"
                                 >
                                         <Screen
                                             name        =   "request-options"
-                                            component   =   {OptionsScreen}
-                                        />
+                                        >
+                                                { 
+                                                    props => (
+                                                        <OptionsScreen
+                                                            setModalHeaderTitle = { setModalHeaderTitle } 
+                                                                                  {...props}
+                                                        />
+                                                    ) 
+                                                }
+                                        </Screen>
                                             
                                         <Screen 
                                                 name="view-requests" 
@@ -101,6 +108,7 @@ const RequestOptions = ({ appWidth, email, firstName, lastName, districtPosition
                                                         renderAsStudent     =   { renderAsStudent } 
                                                         showRequestModal    =   { showRequestModal }
                                                         setShowRequestModal =   { setShowRequestModal }
+                                                        setModalHeaderTitle =   { setModalHeaderTitle }
                                                                                 {...props}
                                                         
                                                         />
