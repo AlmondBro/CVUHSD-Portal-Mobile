@@ -27,7 +27,7 @@ import HomeScreen from './../HomeScreen/HomeScreen.js';
 //import styled components
 import { AppContainerView, ImageBackgroundStyled, WelcomeText, StatusBarSafeView, SafeAreaViewStyled } from './App_StyledComponents.js';
 
-import { PORTAL_LIVE_LINK, IP_ADDRESS, OAUTH_AUTH_URL, OAUTH_TOKEN_URL, OAUTH_REDIRECT_URL, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET, OAUTH_LOGOUT_URL, ADFS_LOG_OUT } from "@env";
+import { PORTAL_LIVE_LINK, IP_ADDRESS, OAUTH_AUTH_URL, OAUTH_TOKEN_URL, OAUTH_REDIRECT_URL, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET, OAUTH_LOGOUT_URL, ADFS_LOG_OUT, NODEJS_SERVER_PORT } from "@env";
 
 const isDev = __DEV__;
 const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
@@ -486,7 +486,6 @@ class App extends Component {
                                 renderAsStudent =   { this.state.renderAsStudent }
                                 edges           =   { ['left', 'right', 'bottom'] }
                     >
-                
                         <NavigationContainer ref={navigationRef}>
                             {
                                 !this.state.showPortalLogo ?(
