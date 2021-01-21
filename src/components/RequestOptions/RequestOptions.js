@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Alert, Text } from 'react-native';
 
 import OptionsScreen from './OptionsScreen/OptionsScreen.js';
+import SupportRequestModal from './../SupportRequestModal/SupportRequestModal.js';
 
 import Header from './../FormComponents/Header/Header.js';
 
@@ -88,7 +89,23 @@ const RequestOptions = ({ appWidth, email, firstName, lastName, districtPosition
                                                 name="submit-request" 
                                                 // options={{ title: null, headerShown: false }}
                                         >
-                                                { props => (<Text>Submit Request</Text>) }
+                                                { 
+                                                    props => (
+                                                    <SupportRequestModal
+                                                        appWidth            =   { appWidth }
+                                                        email               =   { email }
+                                                        firstName           =   { firstName } 
+                                                        lastName            =   { lastName} 
+                                                        districtPosition    =   { districtPosition}
+                                                        site                =   { site} 
+                                                        renderAsStudent     =   { renderAsStudent } 
+                                                        showRequestModal    =   { showRequestModal }
+                                                        setShowRequestModal =   { setShowRequestModal }
+                                                                                {...props}
+                                                        
+                                                        />
+                                                    ) 
+                                                }
                                         </Screen>
                                 </Navigator>
 
