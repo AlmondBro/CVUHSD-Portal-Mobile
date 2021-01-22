@@ -4,9 +4,33 @@ import RequestPreview from './RequestPreview/RequestPreview.js';
 
 //Import styled components
 import { Container, RequestTypeTitle, RequestPreviewContainer } from './ViewRequestsStyledComponents.js';
-
+import undefsafe from 'undefsafe';
 import { PORTAL_LIVE_LINK, NODEJS_SERVER_PORT, IP_ADDRESS_DEV } from "@env";
 import { Reactotron } from '../../../config/reactotron.dev.js';
+
+/**
+ * Function to parse the date into a an array, to later extract the time and date subparts.
+ * @param { string } stringToParse 
+ * @return { array } dateAndTime the dtae and time in one array
+ */
+const parseDate = (stringToParse) => {
+    let dateAndTime = stringToParse.split(" ");
+
+    return dateAndTime;
+}; //end parseDate()
+
+/**
+ * Function to return a formatted string date.
+ * @param { string } dateToChange 
+ * @return { string } formattedDate
+ */
+const dateFormatChange = (dateToChange) => {
+    const dateParts = dateToChange.split("/");
+
+    const formattedDate  = dateParts[1] + "/" +  dateParts[0] + "/" + dateParts[2];
+
+    return formattedDate;
+};
 
 /**
  * React functional component to house the screen to view all the requests
@@ -14,11 +38,54 @@ import { Reactotron } from '../../../config/reactotron.dev.js';
  * @param { string } districtPosition the role of the school district user
  * @param { boolean } renderAsStudent dictates whether a staff member is choosing to view the app through a student's eyes
  */
-
 const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
     const isDev = __DEV__;
 
     let [ isLoading, setIsLoading ] = useState(false);
+    let [ requestPreviews, setRequestPreviews ] = useState([]);
+
+    const loadRequestPreviews = (requests) => {
+        let requestRectangles = requests.map((requestObject, index) => {
+
+            let { subject, short_description: description, created_time, status, id, technician, site } = requestObject;
+            
+            let dateAndTime = parseDate(created_time["display_value"]);
+
+            const date = dateFormatChange(dateAndTime[0]);
+
+            const time = dateAndTime[1] + " " + dateAndTime[2];
+            
+            status = status.name;
+
+            if (undefsafe(site, "name")) {
+                site   =  site.name;
+            }
+            
+            return (
+                <RequestPreview
+                    navigation          =   { navigation }
+                    districtPosition    =   { districtPosition }
+                    renderAsStudent     =   { renderAsStudent }
+
+                    subject             =   { subject}
+                    description         =   { description }
+                    date                =   { date }
+                    time                =   { dateAndTime[1] + " " + dateAndTime[2] }
+                    status              =   { status }
+                    id                  =   { id }
+                    isLoading           =   { isLoading }
+
+                    // onClick             =   { () => routeToReqID(requestObject, subject, description, time, date, status, technician, site) }
+
+                    key                 =   { id }
+                />
+            );
+
+        });
+
+        return requestRectangles;
+    }; //end loadRequestRectangles()
+    
 
     const getUserRequests = async (email = "lopezj@centinela.k12.ca.us", requestsType = "All") => {
         let requests = [];
@@ -54,11 +121,14 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
         return requests;
     }; //end getUserRequests
 
-    
+   
     useEffect(() => {
         (async () => {
             let requests = await getUserRequests();
             Reactotron.log("requests:\t", requests);
+
+            let requestPreviews = loadRequestPreviews(requests);
+            setRequestPreviews(requestPreviews);
         })();
     }, []);
 
@@ -77,6 +147,8 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
                     districtPosition    =   { districtPosition } 
                     renderAsStudent     =   { renderAsStudent }
                 />
+                
+                {requestPreviews}
                  
 
 

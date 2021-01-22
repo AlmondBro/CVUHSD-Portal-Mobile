@@ -8,7 +8,7 @@ import {  Container, Content, MetaDataContainer, MetaDataIconTextContainer, Meta
  * @param { string } districtPosition the role of the school district user
  * @param { boolean } renderAsStudent dictates whether a staff member is choosing to view the app through a student's eyes
  */
-const RequestPreview = ({ navigation, districtPosition, renderAsStudent}) => {
+const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject, description, date, time, id, status, onClick, isLoading }) => {
     const metadataIconsSize = 22;
     return (
         <Container>
@@ -29,7 +29,7 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent}) => {
                             districtPosition    =   { districtPosition } 
                             renderAsStudent     =   { renderAsStudent }
                         >
-                            Time
+                            { time || "11:33 AM" }
                         </MetaDataText>
                     </MetaDataIconTextContainer>
 
@@ -46,7 +46,7 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent}) => {
                             districtPosition    =   { districtPosition } 
                             renderAsStudent     =   { renderAsStudent }
                         >
-                            Date
+                            { date || "12/09/2020" }
                         </MetaDataText>
                     </MetaDataIconTextContainer>
 
@@ -62,7 +62,7 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent}) => {
                             districtPosition    =   { districtPosition } 
                             renderAsStudent     =   { renderAsStudent }
                         >
-                            Ticket Type
+                            { status || "Closed" }
                         </MetaDataText>
                     </MetaDataIconTextContainer>
                 </MetaDataContainer>
@@ -72,13 +72,13 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent}) => {
                         districtPosition    =   { districtPosition } 
                         renderAsStudent     =   { renderAsStudent }
                     >
-                        Canvas Test
+                        {subject || "Canvas Test" }
                     </Subject>
                     <Description
                         districtPosition    =   { districtPosition } 
                         renderAsStudent     =   { renderAsStudent }
                     >
-                        Canvas test rule ticket
+                        { description || "Canvas test rule ticket" }
                     </Description>
                 </SubjDescContainer>
               
