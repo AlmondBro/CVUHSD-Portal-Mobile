@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native';
 import RequestPreview from './RequestPreview/RequestPreview.js';
 
 //Import styled components
-import { Container, RequestTypeTitle, SortFilterButtonsContainer, FilterButton, SortButton, RequestPreviewContainer } from './ViewRequestsStyledComponents.js';
+import { Container, RequestTypeTitle, SortFilterButtonsContainer, Button, RequestPreviewContainer } from './ViewRequestsStyledComponents.js';
 import undefsafe from 'undefsafe';
 import { PORTAL_LIVE_LINK, NODEJS_SERVER_PORT, IP_ADDRESS_DEV } from "@env";
 import { Reactotron } from '../../../config/reactotron.dev.js';
@@ -143,14 +143,21 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
             </RequestTypeTitle>
 
             <SortFilterButtonsContainer>
-                <FilterButton 
-                        districtPosition    =   { districtPosition } 
-                        renderAsStudent     =   { renderAsStudent }
+                <Button
+                    width               =   "150px" 
+                    text                =   "Filter/Legend"
+                    iconName            =   "filter"
+
+                    districtPosition    =   { districtPosition } 
+                    renderAsStudent     =   { renderAsStudent }
                 />
 
-                <SortButton 
-                        districtPosition    =   { districtPosition } 
-                        renderAsStudent     =   { renderAsStudent }
+                <Button
+                    width               =   "80px" 
+                    iconName            =   "sort"
+                    
+                    districtPosition    =   { districtPosition } 
+                    renderAsStudent     =   { renderAsStudent }
                 />
             </SortFilterButtonsContainer>
        

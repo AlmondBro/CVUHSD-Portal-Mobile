@@ -45,43 +45,48 @@ const FilterText = styled.Text`
 `;
 
 
-const FilterButton = ({ districtPosition, renderAsStudent }) => {
+const Button = ({ districtPosition, renderAsStudent, width, iconName, text }) => {
     return (
         <TouchableButton
             districtPosition    =   { districtPosition } 
             renderAsStudent     =   { renderAsStudent }
-            width               =   { "100px" }
+            width               =   { width || "120px" }
             bgColor             =   { ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" }
         >
             <FontAwesome5
-                name    =   "filter"
+                name    =   { iconName }
                 size    =   { 20 }
                 color   =   "white"
             >
-            <FilterText>Filter</FilterText>
+                {
+                    text ? (
+                        <FilterText>{ text }</FilterText>
+
+                    ) : null
+                }
             </FontAwesome5>
         </TouchableButton>
     ); //end return statement
 }; //end FilterButton
 
 
-const SortButton = ({ districtPosition, renderAsStudent }) => {
-    return (
-        <TouchableButton
-            districtPosition    =   { districtPosition } 
-            renderAsStudent     =   { renderAsStudent }
-            width               =   { "80px" }
-            bgColor             =   { ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" }
-        >
-            <FontAwesome5
-                name    =   "sort"
-                size    =   { 20 }
-                color   =   "white"
-            >
-            {/* <FilterText>Sort</FilterText> */}
-            </FontAwesome5>
-        </TouchableButton>
-    ); //end return statement
-}; //end FilterButton
+// const SortButton = ({ districtPosition, renderAsStudent }) => {
+//     return (
+//         <TouchableButton
+//             districtPosition    =   { districtPosition } 
+//             renderAsStudent     =   { renderAsStudent }
+//             width               =   { "80px" }
+//             bgColor             =   { ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" }
+//         >
+//             <FontAwesome5
+//                 name    =   "sort"
+//                 size    =   { 20 }
+//                 color   =   "white"
+//             >
+//             {/* <FilterText>Sort</FilterText> */}
+//             </FontAwesome5>
+//         </TouchableButton>
+//     ); //end return statement
+// }; //end FilterButton
 
-export { Container, RequestTypeTitle, SortFilterButtonsContainer, FilterButton, SortButton, RequestPreviewContainer};
+export { Container, RequestTypeTitle, SortFilterButtonsContainer, Button, RequestPreviewContainer};
