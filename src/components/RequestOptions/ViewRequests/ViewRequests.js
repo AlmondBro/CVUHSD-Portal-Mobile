@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 import RequestPreview from './RequestPreview/RequestPreview.js';
 
-//Import styled components
-import { Container, RequestTypeTitle, SortFilterButtonsContainer, Button, RequestPreviewContainer } from './ViewRequestsStyledComponents.js';
+
 import undefsafe from 'undefsafe';
+import { useActionSheet } from '@expo/react-native-action-sheet';
+
 import { PORTAL_LIVE_LINK, NODEJS_SERVER_PORT, IP_ADDRESS_DEV } from "@env";
 import { Reactotron } from '../../../config/reactotron.dev.js';
+
+//Import styled components
+import { Container, RequestTypeTitle, SortFilterButtonsContainer, Button, RequestPreviewContainer } from './ViewRequestsStyledComponents.js';
 
 
 /**
@@ -44,6 +48,8 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
 
     let [ isLoading, setIsLoading ] = useState(false);
     let [ requestPreviews, setRequestPreviews ] = useState([]);
+
+    const { showActionSheetWithOptions } = useActionSheet();
 
     const loadRequestPreviews = (requests) => {
         let requestRectangles = requests.map((requestObject, index) => {
@@ -122,6 +128,21 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
         return requests;
     }; //end getUserRequests
 
+    const openFilterOptions = () => {
+        Reactotron.log("Pressing filter button");
+        const options = ['All', 'In Progress', 'Closed', "Cancel"];
+        const destructiveButtonIndex = 0;
+        const cancelButtonIndex = 3;
+
+        const callback = (buttonIndex) => {
+            Reactotron.log(buttonIndex);
+        };
+        return showActionSheetWithOptions({
+            options,
+            cancelButtonIndex,
+            destructiveButtonIndex
+        }, callback);
+    };
    
     useEffect(() => {
         (async () => {
@@ -150,6 +171,8 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
 
                     districtPosition    =   { districtPosition } 
                     renderAsStudent     =   { renderAsStudent }
+
+                    onPress             =   { openFilterOptions }
                 />
 
                 <Button
