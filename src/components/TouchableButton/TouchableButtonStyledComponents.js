@@ -9,9 +9,11 @@ const Container = styled.View`
 
     border-radius: 15px;
 
-    width: 120px;
+    width: ${props => props.width ? props.width : "120px"};
     flex-direction: row;
     justify-content: center;
+    align-items: center;
+    align-content: center;
 
     margin-top: 10px;
     margin-bottom: ${ (OS === "android") ? "5px" : "18px"};

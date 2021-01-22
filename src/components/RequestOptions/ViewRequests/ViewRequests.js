@@ -3,10 +3,11 @@ import { TouchableOpacity } from 'react-native';
 import RequestPreview from './RequestPreview/RequestPreview.js';
 
 //Import styled components
-import { Container, RequestTypeTitle, RequestPreviewContainer } from './ViewRequestsStyledComponents.js';
+import { Container, RequestTypeTitle, SortFilterButtonsContainer, FilterButton, SortButton, RequestPreviewContainer } from './ViewRequestsStyledComponents.js';
 import undefsafe from 'undefsafe';
 import { PORTAL_LIVE_LINK, NODEJS_SERVER_PORT, IP_ADDRESS_DEV } from "@env";
 import { Reactotron } from '../../../config/reactotron.dev.js';
+
 
 /**
  * Function to parse the date into a an array, to later extract the time and date subparts.
@@ -141,6 +142,18 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
                 All Requests
             </RequestTypeTitle>
 
+            <SortFilterButtonsContainer>
+                <FilterButton 
+                        districtPosition    =   { districtPosition } 
+                        renderAsStudent     =   { renderAsStudent }
+                />
+
+                <SortButton 
+                        districtPosition    =   { districtPosition } 
+                        renderAsStudent     =   { renderAsStudent }
+                />
+            </SortFilterButtonsContainer>
+       
             <RequestPreviewContainer>
                 <TouchableOpacity activeOpacity={1}>
                     { requestPreviews }

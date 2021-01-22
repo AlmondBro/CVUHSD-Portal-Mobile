@@ -11,7 +11,7 @@ import { Container, Text } from './TouchableButtonStyledComponents';
     Conditional requiring is the workaround for 
     now.
 */
-const TouchableButton = ({ renderAsStudent, districtPosition, buttonTitle, color, bgColor, children, onPress }) => {
+const TouchableButton = ({ renderAsStudent, districtPosition, buttonTitle, color, bgColor, width, children, onPress }) => {
    let TouchableOpacity;
 
     if (Platform.OS === "ios") {
@@ -26,6 +26,7 @@ const TouchableButton = ({ renderAsStudent, districtPosition, buttonTitle, color
             onPress         =   { onPress }
         >
             <Container
+                width               =   { width }
                 color               =   { color }
                 bgColor             =   { bgColor }
                 
