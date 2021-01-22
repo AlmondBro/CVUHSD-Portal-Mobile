@@ -3,6 +3,7 @@ import { Alert, Text } from 'react-native';
 
 import OptionsScreen from './OptionsScreen/OptionsScreen.js';
 import SupportRequestModal from './../SupportRequestModal/SupportRequestModal.js';
+import ViewRequests from './ViewRequests/ViewRequests.js'
 
 import Header from './../FormComponents/Header/Header.js';
 
@@ -106,7 +107,13 @@ const RequestOptions = ({ appWidth, email, firstName, lastName, districtPosition
                                                 name="View Requests" 
                                                 // options={{ title: null, headerShown: false }}
                                         >
-                                                { props => (<Text>View Requests</Text>) }
+                                                { props => (
+                                                    <ViewRequests
+                                                        districtPosition    =   { districtPosition } 
+                                                        renderAsStudent     =   { renderAsStudent }
+                                                                                {...props}
+                                                    />
+                                                ) }
                                         </Screen>
                                         <Screen 
                                                 name="Submit Request" 
