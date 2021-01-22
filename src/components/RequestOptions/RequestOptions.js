@@ -25,7 +25,8 @@ const { Navigator, Screen } = createStackNavigator();  //<Navigator> is equivale
 const RequestOptions = ({ appWidth, email, firstName, lastName, districtPosition, site, renderAsStudent, showRequestModal, setShowRequestModal }) => {
     let navContainerRef = useRef(null); //Define a NavigationContainer ref to have access to its functions to pass down to components outside of its hierarchy
 
-    let [ currentRoute, setCurrentRoute ]           = useState("request-options");
+    let initialRouteName = "View/Submit Requests";
+    let [ currentRoute, setCurrentRoute ]  = useState(initialRouteName);
 
     const onModalDismiss = () => {
         setShowRequestModal(false);
@@ -35,6 +36,8 @@ const RequestOptions = ({ appWidth, email, firstName, lastName, districtPosition
     
     const unsubscribe = navContainerRef.current?.addListener('state', (event) => {
         let currentRoute = navContainerRef.current?.getCurrentRoute();
+
+        ReactotronDebug.log("RequestOptions Current Route:\t", currentRoute);
         setCurrentRoute(currentRoute);
     });
 
@@ -83,10 +86,10 @@ const RequestOptions = ({ appWidth, email, firstName, lastName, districtPosition
                                     //                         }
                                     //                     }
                                     
-                                    initialRouteName    =   "View/Submit Requests"
+                                    initialRouteName    =   ""
                                 >
                                         <Screen
-                                            name        =   "View/Submit Requests"
+                                            name        =   { initialRouteName }
                                         >
                                                 { 
                                                     props => (

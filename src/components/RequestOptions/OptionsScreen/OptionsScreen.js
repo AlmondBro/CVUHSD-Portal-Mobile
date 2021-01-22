@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useRoute } from '@react-navigation/native'; //Equivalent to the BrowserRouter in ReactRouter
 
 import { Container, InstructionsText, ButtonsContainer, Button } from './OptionsScreenStyledComponents.js';
 
