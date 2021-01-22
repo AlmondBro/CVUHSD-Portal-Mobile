@@ -6,7 +6,7 @@ const Container = styled.View`
     flex: 1;
     flex-direction: column;
     justify-content: space-evenly;
-    /* background-color: red; */
+    background-color: white;
 `; 
 
 const ButtonContainer = styled.View`
