@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import RequestPreview from './RequestPreview/RequestPreview.js';
 
 //Import styled components
@@ -141,11 +141,10 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
                 All Requests
             </RequestTypeTitle>
 
-        
-            <RequestPreviewContainer contentContainerStyle={{ flexGrow: 1 }}>
-                <View flex={1} onStartShouldSetResponder={() => true}>
+            <RequestPreviewContainer>
+                <TouchableOpacity activeOpacity={1}>
                     { requestPreviews }
-                </View>
+                </TouchableOpacity>
             </RequestPreviewContainer>
         </Container>
     ); //end return

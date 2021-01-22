@@ -47,8 +47,10 @@ const RequestOptions = ({ appWidth, email, firstName, lastName, districtPosition
                 animationType       =   "slide"
                 presentationStyle   =   "pageSheet"
                 transparent         =   { true }
+                
+                propagateSwipe      =   { true }
 
-                // swipeDirection      =   "down"
+                swipeDirection      =   "down"
                 onBackButtonPress   =   { () => setShowRequestModal(false) }
                 hasBackdrop         =   { false }
                 isVisible           =   { showRequestModal  }  

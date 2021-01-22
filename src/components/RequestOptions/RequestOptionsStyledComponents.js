@@ -37,7 +37,8 @@ const ModalStyled = styled(Modal).attrs((props) => ({
     mixedContentMode        :   props.mixedContentMode,
     animationType           :   props.animationType,
     presentationStyle       :   props.presentationStyle,
-    onDismiss               :   props.onDismiss
+    onDismiss               :   props.onDismiss,
+    propagateSwipe          : props.propagateSwipe
 }))`
   flex                      : 1;
   flex-direction            : row;

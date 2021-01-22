@@ -23,7 +23,9 @@ const RequestTypeTitle = styled.Text`
     text-align: center;
 `;
 
-const RequestPreviewContainer = styled.ScrollView`
+const RequestPreviewContainer = styled.ScrollView.attrs((props) => ({
+    contentContainerStyle : { flexGrow: 1 }
+}))`
     display: flex;
     flex: 1;
     flex-direction: column;
