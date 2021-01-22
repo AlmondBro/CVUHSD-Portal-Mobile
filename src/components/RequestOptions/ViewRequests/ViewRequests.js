@@ -20,6 +20,7 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
             >
                 All Requests
             </RequestTypeTitle>
+            
             <RequestPreviewContainer>
                 <RequestPreview
                     navigation          =   { navigation }
