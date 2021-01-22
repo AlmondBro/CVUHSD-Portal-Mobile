@@ -62,6 +62,7 @@ const KeyboardAwareScrollViewStyled = styled(KeyboardAwareScrollView).attrs((pro
     keyboardShouldPersistTaps : "never"
 }))`
     margin-bottom: 56px;
+    background-color: white;
 `;
 
 const Divider = styled.View`

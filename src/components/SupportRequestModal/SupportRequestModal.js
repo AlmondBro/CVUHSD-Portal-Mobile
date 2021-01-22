@@ -285,7 +285,6 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
     return (
       <Fragment>
         <KeyboardAwareScrollViewStyled>
-        
             <InstructionsText
                 districtPosition    =   { districtPosition } 
                 renderAsStudent     =   { renderAsStudent }
