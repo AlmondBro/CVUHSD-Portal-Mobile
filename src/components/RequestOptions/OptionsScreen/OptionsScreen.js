@@ -3,28 +3,18 @@ import { useRoute } from '@react-navigation/native'; //Equivalent to the Browser
 
 import { Container, Button } from './OptionsScreenStyledComponents.js';
 
-const OptionsScreen = ({ navigation, setModalHeaderTitle }) => {
-    let { name: screenName } = useRoute();
+const OptionsScreen = ({ navigation }) => {
+    let { navigate } = navigation;
 
-    useEffect(() => {
-        if (screenName === "submit-request") {
-            setModalHeaderTitle("Submit Requests"); 
-         }
-
-         if (screenName === "request-options") {
-            setModalHeaderTitle("View/Submit Requests"); 
-         }
-    }, [ screenName ]);
-    
     return (
         <Container>
             <Button
                 buttonTitle = "View Requests"
-                onPress     = { () => navigation.navigate("view-requests")}
+                onPress     = { () => navigate("View Requests") }
             />
             <Button
                 buttonTitle = "Submit Request"
-                onPress     = { () => navigation.navigate("submit-request")}
+                onPress     = { () => navigate("Submit Request") }
             />
         </Container>
     ); //end return statement

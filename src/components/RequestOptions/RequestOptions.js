@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Alert, Text } from 'react-native';
 
 import OptionsScreen from './OptionsScreen/OptionsScreen.js';
@@ -14,7 +14,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import { SafeAreaViewStyled, NavScreensContainer, ModalStyled, KeyboardAwareScrollViewStyled, Button, InstructionsText, Divider } from './RequestOptionsStyledComponents.js';
 
-import { navigate } from './../../utility-functions.js';
+import { navigate, navigationRef } from './../../utility-functions.js';
 import TouchableButton from '../TouchableButton/TouchableButton.js';
 
 const isDev = __DEV__;
@@ -23,12 +23,21 @@ const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
 const { Navigator, Screen } = createStackNavigator();  //<Navigator> is equivalent to a <Switch> on React Router, <Screen/> is equivalent to <Route>
 
 const RequestOptions = ({ appWidth, email, firstName, lastName, districtPosition, site, renderAsStudent, showRequestModal, setShowRequestModal }) => {
-    let [ modalHeaderTitle, setModalHeaderTitle ] = useState("View/Submit Requests");
+    let navContainerRef = useRef(null); //Define a NavigationContainer ref to have access to its functions to pass down to components outside of its hierarchy
+
+    let [ currentRoute, setCurrentRoute ]           = useState("request-options");
 
     const onModalDismiss = () => {
         setShowRequestModal(false);
+
+        return unsubscribe(); //Stop listening to navigation container state changes when the modal is closed.
     }; //end onModalDismiss()
     
+    const unsubscribe = navContainerRef.current?.addListener('state', (event) => {
+        let currentRoute = navContainerRef.current?.getCurrentRoute();
+        setCurrentRoute(currentRoute);
+    });
+
     return (
             <ModalStyled 
                 animationType       =   "slide"
@@ -46,15 +55,17 @@ const RequestOptions = ({ appWidth, email, firstName, lastName, districtPosition
             >
                 <SafeAreaViewStyled>
                             <Header
-                                title               =   { modalHeaderTitle } 
                                 districtPosition    =   { districtPosition } 
                                 renderAsStudent     =   { renderAsStudent }
 
+                                currentRoute        =   { currentRoute }
+                                goBack              =   { () => navContainerRef.current?.goBack() }
                                 closeModal          =   { () => setShowRequestModal(false) }
                             />
 
                             <NavigationContainer 
-                                independent={true}
+                                independent     =   {   true    }
+                                ref             =   { navContainerRef }
                             >
 
                                 {/* <TouchableButton onPress={() => navigate("submit-request")}>
@@ -71,15 +82,14 @@ const RequestOptions = ({ appWidth, email, firstName, lastName, districtPosition
                                     //                         }
                                     //                     }
                                     
-                                    initialRouteName    =   "request-options"
+                                    initialRouteName    =   "View/Submit Requests"
                                 >
                                         <Screen
-                                            name        =   "request-options"
+                                            name        =   "View/Submit Requests"
                                         >
                                                 { 
                                                     props => (
                                                         <OptionsScreen
-                                                            setModalHeaderTitle = { setModalHeaderTitle } 
                                                                                   {...props}
                                                         />
                                                     ) 
@@ -87,13 +97,13 @@ const RequestOptions = ({ appWidth, email, firstName, lastName, districtPosition
                                         </Screen>
                                             
                                         <Screen 
-                                                name="view-requests" 
+                                                name="View Requests" 
                                                 // options={{ title: null, headerShown: false }}
                                         >
                                                 { props => (<Text>View Requests</Text>) }
                                         </Screen>
                                         <Screen 
-                                                name="submit-request" 
+                                                name="Submit Request" 
                                                 // options={{ title: null, headerShown: false }}
                                         >
                                                 { 
@@ -108,7 +118,6 @@ const RequestOptions = ({ appWidth, email, firstName, lastName, districtPosition
                                                         renderAsStudent     =   { renderAsStudent } 
                                                         showRequestModal    =   { showRequestModal }
                                                         setShowRequestModal =   { setShowRequestModal }
-                                                        setModalHeaderTitle =   { setModalHeaderTitle }
                                                                                 {...props}
                                                         
                                                         />

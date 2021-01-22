@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native';
 
 import styled from 'styled-components/native';
 
-import { AntDesign } from '@expo/vector-icons'; 
+import { AntDesign, FontAwesome5 } from '@expo/vector-icons'; 
 
 const HeaderContainer = styled.View`
     position: absolute;
@@ -58,6 +58,18 @@ const CloseIcon = styled(AntDesign)`
     padding-right: 5px;
 `;
 
+const LeftArrowIcon = styled(FontAwesome5)`
+    color: white;
+    /* background-color: white; */
+
+    margin-left: 15px;
+
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+`;
+
 const CloseIconButton = ({ districtPosition, renderAsStudent, onPress }) => {
     return (
         <TouchableOpacity
@@ -74,4 +86,20 @@ const CloseIconButton = ({ districtPosition, renderAsStudent, onPress }) => {
     ); //end return statement
 }; //end CloseIconButton()
 
-export { HeaderContainer, HeaderTitleIconContainer, HeaderText, CloseIconButton };
+const BackButton = ({ districtPosition, renderAsStudent, onPress }) => {
+    return (
+        <TouchableOpacity
+            onPress = { onPress }
+        >
+            <LeftArrowIcon 
+                    color               =   { ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" }
+                    name                =   "angle-left" 
+                    size                =   {   22  } 
+
+                    districtPosition    =   { districtPosition } 
+                />
+        </TouchableOpacity>
+    ); //end return statement
+}; //end CloseIconButton()
+
+export { HeaderContainer, HeaderTitleIconContainer, HeaderText, BackButton, CloseIconButton };
