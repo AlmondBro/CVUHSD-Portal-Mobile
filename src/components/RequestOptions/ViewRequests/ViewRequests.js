@@ -1,7 +1,9 @@
 import React from 'react';
 
+import RequestPreview from './RequestPreview/RequestPreview.js';
+
 //Import styled components
-import { Container, RequestTypeTitle } from './ViewRequestsStyledComponents.js';
+import { Container, RequestTypeTitle, RequestPreviewContainer } from './ViewRequestsStyledComponents.js';
 
 /**
  * React functional component to house the screen to view all the requests
@@ -18,6 +20,13 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
             >
                 View Requests
             </RequestTypeTitle>
+            <RequestPreviewContainer>
+                <RequestPreview
+                    navigation          =   { navigation }
+                    districtPosition    =   { districtPosition } 
+                    renderAsStudent     =   { renderAsStudent }
+                />
+            </RequestPreviewContainer>
         </Container>
     ); //end return
 }; //end ViewRequests

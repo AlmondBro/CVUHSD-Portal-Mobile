@@ -1,5 +1,4 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
 
 import styled from 'styled-components/native';
 
@@ -17,4 +16,9 @@ const RequestTypeTitle = styled.Text`
     font-size: 16px;
 `;
 
-export { Container, RequestTypeTitle };
+const RequestPreviewContainer = styled.View`
+    display: flex;
+    flex-direction: column;
+`;
+
+export { Container, RequestTypeTitle, RequestPreviewContainer};
