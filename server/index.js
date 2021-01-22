@@ -36,7 +36,7 @@ const app = express();
 //TODO: Add footer link to change password
 //TODO: Have helpdesk call link
 
-const port = process.env.PORT || 3002; 
+const port = process.env.PORT || process.env.NODEJS_SERVER_PORT || 3001; 
 
 app.use(helmet());
 //app.use(csp()); 
