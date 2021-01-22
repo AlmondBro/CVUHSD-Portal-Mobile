@@ -63,6 +63,7 @@ const RequestOptions = ({ appWidth, email, firstName, lastName, districtPosition
                                 closeModal          =   { () => setShowRequestModal(false) }
                             />
 
+
                             <NavigationContainer 
                                 independent     =   {   true    }
                                 ref             =   { navContainerRef }
@@ -90,7 +91,9 @@ const RequestOptions = ({ appWidth, email, firstName, lastName, districtPosition
                                                 { 
                                                     props => (
                                                         <OptionsScreen
-                                                                                  {...props}
+                                                            districtPosition    =   { districtPosition } 
+                                                            renderAsStudent     =   { renderAsStudent }
+                                                            {...props}
                                                         />
                                                     ) 
                                                 }

@@ -10,7 +10,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 let SafeAreaViewStyled = styled(SafeAreaView)`
     flex: 1;
-    justify-content: center;
+    justify-content: space-evenly;
     overflow: hidden;
     background-color: white;
 `;
@@ -118,6 +118,7 @@ const ButtonText = styled.Text`
 
     text-align: center;
 `;
+
 
 const InstructionsText = styled(ButtonText)`
     color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};

@@ -5,9 +5,20 @@ import styled from 'styled-components/native';
 const Container = styled.View`
     flex: 1;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-around;
     background-color: white;
 `; 
+
+const ButtonsContainer = styled.View`
+    flex: 0.5;
+    flex-direction: column;
+    justify-content: space-evenly;
+    /* background-color: blue; */
+    margin-top: 0px;
+    margin-bottom: 100px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+`;
 
 const ButtonContainer = styled.View`
     display: flex;
@@ -45,6 +56,24 @@ const ButtonText = styled.Text`
     text-align: center;
 `;
 
+const InstructionsText = styled(ButtonText)`
+    color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
+    
+    justify-content: flex-end;
+    
+    font-size: 12px;
+
+    text-align: center;
+
+    width: 100%;
+
+    padding-left: 8%;
+    padding-right: 8%;
+
+    margin-top: 50px; /*  TODO: This is hard-coded. FIx por favor */
+    margin-bottom: 5px;
+`;
+
 const Button = ({ renderAsStudent, districtPosition, buttonTitle, children, onPress }) => {
     return (
         <TouchableOpacity
@@ -71,4 +100,4 @@ const Button = ({ renderAsStudent, districtPosition, buttonTitle, children, onPr
     ); //end return
 }; //SignInButtonTouchableOpacity
 
-export { Container, Button };
+export { Container, InstructionsText, ButtonsContainer, Button };
