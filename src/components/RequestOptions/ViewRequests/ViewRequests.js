@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import RequestPreview from './RequestPreview/RequestPreview.js';
 
 //Import styled components
 import { Container, RequestTypeTitle, RequestPreviewContainer } from './ViewRequestsStyledComponents.js';
 
-import { PORTAL_LIVE_LINK, NODEJS_SERVER_PORT } from "@env";
+import { PORTAL_LIVE_LINK, NODEJS_SERVER_PORT, IP_ADDRESS_DEV } from "@env";
+import { Reactotron } from '../../../config/reactotron.dev.js';
 
 /**
  * React functional component to house the screen to view all the requests
@@ -19,7 +20,7 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
 
     let [ isLoading, setIsLoading ] = useState(false);
 
-    const getUserRequests = async (email, requestsType = "All") => {
+    const getUserRequests = async (email = "lopezj@centinela.k12.ca.us", requestsType = "All") => {
         let requests = [];
         setIsLoading(true);
 
@@ -38,7 +39,7 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
         .then((serverResponse) => serverResponse.json()) //Parse the JSON of the response
         .then((jsonResponse) => jsonResponse)
         .catch((error) => {
-            console.error(`Catching error:\t ${error}`);
+            console.error(`getUserRequests() Fetch -- Catching error:\t ${error}`);
         });
 
         if (requestsResponse && !requestsResponse.error) {
@@ -52,6 +53,14 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
 
         return requests;
     }; //end getUserRequests
+
+    
+    useEffect(() => {
+        (async () => {
+            let requests = await getUserRequests();
+            Reactotron.log("requests:\t", requests);
+        })();
+    }, []);
 
     return (
         <Container>
