@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { View } from 'react-native';
 import RequestPreview from './RequestPreview/RequestPreview.js';
 
 //Import styled components
@@ -70,7 +70,7 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
                     subject             =   { subject}
                     description         =   { description }
                     date                =   { date }
-                    time                =   { dateAndTime[1] + " " + dateAndTime[2] }
+                    time                =   { time}
                     status              =   { status }
                     id                  =   { id }
                     isLoading           =   { isLoading }
@@ -141,17 +141,11 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
                 All Requests
             </RequestTypeTitle>
 
-            <RequestPreviewContainer>
-                <RequestPreview
-                    navigation          =   { navigation }
-                    districtPosition    =   { districtPosition } 
-                    renderAsStudent     =   { renderAsStudent }
-                />
-                
-                {requestPreviews}
-                 
-
-
+        
+            <RequestPreviewContainer contentContainerStyle={{ flexGrow: 1 }}>
+                <View flex={1} onStartShouldSetResponder={() => true}>
+                    { requestPreviews }
+                </View>
             </RequestPreviewContainer>
         </Container>
     ); //end return

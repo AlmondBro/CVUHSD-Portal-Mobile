@@ -48,7 +48,7 @@ const RequestOptions = ({ appWidth, email, firstName, lastName, districtPosition
                 presentationStyle   =   "pageSheet"
                 transparent         =   { true }
 
-                swipeDirection      =   "down"
+                // swipeDirection      =   "down"
                 onBackButtonPress   =   { () => setShowRequestModal(false) }
                 hasBackdrop         =   { false }
                 isVisible           =   { showRequestModal  }  
@@ -72,11 +72,6 @@ const RequestOptions = ({ appWidth, email, firstName, lastName, districtPosition
                                 independent     =   {   true    }
                                 ref             =   { navContainerRef }
                             >
-
-                                {/* <TouchableButton onPress={() => navigate("submit-request")}>
-                                    <Text>Holis</Text>
-                                </TouchableButton> */}
-
                                 <Navigator 
                                     headerMode      = "none"
                                     // screenOptions   =   {   { 
@@ -140,11 +135,6 @@ const RequestOptions = ({ appWidth, email, firstName, lastName, districtPosition
                                 </Navigator>
 
                             </NavigationContainer>
-                        {/* <KeyboardAwareScrollViewStyled>
-                        
-
-
-                        </KeyboardAwareScrollViewStyled> */}
                     </SafeAreaViewStyled>
             </ModalStyled>  
     ); //end return statement

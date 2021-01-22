@@ -23,7 +23,7 @@ const RequestTypeTitle = styled.Text`
     text-align: center;
 `;
 
-const RequestPreviewContainer = styled.View`
+const RequestPreviewContainer = styled.ScrollView`
     display: flex;
     flex: 1;
     flex-direction: column;

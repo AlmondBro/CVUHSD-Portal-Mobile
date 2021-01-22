@@ -7,6 +7,8 @@ const Container = styled.View`
     flex-direction: column;
     align-items: center;
     background-color: white;
+
+    margin-bottom: 35px;
 `;
 
 const Content = styled.View`
