@@ -5,6 +5,8 @@ import RequestPreview from './RequestPreview/RequestPreview.js';
 //Import styled components
 import { Container, RequestTypeTitle, RequestPreviewContainer } from './ViewRequestsStyledComponents.js';
 
+import { PORTAL_LIVE_LINK, NODEJS_SERVER_PORT } from "@env";
+
 /**
  * React functional component to house the screen to view all the requests
  * @param { Object } navigation  object passed from React Navigation's Navigation Container. Houses methods to navigate across the different streams.
@@ -12,16 +14,16 @@ import { Container, RequestTypeTitle, RequestPreviewContainer } from './ViewRequ
  * @param { boolean } renderAsStudent dictates whether a staff member is choosing to view the app through a student's eyes
  */
 
-const isDev = __DEV__;
-
 const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
+    const isDev = __DEV__;
+
     let [ isLoading, setIsLoading ] = useState(false);
 
     const getUserRequests = async (email, requestsType = "All") => {
         let requests = [];
         setIsLoading(true);
 
-        const getUserRequests_URL = `${isDev ? "" : "/server"}/helpdesk/request/read/all/user`;
+        const getUserRequests_URL = `${isDev ? `http://${IP_ADDRESS_DEV}:${NODEJS_SERVER_PORT}` : `https://${PORTAL_LIVE_LINK}/server`}/helpdesk/request/read/all/user`;
         const getUserRequests_Headers = {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
