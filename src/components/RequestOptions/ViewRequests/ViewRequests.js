@@ -128,7 +128,7 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
             let requests = await getUserRequests();
             Reactotron.log("requests:\t", requests);
 
-            let requestPreviews = loadRequestPreviews(requests);
+            let requestPreviews = loadRequestPreviews(requests.reverse()); //Reverse the requests such that is the most recent tickets first on default
             setRequestPreviews(requestPreviews);
         })();
     }, []);
@@ -158,6 +158,8 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
                     
                     districtPosition    =   { districtPosition } 
                     renderAsStudent     =   { renderAsStudent }
+
+                    onPress             =   { () => setRequestPreviews([...requestPreviews].reverse()) }
                 />
             </SortFilterButtonsContainer>
        
