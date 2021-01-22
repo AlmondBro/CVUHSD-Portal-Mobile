@@ -18,7 +18,7 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
               districtPosition    =   { districtPosition } 
               renderAsStudent     =   { renderAsStudent }
             >
-                View Requests
+                All Requests
             </RequestTypeTitle>
             <RequestPreviewContainer>
                 <RequestPreview
@@ -26,6 +26,9 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
                     districtPosition    =   { districtPosition } 
                     renderAsStudent     =   { renderAsStudent }
                 />
+                 
+
+
             </RequestPreviewContainer>
         </Container>
     ); //end return
