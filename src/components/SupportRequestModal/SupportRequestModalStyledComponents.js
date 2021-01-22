@@ -10,7 +10,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 let SafeAreaViewStyled = styled(SafeAreaView)`
     flex: 1;
-
+    background-color: white;
     overflow: hidden;
 `;
 
