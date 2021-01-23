@@ -27,7 +27,7 @@ import HomeScreen from './../HomeScreen/HomeScreen.js';
 //import styled components
 import { AppContainerView, ImageBackgroundStyled, WelcomeText, StatusBarSafeView, SafeAreaViewStyled } from './App_StyledComponents.js';
 
-import { PORTAL_LIVE_LINK, IP_ADDRESS, OAUTH_AUTH_URL, OAUTH_TOKEN_URL, OAUTH_REDIRECT_URL, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET, OAUTH_LOGOUT_URL, ADFS_LOG_OUT, NODEJS_SERVER_PORT } from "@env";
+import { PORTAL_LIVE_LINK, IP_ADDRESS, OAUTH_AUTH_URL, OAUTH_TOKEN_URL, OAUTH_CALLBACK_URL_DEV, OAUTH_CALLBACK_URL_PROD, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET, OAUTH_LOGOUT_URL, ADFS_LOG_OUT, NODEJS_SERVER_PORT } from "@env";
 
 const isDev = __DEV__;
 const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
@@ -137,7 +137,7 @@ class App extends Component {
         let requestParams = {
             client_id: OAUTH_CLIENT_ID,
             code: authorizationCode,
-            redirect_uri: OAUTH_REDIRECT_URL,
+            redirect_uri: OAUTH_CALLBACK_URL_DEV,
             grant_type: "authorization_code",
             client_secret: OAUTH_CLIENT_SECRET
         };
@@ -190,15 +190,15 @@ class App extends Component {
         
         this.setState({ authLoading: true }); //Set loading to true
 
-        const redirectUrl = OAUTH_REDIRECT_URL;
+        const redirectUrl = isDev ? OAUTH_CALLBACK_URL_DEV : OAUTH_CALLBACK_URL_PROD;
 
         ReactotronDebug.log("authUrl", OAUTH_AUTH_URL);
 
         const authUrl  =    `${OAUTH_AUTH_URL}` +
-                            `?resource=${"http://localhost:3000"}` +
-                            `&response_type=${"code"}` +
-                            `&redirect_uri=${encodeURIComponent(redirectUrl)}` +
-                            `&client_id=${OAUTH_CLIENT_ID}`;
+                            `?resource=${encodeURIComponent("http://localhost:3000")}` +
+                            `&response_type=${encodeURIComponent("code")}` +
+                            `&redirect_uri=${encodeURIComponent(AuthSession.makeRedirectUri())}` +
+                            `&client_id=${encodeURIComponent(OAUTH_CLIENT_ID)}`;
 
         let authSessionResults = await AuthSession.startAsync({
             authUrl: authUrl   
