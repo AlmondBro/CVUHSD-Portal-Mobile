@@ -158,8 +158,9 @@ class App extends Component {
         .then((tokenResponse) => tokenResponse)
         .catch((error) => Reactotron.log("getAccessToken() error:\t", error) );
 
+        ReactotronDebug.log("accessToken:\t", accessToken);
         return accessToken;
-    }; //end getUserInfo()
+    }; //end getAccessToken()
 
     getUserInfo = async (accessToken) => {
         const getUserInfoURL = `${isDev ? `http://${IP_ADDRESS_DEV}:${NODEJS_SERVER_PORT}` : `https://${PORTAL_LIVE_LINK}/server`}/auth/user-info`;
@@ -197,8 +198,13 @@ class App extends Component {
         const authUrl  =    `${OAUTH_AUTH_URL}` +
                             `?resource=${encodeURIComponent("http://localhost:3000")}` +
                             `&response_type=${encodeURIComponent("code")}` +
-                            `&redirect_uri=${encodeURIComponent(AuthSession.makeRedirectUri())}` +
-                            `&client_id=${encodeURIComponent(OAUTH_CLIENT_ID)}`;
+                            `&redirect_uri=${encodeURIComponent(AuthSession.getRedirectUrl())}` +
+                            `&client_id=${encodeURIComponent(OAUTH_CLIENT_ID)}` +
+                            `&response_mode=${"fragment"}` + 
+                            `&scope=${"openid"}` + 
+                            `state=${Math.random()*100 + 20}`;
+                       
+
 
         let authSessionResults = await AuthSession.startAsync({
             authUrl: authUrl   
@@ -206,7 +212,9 @@ class App extends Component {
 
         if ( !(authSessionResults.type === "cancel" || authSessionResults.type === "dismiss" || authSessionResults.type === "error" || authSessionResults.type === "locked")) {
             const { code: authorizationCode } = authSessionResults.params;
-                                
+                  
+            ReactotronDebug.log("authorizationCode:\t", authorizationCode);
+            
             ReactotronDebug.log("authSessionResults:\t" + JSON.stringify(authSessionResults) );
 
             const { access_token } = await this.getAccessToken(authorizationCode);
