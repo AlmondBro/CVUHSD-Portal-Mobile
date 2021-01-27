@@ -35,13 +35,15 @@ const Header = ({ districtPosition, renderAsStudent, faIcon, title, currentRoute
             onLayout            =   { onLayout }
         >
             {
-                goBack && (routeName === "View/Submit Requests") ? null
+                 (routeName === "View/Submit Requests") ? null
                 : (
-                    <BackButton
-                        districtPosition    =   { districtPosition } 
-                        renderAsStudent     =   { renderAsStudent }
-                        onPress             =   { goBack }
-                    />
+                    goBack && (
+                        <BackButton
+                            districtPosition    =   { districtPosition } 
+                            renderAsStudent     =   { renderAsStudent }
+                            onPress             =   { goBack }
+                        />
+                    )
                 )
             } 
          
