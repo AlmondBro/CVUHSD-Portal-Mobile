@@ -8,19 +8,19 @@ const Container = styled.View`
     align-items: center;
     background-color: white;
 
-    margin-bottom: 35px;
+    margin-bottom: 25px;
 `;
 
 const Content = styled.View`
     width: 90%;
 
     border-top-width: 1px;
-    border-bottom-width: 1px;
+    /* border-bottom-width: 1px; */
     border-style: solid; 
     border-color: ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
 
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding-top: 25px;
+    /* padding-bottom: 12px; */
 
 `;
 
