@@ -40,7 +40,7 @@ const RequestOptions = ({ appWidth, email, firstName, lastName, districtPosition
     const onModalDismiss = () => {
         setShowRequestModal(false);
 
-        return unsubscribe(); //Stop listening to navigation container state changes when the modal is closed.
+        return unsubscribe; //Stop listening to navigation container state changes when the modal is closed.
     }; //end onModalDismiss()
     
 
