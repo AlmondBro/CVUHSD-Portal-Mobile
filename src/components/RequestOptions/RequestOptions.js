@@ -29,18 +29,20 @@ const RequestOptions = ({ appWidth, email, firstName, lastName, districtPosition
     let initialRouteName = "View/Submit Requests";
     let [ currentRoute, setCurrentRoute ]  = useState(initialRouteName);
 
-    const onModalDismiss = () => {
-        setShowRequestModal(false);
 
-        return unsubscribe(); //Stop listening to navigation container state changes when the modal is closed.
-    }; //end onModalDismiss()
-    
     const unsubscribe = navContainerRef.current?.addListener('state', (event) => {
         let currentRoute = navContainerRef.current?.getCurrentRoute();
 
         ReactotronDebug.log("RequestOptions Current Route:\t", currentRoute);
         setCurrentRoute(currentRoute);
     });
+
+    const onModalDismiss = () => {
+        setShowRequestModal(false);
+
+        return unsubscribe(); //Stop listening to navigation container state changes when the modal is closed.
+    }; //end onModalDismiss()
+    
 
     return (
             <ModalStyled 
