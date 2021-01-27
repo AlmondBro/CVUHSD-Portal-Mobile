@@ -20,9 +20,8 @@ const Header = ({ districtPosition, renderAsStudent, faIcon, title, currentRoute
 
     useEffect(() => {
         if (currentRoute) {
-            let { name } = currentRoute;
-            setRouteName(name);
-            setHeaderTitle(name); //Update the title of the header based off the route name
+            setRouteName(currentRoute);
+            setHeaderTitle(currentRoute); //Update the title of the header based off the route name
         }
     }, [ currentRoute ]);
 

@@ -124,7 +124,7 @@ const RequestOptions = ({ navigation, appWidth, email, firstName, lastName, dist
                                         props => (
                                             <CurrentRouteSetter 
                                                 setCurrentRoute     =   { setCurrentRoute }
-                                                {...props}
+                                                                        {...props}
                                             >
                                             <SupportRequestModal
                                                 appWidth            =   { appWidth }
