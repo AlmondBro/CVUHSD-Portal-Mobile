@@ -12,7 +12,7 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
     const metadataIconsSize = 22;
     
     const truncateDescription = (description) => {
-        if (description.length >= 130) {
+        if (description.length >= 90) {
             let truncatedDescr = description.substr(0, 129);
 
             let truncDescEllipses = truncatedDescr + "...";

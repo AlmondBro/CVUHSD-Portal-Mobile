@@ -112,6 +112,7 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
         .then((jsonResponse) => jsonResponse)
         .catch((error) => {
             console.error(`getUserRequests() Fetch -- Catching error:\t ${error}`);
+            setIsLoading(false);
         });
 
         if (requestsResponse && !requestsResponse.error) {
@@ -120,6 +121,7 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
         } else {
             console.log(`Error in fetching the requests.`);
 
+            setIsLoading(false);
             requests = [];
         }
 
