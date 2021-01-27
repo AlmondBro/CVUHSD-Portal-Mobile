@@ -10,6 +10,20 @@ import {  Container, Content, MetaDataContainer, MetaDataIconTextContainer, Meta
  */
 const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject, description, date, time, id, status, onClick, isLoading }) => {
     const metadataIconsSize = 22;
+    
+    const truncateDescription = (description) => {
+        if (description.length >= 130) {
+            let truncatedDescr = description.substr(0, 129);
+
+            let truncDescEllipses = truncatedDescr + "...";
+    
+            console.log("trunc", truncDescEllipses);
+    
+            return truncDescEllipses;
+        }
+        return description;
+    };
+    
     return (
         <Container>
             <Content
@@ -78,7 +92,7 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
                         districtPosition    =   { districtPosition } 
                         renderAsStudent     =   { renderAsStudent }
                     >
-                        { description || "Canvas test rule ticket" }
+                        { truncateDescription(description) || "Canvas test rule ticket" }
                     </Description>
                 </SubjDescContainer>
               
