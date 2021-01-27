@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, ActivityIndicator } from 'react-native';
 import RequestPreview from './RequestPreview/RequestPreview.js';
 
 import undefsafe from 'undefsafe';
@@ -9,7 +9,7 @@ import { PORTAL_LIVE_LINK, NODEJS_SERVER_PORT, IP_ADDRESS_DEV } from "@env";
 import { Reactotron } from '../../../config/reactotron.dev.js';
 
 //Import styled components
-import { Container, RequestTypeTitle, SortFilterButtonsContainer, Button, RequestPreviewContainer } from './ViewRequestsStyledComponents.js';
+import { Container, RequestTypeTitle, SortFilterButtonsContainer, Button, RequestPreviewContainer, NoRequestsMessage } from './ViewRequestsStyledComponents.js';
 
 /**
  * Function to parse the date into a an array, to later extract the time and date subparts.
@@ -186,7 +186,25 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
        
             <RequestPreviewContainer>
                 <TouchableOpacity activeOpacity={1}>
-                    { requestPreviews }
+                    { isLoading ? (
+                        <ActivityIndicator 
+                            size        =   "large" 
+                            color       =   { districtPosition ?
+                                                    ( (districtPosition.toLowerCase() === "student") || renderAsStudent) ? 
+                                                        "#931E1D": "#1E6C93"
+                                                : "#931E1D" 
+                                            }
+                            animating   =   { isLoading  }
+                        />
+                    ) : (requestPreviews.length > 0) ? requestPreviews : (
+                        <NoRequestsMessage
+                            districtPosition    =   { districtPosition } 
+                            renderAsStudent     =   { renderAsStudent }
+                        >
+                            No requests at this moment.
+                        </NoRequestsMessage>
+                    ) 
+                }
                 </TouchableOpacity>
             </RequestPreviewContainer>
         </Container>

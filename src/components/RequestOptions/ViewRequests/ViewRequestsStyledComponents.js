@@ -45,6 +45,14 @@ const FilterText = styled.Text`
 `;
 
 
+const NoRequestsMessage = styled.Text`
+  color:  ${ props => props.districtPosition ?
+                                      ( (props.districtPosition.toLowerCase() === "student") || props.renderAsStudent) ? 
+                                          "#931E1D": "#1E6C93"
+                                    : "#931E1D"
+            };
+`;
+
 const Button = ({ districtPosition, renderAsStudent, width, iconName, text, onPress }) => {
     return (
         <TouchableButton
@@ -70,4 +78,4 @@ const Button = ({ districtPosition, renderAsStudent, width, iconName, text, onPr
     ); //end return statement
 }; //end FilterButton
 
-export { Container, RequestTypeTitle, SortFilterButtonsContainer, Button, RequestPreviewContainer};
+export { Container, RequestTypeTitle, SortFilterButtonsContainer, Button, RequestPreviewContainer, NoRequestsMessage};
