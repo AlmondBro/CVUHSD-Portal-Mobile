@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Alert, Text } from 'react-native';
 
 import OptionsScreen from './OptionsScreen/OptionsScreen.js';
@@ -13,36 +13,26 @@ import { Reactotron } from './../../config/reactotron.dev.js';
 import { NavigationContainer } from '@react-navigation/native'; //Equivalent to the BrowserRouter in ReactRouter
 import { createStackNavigator } from '@react-navigation/stack'; 
 
+import CurrentRouteSetter from './CurrentRouteSetterHOC.js';
+
 import { SafeAreaViewStyled, NavScreensContainer, ModalStyled, KeyboardAwareScrollViewStyled, Button, InstructionsText, Divider } from './RequestOptionsStyledComponents.js';
 
 import { navigate, navigationRef } from './../../utility-functions.js';
 import TouchableButton from '../TouchableButton/TouchableButton.js';
 
-const isDev = __DEV__;
-const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
-
 const { Navigator, Screen } = createStackNavigator();  //<Navigator> is equivalent to a <Switch> on React Router, <Screen/> is equivalent to <Route>
 
-const RequestOptions = ({ appWidth, email, firstName, lastName, districtPosition, site, renderAsStudent, showRequestModal, setShowRequestModal }) => {
+const RequestOptions = ({ navigation, appWidth, email, firstName, lastName, districtPosition, site, renderAsStudent, showRequestModal, setShowRequestModal }) => {
     let navContainerRef = useRef(null); //Define a NavigationContainer ref to have access to its functions to pass down to components outside of its hierarchy
 
     let initialRouteName = "View/Submit Requests";
     let [ currentRoute, setCurrentRoute ]  = useState(initialRouteName);
 
-
-    const unsubscribe = navContainerRef.current?.addListener('state', (event) => {
-        let currentRoute = navContainerRef.current?.getCurrentRoute();
-
-        ReactotronDebug.log("RequestOptions Current Route:\t", currentRoute);
-        setCurrentRoute(currentRoute);
-    });
-
     const onModalDismiss = () => {
         setShowRequestModal(false);
 
-        return unsubscribe; //Stop listening to navigation container state changes when the modal is closed.
     }; //end onModalDismiss()
-    
+
 
     return (
             <ModalStyled 
@@ -62,84 +52,100 @@ const RequestOptions = ({ appWidth, email, firstName, lastName, districtPosition
                 onSwipeComplete     =   { () => setShowRequestModal(false) }
             >
                 <SafeAreaViewStyled>
-                            <Header
-                                districtPosition    =   { districtPosition } 
-                                renderAsStudent     =   { renderAsStudent }
+                    <Header
+                        districtPosition    =   { districtPosition } 
+                        renderAsStudent     =   { renderAsStudent }
 
-                                currentRoute        =   { currentRoute }
-                                goBack              =   { () => navContainerRef.current?.goBack() }
-                                closeModal          =   { () => setShowRequestModal(false) }
-                            />
+                        currentRoute        =   { currentRoute }
+                        goBack              =   { () => navContainerRef.current?.goBack() }
+                        closeModal          =   { () => setShowRequestModal(false) }
+                    />
 
 
-                            <NavigationContainer 
-                                independent     =   {   true    }
-                                ref             =   { navContainerRef }
-                            >
-                                <Navigator 
-                                    headerMode      = "none"
-                                    // screenOptions   =   {   { 
-                                    //                             title: null, 
-                                    //                             headerShown: false,
-                                    //                             gestureEnabled: false,
-                                    //                             animationTypeForReplace: 'push'
-                                    //                         }
-                                    //                     }
-                                    
-                                    initialRouteName    =   ""
+                    <NavigationContainer 
+                        independent     =   {   true    }
+                        ref             =   { navContainerRef }
+                    >
+                        <Navigator 
+                            headerMode      = "none"
+                            // screenOptions   =   {   { 
+                            //                             title: null, 
+                            //                             headerShown: false,
+                            //                             gestureEnabled: false,
+                            //                             animationTypeForReplace: 'push'
+                            //                         }
+                            //                     }
+                            
+                            initialRouteName    =   { initialRouteName }
+                        >
+                                <Screen
+                                    name        =   { initialRouteName }
                                 >
-                                        <Screen
-                                            name        =   { initialRouteName }
-                                        >
-                                                { 
-                                                    props => (
-                                                        <OptionsScreen
-                                                            districtPosition    =   { districtPosition } 
-                                                            renderAsStudent     =   { renderAsStudent }
-                                                            {...props}
-                                                        />
-                                                    ) 
-                                                }
-                                        </Screen>
-                                            
-                                        <Screen 
-                                                name="View Requests" 
-                                                // options={{ title: null, headerShown: false }}
-                                        >
-                                                { props => (
-                                                    <ViewRequests
+                                    { 
+                                        props => (
+                                            <CurrentRouteSetter 
+                                                setCurrentRoute     =   { setCurrentRoute }
+                                                {...props}
+                                            >
+                                                   <OptionsScreen
                                                         districtPosition    =   { districtPosition } 
                                                         renderAsStudent     =   { renderAsStudent }
-                                                                                {...props}
-                                                    />
-                                                ) }
-                                        </Screen>
-                                        <Screen 
-                                                name="Submit Request" 
-                                                // options={{ title: null, headerShown: false }}
+                                                        setCurrentRoute     =   { setCurrentRoute }
+                                                        {...props}
+                                                />
+                                            </CurrentRouteSetter>
+                                         
+                                        ) 
+                                    }
+                                </Screen>
+                                    
+                                <Screen 
+                                        name="View Requests" 
+                                        // options={{ title: null, headerShown: false }}
+                                >
+                                    { props => (
+                                         <CurrentRouteSetter 
+                                            setCurrentRoute     =   { setCurrentRoute }
+                                            {...props}
                                         >
-                                                { 
-                                                    props => (
-                                                    <SupportRequestModal
-                                                        appWidth            =   { appWidth }
-                                                        email               =   { email }
-                                                        firstName           =   { firstName } 
-                                                        lastName            =   { lastName} 
-                                                        districtPosition    =   { districtPosition}
-                                                        site                =   { site} 
-                                                        renderAsStudent     =   { renderAsStudent } 
-                                                        showRequestModal    =   { showRequestModal }
-                                                        setShowRequestModal =   { setShowRequestModal }
-                                                                                {...props}
-                                                        
-                                                        />
-                                                    ) 
-                                                }
-                                        </Screen>
-                                </Navigator>
+                                            <ViewRequests
+                                                districtPosition    =   { districtPosition } 
+                                                renderAsStudent     =   { renderAsStudent }
+                                                                        {...props}
+                                            />
+                                        </CurrentRouteSetter>
+                                    ) }
+                                </Screen>
+                                <Screen 
+                                        name="Submit Request" 
+                                        // options={{ title: null, headerShown: false }}
+                                >
+                                    { 
+                                        props => (
+                                            <CurrentRouteSetter 
+                                                setCurrentRoute     =   { setCurrentRoute }
+                                                {...props}
+                                            >
+                                            <SupportRequestModal
+                                                appWidth            =   { appWidth }
+                                                email               =   { email }
+                                                firstName           =   { firstName } 
+                                                lastName            =   { lastName} 
+                                                districtPosition    =   { districtPosition}
+                                                site                =   { site} 
+                                                renderAsStudent     =   { renderAsStudent } 
+                                                showRequestModal    =   { showRequestModal }
+                                                setShowRequestModal =   { setShowRequestModal }
+                                                                        {...props}
+                                            />
+                                        </CurrentRouteSetter>
+                                        ) 
+                                    }
+                                </Screen>
+                        </Navigator>
+                    </NavigationContainer>
 
-                            </NavigationContainer>
-                    </SafeAreaViewStyled>
+                </SafeAreaViewStyled>
             </ModalStyled>  
     ); //end return statement
 }; //end SupportRequestModal()

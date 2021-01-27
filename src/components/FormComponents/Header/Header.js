@@ -36,7 +36,7 @@ const Header = ({ districtPosition, renderAsStudent, faIcon, title, currentRoute
             onLayout            =   { onLayout }
         >
             {
-                (routeName === "View/Submit Requests") ? null
+                goBack && (routeName === "View/Submit Requests") ? null
                 : (
                     <BackButton
                         districtPosition    =   { districtPosition } 

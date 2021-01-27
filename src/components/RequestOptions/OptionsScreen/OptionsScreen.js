@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { Container, InstructionsText, ButtonsContainer, Button } from './OptionsScreenStyledComponents.js';
 
-const OptionsScreen = ({ navigation, districtPosition, renderAsStudent }) => {
+const OptionsScreen = ({ navigation, districtPosition, renderAsStudent, setCurrentRoute }) => {
     let { navigate } = navigation;
 
     return (
