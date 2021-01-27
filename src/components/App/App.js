@@ -27,12 +27,10 @@ import HomeScreen from './../HomeScreen/HomeScreen.js';
 //import styled components
 import { AppContainerView, ImageBackgroundStyled, WelcomeText, StatusBarSafeView, SafeAreaViewStyled } from './App_StyledComponents.js';
 
-import { PORTAL_LIVE_LINK, IP_ADDRESS, OAUTH_AUTH_URL, OAUTH_TOKEN_URL, OAUTH_CALLBACK_URL_DEV, OAUTH_CALLBACK_URL_PROD, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET, OAUTH_LOGOUT_URL, ADFS_LOG_OUT, NODEJS_SERVER_PORT } from "@env";
+import { IP_ADDRESS_DEV, PORTAL_LIVE_LINK, OAUTH_AUTH_URL, OAUTH_TOKEN_URL, OAUTH_CALLBACK_URL_DEV, OAUTH_CALLBACK_URL_PROD, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET, OAUTH_LOGOUT_URL, ADFS_LOG_OUT, NODEJS_SERVER_PORT } from "@env";
 
 const isDev = __DEV__;
 const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
-
-const IP_ADDRESS_DEV = IP_ADDRESS;
 
 const imagesObjectPath = (Platform.OS === "web") ? require('./../../assets/images/index.js') : require('@images');
 const Images = imagesObjectPath.default;
