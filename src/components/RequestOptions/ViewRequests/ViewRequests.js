@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 import RequestPreview from './RequestPreview/RequestPreview.js';
 
-
 import undefsafe from 'undefsafe';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 
@@ -11,7 +10,6 @@ import { Reactotron } from '../../../config/reactotron.dev.js';
 
 //Import styled components
 import { Container, RequestTypeTitle, SortFilterButtonsContainer, Button, RequestPreviewContainer } from './ViewRequestsStyledComponents.js';
-
 
 /**
  * Function to parse the date into a an array, to later extract the time and date subparts.

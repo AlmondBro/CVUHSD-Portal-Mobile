@@ -7,10 +7,10 @@ import { HeaderContainer, HeaderTitleIconContainer, HeaderText, BackButton, Clos
 
 import { Reactotron } from './../../../config/reactotron.dev.js';
 
-const Header = ({ districtPosition, renderAsStudent, faIcon, currentRoute, goBack, closeModal }) => {
+const Header = ({ districtPosition, renderAsStudent, faIcon, title, currentRoute, goBack, closeModal }) => {
     const [ headerHeight, setHeaderHeight ]  = useState(0);
     const [ routeName, setRouteName ]        = useState("request-options");
-    const [ headerTitle, setHeaderTitle ]    = useState("HelpDesk Requests");
+    const [ headerTitle, setHeaderTitle ]    = useState(title);
 
     const onLayout = (event) => {
         const { height } = Dimensions.get('window');

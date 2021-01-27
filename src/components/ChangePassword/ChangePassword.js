@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Keyboard, ActivityIndicator } from 'react-native';
+import { Alert, Keyboard, ActivityIndicator, TouchableOpacity, Touchable } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 import { useForm } from 'react-hook-form';
@@ -16,7 +16,7 @@ import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, SubmitC
 
 import { Reactotron } from './../../config/reactotron.dev.js';
 
-import { IP_ADDRESS, PORTAL_LIVE_LINK, NODEJS_SERVER_PORT } from "@env";
+import { IP_ADDRESS_DEV, PORTAL_LIVE_LINK, NODEJS_SERVER_PORT } from "@env";
 
 const isDev = __DEV__;
 const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
@@ -27,8 +27,6 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
     let [ isLoading, setIsLoading ]                                             = useState(false);
     let [ isRequestSuccessful, setIsRequestSuccessful ]                         = useState(null);
     let [ submitEnabled, setSubmitEnabled ]                                     = useState(true);
-
-    const IP_ADDRESS_DEV    = IP_ADDRESS;
 
     const inputColorsTheme  = {
         colors: {
@@ -196,8 +194,10 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                 animationType       =   "slide"
                 presentationStyle   =   "pageSheet"
                 transparent         =   { true }
-
+                
+                propagateSwipe      =   { true }
                 swipeDirection      =   "down"
+
                 onBackButtonPress   =   { () => setShowPasswordModal(false) }
                 hasBackdrop         =   { false }
                 isVisible           =   { showPasswordModal }  
@@ -219,118 +219,119 @@ const ChangePassword = ({ email, appWidth, districtPosition, site, renderAsStude
                         <KeyboardAwareScrollViewStyled
                             keyboardShouldPersistTaps   =   { true } //Enable this so that the input form field for passwords stay focused even when the toggle visibility eye symbol is tapped
                         >
-                            <InstructionsText
-                              districtPosition    =   { districtPosition } 
-                              renderAsStudent     =   { renderAsStudent }
-                            >
-                                Fill the form fields to change your password:
-                            </InstructionsText>
-                            <Form {...{ register, setValue, getValues, validation, errors }}>
-                                <Input 
-                                    appWidth            =   { appWidth }
-
-                                    name                =   "currentPassword" 
-                                    label               =   "Current Password:" 
-                                    placeHolderText     =   "Current Password..."
-
-                                    mode                =   "outlined"
-                                    theme               =   { inputColorsTheme }
-
+                            <TouchableOpacity activeOpacity={1.0}>
+                                <InstructionsText
                                     districtPosition    =   { districtPosition } 
                                     renderAsStudent     =   { renderAsStudent }
+                                >
+                                    Fill the form fields to change your password:
+                                </InstructionsText>
+                                <Form {...{ register, setValue, getValues, validation, errors }}>
+                                    <Input 
+                                        appWidth            =   { appWidth }
 
-                                    usePicker           =   { false }
-                                    noOuterLabel        =   { false }
+                                        name                =   "currentPassword" 
+                                        label               =   "Current Password:" 
+                                        placeHolderText     =   "Current Password..."
 
-                                    type                =   "password"
+                                        mode                =   "outlined"
+                                        theme               =   { inputColorsTheme }
 
-                                    keyboardType        =   "default"
-                                    textContentType     =   "password"
-                                />
-                                
-                                <Input 
-                                    appWidth            =   { appWidth }
-
-                                    name                =   "newPassword" 
-                                    label               =   "New Password:"
-                                    placeHolderText     =   "New Password..."
-
-                                    mode                =   "outlined"
-                                    theme               =   { inputColorsTheme }
-
-                                    districtPosition    =   { districtPosition } 
-                                    renderAsStudent     =   { renderAsStudent }
-
-                                    usePicker           =   { false }
-                                    noOuterLabel        =   { false }
-
-                                    type                =   "password"
-
-                                    keyboardType        =   "default"
-                                    textContentType     =   "newPassword"
-                                />
-
-                                <Input 
-                                    appWidth            =   { appWidth }
-
-                                    name                =   "newPasswordConfirmed" 
-                                    label               =   "Confirmed New Password:"
-                                    placeHolderText     =   "Confirm New Password..."
-
-                                    mode                =   "outlined"
-                                    theme               =   { inputColorsTheme }
-
-                                    districtPosition    =   { districtPosition } 
-                                    renderAsStudent     =   { renderAsStudent }
-
-                                    usePicker           =   { false }
-                                    noOuterLabel        =   { false }
-
-                                    type                =   "password"
-
-                                    keyboardType        =   "default"
-                                    textContentType     =   "newPassword"
-                                />
-                            </Form>
-
-                            <TouchableWithoutFeedback
-                                onPress = {() => Keyboard.dismiss() }
-                                hitSlop =   {
-                                    {
-                                        top: 25 
-                                    }
-                                }
-                            >
-                                <SubmitContainer>
-                                    <Divider
                                         districtPosition    =   { districtPosition } 
                                         renderAsStudent     =   { renderAsStudent }
+
+                                        usePicker           =   { false }
+                                        noOuterLabel        =   { false }
+
+                                        type                =   "password"
+
+                                        keyboardType        =   "default"
+                                        textContentType     =   "password"
+                                    />
+                                    
+                                    <Input 
+                                        appWidth            =   { appWidth }
+
+                                        name                =   "newPassword" 
+                                        label               =   "New Password:"
+                                        placeHolderText     =   "New Password..."
+
+                                        mode                =   "outlined"
+                                        theme               =   { inputColorsTheme }
+
+                                        districtPosition    =   { districtPosition } 
+                                        renderAsStudent     =   { renderAsStudent }
+
+                                        usePicker           =   { false }
+                                        noOuterLabel        =   { false }
+
+                                        type                =   "password"
+
+                                        keyboardType        =   "default"
+                                        textContentType     =   "newPassword"
                                     />
 
-                                    <TouchableButton 
-                                        buttonTitle         =   "Update" 
-                                        onPress             =     {  handleSubmit(onSubmit) } 
+                                    <Input 
+                                        appWidth            =   { appWidth }
 
-                                        color               =   "white"         
-                                        bgColor             =   { (districtPosition === "Student" || renderAsStudent) ? "#B41A1F" : "#1E6C93"}
-                                    
+                                        name                =   "newPasswordConfirmed" 
+                                        label               =   "Confirmed New Password:"
+                                        placeHolderText     =   "Confirm New Password..."
+
+                                        mode                =   "outlined"
+                                        theme               =   { inputColorsTheme }
+
                                         districtPosition    =   { districtPosition } 
                                         renderAsStudent     =   { renderAsStudent }
-                                    >
-                                        {
-                                            isLoading ? (
-                                                <ActivityIndicator 
-                                                    size        =   "large" 
-                                                    color       =   "white"
-                                                    animating   =   { isLoading  }
-                                                />
-                                                )
-                                                : null
-                                        } 
-                                    </TouchableButton>
-                                </SubmitContainer>
-                            </TouchableWithoutFeedback>
 
+                                        usePicker           =   { false }
+                                        noOuterLabel        =   { false }
+
+                                        type                =   "password"
+
+                                        keyboardType        =   "default"
+                                        textContentType     =   "newPassword"
+                                    />
+                                </Form>
+
+                                <TouchableWithoutFeedback
+                                    onPress = {() => Keyboard.dismiss() }
+                                    hitSlop =   {
+                                        {
+                                            top: 25 
+                                        }
+                                    }
+                                >
+                                    <SubmitContainer>
+                                        <Divider
+                                            districtPosition    =   { districtPosition } 
+                                            renderAsStudent     =   { renderAsStudent }
+                                        />
+
+                                        <TouchableButton 
+                                            buttonTitle         =   "Update" 
+                                            onPress             =     {  handleSubmit(onSubmit) } 
+
+                                            color               =   "white"         
+                                            bgColor             =   { (districtPosition === "Student" || renderAsStudent) ? "#B41A1F" : "#1E6C93"}
+                                        
+                                            districtPosition    =   { districtPosition } 
+                                            renderAsStudent     =   { renderAsStudent }
+                                        >
+                                            {
+                                                isLoading ? (
+                                                    <ActivityIndicator 
+                                                        size        =   "large" 
+                                                        color       =   "white"
+                                                        animating   =   { isLoading  }
+                                                    />
+                                                    )
+                                                    : null
+                                            } 
+                                        </TouchableButton>
+                                    </SubmitContainer>
+                                </TouchableWithoutFeedback>
+                            </TouchableOpacity>
                         </KeyboardAwareScrollViewStyled>
                         
                     </SafeAreaViewStyled>

@@ -15,7 +15,7 @@ import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Button,
 
 import { Reactotron } from './../../config/reactotron.dev.js';
 
-import { IP_ADDRESS, PORTAL_LIVE_LINK, NODEJS_SERVER_PORT } from "@env";
+import { IP_ADDRESS_DEV, PORTAL_LIVE_LINK, NODEJS_SERVER_PORT } from "@env";
 
 const isDev = __DEV__;
 const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
@@ -26,8 +26,6 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
     let [ submitEnabled, setSubmitEnabled ]                                     = useState(true);
 
     const { handleSubmit, register, setValue, getValues, clearErrors, errors }  = useForm();
-    
-    const IP_ADDRESS_DEV = IP_ADDRESS;
 
     const submitTicket = async () => {
         let submitReqResponse = "";
