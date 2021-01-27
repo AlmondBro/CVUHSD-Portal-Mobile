@@ -137,7 +137,7 @@ class App extends Component {
         let requestParams = {
             client_id: OAUTH_CLIENT_ID,
             code: authorizationCode,
-            redirect_uri: OAUTH_CALLBACK_URL_DEV,
+            redirect_uri: AuthSession.getRedirectUrl(),
             grant_type: "authorization_code",
             client_secret: OAUTH_CLIENT_SECRET
         };
@@ -200,9 +200,9 @@ class App extends Component {
                             `&response_type=${encodeURIComponent("code")}` +
                             `&redirect_uri=${encodeURIComponent(AuthSession.getRedirectUrl())}` +
                             `&client_id=${encodeURIComponent(OAUTH_CLIENT_ID)}` +
-                            `&response_mode=${"fragment"}` + 
-                            `&scope=${"openid"}` + 
-                            `state=${Math.random()*100 + 20}`;
+                            // `&response_mode=${"fragment"}` + 
+                            // `&scope=${"openid"}` + 
+                            `&state=${Math.random()*100 + 20}`;
                        
 
 
