@@ -10,8 +10,16 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 let SafeAreaViewStyled = styled(SafeAreaView)`
     flex: 1;
-    background-color: white;
+    justify-content: space-evenly;
     overflow: hidden;
+    background-color: white;
+`;
+
+let NavScreensContainer = styled.View`
+    flex: 1;
+    background-color: green;
+    display: flex;
+    flex-direction: column;
 `;
 
 const ModalStyled = styled(Modal).attrs((props) => ({
@@ -29,7 +37,8 @@ const ModalStyled = styled(Modal).attrs((props) => ({
     mixedContentMode        :   props.mixedContentMode,
     animationType           :   props.animationType,
     presentationStyle       :   props.presentationStyle,
-    onDismiss               :   props.onDismiss
+    onDismiss               :   props.onDismiss,
+    propagateSwipe          : props.propagateSwipe
 }))`
   flex                      : 1;
   flex-direction            : row;
@@ -62,7 +71,6 @@ const KeyboardAwareScrollViewStyled = styled(KeyboardAwareScrollView).attrs((pro
     keyboardShouldPersistTaps : "never"
 }))`
     margin-bottom: 56px;
-    background-color: white;
 `;
 
 const Divider = styled.View`
@@ -112,6 +120,7 @@ const ButtonText = styled.Text`
     text-align: center;
 `;
 
+
 const InstructionsText = styled(ButtonText)`
     color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
     
@@ -153,6 +162,6 @@ const Button = ({ renderAsStudent, districtPosition, buttonTitle, children, onPr
     ); //end return
 }; //SignInButtonTouchableOpacity
 
-export { SafeAreaViewStyled, ModalStyled, ModalContentContainer, KeyboardAwareScrollViewStyled, InstructionsText, Button, Divider };
+export { SafeAreaViewStyled, ModalStyled, ModalContentContainer, KeyboardAwareScrollViewStyled, InstructionsText, Button, Divider, NavScreensContainer };
 
 

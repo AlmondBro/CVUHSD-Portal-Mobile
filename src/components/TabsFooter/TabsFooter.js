@@ -6,7 +6,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import ChangePassword  from './../ChangePassword/ChangePassword.js';
 import ChangePasswordIcon from './../../assets/images/icons/change-password.svg';
 
-import SupportRequestModal  from './../SupportRequestModal/SupportRequestModal.js';
+import RequestOptions from './../RequestOptions/RequestOptions.js';
 
 //Import styled components
 import { TabsFooterContainerView, TabsFooterButton }  from './TabsFooter_StyledComponents.js';
@@ -51,7 +51,6 @@ const TabsFooter = ({ appWidth, email, firstName, lastName, renderAsStudent, sit
                 )
                 : null
             } 
-
 
             <TabsFooterButton
                 renderAsStudent =   {  renderAsStudent }
@@ -99,7 +98,7 @@ const TabsFooter = ({ appWidth, email, firstName, lastName, renderAsStudent, sit
                     )
                     : null
             }
-            <SupportRequestModal
+            <RequestOptions
                 appWidth            =   {   appWidth }
                 email               =   { email }
                 firstName           =   { firstName }

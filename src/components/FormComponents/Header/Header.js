@@ -3,10 +3,14 @@ import  { Dimensions } from 'react-native';
 
 import { FontAwesome } from '@expo/vector-icons'; 
 
-import { HeaderContainer, HeaderTitleIconContainer, HeaderText, CloseIconButton } from  './HeaderStyledComponents.js';
+import { HeaderContainer, HeaderTitleIconContainer, HeaderText, BackButton, CloseIconButton } from  './HeaderStyledComponents.js';
 
-const Header = ({ districtPosition, renderAsStudent, title, faIcon, closeModal }) => {
+import { Reactotron } from './../../../config/reactotron.dev.js';
+
+const Header = ({ districtPosition, renderAsStudent, faIcon, title, currentRoute, goBack, closeModal }) => {
     const [ headerHeight, setHeaderHeight ]  = useState(0);
+    const [ routeName, setRouteName ]        = useState("request-options");
+    const [ headerTitle, setHeaderTitle ]    = useState(title);
 
     const onLayout = (event) => {
         const { height } = Dimensions.get('window');
@@ -15,8 +19,12 @@ const Header = ({ districtPosition, renderAsStudent, title, faIcon, closeModal }
     };
 
     useEffect(() => {
-        console.log("headerHeight:\t", headerHeight);
-    }, [ headerHeight ]);
+        if (currentRoute) {
+            setRouteName(currentRoute);
+            setHeaderTitle(currentRoute); //Update the title of the header based off the route name
+        }
+    }, [ currentRoute ]);
+
     return (
         <HeaderContainer
             districtPosition    =   { districtPosition } 
@@ -26,9 +34,22 @@ const Header = ({ districtPosition, renderAsStudent, title, faIcon, closeModal }
 
             onLayout            =   { onLayout }
         >
+            {
+                 (routeName === "View/Submit Requests") ? null
+                : (
+                    goBack && (
+                        <BackButton
+                            districtPosition    =   { districtPosition } 
+                            renderAsStudent     =   { renderAsStudent }
+                            onPress             =   { goBack }
+                        />
+                    )
+                )
+            } 
+         
             <HeaderTitleIconContainer>
                 <HeaderText>
-                    { title }
+                    { headerTitle }
                 </HeaderText>
                 <FontAwesome 
                         name    =   { faIcon || "ticket"} 

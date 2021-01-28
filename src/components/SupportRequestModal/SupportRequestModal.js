@@ -1,7 +1,6 @@
 import React, { useState, Fragment } from 'react';
-import { Alert, ActivityIndicator } from 'react-native';
+import { Alert, ActivityIndicator, TouchableOpacity } from 'react-native';
 
-import Header from './../FormComponents/Header/Header.js';
 import Form from './../FormComponents/Form/Form.js';
 import Input from './../FormComponents/Form/Input/Input.js';
 
@@ -16,7 +15,7 @@ import { SafeAreaViewStyled, ModalStyled, KeyboardAwareScrollViewStyled, Button,
 
 import { Reactotron } from './../../config/reactotron.dev.js';
 
-import { IP_ADDRESS, PORTAL_LIVE_LINK, NODEJS_SERVER_PORT } from "@env";
+import { IP_ADDRESS_DEV, PORTAL_LIVE_LINK, NODEJS_SERVER_PORT } from "@env";
 
 const isDev = __DEV__;
 const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
@@ -27,8 +26,6 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
     let [ submitEnabled, setSubmitEnabled ]                                     = useState(true);
 
     const { handleSubmit, register, setValue, getValues, clearErrors, errors }  = useForm();
-    
-    const IP_ADDRESS_DEV = IP_ADDRESS;
 
     const submitTicket = async () => {
         let submitReqResponse = "";
@@ -279,226 +276,201 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
             color:  ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93",
     });
 
-    const onModalDismiss = () => {
-        clearErrors();
-        setShowRequestModal(false);
-        setSubmitEnabled(true);
-    }; //end onModalDismiss()
-           
     return (
-            <ModalStyled 
-                animationType       =   "slide"
-                presentationStyle   =   "pageSheet"
-                transparent         =   { true }
+      <Fragment>
+        <KeyboardAwareScrollViewStyled extraScrollHeight={50} viewIsInsideTabBar={true}>
+            {/* Wrap the contents of this scrollview in a touchable opacity to get around the bug where one cannot scroll */}
+            <TouchableOpacity activeOpacity={1}>
+                <InstructionsText
+                    districtPosition    =   { districtPosition } 
+                    renderAsStudent     =   { renderAsStudent }
+                >
+                    Fill the form fields to submit a ticket:
+                </InstructionsText>
+                <Form {...{ register, setValue, getValues, validation, errors }} >
+                    <Input 
+                        appWidth            =   { appWidth }
 
-                swipeDirection      =   "down"
-                onBackButtonPress   =   { () => setShowRequestModal(false) }
-                hasBackdrop         =   { false }
-                isVisible           =   { showRequestModal  }  
-                
-                onDismiss           =   { onModalDismiss }
-                // onBackdropPress     =   { () => setShowRequestModal(false) }
-                onSwipeComplete     =   { () => setShowRequestModal(false) }
-            >
-                <SafeAreaViewStyled>
-                            <Header
-                                title               =   "Tech Support Request"  
-                                districtPosition    =   { districtPosition } 
-                                renderAsStudent     =   { renderAsStudent }
+                        name                =   "supportRequestTitle" 
+                        label               =   "Title:" 
+                        placeHolderText     =   "Support Request Title..."
 
-                                closeModal          =   { () => setShowRequestModal(false) }
-                            />
-                        <KeyboardAwareScrollViewStyled>
+                        mode                =   "outlined"
+                        theme               =   { inputColorsTheme }
+
+                        districtPosition    =   { districtPosition } 
+                        renderAsStudent     =   { renderAsStudent }
+
+                        usePicker           =   { false }
+                        noOuterLabel        =   { false }
+                    />
+
+                    <Input  
+                        appWidth            =   { appWidth }
+
+                        name                =   "category" 
+                        label               =   "Category:" 
+                        placeHolderText     =   "Issue Type..."
+
+                        mode                =   "outlined"
+                        theme               =   { inputColorsTheme }
+
+                        districtPosition    =   { districtPosition } 
+                        renderAsStudent     =   { renderAsStudent }
+
+                        usePicker           =   { true }
+                        pickerPlaceHolder   =   { pickerPlaceHolder("Choose an issues category...") }
                         
-                            <InstructionsText
-                              districtPosition    =   { districtPosition } 
-                              renderAsStudent     =   { renderAsStudent }
-                            >
-                                Fill the form fields to submit a ticket:
-                            </InstructionsText>
-                            <Form {...{ register, setValue, getValues, validation, errors }} >
+                        items               =   { categories }
+                        noOuterLabel        =   { false }
+                    />
+
+                    <Input 
+                        appWidth            =   { appWidth }
+
+                        name                =   "description" 
+                        label               =   "Description:" 
+                        placeHolderText     =   "What is the issue at hand?"
+
+                        mode                =   "outlined"
+                        theme               =   { inputColorsTheme }
+
+                        secureTextEntry     =   { false } 
+
+                        districtPosition    =   { districtPosition } 
+                        renderAsStudent     =   { renderAsStudent }
+
+                        noOuterLabel        =   { false }
+                    />
+
+                    {
+                            (districtPosition === "Student") ? (
+                            // <Input 
+                            //     appWidth            =   { appWidth }
+
+                            //     name                =   "location" 
+                            //     label               =   "Location:" 
+                            //     placeHolderText     =   "Your School or Site..."
+
+
+                            //     mode                =   "outlined"
+                            //     theme               =   { inputColorsTheme }
+
+                            //     secureTextEntry     =   { false } 
+
+                            //     districtPosition    =   { districtPosition } 
+                            //     renderAsStudent     =   { renderAsStudent }
+
+                            //     value               =   { locations[0].value }
+                            //     usePicker           =   { true }
+                            //     pickerPlaceHolder   =   { (districtPosition === "Student") ? {} : pickerPlaceHolder("Choose your site or location...") }
+                            //     items               =   { locations }
+                            //     noOuterLabel        =   { false }
+                            // />
+                            <Fragment/>
+                            ) : (
                                 <Input 
                                     appWidth            =   { appWidth }
 
-                                    name                =   "supportRequestTitle" 
-                                    label               =   "Title:" 
-                                    placeHolderText     =   "Support Request Title..."
+                                    name                =   "location" 
+                                    label               =   "Location:" 
+                                    placeHolderText     =   "Your School or Site..."
+
 
                                     mode                =   "outlined"
                                     theme               =   { inputColorsTheme }
 
-                                    districtPosition    =   { districtPosition } 
-                                    renderAsStudent     =   { renderAsStudent }
-
-                                    usePicker           =   { false }
-                                    noOuterLabel        =   { false }
-                                />
-
-                                <Input  
-                                    appWidth            =   { appWidth }
-
-                                    name                =   "category" 
-                                    label               =   "Category:" 
-                                    placeHolderText     =   "Issue Type..."
-
-                                    mode                =   "outlined"
-                                    theme               =   { inputColorsTheme }
+                                    secureTextEntry     =   { false } 
 
                                     districtPosition    =   { districtPosition } 
                                     renderAsStudent     =   { renderAsStudent }
 
                                     usePicker           =   { true }
-                                    pickerPlaceHolder   =   { pickerPlaceHolder("Choose an issues category...") }
-                                 
-                                    items               =   { categories }
+                                    pickerPlaceHolder   =   { (districtPosition === "Student") ? {} : pickerPlaceHolder("Choose your site or location...") }
+                                    items               =   { locations }
                                     noOuterLabel        =   { false }
-                                />
-
-                                <Input 
-                                    appWidth            =   { appWidth }
-
-                                    name                =   "description" 
-                                    label               =   "Description:" 
-                                    placeHolderText     =   "What is the issue at hand?"
-
-                                    mode                =   "outlined"
-                                    theme               =   { inputColorsTheme }
-
-                                    secureTextEntry     =   { false } 
-
-                                    districtPosition    =   { districtPosition } 
-                                    renderAsStudent     =   { renderAsStudent }
-
-                                    noOuterLabel        =   { false }
-                                />
-
-                                {
-                                     (districtPosition === "Student") ? (
-                                        // <Input 
-                                        //     appWidth            =   { appWidth }
-        
-                                        //     name                =   "location" 
-                                        //     label               =   "Location:" 
-                                        //     placeHolderText     =   "Your School or Site..."
-        
-        
-                                        //     mode                =   "outlined"
-                                        //     theme               =   { inputColorsTheme }
-        
-                                        //     secureTextEntry     =   { false } 
-        
-                                        //     districtPosition    =   { districtPosition } 
-                                        //     renderAsStudent     =   { renderAsStudent }
-        
-                                        //     value               =   { locations[0].value }
-                                        //     usePicker           =   { true }
-                                        //     pickerPlaceHolder   =   { (districtPosition === "Student") ? {} : pickerPlaceHolder("Choose your site or location...") }
-                                        //     items               =   { locations }
-                                        //     noOuterLabel        =   { false }
-                                        // />
-                                        <Fragment/>
-                                     ) : (
-                                            <Input 
-                                                appWidth            =   { appWidth }
-            
-                                                name                =   "location" 
-                                                label               =   "Location:" 
-                                                placeHolderText     =   "Your School or Site..."
-            
-            
-                                                mode                =   "outlined"
-                                                theme               =   { inputColorsTheme }
-            
-                                                secureTextEntry     =   { false } 
-            
-                                                districtPosition    =   { districtPosition } 
-                                                renderAsStudent     =   { renderAsStudent }
-            
-                                                usePicker           =   { true }
-                                                pickerPlaceHolder   =   { (districtPosition === "Student") ? {} : pickerPlaceHolder("Choose your site or location...") }
-                                                items               =   { locations }
-                                                noOuterLabel        =   { false }
-                                        />
-                                     )
-                                }
-
-                                
-                                <Input 
-                                    appWidth            =   { appWidth }
-
-                                    name                =   "phoneExt" 
-                                    label               =   "Phone Number:" 
-                                    placeHolderText     =   "XXX XXX XXXX"
-
-                                    mode                =   "outlined"
-                                    theme               =   { inputColorsTheme }
-
-                                    secureTextEntry     =   { false } 
-
-                                    keyboardType        =   "phone-pad"
-                                    textContentType     =   "telephoneNumber"
-
-                                    districtPosition    =   { districtPosition } 
-                                    renderAsStudent     =   { renderAsStudent }
-
-                                    usePicker           =   { false }
-                                    noOuterLabel        =   { false }
-                                />
-
-                                {
-                                    (districtPosition === "Student") ? (<Fragment/>) : (
-                                        <Input 
-                                            appWidth            =   { appWidth }
-        
-                                            name                =   "room" 
-                                            label               =   "Room Number:"
-                                            placeHolderText     =   "Your room..."
-        
-                                            mode                =   "outlined"
-                                            theme               =   { inputColorsTheme }
-        
-                                            secureTextEntry     =   { false } 
-        
-                                            districtPosition    =   { districtPosition } 
-                                            renderAsStudent     =   { renderAsStudent }
-        
-                                            usePicker           =   { false }
-                                            noOuterLabel        =   { false }
-                                        />
-                                    )
-                                }
-                            </Form>
-                        </KeyboardAwareScrollViewStyled>
-
-                        <SubmitFooterContainer>
-                            <Divider
-                                districtPosition    =   { districtPosition } 
-                                renderAsStudent     =   { renderAsStudent }
                             />
-                            <TouchableButton 
-                                buttonTitle         =   "Submit" 
-                                onPress             =     {  handleSubmit(onSubmit) } 
+                            )
+                    }
 
-                                color               =   "white"         
-                                bgColor             =   { (districtPosition === "Student" || renderAsStudent) ? "#B41A1F" : "#1E6C93"}
-                               
+                    
+                    <Input 
+                        appWidth            =   { appWidth }
+
+                        name                =   "phoneExt" 
+                        label               =   "Phone Number:" 
+                        placeHolderText     =   "XXX XXX XXXX"
+
+                        mode                =   "outlined"
+                        theme               =   { inputColorsTheme }
+
+                        secureTextEntry     =   { false } 
+
+                        keyboardType        =   "phone-pad"
+                        textContentType     =   "telephoneNumber"
+
+                        districtPosition    =   { districtPosition } 
+                        renderAsStudent     =   { renderAsStudent }
+
+                        usePicker           =   { false }
+                        noOuterLabel        =   { false }
+                    />
+
+                    {
+                        (districtPosition === "Student") ? (<Fragment/>) : (
+                            <Input 
+                                appWidth            =   { appWidth }
+
+                                name                =   "room" 
+                                label               =   "Room Number:"
+                                placeHolderText     =   "Your room..."
+
+                                mode                =   "outlined"
+                                theme               =   { inputColorsTheme }
+
+                                secureTextEntry     =   { false } 
+
                                 districtPosition    =   { districtPosition } 
                                 renderAsStudent     =   { renderAsStudent }
-                            >
-                                {
-                                    isLoading ? (
-                                        <ActivityIndicator 
-                                            size        =   "large" 
-                                            color       =   "white"
-                                            animating   =   { isLoading  }
-                                        />
-                                        )
-                                        : null
-                                } 
-                            </TouchableButton>
-                        </SubmitFooterContainer>
-                    </SafeAreaViewStyled>
-            </ModalStyled>  
+
+                                usePicker           =   { false }
+                                noOuterLabel        =   { false }
+                            />
+                        )
+                    }
+                </Form>
+            </TouchableOpacity>
+
+        </KeyboardAwareScrollViewStyled>
+
+        <SubmitFooterContainer>
+            <Divider
+                districtPosition    =   { districtPosition } 
+                renderAsStudent     =   { renderAsStudent }
+            />
+            <TouchableButton 
+                buttonTitle         =   "Submit" 
+                onPress             =     {  handleSubmit(onSubmit) } 
+
+                color               =   "white"         
+                bgColor             =   { (districtPosition === "Student" || renderAsStudent) ? "#B41A1F" : "#1E6C93"}
+                
+                districtPosition    =   { districtPosition } 
+                renderAsStudent     =   { renderAsStudent }
+            >
+                {
+                    isLoading ? (
+                        <ActivityIndicator 
+                            size        =   "large" 
+                            color       =   "white"
+                            animating   =   { isLoading  }
+                        />
+                        )
+                        : null
+                } 
+            </TouchableButton>
+        </SubmitFooterContainer>
+    </Fragment>
     ); //end return statement
 }; //end SupportRequestModal()
 

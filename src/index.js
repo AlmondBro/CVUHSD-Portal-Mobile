@@ -6,6 +6,7 @@ import { registerRootComponent } from 'expo';
 
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { ActionSheetProvider } from '@expo/react-native-action-sheet'
 
 import App from './components/App/App.js';
 
@@ -28,7 +29,9 @@ const AppWithProviders = () => {
     return (
         <PaperProvider theme={theme}>
             <SafeAreaProvider>
-                <App/>
+                <ActionSheetProvider>
+                    <App/>
+                </ActionSheetProvider>
             </SafeAreaProvider>
         </PaperProvider>
        

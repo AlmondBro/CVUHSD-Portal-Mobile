@@ -27,12 +27,10 @@ import HomeScreen from './../HomeScreen/HomeScreen.js';
 //import styled components
 import { AppContainerView, ImageBackgroundStyled, WelcomeText, StatusBarSafeView, SafeAreaViewStyled } from './App_StyledComponents.js';
 
-import { PORTAL_LIVE_LINK, IP_ADDRESS, OAUTH_AUTH_URL, OAUTH_TOKEN_URL, OAUTH_REDIRECT_URL, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET, OAUTH_LOGOUT_URL, ADFS_LOG_OUT } from "@env";
+import { IP_ADDRESS_DEV, PORTAL_LIVE_LINK, OAUTH_AUTH_URL, OAUTH_TOKEN_URL, OAUTH_CALLBACK_URL_DEV, OAUTH_CALLBACK_URL_PROD, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET, OAUTH_LOGOUT_URL, ADFS_LOG_OUT, NODEJS_SERVER_PORT } from "@env";
 
 const isDev = __DEV__;
 const ReactotronDebug = (isDev &&  Reactotron) ? Reactotron : console;
-
-const IP_ADDRESS_DEV = IP_ADDRESS;
 
 const imagesObjectPath = (Platform.OS === "web") ? require('./../../assets/images/index.js') : require('@images');
 const Images = imagesObjectPath.default;
@@ -137,7 +135,7 @@ class App extends Component {
         let requestParams = {
             client_id: OAUTH_CLIENT_ID,
             code: authorizationCode,
-            redirect_uri: OAUTH_REDIRECT_URL,
+            redirect_uri: AuthSession.getRedirectUrl(),
             grant_type: "authorization_code",
             client_secret: OAUTH_CLIENT_SECRET
         };
@@ -158,8 +156,9 @@ class App extends Component {
         .then((tokenResponse) => tokenResponse)
         .catch((error) => Reactotron.log("getAccessToken() error:\t", error) );
 
+        ReactotronDebug.log("accessToken:\t", accessToken);
         return accessToken;
-    }; //end getUserInfo()
+    }; //end getAccessToken()
 
     getUserInfo = async (accessToken) => {
         const getUserInfoURL = `${isDev ? `http://${IP_ADDRESS_DEV}:${NODEJS_SERVER_PORT}` : `https://${PORTAL_LIVE_LINK}/server`}/auth/user-info`;
@@ -190,15 +189,20 @@ class App extends Component {
         
         this.setState({ authLoading: true }); //Set loading to true
 
-        const redirectUrl = OAUTH_REDIRECT_URL;
+        const redirectUrl = isDev ? OAUTH_CALLBACK_URL_DEV : OAUTH_CALLBACK_URL_PROD;
 
         ReactotronDebug.log("authUrl", OAUTH_AUTH_URL);
 
         const authUrl  =    `${OAUTH_AUTH_URL}` +
-                            `?resource=${"http://localhost:3000"}` +
-                            `&response_type=${"code"}` +
-                            `&redirect_uri=${encodeURIComponent(redirectUrl)}` +
-                            `&client_id=${OAUTH_CLIENT_ID}`;
+                            `?resource=${encodeURIComponent("http://localhost:3000")}` +
+                            `&response_type=${encodeURIComponent("code")}` +
+                            `&redirect_uri=${encodeURIComponent(AuthSession.getRedirectUrl())}` +
+                            `&client_id=${encodeURIComponent(OAUTH_CLIENT_ID)}` +
+                            // `&response_mode=${"fragment"}` + 
+                            // `&scope=${"openid"}` + 
+                            `&state=${Math.random()*100 + 20}`;
+                       
+
 
         let authSessionResults = await AuthSession.startAsync({
             authUrl: authUrl   
@@ -206,7 +210,9 @@ class App extends Component {
 
         if ( !(authSessionResults.type === "cancel" || authSessionResults.type === "dismiss" || authSessionResults.type === "error" || authSessionResults.type === "locked")) {
             const { code: authorizationCode } = authSessionResults.params;
-                                
+                  
+            ReactotronDebug.log("authorizationCode:\t", authorizationCode);
+            
             ReactotronDebug.log("authSessionResults:\t" + JSON.stringify(authSessionResults) );
 
             const { access_token } = await this.getAccessToken(authorizationCode);
@@ -486,7 +492,6 @@ class App extends Component {
                                 renderAsStudent =   { this.state.renderAsStudent }
                                 edges           =   { ['left', 'right', 'bottom'] }
                     >
-                
                         <NavigationContainer ref={navigationRef}>
                             {
                                 !this.state.showPortalLogo ?(

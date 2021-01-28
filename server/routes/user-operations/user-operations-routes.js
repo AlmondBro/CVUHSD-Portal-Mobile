@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import AD from 'ad';
-import user from 'ad/src/user';
 
 let router = Router();
 
@@ -20,15 +19,10 @@ router.post('/password/update', async (req, res) => {
 
     let { username, currentPassword, newPassword } = req.body;
 
-    console.log("req.body:\t", JSON.stringify(req.body));
-
     await activeDirectory.user(username).unlock(); //Unlock account before authenticating so one does not get their account locked out, where the error displays that the current password is incorrect when it is correct
 
     const isAuthenticated = await activeDirectory.user(username).authenticate(currentPassword)
                             .catch((error) => { 
-
-                              console.log("isAuthenticated error", error);
-
                               message = error.description || error;
                               error   = true;
                           });
