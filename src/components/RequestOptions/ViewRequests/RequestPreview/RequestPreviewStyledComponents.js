@@ -5,10 +5,10 @@ import SkeletonContent from 'react-native-skeleton-content';
 
 import { FontAwesome5 } from '@expo/vector-icons'; 
 
-const SkeletonScreen = ({ children, containerWidth, height, isLoading, districtPosition, renderAsStudent, key, marginTop, marginBottom, marginLeft, marginRight }) => {
+const SkeletonScreen = ({ children, width, containerWidth, height, isLoading, districtPosition, renderAsStudent, key, marginTop, marginBottom, marginLeft, marginRight }) => {
     return (
     <SkeletonContent
-        containerStyle  =   { { flex: 1, width: containerWidth, flexDirection: "row" } }
+        containerStyle  =   { { flex: 1, width: (isLoading ? containerWidth : "100%"), flexDirection: "row", justifyContent: "center" } }
         isLoading       =   { isLoading } 
         animationType   =   "shiver"
 
@@ -26,7 +26,7 @@ const SkeletonScreen = ({ children, containerWidth, height, isLoading, districtP
         }
 
         layout={[
-            { key: key, width: "100%", height: (height || 20), marginTop: (marginTop || 0), marginBottom: (marginBottom || 0), marginLeft: (marginLeft || 0), marginRight: (marginRight || 0)},
+            { key: key, width: (width || "100%"), height: (height || 20), marginTop: (marginTop || 0), marginBottom: (marginBottom || 0), marginLeft: (marginLeft || 0), marginRight: (marginRight || 0)},
         ]}
     >
         { children }

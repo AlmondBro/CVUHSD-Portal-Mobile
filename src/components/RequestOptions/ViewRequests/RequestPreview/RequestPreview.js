@@ -1,7 +1,5 @@
 import React from 'react';
 
-import SkeletonContent from 'react-native-skeleton-content';
-
 import {  Container, Content, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, Description } from './RequestPreviewStyledComponents.js';
 
 /**
@@ -12,6 +10,8 @@ import {  Container, Content, SkeletonScreen, MetaDataContainer, MetaDataIconTex
  */
 const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject, description, date, time, id, status, onClick, isLoading }) => {
     const metadataIconsSize = 22;
+    
+    isLoading = true;
     
     const truncateDescription = (description) => {
         if (description.length >= 90) {
@@ -41,12 +41,27 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
                              name                =   "clock" 
                              size                =   {   metadataIconsSize  } 
                         />
-                        <MetaDataText
-                            districtPosition    =   { districtPosition } 
-                            renderAsStudent     =   { renderAsStudent }
+
+                        <SkeletonScreen 
+                            isLoading           =   { isLoading }
+                            districtPosition    =   { districtPosition }
+                            renderAsStudent     =   { renderAsStudent } 
+
+                            containerWidth      =   { 50 }
+                            width               =   { 90 }
+                            height              =   { 15 }
+                            key                 =   "request-preview-date-skeleton"
+                            
+                            marginTop           =   { 8 }
+                            marginLeft          =   { 0 }
                         >
-                            { time || "11:33 AM" }
-                        </MetaDataText>
+                            <MetaDataText
+                                districtPosition    =   { districtPosition } 
+                                renderAsStudent     =   { renderAsStudent }
+                            >
+                                { time || "11:33 AM" }
+                            </MetaDataText>
+                        </SkeletonScreen>
                     </MetaDataIconTextContainer>
 
                     <MetaDataIconTextContainer>
@@ -58,12 +73,28 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
                              name                =   "calendar" 
                              size                =   {   metadataIconsSize  } 
                         />
-                        <MetaDataText
-                            districtPosition    =   { districtPosition } 
-                            renderAsStudent     =   { renderAsStudent }
+
+                        <SkeletonScreen
+                            isLoading           =   { isLoading }
+                            districtPosition    =   { districtPosition }
+                            renderAsStudent     =   { renderAsStudent } 
+
+                            containerWidth      =   { 50 }
+                            width               =   { 100 }
+                            height              =   { 15 }
+                            key                 =   "request-preview-date-skeleton"
+                            
+                            marginTop           =   { 8 }
+                            marginLeft          =   { 0 }
                         >
-                            { date || "12/09/2020" }
-                        </MetaDataText>
+                            <MetaDataText
+                                districtPosition    =   { districtPosition } 
+                                renderAsStudent     =   { renderAsStudent }
+                            >
+                                { date || "12/09/2020" }
+                            </MetaDataText>
+                        </SkeletonScreen>
+                     
                     </MetaDataIconTextContainer>
 
                     <MetaDataIconTextContainer>
@@ -74,24 +105,52 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
                             name                =   "circle" 
                             size                =   {   metadataIconsSize  } 
                         />
-                        <MetaDataText
-                            districtPosition    =   { districtPosition } 
-                            renderAsStudent     =   { renderAsStudent }
+                        <SkeletonScreen
+                            isLoading           =   { isLoading }
+                            districtPosition    =   { districtPosition }
+                            renderAsStudent     =   { renderAsStudent } 
+
+                            containerWidth      =   { 50 }
+                            width               =   { 80 }
+                            height              =   { 15 }
+                            key                 =   "request-preview-req-status-skeleton"
+                            
+                            marginTop           =   { 8 }
+                            marginLeft          =   { 0 }
                         >
-                            { status || "Closed" }
-                        </MetaDataText>
+                            <MetaDataText
+                                districtPosition    =   { districtPosition } 
+                                renderAsStudent     =   { renderAsStudent }
+                            >
+                                { status || "Closed" }
+                            </MetaDataText>
+                        </SkeletonScreen>
+                      
                     </MetaDataIconTextContainer>
                 </MetaDataContainer>
 
                 <SubjDescContainer>
-                    <Subject
-                        districtPosition    =   { districtPosition } 
-                        renderAsStudent     =   { renderAsStudent }
-                    >
-                        {subject || "Canvas Test" }
-                    </Subject>
                     <SkeletonScreen
-                        isLoading           =   { true }
+                        isLoading           =   { isLoading }
+                        districtPosition    =   { districtPosition }
+                        renderAsStudent     =   { renderAsStudent } 
+
+                        containerWidth      =   { 300 }
+                        height              =   { 20 }
+                        key                 =   "request-preview-subject-skeleton"
+                        
+                        marginTop           =   { 24 }
+                        marginLeft          =   { 45 }
+                    >
+                        <Subject
+                            districtPosition    =   { districtPosition } 
+                            renderAsStudent     =   { renderAsStudent }
+                        >
+                            {subject || "Canvas Test" }
+                        </Subject>
+                    </SkeletonScreen>
+                    <SkeletonScreen
+                        isLoading           =   { isLoading }
                         districtPosition    =   { districtPosition }
                         renderAsStudent     =   { renderAsStudent } 
 
@@ -100,17 +159,15 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
                         key                 =   "request-preview-description-skeleton"
                         
                         marginTop           =   { 24 }
-                        marginLeft          =   { 45 }
+                        marginLeft          =   { 95 }
                     >
-
-                    <Description
-                        districtPosition    =   { districtPosition } 
-                        renderAsStudent     =   { renderAsStudent }
-                    >
-                        { truncateDescription(description) || "Canvas test rule ticket" }
-                    </Description>
-                </SkeletonScreen>
-                   
+                        <Description
+                            districtPosition    =   { districtPosition } 
+                            renderAsStudent     =   { renderAsStudent }
+                        >
+                            { truncateDescription(description) || "Canvas test rule ticket" }
+                        </Description>
+                    </SkeletonScreen>
                 </SubjDescContainer>
               
             </Content>
