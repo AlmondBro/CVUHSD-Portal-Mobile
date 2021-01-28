@@ -5,7 +5,7 @@ import SkeletonContent from 'react-native-skeleton-content';
 
 import { FontAwesome5 } from '@expo/vector-icons'; 
 
-const SkeletonScreen = ({ children, width, containerWidth, height, isLoading, districtPosition, renderAsStudent, key, marginTop, marginBottom, marginLeft, marginRight }) => {
+const SkeletonScreen = ({ children, width, containerWidth, height, isLoading, districtPosition, renderAsStudent, identifier, marginTop, marginBottom, marginLeft, marginRight }) => {
     return (
         <SkeletonContent
             containerStyle  =   { { flex: 1, width: (isLoading ? containerWidth : "100%"), flexDirection: "row", justifyContent: "center" } }
@@ -26,7 +26,7 @@ const SkeletonScreen = ({ children, width, containerWidth, height, isLoading, di
             }
 
             layout={[
-                { key: key, width: (width || "100%"), height: (height || 20), marginTop: (marginTop || 0), marginBottom: (marginBottom || 0), marginLeft: (marginLeft || 0), marginRight: (marginRight || 0)},
+                { key: identifier, width: (width || "100%"), height: (height || 20), marginTop: (marginTop || 0), marginBottom: (marginBottom || 0), marginLeft: (marginLeft || 0), marginRight: (marginRight || 0)},
             ]}
         >
             { children }

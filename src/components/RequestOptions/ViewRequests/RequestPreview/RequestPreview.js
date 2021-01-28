@@ -48,7 +48,7 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
                             containerWidth      =   { 50 }
                             width               =   { 90 }
                             height              =   { 15 }
-                            key                 =   "request-preview-date-skeleton"
+                            identifier          =   {`request-preview-date-skeleton-${Math.random()*1000+1}`}
                             
                             marginTop           =   { 8 }
                             marginLeft          =   { 0 }
@@ -80,7 +80,7 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
                             containerWidth      =   { 50 }
                             width               =   { 100 }
                             height              =   { 15 }
-                            key                 =   "request-preview-date-skeleton"
+                            identifier          =   {`request-preview-date-skeleton-${Math.random()*1000+1}`}
                             
                             marginTop           =   { 8 }
                             marginLeft          =   { 0 }
@@ -111,7 +111,7 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
                             containerWidth      =   { 50 }
                             width               =   { 80 }
                             height              =   { 15 }
-                            key                 =   "request-preview-req-status-skeleton"
+                            identifier          =   {`request-preview-req-status-skeleton-${Math.random()*1000+1}`}
                             
                             marginTop           =   { 8 }
                             marginLeft          =   { 0 }
@@ -135,7 +135,7 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
 
                         containerWidth      =   { 300 }
                         height              =   { 20 }
-                        key                 =   "request-preview-subject-skeleton"
+                        identifier          =   {`request-preview-subject-skeleton-${Math.random()*1000+1}`}
                         
                         marginTop           =   { 24 }
                         marginLeft          =   { 45 }
@@ -154,7 +154,7 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
 
                         containerWidth      =   { 250 }
                         height              =   { 20 }
-                        key                 =   "request-preview-description-skeleton"
+                        identifier          =   {`request-preview-description-skeleton-${Math.random()*1000+1}`}
                         
                         marginTop           =   { 24 }
                         marginLeft          =   { 95 }
