@@ -11,15 +11,13 @@ import {  Container, Content, SkeletonScreen, MetaDataContainer, MetaDataIconTex
 const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject, description, date, time, id, status, onClick, isLoading }) => {
     const metadataIconsSize = 22;
     
-    isLoading = true;
+    // isLoading = true;
     
     const truncateDescription = (description) => {
-        if (description.length >= 90) {
+        if (description && description.length >= 90) {
             let truncatedDescr = description.substr(0, 129);
 
             let truncDescEllipses = truncatedDescr + "...";
-    
-            console.log("trunc", truncDescEllipses);
     
             return truncDescEllipses;
         }

@@ -35,6 +35,7 @@ const dateFormatChange = (dateToChange) => {
     return formattedDate;
 };
 
+
 /**
  * React functional component to house the screen to view all the requests
  * @param { Object } navigation  object passed from React Navigation's Navigation Container. Houses methods to navigate across the different streams.
@@ -45,9 +46,23 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
     const isDev = __DEV__;
 
     let [ isLoading, setIsLoading ] = useState(false);
+
     let [ requestPreviews, setRequestPreviews ] = useState([]);
 
     const { showActionSheetWithOptions } = useActionSheet();
+
+    const LoadingReqPreviews = ({navigation, isLoading, districtPosition, renderAsStudent}) => {
+       return (
+            <RequestPreview
+                navigation          =   { navigation }
+                isLoading           =   { isLoading }
+
+                districtPosition    =   { districtPosition }
+                renderAsStudent     =   { renderAsStudent }
+
+                key                 =   { `loading-request-preview-${Math.random()*10 + 1}` }
+            />);
+    }; //end loadLoadingReqPreviews()
 
     const loadRequestPreviews = (requests) => {
         let requestRectangles = requests.map((requestObject, index) => {
@@ -85,13 +100,11 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
                     key                 =   { id }
                 />
             );
-
-        });
+        }); //end map()
 
         return requestRectangles;
     }; //end loadRequestRectangles()
     
-
     const getUserRequests = async (email = "lopezj@centinela.k12.ca.us", requestsType = "All") => {
         let requests = [];
         setIsLoading(true);
@@ -189,15 +202,33 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
             <RequestPreviewContainer>
                 <TouchableOpacity activeOpacity={1}>
                     { isLoading ? (
-                        <ActivityIndicator 
-                            size        =   "large" 
-                            color       =   { districtPosition ?
-                                                    ( (districtPosition.toLowerCase() === "student") || renderAsStudent) ? 
-                                                        "#931E1D": "#1E6C93"
-                                                : "#931E1D" 
-                                            }
-                            animating   =   { isLoading  }
-                        />
+                        [
+                        <LoadingReqPreviews
+                            navigation          =   { navigation } 
+                            isLoading           =   { true }
+                            districtPosition    =   { districtPosition}
+                            renderAsStudent     =   { renderAsStudent}
+                        />,
+                        <LoadingReqPreviews
+                            navigation          =   { navigation } 
+                            isLoading           =   { true }
+                            districtPosition    =   { districtPosition}
+                            renderAsStudent     =   { renderAsStudent}
+                        />, 
+                        <LoadingReqPreviews
+                            navigation          =   { navigation } 
+                            isLoading           =   { true }
+                            districtPosition    =   { districtPosition}
+                            renderAsStudent     =   { renderAsStudent}
+                        />,
+                        <LoadingReqPreviews
+                            navigation          =   { navigation } 
+                            isLoading           =   { true }
+                            districtPosition    =   { districtPosition}
+                            renderAsStudent     =   { renderAsStudent}
+                        />, 
+
+                        ]
                     ) : (requestPreviews.length > 0) ? requestPreviews : (
                         <NoRequestsMessage
                             districtPosition    =   { districtPosition } 

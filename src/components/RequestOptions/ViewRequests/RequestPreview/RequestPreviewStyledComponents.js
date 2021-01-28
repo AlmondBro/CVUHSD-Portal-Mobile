@@ -7,30 +7,30 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 const SkeletonScreen = ({ children, width, containerWidth, height, isLoading, districtPosition, renderAsStudent, key, marginTop, marginBottom, marginLeft, marginRight }) => {
     return (
-    <SkeletonContent
-        containerStyle  =   { { flex: 1, width: (isLoading ? containerWidth : "100%"), flexDirection: "row", justifyContent: "center" } }
-        isLoading       =   { isLoading } 
-        animationType   =   "shiver"
+        <SkeletonContent
+            containerStyle  =   { { flex: 1, width: (isLoading ? containerWidth : "100%"), flexDirection: "row", justifyContent: "center" } }
+            isLoading       =   { isLoading } 
+            animationType   =   "shiver"
 
-        boneColor       = {
-                                districtPosition ?
+            boneColor       = {
+                                    districtPosition ?
+                                        ( (districtPosition.toLowerCase() === "student") || renderAsStudent) ? 
+                                            "rgba(147, 30, 29, 0.1)": "rgba(30, 108, 147, 0.1)"
+                                        : "rgba(147, 30, 29, 0.1)" 
+                }
+            highlightColor  = {
+                                    districtPosition ?
                                     ( (districtPosition.toLowerCase() === "student") || renderAsStudent) ? 
                                         "rgba(147, 30, 29, 0.1)": "rgba(30, 108, 147, 0.1)"
                                     : "rgba(147, 30, 29, 0.1)" 
             }
-        highlightColor  = {
-                                districtPosition ?
-                                ( (districtPosition.toLowerCase() === "student") || renderAsStudent) ? 
-                                    "rgba(147, 30, 29, 0.1)": "rgba(30, 108, 147, 0.1)"
-                                : "rgba(147, 30, 29, 0.1)" 
-        }
 
-        layout={[
-            { key: key, width: (width || "100%"), height: (height || 20), marginTop: (marginTop || 0), marginBottom: (marginBottom || 0), marginLeft: (marginLeft || 0), marginRight: (marginRight || 0)},
-        ]}
-    >
-        { children }
-    </SkeletonContent>
+            layout={[
+                { key: key, width: (width || "100%"), height: (height || 20), marginTop: (marginTop || 0), marginBottom: (marginBottom || 0), marginLeft: (marginLeft || 0), marginRight: (marginRight || 0)},
+            ]}
+        >
+            { children }
+        </SkeletonContent>
     ); //end return statement
 }; //end SkeletonScreen()
 
@@ -77,7 +77,6 @@ const MetaDataIcon = styled(FontAwesome5)`
 `;
 
 const MetaDataText = styled.Text`
-    margin-right: auto;
     color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
 `;
 
