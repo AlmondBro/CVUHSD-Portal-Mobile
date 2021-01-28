@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { TouchableOpacity, ActivityIndicator } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { TouchableOpacity } from 'react-native';
 import RequestPreview from './RequestPreview/RequestPreview.js';
 
 import undefsafe from 'undefsafe';
@@ -13,7 +13,7 @@ import { Container, RequestTypeTitle, SortFilterButtonsContainer, Button, Reques
 
 /**
  * Function to parse the date into a an array, to later extract the time and date subparts.
- * @param { string } stringToParse 
+ * @param { string } stringToParse
  * @return { array } dateAndTime the dtae and time in one array
  */
 const parseDate = (stringToParse) => {
@@ -35,6 +35,22 @@ const dateFormatChange = (dateToChange) => {
     return formattedDate;
 };
 
+/**
+ * 
+ * @param { navi} param0 
+ */
+const LoadingReqPreviews = ({navigation, isLoading, districtPosition, renderAsStudent}) => {
+    return (
+         <RequestPreview
+             navigation          =   { navigation }
+             isLoading           =   { isLoading }
+
+             districtPosition    =   { districtPosition }
+             renderAsStudent     =   { renderAsStudent }
+
+             key                 =   { `loading-request-preview-${Math.random()*10 + 1}` }
+         />);
+ }; //end loadLoadingReqPreviews()
 
 /**
  * React functional component to house the screen to view all the requests
@@ -45,24 +61,14 @@ const dateFormatChange = (dateToChange) => {
 const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
     const isDev = __DEV__;
 
-    let [ isLoading, setIsLoading ] = useState(false);
-
+    let [ isLoading, setIsLoading ]             = useState(false);
     let [ requestPreviews, setRequestPreviews ] = useState([]);
+    let [ requestsType, setRequestsType ]       =   useState("All");
 
     const { showActionSheetWithOptions } = useActionSheet();
 
-    const LoadingReqPreviews = ({navigation, isLoading, districtPosition, renderAsStudent}) => {
-       return (
-            <RequestPreview
-                navigation          =   { navigation }
-                isLoading           =   { isLoading }
-
-                districtPosition    =   { districtPosition }
-                renderAsStudent     =   { renderAsStudent }
-
-                key                 =   { `loading-request-preview-${Math.random()*10 + 1}` }
-            />);
-    }; //end loadLoadingReqPreviews()
+     //Run ref on component updates except for initial mount via use of ref variable
+     const isInitialMount = useRef(true)
 
     const loadRequestPreviews = (requests) => {
         let requestRectangles = requests.map((requestObject, index) => {
@@ -149,23 +155,48 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
 
         const callback = (buttonIndex) => {
             Reactotron.log(buttonIndex);
+
+            switch (buttonIndex) {
+                case 0: 
+                    setRequestsType("All");
+                    break;
+
+                case 1: 
+                    setRequestsType("In Progress");
+                    break;
+
+                case 2: 
+                    setRequestsType("Closed");
+                    break;
+
+                default:
+                    setRequestsType(requestsType);
+                    break;
+            }
         };
+
         return showActionSheetWithOptions({
             options,
             cancelButtonIndex,
             destructiveButtonIndex
         }, callback);
     };
+
+    const getRequestRectangles = async (email, requestsType) => {
+        let requests = await getUserRequests(email, requestsType);
+        Reactotron.log("requests:\t", requests);
+
+        let requestPreviews = loadRequestPreviews(requests.reverse()); //Reverse the requests such that is the most recent tickets first on default
+        setRequestPreviews(requestPreviews);
+    }; //end getRequestRectangles
    
     useEffect(() => {
-        (async () => {
-            let requests = await getUserRequests();
-            Reactotron.log("requests:\t", requests);
-
-            let requestPreviews = loadRequestPreviews(requests.reverse()); //Reverse the requests such that is the most recent tickets first on default
-            setRequestPreviews(requestPreviews);
-        })();
-    }, []);
+        if (isInitialMount.current) {
+            isInitialMount.current = false;
+        } else {
+            getRequestRectangles(email, requestsType); //Only run this function on first mount
+        }
+    }, [ requestsType ]);
 
     return (
         <Container>
