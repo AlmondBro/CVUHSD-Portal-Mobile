@@ -1,6 +1,38 @@
+import React from 'react';
 import styled from 'styled-components/native';
 
-import { AntDesign, FontAwesome5 } from '@expo/vector-icons'; 
+import SkeletonContent from 'react-native-skeleton-content';
+
+import { FontAwesome5 } from '@expo/vector-icons'; 
+
+const SkeletonScreen = ({ children, containerWidth, height, isLoading, districtPosition, renderAsStudent, key, marginTop, marginBottom, marginLeft, marginRight }) => {
+    return (
+    <SkeletonContent
+        containerStyle  =   { { flex: 1, width: containerWidth, flexDirection: "row" } }
+        isLoading       =   { isLoading } 
+        animationType   =   "shiver"
+
+        boneColor       = {
+                                districtPosition ?
+                                    ( (districtPosition.toLowerCase() === "student") || renderAsStudent) ? 
+                                        "rgba(147, 30, 29, 0.1)": "rgba(30, 108, 147, 0.1)"
+                                    : "rgba(147, 30, 29, 0.1)" 
+            }
+        highlightColor  = {
+                                districtPosition ?
+                                ( (districtPosition.toLowerCase() === "student") || renderAsStudent) ? 
+                                    "rgba(147, 30, 29, 0.1)": "rgba(30, 108, 147, 0.1)"
+                                : "rgba(147, 30, 29, 0.1)" 
+        }
+
+        layout={[
+            { key: key, width: "100%", height: (height || 20), marginTop: (marginTop || 0), marginBottom: (marginBottom || 0), marginLeft: (marginLeft || 0), marginRight: (marginRight || 0)},
+        ]}
+    >
+        { children }
+    </SkeletonContent>
+    ); //end return statement
+}; //end SkeletonScreen()
 
 const Container = styled.View`
     flex: 1;
@@ -74,4 +106,4 @@ const Description = styled(Subject)`
 
 
 
-export { Container, Content, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, Description };
+export { Container, Content, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, Description };

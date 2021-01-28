@@ -1,6 +1,8 @@
 import React from 'react';
 
-import {  Container, Content, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, Description } from './RequestPreviewStyledComponents.js';
+import SkeletonContent from 'react-native-skeleton-content';
+
+import {  Container, Content, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, Description } from './RequestPreviewStyledComponents.js';
 
 /**
  * React functional component that displays the main metadata of a request, such as time and date submitted, subject, and description
@@ -88,12 +90,27 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
                     >
                         {subject || "Canvas Test" }
                     </Subject>
+                    <SkeletonScreen
+                        isLoading           =   { true }
+                        districtPosition    =   { districtPosition }
+                        renderAsStudent     =   { renderAsStudent } 
+
+                        containerWidth      =   { 250 }
+                        height              =   { 20 }
+                        key                 =   "request-preview-description-skeleton"
+                        
+                        marginTop           =   { 24 }
+                        marginLeft          =   { 45 }
+                    >
+
                     <Description
                         districtPosition    =   { districtPosition } 
                         renderAsStudent     =   { renderAsStudent }
                     >
                         { truncateDescription(description) || "Canvas test rule ticket" }
                     </Description>
+                </SkeletonScreen>
+                   
                 </SubjDescContainer>
               
             </Content>
