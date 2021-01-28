@@ -111,6 +111,7 @@ const RequestOptions = ({ navigation, appWidth, email, firstName, lastName, dist
                                             <ViewRequests
                                                 districtPosition    =   { districtPosition } 
                                                 renderAsStudent     =   { renderAsStudent }
+                                                email               =   { email }
                                                                         {...props}
                                             />
                                         </CurrentRouteSetter>

@@ -36,8 +36,10 @@ const dateFormatChange = (dateToChange) => {
 };
 
 /**
- * 
- * @param { navi} param0 
+ * @param { string } districtPosition string to indicate a school district user's role  
+ * @param { boolean } renderAsStudent boolean to indicate whether to render the student color scheme and items, even as a staff member
+ * @param { boolean } isLoading boolean to indicate whether this component is loading, such as from fetching requests
+ * @param { Object } navigation object passed down from React Navigation's <NavigationContainer/>.
  */
 const LoadingReqPreviews = ({navigation, isLoading, districtPosition, renderAsStudent}) => {
     return (
@@ -57,8 +59,9 @@ const LoadingReqPreviews = ({navigation, isLoading, districtPosition, renderAsSt
  * @param { Object } navigation  object passed from React Navigation's Navigation Container. Houses methods to navigate across the different streams.
  * @param { string } districtPosition the role of the school district user
  * @param { boolean } renderAsStudent dictates whether a staff member is choosing to view the app through a student's eyes
+ * @return { ReactComponent } React component is returned
  */
-const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
+const ViewRequests = ({navigation, email, districtPosition, renderAsStudent}) => {
     const isDev = __DEV__;
 
     let [ isLoading, setIsLoading ]             = useState(false);
@@ -191,11 +194,7 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
     }; //end getRequestRectangles
    
     useEffect(() => {
-        if (isInitialMount.current) {
-            isInitialMount.current = false;
-        } else {
-            getRequestRectangles(email, requestsType); //Only run this function on first mount
-        }
+        getRequestRectangles(email, requestsType); 
     }, [ requestsType ]);
 
     return (
@@ -204,7 +203,7 @@ const ViewRequests = ({navigation, districtPosition, renderAsStudent}) => {
               districtPosition    =   { districtPosition } 
               renderAsStudent     =   { renderAsStudent }
             >
-                All Requests
+                { requestsType } Requests
             </RequestTypeTitle>
 
             <SortFilterButtonsContainer>
