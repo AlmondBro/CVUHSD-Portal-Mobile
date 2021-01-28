@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {  Container, Content, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, Description } from './RequestPreviewStyledComponents.js';
 
@@ -10,8 +10,38 @@ import {  Container, Content, SkeletonScreen, MetaDataContainer, MetaDataIconTex
  */
 const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject, description, date, time, id, status, onClick, isLoading }) => {
     const metadataIconsSize = 22;
-    
+
+    let [ faIconName, setFAIcon ] = useState("spinner");
+
     // isLoading = true;
+
+    const getFAIcon = (status) => {
+        let faIcon;
+
+        switch(status) {
+            case "All":
+                setFAIcon("tasks");
+            break;
+
+            case "Open":
+                setFAIcon("circle");
+            break;
+
+            case "In Progress":
+                setFAIcon("angle-double-right");
+            break;
+
+            case "Closed":
+                setFAIcon("check");
+            break;
+
+            default:
+                setFAIcon("spinner");
+                
+        }
+
+        return faIcon;
+    }; 
     
     const truncateDescription = (description) => {
         if (description && description.length >= 90) {
@@ -24,6 +54,10 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
         return description;
     };
     
+    useEffect(() => {
+        getFAIcon(status);
+    }, [ status ]);
+
     return (
         <Container>
             <Content
@@ -96,13 +130,41 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
                     </MetaDataIconTextContainer>
 
                     <MetaDataIconTextContainer>
-                        <MetaDataIcon
-                            districtPosition    =   { districtPosition } 
-                            renderAsStudent     =   { renderAsStudent }
+                        {
+                            isLoading ? (
+                                <SkeletonScreen 
+                                    isLoading           =   { isLoading }
+                                    districtPosition    =   { districtPosition }
+                                    renderAsStudent     =   { renderAsStudent } 
 
-                            name                =   "circle" 
-                            size                =   {   metadataIconsSize  } 
-                        />
+                                    containerWidth      =   { 50 }
+                                    width               =   { 25 }
+                                    height              =   { 15 }
+                                    identifier          =   {`request-preview-status-icon-skeleton-${Math.random()*1000+1}`}
+                                    
+                                    marginTop           =   { 8 }
+                                    marginLeft          =   { 0 }
+                                    marginRight         =   { "auto" }
+                                >
+                                    <MetaDataIcon
+                                        districtPosition    =   { districtPosition } 
+                                        renderAsStudent     =   { renderAsStudent }
+
+                                        name                =   { faIconName } 
+                                        size                =   {   metadataIconsSize  } 
+                                    />
+                                </SkeletonScreen>
+                            ) : (
+                                <MetaDataIcon
+                                    districtPosition    =   { districtPosition } 
+                                    renderAsStudent     =   { renderAsStudent }
+
+                                    name                =   { faIconName } 
+                                    size                =   {   metadataIconsSize  } 
+                                />
+                            )
+                        }
+                        
                         <SkeletonScreen
                             isLoading           =   { isLoading }
                             districtPosition    =   { districtPosition }
@@ -115,6 +177,7 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
                             
                             marginTop           =   { 8 }
                             marginLeft          =   { 0 }
+                            marginRight         =   { "auto" }
                         >
                             <MetaDataText
                                 districtPosition    =   { districtPosition } 
@@ -123,7 +186,6 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
                                 { status || "Closed" }
                             </MetaDataText>
                         </SkeletonScreen>
-                      
                     </MetaDataIconTextContainer>
                 </MetaDataContainer>
 
