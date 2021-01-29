@@ -46,14 +46,10 @@ const Container = styled.View`
 `;
 
 const Content = styled.View`
+    flex: 1;
     margin-top: ${baseMarginTop}px;
 
     width: 90%;
-
-    border-bottom-width: 1px;
-    /* border-bottom-width: 1px; */
-    border-style: solid; 
-    border-color: ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
 
     padding-top: 10px;
     /* padding-bottom: 12px; */
@@ -64,6 +60,12 @@ const Content = styled.View`
 
 const MetaDataContainer = styled.View`
     flex-direction: column;
+
+    border-bottom-width: 1px;
+    /* border-bottom-width: 1px; */
+    border-style: solid; 
+    border-color: ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
+    
     /* padding-left: 15px;
     padding-right: 15px; */
 `;
@@ -85,8 +87,11 @@ const MetaDataText = styled.Text`
 `;
 
 const SubjDescContainer = styled.View`
+    flex: 1;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+
+    margin-top: 10px;
 `;
 
 const Subject = styled.Text`
@@ -101,8 +106,6 @@ const Description = styled(Subject)`
     font-family: SourceSansPro_400Regular;
     font-size: 13px;
     text-align: center;
-
-    margin-top: 12px;
 
     opacity: 0.42;
 `;
