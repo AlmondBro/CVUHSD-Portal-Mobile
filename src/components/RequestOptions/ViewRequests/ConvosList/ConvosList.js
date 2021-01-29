@@ -17,47 +17,42 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
     const isDev = __DEV__;
     const metadataIconsSize = 22;
 
-    let [ faIconName, setFAIcon ] = useState("spinner");
     let [ buttonPressed, setButtonPressed ] = useState(false);
 
     let [ convoComps, setConvoComps ]   = useState([]);
-    let [ showConvos, setShowConvos ]   = useState(false);
+
     let [ isLoading, setIsLoading ]     = useState(false);
 
-    let { date, time, id } = route.params
+    let { id, date, time } = route.params;
+
+    let description = "hi";
+
     
-    if (undefsafe(site, "name")) {
-        site   =  site.name;
-    }
+    const mapConvos = (convos) => {
+        return convos.filter((convo, index) => convo["FROM"] != "System").map((convo, index) => {
+            let { CREATEDDATE, FROM, DESCRIPTION } = convo;
 
-    const getFAIcon = (status) => {
-        let faIcon;
+            let time = new Date(CREATEDDATE).toLocaleTimeString();
+            let date =  new Date(CREATEDDATE).toLocaleDateString();
 
-        switch(status) {
-            case "All":
-                setFAIcon("tasks");
-            break;
+            console.log("FROM:\t", FROM);
 
-            case "Open":
-                setFAIcon("circle");
-            break;
+            return (
+                <SingleConvo
+                    isLoading           =   { isLoading }
+                    districtPosition    =   { districtPosition }
+                    renderAsStudent     =   { renderAsStudent }
 
-            case "In Progress":
-                setFAIcon("angle-double-right");
-            break;
+                    description         =   { DESCRIPTION }
+                    date                =   { date }
+                    time                =   { time }
+                    author              =   { FROM } 
+                    key                 =   { index }
+                />
+            ); //end return statement
+        }); //end .map() Array method
+    }; //end mapConvos()
 
-            case "Closed":
-                setFAIcon("check");
-            break;
-
-            default:
-                setFAIcon("spinner");
-                
-        }
-
-        return faIcon;
-    }; 
-    
     const getReqConvos = async (id) => {
         let requests = [];
 
@@ -101,10 +96,6 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
 
         setIsLoading(false);
     };
-
-    useEffect(() => {
-        getFAIcon(status);
-    }, [ status ]);
 
     useEffect(() => {
         loadConvoComponents();
@@ -194,28 +185,6 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
                     </MetaDataContainer>
 
                     <SubjDescContainer>
-                        <SkeletonScreen
-                            isLoading           =   { isLoading }
-                            districtPosition    =   { districtPosition }
-                            renderAsStudent     =   { renderAsStudent } 
-
-                            flexValue           =   { -1 }
-                            flexDirection       =   "column"
-
-                            containerWidth      =   { 300 }
-                            height              =   { 20 }
-                            identifier          =   {`request-specifics-subject-skeleton-${Math.random()*1000+1}`}
-                            
-                            marginTop           =   { 10 }
-                            marginLeft          =   { 25 }
-                        >
-                            <Subject
-                                districtPosition    =   { districtPosition } 
-                                renderAsStudent     =   { renderAsStudent }
-                            >
-                                { subject || "Canvas Test" }
-                            </Subject>
-                        </SkeletonScreen>
                         <SkeletonScreen
                             isLoading           =   { isLoading }
                             districtPosition    =   { districtPosition }
