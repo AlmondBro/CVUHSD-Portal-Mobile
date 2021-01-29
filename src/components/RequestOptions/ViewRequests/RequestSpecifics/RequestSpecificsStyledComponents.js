@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 import SkeletonContent from 'react-native-skeleton-content';
 
 import { FontAwesome5 } from '@expo/vector-icons'; 
@@ -103,17 +105,28 @@ const SubjDescContainer = styled.View`
 `;
 
 const Subject = styled.Text`
-    font-family: SourceSansPro_400Regular;
+    margin-top: 5px;
+    font-family: SourceSansPro_400Regular_Italic;
     font-size: 16px;
     text-align: center;
 
     background-color: lightblue;
 `;
+const DescrScrollContainer = styled(KeyboardAwareScrollView).attrs((props) => ({
+    keyboardShouldPersistTaps : "never"
+}))`
 
+    background-color: white;
+
+    /* height: auto; */
+`;
 const Description = styled(Subject)`
     color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
     font-family: SourceSansPro_400Regular;
+    
     font-size: 13px;
+
+    margin-top: 15px;
     text-align: center;
 
     background-color: yellow;
@@ -135,4 +148,4 @@ const HighlightedButton = styled.TouchableOpacity`
 
 
 
-export { Container, Content, HighlightedButton, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, Description };
+export { Container, Content, HighlightedButton, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, DescrScrollContainer, Description };

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import undefsafe from 'undefsafe';
 
-import {  Container, Content, HighlightedButton, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, Description } from './RequestSpecificsStyledComponents.js';
+import { TouchableOpacity} from 'react-native';
+// import { TouchableOpacity } from 'react-native-gesture-handler';
 
+import {  Container, Content, HighlightedButton, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, DescrScrollContainer, Description } from './RequestSpecificsStyledComponents.js';
 
 /**
  * Function to parse the date into a an array, to later extract the time and date subparts.
@@ -42,7 +44,17 @@ const RequestSpecifics = ({ navigation, route, districtPosition, renderAsStudent
 
     let { subject, description, date, time, id, technician, site, status } = route.params;
 
-    isLoading = true;
+    isLoading = false;
+
+    const loremIpsum = ` Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor orci sem, vel aliquet elit venenatis sit amet. Aenean enim ipsum, vehicula a mollis ut, lobortis ut lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at lobortis lorem. Sed ut ex sit amet felis sollicitudin rhoncus. Praesent sollicitudin ante quis nulla semper blandit. Quisque non pharetra erat. Nam blandit orci eget convallis sodales. Sed congue metus mi, sed volutpat lacus tincidunt non. Ut et nibh pellentesque, gravida est sed, commodo turpis. In hac habitasse platea dictumst. Vestibulum facilisis nisi eu eleifend pellentesque.
+
+    Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec tristique rutrum purus ut tincidunt. Nullam tempor cursus urna sed volutpat. Nulla mattis ipsum vel risus ullamcorper auctor ac at nibh. Vestibulum vitae dapibus leo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nulla feugiat quam tristique est eleifend, et lacinia nisl mollis. Mauris lacinia enim nec est sodales, tempus gravida neque dapibus. Mauris tristique ex eget dui tincidunt accumsan. Praesent sit amet ultricies libero. Morbi feugiat, quam eu consequat ultrices, est erat aliquam lacus, at iaculis augue orci eget urna. Donec eleifend sapien ligula, ut interdum felis laoreet quis. Vestibulum quis ultrices tellus. Pellentesque tincidunt sagittis mollis.
+    
+    Ut sem quam, lobortis ac dui at, blandit convallis magna. Suspendisse consequat elit in lorem condimentum, id tincidunt ante malesuada. Vivamus efficitur, ex sit amet volutpat posuere, nulla ligula aliquet augue, vitae eleifend ante elit at erat. Vestibulum ante sapien, consectetur sit amet nisi non, tincidunt eleifend est. Etiam ullamcorper diam at justo pulvinar ullamcorper. Suspendisse potenti. Mauris sollicitudin, justo non volutpat eleifend, urna orci sollicitudin ligula, scelerisque pulvinar libero urna vel velit. Proin porttitor eros in orci dictum, at facilisis risus finibus. Nam gravida, lorem et varius elementum, nisi ex cursus dui, vitae consectetur urna dolor a dolor. Sed quis laoreet lorem. Cras fringilla luctus velit luctus laoreet. Aliquam porttitor sem sed malesuada tincidunt.
+    
+    Morbi luctus sem viverra, sollicitudin tortor quis, cursus risus. Curabitur sed ipsum faucibus ligula volutpat viverra. Quisque at dolor vel metus suscipit consectetur. Aenean scelerisque vehicula enim in placerat. Vestibulum non sollicitudin enim, vel ultrices nunc. Quisque blandit sed lacus et blandit. Vivamus vel diam eu lectus semper euismod at vel mauris. Cras non laoreet velit. Duis molestie nibh nec pulvinar aliquet. Duis a eleifend nisi. In orci leo, porttitor in erat sed, semper ultricies tortor. Nullam sed mauris nulla. Cras lobortis tincidunt sodales. `;
+   
+    description = Array.from({ length: 5 }, () => loremIpsum).toString();
 
     if (undefsafe(site, "name")) {
         site   =  site.name;
@@ -260,12 +272,16 @@ const RequestSpecifics = ({ navigation, route, districtPosition, renderAsStudent
                             marginTop           =   { 24 }
                             marginLeft          =   { "18%" }
                         >
-                            <Description
-                                districtPosition    =   { districtPosition } 
-                                renderAsStudent     =   { renderAsStudent }
-                            >
-                                { description || "Canvas test rule ticket" }
-                            </Description>
+                            <DescrScrollContainer extraScrollHeight={50} viewIsInsideTabBar={true}>
+                                <TouchableOpacity activeOpacity = { 1.0 }>
+                                    <Description
+                                        districtPosition    =   { districtPosition } 
+                                        renderAsStudent     =   { renderAsStudent }
+                                    >
+                                        { description || "Canvas test rule ticket" }
+                                    </Description>
+                                </TouchableOpacity>
+                            </DescrScrollContainer>
                         </SkeletonScreen>
                     </SubjDescContainer>
                 {/* </HighlightedButton> */}
