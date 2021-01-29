@@ -13,8 +13,6 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
 
     let [ faIconName, setFAIcon ] = useState("spinner");
 
-    // isLoading = true;
-
     const getFAIcon = (status) => {
         let faIcon;
 
@@ -176,7 +174,7 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
                             identifier          =   {`request-preview-req-status-skeleton-${Math.random()*1000+1}`}
                             
                             marginTop           =   { 8 }
-                            marginLeft          =   { 0 }
+                            marginLeft          =   { -30 }
                             marginRight         =   { "auto" }
                         >
                             <MetaDataText
