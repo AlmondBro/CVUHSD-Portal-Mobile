@@ -22,7 +22,7 @@ const RequestSpecifics = ({ navigation, route, districtPosition, renderAsStudent
 
     let { subject, description, date, time, id, technician, site, status } = route.params;
 
-    isLoading = true;
+    isLoading = false;
 
     if (undefsafe(site, "name")) {
         site   =  site.name;
