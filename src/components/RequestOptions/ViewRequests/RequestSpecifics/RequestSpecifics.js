@@ -40,15 +40,15 @@ const RequestSpecifics = ({ navigation, route, districtPosition, renderAsStudent
     let [ faIconName, setFAIcon ] = useState("spinner");
     let [ buttonPressed, setButtonPressed ] = useState(false);
 
-    let { subject, description, created_time, status, id, technician, site } = route.params;
+    let { subject, description, date, time, id, technician, site, status } = route.params;
     
-    let dateAndTime = parseDate(created_time["display_value"]);
+    // let dateAndTime = parseDate(created_time["display_value"]);
 
-    const date = dateFormatChange(dateAndTime[0]);
+    // const date = dateFormatChange(dateAndTime[0]);
 
-    const time = dateAndTime[1] + " " + dateAndTime[2];
+    // const time = dateAndTime[1] + " " + dateAndTime[2];
     
-    status = status.name;
+    // status = status.name;
 
     isLoading = false;
 
@@ -105,6 +105,64 @@ const RequestSpecifics = ({ navigation, route, districtPosition, renderAsStudent
                     onPressOut          =   { () => setButtonPressed(false) }
                 > */}
                     <MetaDataContainer>
+                    <MetaDataIconTextContainer>
+                            {
+                                isLoading ? (
+                                    <SkeletonScreen 
+                                        isLoading           =   { isLoading }
+                                        districtPosition    =   { districtPosition }
+                                        renderAsStudent     =   { renderAsStudent } 
+
+                                        containerWidth      =   { 50 }
+                                        width               =   { 25 }
+                                        height              =   { 15 }
+                                        identifier          =   {`request-specifics-status-icon-skeleton-${Math.random()*1000+1}`}
+                                        
+                                        marginTop           =   { 8 }
+                                        marginLeft          =   { 0 }
+                                        marginRight         =   { "auto" }
+                                    >
+                                        <MetaDataIcon
+                                            districtPosition    =   { districtPosition } 
+                                            renderAsStudent     =   { renderAsStudent }
+
+                                            name                =   { faIconName } 
+                                            size                =   {   metadataIconsSize  } 
+                                        />
+                                    </SkeletonScreen>
+                                ) : (
+                                    <MetaDataIcon
+                                        districtPosition    =   { districtPosition } 
+                                        renderAsStudent     =   { renderAsStudent }
+
+                                        name                =   { faIconName } 
+                                        size                =   {   metadataIconsSize  } 
+                                    />
+                                )
+                            }
+                            
+                            <SkeletonScreen
+                                isLoading           =   { isLoading }
+                                districtPosition    =   { districtPosition }
+                                renderAsStudent     =   { renderAsStudent } 
+
+                                containerWidth      =   { 50 }
+                                width               =   { 80 }
+                                height              =   { 15 }
+                                identifier          =   {`request-specifics-req-status-skeleton-${Math.random()*1000+1}`}
+                                
+                                marginTop           =   { 8 }
+                                marginLeft          =   { -30 }
+                                marginRight         =   { "auto" }
+                            >
+                                <MetaDataText
+                                    districtPosition    =   { districtPosition } 
+                                    renderAsStudent     =   { renderAsStudent }
+                                >
+                                    { status || "Closed" }
+                                </MetaDataText>
+                            </SkeletonScreen>
+                        </MetaDataIconTextContainer>
                         <MetaDataIconTextContainer>
                             <MetaDataIcon
                                 districtPosition    =   { districtPosition } 
@@ -169,64 +227,6 @@ const RequestSpecifics = ({ navigation, route, districtPosition, renderAsStudent
                         
                         </MetaDataIconTextContainer>
 
-                        <MetaDataIconTextContainer>
-                            {
-                                isLoading ? (
-                                    <SkeletonScreen 
-                                        isLoading           =   { isLoading }
-                                        districtPosition    =   { districtPosition }
-                                        renderAsStudent     =   { renderAsStudent } 
-
-                                        containerWidth      =   { 50 }
-                                        width               =   { 25 }
-                                        height              =   { 15 }
-                                        identifier          =   {`request-specifics-status-icon-skeleton-${Math.random()*1000+1}`}
-                                        
-                                        marginTop           =   { 8 }
-                                        marginLeft          =   { 0 }
-                                        marginRight         =   { "auto" }
-                                    >
-                                        <MetaDataIcon
-                                            districtPosition    =   { districtPosition } 
-                                            renderAsStudent     =   { renderAsStudent }
-
-                                            name                =   { faIconName } 
-                                            size                =   {   metadataIconsSize  } 
-                                        />
-                                    </SkeletonScreen>
-                                ) : (
-                                    <MetaDataIcon
-                                        districtPosition    =   { districtPosition } 
-                                        renderAsStudent     =   { renderAsStudent }
-
-                                        name                =   { faIconName } 
-                                        size                =   {   metadataIconsSize  } 
-                                    />
-                                )
-                            }
-                            
-                            <SkeletonScreen
-                                isLoading           =   { isLoading }
-                                districtPosition    =   { districtPosition }
-                                renderAsStudent     =   { renderAsStudent } 
-
-                                containerWidth      =   { 50 }
-                                width               =   { 80 }
-                                height              =   { 15 }
-                                identifier          =   {`request-specifics-req-status-skeleton-${Math.random()*1000+1}`}
-                                
-                                marginTop           =   { 8 }
-                                marginLeft          =   { -30 }
-                                marginRight         =   { "auto" }
-                            >
-                                <MetaDataText
-                                    districtPosition    =   { districtPosition } 
-                                    renderAsStudent     =   { renderAsStudent }
-                                >
-                                    { status || "Closed" }
-                                </MetaDataText>
-                            </SkeletonScreen>
-                        </MetaDataIconTextContainer>
                     </MetaDataContainer>
 
                     <SubjDescContainer>
@@ -246,7 +246,7 @@ const RequestSpecifics = ({ navigation, route, districtPosition, renderAsStudent
                                 districtPosition    =   { districtPosition } 
                                 renderAsStudent     =   { renderAsStudent }
                             >
-                                {subject || "Canvas Test" }
+                                { subject || "Canvas Test" }
                             </Subject>
                         </SkeletonScreen>
                         <SkeletonScreen

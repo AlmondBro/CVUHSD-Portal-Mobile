@@ -78,6 +78,64 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
                 >
                     <MetaDataContainer>
                         <MetaDataIconTextContainer>
+                            {
+                                isLoading ? (
+                                    <SkeletonScreen 
+                                        isLoading           =   { isLoading }
+                                        districtPosition    =   { districtPosition }
+                                        renderAsStudent     =   { renderAsStudent } 
+
+                                        containerWidth      =   { 50 }
+                                        width               =   { 25 }
+                                        height              =   { 15 }
+                                        identifier          =   {`request-preview-status-icon-skeleton-${Math.random()*1000+1}`}
+                                        
+                                        marginTop           =   { 8 }
+                                        marginLeft          =   { 0 }
+                                        marginRight         =   { "auto" }
+                                    >
+                                        <MetaDataIcon
+                                            districtPosition    =   { districtPosition } 
+                                            renderAsStudent     =   { renderAsStudent }
+
+                                            name                =   { faIconName } 
+                                            size                =   {   metadataIconsSize  } 
+                                        />
+                                    </SkeletonScreen>
+                                ) : (
+                                    <MetaDataIcon
+                                        districtPosition    =   { districtPosition } 
+                                        renderAsStudent     =   { renderAsStudent }
+
+                                        name                =   { faIconName } 
+                                        size                =   {   metadataIconsSize  } 
+                                    />
+                                )
+                            }
+                            
+                            <SkeletonScreen
+                                isLoading           =   { isLoading }
+                                districtPosition    =   { districtPosition }
+                                renderAsStudent     =   { renderAsStudent } 
+
+                                containerWidth      =   { 50 }
+                                width               =   { 80 }
+                                height              =   { 15 }
+                                identifier          =   {`request-preview-req-status-skeleton-${Math.random()*1000+1}`}
+                                
+                                marginTop           =   { 8 }
+                                marginLeft          =   { -30 }
+                                marginRight         =   { "auto" }
+                            >
+                                <MetaDataText
+                                    districtPosition    =   { districtPosition } 
+                                    renderAsStudent     =   { renderAsStudent }
+                                >
+                                    { status || "Closed" }
+                                </MetaDataText>
+                            </SkeletonScreen>
+                        </MetaDataIconTextContainer>
+                        <MetaDataIconTextContainer>
                             <MetaDataIcon
                                 districtPosition    =   { districtPosition } 
                                 renderAsStudent     =   { renderAsStudent }
@@ -141,64 +199,6 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
                         
                         </MetaDataIconTextContainer>
 
-                        <MetaDataIconTextContainer>
-                            {
-                                isLoading ? (
-                                    <SkeletonScreen 
-                                        isLoading           =   { isLoading }
-                                        districtPosition    =   { districtPosition }
-                                        renderAsStudent     =   { renderAsStudent } 
-
-                                        containerWidth      =   { 50 }
-                                        width               =   { 25 }
-                                        height              =   { 15 }
-                                        identifier          =   {`request-preview-status-icon-skeleton-${Math.random()*1000+1}`}
-                                        
-                                        marginTop           =   { 8 }
-                                        marginLeft          =   { 0 }
-                                        marginRight         =   { "auto" }
-                                    >
-                                        <MetaDataIcon
-                                            districtPosition    =   { districtPosition } 
-                                            renderAsStudent     =   { renderAsStudent }
-
-                                            name                =   { faIconName } 
-                                            size                =   {   metadataIconsSize  } 
-                                        />
-                                    </SkeletonScreen>
-                                ) : (
-                                    <MetaDataIcon
-                                        districtPosition    =   { districtPosition } 
-                                        renderAsStudent     =   { renderAsStudent }
-
-                                        name                =   { faIconName } 
-                                        size                =   {   metadataIconsSize  } 
-                                    />
-                                )
-                            }
-                            
-                            <SkeletonScreen
-                                isLoading           =   { isLoading }
-                                districtPosition    =   { districtPosition }
-                                renderAsStudent     =   { renderAsStudent } 
-
-                                containerWidth      =   { 50 }
-                                width               =   { 80 }
-                                height              =   { 15 }
-                                identifier          =   {`request-preview-req-status-skeleton-${Math.random()*1000+1}`}
-                                
-                                marginTop           =   { 8 }
-                                marginLeft          =   { -30 }
-                                marginRight         =   { "auto" }
-                            >
-                                <MetaDataText
-                                    districtPosition    =   { districtPosition } 
-                                    renderAsStudent     =   { renderAsStudent }
-                                >
-                                    { status || "Closed" }
-                                </MetaDataText>
-                            </SkeletonScreen>
-                        </MetaDataIconTextContainer>
                     </MetaDataContainer>
 
                     <SubjDescContainer>

@@ -51,7 +51,7 @@ const Content = styled.View`
     border-style: solid; 
     border-color: ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
 
-    padding-top: 25px;
+    padding-top: 10px;
     /* padding-bottom: 12px; */
 
 `;

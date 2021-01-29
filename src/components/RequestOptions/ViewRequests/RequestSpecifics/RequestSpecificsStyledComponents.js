@@ -43,18 +43,19 @@ const Container = styled.View`
     background-color: white;
 
     /* margin-bottom: 25px; */
-    margin-top: ${baseMarginTop + 12}px;
 `;
 
 const Content = styled.View`
+    margin-top: ${baseMarginTop}px;
+
     width: 90%;
 
-    border-top-width: 1px;
+    border-bottom-width: 1px;
     /* border-bottom-width: 1px; */
     border-style: solid; 
     border-color: ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
 
-    padding-top: 25px;
+    padding-top: 10px;
     /* padding-bottom: 12px; */
 
 `;

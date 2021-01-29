@@ -124,7 +124,7 @@ const ViewRequests = ({ navigation, email, districtPosition, renderAsStudent}) =
                 site   =  site.name;
             }
 
-            let routeParams = {...requestObject};
+            let routeParams = { status, subject, description, date, time, id, technician, site };
 
             return (
                 <RequestPreview
