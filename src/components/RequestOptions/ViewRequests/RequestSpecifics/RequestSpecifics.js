@@ -4,6 +4,7 @@ import undefsafe from 'undefsafe';
 import { TouchableOpacity} from 'react-native';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 
+import TouchableButton from './../../../TouchableButton/TouchableButton.js';
 import {  Container, Content, HighlightedButton, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, DescrScrollContainer, Description } from './RequestSpecificsStyledComponents.js';
 
 /**
@@ -285,6 +286,14 @@ const RequestSpecifics = ({ navigation, route, districtPosition, renderAsStudent
                         </SkeletonScreen>
                     </SubjDescContainer>
                 {/* </HighlightedButton> */}
+
+                <TouchableButton 
+                    fontSize    =   "14px"
+                    buttonTitle =   "Conversations" 
+                    width       =   "60%" 
+                    color       =   "white"
+                    bgColor     =   {((districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"}
+                />
             </Content>
         </Container>
     ); //end return statement

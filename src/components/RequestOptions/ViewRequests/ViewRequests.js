@@ -140,7 +140,7 @@ const ViewRequests = ({ navigation, email, districtPosition, renderAsStudent}) =
                     id                  =   { id }
                     isLoading           =   { isLoading }
 
-                    onPress             =   { () => navigate("Request Specifics", routeParams)}
+                    onPress             =   { () => navigate("Request Details", routeParams)}
                     // onClick             =   { () => routeToReqID(requestObject, subject, description, time, date, status, technician, site) }
 
                     key                 =   { id }

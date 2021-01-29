@@ -50,6 +50,7 @@ const Container = styled.View`
     flex: 1;
     flex-direction: column;
     align-items: center;
+    align-content: center;
     background-color: white;
 
     /* margin-bottom: 25px; */
@@ -106,12 +107,14 @@ const SubjDescContainer = styled.View`
 
 const Subject = styled.Text`
     margin-top: 5px;
-    font-family: SourceSansPro_400Regular_Italic;
+    font-family: SourceSansPro_600SemiBold_Italic;
     font-size: 16px;
     text-align: center;
 
-    background-color: lightblue;
+    color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
+    background-color: white;
 `;
+
 const DescrScrollContainer = styled(KeyboardAwareScrollView).attrs((props) => ({
     keyboardShouldPersistTaps : "never"
 }))`
@@ -129,9 +132,9 @@ const Description = styled(Subject)`
     margin-top: 15px;
     text-align: center;
 
-    background-color: yellow;
+    background-color: white;
 
-    opacity: 0.42;
+    opacity: 0.7;
 `;
 
 const HighlightedButton = styled.TouchableOpacity`

@@ -15,6 +15,11 @@ const Container = styled.View`
     align-items: center;
     align-content: center;
 
+    text-align: center;
+
+    margin-left: auto;
+    margin-right: auto;
+
     margin-top: 10px;
     margin-bottom: ${ (OS === "android") ? "5px" : "18px"};
 

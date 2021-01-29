@@ -118,7 +118,7 @@ const RequestOptions = ({ navigation, appWidth, email, firstName, lastName, dist
                                     ) }
                                 </Screen>
                                 <Screen 
-                                        name="Request Specifics" 
+                                        name="Request Details" 
                                         // options={{ title: null, headerShown: false }}
                                 >
                                     { props => (
