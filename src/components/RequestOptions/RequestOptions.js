@@ -4,6 +4,7 @@ import { Alert, Text } from 'react-native';
 import OptionsScreen from './OptionsScreen/OptionsScreen.js';
 import SupportRequestModal from './../SupportRequestModal/SupportRequestModal.js';
 import ViewRequests from './ViewRequests/ViewRequests.js'
+import RequestSpecifics from './ViewRequests/RequestSpecifics/RequestSpecifics.js';
 
 import Header from './../FormComponents/Header/Header.js';
 
@@ -32,7 +33,6 @@ const RequestOptions = ({ navigation, appWidth, email, firstName, lastName, dist
         setShowRequestModal(false);
 
     }; //end onModalDismiss()
-
 
     return (
             <ModalStyled 
@@ -109,6 +109,24 @@ const RequestOptions = ({ navigation, appWidth, email, firstName, lastName, dist
                                             {...props}
                                         >
                                             <ViewRequests
+                                                districtPosition    =   { districtPosition } 
+                                                renderAsStudent     =   { renderAsStudent }
+                                                email               =   { email }
+                                                                        {...props}
+                                            />
+                                        </CurrentRouteSetter>
+                                    ) }
+                                </Screen>
+                                <Screen 
+                                        name="Request Details" 
+                                        // options={{ title: null, headerShown: false }}
+                                >
+                                    { props => (
+                                         <CurrentRouteSetter 
+                                            setCurrentRoute     =   { setCurrentRoute }
+                                                                    {...props}
+                                        >
+                                            <RequestSpecifics
                                                 districtPosition    =   { districtPosition } 
                                                 renderAsStudent     =   { renderAsStudent }
                                                 email               =   { email }

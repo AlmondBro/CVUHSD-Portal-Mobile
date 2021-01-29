@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef, Fragment } from 'react';
 import { TouchableOpacity } from 'react-native';
+
 import RequestPreview from './RequestPreview/RequestPreview.js';
+// import RequestSpecifics from './RequestSpecifics/RequestSpecifics.js';
 
 import undefsafe from 'undefsafe';
 import { useActionSheet } from '@expo/react-native-action-sheet';
@@ -92,9 +94,10 @@ const dateFormatChange = (dateToChange) => {
  * @param { boolean } renderAsStudent dictates whether a staff member is choosing to view the app through a student's eyes
  * @return { ReactComponent } React component is returned
  */
-const ViewRequests = ({navigation, email, districtPosition, renderAsStudent}) => {
+const ViewRequests = ({ navigation, email, districtPosition, renderAsStudent}) => {
     const isDev = __DEV__;
 
+    let { navigate } = navigation;
     let [ isLoading, setIsLoading ]             = useState(false);
     let [ requestPreviews, setRequestPreviews ] = useState([]);
     let [ requestsType, setRequestsType ]       =   useState("All");
@@ -120,7 +123,9 @@ const ViewRequests = ({navigation, email, districtPosition, renderAsStudent}) =>
             if (undefsafe(site, "name")) {
                 site   =  site.name;
             }
-            
+
+            let routeParams = { status, subject, description, date, time, id, technician, site };
+
             return (
                 <RequestPreview
                     navigation          =   { navigation }
@@ -135,6 +140,7 @@ const ViewRequests = ({navigation, email, districtPosition, renderAsStudent}) =>
                     id                  =   { id }
                     isLoading           =   { isLoading }
 
+                    onPress             =   { () => navigate("Request Details", routeParams)}
                     // onClick             =   { () => routeToReqID(requestObject, subject, description, time, date, status, technician, site) }
 
                     key                 =   { id }
@@ -249,15 +255,20 @@ const ViewRequests = ({navigation, email, districtPosition, renderAsStudent}) =>
                     onPress             =   { openFilterOptions }
                 />
 
-                <Button
-                    width               =   "80px" 
-                    iconName            =   "sort"
-                    
-                    districtPosition    =   { districtPosition } 
-                    renderAsStudent     =   { renderAsStudent }
-
-                    onPress             =   { () => setRequestPreviews([...requestPreviews].reverse()) }
-                />
+                {
+                    (requestPreviews && requestPreviews.length > 1) ? (
+                        <Button
+                            width               =   "80px" 
+                            iconName            =   "sort"
+                            
+                            districtPosition    =   { districtPosition } 
+                            renderAsStudent     =   { renderAsStudent }
+        
+                            onPress             =   { () => setRequestPreviews([...requestPreviews].reverse()) }
+                        />
+                    ) : null
+                }   
+               
             </SortFilterButtonsContainer>
        
             <RequestPreviewContainer>
