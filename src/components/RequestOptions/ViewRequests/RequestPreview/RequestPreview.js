@@ -218,7 +218,7 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
                                 districtPosition    =   { districtPosition } 
                                 renderAsStudent     =   { renderAsStudent }
                             >
-                                {subject || "Canvas Test" }
+                                { subject || "Canvas Test" }
                             </Subject>
                         </SkeletonScreen>
                         <SkeletonScreen

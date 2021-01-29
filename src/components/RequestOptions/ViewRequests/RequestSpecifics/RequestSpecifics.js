@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import undefsafe from 'undefsafe';
 
-import { TouchableOpacity} from 'react-native';
+import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import * as Linking from 'expo-linking';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import TouchableButton from './../../../TouchableButton/TouchableButton.js';
@@ -233,12 +234,17 @@ const RequestSpecifics = ({ navigation, route, districtPosition, renderAsStudent
                                 marginTop           =   { 8 }
                                 marginLeft          =   { 0 }
                             >
-                                <MetaDataText
-                                    districtPosition    =   { districtPosition } 
-                                    renderAsStudent     =   { renderAsStudent }
+                                <TouchableOpacity
+                                    onPress             =   { () => Linking.openURL(`mailto:${techInfo.email_id}`)}
                                 >
-                                    { techFullNameFormatted || "No assigned tech" }
-                                </MetaDataText>
+                                    <MetaDataText
+                                        districtPosition    =   { districtPosition } 
+                                        renderAsStudent     =   { renderAsStudent }
+                                    >
+                                        { techFullNameFormatted || "No assigned tech" }
+                                    </MetaDataText>
+                                </TouchableOpacity>
+                             
                             </SkeletonScreen>
                         
                         </MetaDataIconTextContainer>
@@ -305,7 +311,7 @@ const RequestSpecifics = ({ navigation, route, districtPosition, renderAsStudent
                     color       =   "white"
                     bgColor     =   {((districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"}
                 
-                    onPress     =   { () => navigate("Conversations List", { ...route.params, email})}
+                    onPress     =   { () => navigate("Conversations List", { date, time, email})}
                 />
             </Content>
         </Container>

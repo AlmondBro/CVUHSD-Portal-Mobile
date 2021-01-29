@@ -95,6 +95,7 @@ const MetaDataIcon = styled(FontAwesome5)`
 
 const MetaDataText = styled.Text`
     color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
+    background-color: white;
 `;
 
 const SubjDescContainer = styled.View`

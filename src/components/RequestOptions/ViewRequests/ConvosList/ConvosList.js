@@ -13,16 +13,19 @@ import { Container, Content, HighlightedButton, SkeletonScreen, MetaDataContaine
  * @param { string } districtPosition the role of the school district user
  * @param { boolean } renderAsStudent dictates whether a staff member is choosing to view the app through a student's eyes
  */
-const ConvosList = ({ navigation, route, email, districtPosition, renderAsStudent, isLoading }) => {
+const ConvosList = ({ navigation, route, email, districtPosition, renderAsStudent }) => {
+    const isDev = __DEV__;
     const metadataIconsSize = 22;
 
     let [ faIconName, setFAIcon ] = useState("spinner");
     let [ buttonPressed, setButtonPressed ] = useState(false);
 
-    let { subject, description, date, time, id, technician, site, status } = route.params;
+    let [ convoComps, setConvoComps ]   = useState([]);
+    let [ showConvos, setShowConvos ]   = useState(false);
+    let [ isLoading, setIsLoading ]     = useState(false);
 
-    isLoading = false;
-
+    let { date, time, id } = route.params
+    
     if (undefsafe(site, "name")) {
         site   =  site.name;
     }
@@ -55,9 +58,57 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
         return faIcon;
     }; 
     
+    const getReqConvos = async (id) => {
+        let requests = [];
+
+        const getConvos_URL = `${isDev ? "" : "/server"}/helpdesk/request/get-convos/${id}`;
+        const getConvos_Headers = {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            "Access-Control-Allow-Credentials": true
+        };
+    
+        let convos = await fetch(getConvos_URL, {
+            method: 'GET',
+            headers: getConvos_Headers
+        })
+        .then((serverResponse) => serverResponse.json()) //Parse the JSON of the response
+        .then((jsonResponse) => jsonResponse.convos)
+        .catch((error) => {
+            console.error(`getReqConvos() Catching error:\t ${error}`);
+        });
+
+        if (convos && !convos.error) {
+            requests = convos.requests;
+        } else {
+            console.log(`Error in fetching the convo requests.`);
+
+            convos = [];
+        }
+
+        return convos;
+    }; //end getReqConvos
+
+    const loadConvoComponents = async () => {
+        setIsLoading(true);
+
+        let convos          = await getReqConvos(id);
+        let convoComponents = mapConvos([...convos].reverse());
+
+        console.log("ReqSpecifics convos:\t", convos);
+        console.log("ReqSpecifics convoComponents:\t", convoComponents);
+        setConvoComps(convoComponents);
+
+        setIsLoading(false);
+    };
+
     useEffect(() => {
         getFAIcon(status);
     }, [ status ]);
+
+    useEffect(() => {
+        loadConvoComponents();
+    }, []); 
 
     return (
         <Container>
@@ -76,64 +127,6 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
                     onPressOut          =   { () => setButtonPressed(false) }
                 > */}
                     <MetaDataContainer>
-                    <MetaDataIconTextContainer>
-                            {
-                                isLoading ? (
-                                    <SkeletonScreen 
-                                        isLoading           =   { isLoading }
-                                        districtPosition    =   { districtPosition }
-                                        renderAsStudent     =   { renderAsStudent } 
-
-                                        containerWidth      =   { 50 }
-                                        width               =   { 25 }
-                                        height              =   { 15 }
-                                        identifier          =   {`request-specifics-status-icon-skeleton-${Math.random()*1000+1}`}
-                                        
-                                        marginTop           =   { 8 }
-                                        marginLeft          =   { 0 }
-                                        marginRight         =   { "auto" }
-                                    >
-                                        <MetaDataIcon
-                                            districtPosition    =   { districtPosition } 
-                                            renderAsStudent     =   { renderAsStudent }
-
-                                            name                =   { faIconName } 
-                                            size                =   {   metadataIconsSize  } 
-                                        />
-                                    </SkeletonScreen>
-                                ) : (
-                                    <MetaDataIcon
-                                        districtPosition    =   { districtPosition } 
-                                        renderAsStudent     =   { renderAsStudent }
-
-                                        name                =   { faIconName } 
-                                        size                =   {   metadataIconsSize  } 
-                                    />
-                                )
-                            }
-                            
-                            <SkeletonScreen
-                                isLoading           =   { isLoading }
-                                districtPosition    =   { districtPosition }
-                                renderAsStudent     =   { renderAsStudent } 
-
-                                containerWidth      =   { 50 }
-                                width               =   { 80 }
-                                height              =   { 15 }
-                                identifier          =   {`request-specifics-req-status-skeleton-${Math.random()*1000+1}`}
-                                
-                                marginTop           =   { 8 }
-                                marginLeft          =   { -30 }
-                                marginRight         =   { "auto" }
-                            >
-                                <MetaDataText
-                                    districtPosition    =   { districtPosition } 
-                                    renderAsStudent     =   { renderAsStudent }
-                                >
-                                    { status || "Closed" }
-                                </MetaDataText>
-                            </SkeletonScreen>
-                        </MetaDataIconTextContainer>
                         <MetaDataIconTextContainer>
                             <MetaDataIcon
                                 districtPosition    =   { districtPosition } 
@@ -255,7 +248,7 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
 
                 <TouchableButton 
                     fontSize    =   "14px"
-                    buttonTitle =   "Conversations" 
+                    buttonTitle =   "Reply" 
                     width       =   "60%" 
                     color       =   "white"
                     bgColor     =   {((districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"}
