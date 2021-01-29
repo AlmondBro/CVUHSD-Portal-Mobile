@@ -7,10 +7,20 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 const baseMarginTop = 38;
 
-const SkeletonScreen = ({ children, width, containerWidth, height, isLoading, districtPosition, renderAsStudent, identifier, marginTop, marginBottom, marginLeft, marginRight }) => {
+const SkeletonScreen = ({ children, flexValue, flexDirection, width, containerWidth, height, isLoading, districtPosition, renderAsStudent, numberOfLines = 1, identifier, marginTop, marginBottom, marginLeft, marginRight }) => {
+    const layoutLines = Array.from({ 
+            length: numberOfLines
+        }, 
+        () => ({   
+            key: identifier + "-" + (Math.random()*3000), 
+            width: (width || "100%"), 
+            height: (height || 20), marginTop: (marginTop || 0), marginBottom: (marginBottom || 0), marginLeft: (marginLeft || 0), marginRight: (marginRight || 0)
+        })
+    );
+    
     return (
         <SkeletonContent
-            containerStyle  =   { { flex: 1, width: (isLoading ? containerWidth : "100%"), flexDirection: "row", justifyContent: "center" } }
+            containerStyle  =   { { flex: (flexValue || 1), width: (isLoading ? containerWidth : "100%"), flexDirection: (flexDirection || "row"), justifyContent: "center" } }
             isLoading       =   { isLoading } 
             animationType   =   "shiver"
 
@@ -27,9 +37,7 @@ const SkeletonScreen = ({ children, width, containerWidth, height, isLoading, di
                                     : "rgba(147, 30, 29, 0.1)" 
             }
 
-            layout={[
-                { key: identifier, width: (width || "100%"), height: (height || 20), marginTop: (marginTop || 0), marginBottom: (marginBottom || 0), marginLeft: (marginLeft || 0), marginRight: (marginRight || 0)},
-            ]}
+            layout          =   { layoutLines }
         >
             { children }
         </SkeletonContent>
@@ -95,10 +103,11 @@ const SubjDescContainer = styled.View`
 `;
 
 const Subject = styled.Text`
-    color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
     font-family: SourceSansPro_400Regular;
     font-size: 16px;
     text-align: center;
+
+    background-color: lightblue;
 `;
 
 const Description = styled(Subject)`
@@ -106,6 +115,8 @@ const Description = styled(Subject)`
     font-family: SourceSansPro_400Regular;
     font-size: 13px;
     text-align: center;
+
+    background-color: yellow;
 
     opacity: 0.42;
 `;

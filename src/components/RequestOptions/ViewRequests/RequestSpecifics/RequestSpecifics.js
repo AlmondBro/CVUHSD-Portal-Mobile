@@ -41,16 +41,8 @@ const RequestSpecifics = ({ navigation, route, districtPosition, renderAsStudent
     let [ buttonPressed, setButtonPressed ] = useState(false);
 
     let { subject, description, date, time, id, technician, site, status } = route.params;
-    
-    // let dateAndTime = parseDate(created_time["display_value"]);
 
-    // const date = dateFormatChange(dateAndTime[0]);
-
-    // const time = dateAndTime[1] + " " + dateAndTime[2];
-    
-    // status = status.name;
-
-    isLoading = false;
+    isLoading = true;
 
     if (undefsafe(site, "name")) {
         site   =  site.name;
@@ -235,12 +227,15 @@ const RequestSpecifics = ({ navigation, route, districtPosition, renderAsStudent
                             districtPosition    =   { districtPosition }
                             renderAsStudent     =   { renderAsStudent } 
 
+                            flexValue           =   { -1 }
+                            flexDirection       =   "column"
+
                             containerWidth      =   { 300 }
                             height              =   { 20 }
                             identifier          =   {`request-specifics-subject-skeleton-${Math.random()*1000+1}`}
                             
-                            marginTop           =   { 24 }
-                            marginLeft          =   { 45 }
+                            marginTop           =   { 10 }
+                            marginLeft          =   { 25 }
                         >
                             <Subject
                                 districtPosition    =   { districtPosition } 
@@ -254,12 +249,16 @@ const RequestSpecifics = ({ navigation, route, districtPosition, renderAsStudent
                             districtPosition    =   { districtPosition }
                             renderAsStudent     =   { renderAsStudent } 
 
+                            flexValue           =   { -1 }
+                            flexDirection       =   "column"
+                            numberOfLines       =   { 10 }
+
                             containerWidth      =   { 250 }
                             height              =   { 20 }
                             identifier          =   {`request-specifics-description-skeleton-${Math.random()*1000+1}`}
                             
                             marginTop           =   { 24 }
-                            marginLeft          =   { 95 }
+                            marginLeft          =   { "18%" }
                         >
                             <Description
                                 districtPosition    =   { districtPosition } 
