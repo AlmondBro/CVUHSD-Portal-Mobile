@@ -249,15 +249,20 @@ const ViewRequests = ({navigation, email, districtPosition, renderAsStudent}) =>
                     onPress             =   { openFilterOptions }
                 />
 
-                <Button
-                    width               =   "80px" 
-                    iconName            =   "sort"
-                    
-                    districtPosition    =   { districtPosition } 
-                    renderAsStudent     =   { renderAsStudent }
-
-                    onPress             =   { () => setRequestPreviews([...requestPreviews].reverse()) }
-                />
+                {
+                    (requestPreviews && requestPreviews.length > 1) ? (
+                        <Button
+                            width               =   "80px" 
+                            iconName            =   "sort"
+                            
+                            districtPosition    =   { districtPosition } 
+                            renderAsStudent     =   { renderAsStudent }
+        
+                            onPress             =   { () => setRequestPreviews([...requestPreviews].reverse()) }
+                        />
+                    ) : null
+                }   
+               
             </SortFilterButtonsContainer>
        
             <RequestPreviewContainer>

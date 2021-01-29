@@ -103,18 +103,6 @@ const Description = styled(Subject)`
     opacity: 0.42;
 `;
 
-const HighlightedButton = styled.TouchableOpacity`
-    flex: 1;
-    width: 100%;
-    background-color: ${    props => props.districtPosition ?
-                                            ( (props.districtPosition.toLowerCase() === "student") || props.renderAsStudent) ? 
-                                                `rgba(147, 30, 29, ${props.buttonPressed ? "0.05" : "0"})`: `rgba(30, 108, 147, ${props.buttonPressed ? "0.05" : "0"})`
-                                            :   `rgba(147, 30, 29, ${props.buttonPressed ? "0.05" : "0"})`
-                        };
-    border-radius: 10px;
-    padding: 15px;
-`;
 
 
-
-export { Container, Content, HighlightedButton, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, Description };
+export { Container, Content, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, Description };

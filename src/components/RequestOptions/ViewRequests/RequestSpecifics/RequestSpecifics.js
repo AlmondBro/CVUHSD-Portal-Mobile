@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { TouchableOpacity } from 'react-native';
 
-import {  Container, Content, HighlightedButton, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, Description } from './RequestPreviewStyledComponents.js';
+import {  Container, Content, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, Description } from './RequestPreviewStyledComponents.js';
 
 /**
  * React functional component that displays the main metadata of a request, such as time and date submitted, subject, and description
@@ -9,11 +8,10 @@ import {  Container, Content, HighlightedButton, SkeletonScreen, MetaDataContain
  * @param { string } districtPosition the role of the school district user
  * @param { boolean } renderAsStudent dictates whether a staff member is choosing to view the app through a student's eyes
  */
-const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject, description, date, time, id, status, onClick, isLoading }) => {
+const RequestSpecifics = ({ navigation, districtPosition, renderAsStudent, subject, description, date, time, id, status, onClick, isLoading }) => {
     const metadataIconsSize = 22;
 
     let [ faIconName, setFAIcon ] = useState("spinner");
-    let [ buttonPressed, setButtonPressed ] = useState(false);
 
     const getFAIcon = (status) => {
         let faIcon;
@@ -43,17 +41,6 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
         return faIcon;
     }; 
     
-    const truncateDescription = (description) => {
-        if (description && description.length >= 90) {
-            let truncatedDescr = description.substr(0, 129);
-
-            let truncDescEllipses = truncatedDescr + "...";
-    
-            return truncDescEllipses;
-        }
-        return description;
-    };
-    
     useEffect(() => {
         getFAIcon(status);
     }, [ status ]);
@@ -64,17 +51,6 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
                 districtPosition    =   { districtPosition } 
                 renderAsStudent     =   { renderAsStudent }
             >
-                    <HighlightedButton
-                        districtPosition    =   { districtPosition } 
-                        renderAsStudent     =   { renderAsStudent }
-
-                        activeOpacity       =   { 1.0 }
-                        buttonPressed       =   { buttonPressed }
-
-                        onPressIn           =   { () => setButtonPressed(true) }
-                        onPressOut           =   { () => setButtonPressed(false) }
-                    >
-
                 <MetaDataContainer>
                     <MetaDataIconTextContainer>
                         <MetaDataIcon
@@ -236,16 +212,14 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
                             districtPosition    =   { districtPosition } 
                             renderAsStudent     =   { renderAsStudent }
                         >
-                            { truncateDescription(description) || "Canvas test rule ticket" }
+                            { description || "Canvas test rule ticket" }
                         </Description>
                     </SkeletonScreen>
                 </SubjDescContainer>
-                </HighlightedButton>
               
             </Content>
-
         </Container>
     ); //end return statement
 }; //end RequestPreview()
 
-export default RequestPreview;
+export default RequestSpecifics;
