@@ -35,54 +35,55 @@ const dateFormatChange = (dateToChange) => {
     return formattedDate;
 };
 
-/**
- * @param { string } districtPosition string to indicate a school district user's role  
- * @param { boolean } renderAsStudent boolean to indicate whether to render the student color scheme and items, even as a staff member
- * @param { boolean } isLoading boolean to indicate whether this component is loading, such as from fetching requests
- * @param { Object } navigation object passed down from React Navigation's <NavigationContainer/>.
- */
-const LoadingReqPreviews = ({navigation, isLoading, districtPosition, renderAsStudent}) => {
-    return (
-        <Fragment>
-            <RequestPreview
-                navigation          =   { navigation }
-                isLoading           =   { isLoading }
+// /**
+//  * @param { string } districtPosition string to indicate a school district user's role  
+//  * @param { boolean } renderAsStudent boolean to indicate whether to render the student color scheme and items, even as a staff member
+//  * @param { boolean } isLoading boolean to indicate whether this component is loading, such as from fetching requests
+//  * @param { Object } navigation object passed down from React Navigation's <NavigationContainer/>.
+//  */
 
-                districtPosition    =   { districtPosition }
-                renderAsStudent     =   { renderAsStudent }
+// const LoadingReqPreviews = ({navigation, isLoading, districtPosition, renderAsStudent}) => {
+//     return (
+//         <Fragment>
+//             <RequestPreview
+//                 navigation          =   { navigation }
+//                 isLoading           =   { true }
 
-                key                 =   { `loading-request-preview-${Math.random()*2000 + 1}` }
-            />
-             <RequestPreview
-                navigation          =   { navigation }
-                isLoading           =   { isLoading }
+//                 districtPosition    =   { districtPosition }
+//                 renderAsStudent     =   { renderAsStudent }
 
-                districtPosition    =   { districtPosition }
-                renderAsStudent     =   { renderAsStudent }
+//                 key                 =   { `loading-request-preview-${Math.random()*2000 + 1}` }
+//             />
+//              <RequestPreview
+//                 navigation          =   { navigation }
+//                 isLoading           =   { isLoading }
 
-                key                 =   { `loading-request-preview-${Math.random()*2000 + 1}` }
-            />
-            {/* <RequestPreview
-                navigation          =   { navigation }
-                isLoading           =   { isLoading }
+//                 districtPosition    =   { districtPosition }
+//                 renderAsStudent     =   { renderAsStudent }
 
-                districtPosition    =   { districtPosition }
-                renderAsStudent     =   { renderAsStudent }
+//                 key                 =   { `loading-request-preview-${Math.random()*2000 + 1}` }
+//             />
+//             {/* <RequestPreview
+//                 navigation          =   { navigation }
+//                 isLoading           =   { isLoading }
 
-                key                 =   { `loading-request-preview-${Math.random()*2000 + 1}` }
-            />
-            <RequestPreview
-                navigation          =   { navigation }
-                isLoading           =   { isLoading }
+//                 districtPosition    =   { districtPosition }
+//                 renderAsStudent     =   { renderAsStudent }
 
-                districtPosition    =   { districtPosition }
-                renderAsStudent     =   { renderAsStudent }
+//                 key                 =   { `loading-request-preview-${Math.random()*2000 + 1}` }
+//             />
+//             <RequestPreview
+//                 navigation          =   { navigation }
+//                 isLoading           =   { isLoading }
 
-                key                 =   { `loading-request-preview-${Math.random()*2000 + 1}` }
-            /> */}
-        </Fragment>
-       );
- }; //end loadLoadingReqPreviews()
+//                 districtPosition    =   { districtPosition }
+//                 renderAsStudent     =   { renderAsStudent }
+
+//                 key                 =   { `loading-request-preview-${Math.random()*2000 + 1}` }
+//             /> */}
+//         </Fragment>
+//        );
+//  }; //end loadLoadingReqPreviews()
 
 /**
  * React functional component to house the screen to view all the requests
@@ -262,7 +263,7 @@ const ViewRequests = ({navigation, email, districtPosition, renderAsStudent}) =>
             <RequestPreviewContainer>
                 <TouchableOpacity activeOpacity={1}>
                     { isLoading ? (
-                        <LoadingReqPreviews
+                        <RequestPreview
                             navigation          =   { navigation } 
                             isLoading           =   { true }
                             districtPosition    =   { districtPosition}
