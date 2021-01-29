@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Fragment } from 'react';
 import { TouchableOpacity } from 'react-native';
 import RequestPreview from './RequestPreview/RequestPreview.js';
 
@@ -43,15 +43,45 @@ const dateFormatChange = (dateToChange) => {
  */
 const LoadingReqPreviews = ({navigation, isLoading, districtPosition, renderAsStudent}) => {
     return (
-         <RequestPreview
-             navigation          =   { navigation }
-             isLoading           =   { isLoading }
+        <Fragment>
+            <RequestPreview
+                navigation          =   { navigation }
+                isLoading           =   { isLoading }
 
-             districtPosition    =   { districtPosition }
-             renderAsStudent     =   { renderAsStudent }
+                districtPosition    =   { districtPosition }
+                renderAsStudent     =   { renderAsStudent }
 
-             key                 =   { `loading-request-preview-${Math.random()*10 + 1}` }
-         />);
+                key                 =   { `loading-request-preview-${Math.random()*2000 + 1}` }
+            />
+             <RequestPreview
+                navigation          =   { navigation }
+                isLoading           =   { isLoading }
+
+                districtPosition    =   { districtPosition }
+                renderAsStudent     =   { renderAsStudent }
+
+                key                 =   { `loading-request-preview-${Math.random()*2000 + 1}` }
+            />
+            {/* <RequestPreview
+                navigation          =   { navigation }
+                isLoading           =   { isLoading }
+
+                districtPosition    =   { districtPosition }
+                renderAsStudent     =   { renderAsStudent }
+
+                key                 =   { `loading-request-preview-${Math.random()*2000 + 1}` }
+            />
+            <RequestPreview
+                navigation          =   { navigation }
+                isLoading           =   { isLoading }
+
+                districtPosition    =   { districtPosition }
+                renderAsStudent     =   { renderAsStudent }
+
+                key                 =   { `loading-request-preview-${Math.random()*2000 + 1}` }
+            /> */}
+        </Fragment>
+       );
  }; //end loadLoadingReqPreviews()
 
 /**
@@ -232,33 +262,12 @@ const ViewRequests = ({navigation, email, districtPosition, renderAsStudent}) =>
             <RequestPreviewContainer>
                 <TouchableOpacity activeOpacity={1}>
                     { isLoading ? (
-                        [
                         <LoadingReqPreviews
                             navigation          =   { navigation } 
                             isLoading           =   { true }
                             districtPosition    =   { districtPosition}
                             renderAsStudent     =   { renderAsStudent}
-                        />,
-                        <LoadingReqPreviews
-                            navigation          =   { navigation } 
-                            isLoading           =   { true }
-                            districtPosition    =   { districtPosition}
-                            renderAsStudent     =   { renderAsStudent}
-                        />, 
-                        <LoadingReqPreviews
-                            navigation          =   { navigation } 
-                            isLoading           =   { true }
-                            districtPosition    =   { districtPosition}
-                            renderAsStudent     =   { renderAsStudent}
-                        />,
-                        <LoadingReqPreviews
-                            navigation          =   { navigation } 
-                            isLoading           =   { true }
-                            districtPosition    =   { districtPosition}
-                            renderAsStudent     =   { renderAsStudent}
-                        />, 
-
-                        ]
+                        />
                     ) : (requestPreviews.length > 0) ? requestPreviews : (
                         <NoRequestsMessage
                             districtPosition    =   { districtPosition } 
