@@ -9,7 +9,7 @@ import {  Container, Content, HighlightedButton, SkeletonScreen, MetaDataContain
  * @param { string } districtPosition the role of the school district user
  * @param { boolean } renderAsStudent dictates whether a staff member is choosing to view the app through a student's eyes
  */
-const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject, description, date, time, id, status, onClick, isLoading }) => {
+const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject, description, date, time, id, status, onPress, isLoading }) => {
     const metadataIconsSize = 22;
 
     let [ faIconName, setFAIcon ] = useState("spinner");
@@ -72,7 +72,9 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
                     buttonPressed       =   { buttonPressed }
 
                     onPressIn           =   { () => setButtonPressed(true) }
-                    onPressOut           =   { () => setButtonPressed(false) }
+                    onPressOut          =   { () => setButtonPressed(false) }
+
+                    onPress             =   { onPress }
                 >
                     <MetaDataContainer>
                         <MetaDataIconTextContainer>

@@ -5,6 +5,8 @@ import SkeletonContent from 'react-native-skeleton-content';
 
 import { FontAwesome5 } from '@expo/vector-icons'; 
 
+const baseMarginTop = 38;
+
 const SkeletonScreen = ({ children, width, containerWidth, height, isLoading, districtPosition, renderAsStudent, identifier, marginTop, marginBottom, marginLeft, marginRight }) => {
     return (
         <SkeletonContent
@@ -40,7 +42,8 @@ const Container = styled.View`
     align-items: center;
     background-color: white;
 
-    margin-bottom: 25px;
+    /* margin-bottom: 25px; */
+    margin-top: ${baseMarginTop + 12}px;
 `;
 
 const Content = styled.View`
@@ -103,6 +106,18 @@ const Description = styled(Subject)`
     opacity: 0.42;
 `;
 
+const HighlightedButton = styled.TouchableOpacity`
+    flex: 1;
+    width: 100%;
+    background-color: ${    props => props.districtPosition ?
+                                            ( (props.districtPosition.toLowerCase() === "student") || props.renderAsStudent) ? 
+                                                `rgba(147, 30, 29, ${props.buttonPressed ? "0.05" : "0"})`: `rgba(30, 108, 147, ${props.buttonPressed ? "0.05" : "0"})`
+                                            :   `rgba(147, 30, 29, ${props.buttonPressed ? "0.05" : "0"})`
+                        };
+    border-radius: 10px;
+    padding: 15px;
+`;
 
 
-export { Container, Content, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, Description };
+
+export { Container, Content, HighlightedButton, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, Description };
