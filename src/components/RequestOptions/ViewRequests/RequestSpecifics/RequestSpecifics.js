@@ -8,30 +8,6 @@ import TouchableButton from './../../../TouchableButton/TouchableButton.js';
 import {  Container, Content, HighlightedButton, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, DescrScrollContainer, Description } from './RequestSpecificsStyledComponents.js';
 
 /**
- * Function to parse the date into a an array, to later extract the time and date subparts.
- * @param { string } stringToParse
- * @return { array } dateAndTime the dtae and time in one array
- */
-const parseDate = (stringToParse) => {
-    let dateAndTime = stringToParse.split(" ");
-
-    return dateAndTime;
-}; //end parseDate()
-
-/**
- * Function to return a formatted string date.
- * @param { string } dateToChange 
- * @return { string } formattedDate
- */
-const dateFormatChange = (dateToChange) => {
-    const dateParts = dateToChange.split("/");
-
-    const formattedDate  = dateParts[1] + "/" +  dateParts[0] + "/" + dateParts[2];
-
-    return formattedDate;
-};
-
-/**
  * React functional component that displays the main metadata of a request, such as time and date submitted, subject, and description
  * @param { Object } navigation  object passed from React Navigation's Navigation Container. Houses methods to navigate across the different streams.
  * @param { string } districtPosition the role of the school district user
@@ -55,7 +31,7 @@ const RequestSpecifics = ({ navigation, route, districtPosition, renderAsStudent
     
     Morbi luctus sem viverra, sollicitudin tortor quis, cursus risus. Curabitur sed ipsum faucibus ligula volutpat viverra. Quisque at dolor vel metus suscipit consectetur. Aenean scelerisque vehicula enim in placerat. Vestibulum non sollicitudin enim, vel ultrices nunc. Quisque blandit sed lacus et blandit. Vivamus vel diam eu lectus semper euismod at vel mauris. Cras non laoreet velit. Duis molestie nibh nec pulvinar aliquet. Duis a eleifend nisi. In orci leo, porttitor in erat sed, semper ultricies tortor. Nullam sed mauris nulla. Cras lobortis tincidunt sodales. `;
    
-    description = Array.from({ length: 5 }, () => loremIpsum).toString();
+    // description = Array.from({ length: 5 }, () => loremIpsum).toString();
 
     if (undefsafe(site, "name")) {
         site   =  site.name;
