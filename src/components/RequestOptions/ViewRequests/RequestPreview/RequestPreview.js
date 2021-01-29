@@ -64,99 +64,107 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
                 districtPosition    =   { districtPosition } 
                 renderAsStudent     =   { renderAsStudent }
             >
-                    <HighlightedButton
-                        districtPosition    =   { districtPosition } 
-                        renderAsStudent     =   { renderAsStudent }
+                <HighlightedButton
+                    districtPosition    =   { districtPosition } 
+                    renderAsStudent     =   { renderAsStudent }
 
-                        activeOpacity       =   { 1.0 }
-                        buttonPressed       =   { buttonPressed }
+                    activeOpacity       =   { 1.0 }
+                    buttonPressed       =   { buttonPressed }
 
-                        onPressIn           =   { () => setButtonPressed(true) }
-                        onPressOut           =   { () => setButtonPressed(false) }
-                    >
-
-                <MetaDataContainer>
-                    <MetaDataIconTextContainer>
-                        <MetaDataIcon
-                            districtPosition    =   { districtPosition } 
-                            renderAsStudent     =   { renderAsStudent }
-
-                             name                =   "clock" 
-                             size                =   {   metadataIconsSize  } 
-                        />
-
-                        <SkeletonScreen 
-                            isLoading           =   { isLoading }
-                            districtPosition    =   { districtPosition }
-                            renderAsStudent     =   { renderAsStudent } 
-
-                            containerWidth      =   { 50 }
-                            width               =   { 90 }
-                            height              =   { 15 }
-                            identifier          =   {`request-preview-date-skeleton-${Math.random()*1000+1}`}
-                            
-                            marginTop           =   { 8 }
-                            marginLeft          =   { 0 }
-                        >
-                            <MetaDataText
+                    onPressIn           =   { () => setButtonPressed(true) }
+                    onPressOut           =   { () => setButtonPressed(false) }
+                >
+                    <MetaDataContainer>
+                        <MetaDataIconTextContainer>
+                            <MetaDataIcon
                                 districtPosition    =   { districtPosition } 
                                 renderAsStudent     =   { renderAsStudent }
+
+                                name                =   "clock" 
+                                size                =   {   metadataIconsSize  } 
+                            />
+
+                            <SkeletonScreen 
+                                isLoading           =   { isLoading }
+                                districtPosition    =   { districtPosition }
+                                renderAsStudent     =   { renderAsStudent } 
+
+                                containerWidth      =   { 50 }
+                                width               =   { 90 }
+                                height              =   { 15 }
+                                identifier          =   {`request-preview-date-skeleton-${Math.random()*1000+1}`}
+                                
+                                marginTop           =   { 8 }
+                                marginLeft          =   { 0 }
                             >
-                                { time || "11:33 AM" }
-                            </MetaDataText>
-                        </SkeletonScreen>
-                    </MetaDataIconTextContainer>
-
-                    <MetaDataIconTextContainer>
-                        <MetaDataIcon
-                            districtPosition    =   { districtPosition } 
-                            renderAsStudent     =   { renderAsStudent }
-
-                             color               =   { ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" }
-                             name                =   "calendar" 
-                             size                =   {   metadataIconsSize  } 
-                        />
-
-                        <SkeletonScreen
-                            isLoading           =   { isLoading }
-                            districtPosition    =   { districtPosition }
-                            renderAsStudent     =   { renderAsStudent } 
-
-                            containerWidth      =   { 50 }
-                            width               =   { 100 }
-                            height              =   { 15 }
-                            identifier          =   {`request-preview-date-skeleton-${Math.random()*1000+1}`}
-                            
-                            marginTop           =   { 8 }
-                            marginLeft          =   { 0 }
-                        >
-                            <MetaDataText
-                                districtPosition    =   { districtPosition } 
-                                renderAsStudent     =   { renderAsStudent }
-                            >
-                                { date || "12/09/2020" }
-                            </MetaDataText>
-                        </SkeletonScreen>
-                     
-                    </MetaDataIconTextContainer>
-
-                    <MetaDataIconTextContainer>
-                        {
-                            isLoading ? (
-                                <SkeletonScreen 
-                                    isLoading           =   { isLoading }
-                                    districtPosition    =   { districtPosition }
-                                    renderAsStudent     =   { renderAsStudent } 
-
-                                    containerWidth      =   { 50 }
-                                    width               =   { 25 }
-                                    height              =   { 15 }
-                                    identifier          =   {`request-preview-status-icon-skeleton-${Math.random()*1000+1}`}
-                                    
-                                    marginTop           =   { 8 }
-                                    marginLeft          =   { 0 }
-                                    marginRight         =   { "auto" }
+                                <MetaDataText
+                                    districtPosition    =   { districtPosition } 
+                                    renderAsStudent     =   { renderAsStudent }
                                 >
+                                    { time || "11:33 AM" }
+                                </MetaDataText>
+                            </SkeletonScreen>
+                        </MetaDataIconTextContainer>
+
+                        <MetaDataIconTextContainer>
+                            <MetaDataIcon
+                                districtPosition    =   { districtPosition } 
+                                renderAsStudent     =   { renderAsStudent }
+
+                                color               =   { ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" }
+                                name                =   "calendar" 
+                                size                =   {   metadataIconsSize  } 
+                            />
+
+                            <SkeletonScreen
+                                isLoading           =   { isLoading }
+                                districtPosition    =   { districtPosition }
+                                renderAsStudent     =   { renderAsStudent } 
+
+                                containerWidth      =   { 50 }
+                                width               =   { 100 }
+                                height              =   { 15 }
+                                identifier          =   {`request-preview-date-skeleton-${Math.random()*1000+1}`}
+                                
+                                marginTop           =   { 8 }
+                                marginLeft          =   { 0 }
+                            >
+                                <MetaDataText
+                                    districtPosition    =   { districtPosition } 
+                                    renderAsStudent     =   { renderAsStudent }
+                                >
+                                    { date || "12/09/2020" }
+                                </MetaDataText>
+                            </SkeletonScreen>
+                        
+                        </MetaDataIconTextContainer>
+
+                        <MetaDataIconTextContainer>
+                            {
+                                isLoading ? (
+                                    <SkeletonScreen 
+                                        isLoading           =   { isLoading }
+                                        districtPosition    =   { districtPosition }
+                                        renderAsStudent     =   { renderAsStudent } 
+
+                                        containerWidth      =   { 50 }
+                                        width               =   { 25 }
+                                        height              =   { 15 }
+                                        identifier          =   {`request-preview-status-icon-skeleton-${Math.random()*1000+1}`}
+                                        
+                                        marginTop           =   { 8 }
+                                        marginLeft          =   { 0 }
+                                        marginRight         =   { "auto" }
+                                    >
+                                        <MetaDataIcon
+                                            districtPosition    =   { districtPosition } 
+                                            renderAsStudent     =   { renderAsStudent }
+
+                                            name                =   { faIconName } 
+                                            size                =   {   metadataIconsSize  } 
+                                        />
+                                    </SkeletonScreen>
+                                ) : (
                                     <MetaDataIcon
                                         districtPosition    =   { districtPosition } 
                                         renderAsStudent     =   { renderAsStudent }
@@ -164,86 +172,75 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
                                         name                =   { faIconName } 
                                         size                =   {   metadataIconsSize  } 
                                     />
-                                </SkeletonScreen>
-                            ) : (
-                                <MetaDataIcon
+                                )
+                            }
+                            
+                            <SkeletonScreen
+                                isLoading           =   { isLoading }
+                                districtPosition    =   { districtPosition }
+                                renderAsStudent     =   { renderAsStudent } 
+
+                                containerWidth      =   { 50 }
+                                width               =   { 80 }
+                                height              =   { 15 }
+                                identifier          =   {`request-preview-req-status-skeleton-${Math.random()*1000+1}`}
+                                
+                                marginTop           =   { 8 }
+                                marginLeft          =   { -30 }
+                                marginRight         =   { "auto" }
+                            >
+                                <MetaDataText
                                     districtPosition    =   { districtPosition } 
                                     renderAsStudent     =   { renderAsStudent }
+                                >
+                                    { status || "Closed" }
+                                </MetaDataText>
+                            </SkeletonScreen>
+                        </MetaDataIconTextContainer>
+                    </MetaDataContainer>
 
-                                    name                =   { faIconName } 
-                                    size                =   {   metadataIconsSize  } 
-                                />
-                            )
-                        }
-                        
+                    <SubjDescContainer>
                         <SkeletonScreen
                             isLoading           =   { isLoading }
                             districtPosition    =   { districtPosition }
                             renderAsStudent     =   { renderAsStudent } 
 
-                            containerWidth      =   { 50 }
-                            width               =   { 80 }
-                            height              =   { 15 }
-                            identifier          =   {`request-preview-req-status-skeleton-${Math.random()*1000+1}`}
+                            containerWidth      =   { 300 }
+                            height              =   { 20 }
+                            identifier          =   {`request-preview-subject-skeleton-${Math.random()*1000+1}`}
                             
-                            marginTop           =   { 8 }
-                            marginLeft          =   { -30 }
-                            marginRight         =   { "auto" }
+                            marginTop           =   { 24 }
+                            marginLeft          =   { 45 }
                         >
-                            <MetaDataText
+                            <Subject
                                 districtPosition    =   { districtPosition } 
                                 renderAsStudent     =   { renderAsStudent }
                             >
-                                { status || "Closed" }
-                            </MetaDataText>
+                                {subject || "Canvas Test" }
+                            </Subject>
                         </SkeletonScreen>
-                    </MetaDataIconTextContainer>
-                </MetaDataContainer>
+                        <SkeletonScreen
+                            isLoading           =   { isLoading }
+                            districtPosition    =   { districtPosition }
+                            renderAsStudent     =   { renderAsStudent } 
 
-                <SubjDescContainer>
-                    <SkeletonScreen
-                        isLoading           =   { isLoading }
-                        districtPosition    =   { districtPosition }
-                        renderAsStudent     =   { renderAsStudent } 
-
-                        containerWidth      =   { 300 }
-                        height              =   { 20 }
-                        identifier          =   {`request-preview-subject-skeleton-${Math.random()*1000+1}`}
-                        
-                        marginTop           =   { 24 }
-                        marginLeft          =   { 45 }
-                    >
-                        <Subject
-                            districtPosition    =   { districtPosition } 
-                            renderAsStudent     =   { renderAsStudent }
+                            containerWidth      =   { 250 }
+                            height              =   { 20 }
+                            identifier          =   {`request-preview-description-skeleton-${Math.random()*1000+1}`}
+                            
+                            marginTop           =   { 24 }
+                            marginLeft          =   { 95 }
                         >
-                            {subject || "Canvas Test" }
-                        </Subject>
-                    </SkeletonScreen>
-                    <SkeletonScreen
-                        isLoading           =   { isLoading }
-                        districtPosition    =   { districtPosition }
-                        renderAsStudent     =   { renderAsStudent } 
-
-                        containerWidth      =   { 250 }
-                        height              =   { 20 }
-                        identifier          =   {`request-preview-description-skeleton-${Math.random()*1000+1}`}
-                        
-                        marginTop           =   { 24 }
-                        marginLeft          =   { 95 }
-                    >
-                        <Description
-                            districtPosition    =   { districtPosition } 
-                            renderAsStudent     =   { renderAsStudent }
-                        >
-                            { truncateDescription(description) || "Canvas test rule ticket" }
-                        </Description>
-                    </SkeletonScreen>
-                </SubjDescContainer>
+                            <Description
+                                districtPosition    =   { districtPosition } 
+                                renderAsStudent     =   { renderAsStudent }
+                            >
+                                { truncateDescription(description) || "Canvas test rule ticket" }
+                            </Description>
+                        </SkeletonScreen>
+                    </SubjDescContainer>
                 </HighlightedButton>
-              
             </Content>
-
         </Container>
     ); //end return statement
 }; //end RequestPreview()
