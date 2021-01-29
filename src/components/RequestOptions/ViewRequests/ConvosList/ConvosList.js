@@ -5,7 +5,7 @@ import { TouchableOpacity} from 'react-native';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import TouchableButton from './../../../TouchableButton/TouchableButton.js';
-import { Container, Content, HighlightedButton, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, DescrScrollContainer, Description } from './RequestSpecificsStyledComponents.js';
+import { Container, Content, HighlightedButton, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, DescrScrollContainer, Description } from './ConvosListStyledComponents.js';
 
 /**
  * React functional component that displays the main metadata of a request, such as time and date submitted, subject, and description
@@ -13,31 +13,19 @@ import { Container, Content, HighlightedButton, SkeletonScreen, MetaDataContaine
  * @param { string } districtPosition the role of the school district user
  * @param { boolean } renderAsStudent dictates whether a staff member is choosing to view the app through a student's eyes
  */
-const RequestSpecifics = ({ navigation, route, districtPosition, renderAsStudent, email, isLoading }) => {
+const ConvosList = ({ navigation, route, email, districtPosition, renderAsStudent, isLoading }) => {
     const metadataIconsSize = 22;
 
-    let { navigate } = navigation;
-
     let [ faIconName, setFAIcon ] = useState("spinner");
+    let [ buttonPressed, setButtonPressed ] = useState(false);
 
     let { subject, description, date, time, id, technician, site, status } = route.params;
 
-    isLoading = true;
+    isLoading = false;
 
     if (undefsafe(site, "name")) {
         site   =  site.name;
     }
-
-    let techInfo = {
-        email_id: "helpdesk@centinela.k12.ca.us",
-        name: "No assigned tech"
-    };
-
-    if (technician) {
-        techInfo = technician;
-    }
-
-    let techFullNameFormatted = (techInfo.name !== "No assigned tech") ? techInfo.name.split(",")[1] + " " + techInfo.name.split(",")[0] : techInfo.name;
 
     const getFAIcon = (status) => {
         let faIcon;
@@ -210,39 +198,6 @@ const RequestSpecifics = ({ navigation, route, districtPosition, renderAsStudent
                         
                         </MetaDataIconTextContainer>
 
-                        <MetaDataIconTextContainer>
-                            <MetaDataIcon
-                                districtPosition    =   { districtPosition } 
-                                renderAsStudent     =   { renderAsStudent }
-
-                                color               =   { ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" }
-                                name                =   "tools" 
-                                size                =   {   metadataIconsSize  } 
-                            />
-
-                            <SkeletonScreen
-                                isLoading           =   { isLoading }
-                                districtPosition    =   { districtPosition }
-                                renderAsStudent     =   { renderAsStudent } 
-
-                                containerWidth      =   { 50 }
-                                width               =   { 150 }
-                                height              =   { 15 }
-                                identifier          =   {`request-specifics-tech-skeleton-${Math.random()*1000+1}`}
-                                
-                                marginTop           =   { 8 }
-                                marginLeft          =   { 0 }
-                            >
-                                <MetaDataText
-                                    districtPosition    =   { districtPosition } 
-                                    renderAsStudent     =   { renderAsStudent }
-                                >
-                                    { techFullNameFormatted || "No assigned tech" }
-                                </MetaDataText>
-                            </SkeletonScreen>
-                        
-                        </MetaDataIconTextContainer>
-
                     </MetaDataContainer>
 
                     <SubjDescContainer>
@@ -304,12 +259,10 @@ const RequestSpecifics = ({ navigation, route, districtPosition, renderAsStudent
                     width       =   "60%" 
                     color       =   "white"
                     bgColor     =   {((districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"}
-                
-                    onPress     =   { () => navigate("Conversations List", { ...route.params, email})}
                 />
             </Content>
         </Container>
     ); //end return statement
 }; //end RequestPreview()
 
-export default RequestSpecifics;
+export default ConvosList;
