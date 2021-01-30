@@ -8,6 +8,7 @@ import * as Linking from 'expo-linking';
 import TouchableButton from './../../../TouchableButton/TouchableButton.js';
 import { Container, Content, HighlightedButton, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, DescrScrollContainer, Description } from './RequestSpecificsStyledComponents.js';
 
+import { Reactotron } from './../../../../config/reactotron.dev.js';
 /**
  * React functional component that displays the main metadata of a request, such as time and date submitted, subject, and description
  * @param { Object } navigation  object passed from React Navigation's Navigation Container. Houses methods to navigate across the different streams.
@@ -88,8 +89,11 @@ const RequestSpecifics = ({ navigation, route, districtPosition, renderAsStudent
                     onPressIn           =   { () => setButtonPressed(true) }
                     onPressOut          =   { () => setButtonPressed(false) }
                 > */}
-                    <MetaDataContainer>
-                    <MetaDataIconTextContainer>
+                    <MetaDataContainer
+                      districtPosition    =   { districtPosition }
+                      renderAsStudent     =   { renderAsStudent } 
+                    >
+                        <MetaDataIconTextContainer>
                             {
                                 isLoading ? (
                                     <SkeletonScreen 
@@ -311,7 +315,7 @@ const RequestSpecifics = ({ navigation, route, districtPosition, renderAsStudent
                     color       =   "white"
                     bgColor     =   {((districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"}
                 
-                    onPress     =   { () => navigate("Conversations List", { date, time, email})}
+                    onPress     =   { () => navigate("Conversations List", { date, time, email, id})}
                 />
             </Content>
         </Container>

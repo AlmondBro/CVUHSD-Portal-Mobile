@@ -4,8 +4,15 @@ import undefsafe from 'undefsafe';
 import { TouchableOpacity} from 'react-native';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 
+import SingleConvo from './SingleConvo/SingleConvo.js';
 import TouchableButton from './../../../TouchableButton/TouchableButton.js';
-import { Container, Content, HighlightedButton, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, DescrScrollContainer, Description } from './ConvosListStyledComponents.js';
+
+import { PORTAL_LIVE_LINK, NODEJS_SERVER_PORT, IP_ADDRESS_DEV } from "@env";
+
+import { Container, Content, HighlightedButton, SkeletonScreen, SubjDescContainer, Subject, DescrScrollContainer, Description } from './ConvosListStyledComponents.js';
+
+
+import { Reactotron } from './../../../../config/reactotron.dev.js';
 
 /**
  * React functional component that displays the main metadata of a request, such as time and date submitted, subject, and description
@@ -25,9 +32,8 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
 
     let { id, date, time } = route.params;
 
-    let description = "hi";
+    Reactotron.log("ConvosList id:\t" + id);
 
-    
     const mapConvos = (convos) => {
         return convos.filter((convo, index) => convo["FROM"] != "System").map((convo, index) => {
             let { CREATEDDATE, FROM, DESCRIPTION } = convo;
@@ -39,9 +45,12 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
 
             return (
                 <SingleConvo
+                    navigation          =   { navigation }
+                    route               =   { route }
                     isLoading           =   { isLoading }
                     districtPosition    =   { districtPosition }
                     renderAsStudent     =   { renderAsStudent }
+                    email               =   { email }
 
                     description         =   { DESCRIPTION }
                     date                =   { date }
@@ -56,7 +65,7 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
     const getReqConvos = async (id) => {
         let requests = [];
 
-        const getConvos_URL = `${isDev ? "" : "/server"}/helpdesk/request/get-convos/${id}`;
+        const getConvos_URL = `${isDev ? `http://${IP_ADDRESS_DEV}:${NODEJS_SERVER_PORT}` : `https://${PORTAL_LIVE_LINK}/server`}/helpdesk/request/get-convos/${id}`;
         const getConvos_Headers = {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
@@ -67,7 +76,10 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
             method: 'GET',
             headers: getConvos_Headers
         })
-        .then((serverResponse) => serverResponse.json()) //Parse the JSON of the response
+        .then((serverResponse) => { 
+            Reactotron.log("Server response:\t", serverResponse);
+            return serverResponse.json();
+        }) //Parse the JSON of the response
         .then((jsonResponse) => jsonResponse.convos)
         .catch((error) => {
             console.error(`getReqConvos() Catching error:\t ${error}`);
@@ -87,11 +99,12 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
     const loadConvoComponents = async () => {
         setIsLoading(true);
 
-        let convos          = await getReqConvos(id);
+        let convos = await getReqConvos(id);
+        Reactotron.log("convos:\t", convos);
+        Reactotron.log("id:\t", id);
+
         let convoComponents = mapConvos([...convos].reverse());
 
-        console.log("ReqSpecifics convos:\t", convos);
-        console.log("ReqSpecifics convoComponents:\t", convoComponents);
         setConvoComps(convoComponents);
 
         setIsLoading(false);
@@ -117,73 +130,6 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
                     onPressIn           =   { () => setButtonPressed(true) }
                     onPressOut          =   { () => setButtonPressed(false) }
                 > */}
-                    <MetaDataContainer>
-                        <MetaDataIconTextContainer>
-                            <MetaDataIcon
-                                districtPosition    =   { districtPosition } 
-                                renderAsStudent     =   { renderAsStudent }
-
-                                name                =   "clock" 
-                                size                =   {   metadataIconsSize  } 
-                            />
-
-                            <SkeletonScreen 
-                                isLoading           =   { isLoading }
-                                districtPosition    =   { districtPosition }
-                                renderAsStudent     =   { renderAsStudent } 
-
-                                containerWidth      =   { 50 }
-                                width               =   { 90 }
-                                height              =   { 15 }
-                                identifier          =   {`request-specifics-date-skeleton-${Math.random()*1000+1}`}
-                                
-                                marginTop           =   { 8 }
-                                marginLeft          =   { 0 }
-                            >
-                                <MetaDataText
-                                    districtPosition    =   { districtPosition } 
-                                    renderAsStudent     =   { renderAsStudent }
-                                >
-                                    { time || "11:33 AM" }
-                                </MetaDataText>
-                            </SkeletonScreen>
-                        </MetaDataIconTextContainer>
-
-                        <MetaDataIconTextContainer>
-                            <MetaDataIcon
-                                districtPosition    =   { districtPosition } 
-                                renderAsStudent     =   { renderAsStudent }
-
-                                color               =   { ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" }
-                                name                =   "calendar" 
-                                size                =   {   metadataIconsSize  } 
-                            />
-
-                            <SkeletonScreen
-                                isLoading           =   { isLoading }
-                                districtPosition    =   { districtPosition }
-                                renderAsStudent     =   { renderAsStudent } 
-
-                                containerWidth      =   { 50 }
-                                width               =   { 100 }
-                                height              =   { 15 }
-                                identifier          =   {`request-specifics-date-skeleton-${Math.random()*1000+1}`}
-                                
-                                marginTop           =   { 8 }
-                                marginLeft          =   { 0 }
-                            >
-                                <MetaDataText
-                                    districtPosition    =   { districtPosition } 
-                                    renderAsStudent     =   { renderAsStudent }
-                                >
-                                    { date || "12/09/2020" }
-                                </MetaDataText>
-                            </SkeletonScreen>
-                        
-                        </MetaDataIconTextContainer>
-
-                    </MetaDataContainer>
-
                     <SubjDescContainer>
                         <SkeletonScreen
                             isLoading           =   { isLoading }
@@ -203,12 +149,9 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
                         >
                             <DescrScrollContainer extraScrollHeight={50} viewIsInsideTabBar={true}>
                                 <TouchableOpacity activeOpacity = { 1.0 }>
-                                    <Description
-                                        districtPosition    =   { districtPosition } 
-                                        renderAsStudent     =   { renderAsStudent }
-                                    >
-                                        { description || "Canvas test rule ticket" }
-                                    </Description>
+                                    {
+                                        convoComps
+                                    }
                                 </TouchableOpacity>
                             </DescrScrollContainer>
                         </SkeletonScreen>

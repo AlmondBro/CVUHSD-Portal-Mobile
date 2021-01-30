@@ -3,6 +3,7 @@ import { TouchableOpacity } from 'react-native';
 
 import {  Container, Content, HighlightedButton, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, Description } from './RequestPreviewStyledComponents.js';
 
+import { Reactotron } from './../../../../config/reactotron.dev.js';
 /**
  * React functional component that displays the main metadata of a request, such as time and date submitted, subject, and description
  * @param { Object } navigation  object passed from React Navigation's Navigation Container. Houses methods to navigate across the different streams.
@@ -15,6 +16,8 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
     let [ faIconName, setFAIcon ] = useState("spinner");
     let [ buttonPressed, setButtonPressed ] = useState(false);
 
+    Reactotron.log("ReqPreview id:\t" + id);
+    
     const getFAIcon = (status) => {
         let faIcon;
 

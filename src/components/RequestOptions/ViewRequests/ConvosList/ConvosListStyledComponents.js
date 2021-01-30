@@ -67,36 +67,6 @@ const Content = styled.View`
 
 `;
 
-// const Separator 
-
-const MetaDataContainer = styled.View`
-    flex-direction: column;
-
-    border-bottom-width: 1px;
-    /* border-bottom-width: 1px; */
-    border-style: solid; 
-    border-color: ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
-    
-    /* padding-left: 15px;
-    padding-right: 15px; */
-`;
-
-const MetaDataIconTextContainer = styled.View`
-    flex-direction: row;
-    justify-content: center;
-
-    margin-bottom: 12px;
-`;
-
-const MetaDataIcon = styled(FontAwesome5)`
-    margin-right: auto;
-    color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
-`;
-
-const MetaDataText = styled.Text`
-    color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
-`;
-
 const SubjDescContainer = styled.View`
     flex: 1;
     flex-direction: column;
@@ -149,6 +119,4 @@ const HighlightedButton = styled.TouchableOpacity`
     padding: 15px;
 `;
 
-
-
-export { Container, Content, HighlightedButton, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, DescrScrollContainer, Description };
+export { Container, Content, HighlightedButton, SkeletonScreen, SubjDescContainer, Subject, DescrScrollContainer, Description };

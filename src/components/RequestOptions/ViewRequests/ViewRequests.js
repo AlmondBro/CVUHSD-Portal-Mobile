@@ -126,6 +126,8 @@ const ViewRequests = ({ navigation, email, districtPosition, renderAsStudent}) =
 
             let routeParams = { status, subject, description, date, time, id, technician, site };
 
+            Reactotron.log("View Requests id:\t" + id);
+            
             return (
                 <RequestPreview
                     navigation          =   { navigation }
