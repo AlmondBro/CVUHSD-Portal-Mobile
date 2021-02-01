@@ -38,7 +38,14 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
         return convos.filter((convo, index) => convo["FROM"] != "System").map((convo, index) => {
             let { CREATEDDATE, FROM, DESCRIPTION } = convo;
 
-            let time = new Date(CREATEDDATE).toLocaleTimeString();
+            let timeAndAM = new Date(CREATEDDATE).toLocaleTimeString().split(" ");
+
+            let AMorPM  = timeAndAM[1];
+            let hour    = timeAndAM[0].split(":")[0];
+            let minutes = timeAndAM[0].split(":")[1];
+
+            let time = hour + ":" + minutes + " " + AMorPM;
+            
             let date =  new Date(CREATEDDATE).toLocaleDateString();
 
             console.log("FROM:\t", FROM);

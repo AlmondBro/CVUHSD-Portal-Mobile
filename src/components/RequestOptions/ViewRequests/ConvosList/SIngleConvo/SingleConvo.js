@@ -17,11 +17,27 @@ import { PORTAL_LIVE_LINK, NODEJS_SERVER_PORT, IP_ADDRESS_DEV } from "@env";
  * @param { string } districtPosition the role of the school district user
  * @param { boolean } renderAsStudent dictates whether a staff member is choosing to view the app through a student's eyes
  */
-const SingleConvo = ({ navigation, route, email, districtPosition, renderAsStudent, description, date, time, author }) => {
+
+ /*
+
+  navigation          =   { navigation }
+                    route               =   { route }
+                    isLoading           =   { isLoading }
+                    districtPosition    =   { districtPosition }
+                    renderAsStudent     =   { renderAsStudent }
+                    email               =   { email }
+
+                    description         =   { DESCRIPTION }
+                    date                =   { date }
+                    time                =   { time }
+                    author              =   { FROM } 
+                    key                 =   { index }
+ */
+const SingleConvo = ({ navigation, route, isLoading, districtPosition, renderAsStudent, email, description, date, time, author }) => {
     const isDev = __DEV__;
     const metadataIconsSize = 22;
 
-    let [ isLoading, setIsLoading ]     = useState(false);
+    let [ loading, setLoading ]     = useState(isLoading);
 
     //let { id, date, time } = route.params;
 
@@ -68,7 +84,7 @@ const SingleConvo = ({ navigation, route, email, districtPosition, renderAsStude
                                 containerWidth      =   { 50 }
                                 width               =   { 90 }
                                 height              =   { 15 }
-                                identifier          =   {`request-specifics-date-skeleton-${Math.random()*1000+1}`}
+                                identifier          =   {`single-convo-date-skeleton-${Math.random()*1000+1}`}
                                 
                                 marginTop           =   { 8 }
                                 marginLeft          =   { 0 }
@@ -100,7 +116,7 @@ const SingleConvo = ({ navigation, route, email, districtPosition, renderAsStude
                                 containerWidth      =   { 50 }
                                 width               =   { 100 }
                                 height              =   { 15 }
-                                identifier          =   {`request-specifics-date-skeleton-${Math.random()*1000+1}`}
+                                identifier          =   {`single-convo-date-skeleton-${Math.random()*1000+1}`}
                                 
                                 marginTop           =   { 8 }
                                 marginLeft          =   { 0 }
@@ -112,7 +128,38 @@ const SingleConvo = ({ navigation, route, email, districtPosition, renderAsStude
                                     { date || "12/09/2020" }
                                 </MetaDataText>
                             </SkeletonScreen>
-                        
+                        </MetaDataIconTextContainer>
+
+                        <MetaDataIconTextContainer>
+                            <MetaDataIcon
+                                districtPosition    =   { districtPosition } 
+                                renderAsStudent     =   { renderAsStudent }
+
+                                color               =   { ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" }
+                                name                =   "user-tag" 
+                                size                =   {   metadataIconsSize  } 
+                            />
+
+                            <SkeletonScreen
+                                isLoading           =   { isLoading }
+                                districtPosition    =   { districtPosition }
+                                renderAsStudent     =   { renderAsStudent } 
+
+                                containerWidth      =   { 50 }
+                                width               =   { 100 }
+                                height              =   { 15 }
+                                identifier          =   {`single-convo-author-skeleton-${Math.random()*1000+1}`}
+                                
+                                marginTop           =   { 8 }
+                                marginLeft          =   { 0 }
+                            >
+                                <MetaDataText
+                                    districtPosition    =   { districtPosition } 
+                                    renderAsStudent     =   { renderAsStudent }
+                                >
+                                    { author || "Juan David Lopez" }
+                                </MetaDataText>
+                            </SkeletonScreen>
                         </MetaDataIconTextContainer>
 
                     </MetaDataContainer>
@@ -129,7 +176,7 @@ const SingleConvo = ({ navigation, route, email, districtPosition, renderAsStude
 
                             containerWidth      =   { 250 }
                             height              =   { 20 }
-                            identifier          =   {`request-specifics-description-skeleton-${Math.random()*1000+1}`}
+                            identifier          =   {`single-convo-description-skeleton-${Math.random()*1000+1}`}
                             
                             marginTop           =   { 24 }
                             marginLeft          =   { "18%" }
