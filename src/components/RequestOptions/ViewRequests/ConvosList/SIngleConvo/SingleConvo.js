@@ -79,12 +79,12 @@ const SingleConvo = ({ navigation, route, isLoading, districtPosition, renderAsS
                                     districtPosition    =   { districtPosition } 
                                     renderAsStudent     =   { renderAsStudent }
                                 >
-                                    { time || "11:33 AM" }
+                                    { date + " @ " + time|| "11:33 AM" }
                                 </MetaDataText>
                             </SkeletonScreen>
                         </MetaDataIconTextContainer>
 
-                        <MetaDataIconTextContainer>
+                        {/* <MetaDataIconTextContainer>
                             <MetaDataIcon
                                 districtPosition    =   { districtPosition } 
                                 renderAsStudent     =   { renderAsStudent }
@@ -114,7 +114,7 @@ const SingleConvo = ({ navigation, route, isLoading, districtPosition, renderAsS
                                     { date || "12/09/2020" }
                                 </MetaDataText>
                             </SkeletonScreen>
-                        </MetaDataIconTextContainer>
+                        </MetaDataIconTextContainer> */}
 
                         <MetaDataIconTextContainer>
                             <MetaDataIcon

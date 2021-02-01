@@ -127,7 +127,7 @@ const NoConvosMessage = styled.Text`
 
     color:  ${ props => props.districtPosition ?
                                       ( (props.districtPosition.toLowerCase() === "student") || props.renderAsStudent) ? 
-                                          "#B41A1F": "#B41A1F"
+                                          "#B41A1F": "#1E6C93"
                                     : "#B41A1F"
             };
     width: 100%;   

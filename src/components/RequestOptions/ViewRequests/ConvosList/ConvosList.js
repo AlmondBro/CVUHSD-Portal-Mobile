@@ -164,8 +164,8 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
                                         />) : (convoComps.length > 0) ? convoComps :
                                             ( 
                                                 <NoConvosMessage
-                                                districtPosition    =   { districtPosition }
-                                                renderAsStudent     =   { renderAsStudent }
+                                                    districtPosition    =   { districtPosition }
+                                                    renderAsStudent     =   { renderAsStudent }
                                                 >
                                                     No conversations listed yet
                                                 </NoConvosMessage>
