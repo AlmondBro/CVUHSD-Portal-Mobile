@@ -119,4 +119,18 @@ const HighlightedButton = styled.TouchableOpacity`
     padding: 15px;
 `;
 
-export { Container, Content, HighlightedButton, SkeletonScreen, SubjDescContainer, Subject, DescrScrollContainer, Description };
+const NoConvosMessage = styled.Text`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+
+    color:  ${ props => props.districtPosition ?
+                                      ( (props.districtPosition.toLowerCase() === "student") || props.renderAsStudent) ? 
+                                          "#931E1D": "#1E6C93"
+                                    : "#931E1D"
+            };
+    width: 100%;   
+`;
+
+export { Container, Content, HighlightedButton, SkeletonScreen, SubjDescContainer, Subject, DescrScrollContainer, Description, NoConvosMessage };

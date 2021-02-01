@@ -9,7 +9,7 @@ import TouchableButton from './../../../TouchableButton/TouchableButton.js';
 
 import { PORTAL_LIVE_LINK, NODEJS_SERVER_PORT, IP_ADDRESS_DEV } from "@env";
 
-import { Container, Content, HighlightedButton, SkeletonScreen, SubjDescContainer, Subject, DescrScrollContainer, Description } from './ConvosListStyledComponents.js';
+import { Container, Content, HighlightedButton, SkeletonScreen, SubjDescContainer, Subject, DescrScrollContainer, Description, NoConvosMessage } from './ConvosListStyledComponents.js';
 
 
 import { Reactotron } from './../../../../config/reactotron.dev.js';
@@ -138,7 +138,7 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
                     onPressOut          =   { () => setButtonPressed(false) }
                 > */}
                     <SubjDescContainer>
-                        <SkeletonScreen
+                        {/* <SkeletonScreen
                             isLoading           =   { isLoading }
                             districtPosition    =   { districtPosition }
                             renderAsStudent     =   { renderAsStudent } 
@@ -153,15 +153,27 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
                             
                             marginTop           =   { 24 }
                             marginLeft          =   { "18%" }
-                        >
+                        > */}
                             <DescrScrollContainer extraScrollHeight={50} viewIsInsideTabBar={true}>
                                 <TouchableOpacity activeOpacity = { 1.0 }>
                                     {
-                                        convoComps
+                                        isLoading ? (<SingleConvo
+                                            isLoading           =   { isLoading }
+                                            districtPosition    =   { districtPosition }
+                                            renderAsStudent     =   { renderAsStudent }
+                                        />) : (convoComps.length > 0) ? convoComps :
+                                            ( 
+                                                <NoConvosMessage
+                                                districtPosition    =   { districtPosition }
+                                                renderAsStudent     =   { renderAsStudent }
+                                                >
+                                                    No conversations listed yet
+                                                </NoConvosMessage>
+                                            )
                                     }
                                 </TouchableOpacity>
                             </DescrScrollContainer>
-                        </SkeletonScreen>
+                        {/* </SkeletonScreen> */}
                     </SubjDescContainer>
                 {/* </HighlightedButton> */}
 

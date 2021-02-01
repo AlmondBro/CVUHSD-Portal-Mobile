@@ -17,25 +17,11 @@ import { PORTAL_LIVE_LINK, NODEJS_SERVER_PORT, IP_ADDRESS_DEV } from "@env";
  * @param { string } districtPosition the role of the school district user
  * @param { boolean } renderAsStudent dictates whether a staff member is choosing to view the app through a student's eyes
  */
-
- /*
-
-  navigation          =   { navigation }
-                    route               =   { route }
-                    isLoading           =   { isLoading }
-                    districtPosition    =   { districtPosition }
-                    renderAsStudent     =   { renderAsStudent }
-                    email               =   { email }
-
-                    description         =   { DESCRIPTION }
-                    date                =   { date }
-                    time                =   { time }
-                    author              =   { FROM } 
-                    key                 =   { index }
- */
 const SingleConvo = ({ navigation, route, isLoading, districtPosition, renderAsStudent, email, description, date, time, author }) => {
     const isDev = __DEV__;
     const metadataIconsSize = 22;
+
+   // isLoading = true;
 
     let [ loading, setLoading ]     = useState(isLoading);
 
@@ -172,7 +158,7 @@ const SingleConvo = ({ navigation, route, isLoading, districtPosition, renderAsS
 
                             flexValue           =   { -1 }
                             flexDirection       =   "column"
-                            numberOfLines       =   { 10 }
+                            numberOfLines       =   { 2 }
 
                             containerWidth      =   { 250 }
                             height              =   { 20 }

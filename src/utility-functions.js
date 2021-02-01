@@ -131,7 +131,7 @@ const formatPhoneNumber = (text) => {
      return finalText;
 };
 
-const removeHTML = (htmlString) => {
+const removeHTML = (htmlString = "") => {
     var strippedHtmlString = htmlString.replace(/<[^>]+>/g, '');
     
     return he.decode(strippedHtmlString); //Use he to decode any special character HTML entities
