@@ -84,38 +84,6 @@ const SingleConvo = ({ navigation, route, isLoading, districtPosition, renderAsS
                             </SkeletonScreen>
                         </MetaDataIconTextContainer>
 
-                        {/* <MetaDataIconTextContainer>
-                            <MetaDataIcon
-                                districtPosition    =   { districtPosition } 
-                                renderAsStudent     =   { renderAsStudent }
-
-                                color               =   { ( (districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" }
-                                name                =   "calendar" 
-                                size                =   {   metadataIconsSize  } 
-                            />
-
-                            <SkeletonScreen
-                                isLoading           =   { isLoading }
-                                districtPosition    =   { districtPosition }
-                                renderAsStudent     =   { renderAsStudent } 
-
-                                containerWidth      =   { 50 }
-                                width               =   { 100 }
-                                height              =   { 15 }
-                                identifier          =   {`single-convo-date-skeleton-${Math.random()*1000+1}`}
-                                
-                                marginTop           =   { 8 }
-                                marginLeft          =   { 0 }
-                            >
-                                <MetaDataText
-                                    districtPosition    =   { districtPosition } 
-                                    renderAsStudent     =   { renderAsStudent }
-                                >
-                                    { date || "12/09/2020" }
-                                </MetaDataText>
-                            </SkeletonScreen>
-                        </MetaDataIconTextContainer> */}
-
                         <MetaDataIconTextContainer>
                             <MetaDataIcon
                                 districtPosition    =   { districtPosition } 
