@@ -5,6 +5,8 @@ import AppLoading from 'expo-app-loading';
 
 import { setCustomText } from 'react-native-global-props';
 
+import he from 'he';
+
 import { 
     useFonts,
     SourceSansPro_200ExtraLight,
@@ -51,6 +53,8 @@ if (Platform.OS === "android") {
 } else {
     useDimensions   =   require('react-native').useWindowDimensions;
 }
+
+
 
 const dimensionsWidthHOC = (Component) => {
     const customFonts = {
@@ -127,5 +131,10 @@ const formatPhoneNumber = (text) => {
      return finalText;
 };
 
+const removeHTML = (htmlString) => {
+    var strippedHtmlString = htmlString.replace(/<[^>]+>/g, '');
+    
+    return he.decode(strippedHtmlString); //Use he to decode any special character HTML entities
+  };
 
-export  { dimensionsWidthHOC, useComponentSize, navigationRef, navigate, formatPhoneNumber };
+export  { dimensionsWidthHOC, useComponentSize, navigationRef, navigate, formatPhoneNumber, removeHTML };

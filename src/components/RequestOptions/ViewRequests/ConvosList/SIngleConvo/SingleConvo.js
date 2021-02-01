@@ -4,7 +4,11 @@ import undefsafe from 'undefsafe';
 import { TouchableOpacity} from 'react-native';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 
+import { removeHTML } from './../../../../../utility-functions.js';
+
 import { Container, Content, HighlightedButton, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, DescrScrollContainer, Description } from './SingleConvoStyledComponents.js';
+
+
 
 import { PORTAL_LIVE_LINK, NODEJS_SERVER_PORT, IP_ADDRESS_DEV } from "@env";
 /**
@@ -136,7 +140,7 @@ const SingleConvo = ({ navigation, route, email, districtPosition, renderAsStude
                                         districtPosition    =   { districtPosition } 
                                         renderAsStudent     =   { renderAsStudent }
                                     >
-                                        { description || "Canvas test rule ticket" }
+                                        { removeHTML(description) || "Canvas test rule ticket" }
                                     </Description>
                                 </TouchableOpacity>
                             </DescrScrollContainer>
