@@ -58,6 +58,7 @@ const Container = styled.View`
 
 const Content = styled.View`
     flex: 1;
+    justify-content: flex-start;
     margin-top: ${baseMarginTop}px;
 
     width: 90%;
@@ -65,6 +66,19 @@ const Content = styled.View`
     padding-top: 10px;
     /* padding-bottom: 12px; */
 
+    border-width: ${props => props.isLoading ? "0px" : "1px"};
+    border-style: solid;
+    border-color: ${    props => props.districtPosition ?
+                                            ( (props.districtPosition.toLowerCase() === "student") || props.renderAsStudent) ? 
+                                                `rgba(147, 30, 29, 0.42)`: `rgba(30, 108, 147, 0.42)`
+                                            :   `rgba(147, 30, 29, 0.42)`
+                        };
+
+    border-radius: 10px;
+
+    padding: 20px;
+
+    /* background-color: yellow; */
 `;
 
 // const Separator 
@@ -72,7 +86,6 @@ const Content = styled.View`
 const MetaDataContainer = styled.View`
     flex-direction: column;
 
-    border-bottom-width: 1px;
     /* border-bottom-width: 1px; */
     border-style: solid; 
     border-color: ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
@@ -102,7 +115,7 @@ const SubjDescContainer = styled.View`
     flex-direction: column;
     justify-content: flex-start;
 
-    margin-top: 10px;
+    /* margin-top: 10px; */
 `;
 
 const Subject = styled.Text`
@@ -118,6 +131,10 @@ const Subject = styled.Text`
 const DescrScrollContainer = styled(KeyboardAwareScrollView).attrs((props) => ({
     keyboardShouldPersistTaps : "never"
 }))`
+
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
 
     background-color: white;
 

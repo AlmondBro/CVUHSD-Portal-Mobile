@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import undefsafe from 'undefsafe';
 
 import { TouchableOpacity} from 'react-native';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -8,9 +7,6 @@ import { removeHTML } from './../../../../../utility-functions.js';
 
 import { Container, Content, HighlightedButton, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, DescrScrollContainer, Description } from './SingleConvoStyledComponents.js';
 
-
-
-import { PORTAL_LIVE_LINK, NODEJS_SERVER_PORT, IP_ADDRESS_DEV } from "@env";
 /**
  * React functional component that displays the main metadata of a request, such as time and date submitted, subject, and description
  * @param { Object } navigation  object passed from React Navigation's Navigation Container. Houses methods to navigate across the different streams.
@@ -18,24 +14,15 @@ import { PORTAL_LIVE_LINK, NODEJS_SERVER_PORT, IP_ADDRESS_DEV } from "@env";
  * @param { boolean } renderAsStudent dictates whether a staff member is choosing to view the app through a student's eyes
  */
 const SingleConvo = ({ navigation, route, isLoading, districtPosition, renderAsStudent, email, description, date, time, author }) => {
-    const isDev = __DEV__;
     const metadataIconsSize = 22;
 
-   // isLoading = true;
-
-    let [ loading, setLoading ]     = useState(isLoading);
-
-    //let { id, date, time } = route.params;
-
-    // description = "hi";
-
-   
     useEffect(() => {
     }, []); 
 
     return (
         <Container>
             <Content
+                isLoading           =   { isLoading }
                 districtPosition    =   { districtPosition } 
                 renderAsStudent     =   { renderAsStudent }
             >
@@ -68,7 +55,7 @@ const SingleConvo = ({ navigation, route, isLoading, districtPosition, renderAsS
                                 renderAsStudent     =   { renderAsStudent } 
 
                                 containerWidth      =   { 50 }
-                                width               =   { 90 }
+                                width               =   { 150 }
                                 height              =   { 15 }
                                 identifier          =   {`single-convo-date-skeleton-${Math.random()*1000+1}`}
                                 
@@ -126,16 +113,25 @@ const SingleConvo = ({ navigation, route, isLoading, districtPosition, renderAsS
 
                             flexValue           =   { -1 }
                             flexDirection       =   "column"
-                            numberOfLines       =   { 2 }
+                            numberOfLines       =   { 1 }
 
-                            containerWidth      =   { 250 }
+                            containerWidth      =   { 150 }
                             height              =   { 20 }
                             identifier          =   {`single-convo-description-skeleton-${Math.random()*1000+1}`}
                             
                             marginTop           =   { 24 }
-                            marginLeft          =   { "18%" }
+                            marginLeft          =   { "46%" }
                         >
-                            <DescrScrollContainer extraScrollHeight={50} viewIsInsideTabBar={true}>
+                            <DescrScrollContainer 
+                                extraScrollHeight={50} 
+                                viewIsInsideTabBar={true} 
+                                contentContainerStyle   =   {
+                                    {
+                                        flexDirection: "column",
+                                        justifyContent: "center"
+                                    }
+                                }
+                                >
                                 <TouchableOpacity activeOpacity = { 1.0 }>
                                     <Description
                                         districtPosition    =   { districtPosition } 
