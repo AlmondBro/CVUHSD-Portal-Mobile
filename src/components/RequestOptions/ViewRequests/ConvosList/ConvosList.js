@@ -24,6 +24,7 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
     const isDev = __DEV__;
     const metadataIconsSize = 22;
 
+    let { navigate } = navigation;
     let [ buttonPressed, setButtonPressed ] = useState(false);
 
     let [ convoComps, setConvoComps ]   = useState([]);
@@ -183,6 +184,7 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
                     width       =   "60%" 
                     color       =   "white"
                     bgColor     =   {((districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"}
+                    onPress     =   { () => navigate("Reply to Request") }              
                 />
             </Content>
         </Container>
