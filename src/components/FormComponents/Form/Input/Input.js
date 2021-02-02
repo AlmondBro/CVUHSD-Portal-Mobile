@@ -9,8 +9,7 @@ const Input = forwardRef((props, ref) => {
         const { type, secureTextEntry, textArea, keyboardType,textContentType, passwordRules, height, multiline, numberOfLines, appWidth, districtPosition, renderAsStudent, usePicker, pickerPlaceHolder, label, labelStyle, items, error, name, onSubmitEditing, onChangeText, noOuterLabel, theme, placeholder, placeHolderText, value, mode, getValues, maxHeight, minHeight,...inputProps } = props;
 
         const [ labelVisible, setLabelVisible ] = useState(label);
-        const [ isFocused, setIsFocused ]   = useState(false);
-
+        const [ isFocused, setIsFocused ]       = useState(false);
         const [ showPassword, setShowPassword ] = useState(false);
 
         const pickerSelectStyle = StyleSheet.create({
@@ -69,6 +68,8 @@ const Input = forwardRef((props, ref) => {
             }
           });
 
+         const placeholderTextColor = theme.colors.placeholder;
+
         const onFocus = () => { 
             setIsFocused(true);
             setLabelVisible(false); 
@@ -81,6 +82,11 @@ const Input = forwardRef((props, ref) => {
             setLabelVisible(true); 
             return;
         };
+
+        const togglePasswordVisibility = () => {
+            onFocus(); 
+            setShowPassword(!showPassword);
+        }; 
 
         const DownArrowIcon  =  () => (
             <DownArrow 
@@ -158,8 +164,8 @@ const Input = forwardRef((props, ref) => {
                                                 renderAsStudent     =   { renderAsStudent }
                                                 showPassword        =   { showPassword }
                 
-                                                onFocus             =   { () => { onFocus(); } }
-                                                onPress             =   { () => { onFocus(); setShowPassword(!showPassword); } }
+                                                onFocus             =   { onFocus }
+                                                onPress             =   { () => { togglePasswordVisibility } }
                                             /> 
                                         ) : null      
                                     }
@@ -177,6 +183,7 @@ const Input = forwardRef((props, ref) => {
                                         maxHeight               =   { maxHeight || 200 }
                                         minHeight               =   { minHeight || 105 }
                                         placeholder             =   { placeHolderText }
+                                        placeholderTextColor    =   { placeholderTextColor }
                                                                     {...inputProps }
                                     />
                                 )      
