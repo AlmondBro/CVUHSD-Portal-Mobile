@@ -20,6 +20,7 @@ const KeyboardAwareScrollViewStyled = styled(KeyboardAwareScrollView).attrs((pro
     contentContainerStyle       : props.contentContainerStyle || {
         flex: 1,
         flexDirection: "column",
+        justifyContent: "flex-start",
         alignItems: "center",
         alignContent: "center"
     }

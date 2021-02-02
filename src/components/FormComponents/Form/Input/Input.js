@@ -1,5 +1,5 @@
 import React, { forwardRef, useState, Fragment } from 'react';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 
 import RNPickerSelect from 'react-native-picker-select';
 
@@ -165,8 +165,14 @@ const Input = forwardRef((props, ref) => {
                                     }
                                 </Fragment>
                             ) : (
+                                <View
+                                    style={{
+                                        width: "90%",
+                                        position:"relative"
+                                    }}
+                                >
                                     <TextArea 
-                                        
+                                        ref                     =   {   ref }                                 
                                         districtPosition        =   { districtPosition } 
                                         renderAsStudent         =   { renderAsStudent }
                                         
@@ -179,6 +185,8 @@ const Input = forwardRef((props, ref) => {
                                         placeholder             =   { placeHolderText }
                                                                     {...inputProps }
                                     />
+                                </View>
+                             
                                 )      
                 }
                 {
