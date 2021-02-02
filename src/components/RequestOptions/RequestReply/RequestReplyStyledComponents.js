@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { AutoGrowingTextInput } from 'react-native-autogrow-textinput';
+
 
 const baseMarginTop = 38;
 
@@ -29,4 +31,22 @@ const KeyboardAwareScrollViewStyled = styled(KeyboardAwareScrollView).attrs((pro
     width: 100%;
 `;
 
-export { Container, KeyboardAwareScrollViewStyled };
+const TextArea = styled(AutoGrowingTextInput)`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex: 1;
+
+    font-size: 16px;
+    padding-left: 10px;
+    background-color: white;
+
+    width: 300px;
+
+    margin-top: ${baseMarginTop + "px"};
+    border-width: 1px;
+    border-radius: 10px;
+`;
+
+
+export { Container, KeyboardAwareScrollViewStyled, TextArea };

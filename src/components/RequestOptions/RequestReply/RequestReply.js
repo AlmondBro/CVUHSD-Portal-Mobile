@@ -7,9 +7,8 @@ import validation from './validation.js';
 import Form from './../../FormComponents/Form/Form.js';
 import Input from './../../FormComponents/Form/Input/Input.js';
 
-import { Container, KeyboardAwareScrollViewStyled } from './RequestReplyStyledComponents.js';
+import { Container, KeyboardAwareScrollViewStyled, TextArea } from './RequestReplyStyledComponents.js';
 
-import { AutoGrowingTextInput } from 'react-native-autogrow-textinput';
 
 /**
  * React functional component that displays the main metadata of a request, such as time and date submitted, subject, and description
@@ -63,21 +62,9 @@ const RequestReply = ({ navigation, route, isLoading, districtPosition, renderAs
                             getValues           =   { getValues }
                         /> 
                     </Form> */}
-                    <AutoGrowingTextInput 
-                        style       =   {{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "center",
-                            paddingLeft: 10,
-                            fontSize: 17,
-                            flex: 1,
-                            backgroundColor: 'white',
-                            width: 300,
-                            borderWidth: 1,
-                            borderRadius: 10,
-                            maxHeight: 200,
-                            minHeight: 105
-                        }} 
+                    <TextArea 
+                        maxHeight={200}
+                        minHeight={105}
                         placeholder =   {'Your Message'} 
                     />
                 </TouchableOpacity>
