@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { AutoGrowingTextInput } from 'react-native-autogrow-textinput';
-
 
 const baseMarginTop = 38;
 
@@ -31,30 +30,15 @@ const KeyboardAwareScrollViewStyled = styled(KeyboardAwareScrollView).attrs((pro
     width: 100%;
 `;
 
-const TextArea = styled(AutoGrowingTextInput)`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex: 1;
+const Divider = styled.View`
+    width: 90%;
+    height: ${StyleSheet.hairlineWidth + "px"};
 
-    font-size: 16px;
-   
-    width: 300px;
-    color: ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" }; 
-    background-color:  #F6F6F6;
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 0px;
 
-
-    margin-top: ${baseMarginTop + "px"};
-    padding-left: 10px /* Indent space */;
-
-    border-width: 1px;
-    border-color: ${    props => props.districtPosition ?
-                                            ( (props.districtPosition.toLowerCase() === "student") || props.renderAsStudent) ? 
-                                                `rgba(147, 30, 29, 0.47)`: `rgba(30, 108, 147, 0.47)`
-                                            :   `rgba(147, 30, 29, 0.47)`
-                        };
-    border-radius: 10px;
+    background-color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
 `;
 
-
-export { Container, KeyboardAwareScrollViewStyled, TextArea };
+export { Container, KeyboardAwareScrollViewStyled, Divider };

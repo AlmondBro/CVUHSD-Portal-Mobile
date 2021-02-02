@@ -1,13 +1,15 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
 
 import { useForm } from 'react-hook-form';
 import validation from './validation.js';
 
 import Form from './../../FormComponents/Form/Form.js';
 import Input from './../../FormComponents/Form/Input/Input.js';
+import SubmitFooterContainer from './../../FormComponents/SubmitFooterContainer/SubmitFooterContainer.js';
+import TouchableButton from './../../TouchableButton/TouchableButton.js';
 
-import { Container, KeyboardAwareScrollViewStyled, TextArea } from './RequestReplyStyledComponents.js';
+import { Container, KeyboardAwareScrollViewStyled, Divider } from './RequestReplyStyledComponents.js';
 
 /**
  * React functional component that displays the main metadata of a request, such as time and date submitted, subject, and description
@@ -32,17 +34,25 @@ const RequestReply = ({ navigation, route, isLoading, districtPosition, renderAs
         }
     }; //end inputColorsTheme
 
+    const submitReply = () => {
+        let formField = getValues();
+
+        let { description } = formField;
+
+        Alert.alert("Descr", description);
+
+        console.log("yolo 123");
+    }; //end onSubmit
 
     return (
         <Container>
             <KeyboardAwareScrollViewStyled>
-                <TouchableOpacity activeOpacity={1.0}>
+                {/* <TouchableOpacity activeOpacity={1.0}> */}
                     <Form {...{ register, setValue, getValues, validation, errors }} >
                       <Input 
                             // appWidth            =   { appWidth }
-
                             name                =   "description" 
-                            label               =   "Description:" 
+                            label               =   "Respond to ticket:" 
                             placeHolderText     =   "What is the issue at hand?"
 
                             mode                =   "outlined"
@@ -57,20 +67,49 @@ const RequestReply = ({ navigation, route, isLoading, districtPosition, renderAs
 
                             numberOfLines       =   { 5 }
 
-                            height              =   { 300 }
                             getValues           =   { getValues }
-                        /> 
-                        <TextArea 
-                            districtPosition    =   { districtPosition } 
-                            renderAsStudent     =   { renderAsStudent }
 
-                            maxHeight               =   { 200 }
-                            minHeight               =   { 105 }
-                            placeholder             =   'Your Message'
+                            //AutoGrowingTextInput Properties
+                            maxHeight            =   { 200 }
+                            minHeight            =   { 105 }
+                            placeholder          =   'Your Message'
+
+                            textArea             =  { true }
                         />
+                        
+                         
                     </Form>
+
+            
+            <SubmitFooterContainer>
+                <Divider
+                    districtPosition    =   { districtPosition } 
+                    renderAsStudent     =   { renderAsStudent }
+                />
+                <TouchableButton 
+                    buttonTitle         =   "Respond" 
+                    onPress             =     {  submitReply } 
+
+                    color               =   "white"         
+                    bgColor             =   { (districtPosition === "Student" || renderAsStudent) ? "#B41A1F" : "#1E6C93"}
+                    
+                    districtPosition    =   { districtPosition } 
+                    renderAsStudent     =   { renderAsStudent }
+                >
+                    {
+                        isLoading ? (
+                            <ActivityIndicator 
+                                size        =   "large" 
+                                color       =   "white"
+                                animating   =   { isLoading  }
+                            />
+                            )
+                            : null
+                    } 
+                </TouchableButton>
+            </SubmitFooterContainer>
                  
-                </TouchableOpacity>
+            {/* </TouchableOpacity> */}
             </KeyboardAwareScrollViewStyled>
         </Container>
     ); //end return statement

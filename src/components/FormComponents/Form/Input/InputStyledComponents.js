@@ -3,11 +3,14 @@ import { TouchableOpacity } from 'react-native';
 
 import styled from 'styled-components/native';
 
+//Import 3rd-party components
 import { TextInput } from 'react-native-paper';
 import RNPickerSelect from 'react-native-picker-select';
+import { AutoGrowingTextInput } from 'react-native-autogrow-textinput';
 
 import { FontAwesome } from '@expo/vector-icons'; 
 
+const baseMarginTop = 38;
 const InputContainer = styled.View`
     display: flex;
     flex-direction: column;
@@ -154,5 +157,30 @@ const EyeSymbol = ({ districtPosition, renderAsStudent, showPassword, onFocus, o
     ); //end return statement
 }; //return EyeSymbol
 
+const TextArea = styled(AutoGrowingTextInput)`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex: 1;
 
-export {  InputContainer, LabelText, TextInputStyled, Select, ErrorText, ErrorTextItalicalized, DownArrow, EyeSymbol };
+    font-size: 16px;
+   
+    width: ${props => props.width ? props.width : "90%"};
+    color: ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" }; 
+    background-color:  #F6F6F6;
+
+
+    /* margin-top: ${baseMarginTop + "px"}; */
+    padding-left: 10px /* Indent space */;
+
+    border-width: 1px;
+    border-color: ${    props => props.districtPosition ?
+                                            ( (props.districtPosition.toLowerCase() === "student") || props.renderAsStudent) ? 
+                                                `rgba(147, 30, 29, 0.47)`: `rgba(30, 108, 147, 0.47)`
+                                            :   `rgba(147, 30, 29, 0.47)`
+                        };
+    border-radius: 10px;
+`;
+
+
+export {  InputContainer, LabelText, TextInputStyled, TextArea, Select, ErrorText, ErrorTextItalicalized, DownArrow, EyeSymbol };
