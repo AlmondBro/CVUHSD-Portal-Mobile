@@ -38,13 +38,21 @@ const TextArea = styled(AutoGrowingTextInput)`
     flex: 1;
 
     font-size: 16px;
-    padding-left: 10px;
-    background-color: white;
-
+   
     width: 300px;
+    color: ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93" }; 
+    background-color:  #F6F6F6;
+
 
     margin-top: ${baseMarginTop + "px"};
+    padding-left: 10px /* Indent space */;
+
     border-width: 1px;
+    border-color: ${    props => props.districtPosition ?
+                                            ( (props.districtPosition.toLowerCase() === "student") || props.renderAsStudent) ? 
+                                                `rgba(147, 30, 29, 0.47)`: `rgba(30, 108, 147, 0.47)`
+                                            :   `rgba(147, 30, 29, 0.47)`
+                        };
     border-radius: 10px;
 `;
 

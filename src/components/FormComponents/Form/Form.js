@@ -6,15 +6,6 @@ import { formatPhoneNumber } from './../../../utility-functions.js';
 const Form = ({ register, errors, setValue, getValues, validation, children }) => {
     const Inputs = useRef([]);
 
-    const onChangeText = (value) => {
-        if (children.props.keyboardType === "phone-pad") {
-            setValue(children.props.name, formatPhoneNumber(value), true); 
-        } else {
-            setValue(children.props.name, value, true); 
-        }
-    }; //onChangeText()
-
-    
     useEffect(() => {
         (Array.isArray(children) ? [...children] : [children]).forEach((child) => {
             let { name } = child.props;
