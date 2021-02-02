@@ -158,7 +158,7 @@ const EyeSymbol = ({ districtPosition, renderAsStudent, showPassword, onFocus, o
 }; //return EyeSymbol
 
 const TextArea = styled(AutoGrowingTextInput)`
-    position: absolute;
+    position: relative;
     margin-bottom: 500px;
     display: flex;
     flex-direction: row;
@@ -173,6 +173,7 @@ const TextArea = styled(AutoGrowingTextInput)`
 
 
     /* margin-top: ${baseMarginTop + "px"}; */
+    margin-bottom: ${props => props.marginBottom ? props.marginBottom : "100px"};
     padding-left: 10px /* Indent space */;
 
     border-width: 1px;
