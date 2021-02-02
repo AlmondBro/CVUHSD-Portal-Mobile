@@ -11,16 +11,23 @@ import TouchableButton from './../../TouchableButton/TouchableButton.js';
 
 import { Container, KeyboardAwareScrollViewStyled, Divider } from './RequestReplyStyledComponents.js';
 
+import { PORTAL_LIVE_LINK, NODEJS_SERVER_PORT, IP_ADDRESS_DEV } from "@env";
+
 /**
  * React functional component that displays the main metadata of a request, such as time and date submitted, subject, and description
  * @param { Object } navigation  object passed from React Navigation's Navigation Container. Houses methods to navigate across the different streams.
  * @param { string } districtPosition the role of the school district user
  * @param { boolean } renderAsStudent dictates whether a staff member is choosing to view the app through a student's eyes
  */
-const RequestReply = ({ navigation, route, isLoading, districtPosition, renderAsStudent, email }) => {
+const RequestReply = ({ navigation, route, districtPosition, renderAsStudent, email }) => {
     const metadataIconsSize = 22;
 
+    const id = "";
+
     const { handleSubmit, register, setValue, getValues, clearErrors, errors }  = useForm();
+
+    let [ isLoading, setIsLoading ]         = useState(false);
+    let [ submitEnabled, setSubmitEnabled ] = useState(true);
 
     const inputColorsTheme  = {
         colors: {
@@ -34,10 +41,60 @@ const RequestReply = ({ navigation, route, isLoading, districtPosition, renderAs
         }
     }; //end inputColorsTheme
 
+    const sendReplyReq = async () => {
+
+        const sendReplyReq_URL = `${isDev ? `http://${IP_ADDRESS_DEV}:${NODEJS_SERVER_PORT}` : `https://${PORTAL_LIVE_LINK}/server`}/helpdesk/request/${id}/reply`;
+        const sendReplyReq_Headers = {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            "Access-Control-Allow-Credentials": true
+        };
+    
+        let sendReplyReqResult = await fetch(sendReplyReq_URL, {
+            method: 'POST',
+            headers: sendReplyReq_Headers,
+            body: JSON.stringify({subject: replySubject, description: message, email: techEmail})
+        })
+        .then((serverResponse) => serverResponse.json()) //Parse the JSON of the response
+        .then((jsonResponse) => jsonResponse)
+        .catch((error) => {
+            console.error(`getReqConvos() Catching error:\t ${error}`);
+            return;
+        });
+
+        return sendReplyReqResult;
+    }; //end getReqConvos
+
+    const validateReply = () => {
+        if (submitEnabled && !isLoading) {
+            setSubmitEnabled(false);
+            setIsLoading(true);
+
+            let sendReplyReqResult = await sendReplyReq(id);
+            
+            setIsLoading(false);
+
+            console.log("sendReplyReqResult:\t", sendReplyReqResult);
+            
+            if (sendReplyReqResult && !sendReplyReqResult.error) {
+                
+                console.log(`Successfully replied to request #${id}.`);
+                setMessage("");
+                setSubmitEnabled(true);
+            } else {
+                console.log(`Error in replying to request #${id}.`);
+
+                setSubmitEnabled(true);
+            }
+        }
+    };
+
     const submitReply = () => {
         let formField = getValues();
 
         let { description } = formField;
+
+
 
         Alert.alert("Descr", description);
     }; //end onSubmit
