@@ -165,15 +165,6 @@ const Input = forwardRef((props, ref) => {
                                     }
                                 </Fragment>
                             ) : (
-                                <View
-                                    style={{
-                                        width: "100%",
-                                        position:"relative",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        marginBottom: -100,
-                                    }}
-                                >
                                     <TextArea 
                                         ref                     =   {   ref }                                 
                                         districtPosition        =   { districtPosition } 
@@ -188,11 +179,6 @@ const Input = forwardRef((props, ref) => {
                                         placeholder             =   { placeHolderText }
                                                                     {...inputProps }
                                     />
-                                    {/* <LabelText>
-                                        Hiiii
-                                    </LabelText> */}
-                                </View>
-                             
                                 )      
                 }
                 {
