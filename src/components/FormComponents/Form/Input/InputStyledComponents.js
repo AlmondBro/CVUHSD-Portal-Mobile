@@ -49,6 +49,10 @@ const TextInputStyled = styled(TextInput).attrs(props => ({
     color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
 
     border-radius: 50px;
+
+    ${
+        props => props.height ? `height: ${props.height};` : null
+    }
 `;
 
 const ErrorText = styled.Text`

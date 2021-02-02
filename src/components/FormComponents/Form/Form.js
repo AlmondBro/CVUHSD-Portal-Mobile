@@ -5,6 +5,15 @@ import { formatPhoneNumber } from './../../../utility-functions.js';
 
 const Form = ({ register, errors, setValue, getValues, validation, children }) => {
     const Inputs = useRef([]);
+
+    const onChangeText = (value) => {
+        if (children.props.keyboardType === "phone-pad") {
+            setValue(children.props.name, formatPhoneNumber(value), true); 
+        } else {
+            setValue(children.props.name, value, true); 
+        }
+    }; //onChangeText()
+
     
     useEffect(() => {
         (Array.isArray(children) ? [...children] : [children]).forEach((child) => {
@@ -56,8 +65,30 @@ const Form = ({ register, errors, setValue, getValues, validation, children }) =
                                     />
                                 ) : child
                             }) //end map()
-                    :   [...children]
-               // */
+                    :   (
+                    //     <Input
+                    //     ref             =   { (instance) => { Inputs.current = instance; }}
+                    //     onChangeText    =   { onChangeText }
+                    //     onSubmitEditing =   { 
+                    //                             () => {
+                    //                                 Inputs.current
+                    //                                     ?   (Inputs.current.props.usePicker === true)
+                    //                                             ? Inputs.current.togglePicker() 
+                    //                                             : Inputs.current.focus() 
+                    //                                     :   Inputs.current.blur()
+
+                    //                                     // console.log("child props:\t", child.props);
+                    //                             }
+                    //                         }
+                    //     blurOnSubmit    =   { false }
+                    //     getValues       =   { getValues }
+                    //     error           =   { errors[children.props.name] }
+                    //     key             =   { children.props.name }
+                    //                         {...children.props}
+                    // />
+                    children
+                    )
+               // */ //This line used to be [...children]
             }
             </Fragment>
     ); //end return statement
