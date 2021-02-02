@@ -40,8 +40,6 @@ const RequestReply = ({ navigation, route, isLoading, districtPosition, renderAs
         let { description } = formField;
 
         Alert.alert("Descr", description);
-
-        console.log("yolo 123");
     }; //end onSubmit
 
     return (
@@ -58,6 +56,7 @@ const RequestReply = ({ navigation, route, isLoading, districtPosition, renderAs
                             mode                =   "outlined"
                             theme               =   { inputColorsTheme }
 
+                
                             secureTextEntry     =   { false } 
 
                             districtPosition    =   { districtPosition } 
@@ -75,9 +74,7 @@ const RequestReply = ({ navigation, route, isLoading, districtPosition, renderAs
                             placeholder          =   'Your Message'
 
                             textArea             =  { true }
-                        />
-                        
-                         
+                        /> 
                     </Form>
 
             
@@ -88,7 +85,7 @@ const RequestReply = ({ navigation, route, isLoading, districtPosition, renderAs
                 />
                 <TouchableButton 
                     buttonTitle         =   "Respond" 
-                    onPress             =     {  submitReply } 
+                    onPress             =     {  handleSubmit(submitReply) } 
 
                     color               =   "white"         
                     bgColor             =   { (districtPosition === "Student" || renderAsStudent) ? "#B41A1F" : "#1E6C93"}

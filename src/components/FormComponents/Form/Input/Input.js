@@ -166,12 +166,14 @@ const Input = forwardRef((props, ref) => {
                                 </Fragment>
                             ) : (
                                     <TextArea 
+                                        
                                         districtPosition        =   { districtPosition } 
                                         renderAsStudent         =   { renderAsStudent }
                                         
+                                        value                   =   { getValues(name) }
                                         onChange                =   { onChangeText }
                                         onChangeText            =   { onChangeText }
-                                        
+
                                         maxHeight               =   { maxHeight || 200 }
                                         minHeight               =   { minHeight || 105 }
                                         placeholder             =   { placeHolderText }
