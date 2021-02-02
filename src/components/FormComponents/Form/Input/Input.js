@@ -68,7 +68,7 @@ const Input = forwardRef((props, ref) => {
             }
           });
 
-         const placeholderTextColor = theme.colors.placeholder;
+        const placeholderTextColor = theme.colors.placeholder;
 
         const onFocus = () => { 
             setIsFocused(true);
