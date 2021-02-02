@@ -9,6 +9,8 @@ import Input from './../../FormComponents/Form/Input/Input.js';
 
 import { Container, KeyboardAwareScrollViewStyled } from './RequestReplyStyledComponents.js';
 
+import { AutoGrowingTextInput } from 'react-native-autogrow-textinput';
+
 /**
  * React functional component that displays the main metadata of a request, such as time and date submitted, subject, and description
  * @param { Object } navigation  object passed from React Navigation's Navigation Container. Houses methods to navigate across the different streams.
@@ -37,7 +39,7 @@ const RequestReply = ({ navigation, route, isLoading, districtPosition, renderAs
         <Container>
             <KeyboardAwareScrollViewStyled>
                 <TouchableOpacity activeOpacity={1.0}>
-                    <Form {...{ register, setValue, getValues, validation, errors }} >
+                    {/* <Form {...{ register, setValue, getValues, validation, errors }} >
                       <Input 
                             // appWidth            =   { appWidth }
 
@@ -60,7 +62,24 @@ const RequestReply = ({ navigation, route, isLoading, districtPosition, renderAs
                             height              =   { 300 }
                             getValues           =   { getValues }
                         /> 
-                    </Form>
+                    </Form> */}
+                    <AutoGrowingTextInput 
+                        style       =   {{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "center",
+                            paddingLeft: 10,
+                            fontSize: 17,
+                            flex: 1,
+                            backgroundColor: 'white',
+                            width: 300,
+                            borderWidth: 1,
+                            borderRadius: 10,
+                            maxHeight: 200,
+                            minHeight: 105
+                        }} 
+                        placeholder =   {'Your Message'} 
+                    />
                 </TouchableOpacity>
             </KeyboardAwareScrollViewStyled>
         </Container>

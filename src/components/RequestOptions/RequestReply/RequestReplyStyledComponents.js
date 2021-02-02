@@ -15,8 +15,15 @@ const Container = styled.View`
 `;
 
 const KeyboardAwareScrollViewStyled = styled(KeyboardAwareScrollView).attrs((props) => ({
-    keyboardShouldPersistTaps : "never"
+    keyboardShouldPersistTaps : "never",
+    contentContainerStyle       : props.contentContainerStyle || {
+        flex: 1,
+        flexDirection: "column",
+        alignItems: "center",
+        alignContent: "center"
+    }
 }))`
+
     margin-bottom: 56px;
     background-color: white;
     width: 100%;
