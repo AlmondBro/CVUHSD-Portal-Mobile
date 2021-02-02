@@ -159,7 +159,7 @@ const EyeSymbol = ({ districtPosition, renderAsStudent, showPassword, onFocus, o
 
 const TextArea = styled(AutoGrowingTextInput)`
     position: relative;
-    margin-bottom: 500px;
+    
     display: flex;
     flex-direction: row;
     justify-content: center;

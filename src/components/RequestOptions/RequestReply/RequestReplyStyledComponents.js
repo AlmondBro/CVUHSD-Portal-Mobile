@@ -22,7 +22,8 @@ const KeyboardAwareScrollViewStyled = styled(KeyboardAwareScrollView).attrs((pro
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "center",
-        alignContent: "center"
+        alignContent: "center",
+        marginTop: 50
     }
 }))`
 
