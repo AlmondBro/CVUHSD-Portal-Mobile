@@ -9,7 +9,6 @@
     "orientation": "portrait",
     "primaryColor": "#B41A1F",
     "icon": "./src/assets/app-icon.ios.png",
-    "sdkVersion": "40",
     "splash": {
       "image": "./src/assets/splash-screen.png",
       "resizeMode": "cover",
