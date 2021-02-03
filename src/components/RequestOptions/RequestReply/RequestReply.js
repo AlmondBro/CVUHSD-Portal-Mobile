@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
 
 import { useForm } from 'react-hook-form';
@@ -65,7 +65,7 @@ const RequestReply = ({ navigation, route, districtPosition, renderAsStudent, em
         return sendReplyReqResult;
     }; //end getReqConvos
 
-    const validateReply = () => {
+    const validateReply = async () => {
         if (submitEnabled && !isLoading) {
             setSubmitEnabled(false);
             setIsLoading(true);

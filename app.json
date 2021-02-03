@@ -9,12 +9,12 @@
     "orientation": "portrait",
     "primaryColor": "#B41A1F",
     "icon": "./src/assets/app-icon.ios.png",
+    "sdkVersion": "40",
     "splash": {
       "image": "./src/assets/splash-screen.png",
       "resizeMode": "cover",
       "backgroundColor": "#B41A1F"
     },
-    "sdkVersion" : "40.0.0",
     "scheme": "cvuhsd.portal",
     "platforms": [
       "ios",
