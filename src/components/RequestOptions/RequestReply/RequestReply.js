@@ -135,7 +135,6 @@ const RequestReply = ({ navigation, route, districtPosition, renderAsStudent }) 
                             textArea             =  { true }
                         /> 
                     </Form>
-
             
             <SubmitFooterContainer>
                 <Divider
