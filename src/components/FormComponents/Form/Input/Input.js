@@ -1,16 +1,15 @@
 import React, { forwardRef, useState, Fragment } from 'react';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 
 import RNPickerSelect from 'react-native-picker-select';
 
-import { InputContainer, LabelText, TextInputStyled, EyeSymbol, ErrorText, ErrorTextItalicalized, DownArrow } from './InputStyledComponents.js';
+import { InputContainer, LabelText, TextInputStyled, TextArea, EyeSymbol, ErrorText, ErrorTextItalicalized, DownArrow } from './InputStyledComponents.js';
 
 const Input = forwardRef((props, ref) => {
-        const { type, secureTextEntry, keyboardType,textContentType, passwordRules, multiline, appWidth, districtPosition, renderAsStudent, usePicker, pickerPlaceHolder, label, labelStyle, items, error, name, onSubmitEditing, onChangeText, noOuterLabel, theme, placeholder, placeHolderText, value, mode, getValues,...inputProps } = props;
+        const { type, secureTextEntry, textArea, keyboardType,textContentType, passwordRules, height, multiline, numberOfLines, appWidth, districtPosition, renderAsStudent, usePicker, pickerPlaceHolder, label, labelStyle, items, error, name, onSubmitEditing, onChangeText, noOuterLabel, theme, placeholder, placeHolderText, value, mode, getValues, maxHeight, minHeight,...inputProps } = props;
 
         const [ labelVisible, setLabelVisible ] = useState(label);
-        const [ isFocused, setIsFocused ]   = useState(false);
-
+        const [ isFocused, setIsFocused ]       = useState(false);
         const [ showPassword, setShowPassword ] = useState(false);
 
         const pickerSelectStyle = StyleSheet.create({
@@ -69,6 +68,8 @@ const Input = forwardRef((props, ref) => {
             }
           });
 
+        const placeholderTextColor = theme.colors.placeholder;
+
         const onFocus = () => { 
             setIsFocused(true);
             setLabelVisible(false); 
@@ -81,6 +82,11 @@ const Input = forwardRef((props, ref) => {
             setLabelVisible(true); 
             return;
         };
+
+        const togglePasswordVisibility = () => {
+            onFocus(); 
+            setShowPassword(!showPassword);
+        }; 
 
         const DownArrowIcon  =  () => (
             <DownArrow 
@@ -119,50 +125,68 @@ const Input = forwardRef((props, ref) => {
                             onValueChange               =   {   onChangeText  }
                             onDonePress                 =   {   () => onSubmitEditing()         }
                         />
-                    ) : (
-                        <Fragment>
-                            <TextInputStyled
-                                ref                 =   { ref } 
-                                
-                                districtPosition    =   { districtPosition }
-                                renderAsStudent     =   { renderAsStudent }
-            
-                                name                =   { name }
-                                theme               =   { theme }
-                                mode                =   { mode }
-                                label               =   {  getValues(name) && !isFocused ? "" : placeHolderText }
-                                
-                                type                =   { type }
-                                secureTextEntry     =   { (type === "password") ? !showPassword : secureTextEntry}
-
-                                multiline           =   { multiline || false }
-                                autoCapitalize      =   "none"
-                                keyboardType        =   { keyboardType }
-                                textContentType     =   { textContentType }
-                                passwordRules       =   { passwordRules }
-                                
-                                onChangeText        =   { onChangeText }
-
-                                onSubmitEditing     =   { onSubmitEditing }
-                                onFocus             =   { onFocus }
-                                onBlur              =   { onBlur }
-                                                        {...inputProps}
-                            />
-                            {
-                                (type === "password") && isFocused ? (
-                                    <EyeSymbol
+                    ) : !textArea ?  (
+                                <Fragment>
+                                    <TextInputStyled
+                                        ref                 =   { ref } 
+                                        
                                         districtPosition    =   { districtPosition }
                                         renderAsStudent     =   { renderAsStudent }
-                                        showPassword        =   { showPassword }
-        
-                                        onFocus             =   { () => { onFocus(); } }
-                                        onPress             =   { () => { onFocus(); setShowPassword(!showPassword); } }
-                                    /> 
-                                ) : null      
-                            }
-                        
-                        </Fragment>
-                    )
+                    
+                                        name                =   { name }
+                                        theme               =   { theme }
+                                        mode                =   { mode }
+                                        label               =   {  getValues(name) && !isFocused ? "" : placeHolderText }
+                                        
+                                        type                =   { type }
+                                        secureTextEntry     =   { (type === "password") ? !showPassword : secureTextEntry}
+    
+                                        height              =   { height }
+                                        multiline           =   { multiline || false }
+                                        numberOfLines       =   { numberOfLines || 1}
+    
+                                        autoCapitalize      =   "none"
+                                        keyboardType        =   { keyboardType }
+                                        textContentType     =   { textContentType }
+                                        passwordRules       =   { passwordRules }
+                                        
+                                        onChangeText        =   { onChangeText }
+    
+                                        onSubmitEditing     =   { onSubmitEditing }
+                                        onFocus             =   { onFocus }
+                                        onBlur              =   { onBlur }
+                                                                {...inputProps}
+                                    />
+                                    {
+                                        (type === "password") && isFocused ? (
+                                            <EyeSymbol
+                                                districtPosition    =   { districtPosition }
+                                                renderAsStudent     =   { renderAsStudent }
+                                                showPassword        =   { showPassword }
+                
+                                                onFocus             =   { onFocus }
+                                                onPress             =   { () => { togglePasswordVisibility } }
+                                            /> 
+                                        ) : null      
+                                    }
+                                </Fragment>
+                            ) : (
+                                    <TextArea 
+                                        ref                     =   {   ref }                                 
+                                        districtPosition        =   { districtPosition } 
+                                        renderAsStudent         =   { renderAsStudent }
+                                        
+                                        value                   =   { getValues(name) }
+                                        onChange                =   { onChangeText }
+                                        onChangeText            =   { onChangeText }
+
+                                        maxHeight               =   { maxHeight || 200 }
+                                        minHeight               =   { minHeight || 105 }
+                                        placeholder             =   { placeHolderText }
+                                        placeholderTextColor    =   { placeholderTextColor }
+                                                                    {...inputProps }
+                                    />
+                                )      
                 }
                 {
                     error ? (

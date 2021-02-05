@@ -1,14 +1,28 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 import SkeletonContent from 'react-native-skeleton-content';
 
 import { FontAwesome5 } from '@expo/vector-icons'; 
 
-const SkeletonScreen = ({ children, width, containerWidth, height, isLoading, districtPosition, renderAsStudent, identifier, marginTop, marginBottom, marginLeft, marginRight }) => {
+const baseMarginTop = 38;
+
+const SkeletonScreen = ({ children, flexValue, flexDirection, width, containerWidth, height, isLoading, districtPosition, renderAsStudent, numberOfLines = 1, identifier, marginTop, marginBottom, marginLeft, marginRight }) => {
+    const layoutLines = Array.from({ 
+            length: numberOfLines
+        }, 
+        () => ({   
+            key: identifier + "-" + (Math.random()*3000), 
+            width: (width || "100%"), 
+            height: (height || 20), marginTop: (marginTop || 0), marginBottom: (marginBottom || 0), marginLeft: (marginLeft || 0), marginRight: (marginRight || 0)
+        })
+    );
+    
     return (
         <SkeletonContent
-            containerStyle  =   { { flex: 1, width: (isLoading ? containerWidth : "100%"), flexDirection: "row", justifyContent: "center" } }
+            containerStyle  =   { { flex: (flexValue || 1), width: (isLoading ? containerWidth : "100%"), flexDirection: (flexDirection || "row"), justifyContent: "center" } }
             isLoading       =   { isLoading } 
             animationType   =   "shiver"
 
@@ -25,9 +39,7 @@ const SkeletonScreen = ({ children, width, containerWidth, height, isLoading, di
                                     : "rgba(147, 30, 29, 0.1)" 
             }
 
-            layout={[
-                { key: identifier, width: (width || "100%"), height: (height || 20), marginTop: (marginTop || 0), marginBottom: (marginBottom || 0), marginLeft: (marginLeft || 0), marginRight: (marginRight || 0)},
-            ]}
+            layout          =   { layoutLines }
         >
             { children }
         </SkeletonContent>
@@ -38,28 +50,46 @@ const Container = styled.View`
     flex: 1;
     flex-direction: column;
     align-items: center;
+    align-content: center;
     background-color: white;
 
-    margin-bottom: 25px;
+    /* margin-bottom: 25px; */
 `;
 
 const Content = styled.View`
-    width: 90%;
+    flex: 1;
+    justify-content: flex-start;
+    margin-top: ${baseMarginTop}px;
 
-    border-top-width: 1px;
-    /* border-bottom-width: 1px; */
-    border-style: solid; 
-    border-color: ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
+    width: 90%;
 
     padding-top: 10px;
     /* padding-bottom: 12px; */
 
+    border-width: ${props => props.isLoading ? "0px" : "1px"};
+    border-style: solid;
+    border-color: ${    props => props.districtPosition ?
+                                            ( (props.districtPosition.toLowerCase() === "student") || props.renderAsStudent) ? 
+                                                `rgba(147, 30, 29, 0.42)`: `rgba(30, 108, 147, 0.42)`
+                                            :   `rgba(147, 30, 29, 0.42)`
+                        };
+
+    border-radius: 10px;
+
+    padding: 20px;
+
+    /* background-color: yellow; */
 `;
 
 // const Separator 
 
 const MetaDataContainer = styled.View`
     flex-direction: column;
+
+    /* border-bottom-width: 1px; */
+    border-style: solid; 
+    border-color: ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
+    
     /* padding-left: 15px;
     padding-right: 15px; */
 `;
@@ -81,26 +111,47 @@ const MetaDataText = styled.Text`
 `;
 
 const SubjDescContainer = styled.View`
+    flex: 1;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+
+    /* margin-top: 10px; */
 `;
 
 const Subject = styled.Text`
-    color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
-    font-family: SourceSansPro_400Regular;
+    margin-top: 5px;
+    font-family: SourceSansPro_600SemiBold_Italic;
     font-size: 16px;
     text-align: center;
+
+    color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
+    background-color: white;
 `;
 
+const DescrScrollContainer = styled(KeyboardAwareScrollView).attrs((props) => ({
+    keyboardShouldPersistTaps : "never"
+}))`
+
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+
+    background-color: white;
+
+    /* height: auto; */
+`;
 const Description = styled(Subject)`
     color:  ${props => ( (props.districtPosition === "Student") || (props.renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"};
     font-family: SourceSansPro_400Regular;
+    
     font-size: 13px;
+
+    margin-top: 15px;
     text-align: center;
 
-    margin-top: 12px;
+    background-color: white;
 
-    opacity: 0.42;
+    opacity: 0.7;
 `;
 
 const HighlightedButton = styled.TouchableOpacity`
@@ -117,4 +168,4 @@ const HighlightedButton = styled.TouchableOpacity`
 
 
 
-export { Container, Content, HighlightedButton, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, Description };
+export { Container, Content, HighlightedButton, SkeletonScreen, MetaDataContainer, MetaDataIconTextContainer, MetaDataIcon, MetaDataText, SubjDescContainer, Subject, DescrScrollContainer, Description };

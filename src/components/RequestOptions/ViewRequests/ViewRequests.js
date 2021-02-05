@@ -1,6 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Fragment } from 'react';
 import { TouchableOpacity } from 'react-native';
+
 import RequestPreview from './RequestPreview/RequestPreview.js';
+// import RequestSpecifics from './RequestSpecifics/RequestSpecifics.js';
 
 import undefsafe from 'undefsafe';
 import { useActionSheet } from '@expo/react-native-action-sheet';
@@ -35,24 +37,55 @@ const dateFormatChange = (dateToChange) => {
     return formattedDate;
 };
 
-/**
- * @param { string } districtPosition string to indicate a school district user's role  
- * @param { boolean } renderAsStudent boolean to indicate whether to render the student color scheme and items, even as a staff member
- * @param { boolean } isLoading boolean to indicate whether this component is loading, such as from fetching requests
- * @param { Object } navigation object passed down from React Navigation's <NavigationContainer/>.
- */
-const LoadingReqPreviews = ({navigation, isLoading, districtPosition, renderAsStudent}) => {
-    return (
-         <RequestPreview
-             navigation          =   { navigation }
-             isLoading           =   { isLoading }
+// /**
+//  * @param { string } districtPosition string to indicate a school district user's role  
+//  * @param { boolean } renderAsStudent boolean to indicate whether to render the student color scheme and items, even as a staff member
+//  * @param { boolean } isLoading boolean to indicate whether this component is loading, such as from fetching requests
+//  * @param { Object } navigation object passed down from React Navigation's <NavigationContainer/>.
+//  */
 
-             districtPosition    =   { districtPosition }
-             renderAsStudent     =   { renderAsStudent }
+// const LoadingReqPreviews = ({navigation, isLoading, districtPosition, renderAsStudent}) => {
+//     return (
+//         <Fragment>
+//             <RequestPreview
+//                 navigation          =   { navigation }
+//                 isLoading           =   { true }
 
-             key                 =   { `loading-request-preview-${Math.random()*10 + 1}` }
-         />);
- }; //end loadLoadingReqPreviews()
+//                 districtPosition    =   { districtPosition }
+//                 renderAsStudent     =   { renderAsStudent }
+
+//                 key                 =   { `loading-request-preview-${Math.random()*2000 + 1}` }
+//             />
+//              <RequestPreview
+//                 navigation          =   { navigation }
+//                 isLoading           =   { isLoading }
+
+//                 districtPosition    =   { districtPosition }
+//                 renderAsStudent     =   { renderAsStudent }
+
+//                 key                 =   { `loading-request-preview-${Math.random()*2000 + 1}` }
+//             />
+//             {/* <RequestPreview
+//                 navigation          =   { navigation }
+//                 isLoading           =   { isLoading }
+
+//                 districtPosition    =   { districtPosition }
+//                 renderAsStudent     =   { renderAsStudent }
+
+//                 key                 =   { `loading-request-preview-${Math.random()*2000 + 1}` }
+//             />
+//             <RequestPreview
+//                 navigation          =   { navigation }
+//                 isLoading           =   { isLoading }
+
+//                 districtPosition    =   { districtPosition }
+//                 renderAsStudent     =   { renderAsStudent }
+
+//                 key                 =   { `loading-request-preview-${Math.random()*2000 + 1}` }
+//             /> */}
+//         </Fragment>
+//        );
+//  }; //end loadLoadingReqPreviews()
 
 /**
  * React functional component to house the screen to view all the requests
@@ -61,9 +94,10 @@ const LoadingReqPreviews = ({navigation, isLoading, districtPosition, renderAsSt
  * @param { boolean } renderAsStudent dictates whether a staff member is choosing to view the app through a student's eyes
  * @return { ReactComponent } React component is returned
  */
-const ViewRequests = ({navigation, email, districtPosition, renderAsStudent}) => {
+const ViewRequests = ({ navigation, email, districtPosition, renderAsStudent}) => {
     const isDev = __DEV__;
 
+    let { navigate } = navigation;
     let [ isLoading, setIsLoading ]             = useState(false);
     let [ requestPreviews, setRequestPreviews ] = useState([]);
     let [ requestsType, setRequestsType ]       =   useState("All");
@@ -89,6 +123,10 @@ const ViewRequests = ({navigation, email, districtPosition, renderAsStudent}) =>
             if (undefsafe(site, "name")) {
                 site   =  site.name;
             }
+
+            let routeParams = { status, subject, description, date, time, id, technician, site };
+
+            Reactotron.log("View Requests id:\t" + id);
             
             return (
                 <RequestPreview
@@ -104,6 +142,7 @@ const ViewRequests = ({navigation, email, districtPosition, renderAsStudent}) =>
                     id                  =   { id }
                     isLoading           =   { isLoading }
 
+                    onPress             =   { () => navigate("Request Details", routeParams)}
                     // onClick             =   { () => routeToReqID(requestObject, subject, description, time, date, status, technician, site) }
 
                     key                 =   { id }
@@ -218,47 +257,31 @@ const ViewRequests = ({navigation, email, districtPosition, renderAsStudent}) =>
                     onPress             =   { openFilterOptions }
                 />
 
-                <Button
-                    width               =   "80px" 
-                    iconName            =   "sort"
-                    
-                    districtPosition    =   { districtPosition } 
-                    renderAsStudent     =   { renderAsStudent }
-
-                    onPress             =   { () => setRequestPreviews([...requestPreviews].reverse()) }
-                />
+                {
+                    (requestPreviews && requestPreviews.length > 1) ? (
+                        <Button
+                            width               =   "80px" 
+                            iconName            =   "sort"
+                            
+                            districtPosition    =   { districtPosition } 
+                            renderAsStudent     =   { renderAsStudent }
+        
+                            onPress             =   { () => setRequestPreviews([...requestPreviews].reverse()) }
+                        />
+                    ) : null
+                }   
+               
             </SortFilterButtonsContainer>
        
             <RequestPreviewContainer>
                 <TouchableOpacity activeOpacity={1}>
                     { isLoading ? (
-                        [
-                        <LoadingReqPreviews
+                        <RequestPreview
                             navigation          =   { navigation } 
                             isLoading           =   { true }
                             districtPosition    =   { districtPosition}
                             renderAsStudent     =   { renderAsStudent}
-                        />,
-                        <LoadingReqPreviews
-                            navigation          =   { navigation } 
-                            isLoading           =   { true }
-                            districtPosition    =   { districtPosition}
-                            renderAsStudent     =   { renderAsStudent}
-                        />, 
-                        <LoadingReqPreviews
-                            navigation          =   { navigation } 
-                            isLoading           =   { true }
-                            districtPosition    =   { districtPosition}
-                            renderAsStudent     =   { renderAsStudent}
-                        />,
-                        <LoadingReqPreviews
-                            navigation          =   { navigation } 
-                            isLoading           =   { true }
-                            districtPosition    =   { districtPosition}
-                            renderAsStudent     =   { renderAsStudent}
-                        />, 
-
-                        ]
+                        />
                     ) : (requestPreviews.length > 0) ? requestPreviews : (
                         <NoRequestsMessage
                             districtPosition    =   { districtPosition } 
