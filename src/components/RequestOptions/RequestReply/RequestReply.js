@@ -81,12 +81,9 @@ const RequestReply = ({ navigation, route, districtPosition, renderAsStudent }) 
             console.log("sendReplyReqResult:\t", sendReplyReqResult);
             
             if (sendReplyReqResult && !sendReplyReqResult.error) {
-                setValue({
-                    description: ""
-                });
-
                 alert("Success", `Successfully replied to request #${id}.`);
 
+                setValue("description", null); //Empty the form
                 setSubmitEnabled(true);
             } else {
                 alert("Error", `Error in replying to request #${id}.`);
