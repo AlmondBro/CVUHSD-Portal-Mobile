@@ -19,15 +19,20 @@ import { PORTAL_LIVE_LINK, NODEJS_SERVER_PORT, IP_ADDRESS_DEV } from "@env";
  * @param { string } districtPosition the role of the school district user
  * @param { boolean } renderAsStudent dictates whether a staff member is choosing to view the app through a student's eyes
  */
-const RequestReply = ({ navigation, route, districtPosition, renderAsStudent, email }) => {
+const RequestReply = ({ navigation, route, districtPosition, renderAsStudent }) => {
+    const isDev = __DEV__;
     const metadataIconsSize = 22;
 
-    const id = "";
+    const { alert } = Alert;
 
     const { handleSubmit, register, setValue, getValues, clearErrors, errors }  = useForm();
 
     let [ isLoading, setIsLoading ]         = useState(false);
     let [ submitEnabled, setSubmitEnabled ] = useState(true);
+
+    const { id, subject, techEmail } = route.params;
+
+    const replySubject = `Re: [Request ID: ##RE-${id}##]: ${subject} `;
 
     const inputColorsTheme  = {
         colors: {
@@ -41,8 +46,7 @@ const RequestReply = ({ navigation, route, districtPosition, renderAsStudent, em
         }
     }; //end inputColorsTheme
 
-    const sendReplyReq = async () => {
-
+    const sendReplyReq = async (description) => {
         const sendReplyReq_URL = `${isDev ? `http://${IP_ADDRESS_DEV}:${NODEJS_SERVER_PORT}` : `https://${PORTAL_LIVE_LINK}/server`}/helpdesk/request/${id}/reply`;
         const sendReplyReq_Headers = {
             'Content-Type': 'application/json',
@@ -53,7 +57,7 @@ const RequestReply = ({ navigation, route, districtPosition, renderAsStudent, em
         let sendReplyReqResult = await fetch(sendReplyReq_URL, {
             method: 'POST',
             headers: sendReplyReq_Headers,
-            body: JSON.stringify({subject: replySubject, description: message, email: techEmail})
+            body: JSON.stringify({subject: replySubject, description, email: techEmail})
         })
         .then((serverResponse) => serverResponse.json()) //Parse the JSON of the response
         .then((jsonResponse) => jsonResponse)
@@ -65,39 +69,43 @@ const RequestReply = ({ navigation, route, districtPosition, renderAsStudent, em
         return sendReplyReqResult;
     }; //end getReqConvos
 
-    const validateReply = async () => {
+    const validateReply = async (description) => {
         if (submitEnabled && !isLoading) {
             setSubmitEnabled(false);
             setIsLoading(true);
 
-            let sendReplyReqResult = await sendReplyReq(id);
+            let sendReplyReqResult = await sendReplyReq(id, description);
             
             setIsLoading(false);
 
             console.log("sendReplyReqResult:\t", sendReplyReqResult);
             
             if (sendReplyReqResult && !sendReplyReqResult.error) {
-                
-                console.log(`Successfully replied to request #${id}.`);
-                setMessage("");
+                setValue({
+                    description: ""
+                });
+
+                alert("Success", `Successfully replied to request #${id}.`);
+
                 setSubmitEnabled(true);
             } else {
-                console.log(`Error in replying to request #${id}.`);
+                alert("Error", `Error in replying to request #${id}.`);
 
                 setSubmitEnabled(true);
             }
         }
     };
 
-    const submitReply = () => {
+    const submitReply = async () => {
         let formField = getValues();
 
         let { description } = formField;
 
+        alert("Descr", description);
 
-
-        Alert.alert("Descr", description);
+        await validateReply(description);
     }; //end onSubmit
+
 
     return (
         <Container>
@@ -113,7 +121,6 @@ const RequestReply = ({ navigation, route, districtPosition, renderAsStudent, em
                             mode                =   "outlined"
                             theme               =   { inputColorsTheme }
 
-                
                             secureTextEntry     =   { false } 
 
                             districtPosition    =   { districtPosition } 

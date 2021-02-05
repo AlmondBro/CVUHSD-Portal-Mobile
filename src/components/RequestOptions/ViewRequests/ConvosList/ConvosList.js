@@ -31,7 +31,7 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
 
     let [ isLoading, setIsLoading ]     = useState(false);
 
-    let { id, date, time } = route.params;
+    let { id, subject, techEmail } = route.params;
 
     Reactotron.log("ConvosList id:\t" + id);
 
@@ -48,8 +48,6 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
             let time = hour + ":" + minutes + " " + AMorPM;
             
             let date =  new Date(CREATEDDATE).toLocaleDateString();
-
-            console.log("FROM:\t", FROM);
 
             return (
                 <SingleConvo
@@ -184,7 +182,7 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
                     width       =   "60%" 
                     color       =   "white"
                     bgColor     =   {((districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"}
-                    onPress     =   { () => navigate("Reply to Request") }              
+                    onPress     =   { () => navigate("Reply to Request", { id, subject, techEmail }) }              
                 />
             </Content>
         </Container>
