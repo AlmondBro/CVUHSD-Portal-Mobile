@@ -46,7 +46,7 @@ const RequestReply = ({ navigation, route, districtPosition, renderAsStudent }) 
         }
     }; //end inputColorsTheme
 
-    const sendReplyReq = async (description) => {
+    const sendReplyReq = async (id, description) => {
         const sendReplyReq_URL = `${isDev ? `http://${IP_ADDRESS_DEV}:${NODEJS_SERVER_PORT}` : `https://${PORTAL_LIVE_LINK}/server`}/helpdesk/request/${id}/reply`;
         const sendReplyReq_Headers = {
             'Content-Type': 'application/json',
@@ -100,8 +100,6 @@ const RequestReply = ({ navigation, route, districtPosition, renderAsStudent }) 
         let formField = getValues();
 
         let { description } = formField;
-
-        alert("Descr", description);
 
         await validateReply(description);
     }; //end onSubmit
