@@ -341,33 +341,13 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
                         renderAsStudent     =   { renderAsStudent }
 
                         noOuterLabel        =   { false }
+
+                        textArea            =   { true }
                     />
 
                     {
                             (districtPosition === "Student") ? (
-                            // <Input 
-                            //     appWidth            =   { appWidth }
-
-                            //     name                =   "location" 
-                            //     label               =   "Location:" 
-                            //     placeHolderText     =   "Your School or Site..."
-
-
-                            //     mode                =   "outlined"
-                            //     theme               =   { inputColorsTheme }
-
-                            //     secureTextEntry     =   { false } 
-
-                            //     districtPosition    =   { districtPosition } 
-                            //     renderAsStudent     =   { renderAsStudent }
-
-                            //     value               =   { locations[0].value }
-                            //     usePicker           =   { true }
-                            //     pickerPlaceHolder   =   { (districtPosition === "Student") ? {} : pickerPlaceHolder("Choose your site or location...") }
-                            //     items               =   { locations }
-                            //     noOuterLabel        =   { false }
-                            // />
-                            <Fragment/>
+                                <Fragment/>
                             ) : (
                                 <Input 
                                     appWidth            =   { appWidth }
@@ -443,7 +423,9 @@ const SupportRequestModal = ({ appWidth, email, firstName, lastName, districtPos
 
         </KeyboardAwareScrollViewStyled>
 
-        <SubmitFooterContainer>
+        <SubmitFooterContainer
+            marginTop   =   "0px"
+        >
             <Divider
                 districtPosition    =   { districtPosition } 
                 renderAsStudent     =   { renderAsStudent }

@@ -11,7 +11,7 @@ const Container = styled.View`
    
     width:  100%;
 
-    margin-top: 150px;
+    margin-top: ${props => props.marginTop ? props.marginTop : "150px"};
 
     background-color: white;
 `;

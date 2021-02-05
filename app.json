@@ -14,7 +14,6 @@
       "resizeMode": "cover",
       "backgroundColor": "#B41A1F"
     },
-    "sdkVersion" : "40.0.0",
     "scheme": "cvuhsd.portal",
     "platforms": [
       "ios",
