@@ -315,7 +315,7 @@ const RequestSpecifics = ({ navigation, route, districtPosition, renderAsStudent
                     color       =   "white"
                     bgColor     =   {((districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"}
                 
-                    onPress     =   { () => navigate("Conversations List", { date, time, email, id})}
+                    onPress     =   { () => navigate("Conversations List", { id, subject, date, time, email, techEmail: techInfo.email_id })}
                 />
             </Content>
         </Container>
