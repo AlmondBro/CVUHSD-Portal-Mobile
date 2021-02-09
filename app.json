@@ -3,7 +3,7 @@
     "name": "CVUHSD Portal Mobile",
     "slug": "CVUHSD-Portal-Mobile",
     "description": "The CVUHSD Mobile Portal allows for quick access in mobile apparati to 3rd-party CVUHSD staff services, such as school dude. Availale for iOS & Android ",
-    "version": "2.1.5",
+    "version": "3.0.0",
     "privacy": "public",
     "githubUrl": "https://github.com/JuanDavidLopez95/CVUHSD-Portal-Mobile",
     "orientation": "portrait",
@@ -23,13 +23,13 @@
     "ios": {
       "icon": "./src/assets/app-icon.ios.png",
       "supportsTablet": false,
-      "buildNumber": "14",
+      "buildNumber": "15",
       "bundleIdentifier": "com.cvuhsd.portal"
     },
     "android": {
       "icon": "./src/assets/app-icon.android.png",
       "package": "com.cvuhsd.portalMobile",
-      "versionCode": 14,
+      "versionCode": 15,
       "permissions": [],
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.cvuhsd.portal"
     },
