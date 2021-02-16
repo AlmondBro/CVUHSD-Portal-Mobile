@@ -12,7 +12,7 @@ import LogoRed from './../../assets/images/wp-portal-logo-red-white-interior.svg
 import greeting from 'greeting';
 
 const Header = ({ renderAsStudent, uid, title, firstName, lastName, site, gradeLevel, portalLogoSource, showPortalLogo, showUpdate, reloadAppFromUpdate }) => {  
-    // showUpdate = true;
+    showUpdate = true;
     let parseSchoolName = (site) => {
         if (site && (site !== "Centinela Valley Independent Study School" )) {
             console.log("Site:\t" + site);
@@ -69,41 +69,21 @@ const Header = ({ renderAsStudent, uid, title, firstName, lastName, site, gradeL
 
                     </TouchableOpacity>
                      {/* Rato is 204/45 (width/height) */}
-                    <WayPointTypography
-                        width   =   { 136 } 
-                        height  =   { 30 } 
-                    />
+                     {
+                         showUpdate ? null : (
+                            <WayPointTypography
+                                width   =   { 136 } 
+                                height  =   { 30 } 
+                            />
+                         )
+                     }
+                 
                   </Fragment>
         
               ) : null
           }
 
-     
-        <Fragment>
-            { showUpdate ?
-                ( 
-                    <UpdateAppView>
-                        <UpdateTextDescription
-                            title           =   { title }
-                            renderAsStudent =   { renderAsStudent }
-                        >
-                            A new update is available. Press here to update!
-                        </UpdateTextDescription>
-                        <UpdateButtonTouchableOpacity
-                            title           =   { title }
-                            renderAsStudent =   { renderAsStudent }
-                            buttonTitle               =   "Update"
-
-
-                            onPress             =   { () => { console.log("Update reload"); reloadAppFromUpdate(); } }
-                            accessibilityLabel  =   "Update Mobile Portal"
-                        />
-                    </UpdateAppView>
-                )
-                : null
-            }  
-        </Fragment> 
-
+    
         <BlueSectionContainer>
         {
             title && !showUpdate ? 
@@ -168,6 +148,31 @@ const Header = ({ renderAsStudent, uid, title, firstName, lastName, site, gradeL
                         </Fragment> 
                     ) : null      
             }
+
+            <Fragment>
+                { showUpdate ?
+                    ( 
+                        <UpdateAppView>
+                            <UpdateTextDescription
+                                title           =   { title }
+                                renderAsStudent =   { renderAsStudent }
+                            >
+                                A new update is available. Press here to update!
+                            </UpdateTextDescription>
+                            <UpdateButtonTouchableOpacity
+                                title           =   { title }
+                                renderAsStudent =   { renderAsStudent }
+                                buttonTitle               =   "Update"
+
+
+                                onPress             =   { reloadAppFromUpdate }
+                                accessibilityLabel  =   "Update Mobile Portal"
+                            />
+                        </UpdateAppView>
+                    )
+                    : null
+                }  
+            </Fragment> 
         </BlueSectionContainer>
       </HeaderContainerView>
     ); //end return statement

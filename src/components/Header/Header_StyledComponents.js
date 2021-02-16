@@ -27,10 +27,10 @@ let UpdateAppView = styled.View`
     justify-content: center;
     align-items: center;
 
-    /* background-color: white; */
+    background-color: white;
 
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 
     border-radius: 10px;
 
@@ -41,6 +41,8 @@ let UpdateTextDescription = styled.Text`
     font-size: 14px; 
     padding-left: 8px;
     padding-right: 8px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     align-self: center;
     color:  ${   props => (props.title === null) 
                             ? "#B41A1F" : 

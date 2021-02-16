@@ -4,8 +4,8 @@ import { Alert, Platform, NativeModules } from 'react-native';
 
 //Import expo/react native components that now exist as separate packages
 import { StatusBar } from 'expo-status-bar';
-import { checkForUpdateAsync } from 'expo-updates';
-import * as AuthSession from 'expo-auth-session';
+import AuthSession from 'expo-auth-session';
+import Updates, { checkForUpdateAsync, fetchUpdateAsync, reloadAsync } from 'expo-updates';
 import AsyncStorage from '@react-native-community/async-storage';
 
 //Import React Navigation Packages
@@ -412,17 +412,17 @@ class App extends Component {
     }; //end clearLogOnUserData
 
     reloadAppFromUpdate = async () => {
-        await Updates.reloadAsync();
+        await reloadAsync();
         return;
     };
 
     checkForUpdates = async () => {
-        const checkforUpdatesDev = false;
+        const checkforUpdatesDev = true;
 
-        if (!__DEV__ || checkforUpdatesDev === true) {
-            const update = await checkForUpdateAsync();
+        if (!isDev || checkforUpdatesDev === true) {
+            const { isAvailable: updateAvailable } = await checkForUpdateAsync();
 
-            if (update.isAvailable) {
+            if (updateAvailable) {
                 await fetchUpdateAsync();
 
                 this.setState({ showUpdate: true } );
@@ -440,7 +440,7 @@ class App extends Component {
     componentDidMount = () => {
         ReactotronDebug.log("Width:\t" + this.props.width);
 
-        if (__DEV__ && Reactotron) {
+        if (isDev && Reactotron) {
             ReactotronDebug.log('Reactotron running');
         }
         
@@ -522,8 +522,7 @@ class App extends Component {
 
                                             showPortalLogo      =   {  this.state.showPortalLogo    }
                                         />
-                                        
-                                        { (this.state.title || this.state.renderAsStudent) && !this.state.showUpdate ? null : <WelcomeText>CVUHSD Portal</WelcomeText> }
+                                        { this.state.title && !this.state.showUpdate ? (<WelcomeText>CVUHSD Portal</WelcomeText>) : null }
                                     </ImageBackgroundStyled>
 
                                     <Navigator
