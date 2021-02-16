@@ -420,7 +420,7 @@ class App extends Component {
     checkForUpdates = async () => {
         const checkforUpdatesDev = true;
 
-        if (!__DEV__ || checkforUpdatesDev === true) {
+        if (!isDev || checkforUpdatesDev === true) {
             const update = await checkForUpdateAsync();
 
             if (update.isAvailable) {
@@ -441,7 +441,7 @@ class App extends Component {
     componentDidMount = () => {
         ReactotronDebug.log("Width:\t" + this.props.width);
 
-        if (__DEV__ && Reactotron) {
+        if (isDev && Reactotron) {
             ReactotronDebug.log('Reactotron running');
         }
         
