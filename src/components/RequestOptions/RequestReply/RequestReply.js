@@ -19,7 +19,7 @@ import { PORTAL_LIVE_LINK, NODEJS_SERVER_PORT, IP_ADDRESS_DEV } from "@env";
  * @param { string } districtPosition the role of the school district user
  * @param { boolean } renderAsStudent dictates whether a staff member is choosing to view the app through a student's eyes
  */
-const RequestReply = ({ navigation, route, districtPosition, renderAsStudent }) => {
+const RequestReply = ({ navigation, route, districtPosition, renderAsStudent, email }) => {
     const isDev = __DEV__;
     const metadataIconsSize = 22;
 
@@ -57,7 +57,7 @@ const RequestReply = ({ navigation, route, districtPosition, renderAsStudent }) 
         let sendReplyReqResult = await fetch(sendReplyReq_URL, {
             method: 'POST',
             headers: sendReplyReq_Headers,
-            body: JSON.stringify({subject: replySubject, description, email: techEmail})
+            body: JSON.stringify({subject: replySubject, description, email: email})
         })
         .then((serverResponse) => serverResponse.json()) //Parse the JSON of the response
         .then((jsonResponse) => jsonResponse)
