@@ -6,6 +6,7 @@ import { Alert, Platform, NativeModules } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { checkForUpdateAsync } from 'expo-updates';
 import * as AuthSession from 'expo-auth-session';
+import * as Updates from 'expo-updates';
 import AsyncStorage from '@react-native-community/async-storage';
 
 //Import React Navigation Packages
@@ -417,13 +418,13 @@ class App extends Component {
     };
 
     checkForUpdates = async () => {
-        const checkforUpdatesDev = false;
+        const checkforUpdatesDev = true;
 
         if (!__DEV__ || checkforUpdatesDev === true) {
             const update = await checkForUpdateAsync();
 
             if (update.isAvailable) {
-                await fetchUpdateAsync();
+                await Updates.fetchUpdateAsync();
 
                 this.setState({ showUpdate: true } );
 
@@ -522,8 +523,7 @@ class App extends Component {
 
                                             showPortalLogo      =   {  this.state.showPortalLogo    }
                                         />
-                                        
-                                        { (this.state.title || this.state.renderAsStudent) && !this.state.showUpdate ? null : <WelcomeText>CVUHSD Portal</WelcomeText> }
+                                        { this.state.title && !this.state.showUpdate ? (<WelcomeText>CVUHSD Portal</WelcomeText>) : null }
                                     </ImageBackgroundStyled>
 
                                     <Navigator
