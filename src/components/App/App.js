@@ -4,9 +4,8 @@ import { Alert, Platform, NativeModules } from 'react-native';
 
 //Import expo/react native components that now exist as separate packages
 import { StatusBar } from 'expo-status-bar';
-import { checkForUpdateAsync } from 'expo-updates';
-import * as AuthSession from 'expo-auth-session';
-import * as Updates from 'expo-updates';
+import AuthSession from 'expo-auth-session';
+import Updates, { checkForUpdateAsync, fetchUpdateAsync, reloadAsync } from 'expo-updates';
 import AsyncStorage from '@react-native-community/async-storage';
 
 //Import React Navigation Packages
@@ -413,7 +412,7 @@ class App extends Component {
     }; //end clearLogOnUserData
 
     reloadAppFromUpdate = async () => {
-        await Updates.reloadAsync();
+        await reloadAsync();
         return;
     };
 
@@ -421,10 +420,10 @@ class App extends Component {
         const checkforUpdatesDev = true;
 
         if (!isDev || checkforUpdatesDev === true) {
-            const update = await checkForUpdateAsync();
+            const { isAvailable: updateAvailable } = await checkForUpdateAsync();
 
-            if (update.isAvailable) {
-                await Updates.fetchUpdateAsync();
+            if (updateAvailable) {
+                await fetchUpdateAsync();
 
                 this.setState({ showUpdate: true } );
 
