@@ -57,6 +57,10 @@ const RequestSpecifics = ({ navigation, route, districtPosition, renderAsStudent
                 setFAIcon("angle-double-right");
             break;
 
+            case "Resolved":
+                setFAIcon("check");
+            break;
+            
             case "Closed":
                 setFAIcon("check");
             break;

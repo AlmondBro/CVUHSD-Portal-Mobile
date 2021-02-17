@@ -38,6 +38,10 @@ const RequestPreview = ({ navigation, districtPosition, renderAsStudent, subject
                 setFAIcon("check");
             break;
 
+            case "Resolved":
+                setFAIcon("check");
+            break;
+
             default:
                 setFAIcon("spinner");
                 
