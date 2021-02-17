@@ -55,16 +55,22 @@ let ToggleButtonText  = styled.Text`
     color: ${props => (props.title === "Student" || props.renderAsStudent) ? "#B41A1F" : "#1E6C93" };
 `;
 
+/*
+    In order to get around the issue of the WebView causing the app to crash when it is
+    wrapped by a parent View, set the the androidHardwareAccelerationDisabled be true.
+    Source: https://github.com/react-native-webview/react-native-webview/issues/811
+*/
 const WebViewStyled = styled(WebView).attrs((props) => ({
-    source              :  props.source,
-    originWhitelist     :  props.originWhitelist,
-    scalesPageToFit     :  props.scalesPageToFit,
-    bounces             :  props.bounces,
-    javaScriptEnabled   :  props.javaScriptEnabled,
-    injectedJavaScript  :  props.injectedJavaScript,   
-    injectJavaScript    :  props.injectJavaScript,
-    mixedContentMode    :  props.mixedContentMode,
-    onMessage           :  props.onMessage
+    source                              :  props.source,
+    originWhitelist                     :  props.originWhitelist,
+    scalesPageToFit                     :  props.scalesPageToFit,
+    bounces                             :  props.bounces,
+    javaScriptEnabled                   :  props.javaScriptEnabled,
+    injectedJavaScript                  :  props.injectedJavaScript,   
+    injectJavaScript                    :  props.injectJavaScript,
+    mixedContentMode                    :  props.mixedContentMode,
+    onMessage                           :  props.onMessage,
+    androidHardwareAccelerationDisabled :  true
 }))`
     align-self: center;
     height: 150px;
