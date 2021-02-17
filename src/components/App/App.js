@@ -522,7 +522,7 @@ class App extends Component {
 
                                             showPortalLogo      =   {  this.state.showPortalLogo    }
                                         />
-                                        { this.state.title && !this.state.showUpdate ? (<WelcomeText>CVUHSD Portal</WelcomeText>) : null }
+                                        { !this.state.title && !this.state.showUpdate ? (<WelcomeText>CVUHSD Portal</WelcomeText>) : null }
                                     </ImageBackgroundStyled>
 
                                     <Navigator
