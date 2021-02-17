@@ -4,8 +4,8 @@ import { Alert, Platform, NativeModules } from 'react-native';
 
 //Import expo/react native components that now exist as separate packages
 import { StatusBar } from 'expo-status-bar';
-import AuthSession from 'expo-auth-session';
-import Updates, { checkForUpdateAsync, fetchUpdateAsync, reloadAsync } from 'expo-updates';
+import * as AuthSession from 'expo-auth-session';
+import { checkForUpdateAsync, fetchUpdateAsync, reloadAsync }  from 'expo-updates';
 import AsyncStorage from '@react-native-community/async-storage';
 
 //Import React Navigation Packages
