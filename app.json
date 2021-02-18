@@ -23,13 +23,14 @@
     "ios": {
       "icon": "./src/assets/app-icon.ios.png",
       "supportsTablet": false,
-      "buildNumber": "21",
-      "bundleIdentifier": "com.cvuhsd.portal"
+      "buildNumber": "22",
+      "bundleIdentifier": "com.cvuhsd.portal",
+      "usesNonExemptEncryption": false
     },
     "android": {
       "icon": "./src/assets/app-icon.android.png",
       "package": "com.cvuhsd.portalMobile",
-      "versionCode": 21,
+      "versionCode": 22,
       "permissions": [],
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.cvuhsd.portal"
     },
