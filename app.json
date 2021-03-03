@@ -25,7 +25,9 @@
       "supportsTablet": false,
       "buildNumber": "22",
       "bundleIdentifier": "com.cvuhsd.portal",
-      "usesNonExemptEncryption": false
+      "config": {
+        "usesNonExemptEncryption": false
+      }
     },
     "android": {
       "icon": "./src/assets/app-icon.android.png",

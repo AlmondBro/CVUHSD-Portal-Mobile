@@ -87,7 +87,7 @@ const RequestReply = ({ navigation, route, districtPosition, renderAsStudent, em
                 setSubmitEnabled(true);
             } else {
                 alert("Error", `Error in replying to request #${id}.`);
-
+                setIsLoading(false);
                 setSubmitEnabled(true);
             }
         }
