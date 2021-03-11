@@ -47,7 +47,7 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
             let possibleMilitaryTime = parseInt(timeAndAM[0].split(":")[0]);
             let hour    = (possibleMilitaryTime > 12) ? (possibleMilitaryTime - 12).toString() : parseInt(timeAndAM[0].split(":")[0]);
             let minutes = timeAndAM[0].split(":")[1];
-            let AMorPM  = (possibleMilitaryTime >= 12) ? "PM" : "AM";
+            let AMorPM  = (OS === "ios") ? timeAndAM[1] : (possibleMilitaryTime >= 12) ? "PM" : "AM";
 
             let time = hour + ":" + minutes + " " + AMorPM;
 
