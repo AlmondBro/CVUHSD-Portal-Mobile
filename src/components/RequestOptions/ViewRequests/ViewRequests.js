@@ -44,7 +44,7 @@ const dateFormatChange = (dateToChange) => {
  * @param { boolean } renderAsStudent dictates whether a staff member is choosing to view the app through a student's eyes
  * @return { ReactComponent } React component is returned
  */
-const ViewRequests = ({ navigation, email, districtPosition, renderAsStudent}) => {
+const ViewRequests = ({ currentRoute, navigation, email, districtPosition, renderAsStudent}) => {
     const isDev = __DEV__;
 
     let { navigate } = navigation;
@@ -185,8 +185,10 @@ const ViewRequests = ({ navigation, email, districtPosition, renderAsStudent}) =
     }; //end getRequestRectangles
    
     useEffect(() => {
-        getRequestRectangles(email, requestsType); 
-    }, [ requestsType ]);
+        if (currentRoute === "View Requests") {
+            getRequestRectangles(email, requestsType); 
+        }
+    }, [ requestsType, currentRoute ]);
 
     return (
         <Container>

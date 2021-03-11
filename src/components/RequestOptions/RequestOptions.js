@@ -64,7 +64,6 @@ const RequestOptions = ({ navigation, appWidth, email, firstName, lastName, dist
                         closeModal          =   { () => setShowRequestModal(false) }
                     />
 
-
                     <NavigationContainer 
                         independent     =   {   true    }
                         ref             =   { navContainerRef }
@@ -112,6 +111,7 @@ const RequestOptions = ({ navigation, appWidth, email, firstName, lastName, dist
                                             {...props}
                                         >
                                             <ViewRequests
+                                                currentRoute        =   { currentRoute }
                                                 districtPosition    =   { districtPosition } 
                                                 renderAsStudent     =   { renderAsStudent }
                                                 email               =   { email }
