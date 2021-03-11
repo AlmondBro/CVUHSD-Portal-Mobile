@@ -314,6 +314,16 @@ const RequestSpecifics = ({ navigation, route, districtPosition, renderAsStudent
 
                 <TouchableButton 
                     fontSize    =   "14px"
+                    buttonTitle =   "Reply" 
+                    width       =   "60%" 
+                    color       =   "white"
+                    bgColor     =   {((districtPosition === "Student") || (renderAsStudent === true) ) ? "#B41A1F" : "#1E6C93"}
+                
+                    onPress     =   { () => navigate("Reply to Request", { id, subject, techEmail: techInfo.email_id }) }
+                />
+
+                <TouchableButton 
+                    fontSize    =   "14px"
                     buttonTitle =   "Conversations" 
                     width       =   "60%" 
                     color       =   "white"
