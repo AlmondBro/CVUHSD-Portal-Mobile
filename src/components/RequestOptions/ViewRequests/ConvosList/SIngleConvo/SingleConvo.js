@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import { TouchableOpacity} from 'react-native';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -15,9 +15,6 @@ import { Container, Content, HighlightedButton, SkeletonScreen, MetaDataContaine
  */
 const SingleConvo = ({ navigation, route, isLoading, districtPosition, renderAsStudent, email, description, date, time, author }) => {
     const metadataIconsSize = 22;
-
-    useEffect(() => {
-    }, []); 
 
     return (
         <Container>
