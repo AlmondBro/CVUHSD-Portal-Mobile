@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import undefsafe from 'undefsafe';
 
-import { TouchableOpacity} from 'react-native';
+import { Platform, TouchableOpacity } from 'react-native';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import SingleConvo from './SingleConvo/SingleConvo.js';
@@ -24,6 +24,8 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
     const isDev = __DEV__;
     const metadataIconsSize = 22;
 
+    const { OS } = Platform;
+
     let { navigate } = navigation;
     let [ buttonPressed, setButtonPressed ] = useState(false);
 
@@ -35,18 +37,20 @@ const ConvosList = ({ navigation, route, email, districtPosition, renderAsStuden
 
     Reactotron.log("ConvosList id:\t" + id);
 
+    //
     const mapConvos = (convos) => {
         return convos.filter((convo, index) => convo["FROM"] != "System").map((convo, index) => {
             let { CREATEDDATE, FROM, DESCRIPTION } = convo;
 
             let timeAndAM = new Date(CREATEDDATE).toLocaleTimeString().split(" ");
 
-            let AMorPM  = timeAndAM[1];
-            let hour    = timeAndAM[0].split(":")[0];
+            let possibleMilitaryTime = parseInt(timeAndAM[0].split(":")[0]);
+            let hour    = (possibleMilitaryTime > 12) ? (possibleMilitaryTime - 12).toString() : parseInt(timeAndAM[0].split(":")[0]);
             let minutes = timeAndAM[0].split(":")[1];
+            let AMorPM  = (possibleMilitaryTime >= 12) ? "PM" : "AM";
 
             let time = hour + ":" + minutes + " " + AMorPM;
-            
+
             let date =  new Date(CREATEDDATE).toLocaleDateString();
 
             return (
